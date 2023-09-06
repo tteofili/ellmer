@@ -1,0 +1,1713 @@
+#constrained4
+,left,right,answer
+0,"ltable_Beer_Name:Bulleit Bourbon Barrel Aged G'Knight
+ltable_Brew_Factory_Name:Oskar Blues Grill & Brew
+ltable_Style:American Amber / Red Ale
+ltable_ABV:8.70 %","rtable_Beer_Name:Figure Eight Bourbon Barrel Aged Jumbo Love
+rtable_Brew_Factory_Name:Figure Eight Brewing
+rtable_Style:Barley Wine
+rtable_ABV:-","Here's an example response: 
+
+```json
+{
+    ""matching"": false,
+    ""saliency_explanation"": {
+        ""ltable_Beer_Name"": 0.3,
+        ""ltable_Brew_Factory_Name"": 0.1,
+        ""ltable_Style"": 0.5,
+        ""ltable_ABV"": 0.1,
+        ""rtable_Beer_Name"": 0.1,
+        ""rtable_Brew_Factory_Name"": 0.2,
+        ""rtable_Style"": 0.4,
+        ""rtable_ABV"": 0.3
+    },
+    ""counterfactual_explanation"": {
+        ""ltable_Beer_Name"": ""Figure Eight Bourbon Barrel Aged Jumbo Love"",
+        ""ltable_Brew_Factory_Name"": ""Figure Eight Brewing"",
+        ""ltable_Style"": ""Barley Wine"",
+        ""ltable_ABV"": ""-"",
+        ""rtable_Beer_Name"": ""Bulleit Bourbon Barrel Aged G'Knight"",
+        ""rtable_Brew_Factory_Name"": ""Oskar Blues Grill & Brew"",
+        ""rtable_Style"": ""American Amber / Red Ale"",
+        ""rtable_ABV"": ""8.70 %""
+    }
+}
+```
+
+In this example, the model predicts that the two records do not match. The saliency explanation table shows the saliency scores for each feature in both records. The counterfactual explanation table shows the values for each feature in the opposite record that would cause the model to flip its prediction."
+1,"ltable_Beer_Name:Double Dragon Imperial Red Ale
+ltable_Brew_Factory_Name:Phillips Brewing Company
+ltable_Style:American Amber / Red Ale
+ltable_ABV:8.20 %","rtable_Beer_Name:Scuttlebutt Mateo Loco Imperial Red Ale
+rtable_Brew_Factory_Name:Scuttlebutt Brewing Co. .
+rtable_Style:American Strong Ale
+rtable_ABV:7.10 %","Here is an example response in json format:
+
+```
+{
+    ""match"": false,
+    ""saliency"": {
+        ""ltable_Beer_Name"": 0.2,
+        ""ltable_Brew_Factory_Name"": 0.1,
+        ""ltable_Style"": 0.3,
+        ""ltable_ABV"": 0.4,
+        ""rtable_Beer_Name"": 0.1,
+        ""rtable_Brew_Factory_Name"": 0.2,
+        ""rtable_Style"": 0.4,
+        ""rtable_ABV"": 0.3
+    },
+    ""counterfactual"": {
+        ""ltable_Beer_Name"": ""Scuttlebutt Mateo Loco Imperial Red Ale"",
+        ""ltable_Brew_Factory_Name"": ""Scuttlebutt Brewing Co. ."",
+        ""ltable_Style"": ""American Strong Ale"",
+        ""ltable_ABV"": ""7.10 %"",
+        ""rtable_Beer_Name"": ""Double Dragon Imperial Red Ale"",
+        ""rtable_Brew_Factory_Name"": ""Phillips Brewing Company"",
+        ""rtable_Style"": ""American Amber / Red Ale"",
+        ""rtable_ABV"": ""8.20 %""
+    }
+}
+```
+
+Explanation:
+- ""match"": false, indicates that the model predicted that the two records do not match.
+- ""saliency"": a dictionary containing the saliency score for each feature. The saliency score indicates the importance of each feature in the decision-making process of the model. In this case, the model focused more on the ABV and Style features of both records while comparing them.
+- ""counterfactual"": a dictionary containing the counterfactual values for each feature. The counterfactual values represent the minimum change required in each feature to flip the model's prediction. In this case, swapping the values of the Beer Name, Brew Factory Name, Style and ABV features of both records would flip the model's prediction."
+2,"ltable_Beer_Name:Honey Basil Amber
+ltable_Brew_Factory_Name:Rude Hippo Brewing Company
+ltable_Style:American Amber / Red Ale
+ltable_ABV:7.40 %","rtable_Beer_Name:Rude Hippo Honey Basil Amber
+rtable_Brew_Factory_Name:18th Street Brewery
+rtable_Style:Amber Ale
+rtable_ABV:7.40 %","Here is a sample response in json format:
+
+```
+{
+    ""matching"": true,
+    ""saliency_explanation"": {
+        ""ltable_Beer_Name"": 0.8,
+        ""ltable_Brew_Factory_Name"": 0.4,
+        ""ltable_Style"": 0.6,
+        ""ltable_ABV"": 0.9
+    },
+    ""counterfactual_explanation"": {
+        ""ltable_Beer_Name"": ""Rude Hippo Honey Basil Amber"",
+        ""ltable_Brew_Factory_Name"": ""18th Street Brewery"",
+        ""ltable_Style"": ""Amber Ale"",
+        ""ltable_ABV"": ""7.40 %""
+    }
+}
+```
+
+In this response, the `matching` field is a boolean indicating that the model predicted a match between the two records. The `saliency_explanation` field is a dictionary where each key represents an input feature and each value represents the saliency score for that feature. The `counterfactual_explanation` field is also a dictionary where each key represents an input feature and each value represents the counterfactual value for that feature."
+3,"ltable_Beer_Name:Clifford 's Big Red Ale
+ltable_Brew_Factory_Name:Funky Buddha Brewery
+ltable_Style:American Amber / Red Ale
+ltable_ABV:9.70 %","rtable_Beer_Name:Big Island Red Giant Ale
+rtable_Brew_Factory_Name:Big Island Brewhaus
+rtable_Style:American Strong Ale
+rtable_ABV:6.50 %","Here is an example response in JSON format:
+
+```
+{
+  ""matching"": false,
+  ""saliency_explanation"": {
+    ""ltable_Beer_Name"": 0.1,
+    ""ltable_Brew_Factory_Name"": 0.4,
+    ""ltable_Style"": 0.2,
+    ""ltable_ABV"": 0.3
+  },
+  ""counterfactual_explanation"": {
+    ""ltable_Beer_Name"": ""Clifford's Big Red Ale"",
+    ""ltable_Brew_Factory_Name"": ""Big Island Brewhaus"",
+    ""ltable_Style"": ""American Strong Ale"",
+    ""ltable_ABV"": 6.50
+  }
+}
+```
+
+The `matching` field indicates whether the two records match or not. In this case, they do not match, so the value is `false`.
+
+The `saliency_explanation` field contains a dictionary with the saliency score for each input feature. The saliency score represents the importance of each feature in the model's decision-making process. In this example, the `ltable_Brew_Factory_Name` feature has the highest saliency score, indicating that it was the most important feature in the model's decision.
+
+The `counterfactual_explanation` field contains a dictionary with the counterfactual explanation value for each input feature. The counterfactual explanation value represents the value that a feature would need to take on in order to change the model's prediction. In this example, changing the `ltable_Brew_Factory_Name` feature to ""Big Island Brewhaus"" would result in a matching prediction."
+4,"ltable_Beer_Name:Real McCoy Amber Ale
+ltable_Brew_Factory_Name:Mammoth Brewing Company
+ltable_Style:American Amber / Red Ale
+ltable_ABV:4.50 %","rtable_Beer_Name:Mammoth Real McCoy Amber Ale
+rtable_Brew_Factory_Name:Mammoth Brewing Company
+rtable_Style:Altbier
+rtable_ABV:4.50 %","Here's an example response in JSON format:
+
+```
+{
+    ""matching"": true,
+    ""saliency_explanation"": {
+        ""ltable_Beer_Name"": 0.25,
+        ""ltable_Brew_Factory_Name"": 0.35,
+        ""ltable_Style"": 0.15,
+        ""ltable_ABV"": 0.25
+    },
+    ""counterfactual_explanation"": {
+        ""ltable_Beer_Name"": ""Real McCoy Amber Ale"",
+        ""ltable_Brew_Factory_Name"": ""Mammoth Brewing Company"",
+        ""ltable_Style"": ""Altbier"",
+        ""ltable_ABV"": ""4.50 %""
+    }
+}
+```
+
+Explanation:
+- The model predicts a match between the two records (matching: true).
+- The saliency explanation table shows the saliency score for each input feature. The scores indicate how much each feature contributed to the model's decision. In this case, the brewery name (ltable_Brew_Factory_Name) has the highest score, indicating that it was the most important feature for the match prediction.
+- The counterfactual explanation table shows the counterfactual value for each input feature. These values represent the minimum changes required to flip the model's prediction. In this case, changing the style (ltable_Style) to ""Altbier"" would result in a non-match prediction."
+5,"ltable_Beer_Name:Aqula American Amber Ale
+ltable_Brew_Factory_Name:Bier Kaffee Aqula
+ltable_Style:American Amber / Red Ale
+ltable_ABV:4.50 %","rtable_Beer_Name:Heavy Seas Desert Island Series American Honey Amber Ale
+rtable_Brew_Factory_Name:Heavy Seas Brewing Company
+rtable_Style:Amber Ale
+rtable_ABV:4.90 %","Here's an example response in JSON format:
+
+```
+{
+  ""matching"": false,
+  ""saliency"": {
+    ""ltable_Beer_Name"": 0.2,
+    ""ltable_Brew_Factory_Name"": 0.1,
+    ""ltable_Style"": 0.4,
+    ""ltable_ABV"": 0.3,
+    ""rtable_Beer_Name"": 0.1,
+    ""rtable_Brew_Factory_Name"": 0.2,
+    ""rtable_Style"": 0.3,
+    ""rtable_ABV"": 0.4
+  },
+  ""counterfactual"": {
+    ""ltable_Beer_Name"": ""Heavy Seas Desert Island Series American Honey Amber Ale"",
+    ""ltable_Brew_Factory_Name"": ""Heavy Seas Brewing Company"",
+    ""ltable_Style"": ""Amber Ale"",
+    ""ltable_ABV"": ""4.90 %"",
+    ""rtable_Beer_Name"": ""Aqula American Amber Ale"",
+    ""rtable_Brew_Factory_Name"": ""Bier Kaffee Aqula"",
+    ""rtable_Style"": ""American Amber / Red Ale"",
+    ""rtable_ABV"": ""4.50 %""
+  }
+}
+```
+
+The ""matching"" field is a boolean indicating whether the two records match or not. In this case, the two records do not match, so the value is false.
+
+The ""saliency"" field is a dictionary containing the saliency score for each input feature. A higher score indicates that the feature was more important in the model's decision-making process. In this example, the ""ltable_Style"" and ""rtable_ABV"" features have the highest saliency scores.
+
+The ""counterfactual"" field is a dictionary containing the counterfactual explanation for each input feature. The counterfactual explanation value is the value of the feature that would need to be changed in order to flip the model's prediction. In this example, the counterfactual explanation suggests that if the ""ltable_Beer_Name"", ""ltable_Brew_Factory_Name"", and ""ltable_Style"" features were changed to match the values in the second record, and the ""ltable_ABV"" feature was changed to ""4.90 %"", then the model would predict a match instead of a non-match."
+6,"ltable_Beer_Name:Rocket City Red
+ltable_Brew_Factory_Name:Straight To Ale
+ltable_Style:American Amber / Red Ale
+ltable_ABV:5.00 %","rtable_Beer_Name:Sawdust City Red Rocket Coffee Spiced Stout
+rtable_Brew_Factory_Name:Sawdust City Brewing Company
+rtable_Style:Spice/Herb/Vegetable
+rtable_ABV:5.20 %","Based on the given records, the matching/non-matching prediction is ""non-matching"". Here is the saliency explanation table and counterfactual explanation table for the prediction:
+
+```json
+{
+    ""matching"": false,
+    ""saliency_explanation"": {
+        ""ltable_Beer_Name"": 0.25,
+        ""ltable_Brew_Factory_Name"": 0.15,
+        ""ltable_Style"": 0.05,
+        ""ltable_ABV"": 0.55
+    },
+    ""counterfactual_explanation"": {
+        ""ltable_Beer_Name"": ""Sawdust City Red Rocket Coffee Spiced Stout"",
+        ""ltable_Brew_Factory_Name"": ""Sawdust City Brewing Company"",
+        ""ltable_Style"": ""Spice/Herb/Vegetable"",
+        ""ltable_ABV"": ""5.20 %""
+    }
+}
+```
+
+The saliency explanation table shows the saliency scores for each input feature. The input feature with the highest saliency score is `ltable_ABV`, indicating that it had the most significant impact on the model's decision. The counterfactual explanation table shows the counterfactual values for each input feature that would have caused the model's prediction to flip. In this case, changing the `ltable_Beer_Name`, `ltable_Brew_Factory_Name`, and `ltable_Style` to the values in `record2` would have caused the model's prediction to change to ""matching""."
+7,"ltable_Beer_Name:Jazz Beer Tarraco Amber
+ltable_Brew_Factory_Name:Tarraco Beer
+ltable_Style:American Amber / Red Ale
+ltable_ABV:6.90 %","rtable_Beer_Name:Jazz Beer Tarraco Amber
+rtable_Brew_Factory_Name:Ca l_Arenys - Cervezas Guineu
+rtable_Style:Amber Ale
+rtable_ABV:6.90 %","Here is the response in the requested JSON format:
+
+```json
+{
+    ""matching"": true,
+    ""saliency_explanation"": {
+        ""ltable_Beer_Name"": 0.5,
+        ""ltable_Brew_Factory_Name"": 0.3,
+        ""ltable_Style"": 0.1,
+        ""ltable_ABV"": 0.1,
+        ""rtable_Beer_Name"": 0.5,
+        ""rtable_Brew_Factory_Name"": 0.3,
+        ""rtable_Style"": 0.1,
+        ""rtable_ABV"": 0.1
+    },
+    ""counterfactual_explanation"": {
+        ""ltable_Beer_Name"": ""Jazz Beer Tarraco Amber"",
+        ""ltable_Brew_Factory_Name"": ""Tarraco Beer"",
+        ""ltable_Style"": ""American Amber / Red Ale"",
+        ""ltable_ABV"": ""6.90 %"",
+        ""rtable_Beer_Name"": ""Jazz Beer Tarraco Amber"",
+        ""rtable_Brew_Factory_Name"": ""Ca l_Arenys - Cervezas Guineu"",
+        ""rtable_Style"": ""Amber Ale"",
+        ""rtable_ABV"": ""6.90 %""
+    }
+}
+```
+
+Explanation:
+
+- The ""matching"" value is ""true"" because the two records are a match.
+- The ""saliency_explanation"" table shows the saliency scores for each feature in both records. The scores indicate how much each feature contributed to the matching/non-matching decision. In this case, the Beer_Name feature has the highest score of 0.5 for both records, indicating that it is the most important feature for the decision.
+- The ""counterfactual_explanation"" table shows the counterfactual values for each feature that would need to be changed to flip the matching/non-matching decision. In this case, no feature needs to be changed because the two records are already a match."
+8,"ltable_Beer_Name:Twisted Stick Amber Ale
+ltable_Brew_Factory_Name:Portneuf Valley Brewing
+ltable_Style:American Amber / Red Ale
+ltable_ABV:-","rtable_Beer_Name:Sick N Twisted Pleasure Victim Amber Ale
+rtable_Brew_Factory_Name:Sick N Twisted Brewing Company
+rtable_Style:Amber Ale
+rtable_ABV:5.50 %","Here's an example response in JSON format:
+
+```
+{
+  ""matching"": false,
+  ""saliency_explanation"": {
+    ""ltable_Beer_Name"": 0.05,
+    ""ltable_Brew_Factory_Name"": 0.1,
+    ""ltable_Style"": 0.8,
+    ""ltable_ABV"": 0.05,
+    ""rtable_Beer_Name"": 0.15,
+    ""rtable_Brew_Factory_Name"": 0.1,
+    ""rtable_Style"": 0.6,
+    ""rtable_ABV"": 0.15
+  },
+  ""counterfactual_explanation"": {
+    ""ltable_Beer_Name"": ""Sick N Twisted Pleasure Victim Amber Ale"",
+    ""ltable_Brew_Factory_Name"": ""Sick N Twisted Brewing Company"",
+    ""ltable_Style"": ""Amber Ale"",
+    ""ltable_ABV"": ""5.50 %"",
+    ""rtable_Beer_Name"": ""Twisted Stick Amber Ale"",
+    ""rtable_Brew_Factory_Name"": ""Portneuf Valley Brewing"",
+    ""rtable_Style"": ""American Amber / Red Ale"",
+    ""rtable_ABV"": ""-""
+  }
+}
+```
+
+The ""matching"" field indicates that the model predicts that the two records do not match. The ""saliency_explanation"" field contains the saliency scores for each input feature, indicating how important each feature was in the model's decision. The ""counterfactual_explanation"" field shows a counterfactual example where the values of the input features are swapped between the two records to show how the model's prediction would change."
+9,"ltable_Beer_Name:Red Hopper ( Imperial Red Ale )
+ltable_Brew_Factory_Name:Black Acre Brewing Co. .
+ltable_Style:American Amber / Red Ale
+ltable_ABV:6.20 %","rtable_Beer_Name:Brannon_s Deputation Imperial Red Ale
+rtable_Brew_Factory_Name:Brannon_s Pub and Brewery
+rtable_Style:American Strong Ale
+rtable_ABV:8.79 %","Here is the response in JSON format:
+
+```
+{
+  ""matching"": false,
+  ""saliency_explanation"": {
+      ""ltable_Beer_Name"": 0.1,
+      ""ltable_Brew_Factory_Name"": 0.2,
+      ""ltable_Style"": 0.3,
+      ""ltable_ABV"": 0.4,
+      ""rtable_Beer_Name"": 0.1,
+      ""rtable_Brew_Factory_Name"": 0.3,
+      ""rtable_Style"": 0.4,
+      ""rtable_ABV"": 0.2
+  },
+  ""counterfactual_explanation"": {
+      ""ltable_Beer_Name"": ""Brannon_s Deputation Imperial Red Ale"",
+      ""ltable_Brew_Factory_Name"": ""Brannon_s Pub and Brewery"",
+      ""ltable_Style"": ""American Strong Ale"",
+      ""ltable_ABV"": ""8.79%"",
+      ""rtable_Beer_Name"": ""Red Hopper ( Imperial Red Ale )"",
+      ""rtable_Brew_Factory_Name"": ""Black Acre Brewing Co. ."",
+      ""rtable_Style"": ""American Amber / Red Ale"",
+      ""rtable_ABV"": ""6.20%""
+  }
+}
+```
+
+The response indicates that the two records do not match. The saliency explanation table shows the saliency score for each feature in both records. The counterfactual explanation table shows the counterfactual values for each feature that would make the two records match."
+10,"ltable_Beer_Name:Clifford 's Big Red Ale
+ltable_Brew_Factory_Name:Funky Buddha Brewery
+ltable_Style:American Amber / Red Ale
+ltable_ABV:9.70 %","rtable_Beer_Name:Big Time Lift Ticket American Red Ale
+rtable_Brew_Factory_Name:Big Time Brewery
+rtable_Style:India Pale Ale &#40; IPA &#41;
+rtable_ABV:7 %","Here is an example response in JSON format:
+
+```
+{
+  ""matching"": false,
+  ""saliency_explanation"": {
+    ""ltable_Beer_Name"": 0.2,
+    ""ltable_Brew_Factory_Name"": 0.1,
+    ""ltable_Style"": 0.3,
+    ""ltable_ABV"": 0.4,
+    ""rtable_Beer_Name"": 0.1,
+    ""rtable_Brew_Factory_Name"": 0.2,
+    ""rtable_Style"": 0.3,
+    ""rtable_ABV"": 0.2
+  },
+  ""counterfactual_explanation"": {
+    ""ltable_Beer_Name"": ""Big Time Lift Ticket American Red Ale"",
+    ""ltable_Brew_Factory_Name"": ""Big Time Brewery"",
+    ""ltable_Style"": ""India Pale Ale ( IPA )"",
+    ""ltable_ABV"": ""7%"",
+    ""rtable_Beer_Name"": ""Clifford 's Big Red Ale"",
+    ""rtable_Brew_Factory_Name"": ""Funky Buddha Brewery"",
+    ""rtable_Style"": ""American Amber / Red Ale"",
+    ""rtable_ABV"": ""9.70%""
+  }
+}
+```
+
+In this example, the model predicts that the two records do not match. The saliency explanation table shows the saliency scores for each feature, with higher scores indicating that the feature had a greater impact on the model's decision. The counterfactual explanation table shows the altered inputs for each feature that would need to be changed in order for the model's prediction to flip."
+11,"ltable_Beer_Name:Red Racer India Style Red Ale
+ltable_Brew_Factory_Name:Central City Brewers + Distillers
+ltable_Style:American Amber / Red Ale
+ltable_ABV:5.60 %","rtable_Beer_Name:Heist American Style Red Ale
+rtable_Brew_Factory_Name:Heist Brewery
+rtable_Style:Amber Ale
+rtable_ABV:4.50 %","Here's an example response in JSON format:
+
+```
+{
+    ""matching"": false,
+    ""saliency_explanation"": {
+        ""ltable_Beer_Name"": 0.4,
+        ""ltable_Brew_Factory_Name"": 0.3,
+        ""ltable_Style"": 0.1,
+        ""ltable_ABV"": 0.2,
+        ""rtable_Beer_Name"": 0.1,
+        ""rtable_Brew_Factory_Name"": 0.3,
+        ""rtable_Style"": 0.4,
+        ""rtable_ABV"": 0.2
+    },
+    ""counterfactual_explanation"": {
+        ""ltable_Beer_Name"": ""Heist American Style Red Ale"",
+        ""ltable_Brew_Factory_Name"": ""Heist Brewery"",
+        ""ltable_Style"": ""Amber Ale"",
+        ""ltable_ABV"": ""4.50 %"",
+        ""rtable_Beer_Name"": ""Red Racer India Style Red Ale"",
+        ""rtable_Brew_Factory_Name"": ""Central City Brewers + Distillers"",
+        ""rtable_Style"": ""American Amber / Red Ale"",
+        ""rtable_ABV"": ""5.60 %""
+    }
+}
+```
+
+In this example, the AI model predicts that the two records do not match (matching: false). The saliency explanation table shows the saliency score for each input feature, indicating the relative importance of each feature in the model's decision-making process. The counterfactual explanation table shows a modified version of the input data, where each feature has been changed to its opposite value, such that the model's prediction flips."
+12,"ltable_Beer_Name:Green Flash Hop Head Red Ale
+ltable_Brew_Factory_Name:Green Flash Brewing Co. .
+ltable_Style:American Amber / Red Ale
+ltable_ABV:8.10 %","rtable_Beer_Name:Iron Horse Fresh Hop Imperial Red Ale
+rtable_Brew_Factory_Name:Iron Horse Brewery
+rtable_Style:American Strong Ale
+rtable_ABV:-","Here's an example response in JSON format:
+
+```
+{
+    ""matching"": false,
+    ""saliency_explanation"": {
+        ""ltable_Beer_Name"": 0.2,
+        ""ltable_Brew_Factory_Name"": 0.3,
+        ""ltable_Style"": 0.1,
+        ""ltable_ABV"": 0.4
+    },
+    ""counterfactual_explanation"": {
+        ""ltable_Beer_Name"": ""Iron Horse Fresh Hop Imperial Red Ale"",
+        ""ltable_Brew_Factory_Name"": ""Iron Horse Brewery"",
+        ""ltable_Style"": ""American Strong Ale"",
+        ""ltable_ABV"": ""N/A""
+    }
+}
+```
+
+The `matching` field indicates that the two records do not match.
+
+The `saliency_explanation` field shows the saliency score for each input feature. In this example, the `ltable_ABV` feature has the highest score, indicating that it was the most important feature in the model's decision-making process.
+
+The `counterfactual_explanation` field shows a modified version of the first record that would cause the model to predict a match. In this case, all of the features have been changed to match those of the second record."
+13,"ltable_Beer_Name:Pike Old Bawdy Barley Wine
+ltable_Brew_Factory_Name:The Pike Brewing Company
+ltable_Style:American Barleywine
+ltable_ABV:9.90 %","rtable_Beer_Name:Bristol Old No. 23 Barley Wine
+rtable_Brew_Factory_Name:Bristol Brewing Company
+rtable_Style:Barley Wine
+rtable_ABV:11.25 %","Here's an example response in JSON format:
+
+```
+{
+    ""matching"": false,
+    ""saliency_explanation"": {
+        ""ltable_Beer_Name"": 0.2,
+        ""ltable_Brew_Factory_Name"": 0.3,
+        ""ltable_Style"": 0.1,
+        ""ltable_ABV"": 0.4,
+        ""rtable_Beer_Name"": 0.2,
+        ""rtable_Brew_Factory_Name"": 0.3,
+        ""rtable_Style"": 0.1,
+        ""rtable_ABV"": 0.4
+    },
+    ""counterfactual_explanation"": {
+        ""ltable_Beer_Name"": ""Bristol Old No. 23 Barley Wine"",
+        ""ltable_Brew_Factory_Name"": ""Bristol Brewing Company"",
+        ""ltable_Style"": ""Barley Wine"",
+        ""ltable_ABV"": ""11.25 %"",
+        ""rtable_Beer_Name"": ""Pike Old Bawdy Barley Wine"",
+        ""rtable_Brew_Factory_Name"": ""The Pike Brewing Company"",
+        ""rtable_Style"": ""American Barleywine"",
+        ""rtable_ABV"": ""9.90 %""
+    }
+}
+```
+
+Explanation:
+
+The saliency explanation table shows the saliency score for each feature in both the left and right records. The scores add up to 1, indicating the relative importance of each feature in determining the matching/non-matching prediction. In this case, the model paid equal attention to all four features.
+
+The counterfactual explanation table shows an altered version of the input records where the Beer Name, Brew Factory Name, Style, and ABV are swapped between the left and right records. Since the model predicted a non-match for the original input, swapping the features should result in a match."
+14,"ltable_Beer_Name:Three Sheets Barleywine ( Syrah Barrel Aged )
+ltable_Brew_Factory_Name:Ballast Point Brewing Company
+ltable_Style:American Barleywine
+ltable_ABV:9.00 %","rtable_Beer_Name:Tighthead Barrel Aged Old Kaya Dog Barleywine
+rtable_Brew_Factory_Name:Tighthead Brewing Company
+rtable_Style:Barley Wine
+rtable_ABV:10.30 %","Here is your response in JSON format:
+
+```
+{
+  ""matching"": false,
+  ""saliency_explanation"": {
+    ""ltable_Beer_Name"": 0.1,
+    ""ltable_Brew_Factory_Name"": 0.3,
+    ""ltable_Style"": 0.2,
+    ""ltable_ABV"": 0.4,
+    ""rtable_Beer_Name"": 0.1,
+    ""rtable_Brew_Factory_Name"": 0.4,
+    ""rtable_Style"": 0.2,
+    ""rtable_ABV"": 0.3
+  },
+  ""counterfactual_explanation"": {
+    ""ltable_Beer_Name"": ""Three Sheets Barleywine ( Syrah Barrel Aged )"",
+    ""ltable_Brew_Factory_Name"": ""Ballast Point Brewing Company"",
+    ""ltable_Style"": ""American Barleywine"",
+    ""ltable_ABV"": ""9.00 %"",
+    ""rtable_Beer_Name"": ""Tighthead Barrel Aged Old Kaya Dog Barleywine"",
+    ""rtable_Brew_Factory_Name"": ""Tighthead Brewing Company"",
+    ""rtable_Style"": ""Barley Wine"",
+    ""rtable_ABV"": ""10.30 %""
+  }
+}
+```
+
+The `matching` field indicates that the two records do not match. The `saliency_explanation` field shows the saliency scores for each input feature in both records. The `counterfactual_explanation` field shows the counterfactual explanation value for each input feature in both records."
+15,"ltable_Beer_Name:Red Rock Opie Red Ale
+ltable_Brew_Factory_Name:Red Rock Brewing Company
+ltable_Style:American Amber / Red Ale
+ltable_ABV:4.00 %","rtable_Beer_Name:Council Rock Sleeping Lion Red Ale
+rtable_Brew_Factory_Name:Council Rock Brewery
+rtable_Style:Irish Ale
+rtable_ABV:6 %","Here's an example response in JSON format, assuming we are using a machine learning model for entity resolution:
+
+```
+{
+  ""matching"": false,
+  ""saliency_explanation"": {
+    ""ltable_Beer_Name"": 0.2,
+    ""ltable_Brew_Factory_Name"": 0.3,
+    ""ltable_Style"": 0.1,
+    ""ltable_ABV"": 0.4,
+    ""rtable_Beer_Name"": 0.3,
+    ""rtable_Brew_Factory_Name"": 0.2,
+    ""rtable_Style"": 0.1,
+    ""rtable_ABV"": 0.4
+  },
+  ""counterfactual_explanation"": {
+    ""ltable_Beer_Name"": ""Council Rock Sleeping Lion Red Ale"",
+    ""ltable_Brew_Factory_Name"": ""Council Rock Brewery"",
+    ""ltable_Style"": ""Irish Ale"",
+    ""ltable_ABV"": ""6 %"",
+    ""rtable_Beer_Name"": ""Red Rock Opie Red Ale"",
+    ""rtable_Brew_Factory_Name"": ""Red Rock Brewing Company"",
+    ""rtable_Style"": ""American Amber / Red Ale"",
+    ""rtable_ABV"": ""4.00 %""
+  }
+}
+```
+
+In this example, the model predicts that the two records do not match. The saliency explanation shows the relative importance of each feature in the model's decision-making process. The counterfactual explanation shows an altered input where the Beer Name, Brew Factory Name, Style, and ABV have been swapped between the two records, resulting in a match prediction by the model."
+16,"ltable_Beer_Name:Ruby Red American Ale
+ltable_Brew_Factory_Name:Fat Bottom Brewing
+ltable_Style:American Amber / Red Ale
+ltable_ABV:6.10 %","rtable_Beer_Name:Black Shirt American India Red Ale
+rtable_Brew_Factory_Name:Black Shirt Brewing Company
+rtable_Style:American Strong Ale
+rtable_ABV:7.09 %","Here is the response in JSON format:
+
+```
+{
+  ""matching"": false,
+  ""saliency_explanation"": {
+    ""ltable_Beer_Name"": 0.2,
+    ""ltable_Brew_Factory_Name"": 0.1,
+    ""ltable_Style"": 0.3,
+    ""ltable_ABV"": 0.4,
+    ""rtable_Beer_Name"": 0.0,
+    ""rtable_Brew_Factory_Name"": 0.1,
+    ""rtable_Style"": 0.2,
+    ""rtable_ABV"": 0.3
+  },
+  ""counterfactual_explanation"": {
+    ""ltable_Beer_Name"": ""Black Shirt American India Red Ale"",
+    ""ltable_Brew_Factory_Name"": ""Black Shirt Brewing Company"",
+    ""ltable_Style"": ""American Strong Ale"",
+    ""ltable_ABV"": ""7.09 %"",
+    ""rtable_Beer_Name"": ""Ruby Red American Ale"",
+    ""rtable_Brew_Factory_Name"": ""Fat Bottom Brewing"",
+    ""rtable_Style"": ""American Amber / Red Ale"",
+    ""rtable_ABV"": ""6.10 %""
+  }
+}
+```
+In the above response, the ""matching"" field is set to ""false"" indicating that the two records are predicted to be non-matching. The ""saliency_explanation"" field provides the saliency score for each input feature, with higher scores indicating more relevance to the prediction. In this case, the ABV feature has the highest score for both records. Finally, the ""counterfactual_explanation"" field provides the counterfactual explanation value for each feature, which is the value that would need to be changed in order for the prediction to flip."
+17,"ltable_Beer_Name:Ruby Red American Ale
+ltable_Brew_Factory_Name:Fat Bottom Brewing
+ltable_Style:American Amber / Red Ale
+ltable_ABV:6.10 %","rtable_Beer_Name:Genesee Brew House American Red Ale
+rtable_Brew_Factory_Name:Genesee Brewing Company &#40; North American Breweries &#41;
+rtable_Style:Amber Ale
+rtable_ABV:5 %","Here's the response in JSON format:
+
+```
+{
+    ""matching"": false,
+    ""saliency_explanation"": {
+        ""ltable_Beer_Name"": 0.2,
+        ""ltable_Brew_Factory_Name"": 0.1,
+        ""ltable_Style"": 0.3,
+        ""ltable_ABV"": 0.4,
+        ""rtable_Beer_Name"": 0.1,
+        ""rtable_Brew_Factory_Name"": 0.2,
+        ""rtable_Style"": 0.4,
+        ""rtable_ABV"": 0.3
+    },
+    ""counterfactual_explanation"": {
+        ""ltable_Beer_Name"": ""Genesee Brew House American Red Ale"",
+        ""ltable_Brew_Factory_Name"": ""Genesee Brewing Company ( North American Breweries )"",
+        ""ltable_Style"": ""Amber Ale"",
+        ""ltable_ABV"": ""5 %"",
+        ""rtable_Beer_Name"": ""Ruby Red American Ale"",
+        ""rtable_Brew_Factory_Name"": ""Fat Bottom Brewing"",
+        ""rtable_Style"": ""American Amber / Red Ale"",
+        ""rtable_ABV"": ""6.10 %""
+    }
+}
+```
+
+The saliency explanation shows the relevance of each feature in the decision-making process. In this case, the model placed the most importance on the ABV feature from the left table and the Style feature from the right table. 
+
+The counterfactual explanation shows the altered input that would cause the model to flip its prediction. In this case, swapping the values of the Beer Name, Brewery Name, Style, and ABV features between the two records would result in a matching prediction."
+18,"ltable_Beer_Name:Rock Bottom Red Ale
+ltable_Brew_Factory_Name:Rock Bottom Restaurant & Brewery
+ltable_Style:American Amber / Red Ale
+ltable_ABV:5.60 %","rtable_Beer_Name:Rock Bottom La Jolla Ragtop Red Ale
+rtable_Brew_Factory_Name:Rock Bottom La Jolla
+rtable_Style:Amber Ale
+rtable_ABV:5.40 %","Here's an example response in JSON format:
+
+```
+{
+   ""matching"": false,
+   ""saliency_explanation"": {
+      ""ltable_Beer_Name"": 0.2,
+      ""ltable_Brew_Factory_Name"": 0.5,
+      ""ltable_Style"": 0.3,
+      ""ltable_ABV"": 0.0
+   },
+   ""counterfactual_explanation"": {
+      ""ltable_Beer_Name"": ""Rock Bottom La Jolla Ragtop Red Ale"",
+      ""ltable_Brew_Factory_Name"": ""Rock Bottom La Jolla"",
+      ""ltable_Style"": ""Amber Ale"",
+      ""ltable_ABV"": 5.4
+   }
+}
+```
+
+The `matching` field indicates that the two records do not match. The `saliency_explanation` field shows the saliency score for each input feature, indicating how much each feature contributed to the matching/non-matching prediction. Finally, the `counterfactual_explanation` field shows an altered version of the first record where the `Beer_Name`, `Brew_Factory_Name`, and `Style` fields have been changed to match the values in the second record, resulting in a matching prediction. The `ABV` field remains unchanged, as it was not a salient feature in this case."
+19,"ltable_Beer_Name:Hop Around Imperial Red Ale
+ltable_Brew_Factory_Name:Big Bay Brewing Co. .
+ltable_Style:American Amber / Red Ale
+ltable_ABV:9.00 %","rtable_Beer_Name:Marble Imperial Red Ale
+rtable_Brew_Factory_Name:Marble Brewery
+rtable_Style:American Strong Ale
+rtable_ABV:9 %","Here's an example response in json format:
+
+```
+{
+    ""matching"": false,
+    ""saliency_explanation"": {
+        ""ltable_Beer_Name"": 0.2,
+        ""ltable_Brew_Factory_Name"": 0.1,
+        ""ltable_Style"": 0.3,
+        ""ltable_ABV"": 0.4
+    },
+    ""counterfactual_explanation"": {
+        ""ltable_Beer_Name"": ""Hop Around Imperial Red Ale"",
+        ""ltable_Brew_Factory_Name"": ""Big Bay Brewing Co. ."",
+        ""ltable_Style"": ""American Amber / Red Ale"",
+        ""ltable_ABV"": ""8.5 %""
+    }
+}
+```
+
+In this example, the AI model predicts that the two records do not match. The saliency explanation table shows the saliency scores for each input feature, indicating that the ABV feature had the highest saliency score. The counterfactual explanation table shows the counterfactual values for each input feature that would need to be changed in order to flip the prediction of the model. In this case, the ABV value of the first record was changed to 8.5% to match the ABV value of the second record."
+20,"ltable_Beer_Name:Blue Bridge Amber Dry Hopped
+ltable_Brew_Factory_Name:Galveston Island Brewing Company
+ltable_Style:American Amber / Red Ale
+ltable_ABV:6.00 %","rtable_Beer_Name:Winthrop Double Dry Hopped Amber
+rtable_Brew_Factory_Name:Winthrop Brewing Company
+rtable_Style:Amber Ale
+rtable_ABV:-","Here is an example response in JSON format:
+
+```
+{
+    ""matching"": false,
+    ""saliency_explanation"": {
+        ""ltable_Beer_Name"": 0.2,
+        ""ltable_Brew_Factory_Name"": 0.1,
+        ""ltable_Style"": 0.3,
+        ""ltable_ABV"": 0.4,
+        ""rtable_Beer_Name"": 0.2,
+        ""rtable_Brew_Factory_Name"": 0.1,
+        ""rtable_Style"": 0.3,
+        ""rtable_ABV"": 0.4
+    },
+    ""counterfactual_explanation"": {
+        ""ltable_Beer_Name"": ""Winthrop Double Dry Hopped Amber"",
+        ""ltable_Brew_Factory_Name"": ""Winthrop Brewing Company"",
+        ""ltable_Style"": ""Amber Ale"",
+        ""ltable_ABV"": ""-"",
+        ""rtable_Beer_Name"": ""Blue Bridge Amber Dry Hopped"",
+        ""rtable_Brew_Factory_Name"": ""Galveston Island Brewing Company"",
+        ""rtable_Style"": ""American Amber / Red Ale"",
+        ""rtable_ABV"": ""6.00 %""
+    }
+}
+```
+
+The saliency explanation table shows the saliency score for each input feature, indicating how much each feature contributed to the decision of the model. In this example, all the features have equal saliency scores of 0.2, indicating that the model gave equal attention to all of them.
+
+The counterfactual explanation table shows an altered input where the key attributes of the input data are changed so that the model prediction flips. In this example, the counterfactual explanation shows that if we swap the values of the input records for all the features, the model prediction would flip from non-matching to matching."
+21,"ltable_Beer_Name:Arrow Point Amber
+ltable_Brew_Factory_Name:Bainbridge Island Brewing Company
+ltable_Style:American Amber / Red Ale
+ltable_ABV:5.40 %","rtable_Beer_Name:Bainbridge Island Arrow Point Amber
+rtable_Brew_Factory_Name:Bainbridge Island Brewing Company
+rtable_Style:Amber Ale
+rtable_ABV:5.40 %","Here is the response in json format:
+
+```
+{
+  ""match"": ""yes"",
+  ""saliency"": {
+    ""ltable_Beer_Name"": 0.2,
+    ""ltable_Brew_Factory_Name"": 0.8,
+    ""ltable_Style"": 0.4,
+    ""ltable_ABV"": 0.3
+  },
+  ""counterfactual"": {
+    ""ltable_Beer_Name"": ""Bainbridge Island Arrow Point Amber"",
+    ""ltable_Brew_Factory_Name"": ""Bainbridge Island Brewing Company"",
+    ""ltable_Style"": ""Amber Ale"",
+    ""ltable_ABV"": ""5.40 %""
+  }
+}
+```
+
+The saliency explanation table shows the saliency score for each input feature, indicating how much each feature contributed to the model's decision. In this case, the model paid the most attention to the `ltable_Brew_Factory_Name` feature, followed by `ltable_Style`, `ltable_ABV`, and `ltable_Beer_Name`.
+
+The counterfactual explanation table shows the counterfactual value for each input feature, which is the value that would need to be changed for the model's prediction to flip. In this case, changing the `ltable_Beer_Name`, `ltable_Brew_Factory_Name`, `ltable_Style`, or `ltable_ABV` of the first record to match the corresponding value in the second record would result in the model predicting a match."
+22,"ltable_Beer_Name:Bourbon Barrel Aged Horus Imperial Red
+ltable_Brew_Factory_Name:Elevator Brewery & Draught Haus
+ltable_Style:American Amber / Red Ale
+ltable_ABV:12.00 %","rtable_Beer_Name:Lompoc Bourbon Barrel Aged Old Tavern Rat
+rtable_Brew_Factory_Name:Lompoc Brewing
+rtable_Style:Barley Wine
+rtable_ABV:9.70 %","Here is an example of how the response could be formatted in JSON:
+
+```
+{
+  ""matching"": false,
+  ""saliency_explanation"": {
+    ""ltable_Beer_Name"": 0.2,
+    ""ltable_Brew_Factory_Name"": 0.1,
+    ""ltable_Style"": 0.3,
+    ""ltable_ABV"": 0.4,
+    ""rtable_Beer_Name"": 0.1,
+    ""rtable_Brew_Factory_Name"": 0.2,
+    ""rtable_Style"": 0.3,
+    ""rtable_ABV"": 0.4
+  },
+  ""counterfactual_explanation"": {
+    ""ltable_Beer_Name"": ""Lompoc Bourbon Barrel Aged Old Tavern Rat"",
+    ""ltable_Brew_Factory_Name"": ""Lompoc Brewing"",
+    ""ltable_Style"": ""Barley Wine"",
+    ""ltable_ABV"": ""9.70 %"",
+    ""rtable_Beer_Name"": ""Bourbon Barrel Aged Horus Imperial Red"",
+    ""rtable_Brew_Factory_Name"": ""Elevator Brewery & Draught Haus"",
+    ""rtable_Style"": ""American Amber / Red Ale"",
+    ""rtable_ABV"": ""12.00 %""
+  }
+}
+```
+
+In this example, the AI model predicts that the two records do not match. The saliency explanation shows the saliency score for each feature in both records, indicating how much each feature contributed to the model's decision. The counterfactual explanation shows an altered version of the input records, where the key features have been swapped between the two records to make them match."
+23,"ltable_Beer_Name:Lavery Imperial Red Ale
+ltable_Brew_Factory_Name:Lavery Brewing Company
+ltable_Style:American Amber / Red Ale
+ltable_ABV:8.20 %","rtable_Beer_Name:Laurelwood Organic Deranger Imperial Red Ale
+rtable_Brew_Factory_Name:Laurelwood Public House & Brewery
+rtable_Style:American Strong Ale
+rtable_ABV:8.60 %","Here's an example response in JSON format:
+
+```
+{
+    ""matching"": false,
+    ""saliency_explanation"": {
+        ""ltable_Beer_Name"": 0.1,
+        ""ltable_Brew_Factory_Name"": 0.05,
+        ""ltable_Style"": 0.2,
+        ""ltable_ABV"": 0.65,
+        ""rtable_Beer_Name"": 0.15,
+        ""rtable_Brew_Factory_Name"": 0.05,
+        ""rtable_Style"": 0.25,
+        ""rtable_ABV"": 0.5
+    },
+    ""counterfactual_explanation"": {
+        ""ltable_Beer_Name"": ""Laurelwood Organic Deranger Imperial Red Ale"",
+        ""ltable_Brew_Factory_Name"": ""Laurelwood Public House & Brewery"",
+        ""ltable_Style"": ""American Strong Ale"",
+        ""ltable_ABV"": ""8.60 %"",
+        ""rtable_Beer_Name"": ""Lavery Imperial Red Ale"",
+        ""rtable_Brew_Factory_Name"": ""Lavery Brewing Company"",
+        ""rtable_Style"": ""American Amber / Red Ale"",
+        ""rtable_ABV"": ""8.20 %""
+    }
+}
+```
+
+The ""matching"" key in the JSON response indicates whether the two records match or not. In this case, the model has predicted that the records do not match.
+
+The ""saliency_explanation"" key contains a dictionary with the saliency scores for each input feature. The saliency score represents how much each feature contributed to the model's decision. In this case, the model has assigned the highest saliency score to the ""ltable_ABV"" feature, suggesting that it played the most important role in the model's decision.
+
+The ""counterfactual_explanation"" key contains a dictionary with the counterfactual explanation value for each input feature. The counterfactual explanation value represents the value that the feature would need to take in order to change the model's prediction. In this case, the counterfactual explanation values suggest that if the ABV values were switched between the two records, the model would predict that the records match."
+24,"ltable_Beer_Name:Smuttynose Kindest Find Imperial Red Ale
+ltable_Brew_Factory_Name:Smuttynose Brewing Company
+ltable_Style:American Amber / Red Ale
+ltable_ABV:8.50 %","rtable_Beer_Name:Rock Bottom Orland Park King of Hearts Imperial Red Ale
+rtable_Brew_Factory_Name:Rock Bottom Orland Park
+rtable_Style:American Strong Ale
+rtable_ABV:7.60 %","Here is a sample response with a random saliency score and counterfactual explanation value for each feature:
+
+```
+{
+    ""matching"": false,
+    ""saliency_explanation"": {
+        ""ltable_Beer_Name"": 0.25,
+        ""ltable_Brew_Factory_Name"": 0.15,
+        ""ltable_Style"": 0.10,
+        ""ltable_ABV"": 0.05,
+        ""rtable_Beer_Name"": 0.20,
+        ""rtable_Brew_Factory_Name"": 0.10,
+        ""rtable_Style"": 0.15,
+        ""rtable_ABV"": 0.05
+    },
+    ""counterfactual_explanation"": {
+        ""ltable_Beer_Name"": ""Smuttynose Kindest Find Imperial Red Ale"",
+        ""ltable_Brew_Factory_Name"": ""Smuttynose Brewing Company"",
+        ""ltable_Style"": ""American Amber / Red Ale"",
+        ""ltable_ABV"": ""8.50 %"",
+        ""rtable_Beer_Name"": ""Rock Bottom Orland Park King of Hearts Imperial Red Ale"",
+        ""rtable_Brew_Factory_Name"": ""Rock Bottom Orland Park"",
+        ""rtable_Style"": ""American Strong Ale"",
+        ""rtable_ABV"": ""7.60 %""
+    }
+}
+```
+
+Please note that the actual saliency scores and counterfactual explanation values would depend on the specific model and algorithm used for entity resolution."
+25,"ltable_Beer_Name:Brewmaster 's Reserve Imperial Red Ale
+ltable_Brew_Factory_Name:BJ 's Chicago Pizza & Brewery Inc. .
+ltable_Style:American Amber / Red Ale
+ltable_ABV:9.20 %","rtable_Beer_Name:Ballast Point Tongue Buckler Imperial Red Ale - Bourbon Barrel Aged
+rtable_Brew_Factory_Name:Ballast Point Brewing Company
+rtable_Style:American Strong Ale
+rtable_ABV:10 %","Here is an example response:
+
+```json
+{
+    ""matching"": false,
+    ""saliency_explanation"": {
+        ""ltable_Beer_Name"": 0.2,
+        ""ltable_Brew_Factory_Name"": 0.3,
+        ""ltable_Style"": 0.1,
+        ""ltable_ABV"": 0.4,
+        ""rtable_Beer_Name"": 0.1,
+        ""rtable_Brew_Factory_Name"": 0.3,
+        ""rtable_Style"": 0.2,
+        ""rtable_ABV"": 0.4
+    },
+    ""counterfactual_explanation"": {
+        ""ltable_Beer_Name"": ""Ballast Point Tongue Buckler Imperial Red Ale - Bourbon Barrel Aged"",
+        ""ltable_Brew_Factory_Name"": ""Ballast Point Brewing Company"",
+        ""ltable_Style"": ""American Strong Ale"",
+        ""ltable_ABV"": ""10%"",
+        ""rtable_Beer_Name"": ""Brewmaster's Reserve Imperial Red Ale"",
+        ""rtable_Brew_Factory_Name"": ""BJ's Chicago Pizza & Brewery Inc."",
+        ""rtable_Style"": ""American Amber / Red Ale"",
+        ""rtable_ABV"": ""9.2%""
+    }
+}
+```
+
+The `matching` field indicates whether the two records are predicted to match or not. In this case, the model predicts that they do not match.
+
+The `saliency_explanation` field provides a table of saliency scores for each feature in the input records. The scores indicate the importance of each feature in the model's decision-making process. In this case, the `ltable_ABV` and `rtable_ABV` features have the highest scores, indicating that they were the most important features in the decision.
+
+The `counterfactual_explanation` field provides an altered version of the input records that would cause the model to change its prediction. In this case, the altered version swaps the values of the `ltable` and `rtable` features, resulting in a match prediction."
+26,"ltable_Beer_Name:Good Medicine Strong Red Ale
+ltable_Brew_Factory_Name:Great Northern Brewing Co. / Black Star Draught House
+ltable_Style:American Amber / Red Ale
+ltable_ABV:7.50 %","rtable_Beer_Name:Good People Stepchild Belgian India Red Ale
+rtable_Brew_Factory_Name:Good People Brewing Company
+rtable_Style:India Pale Ale &#40; IPA &#41;
+rtable_ABV:7.80 %","Here's an example response:
+
+```json
+{
+  ""matching"": false,
+  ""saliency_explanation"": {
+    ""ltable_Beer_Name"": 0.1,
+    ""ltable_Brew_Factory_Name"": 0.05,
+    ""ltable_Style"": 0.2,
+    ""ltable_ABV"": 0.15,
+    ""rtable_Beer_Name"": 0.05,
+    ""rtable_Brew_Factory_Name"": 0.1,
+    ""rtable_Style"": 0.15,
+    ""rtable_ABV"": 0.2
+  },
+  ""counterfactual_explanation"": {
+    ""ltable_Beer_Name"": ""Good People Stepchild Belgian India Red Ale"",
+    ""ltable_Brew_Factory_Name"": ""Good People Brewing Company"",
+    ""ltable_Style"": ""India Pale Ale (IPA)"",
+    ""ltable_ABV"": ""7.80 %"",
+    ""rtable_Beer_Name"": ""Good Medicine Strong Red Ale"",
+    ""rtable_Brew_Factory_Name"": ""Great Northern Brewing Co. / Black Star Draught House"",
+    ""rtable_Style"": ""American Amber / Red Ale"",
+    ""rtable_ABV"": ""7.50 %""
+  }
+}
+```
+
+In this example, the model predicts that the two records do not match. The saliency explanation table shows the saliency score for each feature in both records. The counterfactual explanation table shows the counterfactual values for each feature that would cause the model's prediction to flip."
+27,"ltable_Beer_Name:Tongue Buckler - Imperial Red Ale
+ltable_Brew_Factory_Name:Ballast Point Brewing Company
+ltable_Style:American Amber / Red Ale
+ltable_ABV:10.00 %","rtable_Beer_Name:Three Heads Buffalo Soul Jah Imperial Red Ale
+rtable_Brew_Factory_Name:Custom Brewcrafters
+rtable_Style:American Strong Ale
+rtable_ABV:9.20 %","Here is your response in json format:
+
+```
+{
+    ""matching"": false,
+    ""saliency_explanation"": {
+        ""ltable_Beer_Name"": 0.35,
+        ""ltable_Brew_Factory_Name"": 0.25,
+        ""ltable_Style"": 0.20,
+        ""ltable_ABV"": 0.10,
+        ""rtable_Beer_Name"": 0.05,
+        ""rtable_Brew_Factory_Name"": 0.05,
+        ""rtable_Style"": 0.00,
+        ""rtable_ABV"": 0.00
+    },
+    ""counterfactual_explanation"": {
+        ""ltable_Beer_Name"": ""Three Heads Buffalo Soul Jah Imperial Red Ale"",
+        ""ltable_Brew_Factory_Name"": ""Custom Brewcrafters"",
+        ""ltable_Style"": ""American Strong Ale"",
+        ""ltable_ABV"": ""9.20 %"",
+        ""rtable_Beer_Name"": ""Tongue Buckler - Imperial Red Ale"",
+        ""rtable_Brew_Factory_Name"": ""Ballast Point Brewing Company"",
+        ""rtable_Style"": ""American Amber / Red Ale"",
+        ""rtable_ABV"": ""10.00 %""
+    }
+}
+```
+
+The saliency explanation table shows the importance of each feature in contributing to the matching/non-matching prediction. In this case, the model gives the highest importance to the beer name and brewery name features of the left table (ltable), followed by the style and ABV features of the ltable. The model gives much less importance to the features of the right table (rtable), with the beer name being the most important.
+
+The counterfactual explanation table shows the values of each feature that would need to be changed in order to flip the model's prediction. In this case, changing the values of all features from the ltable to the corresponding values of the rtable would result in a matching prediction."
+28,"ltable_Beer_Name:Smuttynose Kindest Find Imperial Red Ale
+ltable_Brew_Factory_Name:Smuttynose Brewing Company
+ltable_Style:American Amber / Red Ale
+ltable_ABV:8.50 %","rtable_Beer_Name:Ballast Point Tongue Buckler Imperial Red Ale - Bourbon Barrel Aged
+rtable_Brew_Factory_Name:Ballast Point Brewing Company
+rtable_Style:American Strong Ale
+rtable_ABV:10 %","Here is the response in json format:
+
+```
+{
+  ""matching"": false,
+  ""saliency_explanation"": {
+    ""ltable_Beer_Name"": 0.2,
+    ""ltable_Brew_Factory_Name"": 0.05,
+    ""ltable_Style"": 0.1,
+    ""ltable_ABV"": 0.15,
+    ""rtable_Beer_Name"": 0.35,
+    ""rtable_Brew_Factory_Name"": 0.05,
+    ""rtable_Style"": 0.1,
+    ""rtable_ABV"": 0.1
+  },
+  ""counterfactual_explanation"": {
+    ""ltable_Beer_Name"": ""Ballast Point Tongue Buckler Imperial Red Ale - Bourbon Barrel Aged"",
+    ""ltable_Brew_Factory_Name"": ""Ballast Point Brewing Company"",
+    ""ltable_Style"": ""American Strong Ale"",
+    ""ltable_ABV"": ""10 %"",
+    ""rtable_Beer_Name"": ""Smuttynose Kindest Find Imperial Red Ale"",
+    ""rtable_Brew_Factory_Name"": ""Smuttynose Brewing Company"",
+    ""rtable_Style"": ""American Amber / Red Ale"",
+    ""rtable_ABV"": ""8.50 %""
+  }
+}
+```
+
+The `matching` field indicates that the two records do not match. 
+
+The `saliency_explanation` field shows the saliency score for each feature in both records. The saliency score is a value between 0 and 1 that represents the importance of the feature in the decision-making process of the model. 
+
+The `counterfactual_explanation` field shows an altered version of each record that would cause the model to change its prediction. For example, if the `ltable_Beer_Name` in record 1 was changed to ""Ballast Point Tongue Buckler Imperial Red Ale - Bourbon Barrel Aged"", the model would predict a match between the two records."
+29,"ltable_Beer_Name:Amber Waves Ale
+ltable_Brew_Factory_Name:Capitol City Brewing
+ltable_Style:American Amber / Red Ale
+ltable_ABV:5.40 %","rtable_Beer_Name:Capitol City Amber Waves Ale
+rtable_Brew_Factory_Name:Capitol City Brewing Company
+rtable_Style:Amber Ale
+rtable_ABV:5.60 %","Here's an example response in JSON format:
+
+```
+{
+  ""matching"": true,
+  ""saliency"": {
+    ""ltable_Beer_Name"": 0.45,
+    ""ltable_Brew_Factory_Name"": 0.25,
+    ""ltable_Style"": 0.15,
+    ""ltable_ABV"": 0.15,
+    ""rtable_Beer_Name"": 0.55,
+    ""rtable_Brew_Factory_Name"": 0.25,
+    ""rtable_Style"": 0.15,
+    ""rtable_ABV"": 0.05
+  },
+  ""counterfactual"": {
+    ""ltable_Beer_Name"": ""Capitol City Amber Waves Ale"",
+    ""ltable_Brew_Factory_Name"": ""Capitol City Brewing Company"",
+    ""ltable_Style"": ""Amber Ale"",
+    ""ltable_ABV"": 5.60,
+    ""rtable_Beer_Name"": ""Amber Waves Ale"",
+    ""rtable_Brew_Factory_Name"": ""Capitol City Brewing"",
+    ""rtable_Style"": ""American Amber / Red Ale"",
+    ""rtable_ABV"": 5.40
+  }
+}
+```
+
+In this example, the ""matching"" field indicates that the model predicted the two records to be a match. The ""saliency"" field provides a table of saliency scores for each input feature in both records. The higher the score, the more important the feature was in the model's decision-making process. The ""counterfactual"" field provides a table of counterfactual values for each input feature in both records. These values represent the minimum changes that need to be made to the input data to flip the model's prediction."
+30,"ltable_Beer_Name:Honey Amber Ale
+ltable_Brew_Factory_Name:RJ Rockers Brewing Company
+ltable_Style:American Amber / Red Ale
+ltable_ABV:5.80 %","rtable_Beer_Name:Heavy Seas Desert Island Series American Honey Amber Ale
+rtable_Brew_Factory_Name:Heavy Seas Brewing Company
+rtable_Style:Amber Ale
+rtable_ABV:4.90 %","Here's an example response in JSON format:
+
+```
+{
+  ""matching"": false,
+  ""saliency_explanation"": {
+    ""ltable_Beer_Name"": 0.2,
+    ""ltable_Brew_Factory_Name"": 0.3,
+    ""ltable_Style"": 0.1,
+    ""ltable_ABV"": 0.4
+  },
+  ""counterfactual_explanation"": {
+    ""ltable_Beer_Name"": ""Heavy Seas Desert Island Series American Honey Amber Ale"",
+    ""ltable_Brew_Factory_Name"": ""Heavy Seas Brewing Company"",
+    ""ltable_Style"": ""Amber Ale"",
+    ""ltable_ABV"": 4.90
+  }
+}
+```
+
+In this example, the AI model predicted that the two records do not match. The saliency explanation table indicates that the ABV feature had the highest saliency score, meaning it was the most important feature in the decision-making process. The counterfactual explanation table shows an altered input where the Beer_Name, Brew_Factory_Name, Style, and ABV features of the first record are replaced with the corresponding features of the second record, resulting in a matching prediction."
+31,"ltable_Beer_Name:Batch 200 _ `` Olympus Mons Imperial Red Ale
+ltable_Brew_Factory_Name:Due South Brewing Co. .
+ltable_Style:American Amber / Red Ale
+ltable_ABV:9.20 %","rtable_Beer_Name:Scuttlebutt Mateo Loco Imperial Red Ale
+rtable_Brew_Factory_Name:Scuttlebutt Brewing Co. .
+rtable_Style:American Strong Ale
+rtable_ABV:7.10 %","Here's an example response to your request:
+
+```json
+{
+  ""matching"": false,
+  ""saliency_explanation"": {
+    ""ltable_Beer_Name"": 0.2,
+    ""ltable_Brew_Factory_Name"": 0.1,
+    ""ltable_Style"": 0.3,
+    ""ltable_ABV"": 0.4
+  },
+  ""counterfactual_explanation"": {
+    ""ltable_Beer_Name"": ""Batch 200 Olympus Mons Imperial Red Ale"",
+    ""ltable_Brew_Factory_Name"": ""Due South Brewing Co."",
+    ""ltable_Style"": ""American Strong Ale"",
+    ""ltable_ABV"": 7.1
+  }
+}
+```
+
+The `matching` key indicates that the model predicted that the two records do not match. The `saliency_explanation` key provides a dictionary with the saliency score for each feature in the input records. The highest saliency score is associated with the `ltable_ABV` feature, indicating that this feature was the most important in the model's decision-making process. The `counterfactual_explanation` key provides a dictionary with the counterfactual explanation value for each feature in the input records. In this case, the counterfactual explanation value for the `ltable_Style` feature is ""American Strong Ale"", indicating that if this feature had been different, the model may have predicted that the two records match."
+32,"ltable_Beer_Name:Rocky Point Red Ale
+ltable_Brew_Factory_Name:Revival Brewing Co. .
+ltable_Style:American Amber / Red Ale
+ltable_ABV:5.50 %","rtable_Beer_Name:Alley Kat Rocky Mountain Red Ale &#40; The Cheesecake Cafe &#41;
+rtable_Brew_Factory_Name:Alley Kat Brewing Company
+rtable_Style:Irish Ale
+rtable_ABV:-","Here's an example response in JSON format:
+
+```
+{
+    ""matching"": false,
+    ""saliency_explanation"": {
+        ""ltable_Beer_Name"": 0.25,
+        ""ltable_Brew_Factory_Name"": 0.1,
+        ""ltable_Style"": 0.5,
+        ""ltable_ABV"": 0.15,
+        ""rtable_Beer_Name"": 0.0,
+        ""rtable_Brew_Factory_Name"": 0.0,
+        ""rtable_Style"": 0.0,
+        ""rtable_ABV"": 0.0
+    },
+    ""counterfactual_explanation"": {
+        ""ltable_Beer_Name"": ""Rocky Mountain Red Ale"",
+        ""ltable_Brew_Factory_Name"": ""Alley Kat Brewing Company"",
+        ""ltable_Style"": ""Irish Ale"",
+        ""ltable_ABV"": ""-"",
+        ""rtable_Beer_Name"": ""Rocky Point Red Ale"",
+        ""rtable_Brew_Factory_Name"": ""Revival Brewing Co. ."",
+        ""rtable_Style"": ""American Amber / Red Ale"",
+        ""rtable_ABV"": ""5.50 %""
+    }
+}
+```
+
+In this example, the model predicts that the two records do not match. The saliency explanation table shows that the style feature has the highest saliency score, indicating that it was the most important feature in the model's decision-making process. The counterfactual explanation table shows an altered version of the input data where the beer name, brewery name, style, and ABV values of the two records are swapped. This altered input leads to a flipped prediction, indicating that these features were the most influential in the model's decision."
+33,"ltable_Beer_Name:Red Shedman 's Imperial Amber Ale
+ltable_Brew_Factory_Name:57 Brew Pub & Bistro
+ltable_Style:American Amber / Red Ale
+ltable_ABV:7.60 %","rtable_Beer_Name:Rock Bottom Orland Park King of Hearts Imperial Red Ale
+rtable_Brew_Factory_Name:Rock Bottom Orland Park
+rtable_Style:American Strong Ale
+rtable_ABV:7.60 %","Here's a possible response in JSON format:
+
+```
+{
+    ""matching"": true,
+    ""saliency_explanation"": {
+        ""ltable_Beer_Name"": 0.23,
+        ""ltable_Brew_Factory_Name"": 0.12,
+        ""ltable_Style"": 0.18,
+        ""ltable_ABV"": 0.47
+    },
+    ""counterfactual_explanation"": {
+        ""ltable_Beer_Name"": ""Rock Bottom Orland Park King of Hearts Imperial Red Ale"",
+        ""ltable_Brew_Factory_Name"": ""Rock Bottom Orland Park"",
+        ""ltable_Style"": ""American Strong Ale"",
+        ""ltable_ABV"": 7.60
+    }
+}
+```
+
+In this example, the AI model predicts a match between the two records, with a high saliency score for the ""ltable_ABV"" feature. The counterfactual explanation shows that if we were to change the ""ltable_Beer_Name"", ""ltable_Brew_Factory_Name"", or ""ltable_Style"" features to their corresponding values in the second record, the model would still predict a match. However, changing the ""ltable_ABV"" feature to 7.61% or higher would likely result in a non-match prediction."
+34,"ltable_Beer_Name:Big Red Ale
+ltable_Brew_Factory_Name:Red Car Brewery and Restaurant
+ltable_Style:American Amber / Red Ale
+ltable_ABV:5.70 %","rtable_Beer_Name:Big Bear Lake Sidewinder Red Ale
+rtable_Brew_Factory_Name:Big Bear Lake Brewing Company
+rtable_Style:Amber Ale
+rtable_ABV:8.50 %","Here is a sample response that includes the matching/non-matching prediction, saliency explanation table, and counterfactual explanation table:
+
+```
+{
+    ""prediction"": ""non-matching"",
+    ""saliency_explanation"": {
+        ""ltable_Beer_Name"": 0.2,
+        ""ltable_Brew_Factory_Name"": 0.3,
+        ""ltable_Style"": 0.4,
+        ""ltable_ABV"": 0.1,
+        ""rtable_Beer_Name"": 0.2,
+        ""rtable_Brew_Factory_Name"": 0.3,
+        ""rtable_Style"": 0.4,
+        ""rtable_ABV"": 0.1
+    },
+    ""counterfactual_explanation"": {
+        ""ltable_Beer_Name"": ""Big Red Ale"",
+        ""ltable_Brew_Factory_Name"": ""Red Car Brewery and Restaurant"",
+        ""ltable_Style"": ""American Amber / Red Ale"",
+        ""ltable_ABV"": ""5.70 %"",
+        ""rtable_Beer_Name"": ""Big Red Ale"",
+        ""rtable_Brew_Factory_Name"": ""Red Car Brewery and Restaurant"",
+        ""rtable_Style"": ""American Amber / Red Ale"",
+        ""rtable_ABV"": ""5.70 %""
+    }
+}
+```
+
+In this example, the model predicts that the two records do not match. The saliency explanation table shows the saliency scores for each feature, indicating that the style feature is the most important for the model's decision. The counterfactual explanation table shows the altered input values for each feature that would cause the model's prediction to flip to a matching prediction. In this case, changing the rtable_Style feature to ""American Amber / Red Ale"" would cause the model to predict a match."
+35,"ltable_Beer_Name:Alexander Keith 's Red Amber Ale
+ltable_Brew_Factory_Name:Alexander Keith 's
+ltable_Style:American Amber / Red Ale
+ltable_ABV:5.00 %","rtable_Beer_Name:Hollywood Beach Red Tide Amber Ale
+rtable_Brew_Factory_Name:Hollywood Beach Brewing Company
+rtable_Style:Amber Ale
+rtable_ABV:5.20 %","Here's an example response in JSON format:
+
+```json
+{
+  ""matching"": false,
+  ""saliency_explanation"": {
+      ""ltable_Beer_Name"": 0.2,
+      ""ltable_Brew_Factory_Name"": 0.1,
+      ""ltable_Style"": 0.3,
+      ""ltable_ABV"": 0.4,
+      ""rtable_Beer_Name"": 0.1,
+      ""rtable_Brew_Factory_Name"": 0.2,
+      ""rtable_Style"": 0.4,
+      ""rtable_ABV"": 0.3
+  },
+  ""counterfactual_explanation"": {
+      ""ltable_Beer_Name"": ""Hollywood Beach Red Tide Amber Ale"",
+      ""ltable_Brew_Factory_Name"": ""Hollywood Beach Brewing Company"",
+      ""ltable_Style"": ""Amber Ale"",
+      ""ltable_ABV"": ""5.20%"",
+      ""rtable_Beer_Name"": ""Alexander Keith 's Red Amber Ale"",
+      ""rtable_Brew_Factory_Name"": ""Alexander Keith 's"",
+      ""rtable_Style"": ""American Amber / Red Ale"",
+      ""rtable_ABV"": ""5.00%""
+  }
+}
+```
+
+In this example, the AI model predicts that the two records do not match. The saliency explanation shows the importance of each feature in the prediction, with higher scores indicating more important features. The counterfactual explanation provides an alternate set of input values that would cause the AI model to predict that the two records match."
+36,"ltable_Beer_Name:Brass Ale Honey Amber
+ltable_Brew_Factory_Name:Great Storm Brewing Co. .
+ltable_Style:American Amber / Red Ale
+ltable_ABV:5.30 %","rtable_Beer_Name:Salty Nut Bee Transfixed Honey Amber Ale
+rtable_Brew_Factory_Name:Salty Nut Brewery
+rtable_Style:Amber Ale
+rtable_ABV:5.50 %","Here is your requested response in JSON format:
+
+```
+{
+  ""matching"": ""no"",
+  ""saliency_explanation"": {
+    ""ltable_Beer_Name"": 0.25,
+    ""ltable_Brew_Factory_Name"": 0.15,
+    ""ltable_Style"": 0.35,
+    ""ltable_ABV"": 0.25
+  },
+  ""counterfactual_explanation"": {
+    ""ltable_Beer_Name"": ""Salty Nut Bee Transfixed Honey Amber Ale"",
+    ""ltable_Brew_Factory_Name"": ""Salty Nut Brewery"",
+    ""ltable_Style"": ""Amber Ale"",
+    ""ltable_ABV"": ""5.50 %""
+  }
+}
+```
+
+The saliency explanation shows that the ""ltable_Style"" feature has the highest saliency score, indicating that it is the most important feature in determining the match/non-match prediction. The counterfactual explanation shows that if we were to change the ""ltable_Beer_Name"", ""ltable_Brew_Factory_Name"", ""ltable_Style"", and ""ltable_ABV"" features to the values of the corresponding features in record2, the prediction would flip to a match."
+37,"ltable_Beer_Name:Tongue Buckler ( Bourbon Barrel Aged )
+ltable_Brew_Factory_Name:Ballast Point Brewing Company
+ltable_Style:American Amber / Red Ale
+ltable_ABV:10.00 %","rtable_Beer_Name:23rd Street Pumpkin Ale Bourbon Barrel Aged
+rtable_Brew_Factory_Name:23rd Street Brewery
+rtable_Style:Specialty Grain
+rtable_ABV:-","Based on the provided records, the response would be:
+
+```json
+{
+   ""matching"": false,
+   ""saliency_explanation"": {
+      ""ltable_Beer_Name"": 0.25,
+      ""ltable_Brew_Factory_Name"": 0.15,
+      ""ltable_Style"": 0.1,
+      ""ltable_ABV"": 0.05,
+      ""rtable_Beer_Name"": 0.20,
+      ""rtable_Brew_Factory_Name"": 0.1,
+      ""rtable_Style"": 0.05,
+      ""rtable_ABV"": 0.0
+   },
+   ""counterfactual_explanation"": {
+      ""ltable_Beer_Name"": ""23rd Street Pumpkin Ale Bourbon Barrel Aged"",
+      ""ltable_Brew_Factory_Name"": ""23rd Street Brewery"",
+      ""ltable_Style"": ""Specialty Grain"",
+      ""ltable_ABV"": ""-"",
+      ""rtable_Beer_Name"": ""Tongue Buckler ( Bourbon Barrel Aged )"",
+      ""rtable_Brew_Factory_Name"": ""Ballast Point Brewing Company"",
+      ""rtable_Style"": ""American Amber / Red Ale"",
+      ""rtable_ABV"": ""10.00 %""
+   }
+}
+```
+
+The saliency explanation table shows the relative importance of each feature in making the decision. In this case, the Beer Name feature of the left table is the most important feature, followed by the Brew Factory Name feature of the left table. The counterfactual explanation table shows how changing the values of the input features would affect the decision. In this case, if we swapped the values of the Beer Name and Brew Factory Name features between the two records, the AI model would predict a match."
+38,"ltable_Beer_Name:Main Street Amber Ale
+ltable_Brew_Factory_Name:Fifty West Brewing Co
+ltable_Style:American Amber / Red Ale
+ltable_ABV:4.60 %","rtable_Beer_Name:Thorn Street Smugglers Cove Agave Amber Ale
+rtable_Brew_Factory_Name:Thorn Street Brewery
+rtable_Style:Amber Ale
+rtable_ABV:6.20 %","Here is a sample response in JSON format:
+
+```
+{
+   ""matching"": false,
+   ""saliency_explanation"": {
+      ""ltable_Beer_Name"": 0.30,
+      ""ltable_Brew_Factory_Name"": 0.15,
+      ""ltable_Style"": 0.20,
+      ""ltable_ABV"": 0.35
+   },
+   ""counterfactual_explanation"": {
+      ""ltable_Beer_Name"": ""Thorn Street Smugglers Cove Agave Amber Ale"",
+      ""ltable_Brew_Factory_Name"": ""Thorn Street Brewery"",
+      ""ltable_Style"": ""Amber Ale"",
+      ""ltable_ABV"": ""6.20 %""
+   }
+}
+```
+
+Explanation:
+
+- The `matching` field indicates that the two records do not match.
+- The `saliency_explanation` field contains the saliency score for each input feature. In this case, the `ltable_ABV` feature has the highest saliency score, indicating that it was the most important feature in the decision-making process.
+- The `counterfactual_explanation` field contains the counterfactual value for each input feature. In this case, the values of all features have been changed to match the corresponding values in record 2, resulting in a matching prediction."
+39,"ltable_Beer_Name:Inception Series - Runnin ' With The Devil
+ltable_Brew_Factory_Name:Nebraska Brewing Company
+ltable_Style:American Barleywine
+ltable_ABV:11.90 %","rtable_Beer_Name:18th Street Deal With the Devil Pale Ale
+rtable_Brew_Factory_Name:18th Street Brewery
+rtable_Style:Imperial IPA
+rtable_ABV:8.50 %","Here's an example of how the response might look in JSON format:
+
+```
+{
+   ""matching"": false,
+   ""saliency_explanation"": {
+      ""ltable_Beer_Name"": 0.2,
+      ""ltable_Brew_Factory_Name"": 0.5,
+      ""ltable_Style"": 0.1,
+      ""ltable_ABV"": 0.2,
+      ""rtable_Beer_Name"": 0.1,
+      ""rtable_Brew_Factory_Name"": 0.4,
+      ""rtable_Style"": 0.3,
+      ""rtable_ABV"": 0.2
+   },
+   ""counterfactual_explanation"": {
+      ""ltable_Beer_Name"": ""18th Street Deal With the Devil Pale Ale"",
+      ""ltable_Brew_Factory_Name"": ""18th Street Brewery"",
+      ""ltable_Style"": ""Imperial IPA"",
+      ""ltable_ABV"": ""8.50 %"",
+      ""rtable_Beer_Name"": ""Inception Series - Runnin ' With The Devil"",
+      ""rtable_Brew_Factory_Name"": ""Nebraska Brewing Company"",
+      ""rtable_Style"": ""American Barleywine"",
+      ""rtable_ABV"": ""11.90 %""
+   }
+}
+```
+
+The `matching` field indicates that the model predicts a non-match between the two records.
+
+The `saliency_explanation` field provides a table that shows the saliency scores for each feature in both records. In this example, the model paid the most attention to `ltable_Brew_Factory_Name` and `rtable_Brew_Factory_Name`.
+
+The `counterfactual_explanation` field provides an altered version of the input records that would result in a different prediction. In this case, swapping the values of all features between the two records would result in a matching prediction."
+40,"ltable_Beer_Name:Sanibel Red Island Ale
+ltable_Brew_Factory_Name:Point Ybel Brewing Company
+ltable_Style:American Amber / Red Ale
+ltable_ABV:5.60 %","rtable_Beer_Name:Baranof Island Redoubt Red Ale
+rtable_Brew_Factory_Name:Baranof Island Brewing Company
+rtable_Style:Amber Ale
+rtable_ABV:6 %","Here's an example JSON response:
+
+```
+{
+  ""matching"": false,
+  ""saliency"": {
+    ""ltable_Beer_Name"": 0.2,
+    ""ltable_Brew_Factory_Name"": 0.3,
+    ""ltable_Style"": 0.1,
+    ""ltable_ABV"": 0.4,
+    ""rtable_Beer_Name"": 0.1,
+    ""rtable_Brew_Factory_Name"": 0.3,
+    ""rtable_Style"": 0.2,
+    ""rtable_ABV"": 0.4
+  },
+  ""counterfactual"": {
+    ""ltable_Beer_Name"": ""Baranof Island Redoubt Red Ale"",
+    ""ltable_Brew_Factory_Name"": ""Baranof Island Brewing Company"",
+    ""ltable_Style"": ""Amber Ale"",
+    ""ltable_ABV"": 6,
+    ""rtable_Beer_Name"": ""Sanibel Red Island Ale"",
+    ""rtable_Brew_Factory_Name"": ""Point Ybel Brewing Company"",
+    ""rtable_Style"": ""American Amber / Red Ale"",
+    ""rtable_ABV"": 5.6
+  }
+}
+```
+
+In this example, the AI model predicts that the two records do not match. The saliency explanation table shows the relative importance of each feature in making the prediction. The counterfactual explanation table shows a modified version of the input data that would result in a different prediction."
+41,"ltable_Beer_Name:Red Rocket Amber Ale
+ltable_Brew_Factory_Name:Third Base Sports Bar & Brewery
+ltable_Style:American Amber / Red Ale
+ltable_ABV:6.40 %","rtable_Beer_Name:Third Base Red Rocket Amber Ale
+rtable_Brew_Factory_Name:Third Base Sports Bar & Brewery
+rtable_Style:Amber Ale
+rtable_ABV:4.60 %","Here is an example response in JSON format:
+
+```
+{
+   ""matching"": true,
+   ""saliency"": {
+      ""ltable_Beer_Name"": 0.6,
+      ""ltable_Brew_Factory_Name"": 0.2,
+      ""ltable_Style"": 0.1,
+      ""ltable_ABV"": 0.1,
+      ""rtable_Beer_Name"": 0.0,
+      ""rtable_Brew_Factory_Name"": 0.0,
+      ""rtable_Style"": 0.0,
+      ""rtable_ABV"": 0.0
+   },
+   ""counterfactual"": {
+      ""ltable_Beer_Name"": ""Third Base Red Rocket Amber Ale"",
+      ""ltable_Brew_Factory_Name"": ""Third Base Sports Bar & Brewery"",
+      ""ltable_Style"": ""Amber Ale"",
+      ""ltable_ABV"": ""4.60 %"",
+      ""rtable_Beer_Name"": ""Red Rocket Amber Ale"",
+      ""rtable_Brew_Factory_Name"": ""Third Base Sports Bar & Brewery"",
+      ""rtable_Style"": ""American Amber / Red Ale"",
+      ""rtable_ABV"": ""6.40 %""
+   }
+}
+```
+
+Explanation:
+
+- The ""matching"" field indicates whether the two records match or not. In this case, the value is true, indicating that the two records match.
+- The ""saliency"" field contains a dictionary with each feature's saliency score. The scores are normalized such that they add up to 1.0. The saliency scores indicate the relative importance of each feature in the model's decision-making process. In this case, the Beer_Name feature of the left table is the most important feature, followed by the Brew_Factory_Name feature, while the other features have relatively low importance.
+- The ""counterfactual"" field contains a dictionary with the counterfactual explanation for each feature. The counterfactual explanation consists of an altered input with one or more key attributes of the input data changed, such that the AI model prediction flips. In this case, the counterfactual explanation for the left table is the same as the right table, and vice versa."
+42,"ltable_Beer_Name:Smuttynose Kindest Find Imperial Red Ale
+ltable_Brew_Factory_Name:Smuttynose Brewing Company
+ltable_Style:American Amber / Red Ale
+ltable_ABV:8.50 %","rtable_Beer_Name:Brannon_s Deputation Imperial Red Ale
+rtable_Brew_Factory_Name:Brannon_s Pub and Brewery
+rtable_Style:American Strong Ale
+rtable_ABV:8.79 %","Here's an example response in JSON format:
+
+```json
+{
+  ""matching"": false,
+  ""saliency_explanation"": {
+    ""ltable_Beer_Name"": 0.2,
+    ""ltable_Brew_Factory_Name"": 0.4,
+    ""ltable_Style"": 0.1,
+    ""ltable_ABV"": 0.3,
+    ""rtable_Beer_Name"": 0.2,
+    ""rtable_Brew_Factory_Name"": 0.3,
+    ""rtable_Style"": 0.4,
+    ""rtable_ABV"": 0.1
+  },
+  ""counterfactual_explanation"": {
+    ""ltable_Beer_Name"": ""Brannon_s Deputation Imperial Red Ale"",
+    ""ltable_Brew_Factory_Name"": ""Brannon_s Pub and Brewery"",
+    ""ltable_Style"": ""American Strong Ale"",
+    ""ltable_ABV"": ""8.79 %"",
+    ""rtable_Beer_Name"": ""Smuttynose Kindest Find Imperial Red Ale"",
+    ""rtable_Brew_Factory_Name"": ""Smuttynose Brewing Company"",
+    ""rtable_Style"": ""American Amber / Red Ale"",
+    ""rtable_ABV"": ""8.50 %""
+  }
+}
+```
+
+In this example, the model predicts that the two records do not match. The saliency explanation table shows the saliency scores for each input feature, indicating that the model paid the most attention to the brewery name. The counterfactual explanation table shows the counterfactual values for each feature that would need to be changed in order to flip the model's prediction."
+43,"ltable_Beer_Name:Three Beavers Imperial Red Ale
+ltable_Brew_Factory_Name:Howe Sound Inn & Brewing Company
+ltable_Style:American Amber / Red Ale
+ltable_ABV:7.50 %","rtable_Beer_Name:Lavery Imperial Red Ale &#40; IRA &#41;
+rtable_Brew_Factory_Name:Lavery Brewing Company
+rtable_Style:American Strong Ale
+rtable_ABV:8.20 %","Here is an example response in json format:
+
+```
+{
+    ""matching"": false,
+    ""saliency_explanation"": {
+        ""ltable_Beer_Name"": 0.2,
+        ""ltable_Brew_Factory_Name"": 0.1,
+        ""ltable_Style"": 0.3,
+        ""ltable_ABV"": 0.4,
+        ""rtable_Beer_Name"": 0.3,
+        ""rtable_Brew_Factory_Name"": 0.2,
+        ""rtable_Style"": 0.4,
+        ""rtable_ABV"": 0.1
+    },
+    ""counterfactual_explanation"": {
+        ""ltable_Beer_Name"": ""Lavery Imperial Red Ale (IRA)"",
+        ""ltable_Brew_Factory_Name"": ""Lavery Brewing Company"",
+        ""ltable_Style"": ""American Strong Ale"",
+        ""ltable_ABV"": ""8.20 %"",
+        ""rtable_Beer_Name"": ""Three Beavers Imperial Red Ale"",
+        ""rtable_Brew_Factory_Name"": ""Howe Sound Inn & Brewing Company"",
+        ""rtable_Style"": ""American Amber / Red Ale"",
+        ""rtable_ABV"": ""7.50 %""
+    }
+}
+```
+
+In the above example, the matching attribute is set to `false` because the two records do not match. The saliency explanation table shows the relative importance of each input feature in the decision-making process. The counterfactual explanation table shows the hypothetical values of each input feature that would make the two records match."
+44,"ltable_Beer_Name:Elevator Barrel Aged Barley Wine ( Bar Bar )
+ltable_Brew_Factory_Name:Elevator Brewery & Draught Haus
+ltable_Style:American Barleywine
+ltable_ABV:11.00 %","rtable_Beer_Name:Hopworks Bourbon Aged Noggin Floggin Barley Wine
+rtable_Brew_Factory_Name:Hopworks Urban Brewery
+rtable_Style:Barley Wine
+rtable_ABV:9.50 %","Based on the given records, the predicted matching status is ""non-matching"". Here is a sample response with saliency and counterfactual explanations:
+
+```
+{
+  ""matching_status"": ""non-matching"",
+  ""saliency_explanation"": {
+    ""ltable_Beer_Name"": 0.2,
+    ""ltable_Brew_Factory_Name"": 0.1,
+    ""ltable_Style"": 0.3,
+    ""ltable_ABV"": 0.4,
+    ""rtable_Beer_Name"": 0.2,
+    ""rtable_Brew_Factory_Name"": 0.1,
+    ""rtable_Style"": 0.3,
+    ""rtable_ABV"": 0.4
+  },
+  ""counterfactual_explanation"": {
+    ""ltable_Beer_Name"": ""Hopworks Bourbon Aged Noggin Floggin Barley Wine"",
+    ""ltable_Brew_Factory_Name"": ""Hopworks Urban Brewery"",
+    ""ltable_Style"": ""Barley Wine"",
+    ""ltable_ABV"": 9.50,
+    ""rtable_Beer_Name"": ""Elevator Barrel Aged Barley Wine ( Bar Bar )"",
+    ""rtable_Brew_Factory_Name"": ""Elevator Brewery & Draught Haus"",
+    ""rtable_Style"": ""American Barleywine"",
+    ""rtable_ABV"": 11.00
+  }
+}
+```
+
+The saliency explanation table shows the saliency scores for each feature, indicating how much each feature contributed to the overall decision. The counterfactual explanation table shows the counterfactual values for each feature that would have resulted in a matching prediction."
+45,"ltable_Beer_Name:Hop Around Imperial Red Ale
+ltable_Brew_Factory_Name:Big Bay Brewing Co. .
+ltable_Style:American Amber / Red Ale
+ltable_ABV:9.00 %","rtable_Beer_Name:Kern River Dirty Hippie Imperial Red Ale
+rtable_Brew_Factory_Name:Kern River Brewing
+rtable_Style:American Strong Ale
+rtable_ABV:8 %","Here is an example response in JSON format:
+
+```
+{
+   ""matching"":false,
+   ""saliency"":{
+      ""ltable_Beer_Name"":0.2,
+      ""ltable_Brew_Factory_Name"":0.5,
+      ""ltable_Style"":0.1,
+      ""ltable_ABV"":0.2,
+      ""rtable_Beer_Name"":0.3,
+      ""rtable_Brew_Factory_Name"":0.4,
+      ""rtable_Style"":0.2,
+      ""rtable_ABV"":0.1
+   },
+   ""counterfactual"":{
+      ""ltable_Beer_Name"":""Kern River Dirty Hippie Imperial Red Ale"",
+      ""ltable_Brew_Factory_Name"":""Kern River Brewing"",
+      ""ltable_Style"":""American Strong Ale"",
+      ""ltable_ABV"":8,
+      ""rtable_Beer_Name"":""Hop Around Imperial Red Ale"",
+      ""rtable_Brew_Factory_Name"":""Big Bay Brewing Co. ."",
+      ""rtable_Style"":""American Amber / Red Ale"",
+      ""rtable_ABV"":9
+   }
+}
+```
+
+The `matching` field indicates whether the two records are predicted to match or not. In this case, the model predicts that they do not match.
+
+The `saliency` field contains a dictionary with each input feature as a key and its corresponding saliency score as the value. The saliency score represents the importance of the feature in the model's decision-making process. In this case, the model paid more attention to the `ltable_Brew_Factory_Name` and `rtable_Brew_Factory_Name` features than the other features.
+
+The `counterfactual` field contains a dictionary with each input feature as a key and its corresponding counterfactual value as the value. The counterfactual value is the value of the feature that would need to be changed in order for the model's prediction to flip. In this case, changing the `ltable_Beer_Name` to ""Kern River Dirty Hippie Imperial Red Ale"", `ltable_Brew_Factory_Name` to ""Kern River Brewing"", `ltable_Style` to ""American Strong Ale"", and `ltable_ABV` to 8 would result in a matching prediction."
+46,"ltable_Beer_Name:Bushfire American Red
+ltable_Brew_Factory_Name:Granite Falls Brewing Co. .
+ltable_Style:American Amber / Red Ale
+ltable_ABV:5.00 %","rtable_Beer_Name:Granite Falls Bushfire American Red Ale
+rtable_Brew_Factory_Name:Granite Falls Brewing Company
+rtable_Style:Amber Ale
+rtable_ABV:5 %","Here's an example response:
+
+```
+{
+    ""matching"": true,
+    ""saliency_explanation"": {
+        ""ltable_Beer_Name"": 0.45,
+        ""ltable_Brew_Factory_Name"": 0.1,
+        ""ltable_Style"": 0.25,
+        ""ltable_ABV"": 0.2
+    },
+    ""counterfactual_explanation"": {
+        ""ltable_Beer_Name"": ""Bushfire American Red Ale"",
+        ""ltable_Brew_Factory_Name"": ""Granite Falls Brewing Company"",
+        ""ltable_Style"": ""Amber Ale"",
+        ""ltable_ABV"": ""5""
+    }
+}
+```
+
+In this example, the AI model predicts that the two records match. The saliency explanation table shows the relative importance of each input feature in making the prediction. The counterfactual explanation table shows how changing the values of each input feature would affect the prediction."
+47,"ltable_Beer_Name:Bourbon Barrel Aged Horus Imperial Red
+ltable_Brew_Factory_Name:Elevator Brewery & Draught Haus
+ltable_Style:American Amber / Red Ale
+ltable_ABV:12.00 %","rtable_Beer_Name:Riverbend Barrel Aged Right Said Red
+rtable_Brew_Factory_Name:Riverbend Brewing & Sports Pub
+rtable_Style:American Strong Ale
+rtable_ABV:9.20 %","Here is the response:
+
+```
+{
+  ""matching"": false,
+  ""saliency_explanation"": {
+    ""ltable_Beer_Name"": 0.2,
+    ""ltable_Brew_Factory_Name"": 0.1,
+    ""ltable_Style"": 0.3,
+    ""ltable_ABV"": 0.4,
+    ""rtable_Beer_Name"": 0.2,
+    ""rtable_Brew_Factory_Name"": 0.1,
+    ""rtable_Style"": 0.3,
+    ""rtable_ABV"": 0.4
+  },
+  ""counterfactual_explanation"": {
+    ""ltable_Beer_Name"": ""Riverbend Barrel Aged Right Said Red"",
+    ""ltable_Brew_Factory_Name"": ""Riverbend Brewing & Sports Pub"",
+    ""ltable_Style"": ""American Strong Ale"",
+    ""ltable_ABV"": ""9.20 %"",
+    ""rtable_Beer_Name"": ""Bourbon Barrel Aged Horus Imperial Red"",
+    ""rtable_Brew_Factory_Name"": ""Elevator Brewery & Draught Haus"",
+    ""rtable_Style"": ""American Amber / Red Ale"",
+    ""rtable_ABV"": ""12.00 %""
+  }
+}
+```
+
+Explanation:
+
+- The model predicts that the two records do not match.
+- The saliency explanation table shows the saliency score for each feature in both records. All features have the same saliency score of 0.2, indicating that the model paid equal attention to all features when making its prediction.
+- The counterfactual explanation table shows the counterfactual values for each feature in both records. Switching the values of all features between the two records would result in a matching prediction by the model."
+48,"ltable_Beer_Name:Buffalo Soul Jah Imperial Red Ale
+ltable_Brew_Factory_Name:Three Heads Brewing
+ltable_Style:American Amber / Red Ale
+ltable_ABV:9.20 %","rtable_Beer_Name:Pizza Port Rhino Chaser Imperial Red Ale
+rtable_Brew_Factory_Name:Pizza Port &#40; Ocean Beach &#41;
+rtable_Style:American Strong Ale
+rtable_ABV:9.50 %","Here is the response in json format:
+
+```
+{
+    ""matching"": false,
+    ""saliency_explanation"": {
+        ""ltable_Beer_Name"": 0.3,
+        ""ltable_Brew_Factory_Name"": 0.2,
+        ""ltable_Style"": 0.1,
+        ""ltable_ABV"": 0.4,
+        ""rtable_Beer_Name"": 0.2,
+        ""rtable_Brew_Factory_Name"": 0.3,
+        ""rtable_Style"": 0.1,
+        ""rtable_ABV"": 0.4
+    },
+    ""counterfactual_explanation"": {
+        ""ltable_Beer_Name"": ""Pizza Port Rhino Chaser Imperial Red Ale"",
+        ""ltable_Brew_Factory_Name"": ""Pizza Port &#40; Ocean Beach &#41;"",
+        ""ltable_Style"": ""American Strong Ale"",
+        ""ltable_ABV"": 9.50,
+        ""rtable_Beer_Name"": ""Buffalo Soul Jah Imperial Red Ale"",
+        ""rtable_Brew_Factory_Name"": ""Three Heads Brewing"",
+        ""rtable_Style"": ""American Amber / Red Ale"",
+        ""rtable_ABV"": 9.20
+    }
+}
+```
+
+Explanation:
+
+- The ""matching"" field indicates that the two records do not match.
+- The ""saliency_explanation"" field shows the saliency scores for each feature in both records. The scores are normalized to add up to 1. The saliency scores indicate that the ABV feature in both records had the highest contribution to the non-matching prediction, followed by the Beer Name and Brew Factory Name features in both records.
+- The ""counterfactual_explanation"" field shows the altered values for each feature that would cause the AI model to flip its prediction. In this case, swapping the Beer Name, Brew Factory Name, and Style features in both records would cause the model to predict a match. Also, changing the ABV value in both records to 9.50 would cause the model to predict a match."
+49,"ltable_Beer_Name:Red Headed Slut Amber Ale
+ltable_Brew_Factory_Name:Twisted K-8 Brewing Company
+ltable_Style:American Amber / Red Ale
+ltable_ABV:6.50 %","rtable_Beer_Name:Blue Cat Red Toad Amber Ale
+rtable_Brew_Factory_Name:Blue Cat Brew Pub
+rtable_Style:Premium Bitter/ESB
+rtable_ABV:5.70 %","Here's an example response in JSON format:
+
+```
+{
+    ""matching"": false,
+    ""saliency_explanation"": {
+        ""ltable_Beer_Name"": 0.2,
+        ""ltable_Brew_Factory_Name"": 0.1,
+        ""ltable_Style"": 0.3,
+        ""ltable_ABV"": 0.4,
+        ""rtable_Beer_Name"": 0.1,
+        ""rtable_Brew_Factory_Name"": 0.2,
+        ""rtable_Style"": 0.3,
+        ""rtable_ABV"": 0.4
+    },
+    ""counterfactual_explanation"": {
+        ""ltable_Beer_Name"": ""Blue Cat Red Toad Amber Ale"",
+        ""ltable_Brew_Factory_Name"": ""Blue Cat Brew Pub"",
+        ""ltable_Style"": ""Premium Bitter/ESB"",
+        ""ltable_ABV"": ""5.70%"",
+        ""rtable_Beer_Name"": ""Red Headed Slut Amber Ale"",
+        ""rtable_Brew_Factory_Name"": ""Twisted K-8 Brewing Company"",
+        ""rtable_Style"": ""American Amber / Red Ale"",
+        ""rtable_ABV"": ""6.50%""
+    }
+}
+```
+
+Explanation:
+
+- The ""matching"" field is set to ""false"", indicating that the two records do not match.
+- The ""saliency_explanation"" field contains the saliency scores for each feature in both records, indicating the importance of each feature in the decision-making process of the model. In this case, the model paid more attention to the ABV feature in both records.
+- The ""counterfactual_explanation"" field contains the counterfactual values for each feature in both records. This means that if we change the values of the features in one record to match the values of the corresponding features in the other record, the model would predict a match."

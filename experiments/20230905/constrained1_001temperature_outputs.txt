@@ -1,0 +1,331 @@
+#constrained1
+ltable_Beer_Name:Bulleit Bourbon Barrel Aged G'Knight
+ltable_Brew_Factory_Name:Oskar Blues Grill & Brew
+ltable_Style:American Amber / Red Ale
+ltable_ABV:8.70 %,rtable_Beer_Name:Figure Eight Bourbon Barrel Aged Jumbo Love
+rtable_Brew_Factory_Name:Figure Eight Brewing
+rtable_Style:Barley Wine
+rtable_ABV:-
+Based on the information provided, I predict that the two records do not refer to the same entity in the real world.
+
+Here is the markdown table containing the saliency explanation for my prediction:
+
+| Token | Importance |
+|-------|------------|
+| Bulleit | 0.05 |
+| Bourbon | 0.15 |
+| Barrel | 0.20 |
+| Aged | 0.10 |
+| G'Knight | 0.10 |
+| Oskar | 0.05 |
+| Blues | 0.05 |
+| Grill | 0.05 |
+| Brew | 0.05 |
+| Factory | 0.05 |
+| American | 0.05 |
+| Amber | 0.05 |
+| Red | 0.05 |
+| Ale | 0.05 |
+| 8.70 | 0.05 |
+
+The saliency explanation shows the importance of each token in the input data for the model's prediction. In this case, the model paid the most attention to the words "Barrel" and "Aged" in both records, which suggests that the similarity between the two records is based on the fact that both beers are barrel-aged. However, the model also paid attention to the specific names of the beers and breweries, which suggests that these differences were also important in the model's decision.
+
+Here is the markdown table containing the counterfactual explanation for my prediction:
+
+| Token | record1 | record2 |
+|-------|---------|---------|
+| Beer_Name | Bulleit Bourbon Barrel Aged G'Knight | Figure Eight Bourbon Barrel Aged Jumbo Love |
+| Brew_Factory_Name | Oskar Blues Grill & Brew | Figure Eight Brewing |
+| Style | American Amber / Red Ale | Barley Wine |
+| ABV | 8.70 % | - |
+
+The counterfactual explanation shows how the model's prediction would change if certain key tokens were altered. In this case, if the beer names were the same or if the breweries were the same, the model's prediction might change to "yes". Similarly, if the beer styles were the same or if the ABV values were the same, the model's prediction might also change to "yes".
+
+ltable_Beer_Name:Bulleit Bourbon Barrel Aged G'Knight
+ltable_Brew_Factory_Name:Oskar Blues Grill & Brew
+ltable_Style:American Amber / Red Ale
+ltable_ABV:8.70 %
+rtable_Beer_Name:Figure Eight Bourbon Barrel Aged Jumbo Love
+rtable_Brew_Factory_Name:Figure Eight Brewing
+rtable_Style:Barley Wine
+rtable_ABV:-
+Based on the information provided, I predict that the two records do not refer to the same entity in the real world.
+
+Here is the markdown table containing the saliency explanation for my prediction:
+
+| Token | Importance |
+|-------|------------|
+| Bulleit | 0.05 |
+| Bourbon | 0.15 |
+| Barrel | 0.20 |
+| Aged | 0.10 |
+| G'Knight | 0.10 |
+| Oskar | 0.05 |
+| Blues | 0.05 |
+| Grill | 0.05 |
+| Brew | 0.05 |
+| Factory | 0.05 |
+| American | 0.05 |
+| Amber | 0.05 |
+| Red | 0.05 |
+| Ale | 0.05 |
+| 8.70 | 0.05 |
+
+The saliency explanation shows the importance of each token in the input data for the model's prediction. In this case, the model paid the most attention to the words "Barrel" and "Aged" in both records, which suggests that the similarity between the two records is based on the fact that both beers are barrel-aged. However, the model also paid attention to the specific names of the beers and breweries, which suggests that these differences were also important in the model's decision.
+
+Here is the markdown table containing the counterfactual explanation for my prediction:
+
+| Token | record1 | record2 |
+|-------|---------|---------|
+| Beer_Name | Bulleit Bourbon Barrel Aged G'Knight | Figure Eight Bourbon Barrel Aged Jumbo Love |
+| Brew_Factory_Name | Oskar Blues Grill & Brew | Figure Eight Brewing |
+| Style | American Amber / Red Ale | Barley Wine |
+| ABV | 8.70 % | - |
+
+The counterfactual explanation shows how the model's prediction would change if certain key tokens were altered. In this case, if the beer names were the same or if the breweries were the same, the model's prediction might change to "yes". Similarly, if the beer styles were the same or if the ABV values were the same, the model's prediction might also change to "yes".
+ltable_Beer_Name:Double Dragon Imperial Red Ale
+ltable_Brew_Factory_Name:Phillips Brewing Company
+ltable_Style:American Amber / Red Ale
+ltable_ABV:8.20 %,rtable_Beer_Name:Scuttlebutt Mateo Loco Imperial Red Ale
+rtable_Brew_Factory_Name:Scuttlebutt Brewing Co. .
+rtable_Style:American Strong Ale
+rtable_ABV:7.10 %
+Based on the information provided, my prediction is that the two records do not refer to the same entity in the real world.
+
+Here is the markdown table containing the saliency explanation for my prediction:
+
+| Token | Importance |
+|-------|------------|
+| Double | 0.05 |
+| Dragon | 0.05 |
+| Imperial | 0.05 |
+| Red | 0.05 |
+| Ale | 0.05 |
+| Phillips | 0.05 |
+| Brewing | 0.05 |
+| Company | 0.05 |
+| American | 0.05 |
+| Amber | 0.05 |
+| / | 0.05 |
+| | 0.05 |
+| Scuttlebutt | 0.05 |
+| Mateo | 0.05 |
+| Loco | 0.05 |
+| Strong | 0.05 |
+| 7.10 | 0.05 |
+| 8.20 | 0.05 |
+
+The saliency explanation shows that all tokens have equal importance in the prediction, which suggests that the model did not find any significant differences between the two records.
+
+Here is the markdown table containing the counterfactual explanation for my prediction:
+
+| Token | record1 | record2 |
+|-------|---------|---------|
+| Beer_Name | Double Dragon Imperial Red Ale | Scuttlebutt Mateo Loco Imperial Red Ale |
+| Brew_Factory_Name | Phillips Brewing Company | Scuttlebutt Brewing Co. |
+| Style | American Amber / Red Ale | American Strong Ale |
+| ABV | 8.20 % | 7.10 % |
+
+The counterfactual explanation shows the key differences between the two records that led to the model's prediction. In this case, the differences are in the beer style and ABV. The model likely determined that these differences were significant enough to conclude that the two records do not refer to the same entity in the real world.
+
+ltable_Beer_Name:Double Dragon Imperial Red Ale
+ltable_Brew_Factory_Name:Phillips Brewing Company
+ltable_Style:American Amber / Red Ale
+ltable_ABV:8.20 %
+rtable_Beer_Name:Scuttlebutt Mateo Loco Imperial Red Ale
+rtable_Brew_Factory_Name:Scuttlebutt Brewing Co. .
+rtable_Style:American Strong Ale
+rtable_ABV:7.10 %
+Based on the information provided, my prediction is that the two records do not refer to the same entity in the real world.
+
+Here is the markdown table containing the saliency explanation for my prediction:
+
+| Token | Importance |
+|-------|------------|
+| Double | 0.05 |
+| Dragon | 0.05 |
+| Imperial | 0.05 |
+| Red | 0.05 |
+| Ale | 0.05 |
+| Phillips | 0.05 |
+| Brewing | 0.05 |
+| Company | 0.05 |
+| American | 0.05 |
+| Amber | 0.05 |
+| / | 0.05 |
+| | 0.05 |
+| Scuttlebutt | 0.05 |
+| Mateo | 0.05 |
+| Loco | 0.05 |
+| Strong | 0.05 |
+| 7.10 | 0.05 |
+| 8.20 | 0.05 |
+
+The saliency explanation shows that all tokens have equal importance in the prediction, which suggests that the model did not find any significant differences between the two records.
+
+Here is the markdown table containing the counterfactual explanation for my prediction:
+
+| Token | record1 | record2 |
+|-------|---------|---------|
+| Beer_Name | Double Dragon Imperial Red Ale | Scuttlebutt Mateo Loco Imperial Red Ale |
+| Brew_Factory_Name | Phillips Brewing Company | Scuttlebutt Brewing Co. |
+| Style | American Amber / Red Ale | American Strong Ale |
+| ABV | 8.20 % | 7.10 % |
+
+The counterfactual explanation shows the key differences between the two records that led to the model's prediction. In this case, the differences are in the beer style and ABV. The model likely determined that these differences were significant enough to conclude that the two records do not refer to the same entity in the real world.
+ltable_Beer_Name:Honey Basil Amber
+ltable_Brew_Factory_Name:Rude Hippo Brewing Company
+ltable_Style:American Amber / Red Ale
+ltable_ABV:7.40 %,rtable_Beer_Name:Rude Hippo Honey Basil Amber
+rtable_Brew_Factory_Name:18th Street Brewery
+rtable_Style:Amber Ale
+rtable_ABV:7.40 %
+Based on the information provided, my prediction is that the two records refer to the same entity in the real world.
+
+Here is the markdown table containing the saliency explanation for my prediction:
+
+| Token | Importance |
+|-------|------------|
+| Honey | 0.35       |
+| Basil | 0.25       |
+| Amber | 0.20       |
+| Rude  | 0.15       |
+| Hippo | 0.05       |
+
+The saliency explanation shows that the tokens "Honey" and "Basil" are the most important in determining that the two records refer to the same entity. The token "Amber" is also important, but to a lesser extent. The tokens "Rude" and "Hippo" are less important and contribute very little to the decision.
+
+Here is the markdown table containing the counterfactual explanation for my prediction:
+
+| Token | Importance | New Value |
+|-------|------------|-----------|
+| Honey | 0.35       | None      |
+| Basil | 0.25       | None      |
+| Amber | 0.20       | None      |
+| Rude  | 0.15       | 18th      |
+| Hippo | 0.05       | Street    |
+
+The counterfactual explanation shows that if the token "Rude" was changed to "18th" and the token "Hippo" was changed to "Street", the prediction would change to "no", indicating that the two records do not refer to the same entity. This suggests that the brewery name is an important factor in determining whether the two records refer to the same entity.
+
+ltable_Beer_Name:Honey Basil Amber
+ltable_Brew_Factory_Name:Rude Hippo Brewing Company
+ltable_Style:American Amber / Red Ale
+ltable_ABV:7.40 %
+rtable_Beer_Name:Rude Hippo Honey Basil Amber
+rtable_Brew_Factory_Name:18th Street Brewery
+rtable_Style:Amber Ale
+rtable_ABV:7.40 %
+Based on the information provided, my prediction is that the two records refer to the same entity in the real world.
+
+Here is the markdown table containing the saliency explanation for my prediction:
+
+| Token | Importance |
+|-------|------------|
+| Honey | 0.35       |
+| Basil | 0.25       |
+| Amber | 0.20       |
+| Rude  | 0.15       |
+| Hippo | 0.05       |
+
+The saliency explanation shows that the tokens "Honey" and "Basil" are the most important in determining that the two records refer to the same entity. The token "Amber" is also important, but to a lesser extent. The tokens "Rude" and "Hippo" are less important and contribute very little to the decision.
+
+Here is the markdown table containing the counterfactual explanation for my prediction:
+
+| Token | Importance | New Value |
+|-------|------------|-----------|
+| Honey | 0.35       | None      |
+| Basil | 0.25       | None      |
+| Amber | 0.20       | None      |
+| Rude  | 0.15       | 18th      |
+| Hippo | 0.05       | Street    |
+
+The counterfactual explanation shows that if the token "Rude" was changed to "18th" and the token "Hippo" was changed to "Street", the prediction would change to "no", indicating that the two records do not refer to the same entity. This suggests that the brewery name is an important factor in determining whether the two records refer to the same entity.
+ltable_Beer_Name:Clifford 's Big Red Ale
+ltable_Brew_Factory_Name:Funky Buddha Brewery
+ltable_Style:American Amber / Red Ale
+ltable_ABV:9.70 %,rtable_Beer_Name:Big Island Red Giant Ale
+rtable_Brew_Factory_Name:Big Island Brewhaus
+rtable_Style:American Strong Ale
+rtable_ABV:6.50 %
+Based on the information provided, I predict that the two records do not refer to the same entity in the real world.
+
+Here is the markdown table containing the saliency explanation for my prediction:
+
+| Token | Importance |
+|-------|------------|
+| Clifford | 0.05 |
+| Big | 0.05 |
+| Red | 0.05 |
+| Ale | 0.05 |
+| Funky | 0.05 |
+| Buddha | 0.05 |
+| Brewery | 0.05 |
+| American | 0.05 |
+| Amber | 0.05 |
+| / | 0.05 |
+| | 0.05 |
+| 9.70 | 0.05 |
+| % | 0.05 |
+| Island | 0.05 |
+| Giant | 0.05 |
+| Brewhaus | 0.05 |
+| Strong | 0.05 |
+| 6.50 | 0.05 |
+
+The saliency explanation shows that all tokens in both records have equal importance in the prediction.
+
+Here is the markdown table containing the counterfactual explanation for my prediction:
+
+| Token | record1 | record2 |
+|-------|---------|---------|
+| Beer_Name | Clifford's Big Red Ale | Big Island Red Giant Ale |
+| Brew_Factory_Name | Funky Buddha Brewery | Big Island Brewhaus |
+| Style | American Amber / Red Ale | American Strong Ale |
+| ABV | 9.70% | 6.50% |
+
+The counterfactual explanation shows the differences between the two records that led to the prediction that they do not refer to the same entity in the real world. The Beer_Name, Brew_Factory_Name, Style, and ABV are all different between the two records.
+
+ltable_Beer_Name:Clifford 's Big Red Ale
+ltable_Brew_Factory_Name:Funky Buddha Brewery
+ltable_Style:American Amber / Red Ale
+ltable_ABV:9.70 %
+rtable_Beer_Name:Big Island Red Giant Ale
+rtable_Brew_Factory_Name:Big Island Brewhaus
+rtable_Style:American Strong Ale
+rtable_ABV:6.50 %
+Based on the information provided, I predict that the two records do not refer to the same entity in the real world.
+
+Here is the markdown table containing the saliency explanation for my prediction:
+
+| Token | Importance |
+|-------|------------|
+| Clifford | 0.05 |
+| Big | 0.05 |
+| Red | 0.05 |
+| Ale | 0.05 |
+| Funky | 0.05 |
+| Buddha | 0.05 |
+| Brewery | 0.05 |
+| American | 0.05 |
+| Amber | 0.05 |
+| / | 0.05 |
+| | 0.05 |
+| 9.70 | 0.05 |
+| % | 0.05 |
+| Island | 0.05 |
+| Giant | 0.05 |
+| Brewhaus | 0.05 |
+| Strong | 0.05 |
+| 6.50 | 0.05 |
+
+The saliency explanation shows that all tokens in both records have equal importance in the prediction.
+
+Here is the markdown table containing the counterfactual explanation for my prediction:
+
+| Token | record1 | record2 |
+|-------|---------|---------|
+| Beer_Name | Clifford's Big Red Ale | Big Island Red Giant Ale |
+| Brew_Factory_Name | Funky Buddha Brewery | Big Island Brewhaus |
+| Style | American Amber / Red Ale | American Strong Ale |
+| ABV | 9.70% | 6.50% |
+
+The counterfactual explanation shows the differences between the two records that led to the prediction that they do not refer to the same entity in the real world. The Beer_Name, Brew_Factory_Name, Style, and ABV are all different between the two records.
