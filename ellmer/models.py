@@ -29,6 +29,8 @@ class LLMERModel(ERModel):
                                       model_kwargs={'temperature': temperature, 'max_length': max_length})
         elif model_type == 'openai':
             self.llm = OpenAI(temperature=temperature, model_name='gpt-3.5-turbo')
+        elif model_type == 'azure_openai':
+            self.llm = None
         self.verbose = verbose
 
     def predict(self, x, mojito=False, **kwargs):
@@ -95,26 +97,56 @@ class LLMERModel(ERModel):
         return no_match_score, match_score
 
 
-class ConstrainedELLMER1:
+class ConstrainedELLMER:
 
+    def __init__(self, explanation_granularity: str = "attribute"):
+        self.explanation_granularity = explanation_granularity
+
+    def er(self, ltuple: str, rtuple: str, temperature=0.99):
+        question = "record1:\n" + ltuple + "\n record2:\n" + rtuple + "\n"  # f"record1:\n{ltuple}\n record2:\n{rtuple}\n"
+        return self.__call__(question, er=True, temperature=temperature)
+
+    def __call__(self, question, er: bool = False, temperature=0.99, *args, **kwargs):
+        openai.api_type = "azure"
+        openai.api_version = "2023-05-15"
+        conversation = []
+        if er:
+            for prompt_message in ellmer.utils.read_prompt('ellmer/prompts/constrained5.txt'):
+                conversation.append(
+                    {"role": prompt_message[0],
+                     "content": prompt_message[1].replace("feature", self.explanation_granularity)})
+        conversation.append({"role": "user", "content": question})
+        response = openai.ChatCompletion.create(
+            deployment_id="gpt-35-turbo", model="gpt-3.5-turbo",
+            messages=conversation, temperature=temperature
+        )
+        try:
+            answer = response["choices"][0]["message"]["content"]
+        except:
+            answer = response["choices"][0]["message"]
+        return answer
+
+class CertaELLMER:
     def __init__(self, explanation_granularity: str = "attributes"):
         self.explanation_granularity = explanation_granularity
 
-    def er(self, ltuple: str, rtuple: str):
-        question = "record1:\n" + ltuple + "\n record2:\n" + rtuple + "\n"  # f"record1:\n{ltuple}\n record2:\n{rtuple}\n"
-        return self.__call__(question, er=True)
+    def er(self, ltuple: str, rtuple: str, temperature=0.99):
+        question = "record1:\n" + ltuple + "\n record2:\n" + rtuple + "\n"
+        return self.__call__(question, er=True, temperature=temperature)
 
-    def __call__(self, question, er: bool = False, *args, **kwargs):
+    def __call__(self, question, er: bool = False, temperature=0.99, *args, **kwargs):
+        openai.api_type = "azure"
+        openai.api_version = "2023-05-15"
         conversation = []
         if er:
-            for prompt_message in ellmer.utils.read_prompt('ellmer/prompts/constrained1.txt'):
+            for prompt_message in ellmer.utils.read_prompt('ellmer/prompts/constrained3.txt'):
                 conversation.append(
                     {"role": prompt_message[0],
                      "content": prompt_message[1].replace("features", self.explanation_granularity)})
         conversation.append({"role": "user", "content": question})
         response = openai.ChatCompletion.create(
             deployment_id="gpt-35-turbo", model="gpt-3.5-turbo",
-            messages=conversation
+            messages=conversation, temperature=temperature
         )
         answer = response["choices"][0]["message"]["content"]
         return answer
