@@ -111,7 +111,7 @@ class ConstrainedELLMER:
         openai.api_version = "2023-05-15"
         conversation = []
         if er:
-            for prompt_message in ellmer.utils.read_prompt('ellmer/prompts/constrained5.txt'):
+            for prompt_message in ellmer.utils.read_prompt('ellmer/prompts/constrained6.txt'):
                 conversation.append(
                     {"role": prompt_message[0],
                      "content": prompt_message[1].replace("feature", self.explanation_granularity)})
