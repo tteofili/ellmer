@@ -1,5 +1,5 @@
 from langchain import PromptTemplate, HuggingFaceHub, OpenAI
-import os, random
+import random
 from certa.models.ermodel import ERModel
 import numpy as np
 import pandas as pd
@@ -182,7 +182,7 @@ class PredictAndSelfExplainER:
         self.explanation_granularity = explanation_granularity
 
     def er(self, ltuple: str, rtuple: str, temperature=0.99):
-        question = "record1:\n" + ltuple + "\n record2:\n" + rtuple + "\n"  # f"record1:\n{ltuple}\n record2:\n{rtuple}\n"
+        question = "record1:\n" + ltuple + "\n record2:\n" + rtuple + "\n"
         return self.__call__(question, er=True, temperature=temperature)
 
     def __call__(self, question, er: bool = False, temperature=0.99, *args, **kwargs):
@@ -190,7 +190,7 @@ class PredictAndSelfExplainER:
         openai.api_version = "2023-05-15"
         conversation = []
         if er:
-            for prompt_message in ellmer.utils.read_prompt('ellmer/prompts/constrained4.txt'):
+            for prompt_message in ellmer.utils.read_prompt('ellmer/prompts/constrained6.txt'):
                 conversation.append(
                     {"role": prompt_message[0],
                      "content": prompt_message[1].replace("feature", self.explanation_granularity)})
@@ -205,28 +205,3 @@ class PredictAndSelfExplainER:
             answer = response["choices"][0]["message"]
         return answer
 
-
-class CertaELLMER:
-    def __init__(self, explanation_granularity: str = "attributes"):
-        self.explanation_granularity = explanation_granularity
-
-    def er(self, ltuple: str, rtuple: str, temperature=0.99):
-        question = "record1:\n" + ltuple + "\n record2:\n" + rtuple + "\n"
-        return self.__call__(question, er=True, temperature=temperature)
-
-    def __call__(self, question, er: bool = False, temperature=0.99, *args, **kwargs):
-        openai.api_type = "azure"
-        openai.api_version = "2023-05-15"
-        conversation = []
-        if er:
-            for prompt_message in ellmer.utils.read_prompt('ellmer/prompts/constrained3.txt'):
-                conversation.append(
-                    {"role": prompt_message[0],
-                     "content": prompt_message[1].replace("features", self.explanation_granularity)})
-        conversation.append({"role": "user", "content": question})
-        response = openai.ChatCompletion.create(
-            deployment_id="gpt-35-turbo", model="gpt-3.5-turbo",
-            messages=conversation, temperature=temperature
-        )
-        answer = response["choices"][0]["message"]["content"]
-        return answer
