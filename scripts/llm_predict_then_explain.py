@@ -6,6 +6,7 @@ import ellmer.models
 import ellmer.utils
 from time import sleep
 import openai
+import json
 
 lprefix = 'ltable_'
 rprefix = 'rtable_'
@@ -22,22 +23,25 @@ test_df = merge_sources(test, 'ltable_', 'rtable_', lsource, rsource, ['label'],
 results = []
 
 llm = ellmer.models.PredictThenSelfExplainER(explanation_granularity='attribute')
-
+temperature = 0.01
 for idx in range(len(test_df[:5])):
     try:
         rand_row = test_df.iloc[[idx]]
         ltuple, rtuple = ellmer.utils.get_tuples(rand_row)
-        prediction = llm.er(ltuple, rtuple, temperature=0.5)
+        prediction = llm.er(ltuple, rtuple, temperature=temperature)
         sleep(10)
-        answer = llm.explain(ltuple, rtuple, prediction, temperature=0.5)
-        results.append((ltuple, rtuple, answer))
+        answer = llm.explain(ltuple, rtuple, prediction['prediction'], temperature=temperature, why=True)
+        answer['ltuple'] = ltuple
+        answer['rtuple'] = rtuple
+        answer['label'] = rand_row['label'].values[0]
+        results.append(answer)
         print(f'{ltuple}\n{rtuple}\n{answer}')
         sleep(10)
     except openai.error.RateLimitError:
         print(f'rate-limit error, waiting...')
         sleep(10)
 
-results_df = pd.DataFrame(columns=['left', 'right', 'answer'], data=results)
 expdir = f'./experiments/{datetime.now():%Y%m%d}/{datetime.now():%H:%M}/'
 os.makedirs(expdir, exist_ok=True)
-results_df.to_csv(expdir + 'ptse_results.csv')
+with open(expdir + 'ptse_results.json', 'w') as fout:
+    json.dump(results, fout)

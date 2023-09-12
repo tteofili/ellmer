@@ -108,13 +108,14 @@ class PredictThenSelfExplainER:
         question = "record1:\n" + ltuple + "\n record2:\n" + rtuple + "\n"
         return self.__call__(question, er=True, explanation=False, temperature=temperature)
 
-    def explain(self, ltuple: str, rtuple: str, prediction: str, temperature=0.99):
+    def explain(self, ltuple: str, rtuple: str, prediction: str, temperature=0.99, *args, **kwargs):
         question = "record1:\n" + ltuple + "\n record2:\n" + rtuple + "\n"
-        return self.__call__(question, er=True, explanation=True, prediction=prediction, temperature=temperature)
+        return self.__call__(question, er=True, explanation=True, prediction=prediction, temperature=temperature,
+                             *args, **kwargs)
 
     def __call__(self, question, er: bool = False, saliency: bool = False, cf: bool = False, why: bool = False,
                  explanation=False, prediction=None, temperature=0.99, *args, **kwargs):
-        answers = []
+        answers = dict()
         openai.api_type = "azure"
         openai.api_version = "2023-05-15"
         conversation = []
@@ -130,7 +131,7 @@ class PredictThenSelfExplainER:
                 messages=conversation, temperature=temperature
             )
             prediction = response["choices"][0]["message"]["content"]
-        answers.append(prediction)
+        answers['prediction'] = prediction
 
         if explanation:
             conversation.append({"role": "assistant", "content": prediction})
@@ -145,7 +146,7 @@ class PredictThenSelfExplainER:
                     deployment_id="gpt-35-turbo", model="gpt-3.5-turbo",
                     messages=conversation, temperature=temperature
                 )["choices"][0]["message"]["content"]
-                answers.append(nl_exp)
+                answers['nl_exp'] = nl_exp
                 sleep(10)
                 conversation.append({"role": "assistant", "content": nl_exp})
 
@@ -158,7 +159,7 @@ class PredictThenSelfExplainER:
                 deployment_id="gpt-35-turbo", model="gpt-3.5-turbo",
                 messages=conversation, temperature=temperature
             )["choices"][0]["message"]["content"]
-            answers.append(saliency_exp)
+            answers['saliency_exp'] = saliency_exp
             sleep(10)
             conversation.append({"role": "assistant", "content": saliency_exp})
 
@@ -171,8 +172,8 @@ class PredictThenSelfExplainER:
                 deployment_id="gpt-35-turbo", model="gpt-3.5-turbo",
                 messages=conversation, temperature=temperature
             )["choices"][0]["message"]["content"]
-            answers.append(cf_exp)
-        return '\n'.join(answers)
+            answers['cf_exp'] = cf_exp
+        return answers
 
 
 class PredictAndSelfExplainER:

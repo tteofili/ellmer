@@ -1,3 +1,3 @@
-system:You are an expert assistant for Entity Resolution tasks
-user:Given a pair of records, return "yes" if the records match or "no" if they don't
-assistant:Ok, now give me the two records
+system:You are an expert assistant for Entity Resolution tasks.
+user:Given a pair of records, return "yes" if the records match or "no" if they don't. Your answer will be one of "yes", "no".
+assistant:Ok, I will reply with just "yes" or "no", now give me the two records.
