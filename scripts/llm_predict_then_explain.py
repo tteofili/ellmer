@@ -21,16 +21,18 @@ test_df = merge_sources(test, 'ltable_', 'rtable_', lsource, rsource, ['label'],
 
 results = []
 
-llm = ellmer.models.ConstrainedELLMER(explanation_granularity='attribute')
+llm = ellmer.models.PredictThenSelfExplainER(explanation_granularity='attribute')
 
-for idx in range(len(test_df[:50])):
+for idx in range(len(test_df[:5])):
     try:
         rand_row = test_df.iloc[[idx]]
         ltuple, rtuple = ellmer.utils.get_tuples(rand_row)
-        answer = llm.er(ltuple, rtuple, temperature=0.5)
+        prediction = llm.er(ltuple, rtuple, temperature=0.5)
+        sleep(10)
+        answer = llm.explain(ltuple, rtuple, prediction, temperature=0.5)
         results.append((ltuple, rtuple, answer))
         print(f'{ltuple}\n{rtuple}\n{answer}')
-        sleep(4)
+        sleep(10)
     except openai.error.RateLimitError:
         print(f'rate-limit error, waiting...')
         sleep(10)
@@ -38,4 +40,4 @@ for idx in range(len(test_df[:50])):
 results_df = pd.DataFrame(columns=['left', 'right', 'answer'], data=results)
 expdir = f'./experiments/{datetime.now():%Y%m%d}/{datetime.now():%H:%M}/'
 os.makedirs(expdir, exist_ok=True)
-results_df.to_csv(expdir+'constrained_results.csv')
+results_df.to_csv(expdir + 'ptse_results.csv')

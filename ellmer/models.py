@@ -5,9 +5,11 @@ import numpy as np
 import pandas as pd
 import ellmer.utils
 import openai
-
+from time import sleep
 
 hf_model = 'EleutherAI/gpt-neox-20b'  # 'tiiuae/falcon-7b-instruct'
+
+
 class LLMERModel(ERModel):
     count = 0
     idks = 0
@@ -16,7 +18,8 @@ class LLMERModel(ERModel):
     fake = False
     verbose = False
 
-    def __init__(self, model_type='openai', temperature=0.99, max_length=512, fake=False, hf_repo=hf_model, verbose=False):
+    def __init__(self, model_type='openai', temperature=0.99, max_length=512, fake=False, hf_repo=hf_model,
+                 verbose=False):
         template = "given the record:\n{ltuple}\n and the record:\n{rtuple}\n do they refer to the same entity in the real world?\nreply yes or no"
         super(LLMERModel, self).__init__()
         self.prompt = PromptTemplate(
@@ -51,9 +54,9 @@ class LLMERModel(ERModel):
                     if c in ['ltable_id', 'rtable_id']:
                         continue
                     if c.startswith('ltable_'):
-                        elt.append(str(c)+':'+xc[c].astype(str).values[0])
+                        elt.append(str(c) + ':' + xc[c].astype(str).values[0])
                     if c.startswith('rtable_'):
-                        ert.append(str(c)+':'+xc[c].astype(str).values[0])
+                        ert.append(str(c) + ':' + xc[c].astype(str).values[0])
                 question = self.prompt.format(ltuple='\n'.join(elt), rtuple='\n'.join(ert))
                 answer = self.llm(question)
                 if self.verbose:
@@ -91,13 +94,87 @@ class LLMERModel(ERModel):
                 summarized_answer = self.llm(summarize_prompt.format(response=answer))
                 self.summarized += 1
                 snms, sms = self.text_to_match(summarized_answer, n=1)
-                if snms == 0 and sms ==0:
+                if snms == 0 and sms == 0:
                     self.idks += 1
                     no_match_score = 1
         return no_match_score, match_score
 
 
-class ConstrainedELLMER:
+class PredictThenSelfExplainER:
+    def __init__(self, explanation_granularity: str = "attribute"):
+        self.explanation_granularity = explanation_granularity
+
+    def er(self, ltuple: str, rtuple: str, temperature=0.99):
+        question = "record1:\n" + ltuple + "\n record2:\n" + rtuple + "\n"
+        return self.__call__(question, er=True, explanation=False, temperature=temperature)
+
+    def explain(self, ltuple: str, rtuple: str, prediction: str, temperature=0.99):
+        question = "record1:\n" + ltuple + "\n record2:\n" + rtuple + "\n"
+        return self.__call__(question, er=True, explanation=True, prediction=prediction, temperature=temperature)
+
+    def __call__(self, question, er: bool = False, saliency: bool = False, cf: bool = False, why: bool = False,
+                 explanation=False, prediction=None, temperature=0.99, *args, **kwargs):
+        answers = []
+        openai.api_type = "azure"
+        openai.api_version = "2023-05-15"
+        conversation = []
+        if er:
+            for prompt_message in ellmer.utils.read_prompt('ellmer/prompts/er.txt'):
+                conversation.append(
+                    {"role": prompt_message[0],
+                     "content": prompt_message[1].replace("feature", self.explanation_granularity)})
+        conversation.append({"role": "user", "content": question})
+        if prediction is None:
+            response = openai.ChatCompletion.create(
+                deployment_id="gpt-35-turbo", model="gpt-3.5-turbo",
+                messages=conversation, temperature=temperature
+            )
+            prediction = response["choices"][0]["message"]["content"]
+        answers.append(prediction)
+
+        if explanation:
+            conversation.append({"role": "assistant", "content": prediction})
+
+            # natural language explanation
+            for prompt_message in ellmer.utils.read_prompt('ellmer/prompts/er-why.txt'):
+                conversation.append(
+                    {"role": prompt_message[0],
+                     "content": prompt_message[1].replace("feature", self.explanation_granularity)})
+            nl_exp = openai.ChatCompletion.create(
+                deployment_id="gpt-35-turbo", model="gpt-3.5-turbo",
+                messages=conversation, temperature=temperature
+            )["choices"][0]["message"]["content"]
+            answers.append(nl_exp)
+            sleep(10)
+            conversation.append({"role": "assistant", "content": nl_exp})
+
+            # saliency explanation
+            for prompt_message in ellmer.utils.read_prompt('ellmer/prompts/er-saliency.txt'):
+                conversation.append(
+                    {"role": prompt_message[0],
+                     "content": prompt_message[1].replace("feature", self.explanation_granularity)})
+            saliency_exp = openai.ChatCompletion.create(
+                deployment_id="gpt-35-turbo", model="gpt-3.5-turbo",
+                messages=conversation, temperature=temperature
+            )["choices"][0]["message"]["content"]
+            answers.append(saliency_exp)
+            sleep(10)
+            conversation.append({"role": "assistant", "content": saliency_exp})
+
+            # counterfactual explanation
+            for prompt_message in ellmer.utils.read_prompt('ellmer/prompts/er-cf.txt'):
+                conversation.append(
+                    {"role": prompt_message[0],
+                     "content": prompt_message[1].replace("feature", self.explanation_granularity)})
+            cf_exp = openai.ChatCompletion.create(
+                deployment_id="gpt-35-turbo", model="gpt-3.5-turbo",
+                messages=conversation, temperature=temperature
+            )["choices"][0]["message"]["content"]
+            answers.append(cf_exp)
+        return '\n'.join(answers)
+
+
+class PredictAndSelfExplainER:
 
     def __init__(self, explanation_granularity: str = "attribute"):
         self.explanation_granularity = explanation_granularity
@@ -125,6 +202,7 @@ class ConstrainedELLMER:
         except:
             answer = response["choices"][0]["message"]
         return answer
+
 
 class CertaELLMER:
     def __init__(self, explanation_granularity: str = "attributes"):
