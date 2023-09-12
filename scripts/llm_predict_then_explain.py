@@ -30,7 +30,13 @@ for idx in range(len(test_df[:5])):
         ltuple, rtuple = ellmer.utils.get_tuples(rand_row)
         prediction = llm.er(ltuple, rtuple, temperature=temperature)
         sleep(10)
-        answer = llm.explain(ltuple, rtuple, prediction['prediction'], temperature=temperature, why=True)
+        answer = llm.explain(ltuple, rtuple, prediction['prediction'], temperature=temperature, why=False)
+        try:
+            saliency = answer['saliency_exp'].split('```')[1]
+            saliency_dict = json.loads(saliency)
+            answer['saliency_exp'] = saliency_dict
+        except:
+            pass
         answer['ltuple'] = ltuple
         answer['rtuple'] = rtuple
         answer['label'] = rand_row['label'].values[0]

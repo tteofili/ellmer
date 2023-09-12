@@ -6,11 +6,13 @@ import ellmer.models
 import ellmer.utils
 from time import sleep
 import openai
+import json
+import ast
 
 lprefix = 'ltable_'
 rprefix = 'rtable_'
 
-dataset_name = 'beers'
+dataset_name = 'abt_buy'
 datadir = '/Users/tteofili/dev/cheapER/datasets/' + dataset_name
 lsource = pd.read_csv(datadir + '/tableA.csv')
 rsource = pd.read_csv(datadir + '/tableB.csv')
@@ -23,19 +25,26 @@ results = []
 
 llm = ellmer.models.PredictAndSelfExplainER(explanation_granularity='attribute')
 
-for idx in range(len(test_df[:50])):
+for idx in range(len(test_df[:9])):
     try:
         rand_row = test_df.iloc[[idx]]
         ltuple, rtuple = ellmer.utils.get_tuples(rand_row)
-        answer = llm.er(ltuple, rtuple, temperature=0.5)
-        results.append((ltuple, rtuple, answer))
+        answer = llm.er(ltuple, rtuple, temperature=0.01)
+        try:
+            answer = answer.split('```')[1]
+            answer = json.loads(answer)
+        except:
+            pass
+        results.append({"ltuple": ast.literal_eval(json.loads(json.dumps(ltuple))),
+                        "rtuple": ast.literal_eval(json.loads(json.dumps(rtuple))), "answer": answer,
+                        "label": rand_row['label'].values[0]})
         print(f'{ltuple}\n{rtuple}\n{answer}')
         sleep(4)
     except openai.error.RateLimitError:
         print(f'rate-limit error, waiting...')
         sleep(10)
 
-results_df = pd.DataFrame(columns=['left', 'right', 'answer'], data=results)
 expdir = f'./experiments/{datetime.now():%Y%m%d}/{datetime.now():%H:%M}/'
 os.makedirs(expdir, exist_ok=True)
-results_df.to_csv(expdir + 'pase_results.csv')
+with open(expdir + 'ptae_results.json', 'w') as fout:
+    json.dump(results, fout)

@@ -1,0 +1,128 @@
+[
+  {
+    "ltuple": {
+      "ltable_name": "sony pink cyber-shot 7.2 megapixel digital camera dscw120p",
+      "ltable_description": "sony pink cyber-shot 7.2 megapixel digital camera dscw120p 7.2 megapixel 4x optical zoom 2.5 ' tft lcd 15 mb internal memory face detection super steadyshot image stabilization smile shutter mode smart zoom pink finish",
+      "ltable_price": "nan"
+    },
+    "rtuple": {
+      "rtable_name": "olympus fe-360 digital camera pink 226540",
+      "rtable_description": "8 megapixel 16:9 3x optical zoom 4x digital zoom 2.5 ' color lcd",
+      "rtable_price": "104.95"
+    },
+    "answer": "Sure, here's the response in JSON format:\n\n```\n{\n    \"matching_prediction\": false,\n    \"saliency_explanation\": {\n        \"ltable_name\": 0.05,\n        \"ltable_description\": 0.85,\n        \"ltable_price\": 0.1,\n        \"rtable_name\": 0.1,\n        \"rtable_description\": 0.9,\n        \"rtable_price\": 0.0\n    },\n    \"counterfactual_explanation\": [\n        {\n            \"ltable_name\": \"sony pink cyber-shot 7.2 megapixel digital camera dscw120p\",\n            \"ltable_description\": \"sony pink cyber-shot 7.2 megapixel digital camera dscw120p 7.2 megapixel 4x optical zoom 2.5 ' tft lcd 15 mb internal memory face detection super steadyshot image stabilization smile shutter mode smart zoom pink finish\",\n            \"ltable_price\": \"nan\",\n            \"rtable_name\": \"olympus fe-360 digital camera pink 226540\",\n            \"rtable_description\": \"8 megapixel 16:9 3x optical zoom 4x digital zoom 2.5 ' color lcd\",\n            \"rtable_price\": \"104.95\"\n        },\n        {\n            \"ltable_name\": \"sony pink cyber-shot 7.2 megapixel digital camera dscw120p\",\n            \"ltable_description\": \"sony pink cyber-shot 7.2 megapixel digital camera dscw120p 7.2 megapixel 4x optical zoom 2.5 ' tft lcd 15 mb internal memory face detection super steadyshot image stabilization smile shutter mode smart zoom pink finish\",\n            \"ltable_price\": \"nan\",\n            \"rtable_name\": \"olympus fe-360 digital camera pink 226540\",\n            \"rtable_description\": \"8 megapixel 16:9 3x optical zoom 4x digital zoom 2.5 ' color lcd\",\n            \"rtable_price\": \"nan\"\n        }\n    ]\n}\n``` \n\nIn this example, the matching_prediction is false, indicating that the two records do not match. The saliency_explanation table shows the saliency scores for each attribute, with the ltable_description and rtable_description attributes having the highest scores. The counterfactual_explanation table shows two records, with the ltable_price attribute changed to \"nan\" in the second record. This change in the ltable_price attribute causes the model to predict a match between the two records.",
+    "label": 0
+  },
+  {
+    "ltuple": {
+      "ltable_name": "lg 2.0 cu . ft. over-the-range white microwave oven lmvm2085wh",
+      "ltable_description": "lg 2.0 cu . ft. over-the-range white microwave oven lmvm2085wh warming lamp glide & spin sliding tray with turntable sensor cook feature 300 cfm exhaust system horizontal keypad elegant hidden vent wideview window halogen cooktop lighting white finish",
+      "ltable_price": "nan"
+    },
+    "rtuple": {
+      "rtable_name": "maytag 2.0 cu . ft. over-the-range microwave oven",
+      "rtable_description": "nan",
+      "rtable_price": "nan"
+    },
+    "answer": "Sure, here's the response in JSON format:\n\n```\n{\n    \"matching_prediction\": false,\n    \"saliency_explanation\": {\n        \"ltable_name\": 0.1,\n        \"ltable_description\": 0.8,\n        \"ltable_price\": 0.1,\n        \"rtable_name\": 0.2,\n        \"rtable_description\": 0.7,\n        \"rtable_price\": 0.1\n    },\n    \"counterfactual_explanation\": [\n        {\n            \"ltable_name\": \"maytag 2.0 cu . ft. over-the-range microwave oven\",\n            \"ltable_description\": \"nan\",\n            \"ltable_price\": \"nan\",\n            \"rtable_name\": \"lg 2.0 cu . ft. over-the-range white microwave oven lmvm2085wh\",\n            \"rtable_description\": \"lg 2.0 cu . ft. over-the-range white microwave oven lmvm2085wh warming lamp glide & spin sliding tray with turntable sensor cook feature 300 cfm exhaust system horizontal keypad elegant hidden vent wideview window halogen cooktop lighting white finish\",\n            \"rtable_price\": \"nan\"\n        },\n        {\n            \"ltable_name\": \"maytag 2.0 cu . ft. over-the-range microwave oven\",\n            \"ltable_description\": \"nan\",\n            \"ltable_price\": \"nan\",\n            \"rtable_name\": \"maytag 2.0 cu . ft. over-the-range microwave oven\",\n            \"rtable_description\": \"lg 2.0 cu . ft. over-the-range white microwave oven lmvm2085wh warming lamp glide & spin sliding tray with turntable sensor cook feature 300 cfm exhaust system horizontal keypad elegant hidden vent wideview window halogen cooktop lighting white finish\",\n            \"rtable_price\": \"nan\"\n        }\n    ]\n}\n``` \n\nNote that the saliency explanation table shows that the model paid more attention to the `ltable_description` and `rtable_description` attributes, while the counterfactual explanation table shows two possible counterfactual records that would flip the prediction.",
+    "label": 0
+  },
+  {
+    "ltuple": {
+      "ltable_name": "panasonic black 8.5 ' portable dvd player dvdls83",
+      "ltable_description": "panasonic black 8.5 ' portable dvd player dvdls83 8.5 ' free style wide screen lcd display 6 hour battery multi format playback dual headphone jacks divx playback car dc adapter included black finish",
+      "ltable_price": "nan"
+    },
+    "rtuple": {
+      "rtable_name": "toshiba sd-p71s portable dvd player",
+      "rtable_description": "toshiba sd-p71s 7 ' portable dvd player",
+      "rtable_price": "119.36"
+    },
+    "answer": "Sure, here's the response in JSON format:\n\n```\n{\n    \"matching_prediction\": false,\n    \"saliency_explanation\": {\n        \"ltable_name\": 0.2,\n        \"ltable_description\": 0.8,\n        \"ltable_price\": 0.0,\n        \"rtable_name\": 0.0,\n        \"rtable_description\": 0.0,\n        \"rtable_price\": 0.0\n    },\n    \"counterfactual_explanation\": [\n        {\n            \"ltable_name\": \"toshiba sd-p71s portable dvd player\",\n            \"ltable_description\": \"panasonic black 8.5 ' portable dvd player dvdls83 8.5 ' free style wide screen lcd display 6 hour battery multi format playback dual headphone jacks divx playback car dc adapter included black finish\",\n            \"ltable_price\": \"nan\",\n            \"rtable_name\": \"toshiba sd-p71s portable dvd player\",\n            \"rtable_description\": \"toshiba sd-p71s 7 ' portable dvd player\",\n            \"rtable_price\": \"119.36\"\n        },\n        {\n            \"ltable_name\": \"panasonic black 8.5 ' portable dvd player dvdls83\",\n            \"ltable_description\": \"toshiba sd-p71s 7 ' portable dvd player\",\n            \"ltable_price\": \"nan\",\n            \"rtable_name\": \"toshiba sd-p71s portable dvd player\",\n            \"rtable_description\": \"toshiba sd-p71s 7 ' portable dvd player\",\n            \"rtable_price\": \"119.36\"\n        }\n    ]\n}\n```",
+    "label": 0
+  },
+  {
+    "ltuple": {
+      "ltable_name": "sony bravia theater black micro system davis50b",
+      "ltable_description": "sony bravia theater black micro system davis50b 5.1-channel surround sound golf ball-sized speakers compact design s-air digital wireless capability hdmi connectivity bravia sync digital cinema sound ( dcs ) technology s-master digital amplifier portable audio enhancer black finish",
+      "ltable_price": "nan"
+    },
+    "rtuple": {
+      "rtable_name": "sony bravia dav-is50 / b home theater system",
+      "rtable_description": "dvd player , 5.1 speakers 1 disc ( s ) progressive scan 450w rms dolby digital ex , dolby pro logic , dolby pro logic ii",
+      "rtable_price": "nan"
+    },
+    "answer": "Here's the response in JSON format:\n\n```\n{\n    \"matching_prediction\": false,\n    \"saliency_explanation\": {\n        \"ltable_name\": 0.0,\n        \"ltable_description\": 0.0,\n        \"ltable_price\": 0.0,\n        \"rtable_name\": 0.0,\n        \"rtable_description\": 0.0,\n        \"rtable_price\": 0.0\n    },\n    \"counterfactual_explanation\": [\n        {\n            \"ltable_name\": \"sony bravia dav-is50 / b home theater system\",\n            \"ltable_description\": \"dvd player , 5.1 speakers 1 disc ( s ) progressive scan 450w rms dolby digital ex , dolby pro logic , dolby pro logic ii\",\n            \"ltable_price\": \"nan\",\n            \"rtable_name\": \"sony bravia theater black micro system davis50b\",\n            \"rtable_description\": \"sony bravia theater black micro system davis50b 5.1-channel surround sound golf ball-sized speakers compact design s-air digital wireless capability hdmi connectivity bravia sync digital cinema sound ( dcs ) technology s-master digital amplifier portable audio enhancer black finish\",\n            \"rtable_price\": \"nan\"\n        },\n        {\n            \"ltable_name\": \"sony bravia theater black micro system davis50b\",\n            \"ltable_description\": \"sony bravia theater black micro system davis50b 5.1-channel surround sound golf ball-sized speakers compact design s-air digital wireless capability hdmi connectivity bravia sync digital cinema sound ( dcs ) technology s-master digital amplifier portable audio enhancer black finish\",\n            \"ltable_price\": \"nan\",\n            \"rtable_name\": \"sony bravia dav-is50 / b home theater system\",\n            \"rtable_description\": \"dvd player , 5.1 speakers 1 disc ( s ) progressive scan 450w rms dolby digital ex , dolby pro logic , dolby pro logic ii\",\n            \"rtable_price\": \"nan\"\n        }\n    ]\n}\n``` \n\nIn the response, `matching_prediction` is a boolean value indicating whether the two records match or not. `saliency_explanation` is a dictionary containing the saliency score for each attribute in both records. `counterfactual_explanation` is a list of two dictionaries, each containing the counterfactual explanation for each record. In the counterfactual explanation, the attribute values are swapped between the two records.",
+    "label": 1
+  },
+  {
+    "ltuple": {
+      "ltable_name": "panasonic dect 6.0 expandable digital cordless phone with all-digital answering system kxtg9344t",
+      "ltable_description": "panasonic dect 6.0 expandable digital cordless phone with all-digital answering system kxtg9344t 4 handsets system up to 6 multi-handset capability digital answering machine system ringer id call waiting caller id voicemail hold voice menu marker message mute clock alarm led lighting night mode call block speakerphone 11 days standby 5 hours talk time black metallic finish",
+      "ltable_price": "139.0"
+    },
+    "rtuple": {
+      "rtable_name": "panasonic kx-tg9342t cordless phone",
+      "rtable_description": "1 x phone line ( s ) black , metallic",
+      "rtable_price": "nan"
+    },
+    "answer": "Here's the response in JSON format:\n\n```\n{\n    \"matching\": false,\n    \"saliency_explanation\": {\n        \"ltable_name\": 0.0,\n        \"ltable_description\": 0.0,\n        \"ltable_price\": 0.0,\n        \"rtable_name\": 0.0,\n        \"rtable_description\": 0.0,\n        \"rtable_price\": 0.0\n    },\n    \"counterfactual_explanation\": [\n        {\n            \"ltable_name\": \"panasonic kx-tg9342t cordless phone\",\n            \"ltable_description\": \"1 x phone line ( s ) black , metallic\",\n            \"ltable_price\": \"139.0\",\n            \"rtable_name\": \"\",\n            \"rtable_description\": \"\",\n            \"rtable_price\": \"\"\n        },\n        {\n            \"ltable_name\": \"panasonic dect 6.0 expandable digital cordless phone with all-digital answering system kxtg9344t\",\n            \"ltable_description\": \"panasonic dect 6.0 expandable digital cordless phone with all-digital answering system kxtg9344t 4 handsets system up to 6 multi-handset capability digital answering machine system ringer id call waiting caller id voicemail hold voice menu marker message mute clock alarm led lighting night mode call block speakerphone 11 days standby 5 hours talk time black metallic finish\",\n            \"ltable_price\": \"\",\n            \"rtable_name\": \"panasonic kx-tg9342t cordless phone\",\n            \"rtable_description\": \"1 x phone line ( s ) black , metallic\",\n            \"rtable_price\": \"139.0\"\n        }\n    ]\n}\n```\n\nExplanation:\n\n- The \"matching\" field is set to \"false\" because the two records do not match.\n- The \"saliency_explanation\" field shows that none of the attributes had any saliency score, indicating that the model did not rely on any specific attribute to make its prediction.\n- The \"counterfactual_explanation\" field shows two records. The first record is the altered version of the first record where the \"rtable_name\", \"rtable_description\", and \"rtable_price\" attributes are empty. The second record is the altered version of the second record where the \"ltable_price\" attribute is empty and the \"ltable_name\" and \"ltable_description\" attributes are replaced with the corresponding values from the first record. The counterfactual explanation shows that if the model had seen the first record as the second record, it would have predicted a match.",
+    "label": 0
+  },
+  {
+    "ltuple": {
+      "ltable_name": "sony cyber-shot black digital camera dsch10b",
+      "ltable_description": "sony dsch10 cyber-shot black digital camera dsch10b 8.1 megapixels 3.0 ' lcd display carl zeiss 10x optical zoom lens 31 mb internal memory versatile flash advanced sports mode 9-point auto focus high sensitivity mode burst mode face detection in-camera retouching super steadyshot optical image stabilization with anti-blur solution music slideshow hdtv compatibility stamina battery power beginner-friendly function guide black finish",
+      "ltable_price": "nan"
+    },
+    "rtuple": {
+      "rtable_name": "sony handycam dcr-sr85 digital camcorder dcrsr85",
+      "rtable_description": "16:9 2.7 ' hybrid lcd",
+      "rtable_price": "375.8"
+    },
+    "answer": "Here is the response in json format:\n\n```\n{\n    \"matching_prediction\": false,\n    \"saliency_explanation\": {\n        \"ltable_name\": 0.0,\n        \"ltable_description\": 0.0,\n        \"ltable_price\": 0.0,\n        \"rtable_name\": 0.0,\n        \"rtable_description\": 0.0,\n        \"rtable_price\": 0.0\n    },\n    \"counterfactual_explanation\": [\n        {\n            \"ltable_name\": \"sony cyber-shot black digital camera dsch10b\",\n            \"ltable_description\": \"sony dsch10 cyber-shot black digital camera dsch10b 8.1 megapixels 3.0 ' lcd display carl zeiss 10x optical zoom lens 31 mb internal memory versatile flash advanced sports mode 9-point auto focus high sensitivity mode burst mode face detection in-camera retouching super steadyshot optical image stabilization with anti-blur solution music slideshow hdtv compatibility stamina battery power beginner-friendly function guide black finish\",\n            \"ltable_price\": \"nan\",\n            \"rtable_name\": \"sony handycam dcr-sr85 digital camcorder dcrsr85\",\n            \"rtable_description\": \"16:9 2.7 ' hybrid lcd\",\n            \"rtable_price\": \"375.8\"\n        },\n        {\n            \"ltable_name\": \"sony cyber-shot black digital camera dsch10b\",\n            \"ltable_description\": \"sony dsch10 cyber-shot black digital camera dsch10b 8.1 megapixels 3.0 ' lcd display carl zeiss 10x optical zoom lens 31 mb internal memory versatile flash advanced sports mode 9-point auto focus high sensitivity mode burst mode face detection in-camera retouching super steadyshot optical image stabilization with anti-blur solution music slideshow hdtv compatibility stamina battery power beginner-friendly function guide black finish\",\n            \"ltable_price\": \"nan\",\n            \"rtable_name\": \"sony handycam dcr-sr85 digital camcorder dcrsr85\",\n            \"rtable_description\": \"16:9 2.7 ' hybrid lcd\",\n            \"rtable_price\": \"nan\"\n        }\n    ]\n}\n``` \n\nIn this example, the matching_prediction is false, indicating that the two records do not match. The saliency_explanation table shows that none of the attributes had a significant impact on the model's decision. The counterfactual_explanation table shows two records, the first being the original record and the second being the same record with the rtable_price attribute set to \"nan\". This change caused the model's prediction to flip from non-matching to matching.",
+    "label": 0
+  },
+  {
+    "ltuple": {
+      "ltable_name": "olympus black 10 megapixels digital camera sp565uz",
+      "ltable_description": "olympus black 10 megapixels digital camera sp565uz dual image stabilization 10 megapixels 20x wide-angle zoom lens pre-capture face detection 33 shooting modes 48mb internal memory black finish",
+      "ltable_price": "nan"
+    },
+    "rtuple": {
+      "rtable_name": "olympus ps-bls1 lithium ion digital camera battery 260236",
+      "rtable_description": "lithium ion ( li-ion ) photo battery",
+      "rtable_price": "nan"
+    },
+    "answer": "Sure, here's the response in JSON format:\n\n```\n{\n    \"matching_prediction\": false,\n    \"saliency_explanation\": {\n        \"ltable_name\": 0.2,\n        \"ltable_description\": 0.8,\n        \"ltable_price\": 0.0,\n        \"rtable_name\": 0.0,\n        \"rtable_description\": 0.0,\n        \"rtable_price\": 0.0\n    },\n    \"counterfactual_explanation\": [\n        {\n            \"ltable_name\": \"olympus black 10 megapixels digital camera sp565uz\",\n            \"ltable_description\": \"olympus black 10 megapixels digital camera sp565uz dual image stabilization 10 megapixels 20x wide-angle zoom lens pre-capture face detection 33 shooting modes 48mb internal memory black finish\",\n            \"ltable_price\": \"nan\",\n            \"rtable_name\": \"olympus ps-bls1 lithium ion digital camera battery 260236\",\n            \"rtable_description\": \"lithium ion ( li-ion ) photo battery\",\n            \"rtable_price\": \"nan\"\n        },\n        {\n            \"ltable_name\": \"olympus black 10 megapixels digital camera sp565uz\",\n            \"ltable_description\": \"olympus black 10 megapixels digital camera sp565uz dual image stabilization 10 megapixels 20x wide-angle zoom lens pre-capture face detection 33 shooting modes 48mb internal memory black finish\",\n            \"ltable_price\": \"nan\",\n            \"rtable_name\": \"olympus ps-bls1 lithium ion digital camera battery 260236\",\n            \"rtable_description\": \"lithium ion ( li-ion ) photo battery\",\n            \"rtable_price\": \"nan\"\n        }\n    ]\n}\n``` \n\nIn the above response, the \"matching_prediction\" field indicates whether the two records match or not. In this case, the prediction is false, indicating that the two records do not match.\n\nThe \"saliency_explanation\" field contains the saliency scores for each attribute in both records. The attribute with the highest saliency score in record1 is \"ltable_description\", indicating that it is the most important attribute in determining the prediction. \n\nThe \"counterfactual_explanation\" field contains two records, each with one attribute changed. These records represent the counterfactual explanations for the prediction. In this case, the counterfactual explanations do not change the prediction, indicating that the model is robust to small changes in the input data.",
+    "label": 0
+  },
+  {
+    "ltuple": {
+      "ltable_name": "canon black rechargeable battery 9612a001",
+      "ltable_description": "canon black rechargeable battery 9612a001 lithium-ion technology compatible with canon digital rebel xt and powershot s series digital cameras also compatible with canon elura series , optura series and zr series camcorders black finish",
+      "ltable_price": "nan"
+    },
+    "rtuple": {
+      "rtable_name": "canon canon cb-2lw battery charger 0763b001",
+      "rtable_description": "nan",
+      "rtable_price": "nan"
+    },
+    "answer": "Sure, here's the response in JSON format:\n\n```\n{\n    \"matching_prediction\": false,\n    \"saliency_explanation\": {\n        \"ltable_name\": 0.2,\n        \"ltable_description\": 0.8,\n        \"ltable_price\": 0.0,\n        \"rtable_name\": 0.0,\n        \"rtable_description\": 0.0,\n        \"rtable_price\": 0.0\n    },\n    \"counterfactual_explanation\": [\n        {\n            \"ltable_name\": \"canon black rechargeable battery 9612a001\",\n            \"ltable_description\": \"canon black rechargeable battery 9612a001 lithium-ion technology compatible with canon digital rebel xt and powershot s series digital cameras also compatible with canon elura series , optura series and zr series camcorders black finish\",\n            \"ltable_price\": \"nan\",\n            \"rtable_name\": \"canon canon cb-2lw battery charger 0763b001\",\n            \"rtable_description\": \"nan\",\n            \"rtable_price\": \"nan\"\n        },\n        {\n            \"ltable_name\": \"canon black rechargeable battery 9612a001\",\n            \"ltable_description\": \"nan\",\n            \"ltable_price\": \"nan\",\n            \"rtable_name\": \"canon canon cb-2lw battery charger 0763b001\",\n            \"rtable_description\": \"nan\",\n            \"rtable_price\": \"nan\"\n        }\n    ]\n}\n```\n\nIn this response, the `matching_prediction` field indicates that the two records do not match. The `saliency_explanation` field shows the saliency scores for each attribute, with the `ltable_description` attribute having the highest score of 0.8, indicating that it was the most important attribute in the model's decision-making process. The `counterfactual_explanation` field shows two altered records, with the first record having the `ltable_description` attribute removed and the `rtable_name` attribute changed to match the `ltable_name` attribute, and the second record having all attributes removed except for the `ltable_name` and `rtable_name` attributes. These altered records represent counterfactual explanations for why the model did not match the two input records.",
+    "label": 0
+  },
+  {
+    "ltuple": {
+      "ltable_name": "canon silver powershot digital camera sd880is",
+      "ltable_description": "canon silver powershot digital camera sd880is 10 megapixel 4x optical zoom optical image stabilizer 3.0 ' purecolor lcd ii digic 4 image processor face detection self-timer red-eye correction 19 shooting modes print/share button silver finish",
+      "ltable_price": "nan"
+    },
+    "rtuple": {
+      "rtable_name": "canon dc310 digital camcorder 2694b001",
+      "rtable_description": "canon dc310 dvd camcorder w / 41x advanced zoom , built-in lens cover , image stabilization , & canon exclusive - digic dv ii",
+      "rtable_price": "289.95"
+    },
+    "answer": "Sure, here's the response in JSON format:\n\n```\n{\n    \"matching_prediction\": false,\n    \"saliency_explanation\": {\n        \"ltable_name\": 0.2,\n        \"ltable_description\": 0.8,\n        \"ltable_price\": 0.0,\n        \"rtable_name\": 0.1,\n        \"rtable_description\": 0.9,\n        \"rtable_price\": 0.0\n    },\n    \"counterfactual_explanation\": [\n        {\n            \"ltable_name\": \"canon dc310 digital camcorder 2694b001\",\n            \"ltable_description\": \"canon silver powershot digital camera sd880is 10 megapixel 4x optical zoom optical image stabilizer 3.0 ' purecolor lcd ii digic 4 image processor face detection self-timer red-eye correction 19 shooting modes print/share button silver finish\",\n            \"ltable_price\": \"nan\",\n            \"rtable_name\": \"canon silver powershot digital camera sd880is\",\n            \"rtable_description\": \"canon dc310 dvd camcorder w / 41x advanced zoom , built-in lens cover , image stabilization , & canon exclusive - digic dv ii\",\n            \"rtable_price\": \"289.95\"\n        },\n        {\n            \"ltable_name\": \"canon silver powershot digital camera sd880is\",\n            \"ltable_description\": \"canon dc310 dvd camcorder w / 41x advanced zoom , built-in lens cover , image stabilization , & canon exclusive - digic dv ii\",\n            \"ltable_price\": \"nan\",\n            \"rtable_name\": \"canon dc310 digital camcorder 2694b001\",\n            \"rtable_description\": \"canon silver powershot digital camera sd880is 10 megapixel 4x optical zoom optical image stabilizer 3.0 ' purecolor lcd ii digic 4 image processor face detection self-timer red-eye correction 19 shooting modes print/share button silver finish\",\n            \"rtable_price\": \"289.95\"\n        }\n    ]\n}\n```",
+    "label": 0
+  }
+]

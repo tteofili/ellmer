@@ -25,18 +25,16 @@ def predict(x: pd.DataFrame, llm_fn, verbose: bool = True, mojito: bool = False)
 
 
 def get_tuples(xc):
-    elt = []
-    ert = []
+    elt = dict()
+    ert = dict()
     for c in xc.columns:
         if c in ['ltable_id', 'rtable_id']:
             continue
         if c.startswith('ltable_'):
-            elt.append(str(c) + ':' + xc[c].astype(str).values[0])
+            elt[str(c)]= xc[c].astype(str).values[0]
         if c.startswith('rtable_'):
-            ert.append(str(c) + ':' + xc[c].astype(str).values[0])
-    ltuple = '\n'.join(elt)
-    rtuple = '\n'.join(ert)
-    return ltuple, rtuple
+            ert[str(c)] = xc[c].astype(str).values[0]
+    return str(elt), str(ert)
 
 
 def text_to_match(answer, llm_fn, n=0):
@@ -68,3 +66,31 @@ def read_prompt(file_path: str):
     with open(file_path) as file:
         lines = [(line.rstrip().split(':')) for line in file]
     return lines
+
+
+def concordance_correlation(y_pred, y_true):
+    # Raw data
+    dct = {
+        'y_true': y_true,
+        'y_pred': y_pred
+    }
+    df = pd.DataFrame(dct)
+    # Remove NaNs
+    df = df.dropna()
+    # Pearson product-moment correlation coefficients
+    y_true = df['y_true']
+    y_pred = df['y_pred']
+    cor = np.corrcoef(y_true, y_pred)[0][1]
+    # Means
+    mean_true = np.mean(y_true)
+    mean_pred = np.mean(y_pred)
+    # Population variances
+    var_true = np.var(y_true)
+    var_pred = np.var(y_pred)
+    # Population standard deviations
+    sd_true = np.std(y_true)
+    sd_pred = np.std(y_pred)
+    # Calculate CCC
+    numerator = 2 * cor * sd_true * sd_pred
+    denominator = var_true + var_pred + (mean_true - mean_pred) ** 2
+    return numerator / denominator
