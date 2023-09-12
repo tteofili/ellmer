@@ -1,0 +1,311 @@
+,left,right,answer
+0,"ltable_Beer_Name:Bulleit Bourbon Barrel Aged G'Knight
+ltable_Brew_Factory_Name:Oskar Blues Grill & Brew
+ltable_Style:American Amber / Red Ale
+ltable_ABV:8.70 %","rtable_Beer_Name:Figure Eight Bourbon Barrel Aged Jumbo Love
+rtable_Brew_Factory_Name:Figure Eight Brewing
+rtable_Style:Barley Wine
+rtable_ABV:-","Based on the information provided, the two records do not match.
+The two records have different values for the following attributes:
+- `ltable_Beer_Name` and `rtable_Beer_Name`: The two beer names are different.
+- `ltable_Brew_Factory_Name` and `rtable_Brew_Factory_Name`: The two brewery names are different.
+- `ltable_Style` and `rtable_Style`: The two beer styles are different.
+- `ltable_ABV` and `rtable_ABV`: The two ABV values are different.
+
+Therefore, it is highly unlikely that the two records represent the same entity, and I predict that the two records do not match.
+Sure, here's an attribute-level saliency explanation for the above prediction in JSON format:
+
+```
+{
+    ""ltable_Beer_Name"": 0.0,
+    ""rtable_Beer_Name"": 0.0,
+    ""ltable_Brew_Factory_Name"": 0.0,
+    ""rtable_Brew_Factory_Name"": 0.0,
+    ""ltable_Style"": 0.0,
+    ""rtable_Style"": 0.0,
+    ""ltable_ABV"": 0.0,
+    ""rtable_ABV"": 0.0
+}
+```
+
+In this case, all attributes have a saliency score of 0.0 because none of them contributed to the decision. Since all attribute values are different, the decision was made based on the fact that no two attributes matched between the two records.
+Sure, here's an attribute-level counterfactual explanation for the above prediction in JSON format:
+
+```
+{
+    ""record1"": {
+        ""ltable_Beer_Name"": ""Figure Eight Bourbon Barrel Aged Jumbo Love"",
+        ""ltable_Brew_Factory_Name"": ""Figure Eight Brewing"",
+        ""ltable_Style"": ""Barley Wine"",
+        ""ltable_ABV"": ""-""
+    },
+    ""record2"": {
+        ""rtable_Beer_Name"": ""Bulleit Bourbon Barrel Aged G'Knight"",
+        ""rtable_Brew_Factory_Name"": ""Oskar Blues Grill & Brew"",
+        ""rtable_Style"": ""American Amber / Red Ale"",
+        ""rtable_ABV"": ""8.70 %""
+    }
+}
+```
+
+In this case, I changed the key attributes of the two records such that they match each other. The `ltable_Beer_Name`, `ltable_Brew_Factory_Name`, `ltable_Style`, and `ltable_ABV` attributes of record1 were changed to match the corresponding attributes of record2. Similarly, the `rtable_Beer_Name`, `rtable_Brew_Factory_Name`, `rtable_Style`, and `rtable_ABV` attributes of record2 were changed to match the corresponding attributes of record1. With these changes, the two records now represent the same entity, and my prediction would flip to ""yes""."
+1,"ltable_Beer_Name:Double Dragon Imperial Red Ale
+ltable_Brew_Factory_Name:Phillips Brewing Company
+ltable_Style:American Amber / Red Ale
+ltable_ABV:8.20 %","rtable_Beer_Name:Scuttlebutt Mateo Loco Imperial Red Ale
+rtable_Brew_Factory_Name:Scuttlebutt Brewing Co. .
+rtable_Style:American Strong Ale
+rtable_ABV:7.10 %","Based on the given records, the answer is ""no"". The beer names are different, the brewery names are different, the styles are different, and the ABV percentages are different.
+I predicted that the records do not match because there are significant differences between the values in each record. 
+
+Firstly, the beer names are different. The first record has ""Double Dragon Imperial Red Ale"" while the second record has ""Scuttlebutt Mateo Loco Imperial Red Ale"". These are clearly different beer names.
+
+Secondly, the brewery names are different. The first record has ""Phillips Brewing Company"" while the second record has ""Scuttlebutt Brewing Co."".
+
+Thirdly, the styles are different. The first record has ""American Amber / Red Ale"" while the second record has ""American Strong Ale"".
+
+Finally, the ABV percentages are different. The first record has 8.20% while the second record has 7.10%. 
+
+All of these differences suggest that the records do not match.
+Here is the attribute-level saliency explanation for the above prediction in JSON format:
+
+```
+{
+    ""ltable_Beer_Name"": 0,
+    ""rtable_Beer_Name"": 0,
+    ""ltable_Brew_Factory_Name"": 0,
+    ""rtable_Brew_Factory_Name"": 0,
+    ""ltable_Style"": 0,
+    ""rtable_Style"": 0,
+    ""ltable_ABV"": 0,
+    ""rtable_ABV"": 0
+}
+```
+
+Since all the attributes have different values in both records, none of the attributes have contributed to the decision-making process. Therefore, all the saliency scores are 0.
+Here is an attribute-level counterfactual explanation for the above prediction in JSON format:
+
+```
+{
+    ""record1"": {
+        ""ltable_Beer_Name"": ""Double Dragon Imperial Red Ale"",
+        ""ltable_Brew_Factory_Name"": ""Phillips Brewing Company"",
+        ""ltable_Style"": ""American Amber / Red Ale"",
+        ""ltable_ABV"": ""8.20 %""
+    },
+    ""record2"": {
+        ""rtable_Beer_Name"": ""Double Dragon Imperial Red Ale"",
+        ""rtable_Brew_Factory_Name"": ""Phillips Brewing Company"",
+        ""rtable_Style"": ""American Amber / Red Ale"",
+        ""rtable_ABV"": ""8.20 %""
+    }
+}
+```
+
+In this counterfactual explanation, the beer name, brewery name, style, and ABV percentage of the second record have been changed to match the first record. This results in both records having the same values for all attributes, which would lead to a ""yes"" prediction for entity resolution."
+2,"ltable_Beer_Name:Honey Basil Amber
+ltable_Brew_Factory_Name:Rude Hippo Brewing Company
+ltable_Style:American Amber / Red Ale
+ltable_ABV:7.40 %","rtable_Beer_Name:Rude Hippo Honey Basil Amber
+rtable_Brew_Factory_Name:18th Street Brewery
+rtable_Style:Amber Ale
+rtable_ABV:7.40 %","Based on the information provided, the two records do not match. 
+
+The beer names are slightly different: ""Honey Basil Amber"" in record 1 vs ""Rude Hippo Honey Basil Amber"" in record 2. 
+
+The brewery names are completely different: ""Rude Hippo Brewing Company"" in record 1 vs ""18th Street Brewery"" in record 2. 
+
+The styles are also different: ""American Amber / Red Ale"" in record 1 vs ""Amber Ale"" in record 2.
+
+The ABV is the same in both records, but this is not enough to consider them a match.
+
+Therefore, the answer is ""no"".
+My prediction is based on the fact that the two records have differences in multiple key attributes such as beer name, brewery name, and beer style. 
+
+In particular, the beer name in record 1 is ""Honey Basil Amber"", while in record 2 it is ""Rude Hippo Honey Basil Amber"". Although both records mention the words ""Honey Basil Amber"", the fact that the second record mentions the brewery name as well suggests that it might be a different version of the same beer, or a different beer altogether.
+
+Furthermore, the brewery names are completely different, which is a strong indication that the two records are not a match. Finally, the beer styles are also different, with record 1 indicating an ""American Amber / Red Ale"" and record 2 indicating an ""Amber Ale"". 
+
+All of these differences combined suggest that the two records are not a match.
+Here's the saliency explanation for the above prediction in JSON format:
+
+```
+{
+    ""ltable_Beer_Name"": 0.2,
+    ""rtable_Beer_Name"": 0.4,
+    ""ltable_Brew_Factory_Name"": 0.1,
+    ""rtable_Brew_Factory_Name"": 0.4,
+    ""ltable_Style"": 0.1,
+    ""rtable_Style"": 0.2,
+    ""ltable_ABV"": 0.0,
+    ""rtable_ABV"": 0.0
+}
+```
+
+The saliency scores represent the relative importance of each attribute in the decision-making process. In this case, the most important attribute is ""rtable_Brew_Factory_Name"" with a score of 0.4, followed by ""rtable_Beer_Name"" and ""ltable_Beer_Name"" with scores of 0.4 and 0.2 respectively. The other attributes have lower scores, indicating that they had less impact on the decision.
+Here's a counterfactual explanation for the above prediction in JSON format:
+
+```
+{
+    ""original"": {
+        ""ltable_Beer_Name"": ""Honey Basil Amber"",
+        ""ltable_Brew_Factory_Name"": ""Rude Hippo Brewing Company"",
+        ""ltable_Style"": ""American Amber / Red Ale"",
+        ""ltable_ABV"": ""7.40 %"",
+        ""rtable_Beer_Name"": ""Rude Hippo Honey Basil Amber"",
+        ""rtable_Brew_Factory_Name"": ""18th Street Brewery"",
+        ""rtable_Style"": ""Amber Ale"",
+        ""rtable_ABV"": ""7.40 %""
+    },
+    ""counterfactual"": {
+        ""ltable_Beer_Name"": ""Rude Hippo Honey Basil Amber"",
+        ""ltable_Brew_Factory_Name"": ""Rude Hippo Brewing Company"",
+        ""ltable_Style"": ""American Amber / Red Ale"",
+        ""ltable_ABV"": ""7.40 %"",
+        ""rtable_Beer_Name"": ""Rude Hippo Honey Basil Amber"",
+        ""rtable_Brew_Factory_Name"": ""Rude Hippo Brewing Company"",
+        ""rtable_Style"": ""American Amber / Red Ale"",
+        ""rtable_ABV"": ""7.40 %""
+    }
+}
+```
+
+The ""original"" record is the same as the input record provided earlier. The ""counterfactual"" record is an altered version of the original record, where the brewery name in the left table has been changed to match the brewery name in the right table. This change is sufficient to flip the prediction from ""no"" to ""yes"", because the brewery name was the most important attribute in the decision-making process, as indicated by the saliency explanation."
+3,"ltable_Beer_Name:Clifford 's Big Red Ale
+ltable_Brew_Factory_Name:Funky Buddha Brewery
+ltable_Style:American Amber / Red Ale
+ltable_ABV:9.70 %","rtable_Beer_Name:Big Island Red Giant Ale
+rtable_Brew_Factory_Name:Big Island Brewhaus
+rtable_Style:American Strong Ale
+rtable_ABV:6.50 %","Based on the given records, I would say the answer is ""no"" since the Beer Names, Brew Factory Names, Styles, and ABVs are all different.
+Sure, here is my reasoning for why I think the records do not match:
+
+- The beer names are different: ""Clifford's Big Red Ale"" vs ""Big Island Red Giant Ale""
+- The brew factory names are different: ""Funky Buddha Brewery"" vs ""Big Island Brewhaus""
+- The styles are different: ""American Amber / Red Ale"" vs ""American Strong Ale""
+- The ABVs are different: ""9.70%"" vs ""6.50%""
+
+All of these differences suggest that the two records do not refer to the same beer.
+Here is a possible saliency explanation for the above prediction in JSON format:
+
+```
+{
+    ""ltable_Beer_Name"": 0.0,
+    ""rtable_Beer_Name"": 0.0,
+    ""ltable_Brew_Factory_Name"": 0.0,
+    ""rtable_Brew_Factory_Name"": 0.0,
+    ""ltable_Style"": 0.0,
+    ""rtable_Style"": 0.0,
+    ""ltable_ABV"": 0.0,
+    ""rtable_ABV"": 0.0
+}
+```
+
+Since all attributes are different between the two records, the saliency score for each attribute is 0.0. This means that no attribute was more relevant than others in making the decision that the two records do not match.
+Sure, here is a possible counterfactual explanation for the above prediction in JSON format:
+
+```
+{
+    ""original_record"": {
+        ""ltable_Beer_Name"": ""Clifford's Big Red Ale"",
+        ""ltable_Brew_Factory_Name"": ""Funky Buddha Brewery"",
+        ""ltable_Style"": ""American Amber / Red Ale"",
+        ""ltable_ABV"": ""9.70%""
+    },
+    ""counterfactual_record"": {
+        ""ltable_Beer_Name"": ""Big Island Red Giant Ale"",
+        ""ltable_Brew_Factory_Name"": ""Funky Buddha Brewery"",
+        ""ltable_Style"": ""American Amber / Red Ale"",
+        ""ltable_ABV"": ""9.70%""
+    }
+}
+```
+
+In this counterfactual explanation, we changed the Beer Name attribute of the original record to match the Beer Name attribute of the other record. This change flips the prediction from ""no"" to ""yes"". We kept the other attributes the same to make the counterfactual explanation as simple as possible."
+4,"ltable_Beer_Name:Real McCoy Amber Ale
+ltable_Brew_Factory_Name:Mammoth Brewing Company
+ltable_Style:American Amber / Red Ale
+ltable_ABV:4.50 %","rtable_Beer_Name:Mammoth Real McCoy Amber Ale
+rtable_Brew_Factory_Name:Mammoth Brewing Company
+rtable_Style:Altbier
+rtable_ABV:4.50 %","Based on the provided records, the records do not match. Here's why:
+
+- The beer names are similar, but not exactly the same. The first record has ""Real McCoy Amber Ale"" while the second record has ""Mammoth Real McCoy Amber Ale"".
+- The styles are different. The first record has ""American Amber / Red Ale"" while the second record has ""Altbier"".
+- The ABV values are the same, but that alone is not enough to determine a match.
+
+Therefore, the answer is ""no"".
+Sure, I'd be happy to explain my reasoning.
+
+For entity resolution tasks, we typically compare the values of various attributes (or features) between two records to determine whether they refer to the same real-world entity. In this case, we have two records describing beers from the same brewery, but with slightly different names and styles.
+
+Here's a breakdown of how I arrived at my ""no"" answer:
+
+- Beer name: The first record has ""Real McCoy Amber Ale"" while the second record has ""Mammoth Real McCoy Amber Ale"". While the names are similar, they are not exactly the same. It's possible that these are two different beers with similar names.
+- Brewery name: Both records have the same brewery name (""Mammoth Brewing Company""), which is a good indication that they may refer to the same entity.
+- Style: The first record has ""American Amber / Red Ale"" while the second record has ""Altbier"". These are two different beer styles, so it's unlikely that they refer to the same beer.
+- ABV: Both records have the same ABV value (""4.50 %""), but this alone is not enough to determine a match. Many different beers can have the same ABV value.
+
+Based on these observations, I concluded that the two records do not match.
+Sure, here's the attribute-level saliency explanation for the above prediction in JSON format:
+
+```
+{
+  ""ltable_Beer_Name"": 0.4,
+  ""ltable_Brew_Factory_Name"": 0.8,
+  ""ltable_Style"": 0.2,
+  ""ltable_ABV"": 0.3,
+  ""rtable_Beer_Name"": 0.4,
+  ""rtable_Brew_Factory_Name"": 0.8,
+  ""rtable_Style"": 0.2,
+  ""rtable_ABV"": 0.3
+}
+```
+
+In this explanation, the saliency score for each attribute ranges from 0 to 1, with higher scores indicating that the attribute was more important in the decision-making process. Here's what each attribute score means:
+
+- `ltable_Beer_Name`: 0.4 - This attribute had some importance in the decision-making process, as the beer names were similar but not exactly the same.
+- `ltable_Brew_Factory_Name`: 0.8 - This attribute was highly important in the decision-making process, as both records had the same brewery name.
+- `ltable_Style`: 0.2 - This attribute had low importance in the decision-making process, as the styles were different and therefore unlikely to refer to the same beer.
+- `ltable_ABV`: 0.3 - This attribute had some importance in the decision-making process, but was not enough on its own to determine a match.
+- `rtable_Beer_Name`: 0.4 - This attribute had some importance in the decision-making process, as the beer names were similar but not exactly the same.
+- `rtable_Brew_Factory_Name`: 0.8 - This attribute was highly important in the decision-making process, as both records had the same brewery name.
+- `rtable_Style`: 0.2 - This attribute had low importance in the decision-making process, as the styles were different and therefore unlikely to refer to the same beer.
+- `rtable_ABV`: 0.3 - This attribute had some importance in the decision-making process, but was not enough on its own to determine a match.
+Sure, here's an attribute-level counterfactual explanation for the above prediction in JSON format:
+
+```
+{
+  ""original_record1"": {
+    ""ltable_Beer_Name"": ""Real McCoy Amber Ale"",
+    ""ltable_Brew_Factory_Name"": ""Mammoth Brewing Company"",
+    ""ltable_Style"": ""American Amber / Red Ale"",
+    ""ltable_ABV"": ""4.50 %""
+  },
+  ""original_record2"": {
+    ""rtable_Beer_Name"": ""Mammoth Real McCoy Amber Ale"",
+    ""rtable_Brew_Factory_Name"": ""Mammoth Brewing Company"",
+    ""rtable_Style"": ""Altbier"",
+    ""rtable_ABV"": ""4.50 %""
+  },
+  ""counterfactual_record1"": {
+    ""ltable_Beer_Name"": ""Real McCoy Amber Ale"",
+    ""ltable_Brew_Factory_Name"": ""Mammoth Brewing Company"",
+    ""ltable_Style"": ""Altbier"",
+    ""ltable_ABV"": ""4.50 %""
+  },
+  ""counterfactual_record2"": {
+    ""rtable_Beer_Name"": ""Mammoth Real McCoy Amber Ale"",
+    ""rtable_Brew_Factory_Name"": ""Mammoth Brewing Company"",
+    ""rtable_Style"": ""Altbier"",
+    ""rtable_ABV"": ""4.50 %""
+  }
+}
+```
+
+In this explanation, the counterfactual records are the ones that would have resulted in a ""yes"" prediction (i.e. a match). Here's how the counterfactual records were generated:
+
+- The `ltable_Style` attribute of `original_record1` was changed from ""American Amber / Red Ale"" to ""Altbier"". This was done to make the styles of both records match, which is a key factor in determining whether two beer records refer to the same entity.
+- The `ltable_Style` attribute of `counterfactual_record2` was changed from ""Altbier"" to ""American Amber / Red Ale"". This was done to make the styles of both records match, which is a key factor in determining whether two beer records refer to the same entity.
+
+With these changes, the two records would now match, since they have the same brewery name and the same beer style."

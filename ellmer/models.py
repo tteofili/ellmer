@@ -136,17 +136,18 @@ class PredictThenSelfExplainER:
             conversation.append({"role": "assistant", "content": prediction})
 
             # natural language explanation
-            for prompt_message in ellmer.utils.read_prompt('ellmer/prompts/er-why.txt'):
-                conversation.append(
-                    {"role": prompt_message[0],
-                     "content": prompt_message[1].replace("feature", self.explanation_granularity)})
-            nl_exp = openai.ChatCompletion.create(
-                deployment_id="gpt-35-turbo", model="gpt-3.5-turbo",
-                messages=conversation, temperature=temperature
-            )["choices"][0]["message"]["content"]
-            answers.append(nl_exp)
-            sleep(10)
-            conversation.append({"role": "assistant", "content": nl_exp})
+            if why:
+                for prompt_message in ellmer.utils.read_prompt('ellmer/prompts/er-why.txt'):
+                    conversation.append(
+                        {"role": prompt_message[0],
+                         "content": prompt_message[1].replace("feature", self.explanation_granularity)})
+                nl_exp = openai.ChatCompletion.create(
+                    deployment_id="gpt-35-turbo", model="gpt-3.5-turbo",
+                    messages=conversation, temperature=temperature
+                )["choices"][0]["message"]["content"]
+                answers.append(nl_exp)
+                sleep(10)
+                conversation.append({"role": "assistant", "content": nl_exp})
 
             # saliency explanation
             for prompt_message in ellmer.utils.read_prompt('ellmer/prompts/er-saliency.txt'):
