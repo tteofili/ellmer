@@ -1,5 +1,8 @@
 import pandas as pd
 import numpy as np
+import openai
+import random
+import time
 
 
 def predict(x: pd.DataFrame, llm_fn, verbose: bool = True, mojito: bool = False):
@@ -31,10 +34,10 @@ def get_tuples(xc):
         if c in ['ltable_id', 'rtable_id']:
             continue
         if c.startswith('ltable_'):
-            elt[str(c)]= xc[c].astype(str).values[0]
+            elt[str(c)] = xc[c].astype(str).values[0]
         if c.startswith('rtable_'):
             ert[str(c)] = xc[c].astype(str).values[0]
-    return str(elt), str(ert)
+    return elt, ert
 
 
 def text_to_match(answer, llm_fn, n=0):
@@ -52,7 +55,7 @@ def text_to_match(answer, llm_fn, n=0):
         elif "no".casefold() in answer.casefold():
             no_match_score = 1
         elif n == 0:
-            template = "summarize response as yes or no"
+            template = "summarize \"response\" as yes or no"
             summarized_answer = llm_fn(template.replace("response", answer))
             summarized += 1
             snms, sms = text_to_match(summarized_answer, llm_fn, n=1)
@@ -94,3 +97,39 @@ def concordance_correlation(y_pred, y_true):
     numerator = 2 * cor * sd_true * sd_pred
     denominator = var_true + var_pred + (mean_true - mean_pred) ** 2
     return numerator / denominator
+
+
+def completion_with_backoff(deployment_id="gpt-35-turbo", model="gpt-3.5-turbo", messages=None, temperature=0,
+                            initial_delay=1, max_retries=10, exponential_base: float = 2, jitter: bool = True,
+                            errors: tuple = (openai.error.RateLimitError,), ):
+    num_retries = 0
+    delay = initial_delay
+
+    while True:
+        try:
+            openai.api_type = "azure"
+            openai.api_version = "2023-05-15"
+            return openai.ChatCompletion.create(deployment_id=deployment_id, model=model, messages=messages,
+                                                temperature=temperature)
+
+        # Retry on specified errors
+        except errors as e:
+            print(e)
+            # Increment retries
+            num_retries += 1
+
+            # Check if max retries has been reached
+            if num_retries > max_retries:
+                raise Exception(
+                    f"Maximum number of retries ({max_retries}) exceeded."
+                )
+
+            # Increment the delay
+            delay *= exponential_base * (1 + jitter * random.random())
+
+            # Sleep for the delay
+            time.sleep(delay)
+
+        # Raise exceptions for any errors not specified
+        except Exception as e:
+            raise e

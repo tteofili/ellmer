@@ -28,13 +28,19 @@ for idx in range(len(test_df[:5])):
     try:
         rand_row = test_df.iloc[[idx]]
         ltuple, rtuple = ellmer.utils.get_tuples(rand_row)
-        prediction = llm.er(ltuple, rtuple, temperature=temperature)
+        prediction = llm.er(str(ltuple), str(rtuple), temperature=temperature)
         sleep(10)
-        answer = llm.explain(ltuple, rtuple, prediction['prediction'], temperature=temperature, why=False)
+        answer = llm.explain(str(ltuple), str(rtuple), prediction['prediction'], temperature=temperature, why=False)
         try:
             saliency = answer['saliency_exp'].split('```')[1]
             saliency_dict = json.loads(saliency)
             answer['saliency_exp'] = saliency_dict
+        except:
+            pass
+        try:
+            cf = answer['cf_exp'].split('```')[1]
+            cf_dict = json.loads(cf)
+            answer['cf_exp'] = cf_dict
         except:
             pass
         answer['ltuple'] = ltuple

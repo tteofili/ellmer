@@ -8,6 +8,7 @@ from time import sleep
 import openai
 import json
 import ast
+import traceback
 
 lprefix = 'ltable_'
 rprefix = 'rtable_'
@@ -29,20 +30,23 @@ for idx in range(len(test_df[:9])):
     try:
         rand_row = test_df.iloc[[idx]]
         ltuple, rtuple = ellmer.utils.get_tuples(rand_row)
-        answer = llm.er(ltuple, rtuple, temperature=0.01)
+        answer = llm.er(str(ltuple), str(rtuple), temperature=0.01)
         try:
             answer = answer.split('```')[1]
             answer = json.loads(answer)
         except:
             pass
-        results.append({"ltuple": ast.literal_eval(json.loads(json.dumps(ltuple))),
-                        "rtuple": ast.literal_eval(json.loads(json.dumps(rtuple))), "answer": answer,
+        results.append({"ltuple": json.dumps(ltuple),
+                        "rtuple": json.dumps(rtuple), "answer": answer,
                         "label": rand_row['label'].values[0]})
         print(f'{ltuple}\n{rtuple}\n{answer}')
         sleep(4)
     except openai.error.RateLimitError:
         print(f'rate-limit error, waiting...')
         sleep(10)
+    except Exception:
+        print(f'other error')
+        traceback.print_exc()
 
 expdir = f'./experiments/{datetime.now():%Y%m%d}/{datetime.now():%H:%M}/'
 os.makedirs(expdir, exist_ok=True)

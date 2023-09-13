@@ -6,9 +6,11 @@ import pandas as pd
 import ellmer.utils
 import openai
 from time import sleep
+import os
 
 hf_model = 'EleutherAI/gpt-neox-20b'  # 'tiiuae/falcon-7b-instruct'
-
+openai.api_base = os.getenv("OPENAI_API_BASE")
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 class LLMERModel(ERModel):
     count = 0
@@ -205,3 +207,42 @@ class PredictAndSelfExplainER:
             answer = response["choices"][0]["message"]
         return answer
 
+class AzureOpenAIERModel(ERModel):
+
+    def __init__(self, temperature=0):
+        self.temperature = temperature
+
+    def __call__(self, question, er=False, *args, **kwargs):
+        openai.api_type = "azure"
+        openai.api_version = "2023-05-15"
+        conversation = []
+        if er:
+            for prompt_message in ellmer.utils.read_prompt('ellmer/prompts/er.txt'):
+                conversation.append(
+                    {"role": prompt_message[0],
+                     "content": prompt_message[1]})
+        conversation.append({"role": "user", "content": question})
+        response = ellmer.utils.completion_with_backoff(
+            deployment_id="gpt-35-turbo", model="gpt-3.5-turbo",
+            messages=conversation, temperature=self.temperature
+        )
+        prediction = response["choices"][0]["message"]["content"]
+        if er:
+            return ellmer.utils.text_to_match(prediction, self.__call__)
+        else:
+            return prediction
+
+    def predict(self, x, mojito=False):
+        xcs = []
+        for idx in range(len(x)):
+            xc = x.iloc[[idx]].copy()
+            ltuple, rtuple = ellmer.utils.get_tuples(xc)
+            question = "record1:\n" + str(ltuple) + "\n record2:\n" + str(rtuple) + "\n"
+            nomatch_score, match_score = self.__call__(question, er=True)
+            xc['nomatch_score'] = nomatch_score
+            xc['match_score'] = match_score
+            if mojito:
+                full_df = np.dstack((xc['nomatch_score'], xc['match_score'])).squeeze()
+                xc = full_df
+            xcs.append(xc)
+        return pd.concat(xcs, axis=0)
