@@ -1,0 +1,47 @@
+[
+  {
+    "temperature": 0.01,
+    "why": false,
+    "explanation_granularity": "attribute"
+  },
+  {
+    "prediction": "No.",
+    "saliency_exp": {
+      "ltable_Beer_Name": 0.0,
+      "ltable_Brew_Factory_Name": 0.0,
+      "ltable_Style": 0.0,
+      "ltable_ABV": 0.0,
+      "rtable_Beer_Name": 0.0,
+      "rtable_Brew_Factory_Name": 0.0,
+      "rtable_Style": 0.0,
+      "rtable_ABV": 0.0
+    },
+    "cf_exp": {
+      "original_record": {
+        "ltable_Beer_Name": "Bulleit Bourbon Barrel Aged G'Knight",
+        "ltable_Brew_Factory_Name": "Oskar Blues Grill & Brew",
+        "ltable_Style": "American Amber / Red Ale",
+        "ltable_ABV": "8.70 %"
+      },
+      "counterfactual_record": {
+        "ltable_Beer_Name": "Bulleit Bourbon Barrel Aged G'Knight",
+        "ltable_Brew_Factory_Name": "Oskar Blues Grill & Brew",
+        "ltable_Style": "Barley Wine",
+        "ltable_ABV": "8.70 %"
+      }
+    },
+    "ltuple": {
+      "ltable_Beer_Name": "Bulleit Bourbon Barrel Aged G'Knight",
+      "ltable_Brew_Factory_Name": "Oskar Blues Grill & Brew",
+      "ltable_Style": "American Amber / Red Ale",
+      "ltable_ABV": "8.70 %"
+    },
+    "rtuple": {
+      "rtable_Beer_Name": "Figure Eight Bourbon Barrel Aged Jumbo Love",
+      "rtable_Brew_Factory_Name": "Figure Eight Brewing",
+      "rtable_Style": "Barley Wine",
+      "rtable_ABV": "-"
+    },
+    "label": 0
+  }
+]

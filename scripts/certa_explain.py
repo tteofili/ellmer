@@ -20,10 +20,17 @@ valid = pd.read_csv(datadir + '/valid.csv')
 test = pd.read_csv(datadir + '/test.csv')
 test_df = merge_sources(test, 'ltable_', 'rtable_', lsource, rsource, ['label'], [])
 
-results = []
+explanation_granularity = 'attribute'
+temperature = 0.01
+num_triangles = 10
+
+params = {"temperature": temperature, "num_triangles": num_triangles,
+          "explanation_granularity": explanation_granularity}
+
+results = [params]
 
 certa_explainer = CertaExplainer(lsource, rsource)
-llm = ellmer.models.AzureOpenAIERModel(temperature=0.01)
+llm = ellmer.models.AzureOpenAIERModel(temperature=temperature)
 
 
 def predict_fn(x):
@@ -45,8 +52,8 @@ for idx in range(len(test_df[:50])):
         saliency_df, cf_summary, counterfactual_examples, triangles, _ = certa_explainer.explain(ltuple_series,
                                                                                                  rtuple_series,
                                                                                                  predict_fn,
-                                                                                                 token=False,
-                                                                                                 num_triangles=10)
+                                                                                                 token="token" == explanation_granularity,
+                                                                                                 num_triangles=num_triangles)
         answer = dict()
         answer['ltuple'] = ltuple
         answer['rtuple'] = rtuple

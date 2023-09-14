@@ -19,16 +19,21 @@ valid = pd.read_csv(datadir + '/valid.csv')
 test = pd.read_csv(datadir + '/test.csv')
 test_df = merge_sources(test, 'ltable_', 'rtable_', lsource, rsource, ['label'], [])
 
-results = []
-
-llm = ellmer.models.PredictThenSelfExplainER(explanation_granularity='attribute')
+explanation_granularity = 'attribute'
 temperature = 0.01
-for idx in range(len(test_df[:50])):
+why = False
+
+params = {"temperature": temperature, "why": why, "explanation_granularity": explanation_granularity}
+
+llm = ellmer.models.PredictThenSelfExplainER(explanation_granularity=explanation_granularity)
+
+results = [params]
+for idx in range(len(test_df[:1])):
     try:
         rand_row = test_df.iloc[[idx]]
         ltuple, rtuple = ellmer.utils.get_tuples(rand_row)
         prediction = llm.er(str(ltuple), str(rtuple), temperature=temperature)
-        answer = llm.explain(str(ltuple), str(rtuple), prediction['prediction'], temperature=temperature, why=True)
+        answer = llm.explain(str(ltuple), str(rtuple), prediction['prediction'], temperature=temperature, why=why)
         try:
             saliency = answer['saliency_exp'].split('```')[1]
             saliency_dict = json.loads(saliency)

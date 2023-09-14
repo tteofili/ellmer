@@ -19,15 +19,18 @@ valid = pd.read_csv(datadir + '/valid.csv')
 test = pd.read_csv(datadir + '/test.csv')
 test_df = merge_sources(test, 'ltable_', 'rtable_', lsource, rsource, ['label'], [])
 
-results = []
+explanation_granularity = 'attribute'
+temperature = 0.01
+params = {"temperature": temperature, "explanation_granularity": explanation_granularity}
+results = [params]
 
-llm = ellmer.models.PredictAndSelfExplainER(explanation_granularity='attribute')
+llm = ellmer.models.PredictAndSelfExplainER(explanation_granularity=explanation_granularity)
 
 for idx in range(len(test_df[:50])):
     try:
         rand_row = test_df.iloc[[idx]]
         ltuple, rtuple = ellmer.utils.get_tuples(rand_row)
-        answer = llm.er(str(ltuple), str(rtuple), temperature=0.01)
+        answer = llm.er(str(ltuple), str(rtuple), temperature=temperature)
         try:
             answer = answer.split('```')[1]
             answer = json.loads(answer)
