@@ -35,7 +35,7 @@ for idx in range(len(test_df[:50])):
         rand_row = test_df.iloc[[idx]]
         ltuple, rtuple = ellmer.utils.get_tuples(rand_row)
         question = "record1:\n" + str(ltuple) + "\n record2:\n" + str(rtuple) + "\n"
-        prediction = llm(question, er=True)
+        _, prediction = llm(question, er=True)
 
         l_id = int(rand_row['ltable_id'])
         ltuple_series = lsource.iloc[l_id]
@@ -53,7 +53,7 @@ for idx in range(len(test_df[:50])):
         answer['prediction'] = prediction
         answer['saliency_exp'] = saliency_df.to_dict()
         answer['cf_exp'] = counterfactual_examples.drop(
-            ['alteredAttributes', 'droppedValue', 'copiedValues', 'triangle', 'attr_count'], axis=1).to_dict()
+            ['alteredAttributes', 'droppedValues', 'copiedValues', 'triangle', 'attr_count'], axis=1).T.to_dict()
         answer['cf_summary'] = cf_summary.to_dict()
         answer['triangles'] = len(triangles)
         results.append(answer)

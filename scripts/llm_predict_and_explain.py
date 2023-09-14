@@ -43,5 +43,5 @@ for idx in range(len(test_df[:50])):
 
 expdir = f'./experiments/{datetime.now():%Y%m%d}/{datetime.now():%H:%M}/'
 os.makedirs(expdir, exist_ok=True)
-with open(expdir + 'ptae_results.json', 'w') as fout:
+with open(expdir + 'pase_results.json', 'w') as fout:
     json.dump(results, fout)
