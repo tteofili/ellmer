@@ -1,5 +1,10 @@
 [
   {
+    "temperature": 0.01,
+    "num_triangles": 10,
+    "explanation_granularity": "attribute"
+  },
+  {
     "ltuple": {
       "ltable_Beer_Name": "Bulleit Bourbon Barrel Aged G'Knight",
       "ltable_Brew_Factory_Name": "Oskar Blues Grill & Brew",
