@@ -28,7 +28,7 @@ params = {"temperature": temperature, "why": why, "explanation_granularity": exp
 llm = ellmer.models.PredictThenSelfExplainER(explanation_granularity=explanation_granularity)
 
 results = [params]
-for idx in range(len(test_df[:1])):
+for idx in range(len(test_df[:50])):
     try:
         rand_row = test_df.iloc[[idx]]
         ltuple, rtuple = ellmer.utils.get_tuples(rand_row)
