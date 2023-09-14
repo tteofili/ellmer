@@ -5,10 +5,7 @@ import os
 import ellmer.models
 import ellmer.utils
 from time import sleep
-import openai
 import json
-import ast
-import traceback
 
 lprefix = 'ltable_'
 rprefix = 'rtable_'
@@ -26,7 +23,7 @@ results = []
 
 llm = ellmer.models.PredictAndSelfExplainER(explanation_granularity='attribute')
 
-for idx in range(len(test_df[:9])):
+for idx in range(len(test_df[:50])):
     try:
         rand_row = test_df.iloc[[idx]]
         ltuple, rtuple = ellmer.utils.get_tuples(rand_row)
@@ -40,13 +37,9 @@ for idx in range(len(test_df[:9])):
                         "rtuple": json.dumps(rtuple), "answer": answer,
                         "label": rand_row['label'].values[0]})
         print(f'{ltuple}\n{rtuple}\n{answer}')
-        sleep(4)
-    except openai.error.RateLimitError:
-        print(f'rate-limit error, waiting...')
-        sleep(10)
     except Exception:
-        print(f'other error')
-        traceback.print_exc()
+        print(f'error, waiting...')
+        sleep(10)
 
 expdir = f'./experiments/{datetime.now():%Y%m%d}/{datetime.now():%H:%M}/'
 os.makedirs(expdir, exist_ok=True)

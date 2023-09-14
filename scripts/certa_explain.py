@@ -5,7 +5,6 @@ import os
 import ellmer.models
 import ellmer.utils
 from time import sleep
-import openai
 from certa.explain import CertaExplainer
 import json
 
@@ -31,7 +30,7 @@ def predict_fn(x):
     return llm.predict(x)
 
 
-for idx in range(len(test_df[:5])):
+for idx in range(len(test_df[:50])):
     try:
         rand_row = test_df.iloc[[idx]]
         ltuple, rtuple = ellmer.utils.get_tuples(rand_row)
@@ -47,7 +46,7 @@ for idx in range(len(test_df[:5])):
                                                                                                  rtuple_series,
                                                                                                  predict_fn,
                                                                                                  token=False,
-                                                                                                 num_triangles=5)
+                                                                                                 num_triangles=10)
         answer = dict()
         answer['ltuple'] = ltuple
         answer['rtuple'] = rtuple
@@ -59,8 +58,8 @@ for idx in range(len(test_df[:5])):
         answer['triangles'] = len(triangles)
         results.append(answer)
         print(f'{answer}')
-    except openai.error.RateLimitError:
-        print(f'rate-limit error, waiting...')
+    except Exception:
+        print(f'error, waiting...')
         sleep(10)
 
 expdir = f'./experiments/{datetime.now():%Y%m%d}/{datetime.now():%H:%M}/'

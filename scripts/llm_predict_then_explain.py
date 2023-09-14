@@ -5,7 +5,6 @@ import os
 import ellmer.models
 import ellmer.utils
 from time import sleep
-import openai
 import json
 
 lprefix = 'ltable_'
@@ -24,13 +23,12 @@ results = []
 
 llm = ellmer.models.PredictThenSelfExplainER(explanation_granularity='attribute')
 temperature = 0.01
-for idx in range(len(test_df[:5])):
+for idx in range(len(test_df[:50])):
     try:
         rand_row = test_df.iloc[[idx]]
         ltuple, rtuple = ellmer.utils.get_tuples(rand_row)
         prediction = llm.er(str(ltuple), str(rtuple), temperature=temperature)
-        sleep(10)
-        answer = llm.explain(str(ltuple), str(rtuple), prediction['prediction'], temperature=temperature, why=False)
+        answer = llm.explain(str(ltuple), str(rtuple), prediction['prediction'], temperature=temperature, why=True)
         try:
             saliency = answer['saliency_exp'].split('```')[1]
             saliency_dict = json.loads(saliency)
@@ -48,9 +46,8 @@ for idx in range(len(test_df[:5])):
         answer['label'] = rand_row['label'].values[0]
         results.append(answer)
         print(f'{ltuple}\n{rtuple}\n{answer}')
-        sleep(10)
-    except openai.error.RateLimitError:
-        print(f'rate-limit error, waiting...')
+    except Exception:
+        print(f'error, waiting...')
         sleep(10)
 
 expdir = f'./experiments/{datetime.now():%Y%m%d}/{datetime.now():%H:%M}/'

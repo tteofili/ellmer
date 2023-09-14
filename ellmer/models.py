@@ -5,7 +5,6 @@ import numpy as np
 import pandas as pd
 import ellmer.utils
 import openai
-from time import sleep
 import os
 
 hf_model = 'EleutherAI/gpt-neox-20b'  # 'tiiuae/falcon-7b-instruct'
@@ -128,7 +127,7 @@ class PredictThenSelfExplainER:
                      "content": prompt_message[1].replace("feature", self.explanation_granularity)})
         conversation.append({"role": "user", "content": question})
         if prediction is None:
-            response = openai.ChatCompletion.create(
+            response = ellmer.utils.completion_with_backoff(
                 deployment_id="gpt-35-turbo", model="gpt-3.5-turbo",
                 messages=conversation, temperature=temperature
             )
@@ -144,12 +143,11 @@ class PredictThenSelfExplainER:
                     conversation.append(
                         {"role": prompt_message[0],
                          "content": prompt_message[1].replace("feature", self.explanation_granularity)})
-                nl_exp = openai.ChatCompletion.create(
+                nl_exp = ellmer.utils.completion_with_backoff(
                     deployment_id="gpt-35-turbo", model="gpt-3.5-turbo",
                     messages=conversation, temperature=temperature
                 )["choices"][0]["message"]["content"]
                 answers['nl_exp'] = nl_exp
-                sleep(10)
                 conversation.append({"role": "assistant", "content": nl_exp})
 
             # saliency explanation
@@ -157,12 +155,11 @@ class PredictThenSelfExplainER:
                 conversation.append(
                     {"role": prompt_message[0],
                      "content": prompt_message[1].replace("feature", self.explanation_granularity)})
-            saliency_exp = openai.ChatCompletion.create(
+            saliency_exp = ellmer.utils.completion_with_backoff(
                 deployment_id="gpt-35-turbo", model="gpt-3.5-turbo",
                 messages=conversation, temperature=temperature
             )["choices"][0]["message"]["content"]
             answers['saliency_exp'] = saliency_exp
-            sleep(10)
             conversation.append({"role": "assistant", "content": saliency_exp})
 
             # counterfactual explanation
@@ -170,7 +167,7 @@ class PredictThenSelfExplainER:
                 conversation.append(
                     {"role": prompt_message[0],
                      "content": prompt_message[1].replace("feature", self.explanation_granularity)})
-            cf_exp = openai.ChatCompletion.create(
+            cf_exp = ellmer.utils.completion_with_backoff(
                 deployment_id="gpt-35-turbo", model="gpt-3.5-turbo",
                 messages=conversation, temperature=temperature
             )["choices"][0]["message"]["content"]
@@ -197,7 +194,7 @@ class PredictAndSelfExplainER:
                     {"role": prompt_message[0],
                      "content": prompt_message[1].replace("feature", self.explanation_granularity)})
         conversation.append({"role": "user", "content": question})
-        response = openai.ChatCompletion.create(
+        response = ellmer.utils.completion_with_backoff(
             deployment_id="gpt-35-turbo", model="gpt-3.5-turbo",
             messages=conversation, temperature=temperature
         )
