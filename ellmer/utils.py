@@ -3,6 +3,7 @@ import numpy as np
 import openai
 import random
 import time
+import math
 
 
 def predict(x: pd.DataFrame, llm_fn, verbose: bool = True, mojito: bool = False):
@@ -133,3 +134,20 @@ def completion_with_backoff(deployment_id="gpt-35-turbo", model="gpt-3.5-turbo",
         # Raise exceptions for any errors not specified
         except Exception as e:
             raise e
+
+
+def rbo(list1, list2, p=0.9):
+    # tail recursive helper function
+    def helper(ret, i, d):
+        l1 = set(list1[:i]) if i < len(list1) else set(list1)
+        l2 = set(list2[:i]) if i < len(list2) else set(list2)
+        a_d = len(l1.intersection(l2)) / i
+        term = math.pow(p, i) * a_d
+        if d == i:
+            return ret + term
+        return helper(ret + term, i + 1, d)
+
+    k = max(len(list1), len(list2))
+    x_k = len(set(list1).intersection(set(list2)))
+    summation = helper(0, 1, k)
+    return ((float(x_k) / k) * math.pow(p, k)) + ((1 - p) / p * summation)

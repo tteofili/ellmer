@@ -7,9 +7,11 @@ import ellmer.utils
 import openai
 import os
 
-hf_model = 'EleutherAI/gpt-neox-20b'  # 'tiiuae/falcon-7b-instruct'
+hf_models = ['EleutherAI/gpt-neox-20b', 'tiiuae/falcon-7b-instruct']
+
 openai.api_base = os.getenv("OPENAI_API_BASE")
 openai.api_key = os.getenv("OPENAI_API_KEY")
+
 
 class LLMERModel(ERModel):
     count = 0
@@ -19,10 +21,9 @@ class LLMERModel(ERModel):
     fake = False
     verbose = False
 
-    def __init__(self, model_type='openai', temperature=0.99, max_length=512, fake=False, hf_repo=hf_model,
+    def __init__(self, model_type='azure_openai', temperature=0.01, max_length=512, fake=False, hf_repo=hf_models[0],
                  verbose=False):
         template = "given the record:\n{ltuple}\n and the record:\n{rtuple}\n do they refer to the same entity in the real world?\nreply yes or no"
-        super(LLMERModel, self).__init__()
         self.prompt = PromptTemplate(
             input_variables=["ltuple", "rtuple"],
             template=template,
@@ -34,10 +35,10 @@ class LLMERModel(ERModel):
         elif model_type == 'openai':
             self.llm = OpenAI(temperature=temperature, model_name='gpt-3.5-turbo')
         elif model_type == 'azure_openai':
-            self.llm = None
+            self.llm = AzureOpenAIERModel(temperature=temperature)
         self.verbose = verbose
 
-    def predict(self, x, mojito=False, **kwargs):
+    def predict(self, x, mojito=False):
         xcs = []
         for idx in range(len(x)):
             xc = x.iloc[[idx]].copy()
@@ -71,7 +72,8 @@ class LLMERModel(ERModel):
                 full_df = np.dstack((xc['nomatch_score'], xc['match_score'])).squeeze()
                 xc = full_df
             xcs.append(xc)
-            print(f'{self.count},{self.summarized},{self.idks}')
+            if self.verbose:
+                print(f'{self.count},{self.summarized},{self.idks}')
         return pd.concat(xcs, axis=0)
 
     def text_to_match(self, answer, n=0):
@@ -204,9 +206,10 @@ class PredictAndSelfExplainER:
             answer = response["choices"][0]["message"]
         return answer
 
+
 class AzureOpenAIERModel(ERModel):
 
-    def __init__(self, temperature=0):
+    def __init__(self, temperature: float = 0):
         self.temperature = temperature
 
     def __call__(self, question, er=False, *args, **kwargs):

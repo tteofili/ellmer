@@ -4,13 +4,13 @@ from datetime import datetime
 import os
 import ellmer.models
 import ellmer.utils
-from time import sleep
+from time import sleep, time
 import json
 
 lprefix = 'ltable_'
 rprefix = 'rtable_'
 
-dataset_name = 'abt_buy'
+dataset_name = 'beers'
 datadir = '/Users/tteofili/dev/cheapER/datasets/' + dataset_name
 lsource = pd.read_csv(datadir + '/tableA.csv')
 rsource = pd.read_csv(datadir + '/tableB.csv')
@@ -25,6 +25,9 @@ params = {"temperature": temperature, "explanation_granularity": explanation_gra
 results = [params]
 
 llm = ellmer.models.PredictAndSelfExplainER(explanation_granularity=explanation_granularity)
+
+
+start_time = time()
 
 for idx in range(len(test_df[:50])):
     try:
@@ -43,8 +46,13 @@ for idx in range(len(test_df[:50])):
     except Exception:
         print(f'error, waiting...')
         sleep(10)
+        start_time += 10
 
-expdir = f'./experiments/{datetime.now():%Y%m%d}/{datetime.now():%H:%M}/'
+total_time = time() - start_time
+
+results.append({"total_time": total_time})
+
+expdir = f'./experiments/{dataset_name}/{datetime.now():%Y%m%d}/{datetime.now():%H:%M}/'
 os.makedirs(expdir, exist_ok=True)
 with open(expdir + 'pase_results.json', 'w') as fout:
     json.dump(results, fout)

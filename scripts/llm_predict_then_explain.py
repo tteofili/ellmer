@@ -4,7 +4,7 @@ from datetime import datetime
 import os
 import ellmer.models
 import ellmer.utils
-from time import sleep
+from time import sleep, time
 import json
 
 lprefix = 'ltable_'
@@ -28,6 +28,10 @@ params = {"temperature": temperature, "why": why, "explanation_granularity": exp
 llm = ellmer.models.PredictThenSelfExplainER(explanation_granularity=explanation_granularity)
 
 results = [params]
+
+
+start_time = time()
+
 for idx in range(len(test_df[:50])):
     try:
         rand_row = test_df.iloc[[idx]]
@@ -54,8 +58,13 @@ for idx in range(len(test_df[:50])):
     except Exception:
         print(f'error, waiting...')
         sleep(10)
+        start_time += 10
 
-expdir = f'./experiments/{datetime.now():%Y%m%d}/{datetime.now():%H:%M}/'
+total_time = time() - start_time
+
+results.append({"total_time": total_time})
+
+expdir = f'./experiments/{dataset_name}/{datetime.now():%Y%m%d}/{datetime.now():%H:%M}/'
 os.makedirs(expdir, exist_ok=True)
 with open(expdir + 'ptse_results.json', 'w') as fout:
     json.dump(results, fout)
