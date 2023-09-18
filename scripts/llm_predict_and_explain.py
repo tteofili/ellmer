@@ -10,7 +10,7 @@ import json
 lprefix = 'ltable_'
 rprefix = 'rtable_'
 
-dataset_name = 'beers'
+dataset_name = 'abt_buy'
 datadir = '/Users/tteofili/dev/cheapER/datasets/' + dataset_name
 lsource = pd.read_csv(datadir + '/tableA.csv')
 rsource = pd.read_csv(datadir + '/tableB.csv')
@@ -19,17 +19,17 @@ valid = pd.read_csv(datadir + '/valid.csv')
 test = pd.read_csv(datadir + '/test.csv')
 test_df = merge_sources(test, 'ltable_', 'rtable_', lsource, rsource, ['label'], [])
 
+samples = 50
 explanation_granularity = 'attribute'
 temperature = 0.01
-params = {"temperature": temperature, "explanation_granularity": explanation_granularity}
+params = {"temperature": temperature, "explanation_granularity": explanation_granularity, "samples": samples}
 results = [params]
 
 llm = ellmer.models.PredictAndSelfExplainER(explanation_granularity=explanation_granularity)
 
-
 start_time = time()
 
-for idx in range(len(test_df[:50])):
+for idx in range(len(test_df[:samples])):
     try:
         rand_row = test_df.iloc[[idx]]
         ltuple, rtuple = ellmer.utils.get_tuples(rand_row)

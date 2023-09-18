@@ -12,7 +12,7 @@ import traceback
 lprefix = 'ltable_'
 rprefix = 'rtable_'
 
-dataset_name = 'beers'
+dataset_name = 'abt_buy'
 datadir = '/Users/tteofili/dev/cheapER/datasets/' + dataset_name
 lsource = pd.read_csv(datadir + '/tableA.csv')
 rsource = pd.read_csv(datadir + '/tableB.csv')
