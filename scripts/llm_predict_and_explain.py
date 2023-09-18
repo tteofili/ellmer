@@ -39,7 +39,7 @@ for idx in range(len(test_df[:samples])):
             answer = json.loads(answer)
         except:
             pass
-        results.append({"ltuple": ltuple,
+        results.append({"index": idx, "ltuple": ltuple,
                         "rtuple": rtuple, "answer": answer,
                         "label": rand_row['label'].values[0]})
         print(f'{ltuple}\n{rtuple}\n{answer}')

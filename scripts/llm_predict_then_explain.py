@@ -51,6 +51,7 @@ for idx in range(len(test_df[:samples])):
             answer['cf_exp'] = cf_dict
         except:
             pass
+        answer['id'] = idx
         answer['ltuple'] = ltuple
         answer['rtuple'] = rtuple
         answer['label'] = rand_row['label'].values[0]

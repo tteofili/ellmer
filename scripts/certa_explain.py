@@ -63,6 +63,7 @@ for idx in range(len(test_df[:samples])):
                                                                        token="token" == explanation_granularity,
                                                                        num_triangles=num_triangles)
         answer = dict()
+        answer['id'] = idx
         answer['ltuple'] = ltuple
         answer['rtuple'] = rtuple
         answer['prediction'] = match
