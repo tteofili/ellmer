@@ -4,6 +4,10 @@ import openai
 import random
 import time
 import math
+import re
+from collections import Counter
+
+WORD = re.compile(r'\w+')
 
 
 def predict(x: pd.DataFrame, llm_fn, verbose: bool = True, mojito: bool = False):
@@ -151,3 +155,34 @@ def rbo(list1, list2, p=0.9):
     x_k = len(set(list1).intersection(set(list2)))
     summation = helper(0, 1, k)
     return ((float(x_k) / k) * math.pow(p, k)) + ((1 - p) / p * summation)
+
+
+def cosine_similarity(tuple1, tuple2):
+    string1 = concatenate_list(tuple1)
+    string2 = concatenate_list(tuple2)
+    cos_sim = get_cosine(text_to_vector(string1), text_to_vector(string2))
+    vector = [cos_sim]
+    return vector
+
+
+def text_to_vector(text):
+    words = WORD.findall(text)
+    return Counter(words)
+
+
+def concatenate_list(text_features):
+    return ' '.join(text_features)
+
+
+def get_cosine(vec1, vec2):
+    intersection = set(vec1.keys()) & set(vec2.keys())
+    numerator = sum([vec1[x] * vec2[x] for x in intersection])
+
+    sum1 = sum([vec1[x] ** 2 for x in vec1.keys()])
+    sum2 = sum([vec2[x] ** 2 for x in vec2.keys()])
+    denominator = math.sqrt(sum1) * math.sqrt(sum2)
+
+    if not denominator:
+        return 0.0
+    else:
+        return float(numerator) / denominator

@@ -6,6 +6,7 @@ import pandas as pd
 import ellmer.utils
 import openai
 import os
+import json
 
 hf_models = ['EleutherAI/gpt-neox-20b', 'tiiuae/falcon-7b-instruct']
 
@@ -22,7 +23,7 @@ class LLMERModel(ERModel):
     verbose = False
 
     def __init__(self, model_type='azure_openai', temperature=0.01, max_length=512, fake=False, hf_repo=hf_models[0],
-                 verbose=False):
+                 verbose=False, delegate=None):
         template = "given the record:\n{ltuple}\n and the record:\n{rtuple}\n do they refer to the same entity in the real world?\nreply yes or no"
         self.prompt = PromptTemplate(
             input_variables=["ltuple", "rtuple"],
@@ -36,6 +37,8 @@ class LLMERModel(ERModel):
             self.llm = OpenAI(temperature=temperature, model_name='gpt-3.5-turbo')
         elif model_type == 'azure_openai':
             self.llm = AzureOpenAIERModel(temperature=temperature)
+        elif model_type == 'delegate':
+            self.llm = delegate
         self.verbose = verbose
 
     def predict(self, x, mojito=False):
@@ -77,11 +80,23 @@ class LLMERModel(ERModel):
         return pd.concat(xcs, axis=0)
 
     def text_to_match(self, answer, n=0):
+        if type(answer) == dict:
+            answer = answer['prediction']
+        else:
+            json_answers = answer.split('```')
+            if len(json_answers) > 1:
+                json_answer = json.loads(answer[1])
+                if "matching_prediction" in json_answer:
+                    answer = json_answer['matching_prediction']
+                else:
+                    raise Exception
+
         no_match_score = 0
         match_score = 0
-        if answer.lower().startswith("yes"):
+        answer_lc = answer.lower()
+        if answer_lc.startswith("true") or answer_lc.startswith("yes"):
             match_score = 1
-        elif answer.lower().startswith("no"):
+        elif answer_lc.startswith("no"):
             no_match_score = 1
         else:
             if "yes".casefold() in answer.casefold():

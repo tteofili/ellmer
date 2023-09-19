@@ -24,22 +24,24 @@ test_df = merge_sources(test, 'ltable_', 'rtable_', lsource, rsource, ['label'],
 explanation_granularity = 'attribute'
 temperature = 0.01
 num_triangles = 10
-model_type = "azure_openai"
+model_type = "delegate"
 hf_repo = None
 verbose = False
 max_length = 180
 fake = False
 samples = 50
 
+delegate = ellmer.models.PredictAndSelfExplainER(explanation_granularity=explanation_granularity)
+
 params = {"model_type": model_type, "hf_repo": hf_repo, "verbose": verbose, "max_length": max_length, "fake": fake,
           "temperature": temperature, "num_triangles": num_triangles, "samples": samples,
-          "explanation_granularity": explanation_granularity}
+          "explanation_granularity": explanation_granularity, "delegate": str(delegate)}
 
 results = [params]
 
 certa_explainer = CertaExplainer(lsource, rsource)
 llm = ellmer.models.LLMERModel(temperature=temperature, model_type=model_type, hf_repo=hf_repo, verbose=verbose,
-                               max_length=max_length, fake=fake)
+                               max_length=max_length, fake=fake, delegate=delegate)
 
 
 def predict_fn(x):
@@ -67,7 +69,7 @@ for idx in range(len(test_df[:samples])):
         answer['ltuple'] = ltuple
         answer['rtuple'] = rtuple
         answer['prediction'] = match
-        answer['saliency_exp'] = saliency_df.to_dict()
+        answer['saliency_exp'] = saliency_df.to_dict('list')
         if len(cfs) > 0:
             answer['cf_exp'] = cfs.drop(
                 ['alteredAttributes', 'droppedValues', 'copiedValues', 'triangle', 'attr_count'], axis=1).T.to_dict()

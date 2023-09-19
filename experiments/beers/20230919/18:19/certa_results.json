@@ -1,0 +1,275 @@
+[
+  {
+    "model_type": "delegate",
+    "hf_repo": null,
+    "verbose": false,
+    "max_length": 180,
+    "fake": false,
+    "temperature": 0.01,
+    "num_triangles": 10,
+    "samples": 2,
+    "explanation_granularity": "attribute",
+    "delegate": "<ellmer.models.PredictAndSelfExplainER object at 0x16cb53510>"
+  },
+  {
+    "id": 0,
+    "ltuple": {
+      "ltable_Beer_Name": "Bulleit Bourbon Barrel Aged G'Knight",
+      "ltable_Brew_Factory_Name": "Oskar Blues Grill & Brew",
+      "ltable_Style": "American Amber / Red Ale",
+      "ltable_ABV": "8.70 %"
+    },
+    "rtuple": {
+      "rtable_Beer_Name": "Figure Eight Bourbon Barrel Aged Jumbo Love",
+      "rtable_Brew_Factory_Name": "Figure Eight Brewing",
+      "rtable_Style": "Barley Wine",
+      "rtable_ABV": "-"
+    },
+    "prediction": "0",
+    "saliency_exp": {
+      "ltable_Beer_Name": {
+        "0": 0.6111111111111112
+      },
+      "ltable_Brew_Factory_Name": {
+        "0": 0.5
+      },
+      "ltable_Style": {
+        "0": 0.4444444444444444
+      },
+      "ltable_ABV": {
+        "0": 0.38888888888888895
+      },
+      "rtable_Beer_Name": {
+        "0": 0.38888888888888895
+      },
+      "rtable_Brew_Factory_Name": {
+        "0": 0.3055555555555556
+      },
+      "rtable_Style": {
+        "0": 0.3055555555555556
+      },
+      "rtable_ABV": {
+        "0": 0.2777777777777778
+      }
+    },
+    "cf_exp": {
+      "23": {
+        "ltable_Beer_Name": "Jumbo Love",
+        "ltable_Brew_Factory_Name": "Figure 8 Brewing",
+        "ltable_Style": "American Amber / Red Ale",
+        "ltable_ABV": "8.70 %",
+        "rtable_Beer_Name": "Figure Eight Bourbon Barrel Aged Jumbo Love",
+        "rtable_Brew_Factory_Name": "Figure Eight Brewing",
+        "rtable_Style": "Barley Wine",
+        "rtable_ABV": "-",
+        "nomatch_score": "0",
+        "match_score": "1"
+      },
+      "10": {
+        "ltable_Beer_Name": "Bourbon Barrel",
+        "ltable_Brew_Factory_Name": "Figure 8 Brewing",
+        "ltable_Style": "American Amber / Red Ale",
+        "ltable_ABV": "8.70 %",
+        "rtable_Beer_Name": "Figure Eight Bourbon Barrel Aged Jumbo Love",
+        "rtable_Brew_Factory_Name": "Figure Eight Brewing",
+        "rtable_Style": "Barley Wine",
+        "rtable_ABV": "-",
+        "nomatch_score": "0",
+        "match_score": "1"
+      },
+      "11": {
+        "ltable_Beer_Name": "Bourbon Barrel Ro",
+        "ltable_Brew_Factory_Name": "Figure 8 Brewing",
+        "ltable_Style": "American Amber / Red Ale",
+        "ltable_ABV": "8.70 %",
+        "rtable_Beer_Name": "Figure Eight Bourbon Barrel Aged Jumbo Love",
+        "rtable_Brew_Factory_Name": "Figure Eight Brewing",
+        "rtable_Style": "Barley Wine",
+        "rtable_ABV": "-",
+        "nomatch_score": "0",
+        "match_score": "1"
+      }
+    },
+    "cf_summary": {
+      "rtable_Beer_Name": 0.0,
+      "rtable_Brew_Factory_Name": 0.0,
+      "rtable_Style": 0.0,
+      "rtable_ABV": 0.0,
+      "ltable_Beer_Name": 0.4,
+      "ltable_Brew_Factory_Name": 0.0,
+      "ltable_Style": 0.0,
+      "ltable_ABV": 0.0,
+      "rtable_Beer_Name/rtable_Brew_Factory_Name": 0.3,
+      "rtable_Beer_Name/rtable_Style": 0.3,
+      "rtable_Beer_Name/rtable_ABV": 0.2,
+      "rtable_Brew_Factory_Name/rtable_Style": 0.0,
+      "rtable_Brew_Factory_Name/rtable_ABV": 0.0,
+      "rtable_Style/rtable_ABV": 0.0,
+      "ltable_Beer_Name/ltable_Brew_Factory_Name": 0.6,
+      "ltable_Beer_Name/ltable_Style": 0.4,
+      "ltable_Beer_Name/ltable_ABV": 0.4,
+      "ltable_Brew_Factory_Name/ltable_Style": 0.4,
+      "ltable_Brew_Factory_Name/ltable_ABV": 0.0,
+      "ltable_Style/ltable_ABV": 0.0,
+      "rtable_Beer_Name/rtable_Brew_Factory_Name/rtable_Style": 0.4,
+      "rtable_Beer_Name/rtable_Brew_Factory_Name/rtable_ABV": 0.3,
+      "rtable_Beer_Name/rtable_Style/rtable_ABV": 0.3,
+      "rtable_Brew_Factory_Name/rtable_Style/rtable_ABV": 0.2,
+      "ltable_Beer_Name/ltable_Brew_Factory_Name/ltable_Style": 0.6,
+      "ltable_Beer_Name/ltable_Brew_Factory_Name/ltable_ABV": 0.6,
+      "ltable_Beer_Name/ltable_Style/ltable_ABV": 0.4,
+      "ltable_Brew_Factory_Name/ltable_Style/ltable_ABV": 0.4
+    },
+    "triangles": 10
+  },
+  {
+    "id": 1,
+    "ltuple": {
+      "ltable_Beer_Name": "Double Dragon Imperial Red Ale",
+      "ltable_Brew_Factory_Name": "Phillips Brewing Company",
+      "ltable_Style": "American Amber / Red Ale",
+      "ltable_ABV": "8.20 %"
+    },
+    "rtuple": {
+      "rtable_Beer_Name": "Scuttlebutt Mateo Loco Imperial Red Ale",
+      "rtable_Brew_Factory_Name": "Scuttlebutt Brewing Co. .",
+      "rtable_Style": "American Strong Ale",
+      "rtable_ABV": "7.10 %"
+    },
+    "prediction": "0",
+    "saliency_exp": {
+      "ltable_Beer_Name": {
+        "0": 0.40229885057471265
+      },
+      "ltable_Brew_Factory_Name": {
+        "0": 0.4367816091954023
+      },
+      "ltable_Style": {
+        "0": 0.33333333333333337
+      },
+      "ltable_ABV": {
+        "0": 0.3218390804597701
+      },
+      "rtable_Beer_Name": {
+        "0": 0.5287356321839081
+      },
+      "rtable_Brew_Factory_Name": {
+        "0": 0.29885057471264365
+      },
+      "rtable_Style": {
+        "0": 0.28735632183908044
+      },
+      "rtable_ABV": {
+        "0": 0.2988505747126437
+      }
+    },
+    "cf_exp": {
+      "63": {
+        "ltable_Beer_Name": "Double Dragon Imperial Red Ale",
+        "ltable_Brew_Factory_Name": "Phillips Brewing Company",
+        "ltable_Style": "American Amber / Red Ale",
+        "ltable_ABV": "8.20 %",
+        "rtable_Beer_Name": "Phillips Double Dragon Imperial Red Ale",
+        "rtable_Brew_Factory_Name": "Phillips",
+        "rtable_Style": "American Strong Ale",
+        "rtable_ABV": "8.20 %",
+        "nomatch_score": "0",
+        "match_score": "1"
+      },
+      "73": {
+        "ltable_Beer_Name": "Double Dragon Imperial Red Ale",
+        "ltable_Brew_Factory_Name": "Phillips Brewing Company",
+        "ltable_Style": "American Amber / Red Ale",
+        "ltable_ABV": "8.20 %",
+        "rtable_Beer_Name": "Red Ale",
+        "rtable_Brew_Factory_Name": "Phillips Brewing Co. .",
+        "rtable_Style": "American Strong Ale",
+        "rtable_ABV": "8.20 %",
+        "nomatch_score": "0",
+        "match_score": "1"
+      },
+      "56": {
+        "ltable_Beer_Name": "Double Dragon Imperial Red Ale",
+        "ltable_Brew_Factory_Name": "Phillips Brewing Company",
+        "ltable_Style": "American Amber / Red Ale",
+        "ltable_ABV": "8.20 %",
+        "rtable_Beer_Name": "Phillips Double Dragon Imperial Red Ale",
+        "rtable_Brew_Factory_Name": "Phillips Brewing Co. .",
+        "rtable_Style": "American Strong Ale",
+        "rtable_ABV": "8.20 %",
+        "nomatch_score": "0",
+        "match_score": "1"
+      },
+      "53": {
+        "ltable_Beer_Name": "Double Dragon Imperial Red Ale",
+        "ltable_Brew_Factory_Name": "Phillips Brewing Company",
+        "ltable_Style": "American Amber / Red Ale",
+        "ltable_ABV": "8.20 %",
+        "rtable_Beer_Name": "Phillips Double Dragon Imperial Red Ale",
+        "rtable_Brew_Factory_Name": "Phillips Brewing Co. .",
+        "rtable_Style": "American Strong Ale",
+        "rtable_ABV": "8.20",
+        "nomatch_score": "0",
+        "match_score": "1"
+      },
+      "47": {
+        "ltable_Beer_Name": "Double Dragon Imperial Red Ale",
+        "ltable_Brew_Factory_Name": "Phillips Brewing Company",
+        "ltable_Style": "American Amber / Red Ale",
+        "ltable_ABV": "8.20 %",
+        "rtable_Beer_Name": "Double Dragon Imperial Red Ale",
+        "rtable_Brew_Factory_Name": "Phillips Brewing Co. .",
+        "rtable_Style": "American Strong Ale",
+        "rtable_ABV": "8.20 %",
+        "nomatch_score": "0",
+        "match_score": "1"
+      },
+      "75": {
+        "ltable_Beer_Name": "Double Dragon Imperial Red Ale",
+        "ltable_Brew_Factory_Name": "Phillips Brewing Company",
+        "ltable_Style": "American Amber / Red Ale",
+        "ltable_ABV": "8.20 %",
+        "rtable_Beer_Name": "Phillips Double Dragon Imperial Red Ale",
+        "rtable_Brew_Factory_Name": "Phillips Brewing Co.",
+        "rtable_Style": "American Strong Ale",
+        "rtable_ABV": "8.20 %",
+        "nomatch_score": "0",
+        "match_score": "1"
+      }
+    },
+    "cf_summary": {
+      "rtable_Beer_Name": 0.5,
+      "rtable_Brew_Factory_Name": 0.0,
+      "rtable_Style": 0.0,
+      "rtable_ABV": 0.0,
+      "ltable_Beer_Name": 0.3,
+      "ltable_Brew_Factory_Name": 0.4,
+      "ltable_Style": 0.0,
+      "ltable_ABV": 0.0,
+      "rtable_Beer_Name/rtable_Brew_Factory_Name": 0.5,
+      "rtable_Beer_Name/rtable_Style": 0.5,
+      "rtable_Beer_Name/rtable_ABV": 0.5,
+      "rtable_Brew_Factory_Name/rtable_Style": 0.0,
+      "rtable_Brew_Factory_Name/rtable_ABV": 0.0,
+      "rtable_Style/rtable_ABV": 0.0,
+      "ltable_Beer_Name/ltable_Brew_Factory_Name": 0.4,
+      "ltable_Beer_Name/ltable_Style": 0.4,
+      "ltable_Beer_Name/ltable_ABV": 0.3,
+      "ltable_Brew_Factory_Name/ltable_Style": 0.4,
+      "ltable_Brew_Factory_Name/ltable_ABV": 0.4,
+      "ltable_Style/ltable_ABV": 0.0,
+      "rtable_Beer_Name/rtable_Brew_Factory_Name/rtable_Style": 0.5,
+      "rtable_Beer_Name/rtable_Brew_Factory_Name/rtable_ABV": 0.6,
+      "rtable_Beer_Name/rtable_Style/rtable_ABV": 0.5,
+      "rtable_Brew_Factory_Name/rtable_Style/rtable_ABV": 0.0,
+      "ltable_Beer_Name/ltable_Brew_Factory_Name/ltable_Style": 0.4,
+      "ltable_Beer_Name/ltable_Brew_Factory_Name/ltable_ABV": 0.4,
+      "ltable_Beer_Name/ltable_Style/ltable_ABV": 0.3,
+      "ltable_Brew_Factory_Name/ltable_Style/ltable_ABV": 0.4
+    },
+    "triangles": 10
+  },
+  {
+    "total_time": 107.48675203323364
+  }
+]

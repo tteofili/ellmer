@@ -1,0 +1,1 @@
+[{"model_type": "delegate", "hf_repo": null, "verbose": false, "max_length": 180, "fake": false, "temperature": 0.01, "num_triangles": 10, "samples": 2, "explanation_granularity": "attribute", "delegate": 
