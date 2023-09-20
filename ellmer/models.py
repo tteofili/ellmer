@@ -119,8 +119,9 @@ class LLMERModel(ERModel):
 
 
 class PredictThenSelfExplainER:
-    def __init__(self, explanation_granularity: str = "attribute"):
+    def __init__(self, explanation_granularity: str = "attribute", why: bool = False):
         self.explanation_granularity = explanation_granularity
+        self.why = why
 
     def er(self, ltuple: str, rtuple: str, temperature=0.99):
         question = "record1:\n" + ltuple + "\n record2:\n" + rtuple + "\n"
@@ -131,7 +132,7 @@ class PredictThenSelfExplainER:
         return self.__call__(question, er=True, explanation=True, prediction=prediction, temperature=temperature,
                              *args, **kwargs)
 
-    def __call__(self, question, er: bool = False, saliency: bool = False, cf: bool = False, why: bool = False,
+    def __call__(self, question, er: bool = False, saliency: bool = False, cf: bool = False,
                  explanation=False, prediction=None, temperature=0.99, *args, **kwargs):
         answers = dict()
         openai.api_type = "azure"
@@ -155,7 +156,7 @@ class PredictThenSelfExplainER:
             conversation.append({"role": "assistant", "content": prediction})
 
             # natural language explanation
-            if why:
+            if self.why:
                 for prompt_message in ellmer.utils.read_prompt('ellmer/prompts/er-why.txt'):
                     conversation.append(
                         {"role": prompt_message[0],

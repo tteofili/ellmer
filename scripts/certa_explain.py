@@ -31,7 +31,7 @@ max_length = 180
 fake = False
 samples = 50
 
-delegate = ellmer.models.PredictAndSelfExplainER(explanation_granularity=explanation_granularity)
+delegate = ellmer.models.PredictThenSelfExplainER(explanation_granularity=explanation_granularity, why=True)
 
 params = {"model_type": model_type, "hf_repo": hf_repo, "verbose": verbose, "max_length": max_length, "fake": fake,
           "temperature": temperature, "num_triangles": num_triangles, "samples": samples,

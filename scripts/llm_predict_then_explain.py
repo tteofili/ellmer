@@ -24,12 +24,12 @@ explanation_granularity = 'attribute'
 temperature = 0.01
 why = True
 
-params = {"temperature": temperature, "why": why, "explanation_granularity": explanation_granularity, "samples": samples}
+params = {"temperature": temperature, "why": why, "explanation_granularity": explanation_granularity,
+          "samples": samples}
 
-llm = ellmer.models.PredictThenSelfExplainER(explanation_granularity=explanation_granularity)
+llm = ellmer.models.PredictThenSelfExplainER(explanation_granularity=explanation_granularity, why=why)
 
 results = [params]
-
 
 start_time = time()
 
@@ -38,7 +38,7 @@ for idx in range(len(test_df[:samples])):
         rand_row = test_df.iloc[[idx]]
         ltuple, rtuple = ellmer.utils.get_tuples(rand_row)
         prediction = llm.er(str(ltuple), str(rtuple), temperature=temperature)
-        answer = llm.explain(str(ltuple), str(rtuple), prediction['prediction'], temperature=temperature, why=why)
+        answer = llm.explain(str(ltuple), str(rtuple), prediction['prediction'], temperature=temperature)
         try:
             saliency = answer['saliency_exp'].split('```')[1]
             saliency_dict = json.loads(saliency)
@@ -68,5 +68,9 @@ results.append({"total_time": total_time})
 
 expdir = f'./experiments/{dataset_name}/{datetime.now():%Y%m%d}/{datetime.now():%H:%M}/'
 os.makedirs(expdir, exist_ok=True)
-with open(expdir + 'ptse_results.json', 'w') as fout:
+if why:
+    w = 'w'
+else:
+    w = ''
+with open(expdir + 'ptse' + w + '_results.json', 'w') as fout:
     json.dump(results, fout)
