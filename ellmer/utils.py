@@ -1,3 +1,5 @@
+import traceback
+
 import pandas as pd
 import numpy as np
 import openai
@@ -5,7 +7,11 @@ import random
 import time
 import math
 import re
+import os
+import operator
+from sklearn.metrics import auc
 from collections import Counter
+import json
 
 WORD = re.compile(r'\w+')
 
@@ -186,3 +192,151 @@ def get_cosine(vec1, vec2):
         return 0.0
     else:
         return float(numerator) / denominator
+
+
+def get_faithfulness(saliency_names: list, eval_fn, base_dir: str, test_set_df: pd.DataFrame):
+    np.random.seed(0)
+
+    thresholds = [0.1, 0.2, 0.33, 0.5, 0.7, 0.9]
+
+    attr_len = len(test_set_df.columns) - 2
+    aucs = dict()
+    for saliency in saliency_names:
+        model_scores = []
+        reverse = True
+        json_path = os.path.join(base_dir, saliency + '_results.json')
+        with open(json_path) as fd:
+            results_json = json.load(fd)
+        saliencies = []
+        predictions = []
+        for v in results_json:
+            saliencies.append(v['saliency'])
+            predictions.append(v['prediction'])
+        for threshold in thresholds:
+            top_k = int(threshold * attr_len)
+            test_set_df_c = test_set_df.copy().astype(str)
+            for i in range(len(predictions)):
+                if int(predictions[i]) == 0:
+                    reverse = False
+                attributes_dict = saliencies[i]
+                if saliency.startswith('certa'):
+                    sorted_attributes_dict = sorted(attributes_dict.items(), key=operator.itemgetter(1),
+                                                    reverse=True)
+                else:
+                    sorted_attributes_dict = sorted(attributes_dict.items(), key=operator.itemgetter(1),
+                                                    reverse=reverse)
+                top_k_attributes = sorted_attributes_dict[:top_k]
+                for t in top_k_attributes:
+                    split = t[0].split('__')
+                    if len(split) == 2:
+                        test_set_df_c.at[i, split[0]] = test_set_df_c.iloc[i][split[0]].replace(split[1], '')
+                    else:
+                        test_set_df_c.at[i, t[0]] = ''
+            try:
+                evaluation = eval_fn(test_set_df_c)
+                model_scores.append(evaluation)
+            except Exception as e:
+                print(f'skipped {threshold}: {e}')
+        auc_sal = auc(thresholds, model_scores)
+        aucs[saliency] = auc_sal
+    return aucs
+
+
+def get_cf_metrics(explainer_names: list, predict_fn, base_dir, test_set_df: pd.DataFrame):
+    to_drop = ['ltable_id', 'rtable_id', 'match', 'label']
+    rows = dict()
+    for explainer_name in explainer_names:
+        json_path = os.path.join(base_dir, explainer_name + '_results.json')
+        with open(json_path) as fd:
+            results_json = json.load(fd)
+        cfs = []
+        predictions = []
+        indexes = []
+        for v in results_json:
+            cfs.append(v['cfs'])
+            predictions.append(v['prediction'])
+            indexes.append(v['id'])
+        validity = 0
+        proximity = 0
+        sparsity = 0
+        diversity = 0
+        count = 1e-10
+        for i in range(len(test_set_df)):
+            try:
+                if len(cfs[i]) == 0 or len(cfs[i][0].keys()) == 0 or indexes[i] != i:
+                    continue
+
+                instance = test_set_df.iloc[i].copy()
+                for c in to_drop:
+                    if c in test_set_df.columns:
+                        instance = instance.drop(c)
+                matching = int(predictions[i])
+
+                # validity
+                validity += get_validity(predict_fn, cfs[i], matching)
+
+                # proximity
+                proximity += get_proximity(cfs[i], instance.to_dict())
+
+                # sparsity
+                sparsity += get_sparsity(cfs[i], instance.to_dict())
+
+                # diversity
+                diversity += get_diversity(pd.DataFrame(cfs[i]))
+
+                count += 1
+            except:
+                traceback.print_exc()
+                pass
+
+        mean_validity = validity / count
+        mean_proximity = proximity / count
+        mean_sparsity = sparsity / count
+        mean_diversity = diversity / count
+        row = {'validity': mean_validity, 'proximity': mean_proximity,
+               'sparsity': mean_sparsity, 'diversity': mean_diversity}
+        rows[explainer_name] = row
+    return rows
+
+
+def get_validity(predict_fn, counterfactuals, original):
+    rowsc_df = pd.DataFrame(counterfactuals.copy())
+    predicted = predict_fn(rowsc_df)['match_score'].values
+    return 1 - abs(predicted - original)
+
+
+def get_proximity(counterfactuals, original_row):
+    proximity_all = 0
+    for i in range(len(counterfactuals)):
+        curr_row = counterfactuals[i]
+        sum_cat_dist = 0
+        for c, v in curr_row.items():
+            if c in original_row and v == original_row[c]:
+                sum_cat_dist += 1
+
+        proximity = 1 - (1 / len(original_row)) * sum_cat_dist
+        proximity_all += proximity
+    return proximity_all / len(counterfactuals)
+
+
+def get_diversity(expl_df):
+    diversity = 0
+    for i in range(len(expl_df)):
+        for j in range(len(expl_df)):
+            if i == j:
+                continue
+            curr_row1 = expl_df.iloc[i]
+            curr_row2 = expl_df.iloc[j]
+            sum_cat_dist = 0
+
+            for c, v in curr_row1.items():
+                if v != curr_row2[c]:
+                    sum_cat_dist += 1
+
+            dist = sum_cat_dist / len(curr_row1)
+            diversity += dist
+    return diversity / math.pow(len(expl_df), 2)
+
+
+def get_sparsity(expl_df, instance):
+    return 1 - get_proximity(expl_df, instance) / (len(expl_df[0].keys()) / 2)

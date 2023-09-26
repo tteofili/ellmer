@@ -20,7 +20,9 @@ def make_predictions_boolean(preds):
 
 def get_prediction(pred):
     try:
-        if "answer" in pred:
+        if "prediction" in pred:
+            mnm = pred['prediction']
+        elif "answer" in pred:
             mnm = pred['answer']['matching_prediction']
         else:
             mnm = pred['matching_prediction']
@@ -31,7 +33,9 @@ def get_prediction(pred):
 
 def get_saliency(pred):
     try:
-        if "answer" in pred:
+        if "saliency" in pred:
+            sal = pred['saliency']
+        elif "answer" in pred:
             sal = pred['answer']['saliency_explanation']
         else:
             sal = pred['saliency_exp']
@@ -42,7 +46,9 @@ def get_saliency(pred):
 
 def get_cf(pred):
     try:
-        if "answer" in pred:
+        if "cfs" in pred:
+            cf = pred['cfs'][0]
+        elif "answer" in pred:
             cf = pred['answer']['counterfactual_explanation']
         else:
             if "counterfactual_record" in pred:
@@ -67,17 +73,11 @@ def eq_ratio(l1, l2):
     return same / len(l1)
 
 
-if __name__ == "__main__":
-    # take two experimental results files
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--pred1", type=str, required=True)
-    parser.add_argument("--pred2", type=str, required=True)
-    args = parser.parse_args()
-
+def get_concordance(pred1_file, pred2_file):
     # read json files into dictionaries
-    with open(args.pred1) as json1_file:
+    with open(pred1_file) as json1_file:
         pred1_json = json.load(json1_file)
-    with open(args.pred2) as json2_file:
+    with open(pred2_file) as json2_file:
         pred2_json = json.load(json2_file)
 
     # transform predictions from text to boolean, where necessary
@@ -109,23 +109,24 @@ if __name__ == "__main__":
 
         # the rate of agreement between each set of predictions and the ground truth
         observation['label'] = bool(pred1['label'])
+
         # how many match / non-match predictions respectively, for each list (pred1, pred2, labels)
         if mnm2 == mnm1:
             agree = True
         else:
             agree = False
         observation['agree'] = agree
-        # TBD: highlight where they disagree, put them in separate example files
 
         # for saliency explanations, identify
         # the avg kendall-tau between saliency explanations
         sal1 = get_saliency(pred1)
-
         sal2 = get_saliency(pred2)
 
         if sal1 is not None and sal2 is not None:
-            sal1_ranked_keys = list({k: v for k, v in sorted(sal1.items(), key=lambda item: item[1], reverse=True)}.keys())
-            sal2_ranked_keys = list({k: v for k, v in sorted(sal2.items(), key=lambda item: item[1], reverse=True)}.keys())
+            sal1_ranked_keys = list(
+                {k: v for k, v in sorted(sal1.items(), key=lambda item: item[1], reverse=True)}.keys())
+            sal2_ranked_keys = list(
+                {k: v for k, v in sorted(sal2.items(), key=lambda item: item[1], reverse=True)}.keys())
             try:
                 kt = kendalltau(sal1_ranked_keys, sal2_ranked_keys).statistic
             except:
@@ -135,7 +136,6 @@ if __name__ == "__main__":
         # for counterfactual explanations, identify
         cf1 = get_cf(pred1)
         cf2 = get_cf(pred2)
-        # TBD: whether it actually flips the prediction
         # the similarity between the counterfactuals using different similarity metrics
         if cf1 is not None and cf2 is not None:
             observation['cos_sim'] = cosine_similarity(list(cf1.values()), list(cf2.values()))[0]
@@ -151,4 +151,4 @@ if __name__ == "__main__":
     print(f"avg kt: {obs_df['kt'].mean()}")
     print(f"avg cf cos_sim: {obs_df['cos_sim'].mean()}")
 
-    obs_df.to_csv('observations.csv')
+    return obs_df
