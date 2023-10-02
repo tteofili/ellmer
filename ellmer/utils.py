@@ -112,7 +112,7 @@ def concordance_correlation(y_pred, y_true):
 
 def completion_with_backoff(deployment_id="gpt-35-turbo", model="gpt-3.5-turbo", messages=None, temperature=0,
                             initial_delay=1, max_retries=10, exponential_base: float = 2, jitter: bool = True,
-                            errors: tuple = (openai.error.RateLimitError,), ):
+                            errors: tuple = (openai.error.RateLimitError, openai.error.Timeout), ):
     num_retries = 0
     delay = initial_delay
 
@@ -197,7 +197,7 @@ def get_cosine(vec1, vec2):
 def get_faithfulness(saliency_names: list, eval_fn, base_dir: str, test_set_df: pd.DataFrame):
     np.random.seed(0)
 
-    thresholds = [0.1, 0.2, 0.33, 0.5, 0.7, 0.9]
+    thresholds = [0.1, 0.33, 0.5, 0.7, 0.9]
 
     attr_len = len(test_set_df.columns) - 2
     aucs = dict()
@@ -236,9 +236,11 @@ def get_faithfulness(saliency_names: list, eval_fn, base_dir: str, test_set_df: 
                 evaluation = eval_fn(test_set_df_c)
                 model_scores.append(evaluation)
             except Exception as e:
-                print(f'skipped {threshold}: {e}')
-        auc_sal = auc(thresholds, model_scores)
-        aucs[saliency] = auc_sal
+                print(f'skipped faithfulness for {saliency}: {e}')
+                break
+        if len(thresholds) == len(model_scores):
+            auc_sal = auc(thresholds, model_scores)
+            aucs[saliency] = auc_sal
     return aucs
 
 

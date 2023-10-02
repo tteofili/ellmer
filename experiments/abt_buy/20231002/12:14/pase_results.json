@@ -1,0 +1,115 @@
+[
+  {
+    "temperature": 0.01,
+    "explanation_granularity": "attribute",
+    "samples": 4
+  },
+  {
+    "id": 0,
+    "ltuple": {
+      "ltable_name": "sony pink cyber-shot 7.2 megapixel digital camera dscw120p",
+      "ltable_description": "sony pink cyber-shot 7.2 megapixel digital camera dscw120p 7.2 megapixel 4x optical zoom 2.5 ' tft lcd 15 mb internal memory face detection super steadyshot image stabilization smile shutter mode smart zoom pink finish",
+      "ltable_price": "nan"
+    },
+    "rtuple": {
+      "rtable_name": "olympus fe-360 digital camera pink 226540",
+      "rtable_description": "8 megapixel 16:9 3x optical zoom 4x digital zoom 2.5 ' color lcd",
+      "rtable_price": "104.95"
+    },
+    "answer": {
+      "prediction": 0,
+      "why": null,
+      "saliency": {
+        "ltable_name": 0.0,
+        "ltable_description": 0.0,
+        "ltable_price": 0.0,
+        "rtable_name": 0.0,
+        "rtable_description": 0.0,
+        "rtable_price": 0.0
+      },
+      "cf": {}
+    },
+    "label": 0
+  },
+  {
+    "id": 1,
+    "ltuple": {
+      "ltable_name": "lg 2.0 cu . ft. over-the-range white microwave oven lmvm2085wh",
+      "ltable_description": "lg 2.0 cu . ft. over-the-range white microwave oven lmvm2085wh warming lamp glide & spin sliding tray with turntable sensor cook feature 300 cfm exhaust system horizontal keypad elegant hidden vent wideview window halogen cooktop lighting white finish",
+      "ltable_price": "nan"
+    },
+    "rtuple": {
+      "rtable_name": "maytag 2.0 cu . ft. over-the-range microwave oven",
+      "rtable_description": "nan",
+      "rtable_price": "nan"
+    },
+    "answer": {
+      "prediction": 0,
+      "why": null,
+      "saliency": {
+        "ltable_name": 0.5,
+        "ltable_description": 0.8,
+        "ltable_price": 0.0,
+        "rtable_name": 0.5,
+        "rtable_description": 0.0,
+        "rtable_price": 0.0
+      },
+      "cf": {}
+    },
+    "label": 0
+  },
+  {
+    "id": 2,
+    "ltuple": {
+      "ltable_name": "panasonic black 8.5 ' portable dvd player dvdls83",
+      "ltable_description": "panasonic black 8.5 ' portable dvd player dvdls83 8.5 ' free style wide screen lcd display 6 hour battery multi format playback dual headphone jacks divx playback car dc adapter included black finish",
+      "ltable_price": "nan"
+    },
+    "rtuple": {
+      "rtable_name": "toshiba sd-p71s portable dvd player",
+      "rtable_description": "toshiba sd-p71s 7 ' portable dvd player",
+      "rtable_price": "119.36"
+    },
+    "answer": {
+      "prediction": 0,
+      "why": null,
+      "saliency": {
+        "ltable_name": 0.0,
+        "ltable_description": 0.0,
+        "ltable_price": 0.0,
+        "rtable_name": 0.0,
+        "rtable_description": 0.0,
+        "rtable_price": 0.0
+      },
+      "cf": {}
+    },
+    "label": 0
+  },
+  {
+    "id": 3,
+    "ltuple": {
+      "ltable_name": "sony bravia theater black micro system davis50b",
+      "ltable_description": "sony bravia theater black micro system davis50b 5.1-channel surround sound golf ball-sized speakers compact design s-air digital wireless capability hdmi connectivity bravia sync digital cinema sound ( dcs ) technology s-master digital amplifier portable audio enhancer black finish",
+      "ltable_price": "nan"
+    },
+    "rtuple": {
+      "rtable_name": "sony bravia dav-is50 / b home theater system",
+      "rtable_description": "dvd player , 5.1 speakers 1 disc ( s ) progressive scan 450w rms dolby digital ex , dolby pro logic , dolby pro logic ii",
+      "rtable_price": "nan"
+    },
+    "answer": {
+      "prediction": 0,
+      "why": null,
+      "saliency": {
+        "name": 0.5,
+        "description": 0.8,
+        "price": 0.0
+      },
+      "cf": {}
+    },
+    "label": 1
+  },
+  {
+    "total_time": 28.990252017974854
+  }
+]

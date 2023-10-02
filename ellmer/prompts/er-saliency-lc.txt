@@ -1,0 +1,3 @@
+user:A {feature}-level saliency explanation highlights the most relevant {feature}s of the input data that contributed the most to your decision on the above prediction. In a {feature}-level saliency explanation, a saliency score is attached to each {feature}. It aids in understanding which {feature}s you paid attention to the most during your decision-making process.
+assistant:Ok, I can generate a {feature}-level saliency explanation as a dictionary where each {feature} is a key having its saliency score as value.
+user:Return a saliency explanation for the above prediction in JSON format.

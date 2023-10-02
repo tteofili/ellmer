@@ -1,6 +1,8 @@
 import traceback
 
+from langchain.prompts import ChatPromptTemplate
 from langchain import PromptTemplate, HuggingFaceHub, OpenAI
+from langchain.chat_models import AzureChatOpenAI
 import random
 from certa.models.ermodel import ERModel
 import numpy as np
@@ -9,6 +11,7 @@ import ellmer.utils
 import openai
 import os
 import json
+import ast
 from sklearn.metrics import f1_score
 
 hf_models = ['EleutherAI/gpt-neox-20b', 'tiiuae/falcon-7b-instruct']
@@ -17,7 +20,7 @@ openai.api_base = os.getenv("OPENAI_API_BASE")
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
-class ELLMER:
+class Ellmer:
 
     def predict_and_explain(self, ltuple, rtuple):
         return None, None, None
@@ -40,6 +43,9 @@ class ELLMER:
             xcs.append(xc)
         return pd.concat(xcs, axis=0)
 
+    def explain(self, ltuple, rtuple, prediction):
+        pass
+
     def evaluation(self, data_df):
         predictions = self.predict(data_df)
         predictions = predictions['match_score'].astype(int).values
@@ -48,18 +54,266 @@ class ELLMER:
         return f1
 
 
-class Certa(ELLMER):
+class CertaEllmer(Ellmer):
 
     def __init__(self, explanation_granularity, delegate, certa, num_triangles=10):
         self.explanation_granularity = explanation_granularity
+        self.certa = certa
+        self.num_triangles = num_triangles
         self.delegate = delegate
+        self.predict_fn = lambda x: self.delegate.predict(x)
+
+    def predict_and_explain(self, ltuple, rtuple):
+        pae = self.delegate.predict_and_explain(ltuple, rtuple)
+        prediction = None
+        saliency_explanation = None
+        cf_explanation = None
+        if pae is not None and "prediction" in pae:
+            ltuple_series = self.get_row(ltuple, self.certa.lsource, prefix="ltable_")
+            rtuple_series = self.get_row(rtuple, self.certa.rsource, prefix="rtable_")
+
+            saliency_df, cf_summary, cfs, tri, _ = self.certa.explain(ltuple_series, rtuple_series, self.predict_fn,
+                                                                      token="token" == self.explanation_granularity,
+                                                                      num_triangles=self.num_triangles)
+            saliency_explanation = saliency_df.to_dict('list')
+            if len(cfs) > 0:
+                cf_explanation = [cfs.drop(
+                    ['alteredAttributes', 'droppedValues', 'copiedValues', 'triangle', 'attr_count'],
+                    axis=1).T.to_dict()]
+            else:
+                cf_explanation = [{}]
+        return {"prediction": prediction, "saliency": saliency_explanation, "cf": cf_explanation}
+
+    def get_row(self, row, df, prefix=''):
+        rc = dict()
+        for k, v in row.items():
+            new_k = k.replace(prefix, "")
+            rc[new_k] = [v]
+        result = df[df.drop(['id'], axis=1).isin(rc).all(axis=1)]
+        return result.iloc[0]
+
+
+class GenericEllmer(Ellmer):
+
+    def __init__(self, model_type='azure_openai', temperature=0.01, max_length=512, fake=False, model_name="",
+                 verbose=False, delegate=None, explanation_granularity="attribute", explainer_fn="self", prompts={},
+                 deployment_name="", model_version="2023-05-15"):
+        self.fake = fake
+        if model_type == 'hf':
+            self.llm = HuggingFaceHub(repo_id=model_name,
+                                      model_kwargs={'temperature': temperature, 'max_length': max_length})
+        elif model_type == 'openai':
+            self.llm = OpenAI(temperature=temperature, model_name=model_name)
+        elif model_type == 'azure_openai':
+            self.llm = AzureChatOpenAI(deployment_name=deployment_name, model_name=model_name,
+                                       openai_api_version=model_version, temperature=temperature)
+        elif model_type == 'delegate':
+            self.llm = delegate
+        self.verbose = verbose
+        self.explanation_granularity = explanation_granularity
+        if "self" == explainer_fn:
+            self.explainer_fn = "self"
+        else:
+            self.explainer_fn = explainer_fn
+        self.prompts = prompts
+
+    def predict_and_explain(self, ltuple, rtuple):
+        conversation = []
+        if "pase" in self.prompts:
+            prompt = self.prompts['pase']
+            for prompt_message in ellmer.utils.read_prompt(prompt):
+                conversation.append((prompt_message[0], prompt_message[1]))
+            question = "record1:\n{ltuple}\n record2:\n{rtuple}\n"
+            conversation.append(("user", question))
+            template = ChatPromptTemplate.from_messages(conversation)
+            messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple, rtuple=rtuple)
+            answer = self.llm(messages)
+            prediction, saliency_explanation, cf_explanation = parse_pase_answer(answer.content, self.llm)
+            if prediction is None:
+                print(f'empty prediction!\nquestion{question}\nconversation{conversation}')
+            return {"prediction": prediction, "saliency": saliency_explanation, "cf": cf_explanation}
+        elif "ptse" in self.prompts:
+            ptse_prompts = self.prompts["ptse"]
+            er_prompt = ptse_prompts['er']
+            for prompt_message in ellmer.utils.read_prompt(er_prompt):
+                conversation.append((prompt_message[0], prompt_message[1]))
+            question = "record1:\n{ltuple}\n record2:\n{rtuple}\n"
+            conversation.append(("user", question))
+            template = ChatPromptTemplate.from_messages(conversation)
+            messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple, rtuple=rtuple)
+            er_answer = self.llm(messages)
+
+            # parse answer into prediction
+            _, prediction = ellmer.utils.text_to_match(er_answer.content, self.llm)
+            conversation.append(("assistant", er_answer.content))
+
+            why = None
+            saliency_explanation = None
+            cf_explanation = None
+
+            # get explanations
+            if "why" in ptse_prompts:
+                for prompt_message in ellmer.utils.read_prompt(ptse_prompts["why"]):
+                    conversation.append((prompt_message[0], prompt_message[1]))
+                template = ChatPromptTemplate.from_messages(conversation)
+                messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple, rtuple=rtuple,
+                                                    prediction=prediction)
+                why_answer = self.llm(messages)
+                why = why_answer.content
+                conversation.append(("assistant", why_answer.content))
+
+            # saliency explanation
+            if "saliency" in ptse_prompts:
+                for prompt_message in ellmer.utils.read_prompt(ptse_prompts["saliency"]):
+                    conversation.append((prompt_message[0], prompt_message[1]))
+                template = ChatPromptTemplate.from_messages(conversation)
+                messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple, rtuple=rtuple,
+                                                    prediction=prediction)
+                saliency_answer = self.llm(messages)
+
+                saliency_explanation = dict()
+                try:
+                    saliency = saliency_answer.content.split('```')[1]
+                    saliency_dict = json.loads(saliency)
+                    saliency_explanation = saliency_dict
+                except:
+                    pass
+
+                conversation.append(("assistant", "{" + str(saliency_explanation) + "}"))
+
+            # counterfactual explanation
+            if "cf" in ptse_prompts:
+                for prompt_message in ellmer.utils.read_prompt(ptse_prompts["cf"]):
+                    conversation.append((prompt_message[0], prompt_message[1]))
+                template = ChatPromptTemplate.from_messages(conversation)
+                messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple, rtuple=rtuple,
+                                                    prediction=prediction)
+                cf_answer = self.llm(messages)
+                cf_explanation = dict()
+                try:
+                    cf_answer_content = cf_answer.content
+                    if '```' in cf_answer_content:
+                        cf_answer_json = cf_answer_content.split('```')[1]
+                    elif cf_answer_content.startswith("{"):
+                        cf_answer_json = cf_answer_content
+                    elif "{" in cf_answer_content and "}" in cf_answer_content:
+                        cf_answer_json = cf_answer_content[
+                                         cf_answer_content.index("{"):cf_answer_content.rfind("}") + 1]
+                        # cf_answer_json = ''.join(cf_answer_content.split("{")[1].split("}")[0])
+                    else:
+                        cf_answer_json = cf_answer_content
+                    cf_dict = ast.literal_eval(cf_answer_json)
+                    keys = cf_dict.keys()
+                    if "record_after" in keys:
+                        cf_explanation = cf_dict["record_after"]
+                        if list(cf_explanation.keys())[0].startswith('rtable_'):
+                            cf_explanation = cf_explanation | ast.literal_eval(ltuple)
+                        else:
+                            cf_explanation = cf_explanation | ast.literal_eval(rtuple)
+                    elif "counterfactual_record" in keys:
+                        cf_explanation = cf_dict["counterfactual_record"]
+                    elif "counterfactual" in keys:
+                        cf_explanation = cf_dict['counterfactual']
+                    elif "record1" in keys and "record2" in keys:
+                        for k in cf_dict['record1'].keys():
+                            if not k.startswith('ltable_'):
+                                cf_dict['record1']['ltable_' + k] = cf_dict['record1'][k]
+                                cf_dict['record1'].pop(k)
+
+                        for k in cf_dict['record2'].keys():
+                            if not k.startswith('rtable_'):
+                                cf_dict['record2']['rtable_' + k] = cf_dict['record2'][k]
+                                cf_dict['record2'].pop(k)
+                        cf_explanation = cf_dict['record1'] | cf_dict['record2']
+                    else:
+                        cf_explanation = cf_dict
+                except:
+                    pass
+                conversation.append(("assistant", str(cf_explanation)))
+            return {"prediction": prediction, "why": why, "saliency": saliency_explanation, "cf": cf_explanation}
+
+
+def parse_pase_answer(answer, llm):
+    matching = 0
+    saliency = dict()
+    cf = dict()
+
+    try:
+        # find the json content
+        split = answer.split('```')
+        if len(split) > 1:
+            answer = split[1]
+            if answer.startswith('json'):
+                answer = answer[4:]
+        elif "\n\n{" in answer and "}\n\n" in answer:
+            answer = ''.join(answer.split("\n\n{")[1].split("}\n\n")[0])
+        # decode the json content
+        try:
+            answer = json.loads(answer)
+            if "matching" in answer.keys():
+                prediction = answer['matching']
+            elif "matching_prediction" in answer.keys():
+                prediction = answer['matching_prediction']
+            elif "match" in answer.keys():
+                prediction = answer['match']
+            else:
+                print(f"cannot find 'matching' key in {answer}")
+                prediction = None
+            if prediction:
+                matching = 1
+            elif not prediction:
+                matching = 0
+            else:
+                _, matching = ellmer.utils.text_to_match(prediction, llm.__call__)
+            try:
+                if "saliency_explanation" in answer.keys():
+                    saliency = answer['saliency_explanation']
+                elif "saliency_explanation_table" in answer.keys():
+                    saliency = answer['saliency_explanation_table']
+            except:
+                pass
+            try:
+                if "counterfactual_explanation" in answer.keys():
+                    cf = answer['counterfactual_explanation']
+                elif "counterfactual_explanation_table" in answer.keys():
+                    cf = answer['counterfactual_explanation_table']
+            except:
+                pass
+        except Exception as d:
+            print(f"{d}: cannot decode json: {answer}")
+            pass
+    except Exception as e:
+        print(f"{e}: cannot find json in: {answer}")
+        pass
+    if matching is None:
+        _, matching = ellmer.utils.text_to_match(answer, llm.__call__)
+    return matching, saliency, cf
+
+
+class Certa(Ellmer):
+
+    def __init__(self, explanation_granularity, delegate, certa, num_triangles=10):
+        self.explanation_granularity = explanation_granularity
+        self.llm = delegate
         self.certa = certa
         self.num_triangles = num_triangles
 
+    def get_row(self, row, df, prefix=''):
+        rc = dict()
+        for k, v in row.items():
+            new_k = k.replace(prefix, "")
+            rc[new_k] = [v]
+        result = df[df.drop(['id'], axis=1).isin(rc).all(axis=1)]
+        return result.iloc[0]
+
     def predict_and_explain(self, ltuple, rtuple):
         matching, _, _ = self.delegate.predict_and_explain(ltuple, rtuple)
-        predict_fn = lambda x: self.delegate.predict_and_explain(x)[0]
-        saliency_df, cf_summary, cfs, tri, _ = self.certa.explain(ltuple, rtuple, predict_fn,
+        predict_fn = lambda x: self.delegate.predict(x)
+
+        ltuple_series = self.get_row(ltuple, self.certa.lsource, prefix="ltable_")
+        rtuple_series = self.get_row(rtuple, self.certa.rsource, prefix="rtable_")
+
+        saliency_df, cf_summary, cfs, tri, _ = self.certa.explain(ltuple_series, rtuple_series, predict_fn,
                                                                   token="token" == self.explanation_granularity,
                                                                   num_triangles=self.num_triangles)
         saliency = saliency_df.to_dict('list')
@@ -71,7 +325,7 @@ class Certa(ELLMER):
         return matching, saliency, counterfactuals
 
 
-class PASE(ELLMER):
+class PASE(Ellmer):
 
     def __init__(self, explanation_granularity, temperature):
         self.llm = PredictAndSelfExplainER(explanation_granularity=explanation_granularity,
@@ -109,7 +363,6 @@ class PASE(ELLMER):
                 except:
                     pass
             else:
-                # print(f'weird!\n{ltuple},{rtuple}\n{answer}')
                 _, matching = ellmer.utils.text_to_match(answer, self.llm.__call__)
         except:
             traceback.print_exc()
@@ -118,7 +371,7 @@ class PASE(ELLMER):
         return matching, saliency, [cf]
 
 
-class PTSE(ELLMER):
+class PTSE(Ellmer):
 
     def __init__(self, explanation_granularity, why, temperature):
         self.llm = PredictThenSelfExplainER(explanation_granularity=explanation_granularity, why=why,

@@ -11,12 +11,25 @@ from time import sleep, time
 import json
 import traceback
 
-samples = 10
+samples = 4
+num_triangles = 10
 explanation_granularity = "attribute"
+quantitative = False
 
-pase = ellmer.models.PASE(explanation_granularity=explanation_granularity, temperature=0.01)
-ptse = ellmer.models.PTSE(explanation_granularity=explanation_granularity, why=False, temperature=0.01)
-ptsew = ellmer.models.PTSE(explanation_granularity=explanation_granularity, why=True, temperature=0.01)
+pase = llm = ellmer.models.GenericEllmer(explanation_granularity=explanation_granularity,
+                                         deployment_name="gpt-35-turbo",
+                                         model_name="gpt-3.5-turbo", model_type="azure_openai", temperature=0.01,
+                                         prompts={"pase": "ellmer/prompts/constrained7.txt"})
+ptse = ellmer.models.GenericEllmer(explanation_granularity=explanation_granularity, deployment_name="gpt-35-turbo",
+                                   model_name="gpt-3.5-turbo", model_type="azure_openai", temperature=0.01,
+                                   prompts={"ptse": {"er": "ellmer/prompts/er.txt",
+                                                     "saliency": "ellmer/prompts/er-saliency-lc.txt",
+                                                     "cf": "ellmer/prompts/er-cf-lc.txt"}})
+ptsew = ellmer.models.GenericEllmer(explanation_granularity=explanation_granularity, deployment_name="gpt-35-turbo",
+                                    model_name="gpt-3.5-turbo", model_type="azure_openai", temperature=0.01,
+                                    prompts={"ptse": {"er": "ellmer/prompts/er.txt", "why": "ellmer/prompts/er-why.txt",
+                                                      "saliency": "ellmer/prompts/er-saliency-lc.txt",
+                                                      "cf": "ellmer/prompts/er-cf-lc.txt"}})
 
 # for each dataset in deepmatcher datasets
 dataset_names = ['beers', 'abt_buy']
@@ -38,10 +51,6 @@ for d in dataset_names:
         "pase": pase,
         "ptse": ptse,
         "ptsew": ptsew,
-        "certa(pase)": ellmer.models.Certa(explanation_granularity=explanation_granularity, delegate=pase, certa=certa),
-        "certa(ptse)": ellmer.models.Certa(explanation_granularity=explanation_granularity, delegate=ptse, certa=certa),
-        "certa(ptsew)": ellmer.models.Certa(explanation_granularity=explanation_granularity, delegate=ptsew,
-                                            certa=certa),
     }
 
     result_files = []
@@ -56,7 +65,10 @@ for d in dataset_names:
             try:
                 rand_row = test_df.iloc[[idx]]
                 ltuple, rtuple = ellmer.utils.get_tuples(rand_row)
-                prediction, saliency, cfs = llm.predict_and_explain(ltuple, rtuple)
+                answer_dictionary = llm.predict_and_explain(ltuple, rtuple)
+                prediction = answer_dictionary['prediction']
+                saliency = answer_dictionary['saliency']
+                cfs = [answer_dictionary['cf']]
                 curr_llm_results.append({"id": idx, "ltuple": ltuple, "rtuple": rtuple, "prediction": prediction,
                                          "label": rand_row['label'].values[0], "saliency": saliency, "cfs": cfs})
             except Exception:
@@ -76,17 +88,18 @@ for d in dataset_names:
             json.dump(curr_llm_results, fout)
 
         result_files.append((key, output_file_path))
-        print(f'data generated in {total_time}s')
+        print(f'{key} data generated in {total_time}s')
 
-        # generate quantitative explainability metrics for each set of generated explanations:
+        if quantitative:
+            # generate quantitative explainability metrics for each set of generated explanations:
 
-        # generate saliency metrics
-        faithfulness = ellmer.utils.get_faithfulness([key], llm.evaluation, expdir, test_data_df)
-        print(f'faithfulness({key}):{faithfulness}')
+            # generate saliency metrics
+            faithfulness = ellmer.utils.get_faithfulness([key], llm.evaluation, expdir, test_data_df)
+            print(f'{key} faithfulness({key}):{faithfulness}')
 
-        # generate counterfactual metrics
-        cf_metrics = ellmer.utils.get_cf_metrics([key], llm.predict, expdir, test_data_df)
-        print(f'cf_metrics({key}):{cf_metrics}')
+            # generate counterfactual metrics
+            cf_metrics = ellmer.utils.get_cf_metrics([key], llm.predict, expdir, test_data_df)
+            print(f'{key} cf_metrics({key}):{cf_metrics}')
 
     # generate concordance statistics for each pair of results
     for pair in itertools.combinations(result_files, 2):
@@ -98,4 +111,5 @@ for d in dataset_names:
         p2_file = p2[1]
         print(f'concordance statistics for {p1_name} - {p2_name}')
         observations = ellmer.metrics.get_concordance(p1_file, p2_file)
+        print(f'{observations}')
         observations.to_csv(f'{d}_{p1_name}_{p2_name}.csv')
