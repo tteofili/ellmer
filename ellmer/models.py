@@ -2,6 +2,7 @@ import traceback
 
 from langchain.prompts import ChatPromptTemplate
 from langchain import PromptTemplate, HuggingFaceHub, OpenAI
+from langchain.chains import LLMChain
 from langchain.chat_models import AzureChatOpenAI
 import random
 from certa.models.ermodel import ERModel
@@ -14,7 +15,8 @@ import json
 import ast
 from sklearn.metrics import f1_score
 
-hf_models = ['EleutherAI/gpt-neox-20b', 'tiiuae/falcon-7b-instruct']
+hf_models = ['EleutherAI/gpt-neox-20b', 'tiiuae/falcon-7b-instruct', "Writer/camel-5b-hf", "databricks/dolly-v2-3b",
+             "google/flan-t5-xxl", "tiiuae/falcon-40b", "tiiuae/falcon-7b", "internlm/internlm-chat-7b", "Qwen/Qwen-7B"]
 
 openai.api_base = os.getenv("OPENAI_API_BASE")
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -23,14 +25,19 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 class Ellmer:
 
     def predict_and_explain(self, ltuple, rtuple):
-        return None, None, None
+        prediction = self.predict_tuples(ltuple, rtuple)
+        saliency, cf = self.explain(ltuple, rtuple, prediction)
+        return {"prediction": prediction, "saliency_explanation": saliency, "counterfactual_explanation": cf}
+
+    def predict_tuples(self, ltuple, rtuple):
+        return False
 
     def predict(self, x, mojito=False):
         xcs = []
         for idx in range(len(x)):
             xc = x.iloc[[idx]].copy()
             ltuple, rtuple = ellmer.utils.get_tuples(xc)
-            matching, _, _ = self.predict_and_explain(ltuple, rtuple)
+            matching = self.predict_tuples(ltuple, rtuple)
             if matching:
                 xc['nomatch_score'] = 0
                 xc['match_score'] = 1
@@ -44,14 +51,13 @@ class Ellmer:
         return pd.concat(xcs, axis=0)
 
     def explain(self, ltuple, rtuple, prediction):
-        pass
+        return None, None
 
     def evaluation(self, data_df):
         predictions = self.predict(data_df)
         predictions = predictions['match_score'].astype(int).values
         labels = data_df['label'].astype(int).values
-        f1 = f1_score(y_true=labels, y_pred=predictions)
-        return f1
+        return f1_score(y_true=labels, y_pred=predictions)
 
 
 class CertaEllmer(Ellmer):
@@ -64,11 +70,11 @@ class CertaEllmer(Ellmer):
         self.predict_fn = lambda x: self.delegate.predict(x)
 
     def predict_and_explain(self, ltuple, rtuple):
-        pae = self.delegate.predict_and_explain(ltuple, rtuple)
+        pae = self.delegate.predict_tuples(ltuple, rtuple)
         prediction = None
         saliency_explanation = None
         cf_explanation = None
-        if pae is not None and "prediction" in pae:
+        if pae is not None:
             ltuple_series = self.get_row(ltuple, self.certa.lsource, prefix="ltable_")
             rtuple_series = self.get_row(rtuple, self.certa.rsource, prefix="rtable_")
 
@@ -96,9 +102,10 @@ class CertaEllmer(Ellmer):
 class GenericEllmer(Ellmer):
 
     def __init__(self, model_type='azure_openai', temperature=0.01, max_length=512, fake=False, model_name="",
-                 verbose=False, delegate=None, explanation_granularity="attribute", explainer_fn="self", prompts={},
+                 verbose=False, delegate=None, explanation_granularity="attribute", explainer_fn="self", prompts=None,
                  deployment_name="", model_version="2023-05-15"):
         self.fake = fake
+        self.model_type = model_type
         if model_type == 'hf':
             self.llm = HuggingFaceHub(repo_id=model_name,
                                       model_kwargs={'temperature': temperature, 'max_length': max_length})
@@ -117,6 +124,34 @@ class GenericEllmer(Ellmer):
             self.explainer_fn = explainer_fn
         self.prompts = prompts
 
+    def predict_tuples(self, ltuple, rtuple):
+        conversation = []
+        if "ptse" in self.prompts:
+            ptse_prompts = self.prompts["ptse"]
+            er_prompt = ptse_prompts['er']
+            for prompt_message in ellmer.utils.read_prompt(er_prompt):
+                conversation.append((prompt_message[0], prompt_message[1]))
+            question = "record1:\n{ltuple}\n record2:\n{rtuple}\n"
+            conversation.append(("user", question))
+            template = ChatPromptTemplate.from_messages(conversation)
+            if "hf" == self.model_type:
+                chain = LLMChain(llm=self.llm, prompt=template)
+                er_answer = chain.predict(ltuple=ltuple, rtuple=rtuple)
+            else:
+                messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple, rtuple=rtuple)
+                answer = self.llm(messages)
+                er_answer = answer.content
+
+            # parse answer into prediction
+            _, prediction = ellmer.utils.text_to_match(er_answer, self.llm)
+        else:
+            prediction = self.predict_and_explain(ltuple, rtuple)['prediction']
+        if self.verbose:
+            print(ltuple)
+            print(rtuple)
+            print(prediction)
+        return prediction
+
     def predict_and_explain(self, ltuple, rtuple):
         conversation = []
         if "pase" in self.prompts:
@@ -126,9 +161,14 @@ class GenericEllmer(Ellmer):
             question = "record1:\n{ltuple}\n record2:\n{rtuple}\n"
             conversation.append(("user", question))
             template = ChatPromptTemplate.from_messages(conversation)
-            messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple, rtuple=rtuple)
-            answer = self.llm(messages)
-            prediction, saliency_explanation, cf_explanation = parse_pase_answer(answer.content, self.llm)
+            if "hf" == self.model_type:
+                chain = LLMChain(llm=self.llm, prompt=template)
+                content = chain.predict(ltuple=ltuple, rtuple=rtuple)
+            else:
+                messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple, rtuple=rtuple)
+                answer = self.llm(messages)
+                content = answer.content
+            prediction, saliency_explanation, cf_explanation = parse_pase_answer(content, self.llm)
             if prediction is None:
                 print(f'empty prediction!\nquestion{question}\nconversation{conversation}')
             return {"prediction": prediction, "saliency": saliency_explanation, "cf": cf_explanation}
@@ -140,12 +180,18 @@ class GenericEllmer(Ellmer):
             question = "record1:\n{ltuple}\n record2:\n{rtuple}\n"
             conversation.append(("user", question))
             template = ChatPromptTemplate.from_messages(conversation)
-            messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple, rtuple=rtuple)
-            er_answer = self.llm(messages)
+            if "hf" == self.model_type:
+                chain = LLMChain(llm=self.llm, prompt=template)
+                er_answer = chain.predict(ltuple=ltuple, rtuple=rtuple)
+                print(er_answer)
+            else:
+                messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple, rtuple=rtuple)
+                answer = self.llm(messages)
+                er_answer = answer.content
 
             # parse answer into prediction
-            _, prediction = ellmer.utils.text_to_match(er_answer.content, self.llm)
-            conversation.append(("assistant", er_answer.content))
+            _, prediction = ellmer.utils.text_to_match(er_answer, self.llm)
+            conversation.append(("assistant", er_answer))
 
             why = None
             saliency_explanation = None
@@ -156,20 +202,37 @@ class GenericEllmer(Ellmer):
                 for prompt_message in ellmer.utils.read_prompt(ptse_prompts["why"]):
                     conversation.append((prompt_message[0], prompt_message[1]))
                 template = ChatPromptTemplate.from_messages(conversation)
-                messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple, rtuple=rtuple,
-                                                    prediction=prediction)
-                why_answer = self.llm(messages)
-                why = why_answer.content
-                conversation.append(("assistant", why_answer.content))
+                if "hf" == self.model_type:
+                    chain = LLMChain(llm=self.llm, prompt=template)
+                    why_answer = chain.predict(ltuple=ltuple, rtuple=rtuple, prediction=prediction)
+                    print(why_answer)
+                else:
+                    messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple,
+                                                        rtuple=rtuple,
+                                                        prediction=prediction)
+
+                    answer = self.llm(messages)
+                    why_answer = answer.content
+
+                conversation.append(("assistant", why_answer))
 
             # saliency explanation
             if "saliency" in ptse_prompts:
                 for prompt_message in ellmer.utils.read_prompt(ptse_prompts["saliency"]):
                     conversation.append((prompt_message[0], prompt_message[1]))
                 template = ChatPromptTemplate.from_messages(conversation)
-                messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple, rtuple=rtuple,
-                                                    prediction=prediction)
-                saliency_answer = self.llm(messages)
+                if "hf" == self.model_type:
+                    chain = LLMChain(llm=self.llm, prompt=template)
+                    saliency_answer = chain.predict(ltuple=ltuple, rtuple=rtuple, prediction=prediction,
+                                                    feature=self.explanation_granularity)
+                    print(saliency_answer)
+                else:
+                    messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple,
+                                                        rtuple=rtuple,
+                                                        prediction=prediction)
+
+                    answer = self.llm(messages)
+                    saliency_answer = answer.content
 
                 saliency_explanation = dict()
                 try:
@@ -186,9 +249,20 @@ class GenericEllmer(Ellmer):
                 for prompt_message in ellmer.utils.read_prompt(ptse_prompts["cf"]):
                     conversation.append((prompt_message[0], prompt_message[1]))
                 template = ChatPromptTemplate.from_messages(conversation)
-                messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple, rtuple=rtuple,
-                                                    prediction=prediction)
-                cf_answer = self.llm(messages)
+
+                if "hf" == self.model_type:
+                    chain = LLMChain(llm=self.llm, prompt=template)
+                    cf_answer = chain.predict(ltuple=ltuple, rtuple=rtuple, prediction=prediction,
+                                              feature=self.explanation_granularity)
+                    print(cf_answer)
+                else:
+                    messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple,
+                                                        rtuple=rtuple,
+                                                        prediction=prediction)
+
+                    answer = self.llm(messages)
+                    cf_answer = answer.content
+
                 cf_explanation = dict()
                 try:
                     cf_answer_content = cf_answer.content
@@ -295,6 +369,7 @@ class Certa(Ellmer):
     def __init__(self, explanation_granularity, delegate, certa, num_triangles=10):
         self.explanation_granularity = explanation_granularity
         self.llm = delegate
+        self.predict_fn = lambda x: self.llm.predict(x)
         self.certa = certa
         self.num_triangles = num_triangles
 
@@ -307,15 +382,14 @@ class Certa(Ellmer):
         return result.iloc[0]
 
     def predict_and_explain(self, ltuple, rtuple):
-        matching, _, _ = self.delegate.predict_and_explain(ltuple, rtuple)
-        predict_fn = lambda x: self.delegate.predict(x)
+        matching, _, _ = self.llm.predict_and_explain(ltuple, rtuple)
 
         ltuple_series = self.get_row(ltuple, self.certa.lsource, prefix="ltable_")
         rtuple_series = self.get_row(rtuple, self.certa.rsource, prefix="rtable_")
 
-        saliency_df, cf_summary, cfs, tri, _ = self.certa.explain(ltuple_series, rtuple_series, predict_fn,
+        saliency_df, cf_summary, cfs, tri, _ = self.certa.explain(ltuple_series, rtuple_series, self.predict_fn,
                                                                   token="token" == self.explanation_granularity,
-                                                                  num_triangles=self.num_triangles)
+                                                                  num_triangles=self.num_triangles, max_predict=100)
         saliency = saliency_df.to_dict('list')
         if len(cfs) > 0:
             counterfactuals = [cfs.drop(
@@ -368,7 +442,7 @@ class PASE(Ellmer):
             traceback.print_exc()
             pass
 
-        return matching, saliency, [cf]
+        return {"prediction": matching, "saliency_explanation": saliency, "cf": cf}
 
 
 class PTSE(Ellmer):
@@ -430,6 +504,7 @@ class LLMERModel(ERModel):
     def __init__(self, model_type='azure_openai', temperature=0.01, max_length=512, fake=False, hf_repo=hf_models[0],
                  verbose=False, delegate=None):
         template = "given the record:\n{ltuple}\n and the record:\n{rtuple}\n do they refer to the same entity in the real world?\nreply yes or no"
+        # ellmer.utils.read_prompt("ellmer/prompts/er2.txt")
         self.prompt = PromptTemplate(
             input_variables=["ltuple", "rtuple"],
             template=template,
@@ -468,7 +543,7 @@ class LLMERModel(ERModel):
                     if c.startswith('rtable_'):
                         ert.append(str(c) + ':' + xc[c].astype(str).values[0])
                 question = self.prompt.format(ltuple='\n'.join(elt), rtuple='\n'.join(ert))
-                answer = self.llm(question)
+                answer = self.llm(question, er=True)
                 if self.verbose:
                     print(question)
                     print(answer)
