@@ -14,6 +14,7 @@ import os
 import json
 import ast
 from sklearn.metrics import f1_score
+from tqdm import tqdm
 
 hf_models = ['EleutherAI/gpt-neox-20b', 'tiiuae/falcon-7b-instruct', "Writer/camel-5b-hf", "databricks/dolly-v2-3b",
              "google/flan-t5-xxl", "tiiuae/falcon-40b", "tiiuae/falcon-7b", "internlm/internlm-chat-7b", "Qwen/Qwen-7B"]
@@ -34,7 +35,8 @@ class Ellmer:
 
     def predict(self, x, mojito=False):
         xcs = []
-        for idx in range(len(x)):
+        ranged = range(len(x))
+        for idx in tqdm(ranged, disable=False):
             xc = x.iloc[[idx]].copy()
             ltuple, rtuple = ellmer.utils.get_tuples(xc)
             matching = self.predict_tuples(ltuple, rtuple)
@@ -69,25 +71,25 @@ class CertaEllmer(Ellmer):
         self.delegate = delegate
         self.predict_fn = lambda x: self.delegate.predict(x)
 
-    def predict_and_explain(self, ltuple, rtuple):
+    def predict_and_explain(self, ltuple, rtuple, max_predict: int = -1, verbose: bool = False):
         pae = self.delegate.predict_tuples(ltuple, rtuple)
-        prediction = None
+        prediction = pae
         saliency_explanation = None
         cf_explanation = None
         if pae is not None:
             ltuple_series = self.get_row(ltuple, self.certa.lsource, prefix="ltable_")
             rtuple_series = self.get_row(rtuple, self.certa.rsource, prefix="rtable_")
-
             saliency_df, cf_summary, cfs, tri, _ = self.certa.explain(ltuple_series, rtuple_series, self.predict_fn,
                                                                       token="token" == self.explanation_granularity,
-                                                                      num_triangles=self.num_triangles)
+                                                                      num_triangles=self.num_triangles, verbose=verbose,
+                                                                      max_predict=max_predict)
             saliency_explanation = saliency_df.to_dict('list')
             if len(cfs) > 0:
-                cf_explanation = [cfs.drop(
+                cf_explanation = cfs.drop(
                     ['alteredAttributes', 'droppedValues', 'copiedValues', 'triangle', 'attr_count'],
-                    axis=1).T.to_dict()]
+                    axis=1).iloc[0].T.to_dict()
             else:
-                cf_explanation = [{}]
+                cf_explanation = {}
         return {"prediction": prediction, "saliency": saliency_explanation, "cf": cf_explanation}
 
     def get_row(self, row, df, prefix=''):
@@ -96,6 +98,18 @@ class CertaEllmer(Ellmer):
             new_k = k.replace(prefix, "")
             rc[new_k] = [v]
         result = df[df.drop(['id'], axis=1).isin(rc).all(axis=1)]
+        if len(result) == 0:
+            result = df.copy()
+            for k, v in rc.items():
+                result_new = result[result[k] == rc[k][0]]
+                if len(result_new) == 1:
+                    break
+                if len(result_new) == 0:
+                    continue
+                else:
+                    result = result_new
+            if len(result) > 1:
+                print(f'warning: found more than 1 item!({len(result)})')
         return result.iloc[0]
 
 
@@ -236,7 +250,7 @@ class GenericEllmer(Ellmer):
 
                 saliency_explanation = dict()
                 try:
-                    saliency = saliency_answer.content.split('```')[1]
+                    saliency = saliency_answer.split('```')[1]
                     saliency_dict = json.loads(saliency)
                     saliency_explanation = saliency_dict
                 except:
@@ -265,7 +279,7 @@ class GenericEllmer(Ellmer):
 
                 cf_explanation = dict()
                 try:
-                    cf_answer_content = cf_answer.content
+                    cf_answer_content = cf_answer
                     if '```' in cf_answer_content:
                         cf_answer_json = cf_answer_content.split('```')[1]
                     elif cf_answer_content.startswith("{"):
@@ -330,6 +344,8 @@ def parse_pase_answer(answer, llm):
                 prediction = answer['matching_prediction']
             elif "match" in answer.keys():
                 prediction = answer['match']
+            elif "prediction" in answer.keys():
+                prediction = answer['prediction']
             else:
                 print(f"cannot find 'matching' key in {answer}")
                 prediction = None
@@ -613,8 +629,12 @@ class PredictThenSelfExplainER:
         return self.__call__(question, er=True, explanation=True, prediction=prediction, temperature=self.temperature,
                              *args, **kwargs)
 
+    def predict_and_explain(self, ltuple, rtuple):
+        question = "record1:\n" + str(ltuple) + "\n record2:\n" + str(rtuple) + "\n"
+        return self.__call__(question, er=True, saliency=True, cf=True, explanation=True, ltuple=ltuple, rtuple=rtuple)
+
     def __call__(self, question, er: bool = False, saliency: bool = False, cf: bool = False,
-                 explanation=False, prediction=None, *args, **kwargs):
+                 explanation=False, prediction=None, ltuple='', rtuple='', *args, **kwargs):
         answers = dict()
         openai.api_type = "azure"
         openai.api_version = "2023-05-15"
@@ -632,7 +652,8 @@ class PredictThenSelfExplainER:
             )
             prediction = response["choices"][0]["message"]
             if "content" in prediction:
-                prediction = prediction["content"]
+                prediction_content = prediction["content"]
+                _, prediction = ellmer.utils.text_to_match(prediction_content, self.__call__)
         answers['prediction'] = prediction
 
         if explanation:
@@ -663,9 +684,17 @@ class PredictThenSelfExplainER:
                 messages=conversation, temperature=self.temperature
             )["choices"][0]["message"]
             if "content" in saliency_exp:
-                saliency_exp = saliency_exp["content"]
-            answers['saliency_exp'] = saliency_exp
-            conversation.append({"role": "assistant", "content": saliency_exp})
+                saliency_answer = saliency_exp["content"]
+                saliency_exp = dict()
+                try:
+                    saliency = saliency_answer.content.split('```')[1]
+                    saliency_dict = json.loads(saliency)
+                    saliency_exp = saliency_dict
+                except:
+                    pass
+            answers['saliency'] = saliency_exp
+
+            conversation.append({"role": "assistant", "content": str(saliency_exp)})
 
             # counterfactual explanation
             for prompt_message in ellmer.utils.read_prompt('ellmer/prompts/er-cf.txt'):
@@ -677,9 +706,72 @@ class PredictThenSelfExplainER:
                 messages=conversation, temperature=self.temperature
             )["choices"][0]["message"]
             if "content" in cf_exp:
-                cf_exp = cf_exp["content"]
-            answers['cf_exp'] = cf_exp
+                cf_answer = cf_exp["content"]
+                cf_exp = dict()
+                try:
+                    cf_answer_content = cf_answer.content
+                    if '```' in cf_answer_content:
+                        cf_answer_json = cf_answer_content.split('```')[1]
+                    elif cf_answer_content.startswith("{"):
+                        cf_answer_json = cf_answer_content
+                    elif "{" in cf_answer_content and "}" in cf_answer_content:
+                        cf_answer_json = cf_answer_content[
+                                         cf_answer_content.index("{"):cf_answer_content.rfind("}") + 1]
+                        # cf_answer_json = ''.join(cf_answer_content.split("{")[1].split("}")[0])
+                    else:
+                        cf_answer_json = cf_answer_content
+                    cf_dict = ast.literal_eval(cf_answer_json)
+                    keys = cf_dict.keys()
+                    if "record_after" in keys:
+                        cf_explanation = cf_dict["record_after"]
+
+                        if list(cf_explanation.keys())[0].startswith('rtable_'):
+                            cf_explanation = cf_explanation | ast.literal_eval(ltuple)
+                        else:
+                            cf_explanation = cf_explanation | ast.literal_eval(rtuple)
+                    elif "counterfactual_record" in keys:
+                        cf_explanation = cf_dict["counterfactual_record"]
+                    elif "counterfactual" in keys:
+                        cf_explanation = cf_dict['counterfactual']
+                    elif "record1" in keys and "record2" in keys:
+                        for k in cf_dict['record1'].keys():
+                            if not k.startswith('ltable_'):
+                                cf_dict['record1']['ltable_' + k] = cf_dict['record1'][k]
+                                cf_dict['record1'].pop(k)
+
+                        for k in cf_dict['record2'].keys():
+                            if not k.startswith('rtable_'):
+                                cf_dict['record2']['rtable_' + k] = cf_dict['record2'][k]
+                                cf_dict['record2'].pop(k)
+                        cf_exp = cf_dict['record1'] | cf_dict['record2']
+                    else:
+                        cf_exp = cf_dict
+                except:
+                    pass
+
+            answers['cf'] = cf_exp
         return answers
+
+    def predict(self, x, mojito=False):
+        xcs = []
+        for idx in range(len(x)):
+            xc = x.iloc[[idx]].copy()
+            ltuple, rtuple = ellmer.utils.get_tuples(xc)
+            question = "record1:\n" + str(ltuple) + "\n record2:\n" + str(rtuple) + "\n"
+            nomatch_score, match_score = ellmer.utils.text_to_match(self.__call__(question, er=True), self.__call__)
+            xc['nomatch_score'] = nomatch_score
+            xc['match_score'] = match_score
+            if mojito:
+                full_df = np.dstack((xc['nomatch_score'], xc['match_score'])).squeeze()
+                xc = full_df
+            xcs.append(xc)
+        return pd.concat(xcs, axis=0)
+
+    def evaluation(self, data_df):
+        predictions = self.predict(data_df)
+        predictions = predictions['match_score'].astype(int).values
+        labels = data_df['label'].astype(int).values
+        return f1_score(y_true=labels, y_pred=predictions)
 
 
 class PredictAndSelfExplainER:
@@ -691,6 +783,13 @@ class PredictAndSelfExplainER:
     def er(self, ltuple: str, rtuple: str, temperature=0.99):
         question = "record1:\n" + ltuple + "\n record2:\n" + rtuple + "\n"
         return self.__call__(question, er=True, temperature=temperature)
+
+    def predict_and_explain(self, ltuple, rtuple):
+        question = "record1:\n" + str(ltuple) + "\n record2:\n" + str(rtuple) + "\n"
+        prediction, saliency_explanation, cf_explanation = parse_pase_answer(self.__call__(question, er=True), self)
+        if prediction is None:
+            print(f'empty prediction!\nquestion:{question}\n')
+        return {"prediction": prediction, "saliency": saliency_explanation, "cf": cf_explanation}
 
     def __call__(self, question, er: bool = False, *args, **kwargs):
         openai.api_type = "azure"
@@ -711,6 +810,27 @@ class PredictAndSelfExplainER:
         except:
             answer = response["choices"][0]["message"]
         return answer
+
+    def predict(self, x, mojito=False):
+        xcs = []
+        for idx in range(len(x)):
+            xc = x.iloc[[idx]].copy()
+            ltuple, rtuple = ellmer.utils.get_tuples(xc)
+            question = "record1:\n" + str(ltuple) + "\n record2:\n" + str(rtuple) + "\n"
+            nomatch_score, match_score = ellmer.utils.text_to_match(self.__call__(question, er=True), self.__call__)
+            xc['nomatch_score'] = nomatch_score
+            xc['match_score'] = match_score
+            if mojito:
+                full_df = np.dstack((xc['nomatch_score'], xc['match_score'])).squeeze()
+                xc = full_df
+            xcs.append(xc)
+        return pd.concat(xcs, axis=0)
+
+    def evaluation(self, data_df):
+        predictions = self.predict(data_df)
+        predictions = predictions['match_score'].astype(int).values
+        labels = data_df['label'].astype(int).values
+        return f1_score(y_true=labels, y_pred=predictions)
 
 
 class AzureOpenAIERModel(ERModel):

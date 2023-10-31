@@ -1,5 +1,7 @@
 import argparse
 import json
+import traceback
+
 from scipy.stats import kendalltau
 from ellmer.utils import cosine_similarity
 import pandas as pd
@@ -87,62 +89,68 @@ def get_concordance(pred1_file, pred2_file):
     observations = []
     # for each prediction, identify:
     for idx in range(len(pred1_json)):
-        pred1 = pred1_json[idx]
-        pred2 = pred2_json[idx]
-        if 'id' not in pred1:
-            continue
-        if pred1['id'] != pred2['id']:
-            idx = max(int(pred1['id']), int(pred2['id']))
+        try:
             pred1 = pred1_json[idx]
             pred2 = pred2_json[idx]
-        observation = dict()
-        observation['id'] = idx
+            if 'id' not in pred1:
+                continue
+            if pred1['id'] != pred2['id']:
+                idx = max(int(pred1['id']), int(pred2['id']))
+                pred1 = pred1_json[idx]
+                pred2 = pred2_json[idx]
+            observation = dict()
+            observation['id'] = idx
 
-        # the rate of agreement between predictions
-        mnm1 = get_prediction(pred1)
-        observation['pred1'] = mnm1
-        mnm2 = get_prediction(pred2)
-        observation['pred2'] = mnm2
+            # the rate of agreement between predictions
+            mnm1 = get_prediction(pred1)
+            observation['pred1'] = mnm1
+            mnm2 = get_prediction(pred2)
+            observation['pred2'] = mnm2
 
-        if mnm1 is None or mnm2 is None:
-            continue
+            if mnm1 is None or mnm2 is None:
+                continue
 
-        # the rate of agreement between each set of predictions and the ground truth
-        observation['label'] = bool(pred1['label'])
+            # the rate of agreement between each set of predictions and the ground truth
+            observation['label'] = bool(pred1['label'])
 
-        # how many match / non-match predictions respectively, for each list (pred1, pred2, labels)
-        if mnm2 == mnm1:
-            agree = True
-        else:
-            agree = False
-        observation['agree'] = agree
+            # how many match / non-match predictions respectively, for each list (pred1, pred2, labels)
+            if mnm2 == mnm1:
+                agree = True
+            else:
+                agree = False
+            observation['agree'] = agree
 
-        # for saliency explanations, identify
-        # the avg kendall-tau between saliency explanations
-        sal1 = get_saliency(pred1)
-        sal2 = get_saliency(pred2)
+            # for saliency explanations, identify
+            # the avg kendall-tau between saliency explanations
+            sal1 = get_saliency(pred1)
+            sal2 = get_saliency(pred2)
 
-        if sal1 is not None and sal2 is not None:
-            sal1_ranked_keys = list(
-                {k: v for k, v in sorted(sal1.items(), key=lambda item: item[1], reverse=True)}.keys())
-            sal2_ranked_keys = list(
-                {k: v for k, v in sorted(sal2.items(), key=lambda item: item[1], reverse=True)}.keys())
-            try:
-                kt = kendalltau(sal1_ranked_keys, sal2_ranked_keys).statistic
-            except:
-                kt = 0
-            observation['kt'] = kt
+            if sal1 is not None and sal2 is not None:
+                sal1_ranked_keys = list(
+                    {k: v for k, v in sorted(sal1.items(), key=lambda item: item[1], reverse=True)}.keys())
+                sal2_ranked_keys = list(
+                    {k: v for k, v in sorted(sal2.items(), key=lambda item: item[1], reverse=True)}.keys())
+                msz = min(len(sal1_ranked_keys), len(sal2_ranked_keys))
+                try:
+                    kt = kendalltau(sal1_ranked_keys[:msz], sal2_ranked_keys[:msz]).statistic
+                except:
+                    kt = 0
+                observation['kt'] = kt
 
-        # for counterfactual explanations, identify
-        cf1 = get_cf(pred1)
-        cf2 = get_cf(pred2)
-        # the similarity between the counterfactuals using different similarity metrics
-        if cf1 is not None and cf2 is not None:
-            observation['cos_sim'] = cosine_similarity(list(cf1.values()), list(cf2.values()))[0]
+            # for counterfactual explanations, identify
+            cf1 = get_cf(pred1)
+            cf2 = get_cf(pred2)
 
-        # examples that are particularly dissimilar (probably as the least similar 5% perc)
-        # the similarity between counterfactuals in different groups (match, non-matching, disagree with label, etc.)
-        observations.append(pd.Series(observation))
+            # the similarity between the counterfactuals using different similarity metrics
+            if cf1 is not None and cf2 is not None:
+                observation['cos_sim'] = cosine_similarity(list(cf1.values()), list(cf2.values()))[0]
+
+            # examples that are particularly dissimilar (probably as the least similar 5% perc)
+            # the similarity between counterfactuals in different groups (match, non-matching, disagree with label, etc.)
+            observations.append(pd.Series(observation))
+        except:
+            traceback.print_exc()
+            pass
 
     obs_df = pd.concat(observations, axis=1).T
     print(f"pred1-pred2 eq rate: {eq_ratio(obs_df['pred1'].values, obs_df['pred2'].values)}")

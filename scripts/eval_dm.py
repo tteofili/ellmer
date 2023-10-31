@@ -11,12 +11,13 @@ import ellmer.metrics
 from time import sleep, time
 import json
 import traceback
+from tqdm import tqdm
 
 cache = "sqlite"
 samples = 10
 num_triangles = 10
 explanation_granularity = "attribute"
-quantitative = False
+quantitative = True
 
 # setup langchain cache
 if cache == "memory":
@@ -25,7 +26,7 @@ elif cache == "sqlite":
     langchain.llm_cache = SQLiteCache(database_path=".langchain.db")
 
 llm_configs = [
-    {"model_type": "hf", "model_name": "tiiuae/falcon-7b-instruct", "deployment_name": "", "tag": "hf"},  # 1
+    # {"model_type": "hf", "model_name": "tiiuae/falcon-7b-instruct", "deployment_name": "", "tag": "hf"},  # 1
     {"model_type": "azure_openai", "model_name": "gpt-3.5-turbo", "deployment_name": "gpt-35-turbo",  # 2
      "tag": "azure_openai"},
 ]
@@ -56,7 +57,7 @@ for llm_config in llm_configs:
                                       prompts={"ptse": {"er": "ellmer/prompts/er.txt"}})
 
     # for each dataset in deepmatcher datasets
-    dataset_names = ['beers', 'abt_buy', 'fodo_zaga', 'walmart_amazon']
+    dataset_names = ['abt_buy', 'fodo_zaga', 'walmart_amazon']
     base_dir = '/Users/tteofili/dev/cheapER/datasets/'
 
     for d in dataset_names:
@@ -88,7 +89,8 @@ for llm_config in llm_configs:
 
             # generate predictions and explanations
             test_data_df = test_df[:samples]
-            for idx in range(len(test_data_df)):
+            ranged = range(len(test_data_df))
+            for idx in tqdm(ranged, disable=False):
                 try:
                     rand_row = test_df.iloc[[idx]]
                     ltuple, rtuple = ellmer.utils.get_tuples(rand_row)
@@ -118,7 +120,7 @@ for llm_config in llm_configs:
             print(f'{key} data generated in {total_time}s')
 
             if quantitative:
-                # generate quantitative explainability metrics for each set of generated explanations:
+                # generate quantitative explainability metrics for each set of generated explanations
 
                 # generate saliency metrics
                 faithfulness = ellmer.utils.get_faithfulness([key], llm.evaluation, expdir, test_data_df)
@@ -139,4 +141,6 @@ for llm_config in llm_configs:
             print(f'concordance statistics for {p1_name} - {p2_name}')
             observations = ellmer.metrics.get_concordance(p1_file, p2_file)
             print(f'{observations}')
-            observations.to_csv(f'{d}_{p1_name}_{p2_name}.csv')
+            obs_dir = f'experiments/concordance/{d}//{datetime.now():%Y%m%d}/{datetime.now():%H:%M}'
+            os.makedirs(obs_dir, exist_ok=True)
+            observations.to_csv(f'{obs_dir}/{p1_name}_{p2_name}.csv')
