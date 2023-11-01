@@ -13,10 +13,10 @@ import json
 import traceback
 from tqdm import tqdm
 
-cache = "sqlite"
-samples = 10
+cache = "memory"
+samples = 5
 num_triangles = 10
-explanation_granularity = "attribute"
+explanation_granularity = "token"
 quantitative = True
 
 # setup langchain cache

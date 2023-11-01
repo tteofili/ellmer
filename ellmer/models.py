@@ -71,7 +71,7 @@ class CertaEllmer(Ellmer):
         self.delegate = delegate
         self.predict_fn = lambda x: self.delegate.predict(x)
 
-    def predict_and_explain(self, ltuple, rtuple, max_predict: int = -1, verbose: bool = False):
+    def predict_and_explain(self, ltuple, rtuple, max_predict: int = 40, verbose: bool = False):
         pae = self.delegate.predict_tuples(ltuple, rtuple)
         prediction = pae
         saliency_explanation = None
@@ -250,7 +250,7 @@ class GenericEllmer(Ellmer):
 
                 saliency_explanation = dict()
                 try:
-                    saliency = saliency_answer.split('```')[1]
+                    saliency = saliency_answer.replace('`','').split('```')[1]
                     saliency_dict = json.loads(saliency)
                     saliency_explanation = saliency_dict
                 except:
@@ -279,7 +279,7 @@ class GenericEllmer(Ellmer):
 
                 cf_explanation = dict()
                 try:
-                    cf_answer_content = cf_answer
+                    cf_answer_content = cf_answer.replace('`','')
                     if '```' in cf_answer_content:
                         cf_answer_json = cf_answer_content.split('```')[1]
                     elif cf_answer_content.startswith("{"):
@@ -334,7 +334,7 @@ def parse_pase_answer(answer, llm):
             if answer.startswith('json'):
                 answer = answer[4:]
         elif "\n\n{" in answer and "}\n\n" in answer:
-            answer = ''.join(answer.split("\n\n{")[1].split("}\n\n")[0])
+            answer = '{'+''.join(answer.split("\n\n{")[1].split("}\n\n")[0])+'}'
         # decode the json content
         try:
             answer = json.loads(answer)

@@ -1,0 +1,4 @@
+system:You are an expert assistant for Entity Resolution tasks.
+user:Given a pair of records, return "yes" if the records match or "no" if they don't. Your answer will be one of "yes", "no".
+assistant:Ok, I will reply with just "yes" or "no", now give me the two records.
+user:given the record:\n{ltuple}\n and the record:\n{rtuple}\n do they refer to the same entity in the real world?\nreply yes or no
