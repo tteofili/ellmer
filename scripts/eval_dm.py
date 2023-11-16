@@ -108,16 +108,10 @@ for llm_config in llm_configs:
 
             total_time = time() - start_time
 
-            all_llm_results[key] = {"data": curr_llm_results, "total_time": total_time}
-
             expdir = f'./experiments/{d}/{datetime.now():%Y%m%d}/{datetime.now():%H:%M}/'
             os.makedirs(expdir, exist_ok=True)
-            output_file_path = expdir + key + '_results.json'
-            with open(output_file_path, 'w') as fout:
-                json.dump(curr_llm_results, fout)
 
-            result_files.append((key, output_file_path))
-            print(f'{key} data generated in {total_time}s')
+            metrics_results = []
 
             if quantitative:
                 # generate quantitative explainability metrics for each set of generated explanations
@@ -129,6 +123,17 @@ for llm_config in llm_configs:
                 # generate counterfactual metrics
                 cf_metrics = ellmer.utils.get_cf_metrics([key], llm.predict, expdir, test_data_df)
                 print(f'{key} cf_metrics({key}):{cf_metrics}')
+
+                metrics_results.append({"faithfulness": faithfulness, "counterfactual_metrics": cf_metrics})
+
+            all_llm_results[key] = {"data": curr_llm_results, "total_time": total_time, "metrics": metrics_results}
+
+            output_file_path = expdir + key + '_results.json'
+            with open(output_file_path, 'w') as fout:
+                json.dump(all_llm_results, fout)
+
+            result_files.append((key, output_file_path))
+            print(f'{key} data generated in {total_time}s')
 
         # generate concordance statistics for each pair of results
         for pair in itertools.combinations(result_files, 2):
