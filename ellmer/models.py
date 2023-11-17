@@ -4,6 +4,7 @@ from langchain.prompts import ChatPromptTemplate
 from langchain import PromptTemplate, HuggingFaceHub, OpenAI
 from langchain.chains import LLMChain
 from langchain.chat_models import AzureChatOpenAI
+from langchain.llms import HuggingFacePipeline, LlamaCpp
 import random
 from certa.models.ermodel import ERModel
 import numpy as np
@@ -15,6 +16,8 @@ import json
 import ast
 from sklearn.metrics import f1_score
 from tqdm import tqdm
+import torch
+from transformers import BitsAndBytesConfig, AutoModelForCausalLM, AutoTokenizer, pipeline
 
 hf_models = ['EleutherAI/gpt-neox-20b', 'tiiuae/falcon-7b-instruct', "Writer/camel-5b-hf", "databricks/dolly-v2-3b",
              "google/flan-t5-xxl", "tiiuae/falcon-40b", "tiiuae/falcon-7b", "internlm/internlm-chat-7b", "Qwen/Qwen-7B"]
@@ -250,7 +253,7 @@ class GenericEllmer(Ellmer):
 
                 saliency_explanation = dict()
                 try:
-                    saliency = saliency_answer.replace('`','').split('```')[1]
+                    saliency = saliency_answer.replace('`', '').split('```')[1]
                     saliency_dict = json.loads(saliency)
                     saliency_explanation = saliency_dict
                 except:
@@ -279,7 +282,7 @@ class GenericEllmer(Ellmer):
 
                 cf_explanation = dict()
                 try:
-                    cf_answer_content = cf_answer.replace('`','')
+                    cf_answer_content = cf_answer.replace('`', '')
                     if '```' in cf_answer_content:
                         cf_answer_json = cf_answer_content.split('```')[1]
                     elif cf_answer_content.startswith("{"):
@@ -334,7 +337,7 @@ def parse_pase_answer(answer, llm):
             if answer.startswith('json'):
                 answer = answer[4:]
         elif "\n\n{" in answer and "}\n\n" in answer:
-            answer = '{'+''.join(answer.split("\n\n{")[1].split("}\n\n")[0])+'}'
+            answer = '{' + ''.join(answer.split("\n\n{")[1].split("}\n\n")[0]) + '}'
         # decode the json content
         try:
             answer = json.loads(answer)
@@ -872,3 +875,44 @@ class AzureOpenAIERModel(ERModel):
                 xc = full_df
             xcs.append(xc)
         return pd.concat(xcs, axis=0)
+
+
+def falcon_pipeline(model_id="vilsonrodrigues/falcon-7b-instruct-sharded"):
+    quantization_config = BitsAndBytesConfig(
+        load_in_4bit=True,
+        bnb_4bit_compute_dtype=torch.float16,
+        bnb_4bit_quant_type="nf4",
+        bnb_4bit_use_double_quant=True,
+    )
+    model_4bit = AutoModelForCausalLM.from_pretrained(
+        model_id,
+        device_map="auto",
+        quantization_config=quantization_config,
+    )
+
+    tokenizer = AutoTokenizer.from_pretrained(model_id)
+    fpip = pipeline(
+        "text-generation",
+        model=model_4bit,
+        tokenizer=tokenizer,
+        use_cache=True,
+        device_map="auto",
+        max_length=296,
+        do_sample=True,
+        top_k=10,
+        num_return_sequences=1,
+        eos_token_id=tokenizer.eos_token_id,
+        pad_token_id=tokenizer.eos_token_id,
+    )
+    return HuggingFacePipeline(pipeline=fpip)
+
+
+def llama2_llm(verbose=True, quantized_model_path='ggml-model-q4_0.gguf', temperature=0.0, top_p=1, n_ctx=6000):
+    llama2_llm = LlamaCpp(
+        model_path=quantized_model_path,
+        temperature=temperature,
+        top_p=top_p,
+        n_ctx=n_ctx,
+        verbose=verbose,
+    )
+    return llama2_llm
