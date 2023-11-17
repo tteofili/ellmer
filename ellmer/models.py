@@ -184,7 +184,7 @@ class GenericEllmer(Ellmer):
             template = ChatPromptTemplate.from_messages(conversation)
             if self.model_type in ['hf', 'falcon', 'llama2']:
                 chain = LLMChain(llm=self.llm, prompt=template)
-                content = chain.predict(ltuple=ltuple, rtuple=rtuple)
+                content = chain.predict(ltuple=ltuple, rtuple=rtuple, feature=self.explanation_granularity)
             else:
                 messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple, rtuple=rtuple)
                 answer = self.llm(messages)
