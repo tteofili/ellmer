@@ -133,6 +133,10 @@ class GenericEllmer(Ellmer):
                                        openai_api_version=model_version, temperature=temperature)
         elif model_type == 'delegate':
             self.llm = delegate
+        elif model_type == 'falcon':
+            self.llm = falcon_pipeline(model_id=model_name)
+        elif model_type == 'llama2':
+            self.llm = llama2_llm(verbose=verbose)
         self.verbose = verbose
         self.explanation_granularity = explanation_granularity
         if "self" == explainer_fn:
@@ -178,7 +182,7 @@ class GenericEllmer(Ellmer):
             question = "record1:\n{ltuple}\n record2:\n{rtuple}\n"
             conversation.append(("user", question))
             template = ChatPromptTemplate.from_messages(conversation)
-            if "hf" == self.model_type:
+            if self.model_type in ['hf', 'falcon', 'llama2']:
                 chain = LLMChain(llm=self.llm, prompt=template)
                 content = chain.predict(ltuple=ltuple, rtuple=rtuple)
             else:
@@ -197,7 +201,7 @@ class GenericEllmer(Ellmer):
             question = "record1:\n{ltuple}\n record2:\n{rtuple}\n"
             conversation.append(("user", question))
             template = ChatPromptTemplate.from_messages(conversation)
-            if "hf" == self.model_type:
+            if self.model_type in ['hf', 'falcon', 'llama2']:
                 chain = LLMChain(llm=self.llm, prompt=template)
                 er_answer = chain.predict(ltuple=ltuple, rtuple=rtuple)
                 print(er_answer)
@@ -219,7 +223,7 @@ class GenericEllmer(Ellmer):
                 for prompt_message in ellmer.utils.read_prompt(ptse_prompts["why"]):
                     conversation.append((prompt_message[0], prompt_message[1]))
                 template = ChatPromptTemplate.from_messages(conversation)
-                if "hf" == self.model_type:
+                if self.model_type in ['hf', 'falcon', 'llama2']:
                     chain = LLMChain(llm=self.llm, prompt=template)
                     why_answer = chain.predict(ltuple=ltuple, rtuple=rtuple, prediction=prediction)
                     print(why_answer)
@@ -238,7 +242,7 @@ class GenericEllmer(Ellmer):
                 for prompt_message in ellmer.utils.read_prompt(ptse_prompts["saliency"]):
                     conversation.append((prompt_message[0], prompt_message[1]))
                 template = ChatPromptTemplate.from_messages(conversation)
-                if "hf" == self.model_type:
+                if self.model_type in ['hf', 'falcon', 'llama2']:
                     chain = LLMChain(llm=self.llm, prompt=template)
                     saliency_answer = chain.predict(ltuple=ltuple, rtuple=rtuple, prediction=prediction,
                                                     feature=self.explanation_granularity)
@@ -267,7 +271,7 @@ class GenericEllmer(Ellmer):
                     conversation.append((prompt_message[0], prompt_message[1]))
                 template = ChatPromptTemplate.from_messages(conversation)
 
-                if "hf" == self.model_type:
+                if self.model_type in ['hf', 'falcon', 'llama2']:
                     chain = LLMChain(llm=self.llm, prompt=template)
                     cf_answer = chain.predict(ltuple=ltuple, rtuple=rtuple, prediction=prediction,
                                               feature=self.explanation_granularity)

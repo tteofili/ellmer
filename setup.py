@@ -18,6 +18,15 @@ setuptools.setup(
           'numpy',
           'certa',
           'langchain',
+          'llama-cpp-python',
+          'bitsandbytes',
+          'transformers',
+          'peft',
+          'accelerate',
+          'einops',
+          'safetensors',
+          'torch',
+          'xformers'
       ],
     classifiers=[
         "Programming Language :: Python :: 3",

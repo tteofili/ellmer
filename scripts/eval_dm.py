@@ -26,8 +26,9 @@ elif cache == "sqlite":
     langchain.llm_cache = SQLiteCache(database_path=".langchain.db")
 
 llm_configs = [
-    # {"model_type": "hf", "model_name": "tiiuae/falcon-7b-instruct", "deployment_name": "", "tag": "hf"},  # 1
-    {"model_type": "azure_openai", "model_name": "gpt-3.5-turbo", "deployment_name": "gpt-35-turbo",  # 2
+    {"model_type": "llama2", "model_name": "llama2_quantized", "deployment_name": "local", "tag": "llama2"},  # 2
+    {"model_type": "falcon", "model_name": "vilsonrodrigues/falcon-7b-instruct-sharded", "deployment_name": "local", "tag": "falcon"},  # 1
+    {"model_type": "azure_openai", "model_name": "gpt-3.5-turbo", "deployment_name": "gpt-35-turbo",  # 3
      "tag": "azure_openai"},
 ]
 for llm_config in llm_configs:
