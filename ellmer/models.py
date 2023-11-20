@@ -155,7 +155,7 @@ class GenericEllmer(Ellmer):
             question = "record1:\n{ltuple}\n record2:\n{rtuple}\n"
             conversation.append(("user", question))
             template = ChatPromptTemplate.from_messages(conversation)
-            if "hf" == self.model_type:
+            if self.model_type in ['hf', 'falcon', 'llama2']:
                 chain = LLMChain(llm=self.llm, prompt=template)
                 er_answer = chain.predict(ltuple=ltuple, rtuple=rtuple)
             else:
