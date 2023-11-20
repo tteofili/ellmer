@@ -84,7 +84,7 @@ class CertaEllmer(Ellmer):
             rtuple_series = self.get_row(rtuple, self.certa.rsource, prefix="rtable_")
             saliency_df, cf_summary, cfs, tri, _ = self.certa.explain(ltuple_series, rtuple_series, self.predict_fn,
                                                                       token="token" == self.explanation_granularity,
-                                                                      num_triangles=self.num_triangles, verbose=verbose,
+                                                                      num_triangles=self.num_triangles,
                                                                       max_predict=max_predict)
             saliency_explanation = saliency_df.to_dict('list')
             if len(cfs) > 0:
