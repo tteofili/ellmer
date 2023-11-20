@@ -67,7 +67,10 @@ def text_to_match(answer, llm_fn, n=0):
             no_match_score = 1
         elif n == 0:
             template = "summarize \"response\" as yes or no"
-            summarized_answer = llm_fn(template.replace("response", answer))
+            try:
+                summarized_answer = llm_fn(template.replace("response", answer))
+            except:
+                summarized_answer = "false"
             summarized += 1
             snms, sms = text_to_match(summarized_answer, llm_fn, n=1)
             if snms == 0 and sms == 0:
@@ -237,7 +240,8 @@ def get_faithfulness(saliency_names: list, eval_fn, base_dir: str, test_set_df: 
                 model_scores.append(evaluation)
             except Exception as e:
                 print(f'skipped faithfulness for {saliency}: {e}')
-                break
+                traceback.print_exc()
+                model_scores.append(evaluation)
         if len(thresholds) == len(model_scores):
             auc_sal = auc(thresholds, model_scores)
             aucs[saliency] = auc_sal
@@ -303,7 +307,7 @@ def get_cf_metrics(explainer_names: list, predict_fn, base_dir, test_set_df: pd.
 
 def get_validity(predict_fn, counterfactuals, original):
     rowsc_df = pd.DataFrame(counterfactuals.copy())
-    predicted = predict_fn(rowsc_df)['match_score'].values
+    predicted = predict_fn(rowsc_df)['match_score'].values[0]
     return 1 - abs(predicted - original)
 
 

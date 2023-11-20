@@ -115,8 +115,6 @@ for llm_config in llm_configs:
             with open(output_file_path, 'w') as fout:
                 json.dump(llm_results, fout)
 
-            metrics_results = []
-
             if quantitative:
                 # generate quantitative explainability metrics for each set of generated explanations
 
@@ -128,13 +126,13 @@ for llm_config in llm_configs:
                 cf_metrics = ellmer.utils.get_cf_metrics([key], llm.predict, expdir, test_data_df)
                 print(f'{key} cf_metrics({key}):{cf_metrics}')
 
-                metrics_results.append({"faithfulness": faithfulness, "counterfactual_metrics": cf_metrics})
+                metrics_results = {"faithfulness": faithfulness, "counterfactual_metrics": cf_metrics}
 
-            llm_results = {"data": curr_llm_results, "total_time": total_time, "metrics": metrics_results}
+                llm_results = {"data": curr_llm_results, "total_time": total_time, "metrics": metrics_results}
 
-            output_file_path = expdir + key + '_results.json'
-            with open(output_file_path, 'w') as fout:
-                json.dump(llm_results, fout)
+                output_file_path = expdir + key + '_results.json'
+                with open(output_file_path, 'w') as fout:
+                    json.dump(llm_results, fout)
 
             result_files.append((key, output_file_path))
             print(f'{key} data generated in {total_time}s')
