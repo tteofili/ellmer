@@ -237,6 +237,7 @@ class GenericEllmer(Ellmer):
                     why_answer = answer.content
                 if self.verbose:
                     print(why_answer)
+                why = why_answer
                 conversation.append(("assistant", why_answer))
 
             # saliency explanation
