@@ -221,7 +221,14 @@ def get_faithfulness(saliency_names: list, eval_fn, base_dir: str, test_set_df: 
             for i in range(len(predictions)):
                 if int(predictions[i]) == 0:
                     reverse = False
-                attributes_dict = saliencies[i]
+                attributes_dict = dict()
+                sal_dict = saliencies[i]
+                for k,v in sal_dict.items():
+                    try:
+                        attributes_dict[k] = float(v)
+                    except:
+                        print(f'{v} is not a float in {sal_dict}')
+                        attributes_dict[k] = 0
                 if saliency.startswith('certa'):
                     sorted_attributes_dict = sorted(attributes_dict.items(), key=operator.itemgetter(1),
                                                     reverse=True)
