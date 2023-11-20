@@ -13,7 +13,7 @@ import json
 import traceback
 from tqdm import tqdm
 
-cache = "memory"
+cache = "sqlite"
 samples = 15
 num_triangles = 10
 explanation_granularity = "attribute"
@@ -108,6 +108,11 @@ for llm_config in llm_configs:
 
             expdir = f'./experiments/{d}/{datetime.now():%Y%m%d}/{datetime.now():%H_%M}/'
             os.makedirs(expdir, exist_ok=True)
+            all_llm_results[key] = {"data": curr_llm_results, "total_time": total_time}
+
+            output_file_path = expdir + key + '_results.json'
+            with open(output_file_path, 'w') as fout:
+                json.dump(all_llm_results, fout)
 
             metrics_results = []
 
