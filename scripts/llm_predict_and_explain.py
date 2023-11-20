@@ -52,7 +52,7 @@ total_time = time() - start_time
 
 results.append({"total_time": total_time})
 
-expdir = f'./experiments/{dataset_name}/{datetime.now():%Y%m%d}/{datetime.now():%H:%M}/'
+expdir = f'./experiments/{dataset_name}/{datetime.now():%Y%m%d}/{datetime.now():%H_%M}/'
 os.makedirs(expdir, exist_ok=True)
 with open(expdir + 'pase_results.json', 'w') as fout:
     json.dump(results, fout)

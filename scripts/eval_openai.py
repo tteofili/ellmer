@@ -107,7 +107,7 @@ for llm_config in llm_configs:
 
             total_time = time() - start_time
 
-            expdir = f'./experiments/{d}/{datetime.now():%Y%m%d}/{datetime.now():%H:%M}/'
+            expdir = f'./experiments/{d}/{datetime.now():%Y%m%d}/{datetime.now():%H_%M}/'
             os.makedirs(expdir, exist_ok=True)
 
             metrics_results = []
@@ -145,6 +145,6 @@ for llm_config in llm_configs:
             print(f'concordance statistics for {p1_name} - {p2_name}')
             observations = ellmer.metrics.get_concordance(p1_file, p2_file)
             print(f'{observations}')
-            obs_dir = f'experiments/concordance/{d}//{datetime.now():%Y%m%d}/{datetime.now():%H:%M}'
+            obs_dir = f'experiments/concordance/{d}//{datetime.now():%Y%m%d}/{datetime.now():%H_%M}'
             os.makedirs(obs_dir, exist_ok=True)
             observations.to_csv(f'{obs_dir}/{p1_name}_{p2_name}.csv')
