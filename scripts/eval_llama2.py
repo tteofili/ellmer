@@ -79,8 +79,8 @@ for llm_config in llm_configs:
         }
 
         result_files = []
-        all_llm_results = dict()
         for key, llm in ellmers.items():
+            llm_results = dict()
             print(f'{key} on {d}')
             curr_llm_results = []
             start_time = time()
@@ -108,11 +108,11 @@ for llm_config in llm_configs:
 
             expdir = f'./experiments/{d}/{datetime.now():%Y%m%d}/{datetime.now():%H_%M}/'
             os.makedirs(expdir, exist_ok=True)
-            all_llm_results[key] = {"data": curr_llm_results, "total_time": total_time}
+            llm_results = {"data": curr_llm_results, "total_time": total_time}
 
             output_file_path = expdir + key + '_results.json'
             with open(output_file_path, 'w') as fout:
-                json.dump(all_llm_results, fout)
+                json.dump(llm_results, fout)
 
             metrics_results = []
 
@@ -129,11 +129,11 @@ for llm_config in llm_configs:
 
                 metrics_results.append({"faithfulness": faithfulness, "counterfactual_metrics": cf_metrics})
 
-            all_llm_results[key] = {"data": curr_llm_results, "total_time": total_time, "metrics": metrics_results}
+            llm_results = {"data": curr_llm_results, "total_time": total_time, "metrics": metrics_results}
 
             output_file_path = expdir + key + '_results.json'
             with open(output_file_path, 'w') as fout:
-                json.dump(all_llm_results, fout)
+                json.dump(llm_results, fout)
 
             result_files.append((key, output_file_path))
             print(f'{key} data generated in {total_time}s')

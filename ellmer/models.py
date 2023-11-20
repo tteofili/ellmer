@@ -361,6 +361,10 @@ def parse_pase_answer(answer, llm):
                 prediction = answer['match']
             elif "prediction" in answer.keys():
                 prediction = answer['prediction']
+            elif 'same_entity' in answer.keys():
+                prediction = answer['same_entity']
+            elif 'entity_resolution' in answer.keys():
+                prediction = answer['entity_resolution']
             else:
                 print(f"cannot find 'matching' key in {answer}")
                 prediction = None
@@ -382,6 +386,10 @@ def parse_pase_answer(answer, llm):
                     cf = answer['counterfactual_explanation']
                 elif "counterfactual_explanation_table" in answer.keys():
                     cf = answer['counterfactual_explanation_table']
+                elif "attribute_counterfactual" in answer.keys():
+                    cf = answer['attribute_counterfactual']
+                elif "token_counterfactual" in answer.keys():
+                    cf = answer['token_counterfactual']
             except:
                 pass
         except Exception as d:

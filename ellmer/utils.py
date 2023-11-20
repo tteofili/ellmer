@@ -209,7 +209,7 @@ def get_faithfulness(saliency_names: list, eval_fn, base_dir: str, test_set_df: 
             results_json = json.load(fd)
         saliencies = []
         predictions = []
-        for v in results_json:
+        for v in results_json['data']:
             saliencies.append(v['saliency'])
             predictions.append(v['prediction'])
         for threshold in thresholds:
@@ -254,7 +254,7 @@ def get_cf_metrics(explainer_names: list, predict_fn, base_dir, test_set_df: pd.
         cfs = []
         predictions = []
         indexes = []
-        for v in results_json:
+        for v in results_json['data']:
             cfs.append(v['cfs'])
             predictions.append(v['prediction'])
             indexes.append(v['id'])
