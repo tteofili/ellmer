@@ -112,7 +112,7 @@ def concordance_correlation(y_pred, y_true):
 
 def completion_with_backoff(deployment_id="gpt-35-turbo", model="gpt-3.5-turbo", messages=None, temperature=0,
                             initial_delay=1, max_retries=10, exponential_base: float = 2, jitter: bool = True,
-                            errors: tuple = (openai.error.RateLimitError, openai.error.Timeout), ):
+                            errors: tuple = (openai.RateLimitError, openai.Timeout), ):
     num_retries = 0
     delay = initial_delay
 

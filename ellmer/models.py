@@ -189,6 +189,8 @@ class GenericEllmer(Ellmer):
                 messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple, rtuple=rtuple)
                 answer = self.llm(messages)
                 content = answer.content
+            if self.verbose:
+                print(content)
             prediction, saliency_explanation, cf_explanation = parse_pase_answer(content, self.llm)
             if prediction is None:
                 print(f'empty prediction!\nquestion{question}\nconversation{conversation}')
@@ -204,12 +206,12 @@ class GenericEllmer(Ellmer):
             if self.model_type in ['hf', 'falcon', 'llama2']:
                 chain = LLMChain(llm=self.llm, prompt=template)
                 er_answer = chain.predict(ltuple=ltuple, rtuple=rtuple)
-                print(er_answer)
             else:
                 messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple, rtuple=rtuple)
                 answer = self.llm(messages)
                 er_answer = answer.content
-
+            if self.verbose:
+                print(er_answer)
             # parse answer into prediction
             _, prediction = ellmer.utils.text_to_match(er_answer, self.llm)
             conversation.append(("assistant", er_answer))
@@ -226,7 +228,6 @@ class GenericEllmer(Ellmer):
                 if self.model_type in ['hf', 'falcon', 'llama2']:
                     chain = LLMChain(llm=self.llm, prompt=template)
                     why_answer = chain.predict(ltuple=ltuple, rtuple=rtuple, prediction=prediction)
-                    print(why_answer)
                 else:
                     messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple,
                                                         rtuple=rtuple,
@@ -234,7 +235,8 @@ class GenericEllmer(Ellmer):
 
                     answer = self.llm(messages)
                     why_answer = answer.content
-
+                if self.verbose:
+                    print(why_answer)
                 conversation.append(("assistant", why_answer))
 
             # saliency explanation
@@ -246,22 +248,26 @@ class GenericEllmer(Ellmer):
                     chain = LLMChain(llm=self.llm, prompt=template)
                     saliency_answer = chain.predict(ltuple=ltuple, rtuple=rtuple, prediction=prediction,
                                                     feature=self.explanation_granularity)
-                    print(saliency_answer)
                 else:
                     messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple,
                                                         rtuple=rtuple,
                                                         prediction=prediction)
-
                     answer = self.llm(messages)
                     saliency_answer = answer.content
-
+                if self.verbose:
+                    print(saliency_answer)
                 saliency_explanation = dict()
                 try:
                     saliency = saliency_answer.replace('`', '').split('```')[1]
                     saliency_dict = json.loads(saliency)
                     saliency_explanation = saliency_dict
                 except:
-                    pass
+                    try:
+                        saliency = saliency_answer[saliency_answer.index("{"):saliency_answer.rfind("}") + 1]
+                        saliency_dict = json.loads(saliency)
+                        saliency_explanation = saliency_dict
+                    except:
+                        pass
 
                 conversation.append(("assistant", "{" + str(saliency_explanation) + "}"))
 
@@ -283,7 +289,8 @@ class GenericEllmer(Ellmer):
 
                     answer = self.llm(messages)
                     cf_answer = answer.content
-
+                if self.verbose:
+                    print(cf_answer)
                 cf_explanation = dict()
                 try:
                     cf_answer_content = cf_answer.replace('`', '')
