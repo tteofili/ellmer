@@ -82,24 +82,44 @@ def get_concordance(pred1_file, pred2_file):
     with open(pred2_file) as json2_file:
         pred2_json = json.load(json2_file)
 
+    if 'data' in pred1_json:
+        pred1_json = pred1_json['data']
+
+    if 'data' in pred2_json:
+        pred2_json = pred2_json['data']
+
     # transform predictions from text to boolean, where necessary
     make_predictions_boolean(pred1_json)
     make_predictions_boolean(pred2_json)
 
+    p1_ids = [p['id'] for p in pred1_json]
+    p2_ids = [p['id'] for p in pred2_json]
+
+    pids = set(p1_ids).intersection(set(p2_ids))
+
     observations = []
     # for each prediction, identify:
-    for idx in range(len(pred1_json)):
+    lidx = 0
+    ridx = 0
+
+    for pid in pids:
         try:
-            pred1 = pred1_json[idx]
-            pred2 = pred2_json[idx]
-            if 'id' not in pred1:
+            pred1 = None
+            for cpr1 in pred1_json[lidx:]:
+                if cpr1['id'] == pid:
+                    pred1 = cpr1
+                    break
+                lidx+=1
+            pred2 = None
+            for cpr2 in pred2_json[ridx:]:
+                if cpr2['id'] == pid:
+                    pred2 = cpr2
+                    break
+                ridx += 1
+            if pred1 is None or pred2 is None:
                 continue
-            if pred1['id'] != pred2['id']:
-                idx = max(int(pred1['id']), int(pred2['id']))
-                pred1 = pred1_json[idx]
-                pred2 = pred2_json[idx]
             observation = dict()
-            observation['id'] = idx
+            observation['id'] = pid
 
             # the rate of agreement between predictions
             mnm1 = get_prediction(pred1)

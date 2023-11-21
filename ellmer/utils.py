@@ -210,9 +210,13 @@ def get_faithfulness(saliency_names: list, eval_fn, base_dir: str, test_set_df: 
         json_path = os.path.join(base_dir, saliency + '_results.json')
         with open(json_path) as fd:
             results_json = json.load(fd)
+
+        if 'data' in results_json:
+            results_json = results_json['data']
+
         saliencies = []
         predictions = []
-        for v in results_json['data']:
+        for v in results_json:
             saliencies.append(v['saliency'])
             predictions.append(v['prediction'])
         for threshold in thresholds:
@@ -227,8 +231,11 @@ def get_faithfulness(saliency_names: list, eval_fn, base_dir: str, test_set_df: 
                     try:
                         attributes_dict[k] = float(v)
                     except:
-                        print(f'{v} is not a float in {sal_dict}')
-                        attributes_dict[k] = 0
+                        try:
+                            attributes_dict[k] = float(v[0])
+                        except:
+                            attributes_dict[k] = 0
+                            print(f'{v} is not a float in {sal_dict}')
                 if saliency.startswith('certa'):
                     sorted_attributes_dict = sorted(attributes_dict.items(), key=operator.itemgetter(1),
                                                     reverse=True)
@@ -262,10 +269,12 @@ def get_cf_metrics(explainer_names: list, predict_fn, base_dir, test_set_df: pd.
         json_path = os.path.join(base_dir, explainer_name + '_results.json')
         with open(json_path) as fd:
             results_json = json.load(fd)
+        if 'data' in results_json:
+            results_json = results_json['data']
         cfs = []
         predictions = []
         indexes = []
-        for v in results_json['data']:
+        for v in results_json:
             cfs.append(v['cfs'])
             predictions.append(v['prediction'])
             indexes.append(v['id'])
