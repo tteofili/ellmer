@@ -1,5 +1,5 @@
 import traceback
-
+import operator
 from langchain.prompts import ChatPromptTemplate
 from langchain import PromptTemplate, HuggingFaceHub, OpenAI
 from langchain.chains import LLMChain
@@ -114,6 +114,77 @@ class CertaEllmer(Ellmer):
             if len(result) > 1:
                 print(f'warning: found more than 1 item!({len(result)})')
         return result.iloc[0]
+
+
+class UnCertaEllmer(CertaEllmer):
+    def __init__(self, explanation_granularity, pred_delegate, certa, ellmers, num_draws=1, num_triangles=10):
+        self.explanation_granularity = explanation_granularity
+        self.certa = certa
+        self.num_triangles = num_triangles
+        self.delegate = pred_delegate
+        self.ellmers = ellmers
+        self.predict_fn = lambda x: self.delegate.predict(x)
+        self.num_draws = num_draws
+
+    def predict_and_explain(self, ltuple, rtuple, max_predict: int = -1, verbose: bool = False):
+        satisfied = False
+        prediction = {}
+        saliency_explanation = {}
+        cf_explanation = {}
+        top_k = int((len(ltuple) + len(rtuple)) / 2)
+        while not satisfied:
+            pae_dicts = []
+            for e in self.ellmers:
+                for _ in range(self.num_draws):
+                    pae_dict = e.predict_and_explain(ltuple, rtuple)['saliency']
+                    pae_dicts.append(pae_dict)
+
+            pae = self.delegate.predict_tuples(ltuple, rtuple)
+            if pae is not None:
+                prediction = pae
+                ltuple_series = self.get_row(ltuple, self.certa.lsource, prefix="ltable_")
+                rtuple_series = self.get_row(rtuple, self.certa.rsource, prefix="rtable_")
+
+                # get most frequent features from the self-explanations
+                filter_features = []
+                for se in pae_dicts:
+                    sorted_attributes_dict = sorted(se.items(), key=operator.itemgetter(1), reverse=True)[:top_k]
+                    freq_tokens = [f[0] for f in sorted_attributes_dict]
+                    filter_features = filter_features + freq_tokens
+                print(f'all:{filter_features}')
+                fc = {}
+                for f in filter_features:
+                    if f in fc:
+                        fc[f] = fc[f] + 1
+                    else:
+                        fc[f] = 1
+                sorted_fc = sorted(fc.items(), key=operator.itemgetter(1), reverse=True)[:top_k]
+                filter_features = [sfc[0] for sfc in sorted_fc]
+                print(f'top_k:{filter_features}')
+                saliency_df, cf_summary, cfs, tri, _ = self.certa.explain(ltuple_series, rtuple_series, self.predict_fn,
+                                                                          token="token" == self.explanation_granularity,
+                                                                          num_triangles=self.num_triangles,
+                                                                          max_predict=max_predict,
+                                                                          filter_features=filter_features)
+                saliency_explanation = saliency_df.to_dict('list')
+                if len(cfs) > 0:
+                    cf_explanation = cfs.drop(
+                        ['alteredAttributes', 'droppedValues', 'copiedValues', 'triangle', 'attr_count'],
+                        axis=1).iloc[0].T.to_dict()
+                print(saliency_explanation)
+                aggregated_pn = 0
+                for sev in saliency_explanation.values():
+                    if type(sev) == list:
+                        aggregated_pn += sev[0]
+                    else:
+                        aggregated_pn +=sev
+                print(f'apn:{aggregated_pn}')
+                if aggregated_pn >= 0.5:
+                    satisfied = True
+                top_k += 1
+                if top_k == len(ltuple) + len(rtuple) - 1:
+                    break
+        return {"prediction": prediction, "saliency": saliency_explanation, "cf": cf_explanation}
 
 
 class GenericEllmer(Ellmer):
@@ -350,9 +421,12 @@ def parse_pase_answer(answer, llm):
                 answer = answer[4:]
         elif "\n\n{" in answer and "}\n\n" in answer:
             answer = '{' + ''.join(answer.split("\n\n{")[1].split("}\n\n")[0]) + '}'
+
         # decode the json content
         try:
             answer = json.loads(answer)
+            if 'answers' in answer:
+                answer = answer['answers']
             if "matching" in answer.keys():
                 prediction = answer['matching']
             elif "matching_prediction" in answer.keys():
@@ -365,6 +439,8 @@ def parse_pase_answer(answer, llm):
                 prediction = answer['same_entity']
             elif 'entity_resolution' in answer.keys():
                 prediction = answer['entity_resolution']
+            elif '1' in answer.keys():
+                prediction = answer['1']
             else:
                 print(f"cannot find 'matching' key in {answer}")
                 prediction = None
@@ -379,6 +455,8 @@ def parse_pase_answer(answer, llm):
                     saliency = answer['saliency_explanation']
                 elif "saliency_explanation_table" in answer.keys():
                     saliency = answer['saliency_explanation_table']
+                elif "2" in answer.keys():
+                    saliency = answer['2']
             except:
                 pass
             try:
@@ -390,6 +468,8 @@ def parse_pase_answer(answer, llm):
                     cf = answer['attribute_counterfactual']
                 elif "token_counterfactual" in answer.keys():
                     cf = answer['token_counterfactual']
+                elif "3" in answer.keys():
+                    cf = answer['3']
             except:
                 pass
         except Exception as d:

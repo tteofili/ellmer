@@ -56,7 +56,7 @@ for llm_config in llm_configs:
                                       prompts={"ptse": {"er": "ellmer/prompts/er.txt"}})
 
     # for each dataset in deepmatcher datasets
-    dataset_names = ['abt_buy', 'fodo_zaga', 'walmart_amazon']
+    dataset_names = ['amazon_google', 'abt_buy', 'fodo_zaga', 'walmart_amazon']
     base_dir = '/Users/tteofili/dev/cheapER/datasets/'
 
     for d in dataset_names:
@@ -77,6 +77,8 @@ for llm_config in llm_configs:
             "ptsew_" + llm_config['tag']: ptsew,
             "certa(ptse)_" + llm_config['tag']: ellmer.models.CertaEllmer(explanation_granularity, ptn, certa),
             "certa(pase)_" + llm_config['tag']: ellmer.models.CertaEllmer(explanation_granularity, pase, certa),
+            "uncerta(pase)_" + llm_config['tag']: ellmer.models.UnCertaEllmer(explanation_granularity, pase, certa, [pase, ptse, ptsew]),
+            "uncerta(ptse)_" + llm_config['tag']: ellmer.models.UnCertaEllmer(explanation_granularity, ptse, certa, [pase, ptse, ptsew]),
         }
 
         result_files = []
@@ -93,12 +95,15 @@ for llm_config in llm_configs:
                 try:
                     rand_row = test_df.iloc[[idx]]
                     ltuple, rtuple = ellmer.utils.get_tuples(rand_row)
+                    ptime = time()
                     answer_dictionary = llm.predict_and_explain(ltuple, rtuple)
+                    pstime = time() - ptime
                     prediction = answer_dictionary['prediction']
                     saliency = answer_dictionary['saliency']
                     cfs = [answer_dictionary['cf']]
                     curr_llm_results.append({"id": idx, "ltuple": ltuple, "rtuple": rtuple, "prediction": prediction,
-                                             "label": rand_row['label'].values[0], "saliency": saliency, "cfs": cfs})
+                                             "label": rand_row['label'].values[0], "saliency": saliency, "cfs": cfs,
+                                             "latency": ptime})
                 except Exception:
                     traceback.print_exc()
                     print(f'error, waiting...')

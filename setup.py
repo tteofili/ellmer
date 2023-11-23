@@ -16,7 +16,7 @@ setuptools.setup(
     install_requires=[
           'pandas',
           'numpy',
-          'certa',
+          'certa==0.0.3',
           'langchain',
           'llama-cpp-python',
           'bitsandbytes',
