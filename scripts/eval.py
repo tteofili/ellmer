@@ -160,20 +160,20 @@ if __name__ == "__main__":
     parser.add_argument('--model_type', metavar='m', type=str, help='the LLM type to evaluate',
                         choices=['azure_openai', 'falcon', 'llama2'], required=True)
     parser.add_argument('--datasets', metavar='d', type=str, nargs='+', required=True,
-                        help='the datasets to be used for the evaluation')
+                        help='the dataset(s) to be used for the evaluation')
     parser.add_argument('--samples', metavar='s', type=int, default=-1,
                         help='no. of samples from the test set used for the evaluation')
     parser.add_argument('--cache', metavar='c', type=str, choices=['', 'sqlite', 'memory'], default='',
-                        help='whether enabling CERTA data-augmentation feature')
+                        help='LLM prediction caching mechanism')
     parser.add_argument('--num_triangles', metavar='t', type=int, default=10,
                         help='no. of open triangles used to generate CERTA explanations')
     parser.add_argument('--granularity', metavar='tk', type=str, default='attribute',
-                        choices=['attribute', 'token'], help='whether generating token-level explanations')
+                        choices=['attribute', 'token'], help='explanation granularity')
     parser.add_argument('--quantitative', metavar='q', type=bool, default=True,
-                        help='whether to regenerate evaluations on previously generated explanations')
-    parser.add_argument('--model_name', metavar='mn', type=str, help='', default="gpt-3.5-turbo")
-    parser.add_argument('--deployment_name', metavar='dn', type=str, help='', default="gpt-35-turbo")
-    parser.add_argument('--tag', metavar='tg', type=str, help='', default="")
+                        help='whether to generate quantitative explanation evaluation results')
+    parser.add_argument('--model_name', metavar='mn', type=str, help='model name/identifier', default="gpt-3.5-turbo")
+    parser.add_argument('--deployment_name', metavar='dn', type=str, help='deployment name', default="gpt-35-turbo")
+    parser.add_argument('--tag', metavar='tg', type=str, help='', default="run tag")
 
     args = parser.parse_args()
     base_datadir = args.base_dir
