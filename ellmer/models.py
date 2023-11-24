@@ -151,7 +151,6 @@ class UnCertaEllmer(CertaEllmer):
                     sorted_attributes_dict = sorted(se.items(), key=operator.itemgetter(1), reverse=True)[:top_k]
                     freq_tokens = [f[0] for f in sorted_attributes_dict]
                     filter_features = filter_features + freq_tokens
-                print(f'all:{filter_features}')
                 fc = {}
                 for f in filter_features:
                     if f in fc:
@@ -160,7 +159,6 @@ class UnCertaEllmer(CertaEllmer):
                         fc[f] = 1
                 sorted_fc = sorted(fc.items(), key=operator.itemgetter(1), reverse=True)[:top_k]
                 filter_features = [sfc[0] for sfc in sorted_fc]
-                print(f'top_k:{filter_features}')
                 saliency_df, cf_summary, cfs, tri, _ = self.certa.explain(ltuple_series, rtuple_series, self.predict_fn,
                                                                           token="token" == self.explanation_granularity,
                                                                           num_triangles=self.num_triangles,
@@ -178,7 +176,6 @@ class UnCertaEllmer(CertaEllmer):
                         aggregated_pn += sev[0]
                     else:
                         aggregated_pn +=sev
-                print(f'apn:{aggregated_pn}')
                 if aggregated_pn >= 0.5:
                     satisfied = True
                 top_k += 1

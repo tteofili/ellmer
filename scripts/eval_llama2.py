@@ -76,6 +76,10 @@ for llm_config in llm_configs:
             "certa(ptse)_" + llm_config['tag']: ellmer.models.CertaEllmer(explanation_granularity, ptn, certa),
             "pase_" + llm_config['tag']: pase,
             "certa(pase)_" + llm_config['tag']: ellmer.models.CertaEllmer(explanation_granularity, pase, certa),
+            "uncerta(pase)_" + llm_config['tag']: ellmer.models.UnCertaEllmer(explanation_granularity, pase, certa,
+                                                                              [pase, ptse, ptsew]),
+            "uncerta(ptse)_" + llm_config['tag']: ellmer.models.UnCertaEllmer(explanation_granularity, ptse, certa,
+                                                                              [pase, ptse, ptsew]),
         }
 
         result_files = []
