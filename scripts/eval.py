@@ -16,7 +16,7 @@ import argparse
 
 
 def eval(cache, samples, num_triangles, explanation_granularity, quantitative, base_dir, dataset_names, model_type,
-         model_name, deployment_name, tag):
+         model_name, deployment_name, tag, temperature):
     if cache == "memory":
         langchain.llm_cache = InMemoryCache()
     elif cache == "sqlite":
@@ -25,19 +25,19 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
     llm_config = {"model_type": model_type, "model_name": model_name, "deployment_name": deployment_name, "tag": tag}
 
     pase = ellmer.models.GenericEllmer(explanation_granularity=explanation_granularity,
-                                       deployment_name=llm_config['deployment_name'], temperature=0.01,
+                                       deployment_name=llm_config['deployment_name'], temperature=temperature,
                                        model_name=llm_config['model_name'], model_type=llm_config['model_type'],
                                        prompts={"pase": "ellmer/prompts/constrained14.txt"})
 
     ptse = ellmer.models.GenericEllmer(explanation_granularity=explanation_granularity,
-                                       deployment_name=llm_config['deployment_name'], temperature=0.01,
+                                       deployment_name=llm_config['deployment_name'], temperature=temperature,
                                        model_name=llm_config['model_name'], model_type=llm_config['model_type'],
                                        prompts={"ptse": {"er": "ellmer/prompts/er.txt",
                                                          "saliency": "ellmer/prompts/er-saliency-lc.txt",
                                                          "cf": "ellmer/prompts/er-cf-lc.txt"}})
 
     ptsew = ellmer.models.GenericEllmer(explanation_granularity=explanation_granularity,
-                                        deployment_name=llm_config['deployment_name'], temperature=0.01,
+                                        deployment_name=llm_config['deployment_name'], temperature=temperature,
                                         model_name=llm_config['model_name'], model_type=llm_config['model_type'],
                                         prompts={
                                             "ptse": {"er": "ellmer/prompts/er.txt",
@@ -46,7 +46,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
                                                      "cf": "ellmer/prompts/er-cf-lc.txt"}})
 
     ptn = ellmer.models.GenericEllmer(explanation_granularity=explanation_granularity,
-                                      deployment_name=llm_config['deployment_name'], temperature=0.01,
+                                      deployment_name=llm_config['deployment_name'], temperature=temperature,
                                       model_name=llm_config['model_name'], model_type=llm_config['model_type'],
                                       prompts={"ptse": {"er": "ellmer/prompts/er.txt"}})
 
@@ -56,7 +56,8 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
         lsource = pd.read_csv(dataset_dir + '/tableA.csv')
         rsource = pd.read_csv(dataset_dir + '/tableB.csv')
         test = pd.read_csv(dataset_dir + '/test.csv')
-        test_df = merge_sources(test, 'ltable_', 'rtable_', lsource, rsource, ['label'], [])
+        test_df = merge_sources(test, 'ltable_', 'rtable_', lsource, rsource, ['label'],
+                                [])
 
         certa = CertaExplainer(lsource, rsource)
 
@@ -171,14 +172,18 @@ if __name__ == "__main__":
                         choices=['attribute', 'token'], help='explanation granularity')
     parser.add_argument('--quantitative', metavar='q', type=bool, default=True,
                         help='whether to generate quantitative explanation evaluation results')
-    parser.add_argument('--model_name', metavar='mn', type=str, help='model name/identifier', default="gpt-3.5-turbo")
-    parser.add_argument('--deployment_name', metavar='dn', type=str, help='deployment name', default="gpt-35-turbo")
-    parser.add_argument('--tag', metavar='tg', type=str, help='', default="run tag")
+    parser.add_argument('--model_name', metavar='mn', type=str, help='model name/identifier',
+                        default="gpt-3.5-turbo")
+    parser.add_argument('--deployment_name', metavar='dn', type=str, help='deployment name',
+                        default="gpt-35-turbo")
+    parser.add_argument('--tag', metavar='tg', type=str, help='run tag', default="run tag")
+    parser.add_argument('--temperature', metavar='tp', type=float, help='LLM temperature', default=0.01)
 
     args = parser.parse_args()
     base_datadir = args.base_dir
     samples = args.samples
     num_triangles = args.num_triangles
+    temperature = args.temperature
 
     cache = args.cache
     explanation_granularity = args.granularity
@@ -191,4 +196,5 @@ if __name__ == "__main__":
     deployment_name = args.deployment_name
     tag = args.tag
 
-    eval(cache, samples, num_triangles, explanation_granularity, quantitative, base_dir, dataset_names, model_type, model_name, deployment_name, tag)
+    eval(cache, samples, num_triangles, explanation_granularity, quantitative, base_dir, dataset_names, model_type,
+         model_name, deployment_name, tag, temperature)

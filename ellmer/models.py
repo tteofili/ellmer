@@ -327,7 +327,7 @@ class GenericEllmer(Ellmer):
                     print(saliency_answer)
                 saliency_explanation = dict()
                 try:
-                    saliency = saliency_answer.replace('`', '').split('```')[1]
+                    saliency = saliency_answer.replace('`', '').replace('´', '').split('```')[1]
                     saliency_dict = json.loads(saliency)
                     saliency_explanation = saliency_dict
                 except:
@@ -362,7 +362,7 @@ class GenericEllmer(Ellmer):
                     print(cf_answer)
                 cf_explanation = dict()
                 try:
-                    cf_answer_content = cf_answer.replace('`', '')
+                    cf_answer_content = cf_answer.replace('`', '').replace('´', '')
                     if '```' in cf_answer_content:
                         cf_answer_json = cf_answer_content.split('```')[1]
                     elif cf_answer_content.startswith("{"):
@@ -421,7 +421,7 @@ def parse_pase_answer(answer, llm):
 
         # decode the json content
         try:
-            answer = json.loads(answer)
+            answer = json.loads(answer.replace('´', '').replace('`', ''))
             if 'answers' in answer:
                 answer = answer['answers']
             if "matching" in answer.keys():
@@ -681,7 +681,7 @@ class LLMERModel(ERModel):
         else:
             json_answers = answer.split('```')
             if len(json_answers) > 1:
-                json_answer = json.loads(answer[1])
+                json_answer = json.loads(answer[1].replace('´', '').replace('`', ''))
                 if "matching_prediction" in json_answer:
                     answer = json_answer['matching_prediction']
                 else:
