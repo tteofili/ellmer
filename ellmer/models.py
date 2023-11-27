@@ -421,7 +421,8 @@ def parse_pase_answer(answer, llm):
 
         # decode the json content
         try:
-            answer = json.loads(answer.replace('´', '').replace('`', ''))
+            answer = answer.replace('´', '').replace('`', '')
+            answer = json.loads(answer)
             if 'answers' in answer:
                 answer = answer['answers']
             if "matching" in answer.keys():
