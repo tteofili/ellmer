@@ -18,6 +18,7 @@ from sklearn.metrics import f1_score
 from tqdm import tqdm
 import torch
 from transformers import BitsAndBytesConfig, AutoModelForCausalLM, AutoTokenizer, pipeline
+from time import time
 
 hf_models = ['EleutherAI/gpt-neox-20b', 'tiiuae/falcon-7b-instruct', "Writer/camel-5b-hf", "databricks/dolly-v2-3b",
              "google/flan-t5-xxl", "tiiuae/falcon-40b", "tiiuae/falcon-7b", "internlm/internlm-chat-7b", "Qwen/Qwen-7B"]
@@ -131,6 +132,7 @@ class UnCertaEllmer(CertaEllmer):
         prediction = {}
         saliency_explanation = {}
         cf_explanation = {}
+        filter_features = []
         top_k = int((len(ltuple) + len(rtuple)) / 2)
         while not satisfied:
             pae_dicts = []
@@ -181,7 +183,8 @@ class UnCertaEllmer(CertaEllmer):
                 top_k += 1
                 if top_k == len(ltuple) + len(rtuple) - 1:
                     break
-        return {"prediction": prediction, "saliency": saliency_explanation, "cf": cf_explanation}
+        return {"prediction": prediction, "saliency": saliency_explanation, "cf": cf_explanation,
+                "filter_features": filter_features}
 
 
 class GenericEllmer(Ellmer):
@@ -244,26 +247,56 @@ class GenericEllmer(Ellmer):
     def predict_and_explain(self, ltuple, rtuple):
         conversation = []
         if "pase" in self.prompts:
+            if self.verbose:
+                prep_t = time()
             prompt = self.prompts['pase']
             for prompt_message in ellmer.utils.read_prompt(prompt):
                 conversation.append((prompt_message[0], prompt_message[1]))
             question = "record1:\n{ltuple}\n record2:\n{rtuple}\n"
             conversation.append(("user", question))
             template = ChatPromptTemplate.from_messages(conversation)
+            if self.verbose:
+                prep_t = time() - prep_t
+                print(f'prep_time:{prep_t}')
             if self.model_type in ['hf', 'falcon', 'llama2']:
+                if self.verbose:
+                    pre_pred_t = time()
                 chain = LLMChain(llm=self.llm, prompt=template)
+                if self.verbose:
+                    pre_pred_t = time() - pre_pred_t
+                    print(f'pre_prep_time:{pre_pred_t}')
+                    pred_t = time()
                 content = chain.predict(ltuple=ltuple, rtuple=rtuple, feature=self.explanation_granularity)
+                if self.verbose:
+                    pred_t = time() - pred_t
+                    print(f'pred_time:{pred_t}')
             else:
+                if self.verbose:
+                    pre_pred_t = time()
                 messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple, rtuple=rtuple)
+                if self.verbose:
+                    pre_pred_t = time() - pre_pred_t
+                    print(f'pre_prep_time:{pre_pred_t}')
+                    pred_t = time()
                 answer = self.llm(messages)
+                if self.verbose:
+                    pred_t = time() - pred_t
+                    print(f'pred_time:{pred_t}')
                 content = answer.content
             if self.verbose:
                 print(content)
+            if self.verbose:
+                parse_t = time()
             prediction, saliency_explanation, cf_explanation = parse_pase_answer(content, self.llm)
+            if self.verbose:
+                parse_t = time() - parse_t
+                print(f'parse_time:{parse_t}')
             if prediction is None:
                 print(f'empty prediction!\nquestion{question}\nconversation{conversation}')
             return {"prediction": prediction, "saliency": saliency_explanation, "cf": cf_explanation}
         elif "ptse" in self.prompts:
+            if self.verbose:
+                prep_t = time()
             ptse_prompts = self.prompts["ptse"]
             er_prompt = ptse_prompts['er']
             for prompt_message in ellmer.utils.read_prompt(er_prompt):
@@ -271,17 +304,43 @@ class GenericEllmer(Ellmer):
             question = "record1:\n{ltuple}\n record2:\n{rtuple}\n"
             conversation.append(("user", question))
             template = ChatPromptTemplate.from_messages(conversation)
+            if self.verbose:
+                prep_t = time() - prep_t
+                print(f'er_prep_time:{prep_t}')
             if self.model_type in ['hf', 'falcon', 'llama2']:
+                if self.verbose:
+                    pre_pred_t = time()
                 chain = LLMChain(llm=self.llm, prompt=template)
+                if self.verbose:
+                    pre_pred_t = time() - pre_pred_t
+                    print(f'er_pre_pred_time:{pre_pred_t}')
+                    pred_t = time()
                 er_answer = chain.predict(ltuple=ltuple, rtuple=rtuple)
+                if self.verbose:
+                    pred_t = time() - pred_t
+                    print(f'er_pred_time:{pred_t}')
             else:
+                if self.verbose:
+                    pre_pred_t = time()
                 messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple, rtuple=rtuple)
+                if self.verbose:
+                    pre_pred_t = time() - pre_pred_t
+                    print(f'er_pre_pred_time:{pre_pred_t}')
+                    pred_t = time()
                 answer = self.llm(messages)
                 er_answer = answer.content
+                if self.verbose:
+                    pred_t = time() - pred_t
+                    print(f'er_pred_time:{pred_t}')
             if self.verbose:
                 print(er_answer)
+            if self.verbose:
+                parse_t = time()
             # parse answer into prediction
             _, prediction = ellmer.utils.text_to_match(er_answer, self.llm)
+            if self.verbose:
+                parse_t = time() - parse_t
+                print(f'er_parse_time:{parse_t}')
             conversation.append(("assistant", er_answer))
 
             why = None
@@ -290,18 +349,39 @@ class GenericEllmer(Ellmer):
 
             # get explanations
             if "why" in ptse_prompts:
+                if self.verbose:
+                    prep_t = time()
                 for prompt_message in ellmer.utils.read_prompt(ptse_prompts["why"]):
                     conversation.append((prompt_message[0], prompt_message[1]))
                 template = ChatPromptTemplate.from_messages(conversation)
+                if self.verbose:
+                    prep_t = time() - prep_t
+                    print(f'why_prep_time:{prep_t}')
                 if self.model_type in ['hf', 'falcon', 'llama2']:
+                    if self.verbose:
+                        pre_pred_t = time()
                     chain = LLMChain(llm=self.llm, prompt=template)
+                    if self.verbose:
+                        pre_pred_t = time() - pre_pred_t
+                        print(f'why_pre_pred_time:{pre_pred_t}')
+                        pred_t = time()
                     why_answer = chain.predict(ltuple=ltuple, rtuple=rtuple, prediction=prediction)
+                    if self.verbose:
+                        pred_t = time() - pred_t
+                        print(f'why_pred_time:{pred_t}')
                 else:
+                    if self.verbose:
+                        pre_pred_t = time()
                     messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple,
-                                                        rtuple=rtuple,
-                                                        prediction=prediction)
-
+                                                        rtuple=rtuple, prediction=prediction)
+                    if self.verbose:
+                        pre_pred_t = time() - pre_pred_t
+                        print(f'why_pre_pred_time:{pre_pred_t}')
+                        pred_t = time()
                     answer = self.llm(messages)
+                    if self.verbose:
+                        pred_t = time() - pred_t
+                        print(f'why_pred_time:{pred_t}')
                     why_answer = answer.content
                 if self.verbose:
                     print(why_answer)
@@ -310,21 +390,46 @@ class GenericEllmer(Ellmer):
 
             # saliency explanation
             if "saliency" in ptse_prompts:
+                if self.verbose:
+                    prep_t = time()
                 for prompt_message in ellmer.utils.read_prompt(ptse_prompts["saliency"]):
                     conversation.append((prompt_message[0], prompt_message[1]))
                 template = ChatPromptTemplate.from_messages(conversation)
+                if self.verbose:
+                    prep_t = time() - prep_t
+                    print(f'saliency_prep_time:{prep_t}')
                 if self.model_type in ['hf', 'falcon', 'llama2']:
+                    if self.verbose:
+                        pre_pred_t = time()
                     chain = LLMChain(llm=self.llm, prompt=template)
+                    if self.verbose:
+                        pre_pred_t = time() - pre_pred_t
+                        print(f'saliency_pre_pred_time:{pre_pred_t}')
+                        pred_t = time()
                     saliency_answer = chain.predict(ltuple=ltuple, rtuple=rtuple, prediction=prediction,
                                                     feature=self.explanation_granularity)
+                    if self.verbose:
+                        pred_t = time() - pred_t
+                        print(f'saliency_pred_time:{pred_t}')
                 else:
+                    if self.verbose:
+                        pre_pred_t = time()
                     messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple,
                                                         rtuple=rtuple,
                                                         prediction=prediction)
+                    if self.verbose:
+                        pre_pred_t = time() - pre_pred_t
+                        print(f'saliency_pre_pred_time:{pre_pred_t}')
+                        pred_t = time()
                     answer = self.llm(messages)
+                    if self.verbose:
+                        pred_t = time() - pred_t
+                        print(f'saliency_pred_time:{pred_t}')
                     saliency_answer = answer.content
                 if self.verbose:
                     print(saliency_answer)
+                if self.verbose:
+                    parse_t = time()
                 saliency_explanation = dict()
                 try:
                     saliency = saliency_answer.replace('`', '').replace('´', '').split('```')[1]
@@ -337,29 +442,54 @@ class GenericEllmer(Ellmer):
                         saliency_explanation = saliency_dict
                     except:
                         pass
-
+                if self.verbose:
+                    parse_t = time() - parse_t
+                    print(f'saliency_parse_time:{parse_t}')
                 conversation.append(("assistant", "{" + str(saliency_explanation) + "}"))
 
             # counterfactual explanation
             if "cf" in ptse_prompts:
+                if self.verbose:
+                    prep_t = time()
                 for prompt_message in ellmer.utils.read_prompt(ptse_prompts["cf"]):
                     conversation.append((prompt_message[0], prompt_message[1]))
                 template = ChatPromptTemplate.from_messages(conversation)
-
+                if self.verbose:
+                    prep_t = time() - prep_t
+                    print(f'cf_prep_time:{prep_t}')
                 if self.model_type in ['hf', 'falcon', 'llama2']:
+                    if self.verbose:
+                        pre_pred_t = time()
                     chain = LLMChain(llm=self.llm, prompt=template)
+                    if self.verbose:
+                        pre_pred_t = time() - pre_pred_t
+                        print(f'cf_pre_pred_time:{pre_pred_t}')
+                        pred_t = time()
                     cf_answer = chain.predict(ltuple=ltuple, rtuple=rtuple, prediction=prediction,
                                               feature=self.explanation_granularity)
+                    if self.verbose:
+                        pred_t = time() - pred_t
+                        print(f'cf_pred_time:{pred_t}')
                     print(cf_answer)
                 else:
+                    if self.verbose:
+                        pre_pred_t = time()
                     messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple,
                                                         rtuple=rtuple,
                                                         prediction=prediction)
-
+                    if self.verbose:
+                        pre_pred_t = time() - pre_pred_t
+                        print(f'cf_pre_pred_time:{pre_pred_t}')
+                        pred_t = time()
                     answer = self.llm(messages)
+                    if self.verbose:
+                        pred_t = time() - pred_t
+                        print(f'cf_pred_time:{pred_t}')
                     cf_answer = answer.content
                 if self.verbose:
                     print(cf_answer)
+                if self.verbose:
+                    parse_t = time()
                 cf_explanation = dict()
                 try:
                     cf_answer_content = cf_answer.replace('`', '').replace('´', '')
@@ -400,6 +530,9 @@ class GenericEllmer(Ellmer):
                         cf_explanation = cf_dict
                 except:
                     pass
+                if self.verbose:
+                    parse_t = time() - parse_t
+                    print(f'cf_parse_time:{parse_t}')
                 conversation.append(("assistant", str(cf_explanation)))
             return {"prediction": prediction, "why": why, "saliency": saliency_explanation, "cf": cf_explanation}
 

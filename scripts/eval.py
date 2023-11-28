@@ -96,10 +96,12 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
                     prediction = answer_dictionary['prediction']
                     saliency = answer_dictionary['saliency']
                     cfs = [answer_dictionary['cf']]
-                    curr_llm_results.append(
-                        {"id": idx, "ltuple": ltuple, "rtuple": rtuple, "prediction": prediction,
-                         "label": rand_row['label'].values[0], "saliency": saliency, "cfs": cfs,
-                         "latency": ptime})
+                    row_dict = {"id": idx, "ltuple": ltuple, "rtuple": rtuple, "prediction": prediction,
+                              "label": rand_row['label'].values[0], "saliency": saliency, "cfs": cfs,
+                              "latency": ptime}
+                    if "filter_features" in answer_dictionary:
+                        row_dict["filter_features"] = answer_dictionary["filter_features"]
+                    curr_llm_results.append(row_dict)
                 except Exception:
                     traceback.print_exc()
                     print(f'error, waiting...')
