@@ -74,7 +74,7 @@ class CertaEllmer(Ellmer):
         self.delegate = delegate
         self.predict_fn = lambda x: self.delegate.predict(x)
 
-    def predict_and_explain(self, ltuple, rtuple, max_predict: int = 40, verbose: bool = False):
+    def predict_and_explain(self, ltuple, rtuple, max_predict: int = -1, verbose: bool = False):
         pae = self.delegate.predict_tuples(ltuple, rtuple)
         prediction = pae
         saliency_explanation = None
@@ -197,7 +197,7 @@ class GenericEllmer(Ellmer):
         elif model_type == 'openai':
             self.llm = OpenAI(temperature=temperature, model_name=model_name)
         elif model_type == 'azure_openai':
-            self.llm = AzureChatOpenAI(deployment_name=deployment_name, model_name=model_name,
+            self.llm = AzureChatOpenAI(deployment_name=deployment_name, model_name=model_name, request_timeout=30,
                                        openai_api_version=model_version, temperature=temperature)
         elif model_type == 'delegate':
             self.llm = delegate
