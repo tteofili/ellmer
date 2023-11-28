@@ -1,0 +1,914 @@
+ptsew_azure on amazon_google
+  0%|                                                                                                                                          | 0/15 [00:00<?, ?it/s]prep_time:0.0009388923645019531
+er_pre_pred_time:0.00026798248291015625
+er_pred_time:0.3340170383453369
+No.
+er_parse_time:2.7179718017578125e-05
+why_prep_time:0.001399993896484375
+why_pre_pred_time:0.00026917457580566406
+why_pred_time:0.4717249870300293
+The two records have different titles, manufacturers, and prices. Therefore, they are not a match.
+saliency_prep_time:0.002231121063232422
+saliency_pre_pred_time:0.0002837181091308594
+saliency_pred_time:2.3621509075164795
+Here is the saliency explanation for the above prediction in JSON format:
+
+```
+{
+    "ltable_title": 0.0,
+    "ltable_manufacturer": 0.0,
+    "ltable_price": 0.0,
+    "rtable_title": 0.0,
+    "rtable_manufacturer": 0.0,
+    "rtable_price": 0.0
+}
+```
+
+Since the two records have no common attributes, all the saliency scores are zero.
+saliency_parse_time:4.1961669921875e-05
+cf_prep_time:1701175392.6705778
+cf_pre_pred_time:0.00014209747314453125
+cf_pred_time:0.6884100437164307
+{'ltable_title': 'individual software professor teaches microsoft office 2007', 'ltable_manufacturer': 'nan', 'ltable_price': '29.99', 'rtable_title': 'microsoft visual studio test agent 2005 cd 1 processor license', 'rtable_manufacturer': 'microsoft software', 'rtable_price': '5099.0'}
+cf_parse_time:0.00017380714416503906
+  7%|████████▋                                                                                                                         | 1/15 [00:03<00:54,  3.87s/it]prep_time:0.0008001327514648438
+er_pre_pred_time:0.00016808509826660156
+er_pred_time:0.18478012084960938
+No.
+er_parse_time:1.3113021850585938e-05
+why_prep_time:0.001008749008178711
+why_pre_pred_time:0.00019407272338867188
+why_pred_time:1.0594871044158936
+The two records do not match because they have different values for the "title" attribute. Although they both refer to Adobe CS3 products, the titles are different ("adobe dreamweaver cs3 [ mac ]" vs "adobe cs3 web premium"). Additionally, the "manufacturer" attribute is different ("adobe" vs "nan"), and the "price" attribute is also different ("399.0" vs "1659.99").
+saliency_prep_time:0.0010478496551513672
+saliency_pre_pred_time:0.0002357959747314453
+saliency_pred_time:2.1557891368865967
+Here is the saliency explanation for the above prediction in JSON format:
+
+```
+{
+    "ltable_title": 0.0,
+    "rtable_title": 1.0,
+    "ltable_manufacturer": 0.5,
+    "rtable_manufacturer": 0.5,
+    "ltable_price": 0.5,
+    "rtable_price": 0.5
+}
+```
+
+The saliency score for the "title" attribute of the right table is 1.0, indicating that this attribute was the most important in determining that the two records do not match. The saliency scores for the other attributes are all 0.5, indicating that they were equally important in the decision-making process.
+saliency_parse_time:3.695487976074219e-05
+cf_prep_time:1701175396.7689571
+cf_pre_pred_time:0.0003342628479003906
+cf_pred_time:0.7595210075378418
+{'ltable_title': 'adobe cs3 web premium', 'rtable_title': 'adobe dreamweaver cs3 [ mac ]', 'ltable_manufacturer': 'nan', 'rtable_manufacturer': 'adobe', 'ltable_price': '1659.99', 'rtable_price': '399.0'}
+cf_parse_time:0.000186920166015625
+ 13%|█████████████████▎                                                                                                                | 2/15 [00:08<00:52,  4.04s/it]prep_time:0.0006461143493652344
+er_pre_pred_time:0.00013685226440429688
+er_pred_time:0.1924757957458496
+No.
+er_parse_time:5.7220458984375e-06
+why_prep_time:0.0008199214935302734
+why_pre_pred_time:0.00023818016052246094
+why_pred_time:0.6136820316314697
+The two records do not match because they have different titles and manufacturers. Although the prices are different, it is not a strong enough indicator to determine a match.
+saliency_prep_time:0.0009028911590576172
+saliency_pre_pred_time:0.0003039836883544922
+saliency_pred_time:2.110239028930664
+Here is the saliency explanation for the above prediction in JSON format:
+
+```
+{
+    "ltable_title": 0,
+    "ltable_manufacturer": 0,
+    "ltable_price": 0,
+    "rtable_title": 0.5,
+    "rtable_manufacturer": 0.5,
+    "rtable_price": 0
+}
+```
+
+The saliency scores indicate the relevance of each attribute in the decision-making process. In this case, the `rtable_title` and `rtable_manufacturer` attributes have a score of 0.5 each, indicating that they were the most relevant attributes in determining that the records do not match. The other attributes (`ltable_title`, `ltable_manufacturer`, and `ltable_price`) have a score of 0, indicating that they did not contribute to the decision.
+saliency_parse_time:7.486343383789062e-05
+cf_prep_time:1701175400.4556801
+cf_pre_pred_time:0.00029921531677246094
+cf_pred_time:1.024632215499878
+{'record1': {'ltable_title': 'instant immersion spanish 2.0', 'ltable_manufacturer': 'topics entertainment', 'ltable_price': '29.99'}, 'record2': {'rtable_title': 'instant immersion spanish 2.0', 'rtable_manufacturer': 'topics entertainment', 'rtable_price': '29.99'}}
+cf_parse_time:0.0001678466796875
+ 20%|██████████████████████████                                                                                                        | 3/15 [00:11<00:48,  4.00s/it]prep_time:0.0009338855743408203
+er_pre_pred_time:0.00020575523376464844
+er_pred_time:0.20032095909118652
+No.
+er_parse_time:9.059906005859375e-06
+why_prep_time:0.0009710788726806641
+why_pre_pred_time:0.00024127960205078125
+why_pred_time:1.764564037322998
+Based on the given records, I can see that the two records are not a match. The reason is that the two records have different values for all the attributes. The `title` attribute of the first record is "i transfer dvds 2 ipod edition ( win/mac )" while the `title` attribute of the second record is "ghost recon gold edition ( dvd-rom )". Similarly, the `manufacturer` attribute of the first record is "me-too-software" while the `manufacturer` attribute of the second record is "nan". Finally, the `price` attribute of the first record is "29.99" while the `price` attribute of the second record is "20.95". Therefore, based on these differences, I can confidently say that the two records do not match.
+saliency_prep_time:0.0018239021301269531
+saliency_pre_pred_time:0.0003871917724609375
+saliency_pred_time:1.4311718940734863
+Here is the saliency explanation for the above prediction in JSON format:
+
+```
+{
+    "ltable_title": 0.0,
+    "ltable_manufacturer": 0.0,
+    "ltable_price": 0.0,
+    "rtable_title": 0.0,
+    "rtable_manufacturer": 0.0,
+    "rtable_price": 0.0
+}
+```
+
+Since the two records have completely different values for all the attributes, the saliency score for each attribute is 0.0, indicating that none of the attributes contributed to the decision-making process.
+saliency_parse_time:5.507469177246094e-05
+cf_prep_time:1701175404.8853662
+cf_pre_pred_time:0.0003809928894042969
+cf_pred_time:2.2214627265930176
+Here is a counterfactual explanation for the above prediction:
+
+```
+{
+    "ltable_title": "ghost recon gold edition ( dvd-rom )",
+    "ltable_manufacturer": "nan",
+    "ltable_price": "20.95",
+    "rtable_title": "i transfer dvds 2 ipod edition ( win/mac )",
+    "rtable_manufacturer": "me-too-software",
+    "rtable_price": "29.99"
+}
+```
+
+In this counterfactual explanation, I have swapped the values of the `title`, `manufacturer`, and `price` attributes of the two records. This change would result in the two records being a match, and my prediction would be "yes" instead of "no".
+cf_parse_time:0.00035190582275390625
+ 27%|██████████████████████████████████▋                                                                                               | 4/15 [00:17<00:51,  4.64s/it]prep_time:0.001157999038696289
+er_pre_pred_time:0.0002167224884033203
+er_pred_time:0.16896533966064453
+No.
+er_parse_time:7.152557373046875e-06
+why_prep_time:0.0011348724365234375
+why_pre_pred_time:0.000186920166015625
+why_pred_time:0.5456619262695312
+The two records have different titles and manufacturers, and the prices are also different. Therefore, I predict that they do not match.
+saliency_prep_time:0.0013959407806396484
+saliency_pre_pred_time:0.00035691261291503906
+saliency_pred_time:1.6506261825561523
+Here is the saliency explanation for the above prediction in JSON format:
+
+```
+{
+    "ltable_title": 0.0,
+    "ltable_manufacturer": 0.0,
+    "ltable_price": 1.0,
+    "rtable_title": 0.0,
+    "rtable_manufacturer": 0.0,
+    "rtable_price": 1.0
+}
+```
+
+The saliency scores indicate that the decision was based solely on the price attribute of both records, while the other attributes (title and manufacturer) did not contribute to the decision.
+saliency_parse_time:6.008148193359375e-05
+cf_prep_time:1701175409.482424
+cf_pre_pred_time:0.0005471706390380859
+cf_pred_time:3.261436939239502
+Here is a counterfactual explanation that flips the prediction:
+
+```
+{
+    "ltable_title": "adobe illustrator cs3 ( mac )",
+    "ltable_manufacturer": "adobe",
+    "ltable_price": "599.0",
+    "rtable_title": "adobe illustrator cs3 ( mac )",
+    "rtable_manufacturer": "adobe",
+    "rtable_price": "599.0"
+}
+```
+
+In this counterfactual example, I changed the `ltable_manufacturer` and `ltable_price` attributes to match the values in `rtable_manufacturer` and `rtable_price`, respectively. This results in both records having the same manufacturer and price, which flips the prediction from "no" to "yes".
+cf_parse_time:0.00016808509826660156
+ 33%|███████████████████████████████████████████▎                                                                                      | 5/15 [00:23<00:50,  5.00s/it]prep_time:0.0005991458892822266
+er_pre_pred_time:8.702278137207031e-05
+er_pred_time:0.1973109245300293
+No.
+er_parse_time:9.298324584960938e-06
+why_prep_time:0.0009739398956298828
+why_pre_pred_time:0.00021886825561523438
+why_pred_time:1.435542106628418
+Based on the given records, the title of the two records are different, and the manufacturers are also different. Although the word "topics" appears in both titles, it is not enough to conclude that the records match. The price of one record is missing, and the price of the other record is different. Therefore, I conclude that the two records do not match.
+saliency_prep_time:0.0012400150299072266
+saliency_pre_pred_time:0.0003311634063720703
+saliency_pred_time:1.329721212387085
+Here is the saliency explanation for the above prediction in JSON format:
+
+```
+{
+    "ltable_title": 0.0,
+    "ltable_manufacturer": 0.0,
+    "ltable_price": 0.0,
+    "rtable_title": 0.0,
+    "rtable_manufacturer": 0.0,
+    "rtable_price": 0.0
+}
+```
+
+Since none of the attributes match between the two records, the saliency score for each attribute is 0.0.
+saliency_parse_time:4.00543212890625e-05
+cf_prep_time:1701175415.715882
+cf_pre_pred_time:0.0003552436828613281
+cf_pred_time:2.2526209354400635
+Here is a counterfactual explanation for the above prediction:
+
+```
+{
+    "ltable_title": "instant immersion ingles audio deluxe",
+    "ltable_manufacturer": "topics entertainment",
+    "ltable_price": "nan",
+    "rtable_title": "instant immersion spanish deluxe 2.0 topics",
+    "rtable_manufacturer": "topics entertainment",
+    "rtable_price": "nan"
+}
+```
+
+In this counterfactual example, I changed the value of the `rtable_manufacturer` attribute of the second record to match the value of the `ltable_manufacturer` attribute of the first record. This change would make the two records match, and the prediction would flip from "no" to "yes".
+cf_parse_time:0.0001480579376220703
+ 40%|████████████████████████████████████████████████████                                                                              | 6/15 [00:28<00:45,  5.08s/it]prep_time:0.0009019374847412109
+er_pre_pred_time:0.00016999244689941406
+er_pred_time:0.1931769847869873
+No.
+er_parse_time:8.821487426757812e-06
+why_prep_time:0.0010571479797363281
+why_pre_pred_time:0.0002448558807373047
+why_pred_time:0.9253990650177002
+Based on the information provided, the two records do not match. The titles are different, the manufacturers are different, and the prices are different. Therefore, I concluded that they do not refer to the same entity.
+saliency_prep_time:0.0012221336364746094
+saliency_pre_pred_time:0.0003268718719482422
+saliency_pred_time:4.124948978424072
+Here is the saliency explanation for the above prediction in JSON format:
+
+```
+{
+    "ltable_title": 0.0,
+    "ltable_manufacturer": 0.0,
+    "ltable_price": 0.0,
+    "rtable_title": 0.5,
+    "rtable_manufacturer": 0.5,
+    "rtable_price": 0.5
+}
+```
+
+The saliency scores are between 0 and 1, where 0 means the attribute did not contribute to the decision and 1 means the attribute was the only factor in the decision. In this case, the attributes that contributed the most to the decision were "rtable_title", "rtable_manufacturer", and "rtable_price", each with a saliency score of 0.5. This indicates that the decision was based on the values of these attributes in the second record. The attributes in the first record had a saliency score of 0, indicating that they did not contribute to the decision.
+saliency_parse_time:4.696846008300781e-05
+cf_prep_time:1701175423.2199688
+cf_pre_pred_time:0.0003631114959716797
+cf_pred_time:2.1175081729888916
+Here is a counterfactual explanation for the above prediction:
+
+```
+{
+    "record1": {
+        "ltable_title": "web easy ( r ) professional 6",
+        "ltable_manufacturer": "nan",
+        "ltable_price": "49.99"
+    },
+    "record2": {
+        "rtable_title": "acrobat professional 8 ( windows )",
+        "rtable_manufacturer": "adobe",
+        "rtable_price": "273.0"
+    }
+}
+```
+
+By swapping the values of the `title` attribute of both records, the prediction flips from "No" to "Yes".
+cf_parse_time:0.000186920166015625
+ 47%|████████████████████████████████████████████████████████████▋                                                                     | 7/15 [00:35<00:46,  5.83s/it]prep_time:0.000904083251953125
+er_pre_pred_time:0.00014901161193847656
+er_pred_time:0.16875696182250977
+No.
+er_parse_time:1.0967254638671875e-05
+why_prep_time:0.0010218620300292969
+why_pre_pred_time:0.00022983551025390625
+why_pred_time:0.646277904510498
+Based on the information provided, the two records do not match. The titles are different, the manufacturers are different, and the prices are different. Although both records are related to Microsoft products, they are not the same product and therefore do not match.
+saliency_prep_time:0.0018618106842041016
+saliency_pre_pred_time:0.00035119056701660156
+saliency_pred_time:1.7447779178619385
+Here is the saliency explanation for the above prediction in JSON format:
+
+```
+{
+    "ltable_title": 0.0,
+    "ltable_manufacturer": 0.0,
+    "ltable_price": 0.0,
+    "rtable_title": 0.0,
+    "rtable_manufacturer": 0.0,
+    "rtable_price": 0.0
+}
+```
+
+Since the two records do not match, none of the attributes contributed to the decision-making process. Therefore, all the saliency scores are 0.0.
+saliency_parse_time:4.696846008300781e-05
+cf_prep_time:1701175427.9056792
+cf_pre_pred_time:0.000370025634765625
+cf_pred_time:1.1892998218536377
+{'ltable_title': 'microsoft office visio standard 2007 ( pc )', 'ltable_manufacturer': 'nan', 'ltable_price': '249.95', 'rtable_title': 'microsoft licenses word olp c ( 05903871 )', 'rtable_manufacturer': 'microsoft licenses', 'rtable_price': '205.73'}
+cf_parse_time:0.00012993812561035156
+ 53%|█████████████████████████████████████████████████████████████████████▎                                                            | 8/15 [00:39<00:36,  5.17s/it]prep_time:0.0008518695831298828
+er_pre_pred_time:0.00016570091247558594
+er_pred_time:0.18302297592163086
+No.
+er_parse_time:7.867813110351562e-06
+why_prep_time:0.0008919239044189453
+why_pre_pred_time:0.00022029876708984375
+why_pred_time:1.123641014099121
+The two records do not match because they have different titles and manufacturers. Although they are both Microsoft products, the first record is an upgrade for Microsoft OneNote 2007, while the second record is an upgrade package for Microsoft Office Publisher 2007. Additionally, the prices are different.
+saliency_prep_time:0.0012090206146240234
+saliency_pre_pred_time:0.00035572052001953125
+saliency_pred_time:1.7528362274169922
+Here is the saliency explanation for the above prediction in JSON format:
+
+```
+{
+    "ltable_title": 0.0,
+    "ltable_manufacturer": 0.0,
+    "ltable_price": 0.0,
+    "rtable_title": 0.0,
+    "rtable_manufacturer": 0.0,
+    "rtable_price": 0.0
+}
+```
+
+Since the two records do not match, the saliency score for each attribute is 0.0, indicating that none of the attributes contributed to the decision that the records do not match.
+saliency_parse_time:7.081031799316406e-05
+cf_prep_time:1701175432.164256
+cf_pre_pred_time:0.0007472038269042969
+cf_pred_time:2.502073287963867
+Here's a counterfactual explanation that flips the prediction:
+
+```
+{
+    "record1": {
+        "ltable_title": "microsoft office publisher 2007 upgrade",
+        "ltable_manufacturer": "microsoft",
+        "ltable_price": "88.8"
+    },
+    "record2": {
+        "rtable_title": "164-04052 microsoft office publisher 2007 version upgrade package 1 pc cd win en",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "79.95"
+    }
+}
+```
+
+In this counterfactual example, I swapped the titles and prices of the two records, while keeping the manufacturer of the first record the same. This results in a match between the two records, which flips the original prediction from "no" to "yes".
+cf_parse_time:0.0003352165222167969
+ 60%|██████████████████████████████████████████████████████████████████████████████                                                    | 9/15 [00:45<00:31,  5.29s/it]prep_time:0.0013568401336669922
+er_pre_pred_time:0.00027108192443847656
+er_pred_time:0.17268896102905273
+No.
+er_parse_time:6.9141387939453125e-06
+why_prep_time:0.0006232261657714844
+why_pre_pred_time:0.00021409988403320312
+why_pred_time:1.3540987968444824
+The two records do not match because they have different titles and different purposes. The first record is a digital audio software called "steinberg nuendo 3" while the second record is an audio editing software called "steinberg wavelab studio 6". Additionally, the prices are different and the second record has an additional description of being an educational discount music production software. Therefore, based on the available information, I conclude that the two records do not match.
+saliency_prep_time:0.0019621849060058594
+saliency_pre_pred_time:0.0005290508270263672
+saliency_pred_time:5.317731142044067
+Here is the saliency explanation for the above prediction in JSON format:
+
+```
+{
+    "ltable_title": 0.0,
+    "rtable_title": 0.0,
+    "ltable_manufacturer": 0.0,
+    "rtable_manufacturer": 0.0,
+    "ltable_price": 1.0,
+    "rtable_price": 1.0
+}
+```
+
+The saliency scores for the attributes "ltable_title" and "rtable_title" are 0.0, indicating that the titles of the records did not contribute to the decision. Similarly, the saliency scores for the attributes "ltable_manufacturer" and "rtable_manufacturer" are also 0.0, indicating that the manufacturers of the records did not contribute to the decision. However, the saliency scores for the attributes "ltable_price" and "rtable_price" are 1.0, indicating that the prices of the records were the most relevant attributes in the decision-making process.
+saliency_parse_time:0.00015687942504882812
+cf_prep_time:1701175441.5226338
+cf_pre_pred_time:0.0005571842193603516
+cf_pred_time:1.9570472240447998
+Here is a counterfactual explanation that flips the prediction:
+
+```
+{
+    "ltable_title": "steinberg nuendo 3 digital audio software",
+    "ltable_manufacturer": "steinberg",
+    "ltable_price": "2499.0",
+    "rtable_title": "steinberg nuendo 3 digital audio software",
+    "rtable_manufacturer": "steinberg",
+    "rtable_price": "2499.0"
+}
+```
+
+In this counterfactual example, I have kept the title and manufacturer of the left record and the price of the left record, but I have changed the right record's title, manufacturer, and price to match the left record. This change would result in a match between the two records, and therefore the prediction would flip from "no" to "yes".
+cf_parse_time:0.0002307891845703125
+ 67%|██████████████████████████████████████████████████████████████████████████████████████                                           | 10/15 [00:53<00:31,  6.38s/it]prep_time:0.0003960132598876953
+er_pre_pred_time:7.390975952148438e-05
+er_pred_time:0.18321585655212402
+No.
+er_parse_time:4.76837158203125e-06
+why_prep_time:0.0006139278411865234
+why_pre_pred_time:0.00011515617370605469
+why_pred_time:1.0217928886413574
+Based on the information provided, the two records do not match. The titles are different, and the manufacturers are different. Even though the prices are not the same, it is not enough to conclude that the records match. Therefore, I predict that the records do not match.
+saliency_prep_time:0.0013470649719238281
+saliency_pre_pred_time:0.00029397010803222656
+saliency_pred_time:2.1605708599090576
+Sure, here's the saliency explanation for the above prediction:
+
+```
+{
+    "ltable_title": 0.0,
+    "ltable_manufacturer": 0.0,
+    "ltable_price": 0.0,
+    "rtable_title": 0.0,
+    "rtable_manufacturer": 0.0,
+    "rtable_price": 0.0
+}
+```
+
+Since the two records do not match, all attributes have a saliency score of 0.0, indicating that none of the attributes contributed to the decision-making process.
+saliency_parse_time:4.76837158203125e-05
+cf_prep_time:1701175446.857161
+cf_pre_pred_time:0.0003829002380371094
+cf_pred_time:2.6152589321136475
+Here is a counterfactual explanation that flips the prediction:
+
+```
+{
+    "record1": {
+        "ltable_title": "quickbooks pro 2007 3 user",
+        "ltable_manufacturer": "nan",
+        "ltable_price": "409.52"
+    },
+    "record2": {
+        "rtable_title": "quickbooks point-of-sale basic 6.0",
+        "rtable_manufacturer": "intuit",
+        "rtable_price": "799.95"
+    }
+}
+```
+
+By swapping the values of the `ltable_title` and `rtable_title` attributes, and the values of the `ltable_manufacturer` and `rtable_manufacturer` attributes, the prediction flips from "no" to "yes".
+cf_parse_time:0.0001862049102783203
+ 73%|██████████████████████████████████████████████████████████████████████████████████████████████▌                                  | 11/15 [00:59<00:25,  6.26s/it]prep_time:0.0010190010070800781
+er_pre_pred_time:0.00014495849609375
+er_pred_time:0.18050003051757812
+No.
+er_parse_time:9.059906005859375e-06
+why_prep_time:0.0010139942169189453
+why_pre_pred_time:0.0002510547637939453
+why_pred_time:1.3814358711242676
+The two records do not match because they have different titles and manufacturers. Although both records are related to Microsoft, the first record is about Microsoft Visio Standard 2007 while the second record is about Microsoft Office SBE 2007. Additionally, the prices are different. Therefore, based on the available information, I conclude that the two records do not match.
+saliency_prep_time:0.001657247543334961
+saliency_pre_pred_time:0.0003199577331542969
+saliency_pred_time:2.7647159099578857
+Here is the saliency explanation for the above prediction in JSON format:
+
+```
+{
+    "ltable_title": 0.0,
+    "ltable_manufacturer": 0.0,
+    "ltable_price": 0.0,
+    "rtable_title": 0.0,
+    "rtable_manufacturer": 0.0,
+    "rtable_price": 0.0
+}
+```
+
+Since the two records do not match, the saliency score for each attribute is 0.0, indicating that none of the attributes contributed to the decision-making process.
+saliency_parse_time:4.029273986816406e-05
+cf_prep_time:1701175453.8081098
+cf_pre_pred_time:0.0003829002380371094
+cf_pred_time:2.7607719898223877
+Here is a counterfactual explanation that flips the prediction:
+
+```
+{
+    "ltable_title": "microsoft office sbe 2007 win32",
+    "ltable_manufacturer": "microsoft",
+    "ltable_price": "400.34",
+    "rtable_title": "microsoft w87-02380 office sbe 2007 win32",
+    "rtable_manufacturer": "nan",
+    "rtable_price": "400.34"
+}
+```
+
+In this counterfactual example, I changed the `ltable_title` and `ltable_price` attributes to match the corresponding attributes in the second record. This results in a match between the two records, which flips the prediction from "no" to "yes".
+cf_parse_time:0.0001571178436279297
+ 80%|███████████████████████████████████████████████████████████████████████████████████████████████████████▏                         | 12/15 [01:07<00:19,  6.52s/it]prep_time:0.0008139610290527344
+er_pre_pred_time:0.0001709461212158203
+er_pred_time:0.20136404037475586
+No.
+er_parse_time:9.059906005859375e-06
+why_prep_time:0.001039743423461914
+why_pre_pred_time:0.0002760887145996094
+why_pred_time:0.8958330154418945
+The two records do not match because the titles are different, even though they are both related to Quicken. Additionally, the manufacturers are different and the prices are not the same. Therefore, based on these differences, I predict that the two records do not match.
+saliency_prep_time:0.0006289482116699219
+saliency_pre_pred_time:0.00023221969604492188
+saliency_pred_time:1.5270719528198242
+Here is the saliency explanation for the above prediction in JSON format:
+
+```
+{
+    "ltable_title": 0.0,
+    "rtable_title": 0.0,
+    "ltable_manufacturer": 0.0,
+    "rtable_manufacturer": 0.0,
+    "ltable_price": 0.0,
+    "rtable_price": 0.0
+}
+```
+
+In this case, all attributes have a saliency score of 0.0 because none of them match between the two records.
+saliency_parse_time:4.601478576660156e-05
+cf_prep_time:1701175459.201816
+cf_pre_pred_time:0.00038909912109375
+cf_pred_time:1.008126974105835
+{'ltable_title': 'quicken 2007 basic', 'ltable_manufacturer': 'intuit', 'ltable_price': '29.95', 'rtable_title': 'quicken ( r ) for mac 2007', 'rtable_manufacturer': 'nan', 'rtable_price': '29.95'}
+cf_parse_time:0.0001442432403564453
+ 87%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████▊                 | 13/15 [01:10<00:11,  5.64s/it]prep_time:0.0008289813995361328
+er_pre_pred_time:0.000164031982421875
+er_pred_time:0.18670368194580078
+No.
+er_parse_time:2.193450927734375e-05
+why_prep_time:0.0011010169982910156
+why_pre_pred_time:0.0002391338348388672
+why_pred_time:0.719249963760376
+The two records do not match because they have different titles and manufacturers. Although they are both Microsoft products, the first record is for Microsoft Office 2004 Professional for Mac, while the second record is for Microsoft OneNote 2007 for PC. Additionally, the prices are different.
+saliency_prep_time:0.002421140670776367
+saliency_pre_pred_time:0.00030994415283203125
+saliency_pred_time:2.2159337997436523
+Here is the saliency explanation for the above prediction in JSON format:
+
+```
+{
+    "ltable_title": 0,
+    "ltable_manufacturer": 0,
+    "ltable_price": 0,
+    "rtable_title": 0.5,
+    "rtable_manufacturer": 0,
+    "rtable_price": 0.5
+}
+```
+
+The saliency scores indicate the relevance of each attribute in making the decision. In this case, the `rtable_title` and `rtable_price` attributes have a score of 0.5 each, indicating that they were the most relevant attributes in determining that the records do not match. The `ltable_title`, `ltable_manufacturer`, and `ltable_price` attributes have a score of 0, indicating that they did not contribute to the decision.
+saliency_parse_time:4.9114227294921875e-05
+cf_prep_time:1701175463.3394868
+cf_pre_pred_time:0.0003917217254638672
+cf_pred_time:2.547623872756958
+Here is a counterfactual explanation that flips the prediction:
+
+```
+{
+    "ltable_title": "microsoft onenote 2007 ( pc )",
+    "ltable_manufacturer": "microsoft",
+    "ltable_price": "499.99",
+    "rtable_title": "microsoft office 2004 professional ( mac )",
+    "rtable_manufacturer": "nan",
+    "rtable_price": "99.95"
+}
+```
+
+In this counterfactual example, I swapped the titles and manufacturers of the two records, and also swapped their prices. This results in the two records being a much closer match, and would likely result in a "yes" prediction.
+cf_parse_time:0.0001621246337890625
+ 93%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍        | 14/15 [01:16<00:05,  5.65s/it]prep_time:0.0007729530334472656
+er_pre_pred_time:0.00017905235290527344
+er_pred_time:0.20258188247680664
+No.
+er_parse_time:8.344650268554688e-06
+why_prep_time:0.0009949207305908203
+why_pre_pred_time:0.00023794174194335938
+why_pred_time:0.43008995056152344
+The two records have different titles, manufacturers, and prices. Therefore, they are not a match.
+saliency_prep_time:0.0011577606201171875
+saliency_pre_pred_time:0.00031185150146484375
+saliency_pred_time:1.2619850635528564
+Here is the saliency explanation for the above prediction in JSON format:
+
+```
+{
+    "ltable_title": 0.0,
+    "ltable_manufacturer": 0.0,
+    "ltable_price": 0.0,
+    "rtable_title": 0.0,
+    "rtable_manufacturer": 0.0,
+    "rtable_price": 0.0
+}
+```
+
+Since all attributes have no relevance to the matching decision, all saliency scores are 0.0.
+saliency_parse_time:9.799003601074219e-05
+cf_prep_time:1701175467.7916784
+cf_pre_pred_time:0.0003731250762939453
+cf_pred_time:0.9657680988311768
+{'ltable_title': 'migo software digital file shredder 2005', 'ltable_manufacturer': 'nan', 'ltable_price': '24.58', 'rtable_title': 'steinberg cubase 4 digital audio software', 'rtable_manufacturer': 'steinberg', 'rtable_price': '999.99'}
+cf_parse_time:0.0001652240753173828
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [01:19<00:00,  5.28s/it]
+  0%|                                                                                                                                          | 0/15 [00:00<?, ?it/s]{'ltable_title': 'microsoft visual studio test agent 2005 cd 1 processor license', 'ltable_manufacturer': 'microsoft software', 'ltable_price': '5099.0'}
+{'rtable_title': 'individual software professor teaches microsoft office 2007', 'rtable_manufacturer': 'nan', 'rtable_price': '29.99'}
+0
+  7%|████████▋                                                                                                                         | 1/15 [00:00<00:02,  5.10it/s]{'ltable_title': 'adobe dreamweaver cs3 [ mac ]', 'ltable_manufacturer': 'adobe', 'ltable_price': '399.0'}
+{'rtable_title': 'adobe cs3 web premium', 'rtable_manufacturer': 'nan', 'rtable_price': '1659.99'}
+0
+ 13%|█████████████████▎                                                                                                                | 2/15 [00:00<00:02,  5.39it/s]{'ltable_title': 'instant immersion spanish 2.0', 'ltable_manufacturer': 'topics entertainment', 'ltable_price': '29.99'}
+{'rtable_title': 'instant immers japanese dlx 2 .', 'rtable_manufacturer': 'nan', 'rtable_price': '36.11'}
+0
+ 20%|██████████████████████████                                                                                                        | 3/15 [00:00<00:02,  4.86it/s]{'ltable_title': 'i transfer dvds 2 ipod edition ( win/mac )', 'ltable_manufacturer': 'me-too-software', 'ltable_price': '29.99'}
+{'rtable_title': 'ghost recon gold edition ( dvd-rom )', 'rtable_manufacturer': 'nan', 'rtable_price': '20.95'}
+0
+ 27%|██████████████████████████████████▋                                                                                               | 4/15 [00:00<00:02,  4.87it/s]{'ltable_title': 'adobe flash pro cs3 upgrade [ mac ]', 'ltable_manufacturer': 'adobe', 'ltable_price': '199.0'}
+{'rtable_title': 'adobe illustrator cs3 ( mac )', 'rtable_manufacturer': 'nan', 'rtable_price': '599.0'}
+0
+ 33%|███████████████████████████████████████████▎                                                                                      | 5/15 [00:00<00:01,  5.11it/s]{'ltable_title': 'instant immersion ingles audio deluxe', 'ltable_manufacturer': 'topics entertainment', 'ltable_price': 'nan'}
+{'rtable_title': 'instant immersion spanish deluxe 2.0 topics', 'rtable_manufacturer': 'nan', 'rtable_price': '39.99'}
+0
+ 40%|████████████████████████████████████████████████████                                                                              | 6/15 [00:01<00:01,  5.47it/s]{'ltable_title': 'acrobat professional 8 ( windows )', 'ltable_manufacturer': 'adobe', 'ltable_price': '273.0'}
+{'rtable_title': 'web easy ( r ) professional 6', 'rtable_manufacturer': 'nan', 'rtable_price': '49.99'}
+0
+ 47%|████████████████████████████████████████████████████████████▋                                                                     | 7/15 [00:01<00:01,  5.45it/s]{'ltable_title': 'microsoft licenses word olp c ( 05903871 )', 'ltable_manufacturer': 'microsoft licenses', 'ltable_price': '205.73'}
+{'rtable_title': 'microsoft office visio standard 2007 ( pc )', 'rtable_manufacturer': 'nan', 'rtable_price': '249.95'}
+0
+ 53%|█████████████████████████████████████████████████████████████████████▎                                                            | 8/15 [00:01<00:01,  5.20it/s]{'ltable_title': 'microsoft onenote 2007 upgrade', 'ltable_manufacturer': 'microsoft', 'ltable_price': '79.95'}
+{'rtable_title': '164-04052 microsoft office publisher 2007 version upgrade package 1 pc cd win en', 'rtable_manufacturer': 'nan', 'rtable_price': '88.8'}
+0
+ 60%|██████████████████████████████████████████████████████████████████████████████                                                    | 9/15 [00:01<00:01,  5.22it/s]{'ltable_title': 'steinberg nuendo 3 digital audio software', 'ltable_manufacturer': 'steinberg', 'ltable_price': '2499.0'}
+{'rtable_title': 'steinberg wavelab studio 6 audio editing software educational discount music production software', 'rtable_manufacturer': 'nan', 'rtable_price': '149.95'}
+0
+ 67%|██████████████████████████████████████████████████████████████████████████████████████                                           | 10/15 [00:01<00:00,  5.10it/s]{'ltable_title': 'quickbooks point-of-sale basic 6.0', 'ltable_manufacturer': 'intuit', 'ltable_price': '799.95'}
+{'rtable_title': 'quickbooks pro 2007 3 user', 'rtable_manufacturer': 'nan', 'rtable_price': '409.52'}
+0
+ 73%|██████████████████████████████████████████████████████████████████████████████████████████████▌                                  | 11/15 [00:02<00:00,  5.05it/s]{'ltable_title': 'microsoft visio standard 2007', 'ltable_manufacturer': 'microsoft', 'ltable_price': '259.95'}
+{'rtable_title': 'microsoft w87-02380 office sbe 2007 win32', 'rtable_manufacturer': 'nan', 'rtable_price': '400.34'}
+0
+ 80%|███████████████████████████████████████████████████████████████████████████████████████████████████████▏                         | 12/15 [00:02<00:00,  5.44it/s]{'ltable_title': 'quicken 2007 basic', 'ltable_manufacturer': 'intuit', 'ltable_price': '29.95'}
+{'rtable_title': 'quicken ( r ) for mac 2007', 'rtable_manufacturer': 'nan', 'rtable_price': '69.99'}
+0
+ 87%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████▊                 | 13/15 [00:02<00:00,  5.66it/s]{'ltable_title': 'microsoft office 2004 professional ( mac )', 'ltable_manufacturer': 'microsoft', 'ltable_price': '499.99'}
+{'rtable_title': 'microsoft onenote 2007 ( pc )', 'rtable_manufacturer': 'nan', 'rtable_price': '99.95'}
+0
+ 93%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍        | 14/15 [00:02<00:00,  5.80it/s]{'ltable_title': 'steinberg cubase 4 digital audio software', 'ltable_manufacturer': 'steinberg', 'ltable_price': '999.99'}
+{'rtable_title': 'migo software digital file shredder 2005', 'rtable_manufacturer': 'nan', 'rtable_price': '24.58'}
+0
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:02<00:00,  5.34it/s]
+/Users/tteofili/anaconda3/envs/erllm/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1609: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 due to no true nor predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, "true nor predicted", "F-score is", len(true_sum))
+  0%|                                                                                                                                          | 0/15 [00:00<?, ?it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': '5099.0'}
+{'rtable_title': 'individual software professor teaches microsoft office 2007', 'rtable_manufacturer': 'nan', 'rtable_price': '29.99'}
+0
+  7%|████████▋                                                                                                                         | 1/15 [00:00<00:02,  6.10it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': '399.0'}
+{'rtable_title': 'adobe cs3 web premium', 'rtable_manufacturer': 'nan', 'rtable_price': '1659.99'}
+0
+ 13%|█████████████████▎                                                                                                                | 2/15 [00:00<00:02,  5.75it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': '29.99'}
+{'rtable_title': 'instant immers japanese dlx 2 .', 'rtable_manufacturer': 'nan', 'rtable_price': '36.11'}
+0
+ 20%|██████████████████████████                                                                                                        | 3/15 [00:00<00:02,  5.38it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': '29.99'}
+{'rtable_title': 'ghost recon gold edition ( dvd-rom )', 'rtable_manufacturer': 'nan', 'rtable_price': '20.95'}
+0
+ 27%|██████████████████████████████████▋                                                                                               | 4/15 [00:00<00:02,  5.31it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': '199.0'}
+{'rtable_title': 'adobe illustrator cs3 ( mac )', 'rtable_manufacturer': 'nan', 'rtable_price': '599.0'}
+0
+ 33%|███████████████████████████████████████████▎                                                                                      | 5/15 [00:00<00:01,  5.53it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': 'nan'}
+{'rtable_title': 'instant immersion spanish deluxe 2.0 topics', 'rtable_manufacturer': 'nan', 'rtable_price': '39.99'}
+0
+ 40%|████████████████████████████████████████████████████                                                                              | 6/15 [00:01<00:01,  5.31it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': '273.0'}
+{'rtable_title': 'web easy ( r ) professional 6', 'rtable_manufacturer': 'nan', 'rtable_price': '49.99'}
+0
+ 47%|████████████████████████████████████████████████████████████▋                                                                     | 7/15 [00:01<00:01,  5.30it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': '205.73'}
+{'rtable_title': 'microsoft office visio standard 2007 ( pc )', 'rtable_manufacturer': 'nan', 'rtable_price': '249.95'}
+0
+ 53%|█████████████████████████████████████████████████████████████████████▎                                                            | 8/15 [00:01<00:01,  5.07it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': '79.95'}
+{'rtable_title': '164-04052 microsoft office publisher 2007 version upgrade package 1 pc cd win en', 'rtable_manufacturer': 'nan', 'rtable_price': '88.8'}
+0
+ 60%|██████████████████████████████████████████████████████████████████████████████                                                    | 9/15 [00:01<00:01,  5.02it/s]{'ltable_title': '', 'ltable_manufacturer': 'steinberg', 'ltable_price': '2499.0'}
+{'rtable_title': '', 'rtable_manufacturer': 'nan', 'rtable_price': '149.95'}
+0
+ 67%|██████████████████████████████████████████████████████████████████████████████████████                                           | 10/15 [00:01<00:00,  5.32it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': '799.95'}
+{'rtable_title': 'quickbooks pro 2007 3 user', 'rtable_manufacturer': 'nan', 'rtable_price': '409.52'}
+0
+ 73%|██████████████████████████████████████████████████████████████████████████████████████████████▌                                  | 11/15 [00:02<00:00,  5.33it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': '259.95'}
+{'rtable_title': 'microsoft w87-02380 office sbe 2007 win32', 'rtable_manufacturer': 'nan', 'rtable_price': '400.34'}
+0
+ 80%|███████████████████████████████████████████████████████████████████████████████████████████████████████▏                         | 12/15 [00:02<00:00,  5.50it/s]{'ltable_title': '', 'ltable_manufacturer': 'intuit', 'ltable_price': '29.95'}
+{'rtable_title': '', 'rtable_manufacturer': 'nan', 'rtable_price': '69.99'}
+0
+ 87%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████▊                 | 13/15 [00:03<00:01,  1.94it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': '499.99'}
+{'rtable_title': 'microsoft onenote 2007 ( pc )', 'rtable_manufacturer': 'nan', 'rtable_price': '99.95'}
+0
+ 93%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍        | 14/15 [00:03<00:00,  2.37it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': '999.99'}
+{'rtable_title': 'migo software digital file shredder 2005', 'rtable_manufacturer': 'nan', 'rtable_price': '24.58'}
+0
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:03<00:00,  3.82it/s]
+/Users/tteofili/anaconda3/envs/erllm/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1609: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 due to no true nor predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, "true nor predicted", "F-score is", len(true_sum))
+  0%|                                                                                                                                          | 0/15 [00:00<?, ?it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': 'individual software professor teaches microsoft office 2007', 'rtable_manufacturer': 'nan', 'rtable_price': '29.99'}
+0
+  7%|████████▋                                                                                                                         | 1/15 [00:00<00:02,  5.05it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': '399.0'}
+{'rtable_title': 'adobe cs3 web premium', 'rtable_manufacturer': '', 'rtable_price': '1659.99'}
+0
+ 13%|█████████████████▎                                                                                                                | 2/15 [00:00<00:02,  4.53it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': 'instant immers japanese dlx 2 .', 'rtable_manufacturer': 'nan', 'rtable_price': '36.11'}
+0
+ 20%|██████████████████████████                                                                                                        | 3/15 [00:00<00:02,  5.06it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': 'ghost recon gold edition ( dvd-rom )', 'rtable_manufacturer': 'nan', 'rtable_price': '20.95'}
+0
+ 27%|██████████████████████████████████▋                                                                                               | 4/15 [00:00<00:02,  5.21it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': '199.0'}
+{'rtable_title': '', 'rtable_manufacturer': 'nan', 'rtable_price': '599.0'}
+0
+ 33%|███████████████████████████████████████████▎                                                                                      | 5/15 [00:01<00:03,  2.83it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': 'instant immersion spanish deluxe 2.0 topics', 'rtable_manufacturer': 'nan', 'rtable_price': '39.99'}
+0
+ 40%|████████████████████████████████████████████████████                                                                              | 6/15 [00:01<00:02,  3.21it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': 'web easy ( r ) professional 6', 'rtable_manufacturer': 'nan', 'rtable_price': '49.99'}
+0
+ 47%|████████████████████████████████████████████████████████████▋                                                                     | 7/15 [00:01<00:02,  3.77it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': 'microsoft office visio standard 2007 ( pc )', 'rtable_manufacturer': 'nan', 'rtable_price': '249.95'}
+0
+ 53%|█████████████████████████████████████████████████████████████████████▎                                                            | 8/15 [00:02<00:01,  3.98it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': '164-04052 microsoft office publisher 2007 version upgrade package 1 pc cd win en', 'rtable_manufacturer': 'nan', 'rtable_price': '88.8'}
+0
+ 60%|██████████████████████████████████████████████████████████████████████████████                                                    | 9/15 [00:02<00:01,  4.38it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': '2499.0'}
+{'rtable_title': '', 'rtable_manufacturer': 'nan', 'rtable_price': '149.95'}
+0
+ 67%|██████████████████████████████████████████████████████████████████████████████████████                                           | 10/15 [00:03<00:02,  2.30it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': 'quickbooks pro 2007 3 user', 'rtable_manufacturer': 'nan', 'rtable_price': '409.52'}
+0
+ 73%|██████████████████████████████████████████████████████████████████████████████████████████████▌                                  | 11/15 [00:03<00:01,  2.85it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': 'microsoft w87-02380 office sbe 2007 win32', 'rtable_manufacturer': 'nan', 'rtable_price': '400.34'}
+0
+ 80%|███████████████████████████████████████████████████████████████████████████████████████████████████████▏                         | 12/15 [00:03<00:00,  3.43it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': '29.95'}
+{'rtable_title': '', 'rtable_manufacturer': 'nan', 'rtable_price': '69.99'}
+0
+ 87%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████▊                 | 13/15 [00:04<00:01,  1.70it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': 'microsoft onenote 2007 ( pc )', 'rtable_manufacturer': 'nan', 'rtable_price': '99.95'}
+0
+ 93%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍        | 14/15 [00:04<00:00,  2.12it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': 'migo software digital file shredder 2005', 'rtable_manufacturer': 'nan', 'rtable_price': '24.58'}
+0
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:05<00:00,  2.95it/s]
+/Users/tteofili/anaconda3/envs/erllm/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1609: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 due to no true nor predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, "true nor predicted", "F-score is", len(true_sum))
+  0%|                                                                                                                                          | 0/15 [00:00<?, ?it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': '', 'rtable_manufacturer': 'nan', 'rtable_price': '29.99'}
+0
+  7%|████████▋                                                                                                                         | 1/15 [00:00<00:02,  5.27it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': 'adobe cs3 web premium', 'rtable_manufacturer': '', 'rtable_price': '1659.99'}
+0
+ 13%|█████████████████▎                                                                                                                | 2/15 [00:00<00:02,  5.37it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': 'instant immers japanese dlx 2 .', 'rtable_manufacturer': 'nan', 'rtable_price': ''}
+0
+ 20%|██████████████████████████                                                                                                        | 3/15 [00:00<00:02,  5.36it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': '', 'rtable_manufacturer': 'nan', 'rtable_price': '20.95'}
+0
+ 27%|██████████████████████████████████▋                                                                                               | 4/15 [00:00<00:01,  5.64it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': '199.0'}
+{'rtable_title': '', 'rtable_manufacturer': '', 'rtable_price': '599.0'}
+0
+ 33%|███████████████████████████████████████████▎                                                                                      | 5/15 [00:01<00:04,  2.03it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': '', 'rtable_manufacturer': 'nan', 'rtable_price': '39.99'}
+0
+ 40%|████████████████████████████████████████████████████                                                                              | 6/15 [00:01<00:03,  2.50it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': '', 'rtable_manufacturer': 'nan', 'rtable_price': '49.99'}
+0
+ 47%|████████████████████████████████████████████████████████████▋                                                                     | 7/15 [00:02<00:02,  2.98it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': '', 'rtable_manufacturer': 'nan', 'rtable_price': '249.95'}
+0
+ 53%|█████████████████████████████████████████████████████████████████████▎                                                            | 8/15 [00:02<00:01,  3.51it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': '', 'rtable_manufacturer': 'nan', 'rtable_price': '88.8'}
+0
+ 60%|██████████████████████████████████████████████████████████████████████████████                                                    | 9/15 [00:02<00:01,  4.06it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': '2499.0'}
+{'rtable_title': '', 'rtable_manufacturer': '', 'rtable_price': '149.95'}
+0
+ 67%|██████████████████████████████████████████████████████████████████████████████████████                                           | 10/15 [00:03<00:01,  2.66it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': '', 'rtable_manufacturer': 'nan', 'rtable_price': '409.52'}
+0
+ 73%|██████████████████████████████████████████████████████████████████████████████████████████████▌                                  | 11/15 [00:03<00:01,  3.14it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': '', 'rtable_manufacturer': 'nan', 'rtable_price': '400.34'}
+0
+ 80%|███████████████████████████████████████████████████████████████████████████████████████████████████████▏                         | 12/15 [00:03<00:00,  3.72it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': '29.95'}
+{'rtable_title': '', 'rtable_manufacturer': '', 'rtable_price': '69.99'}
+0
+ 87%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████▊                 | 13/15 [00:04<00:00,  2.86it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': 'microsoft onenote 2007 ( pc )', 'rtable_manufacturer': '', 'rtable_price': '99.95'}
+0
+ 93%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍        | 14/15 [00:04<00:00,  3.41it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': '', 'rtable_manufacturer': 'nan', 'rtable_price': '24.58'}
+0
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:04<00:00,  3.41it/s]
+/Users/tteofili/anaconda3/envs/erllm/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1609: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 due to no true nor predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, "true nor predicted", "F-score is", len(true_sum))
+  0%|                                                                                                                                          | 0/15 [00:00<?, ?it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': '', 'rtable_manufacturer': '', 'rtable_price': ''}
+0
+  7%|████████▋                                                                                                                         | 1/15 [00:00<00:11,  1.25it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': '', 'rtable_manufacturer': '', 'rtable_price': ''}
+0
+ 13%|█████████████████▎                                                                                                                | 2/15 [00:01<00:08,  1.46it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': '', 'rtable_manufacturer': '', 'rtable_price': ''}
+0
+ 20%|██████████████████████████                                                                                                        | 3/15 [00:01<00:06,  1.75it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': '', 'rtable_manufacturer': '', 'rtable_price': ''}
+0
+ 27%|██████████████████████████████████▋                                                                                               | 4/15 [00:02<00:05,  1.90it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': '', 'rtable_manufacturer': '', 'rtable_price': ''}
+0
+ 33%|███████████████████████████████████████████▎                                                                                      | 5/15 [00:02<00:05,  1.83it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': '', 'rtable_manufacturer': '', 'rtable_price': ''}
+0
+ 40%|████████████████████████████████████████████████████                                                                              | 6/15 [00:03<00:04,  1.96it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': '', 'rtable_manufacturer': '', 'rtable_price': ''}
+0
+ 47%|████████████████████████████████████████████████████████████▋                                                                     | 7/15 [00:03<00:04,  1.98it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': '', 'rtable_manufacturer': '', 'rtable_price': ''}
+0
+ 53%|█████████████████████████████████████████████████████████████████████▎                                                            | 8/15 [00:04<00:03,  2.24it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': '', 'rtable_manufacturer': '', 'rtable_price': ''}
+0
+ 60%|██████████████████████████████████████████████████████████████████████████████                                                    | 9/15 [00:04<00:02,  2.06it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': '', 'rtable_manufacturer': '', 'rtable_price': ''}
+0
+ 67%|██████████████████████████████████████████████████████████████████████████████████████                                           | 10/15 [00:05<00:02,  1.88it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': '', 'rtable_manufacturer': '', 'rtable_price': ''}
+0
+ 73%|██████████████████████████████████████████████████████████████████████████████████████████████▌                                  | 11/15 [00:06<00:02,  1.66it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': '', 'rtable_manufacturer': '', 'rtable_price': ''}
+0
+ 80%|███████████████████████████████████████████████████████████████████████████████████████████████████████▏                         | 12/15 [00:06<00:01,  1.72it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': '', 'rtable_manufacturer': '', 'rtable_price': ''}
+0
+ 87%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████▊                 | 13/15 [00:07<00:01,  1.49it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': '', 'rtable_manufacturer': '', 'rtable_price': ''}
+0
+ 93%|████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████▍        | 14/15 [00:08<00:00,  1.61it/s]{'ltable_title': '', 'ltable_manufacturer': '', 'ltable_price': ''}
+{'rtable_title': '', 'rtable_manufacturer': '', 'rtable_price': ''}
+0
+100%|█████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 15/15 [00:08<00:00,  1.76it/s]
+/Users/tteofili/anaconda3/envs/erllm/lib/python3.11/site-packages/sklearn/metrics/_classification.py:1609: UndefinedMetricWarning: F-score is ill-defined and being set to 0.0 due to no true nor predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, "true nor predicted", "F-score is", len(true_sum))
+ptsew_azure faithfulness(ptsew_azure):{'ptsew_azure': 0.0}
+  0%|                                                                                                                                           | 0/1 [00:00<?, ?it/s]{'ltable_title': 'individual software professor teaches microsoft office 2007', 'ltable_manufacturer': 'nan', 'ltable_price': '29.99'}
+{'rtable_title': 'microsoft visual studio test agent 2005 cd 1 processor license', 'rtable_manufacturer': 'microsoft software', 'rtable_price': '5099.0'}
+0
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  4.28it/s]
+  0%|                                                                                                                                           | 0/1 [00:00<?, ?it/s]{'ltable_title': 'adobe cs3 web premium', 'ltable_manufacturer': 'nan', 'ltable_price': '1659.99'}
+{'rtable_title': 'adobe dreamweaver cs3 [ mac ]', 'rtable_manufacturer': 'adobe', 'rtable_price': '399.0'}
+0
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  5.08it/s]
+  0%|                                                                                                                                           | 0/1 [00:00<?, ?it/s]{'ltable_title': 'instant immersion spanish 2.0', 'ltable_manufacturer': 'topics entertainment', 'ltable_price': '29.99'}
+{'rtable_title': 'instant immersion spanish 2.0', 'rtable_manufacturer': 'topics entertainment', 'rtable_price': '29.99'}
+1
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  3.34it/s]
+  0%|                                                                                                                                           | 0/1 [00:00<?, ?it/s]{'ltable_title': 'ghost recon gold edition ( dvd-rom )', 'ltable_manufacturer': 'nan', 'ltable_price': '20.95'}
+{'rtable_title': 'i transfer dvds 2 ipod edition ( win/mac )', 'rtable_manufacturer': 'me-too-software', 'rtable_price': '29.99'}
+0
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  5.11it/s]
+  0%|                                                                                                                                           | 0/1 [00:00<?, ?it/s]{'ltable_title': 'adobe illustrator cs3 ( mac )', 'ltable_manufacturer': 'adobe', 'ltable_price': '599.0'}
+{'rtable_title': 'adobe illustrator cs3 ( mac )', 'rtable_manufacturer': 'adobe', 'rtable_price': '599.0'}
+1
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  3.51it/s]
+  0%|                                                                                                                                           | 0/1 [00:00<?, ?it/s]{'ltable_title': 'instant immersion ingles audio deluxe', 'ltable_manufacturer': 'topics entertainment', 'ltable_price': 'nan'}
+{'rtable_title': 'instant immersion spanish deluxe 2.0 topics', 'rtable_manufacturer': 'topics entertainment', 'rtable_price': 'nan'}
+0
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  5.73it/s]
+  0%|                                                                                                                                           | 0/1 [00:00<?, ?it/s]{'ltable_title': 'web easy ( r ) professional 6', 'ltable_manufacturer': 'nan', 'ltable_price': '49.99'}
+{'rtable_title': 'acrobat professional 8 ( windows )', 'rtable_manufacturer': 'adobe', 'rtable_price': '273.0'}
+0
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  5.39it/s]
+  0%|                                                                                                                                           | 0/1 [00:00<?, ?it/s]{'ltable_title': 'microsoft office visio standard 2007 ( pc )', 'ltable_manufacturer': 'nan', 'ltable_price': '249.95'}
+{'rtable_title': 'microsoft licenses word olp c ( 05903871 )', 'rtable_manufacturer': 'microsoft licenses', 'rtable_price': '205.73'}
+0
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  3.73it/s]
+  0%|                                                                                                                                           | 0/1 [00:00<?, ?it/s]{'ltable_title': 'microsoft office publisher 2007 upgrade', 'ltable_manufacturer': 'microsoft', 'ltable_price': '88.8'}
+{'rtable_title': '164-04052 microsoft office publisher 2007 version upgrade package 1 pc cd win en', 'rtable_manufacturer': 'nan', 'rtable_price': '79.95'}
+0
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  5.70it/s]
+  0%|                                                                                                                                           | 0/1 [00:00<?, ?it/s]{'ltable_title': 'steinberg nuendo 3 digital audio software', 'ltable_manufacturer': 'steinberg', 'ltable_price': '2499.0'}
+{'rtable_title': 'steinberg nuendo 3 digital audio software', 'rtable_manufacturer': 'steinberg', 'rtable_price': '2499.0'}
+1
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  3.45it/s]
+  0%|                                                                                                                                           | 0/1 [00:00<?, ?it/s]{'ltable_title': 'quickbooks pro 2007 3 user', 'ltable_manufacturer': 'nan', 'ltable_price': '409.52'}
+{'rtable_title': 'quickbooks point-of-sale basic 6.0', 'rtable_manufacturer': 'intuit', 'rtable_price': '799.95'}
+0
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  5.80it/s]
+  0%|                                                                                                                                           | 0/1 [00:00<?, ?it/s]{'ltable_title': 'microsoft office sbe 2007 win32', 'ltable_manufacturer': 'microsoft', 'ltable_price': '400.34'}
+{'rtable_title': 'microsoft w87-02380 office sbe 2007 win32', 'rtable_manufacturer': 'nan', 'rtable_price': '400.34'}
+1
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  1.11it/s]
+  0%|                                                                                                                                           | 0/1 [00:00<?, ?it/s]{'ltable_title': 'quicken 2007 basic', 'ltable_manufacturer': 'intuit', 'ltable_price': '29.95'}
+{'rtable_title': 'quicken ( r ) for mac 2007', 'rtable_manufacturer': 'nan', 'rtable_price': '29.95'}
+0
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  5.13it/s]
+  0%|                                                                                                                                           | 0/1 [00:00<?, ?it/s]{'ltable_title': 'microsoft onenote 2007 ( pc )', 'ltable_manufacturer': 'microsoft', 'ltable_price': '499.99'}
+{'rtable_title': 'microsoft office 2004 professional ( mac )', 'rtable_manufacturer': 'nan', 'rtable_price': '99.95'}
+0
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  4.43it/s]
+  0%|                                                                                                                                           | 0/1 [00:00<?, ?it/s]{'ltable_title': 'migo software digital file shredder 2005', 'ltable_manufacturer': 'nan', 'ltable_price': '24.58'}
+{'rtable_title': 'steinberg cubase 4 digital audio software', 'rtable_manufacturer': 'steinberg', 'rtable_price': '999.99'}
+0
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 1/1 [00:00<00:00,  5.49it/s]
+ptsew_azure cf_metrics(ptsew_azure):{'ptsew_azure': {'validity': 0.7333333333284444, 'proximity': 0.8111111111057038, 'sparsity': 0.7296296296247654, 'diversity': 0.0}}
+ptsew_azure data generated in 79.28094100952148s
