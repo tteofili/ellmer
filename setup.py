@@ -26,7 +26,6 @@ setuptools.setup(
           'einops',
           'safetensors',
           'torch',
-          'xformers',
           'openai'
       ],
     classifiers=[
