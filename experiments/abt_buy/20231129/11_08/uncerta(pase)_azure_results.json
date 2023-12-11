@@ -1,0 +1,2082 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "ltuple": {
+        "ltable_name": "lg 2.0 cu . ft. over-the-range white microwave oven lmvm2085wh",
+        "ltable_description": "lg 2.0 cu . ft. over-the-range white microwave oven lmvm2085wh warming lamp glide & spin sliding tray with turntable sensor cook feature 300 cfm exhaust system horizontal keypad elegant hidden vent wideview window halogen cooktop lighting white finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "maytag 2.0 cu . ft. over-the-range microwave oven",
+        "rtable_description": "nan",
+        "rtable_price": "nan"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.6818181818181818
+        ],
+        "ltable_description": [
+          0.9090909090909091
+        ],
+        "ltable_price": [
+          0.6818181818181818
+        ],
+        "rtable_name": [
+          0.45454545454545453
+        ],
+        "rtable_description": [
+          0.45454545454545453
+        ],
+        "rtable_price": [
+          0.45454545454545453
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "canon blue 8.0 megapixel powershot digital camera sd1100isb",
+          "ltable_description": "technology isaps technology rhythm & blue finish",
+          "ltable_price": "nan",
+          "rtable_name": "linksys etherfast ezxs88w ethernet switch ezxs88w",
+          "rtable_description": "linksys etherfast 8-port 10/100 switch ( new/workgroup )",
+          "rtable_price": "nan",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 1.030289888381958
+    },
+    {
+      "id": 2,
+      "ltuple": {
+        "ltable_name": "panasonic black 8.5 ' portable dvd player dvdls83",
+        "ltable_description": "panasonic black 8.5 ' portable dvd player dvdls83 8.5 ' free style wide screen lcd display 6 hour battery multi format playback dual headphone jacks divx playback car dc adapter included black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "toshiba sd-p71s portable dvd player",
+        "rtable_description": "toshiba sd-p71s 7 ' portable dvd player",
+        "rtable_price": "119.36"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.7391304347826086
+        ],
+        "ltable_description": [
+          0.9130434782608695
+        ],
+        "ltable_price": [
+          0.6086956521739131
+        ],
+        "rtable_name": [
+          0.43478260869565216
+        ],
+        "rtable_description": [
+          0.43478260869565216
+        ],
+        "rtable_price": [
+          0.43478260869565216
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "panasonic dect 6.0 black expandable digital cordless phone system kxtg9372b",
+          "ltable_description": "id voicemail hold mute clock alarm led lighting night mode call block speakerphone 11 days standby 5 hours talk time black finish",
+          "ltable_price": "nan",
+          "rtable_name": "toshiba sd-p71s portable dvd player",
+          "rtable_description": "toshiba sd-p71s 7 ' portable dvd player",
+          "rtable_price": "119.36",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 0.9690229892730713
+    },
+    {
+      "id": 3,
+      "ltuple": {
+        "ltable_name": "sony bravia theater black micro system davis50b",
+        "ltable_description": "sony bravia theater black micro system davis50b 5.1-channel surround sound golf ball-sized speakers compact design s-air digital wireless capability hdmi connectivity bravia sync digital cinema sound ( dcs ) technology s-master digital amplifier portable audio enhancer black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "sony bravia dav-is50 / b home theater system",
+        "rtable_description": "dvd player , 5.1 speakers 1 disc ( s ) progressive scan 450w rms dolby digital ex , dolby pro logic , dolby pro logic ii",
+        "rtable_price": "nan"
+      },
+      "prediction": 1,
+      "label": 1,
+      "saliency": {
+        "ltable_name": [
+          0.9473684210526314
+        ],
+        "ltable_description": [
+          0.7894736842105263
+        ],
+        "ltable_price": [
+          0.5263157894736842
+        ],
+        "rtable_name": [
+          0.5263157894736842
+        ],
+        "rtable_description": [
+          0.5789473684210527
+        ],
+        "rtable_price": [
+          0.5263157894736842
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "sony silver cyber-shot digital camera dscw170",
+          "ltable_description": "sony silver cyber-shot digital camera dscw170 10.1 megapixels 2.7 ' lcd display 15 mb internal memory carl zeiss 5x optical zoom lens bionz real imaging processor technology 16:9 high-resolution mode 9-point auto focus automatic macro shooting high sensitivity mode burst mode face detection intelligent scene recognition mode in-camera retouching super steadyshot optical image stabilization",
+          "ltable_price": "nan",
+          "rtable_name": "sony bravia dav-is50 / b home theater system",
+          "rtable_description": "dvd player , 5.1 speakers 1 disc ( s ) progressive scan 450w rms dolby digital ex , dolby pro logic , dolby pro logic ii",
+          "rtable_price": "nan",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 0.9527809619903564
+    },
+    {
+      "id": 4,
+      "ltuple": {
+        "ltable_name": "panasonic dect 6.0 expandable digital cordless phone with all-digital answering system kxtg9344t",
+        "ltable_description": "panasonic dect 6.0 expandable digital cordless phone with all-digital answering system kxtg9344t 4 handsets system up to 6 multi-handset capability digital answering machine system ringer id call waiting caller id voicemail hold voice menu marker message mute clock alarm led lighting night mode call block speakerphone 11 days standby 5 hours talk time black metallic finish",
+        "ltable_price": "139.0"
+      },
+      "rtuple": {
+        "rtable_name": "panasonic kx-tg9342t cordless phone",
+        "rtable_description": "1 x phone line ( s ) black , metallic",
+        "rtable_price": "nan"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.5588235294117647
+        ],
+        "ltable_description": [
+          0.6764705882352942
+        ],
+        "ltable_price": [
+          0.7058823529411765
+        ],
+        "rtable_name": [
+          0.29411764705882354
+        ],
+        "rtable_description": [
+          0.29411764705882354
+        ],
+        "rtable_price": [
+          0.29411764705882354
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "panasonic dect 6.0 expandable digital cordless phone with all-digital answering system kxtg9344t",
+          "ltable_description": "panasonic dect 6.0 expandable digital cordless phone with all-digital answering system kxtg9344t 4 handsets system up to 6 multi-handset capability digital answering machine system ringer id call waiting caller id voicemail hold voice menu marker message mute clock alarm led lighting night mode call block speakerphone 11 days standby 5 hours talk time black metallic finish",
+          "ltable_price": "nan",
+          "rtable_name": "panasonic kx-tg9342t cordless phone",
+          "rtable_description": "1 x phone line ( s ) black , metallic",
+          "rtable_price": "nan",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 0.9632422924041748
+    },
+    {
+      "id": 5,
+      "ltuple": {
+        "ltable_name": "sony cyber-shot black digital camera dsch10b",
+        "ltable_description": "sony dsch10 cyber-shot black digital camera dsch10b 8.1 megapixels 3.0 ' lcd display carl zeiss 10x optical zoom lens 31 mb internal memory versatile flash advanced sports mode 9-point auto focus high sensitivity mode burst mode face detection in-camera retouching super steadyshot optical image stabilization with anti-blur solution music slideshow hdtv compatibility stamina battery power beginner-friendly function guide black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "sony handycam dcr-sr85 digital camcorder dcrsr85",
+        "rtable_description": "16:9 2.7 ' hybrid lcd",
+        "rtable_price": "375.8"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.7142857142857143
+        ],
+        "ltable_description": [
+          0.857142857142857
+        ],
+        "ltable_price": [
+          0.7619047619047619
+        ],
+        "rtable_name": [
+          0.47619047619047616
+        ],
+        "rtable_description": [
+          0.47619047619047616
+        ],
+        "rtable_price": [
+          0.47619047619047616
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "sony cyber-shot black digital camera dsch10b",
+          "ltable_description": "black finish",
+          "ltable_price": "399.0",
+          "rtable_name": "sony handycam dcr-sr85 digital camcorder dcrsr85",
+          "rtable_description": "16:9 2.7 ' hybrid lcd",
+          "rtable_price": "375.8",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 0.9549977779388428
+    },
+    {
+      "id": 6,
+      "ltuple": {
+        "ltable_name": "olympus black 10 megapixels digital camera sp565uz",
+        "ltable_description": "olympus black 10 megapixels digital camera sp565uz dual image stabilization 10 megapixels 20x wide-angle zoom lens pre-capture face detection 33 shooting modes 48mb internal memory black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "olympus ps-bls1 lithium ion digital camera battery 260236",
+        "rtable_description": "lithium ion ( li-ion ) photo battery",
+        "rtable_price": "nan"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.7857142857142857
+        ],
+        "ltable_description": [
+          0.7857142857142857
+        ],
+        "ltable_price": [
+          0.5714285714285714
+        ],
+        "rtable_name": [
+          0.35714285714285715
+        ],
+        "rtable_description": [
+          0.35714285714285715
+        ],
+        "rtable_price": [
+          0.35714285714285715
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "2.4 ghz intel core 2 duo silver notebook computer mb467lla",
+          "ltable_description": "apple macbook 2.4 ghz intel core 2 duo silver notebook computer mb467lla 2.4 ghz intel core 2 duo processor 250gb 5400-rpm serial ata hard drive 13 ' led-backlit glossy widescreen display built-in isight camera built-in airport extreme wi-fi and bluetooth nvidia geforce 9400m graphics processor extended desktop and video mirroring multi-touch trackpad 60w magsafe power adapter mini displayport mac os x v10 .5 leopard silver finish",
+          "ltable_price": "nan",
+          "rtable_name": "olympus ps-bls1 lithium ion digital camera battery 260236",
+          "rtable_description": "lithium ion ( li-ion ) photo battery",
+          "rtable_price": "nan",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 1.1228129863739014
+    },
+    {
+      "id": 7,
+      "ltuple": {
+        "ltable_name": "canon black rechargeable battery 9612a001",
+        "ltable_description": "canon black rechargeable battery 9612a001 lithium-ion technology compatible with canon digital rebel xt and powershot s series digital cameras also compatible with canon elura series , optura series and zr series camcorders black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "canon canon cb-2lw battery charger 0763b001",
+        "rtable_description": "nan",
+        "rtable_price": "nan"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.7272727272727272
+        ],
+        "ltable_description": [
+          0.9545454545454545
+        ],
+        "ltable_price": [
+          0.6363636363636364
+        ],
+        "rtable_name": [
+          0.45454545454545453
+        ],
+        "rtable_description": [
+          0.45454545454545453
+        ],
+        "rtable_price": [
+          0.45454545454545453
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "lacie 2tb ethernet big disk external hard drive 301239u",
+          "ltable_description": "usb 2.0 full support for windows , mac and linux",
+          "ltable_price": "nan",
+          "rtable_name": "linksys etherfast ezxs88w ethernet switch ezxs88w",
+          "rtable_description": "linksys etherfast 8-port 10/100 switch ( new/workgroup )",
+          "rtable_price": "nan",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 0.9618101119995117
+    },
+    {
+      "id": 9,
+      "ltuple": {
+        "ltable_name": "audiovox commander mt xm satellite radio receiver xmrvrfm002",
+        "ltable_description": "audiovox commander mt xm satellite radio receiver xmrvrfm002 , dual line display tuneselect feature universal connector scan and jump features full function remote black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "directed electronics sportster 4 sirius satellite radio receiver sp4tk1",
+        "rtable_description": "xs fm transmitter 6 lines lcd",
+        "rtable_price": "169.99"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.6875
+        ],
+        "ltable_description": [
+          0.71875
+        ],
+        "ltable_price": [
+          0.625
+        ],
+        "rtable_name": [
+          0.3125
+        ],
+        "rtable_description": [
+          0.3125
+        ],
+        "rtable_price": [
+          0.3125
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "lg 24 ' lds4821bb semi integrated built in black dishwasher lds4821bk",
+          "ltable_description": "lg 24 ' lds4821bb semi integrated built",
+          "ltable_price": "nan",
+          "rtable_name": "directed electronics sportster 4 sirius satellite radio receiver sp4tk1",
+          "rtable_description": "xs fm transmitter 6 lines lcd",
+          "rtable_price": "169.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 0.9968631267547607
+    },
+    {
+      "id": 10,
+      "ltuple": {
+        "ltable_name": "olympus black 10 megapixels digital camera sp565uz",
+        "ltable_description": "olympus black 10 megapixels digital camera sp565uz dual image stabilization 10 megapixels 20x wide-angle zoom lens pre-capture face detection 33 shooting modes 48mb internal memory black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "sony cyber-shot dsc-h50 digital camera black dsch50b",
+        "rtable_description": "9.1 megapixel 16:9 2x digital zoom 3 ' active matrix tft color lcd",
+        "rtable_price": "329.0"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.6666666666666666
+        ],
+        "ltable_description": [
+          0.8148148148148148
+        ],
+        "ltable_price": [
+          0.6296296296296295
+        ],
+        "rtable_name": [
+          0.37037037037037035
+        ],
+        "rtable_description": [
+          0.37037037037037035
+        ],
+        "rtable_price": [
+          0.37037037037037035
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "olympus black 10 megapixels digital camera sp565uz",
+          "ltable_description": "panel tv black wall mount mf110b mounts within 2.5 ' of wall holds up to 100 lbs powder coated black finish",
+          "ltable_price": "nan",
+          "rtable_name": "sony cyber-shot dsc-h50 digital camera black dsch50b",
+          "rtable_description": "9.1 megapixel 16:9 2x digital zoom 3 ' active matrix tft color lcd",
+          "rtable_price": "329.0",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 0.9579567909240723
+    },
+    {
+      "id": 11,
+      "ltuple": {
+        "ltable_name": "panasonic black expandable digital cordless dect 6.0 phone system kxtg9348t",
+        "ltable_description": "panasonic black expandable digital cordless dect 6.0 phone system kxtg9348t automatic clarity booster 5 hours talk time 11 days standby white backlit lcd 6-step speakerphone volume 1 drop & splash resistant phone 1.9 ghz frequency range night mode black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "panasonic kx-tga670b cordless handset",
+        "rtable_description": "panasonic kx-tga670b additional handset for pankxtg6700b",
+        "rtable_price": "nan"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.6000000000000001
+        ],
+        "ltable_description": [
+          1.0
+        ],
+        "ltable_price": [
+          0.6000000000000001
+        ],
+        "rtable_name": [
+          0.4
+        ],
+        "rtable_description": [
+          0.4
+        ],
+        "rtable_price": [
+          0.4
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "panasonic black expandable digital cordless dect 6.0 phone system kxtg9348t",
+          "ltable_description": "hdavi control surround sound bbe viva hd3d sound built-in closed caption decoder built-in sd card memory slot built-in ntsc/atsc/qam tuners black finish",
+          "ltable_price": "nan",
+          "rtable_name": "panasonic kx-tga670b cordless handset",
+          "rtable_description": "panasonic kx-tga670b additional handset for pankxtg6700b",
+          "rtable_price": "nan",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 31.747795820236206
+    },
+    {
+      "id": 12,
+      "ltuple": {
+        "ltable_name": "panasonic dect 6.0 expandable digital cordless phone with all-digital answering system kxtg9342t",
+        "ltable_description": "panasonic dect 6.0 expandable digital cordless phone with all-digital answering system kxtg9342t 2 handsets system up to 6 multi-handset capability digital answering machine system ringer id call waiting caller id voicemail hold voice menu marker message mute clock alarm led lighting night mode call block speakerphone 11 days standby 5 hours talk time black metallic finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "panasonic kx-tg9332t cordless phone",
+        "rtable_description": "1 x phone line ( s ) black , metallic",
+        "rtable_price": "nan"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.6875
+        ],
+        "ltable_description": [
+          0.75
+        ],
+        "ltable_price": [
+          0.59375
+        ],
+        "rtable_name": [
+          0.3125
+        ],
+        "rtable_description": [
+          0.3125
+        ],
+        "rtable_price": [
+          0.3125
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "panasonic dect 6.0 expandable digital cordless phone with all-digital answering system kxtg9342t",
+          "ltable_description": "audio jack into the headphone port of your ipod , mp3 player , cd player or other portable audio device and insert the cassette adapter into your cassette player black finish",
+          "ltable_price": "nan",
+          "rtable_name": "panasonic kx-tg9332t cordless phone",
+          "rtable_description": "1 x phone line ( s ) black , metallic",
+          "rtable_price": "nan",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 1.0096051692962646
+    },
+    {
+      "id": 13,
+      "ltuple": {
+        "ltable_name": "sanus 15 ' 37 ' visionmount full-motion flat panel tv black wall mount mf215b1",
+        "ltable_description": "sanus 15 ' 37 ' visionmount full-motion flat panel tv black wall mount mf215b1 easily conceal hardware easy to install includes two vesa-compatible tv brackets virtual axis 3d black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "sanus visionmount flat panel tv wall mount vmpl3b",
+        "rtable_description": "steel 280 lb",
+        "rtable_price": "144.05"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.6785714285714286
+        ],
+        "ltable_description": [
+          0.8214285714285714
+        ],
+        "ltable_price": [
+          0.5714285714285714
+        ],
+        "rtable_name": [
+          0.35714285714285715
+        ],
+        "rtable_description": [
+          0.35714285714285715
+        ],
+        "rtable_price": [
+          0.35714285714285715
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "sanus 15 ' 37 ' visionmount full-motion flat panel tv black wall mount mf215b1",
+          "ltable_description": "sony alpha dslr black camera body with 18-70mm zoom lens dslra300k 10.2 mp super had ccd tiltable 2.7 clear photo lcd plus screen smart teleconverter 2x zoom expanded iso sensitivity super steadyshot in-camera image stabilization anti-dust technology 9-point center",
+          "ltable_price": "nan",
+          "rtable_name": "sanus visionmount flat panel tv wall mount vmpl3b",
+          "rtable_description": "steel 280 lb",
+          "rtable_price": "144.05",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 0.981381893157959
+    },
+    {
+      "id": 14,
+      "ltuple": {
+        "ltable_name": "canon deluxe grey leather case 2349b001",
+        "ltable_description": "canon deluxe grey leather case 2349b001 genuine leather case designed for the powershot sd770 is , sd1100 and sd1000 grey finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "nikon digital camera leather case 5811",
+        "rtable_description": "leather black",
+        "rtable_price": "7.99"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.7142857142857142
+        ],
+        "ltable_description": [
+          0.7142857142857142
+        ],
+        "ltable_price": [
+          0.5714285714285714
+        ],
+        "rtable_name": [
+          0.2857142857142857
+        ],
+        "rtable_description": [
+          0.2857142857142857
+        ],
+        "rtable_price": [
+          0.2857142857142857
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "telephoto zoom lens 2044b002",
+          "ltable_description": "canon deluxe grey leather case 2349b001 genuine leather case designed for the powershot sd770 is , sd1100 and sd1000 grey finish",
+          "ltable_price": "nan",
+          "rtable_name": "nikon digital camera leather case 5811",
+          "rtable_description": "leather black",
+          "rtable_price": "7.99",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 0.9705178737640381
+    },
+    {
+      "id": 15,
+      "ltuple": {
+        "ltable_name": "canon silver powershot digital camera sd880is",
+        "ltable_description": "canon silver powershot digital camera sd880is 10 megapixel 4x optical zoom optical image stabilizer 3.0 ' purecolor lcd ii digic 4 image processor face detection self-timer red-eye correction 19 shooting modes print/share button silver finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "canon powershot sd790 is digital camera 2554b001",
+        "rtable_description": "canon powershot sd790 is 10 megapixel digital camera with 3x optical zoom , 3 ' lcd , & pictbridge",
+        "rtable_price": "nan"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.6756756756756757
+        ],
+        "ltable_description": [
+          0.7297297297297298
+        ],
+        "ltable_price": [
+          0.5675675675675675
+        ],
+        "rtable_name": [
+          0.2702702702702703
+        ],
+        "rtable_description": [
+          0.2702702702702703
+        ],
+        "rtable_price": [
+          0.2702702702702703
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "canon silver powershot digital camera sd880is",
+          "ltable_description": "nintendo ds lite metallic rose portable gaming system ndsusgszpb dual 3 ' tft color lcd touchscreens slimmer design dual slot compatibility ( ds lite/game boy advance game paks ) twin ultra bright lcd screens up to 19 hours continuous gameplay nintendo wi-fi connection impressive",
+          "ltable_price": "nan",
+          "rtable_name": "canon powershot sd790 is digital camera 2554b001",
+          "rtable_description": "canon powershot sd790 is 10 megapixel digital camera with 3x optical zoom , 3 ' lcd , & pictbridge",
+          "rtable_price": "nan",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 0.9990370273590088
+    },
+    {
+      "id": 16,
+      "ltuple": {
+        "ltable_name": "samsung 50 ' widescreen plasma hdtv pn50a650",
+        "ltable_description": "samsung 50 ' widescreen plasma hdtv pn50a650 touch of color ultra filterbright anti glare technology 1,000,000:1 dynamic contrast ratio picture-in-picture anti-burn-in technology sports/game/movie modes single integrated user interface with wheel-key remote atsc/ntsc/clear qa tuners",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "samsung pn58a550 58 ' plasma tv",
+        "rtable_description": "samsung pn58a550 58 ' widescreen 1080p plasma hdtv 1,000,000:1 dynamic contrast ratio piano black",
+        "rtable_price": "2294.9"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.8148148148148149
+        ],
+        "ltable_description": [
+          0.7037037037037037
+        ],
+        "ltable_price": [
+          0.5555555555555556
+        ],
+        "rtable_name": [
+          0.37037037037037035
+        ],
+        "rtable_description": [
+          0.37037037037037035
+        ],
+        "rtable_price": [
+          0.37037037037037035
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "sony vaio lv series silver all-in-one desktop computer vgclv150j",
+          "ltable_description": "sony vaio lv series silver all-in-one desktop computer vgclv150j 2.53 ghz intel core 2 duo e7200 processor 4gb memory built-in 1.3 mp motion eye camera and microphone 500gb serial",
+          "ltable_price": "nan",
+          "rtable_name": "samsung pn58a550 58 ' plasma tv",
+          "rtable_description": "samsung pn58a550 58 ' widescreen 1080p plasma hdtv 1,000,000:1 dynamic contrast ratio piano black",
+          "rtable_price": "2294.9",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 0.973369836807251
+    },
+    {
+      "id": 17,
+      "ltuple": {
+        "ltable_name": "panasonic kx-tga450b black 5.8 ghz cordless handset kxtga450b",
+        "ltable_description": "panasonic kx-tga450b black 5.8 ghz cordless handset kxtga450b frequency hopping digital spread spectrum technology answering system with compatible base unit call waiting caller id join in/privacy 2-way intercom voice scramble black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "panasonic kx-tg1034s dect 6.0 cordless phone kx-tg1034s",
+        "rtable_description": "panasonic dect 6.0 series 4 handset cordless phone system with answering system",
+        "rtable_price": "89.45"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.8666666666666666
+        ],
+        "ltable_description": [
+          0.9333333333333332
+        ],
+        "ltable_price": [
+          0.7999999999999999
+        ],
+        "rtable_name": [
+          0.6666666666666666
+        ],
+        "rtable_description": [
+          0.6666666666666666
+        ],
+        "rtable_price": [
+          0.6666666666666666
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "panasonic kx-tga450b black 5.8 ghz cordless handset kxtga450b",
+          "ltable_description": "denon stereo",
+          "ltable_price": "375.0",
+          "rtable_name": "panasonic kx-tg1034s dect 6.0 cordless phone kx-tg1034s",
+          "rtable_description": "panasonic dect 6.0 series 4 handset cordless phone system with answering system",
+          "rtable_price": "89.45",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 0.9453911781311035
+    },
+    {
+      "id": 18,
+      "ltuple": {
+        "ltable_name": "olympus premium slim leather case in black 202087",
+        "ltable_description": "olympus 202087-410 premium slim leather case in black 202087 slim classic leather saddle bag design magnetic closure clasp leather wrist strap interior pocket compatible with fe200 and fe230 black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "olympus neoprene soft camera case 202066",
+        "rtable_description": "top loading neoprene black",
+        "rtable_price": "11.89"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.7894736842105263
+        ],
+        "ltable_description": [
+          0.8421052631578947
+        ],
+        "ltable_price": [
+          0.6842105263157894
+        ],
+        "rtable_name": [
+          0.5263157894736842
+        ],
+        "rtable_description": [
+          0.5263157894736842
+        ],
+        "rtable_price": [
+          0.5263157894736842
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "sony 32 ' bravia m-series gloss black lcd",
+          "ltable_description": "sony 32 ' bravia m-series gloss black lcd flat panel hdtv kdl32m4000 1366 x 768 resolution 9,000:1 dynamic contrast ratio advanced contrast enhancer ( ace ) atsc/ntsc tuner with qam 3d comb filter bravia theatre sync clean wire management gloss black finish",
+          "ltable_price": "nan",
+          "rtable_name": "olympus neoprene soft camera case 202066",
+          "rtable_description": "top loading neoprene black",
+          "rtable_price": "11.89",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 0.9444880485534668
+    },
+    {
+      "id": 19,
+      "ltuple": {
+        "ltable_name": "sony 46 ' bravia s-series black lcd flat panel hdtv kdl46s4100",
+        "ltable_description": "sony 46 ' bravia s-series black lcd flat panel hdtv kdl46s4100 1920 x 1080 full hd resolution 24p true cinema atsctm/ntsc tuner with qam 2,500:1 contrast ratio cinemotion reverse 3:2 pulldown technology 3d comb filter mpeg noise reduction black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "sony bravia m series kdl-32m4000 32 ' lcd tv kdl32m4000",
+        "rtable_description": "32 ' atsc , ntsc 16:9 1366 x 768 hdtv",
+        "rtable_price": "639.95"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.75
+        ],
+        "ltable_description": [
+          0.7142857142857142
+        ],
+        "ltable_price": [
+          0.6785714285714286
+        ],
+        "rtable_name": [
+          0.35714285714285715
+        ],
+        "rtable_description": [
+          0.35714285714285715
+        ],
+        "rtable_price": [
+          0.35714285714285715
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "sony 46 ' bravia s-series black lcd flat panel hdtv kdl46s4100",
+          "ltable_description": "32 ' atsc , ntsc 16:9 1366 x 768 hdtv",
+          "ltable_price": "639.95",
+          "rtable_name": "sony bravia m series kdl-32m4000 32 ' lcd tv kdl32m4000",
+          "rtable_description": "32 ' atsc , ntsc 16:9 1366 x 768 hdtv",
+          "rtable_price": "639.95",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 1.2222728729248047
+    },
+    {
+      "id": 21,
+      "ltuple": {
+        "ltable_name": "toshiba 19 ' black lcd hdtv 19av500u",
+        "ltable_description": "toshiba 19 ' black lcd hdtv 19av500u 720p hd display dynalight back-light control theaterwide modes soundstrip speaker system hdmi digital input universal remote high-gloss bezel black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "toshiba 42rv535u 42 ' widescreen 1080p lcd hdtv w / cinespeed piano black",
+        "rtable_description": "nan",
+        "rtable_price": "789.98"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.7297297297297298
+        ],
+        "ltable_description": [
+          0.7027027027027026
+        ],
+        "ltable_price": [
+          0.5405405405405406
+        ],
+        "rtable_name": [
+          0.2702702702702703
+        ],
+        "rtable_description": [
+          0.2702702702702703
+        ],
+        "rtable_price": [
+          0.2702702702702703
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "onkyo 6 disc cd player changer dxc390b",
+          "ltable_description": "toshiba 19 ' black lcd hdtv 19av500u 720p hd display dynalight back-light control theaterwide modes soundstrip speaker system hdmi digital input universal remote high-gloss bezel black finish",
+          "ltable_price": "nan",
+          "rtable_name": "linksys etherfast ezxs88w ethernet switch ezxs88w",
+          "rtable_description": "linksys etherfast 8-port 10/100 switch ( new/workgroup )",
+          "rtable_price": "nan",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 275.4497950077057
+    },
+    {
+      "id": 22,
+      "ltuple": {
+        "ltable_name": "panasonic kx-tga820b black dect 6.0 cordless handset kxtga820b",
+        "ltable_description": "panasonic kx-tga820b black dect 6.0 cordless handset kxtga820b compatible with dect kx-tg8231 / 8232 series phone systems dect 6.0 technology answering system with compatible base unit call waiting caller id join in/privacy full color backlit lcd display black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "uniden tcx905 cordless handset tcx905",
+        "rtable_description": "uniden tcx-905 tru-digital expansion handset with caller id",
+        "rtable_price": "nan"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.7241379310344828
+        ],
+        "ltable_description": [
+          0.7241379310344828
+        ],
+        "ltable_price": [
+          0.6206896551724138
+        ],
+        "rtable_name": [
+          0.3448275862068966
+        ],
+        "rtable_description": [
+          0.3448275862068966
+        ],
+        "rtable_price": [
+          0.3448275862068966
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "ts4gcf133",
+          "ltable_description": "transcend 133x high-speed 4gb compact flash card ts4gcf133 21.5 mb per sec . data transfer rate dual-channel support multi-platform compatibility supports ultra dma mode 0-4 low power consumption",
+          "ltable_price": "nan",
+          "rtable_name": "uniden tcx905 cordless handset tcx905",
+          "rtable_description": "uniden tcx-905 tru-digital expansion handset with caller id",
+          "rtable_price": "nan",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 268.8721740245819
+    },
+    {
+      "id": 23,
+      "ltuple": {
+        "ltable_name": "sony blu-ray disc player bdps550",
+        "ltable_description": "sony blu-ray disc player bdps550 decode dolby truehd and dts hd internally full hd 1080 video output 24p true cinema dvd upscaling to 1080p via hdmi bravia theatre sync ( hdmi-cec ) bd/dvd/cd playback and avchd with x.v. color output dolby digital plus decoding backlit remote glass front finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "sony scd-ce595 cd player scdce595",
+        "rtable_description": "cd-rom , cd-r , cd-rw cd-text playback 5 disc ( s )",
+        "rtable_price": "nan"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          1.0
+        ],
+        "ltable_description": [
+          1.0
+        ],
+        "ltable_price": [
+          0.625
+        ],
+        "rtable_name": [
+          0.625
+        ],
+        "rtable_description": [
+          0.625
+        ],
+        "rtable_price": [
+          0.625
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "speck seethru green hard shell case for 15 ' macbook mb15grnseev2",
+          "ltable_description": "green hard shell case for 15 ' macbook mb15grnseev2 translucent hard plastic shell gives great protection full access to all controls rubber feet for added support green finish",
+          "ltable_price": "nan",
+          "rtable_name": "sony scd-ce595 cd player scdce595",
+          "rtable_description": "cd-rom , cd-r , cd-rw cd-text playback 5 disc ( s )",
+          "rtable_price": "nan",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 261.56367802619934
+    },
+    {
+      "id": 26,
+      "ltuple": {
+        "ltable_name": "belkin neoprene sleeve for macbook air f8n065blk",
+        "ltable_description": "belkin neoprene sleeve for macbook air f8n065blk slim and lightweight high quality neoprene protective case asymmetrical zipper black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "belkin neoprene sleeve for macbook air neoprene black",
+        "rtable_description": "nan",
+        "rtable_price": "nan"
+      },
+      "prediction": 1,
+      "label": 1,
+      "saliency": {
+        "ltable_name": [
+          0.6153846153846154
+        ],
+        "ltable_description": [
+          0.5384615384615385
+        ],
+        "ltable_price": [
+          0.38461538461538464
+        ],
+        "rtable_name": [
+          0.6153846153846154
+        ],
+        "rtable_description": [
+          0.6923076923076923
+        ],
+        "rtable_price": [
+          0.38461538461538464
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "belkin neoprene sleeve for macbook air f8n065blk",
+          "ltable_description": "belkin neoprene sleeve for macbook air f8n065blk slim and lightweight high quality neoprene protective case asymmetrical zipper black finish",
+          "ltable_price": "nan",
+          "rtable_name": "800hz cutoff frequency",
+          "rtable_description": "nan",
+          "rtable_price": "nan",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 430.62429308891296
+    },
+    {
+      "id": 27,
+      "ltuple": {
+        "ltable_name": "samsung 46 ' series 5 lcd black flat panel hdtv ln46a550",
+        "ltable_description": "samsung 46 ' series 5 lcd black flat panel hdtv ln46a550 full 1080p high definition resolution 16:9 widescreen aspect ratio 30,000:1 dynamic contrast ratio 5ms response time srs trusurround xt audio built-in digital tuner ( atsc/clear qam ) picture-in-picture sound leveler 3 hdmi slots swivel stand black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "samsung 4 series ln22a450 22 ' lcd tv",
+        "rtable_description": "samsung ln22a450 22 ' widescreen 720p lcd hdtv 3000:1 dynamic contrast ratio 8ms response time piano black",
+        "rtable_price": "397.77"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.7000000000000001
+        ],
+        "ltable_description": [
+          0.8
+        ],
+        "ltable_price": [
+          0.75
+        ],
+        "rtable_name": [
+          0.5
+        ],
+        "rtable_description": [
+          0.5
+        ],
+        "rtable_price": [
+          0.5
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "samsung 46 ' series 5 lcd black flat panel hdtv ln46a550",
+          "ltable_description": "samsung 46 ' series 5 lcd black flat panel hdtv ln46a550 full 1080p high definition resolution 16:9 widescreen aspect ratio 30,000:1 dynamic contrast ratio 5ms response time srs trusurround xt audio built-in digital tuner ( atsc/clear qam ) picture-in-picture sound leveler 3 hdmi slots swivel stand black finish",
+          "ltable_price": "279.95",
+          "rtable_name": "samsung 4 series ln22a450 22 ' lcd tv",
+          "rtable_description": "samsung ln22a450 22 ' widescreen 720p lcd hdtv 3000:1 dynamic contrast ratio 8ms response time piano black",
+          "rtable_price": "397.77",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 280.96993017196655
+    },
+    {
+      "id": 28,
+      "ltuple": {
+        "ltable_name": "samsung 22 ' black flat panel series 6 lcd hdtv ln22a650",
+        "ltable_description": "samsung 22 ' black flat panel series 6 lcd hdtv ln22a650 1680 x 1050 true 720p resolution 5,000:1 dynamic contrast ratio srs trusurround xt built-in digital tuner ( atsc/clear qam ) wide color enhancer 8ms response time touch of color design black with red finish",
+        "ltable_price": "599.0"
+      },
+      "rtuple": {
+        "rtable_name": "samsung 6 series hl56a650 56 ' projection tv",
+        "rtable_description": "samsung hl56a650 56 ' widescreen 1080p dlp hdtv w / built in ntsc/atsc tuner piano black",
+        "rtable_price": "1079.96"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.6097560975609756
+        ],
+        "ltable_description": [
+          0.6097560975609756
+        ],
+        "ltable_price": [
+          0.6341463414634146
+        ],
+        "rtable_name": [
+          0.24390243902439024
+        ],
+        "rtable_description": [
+          0.24390243902439024
+        ],
+        "rtable_price": [
+          0.24390243902439024
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "garmin nuvi 275t gps navigation system 0100057600",
+          "ltable_description": "samsung 22 ' black flat panel series 6 lcd hdtv ln22a650 1680 x 1050 true 720p resolution 5,000:1 dynamic contrast ratio srs trusurround xt built-in digital tuner ( atsc/clear qam ) wide color enhancer 8ms response time touch of color design black with red finish",
+          "ltable_price": "nan",
+          "rtable_name": "samsung 6 series hl56a650 56 ' projection tv",
+          "rtable_description": "samsung hl56a650 56 ' widescreen 1080p dlp hdtv w / built in ntsc/atsc tuner piano black",
+          "rtable_price": "1079.96",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 307.95644092559814
+    },
+    {
+      "id": 29,
+      "ltuple": {
+        "ltable_name": "lg 5.6 cu . ft. black freestanding electric range lre30453bk",
+        "ltable_description": "lg 5.6 cu . ft. black freestanding electric range lre30453bk intuitouch control system evenjet convection system 5.6 cubic capacity wideview oven window 5 radiant elements 25 heating settings black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "lg 5.6 cu.ft . freestanding electric range",
+        "rtable_description": "nan",
+        "rtable_price": "nan"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.8571428571428571
+        ],
+        "ltable_description": [
+          0.8095238095238094
+        ],
+        "ltable_price": [
+          0.47619047619047616
+        ],
+        "rtable_name": [
+          0.5714285714285714
+        ],
+        "rtable_description": [
+          0.47619047619047616
+        ],
+        "rtable_price": [
+          0.47619047619047616
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "notebook computer vgnz570nb",
+          "ltable_description": "sony black vaio z series 13.1 ' notebook computer vgnz570nb 2.53 ghz intel core 2 duo p9500 processor 13.3 ' xbrite-duraview lcd integrated stereo a2dp bluetooth technology 320gb hard drive 3gb memory built-in motion eye camera and microphone genuine microsoft windows vista business with sp1/xp downgrade black finish",
+          "ltable_price": "nan",
+          "rtable_name": "lg 5.6 cu.ft . freestanding electric range",
+          "rtable_description": "nan",
+          "rtable_price": "nan",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 265.3936800956726
+    },
+    {
+      "id": 30,
+      "ltuple": {
+        "ltable_name": "samsung 46 ' series 8 lcd black flat panel hdtv ln46a850",
+        "ltable_description": "samsung 46 ' series 8 lcd black flat panel hdtv ln46a850 1920 x 1080p full hd resolution touch of color design pre-loaded content library dlna super slim depth narrow bezel auto motion plus 120hz 50,000:1 dynamic contrast ratio 4ms response time srs trusurround built-in digital tuner ( atsc/clear qam ) black with red accent finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "samsung ln46a860 46 ' lcd tv ( widescreen , 1920x1080 , 50000:1 , hdtv )",
+        "rtable_description": "nan",
+        "rtable_price": "1889.98"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.6521739130434783
+        ],
+        "ltable_description": [
+          0.782608695652174
+        ],
+        "ltable_price": [
+          0.43478260869565216
+        ],
+        "rtable_name": [
+          0.6086956521739131
+        ],
+        "rtable_description": [
+          0.43478260869565216
+        ],
+        "rtable_price": [
+          0.43478260869565216
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "samsung 46 ' series 8 lcd black flat panel hdtv ln46a850",
+          "ltable_description": "lg dlg0452w white xl capacity gas dryer dlg0452wh 7.3 cu . ft. capacity 9 drying programs 5 temperature levels precise temperature control with a variable heat source drying rack upfront electronic control with dial-a-cycle large chrome rimmed door",
+          "ltable_price": "nan",
+          "rtable_name": "linksys etherfast ezxs88w ethernet switch ezxs88w",
+          "rtable_description": "linksys etherfast 8-port 10/100 switch ( new/workgroup )",
+          "rtable_price": "nan",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 290.0222339630127
+    },
+    {
+      "id": 32,
+      "ltuple": {
+        "ltable_name": "samsung 55 ' series 9 lcd black flat panel hdtv ln55a950",
+        "ltable_description": "samsung 55 ' series 9 lcd black flat panel hdtv ln55a950 touch of color design full 1080p high definition resolution 2,000,000:1 dynamic contrast ratio auto motion plus 120hz built-in digital tuner ( ntsc/atsc/clear qam ) 4ms response time srs trusurround xt down firing speakers picture-in-picture ( pip ) integrated woofer wide color gamut led backlight black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "samsung 4 series ln22a451 22 ' lcd tv",
+        "rtable_description": "samsung ln22a451 22 ' widescreen lcd hdtv 3,000:1 dynamic contrast ratio 8ms response time white",
+        "rtable_price": "399.0"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.8
+        ],
+        "ltable_description": [
+          0.95
+        ],
+        "ltable_price": [
+          0.6
+        ],
+        "rtable_name": [
+          0.5
+        ],
+        "rtable_description": [
+          0.5
+        ],
+        "rtable_price": [
+          0.5
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "lg 32 ' black lcd flat panel hdtv with built in dvd player 32lg40",
+          "ltable_description": "side-loading progressive scan dvd player super multi-format x3 hdmi 1.3 av mode clear voice invisible speaker system expert mode pc input black finish",
+          "ltable_price": "nan",
+          "rtable_name": "samsung 4 series ln22a451 22 ' lcd tv",
+          "rtable_description": "samsung ln22a451 22 ' widescreen lcd hdtv 3,000:1 dynamic contrast ratio 8ms response time white",
+          "rtable_price": "399.0",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 282.73954010009766
+    },
+    {
+      "id": 33,
+      "ltuple": {
+        "ltable_name": "sony 52 ' bravia w-series black lcd flat panel hdtv kdl52w4100",
+        "ltable_description": "sony 52 ' bravia w-series black lcd flat panel hdtv kdl52w4100 1920 x 1080 full hd resolution dmex motionflow 120hz technology advanced contrast enhancer ( ace ) bravia sync technology 24p true cinema 30,000:1 dynamic contrast ratio 3d comb filter cinemotion reverse 3:2 pulldown technology black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "sony 42in bravia lcd v-series 1080p hdtv kdl42v4100",
+        "rtable_description": "nan",
+        "rtable_price": "1098.72"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.84
+        ],
+        "ltable_description": [
+          0.68
+        ],
+        "ltable_price": [
+          0.6400000000000001
+        ],
+        "rtable_name": [
+          0.4
+        ],
+        "rtable_description": [
+          0.4
+        ],
+        "rtable_price": [
+          0.4
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "coby 10.2 ' black lcd flat panel hdtv tftv1022",
+          "ltable_description": "coby 10.2 ' black lcd flat panel hdtv tftv1022 800 x 480 resolution 480i , 480p , 720p , 1080i dtv",
+          "ltable_price": "nan",
+          "rtable_name": "linksys etherfast ezxs88w ethernet switch ezxs88w",
+          "rtable_description": "linksys etherfast 8-port 10/100 switch ( new/workgroup )",
+          "rtable_price": "nan",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 281.6302251815796
+    },
+    {
+      "id": 34,
+      "ltuple": {
+        "ltable_name": "lg 14 ' washer and dryer red pedestal with drawer wdp3r",
+        "ltable_description": "lg 14 ' washer and dryer red pedestal with drawer wdp3r each drawer has storage for laundry bottles , boxes and more provides easy access to front loading doors by raising the washer and dryer by 14 ' minimizes bending and stooping at doors red finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "lg electronics wdp3 laundry pedestal with drawer blue",
+        "rtable_description": "nan",
+        "rtable_price": "nan"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.7307692307692308
+        ],
+        "ltable_description": [
+          0.6923076923076924
+        ],
+        "ltable_price": [
+          0.38461538461538464
+        ],
+        "rtable_name": [
+          0.5
+        ],
+        "rtable_description": [
+          0.38461538461538464
+        ],
+        "rtable_price": [
+          0.38461538461538464
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "point white finish wpn802na",
+          "ltable_description": "lg 14 ' washer and dryer red pedestal with drawer wdp3r each drawer has storage for laundry bottles , boxes and more provides easy access to front loading doors by raising the washer and dryer by 14 ' minimizes bending and stooping at doors red finish",
+          "ltable_price": "nan",
+          "rtable_name": "linksys etherfast ezxs88w ethernet switch ezxs88w",
+          "rtable_description": "linksys etherfast 8-port 10/100 switch ( new/workgroup )",
+          "rtable_price": "nan",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 282.68309116363525
+    },
+    {
+      "id": 35,
+      "ltuple": {
+        "ltable_name": "sony digital photo printer paper 120 pack svmf120p",
+        "ltable_description": "sony digital photo printer paper 120 pack svmf120p 4 ' x 6 ' print paper with snap-off edges super coat 2 protective lamination water damage and fingerprint resistant prints 120 sheets of paper and print ribbon for dppf series digital photo printers only",
+        "ltable_price": "35.0"
+      },
+      "rtuple": {
+        "rtable_name": "sony dpfv900 digital photo frame dpf-v900",
+        "rtable_description": "photo viewer 9 ' lcd",
+        "rtable_price": "199.95"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.6875
+        ],
+        "ltable_description": [
+          0.875
+        ],
+        "ltable_price": [
+          0.75
+        ],
+        "rtable_name": [
+          0.625
+        ],
+        "rtable_description": [
+          0.625
+        ],
+        "rtable_price": [
+          0.625
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "sony digital photo printer paper 120 pack svmf120p",
+          "ltable_description": "logitech dinovo edge keyboard windows edition 967685 perfectstroke key system innovative touchdisc charging base bluetooth wireless technology 38 mm circular touch",
+          "ltable_price": "35.0",
+          "rtable_name": "sony dpfv900 digital photo frame dpf-v900",
+          "rtable_description": "photo viewer 9 ' lcd",
+          "rtable_price": "199.95",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 277.2185249328613
+    },
+    {
+      "id": 36,
+      "ltuple": {
+        "ltable_name": "sony 9 ' digital photo frame in black dpfv900",
+        "ltable_description": "sony 9 ' digital photo frame dpfv900 9 ' lcd with 800 x 480 resolution 15:9 aspect ratio 512mb internal memory supports most memory cards variety of display modes auto rotation and auto touch up feature hdmi output and bluetooth ready brilliant color photo display store up to 1,000 photos auto correction function remote control black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "sony picture station digital photo printer dppfp95",
+        "rtable_description": "nan",
+        "rtable_price": "nan"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.7916666666666667
+        ],
+        "ltable_description": [
+          0.8333333333333334
+        ],
+        "ltable_price": [
+          0.6666666666666667
+        ],
+        "rtable_name": [
+          0.4166666666666667
+        ],
+        "rtable_description": [
+          0.4166666666666667
+        ],
+        "rtable_price": [
+          0.4166666666666667
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "nikon d300 digital slr digital camera d300body",
+          "ltable_description": "shooting modes picture control settings rugged magnesium-alloy construction black finish body only",
+          "ltable_price": "nan",
+          "rtable_name": "linksys etherfast ezxs88w ethernet switch ezxs88w",
+          "rtable_description": "linksys etherfast 8-port 10/100 switch ( new/workgroup )",
+          "rtable_price": "nan",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 181.6092619895935
+    },
+    {
+      "id": 37,
+      "ltuple": {
+        "ltable_name": "canon deluxe soft black camera case 0716b001",
+        "ltable_description": "canon deluxe soft black camera case 0716b001 compatible with canon powershot s2 is black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "canon psc-4000 deluxe leather case n 3528b001",
+        "rtable_description": "nan",
+        "rtable_price": "35.99"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.9375
+        ],
+        "ltable_description": [
+          0.9375
+        ],
+        "ltable_price": [
+          0.625
+        ],
+        "rtable_name": [
+          0.6875
+        ],
+        "rtable_description": [
+          0.625
+        ],
+        "rtable_price": [
+          0.625
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "sony vaio lv series silver all-in-one desktop computer vgclv150j",
+          "ltable_description": "sony vaio lv series silver all-in-one desktop computer vgclv150j 2.53 ghz intel core 2 duo e7200 processor 4gb memory built-in 1.3 mp motion eye camera and microphone 500gb serial",
+          "ltable_price": "nan",
+          "rtable_name": "linksys etherfast ezxs88w ethernet switch ezxs88w",
+          "rtable_description": "linksys etherfast 8-port 10/100 switch ( new/workgroup )",
+          "rtable_price": "nan",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 285.56376099586487
+    },
+    {
+      "id": 38,
+      "ltuple": {
+        "ltable_name": "canon powershot black 10 megapixel digital camera sx10is",
+        "ltable_description": "canon powershot black 10 megapixel digital camera sx10is 20x optical zoom optical image stabilizer 10.0 megapixel 2.5 ' vari-angle lcd digic 4 image processor face detection self-timer intelligent contrast correction moviesnap mode print/share button black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "canon eos rebel xs digital slr camera with ef-s 18-55mm 1:3.5 -5.6 is lens black 2762b003",
+        "rtable_description": "canon eos rebel xs digital slr camera with 10 megapixel , 2.5 ' lcd , 3 frames per sec & live view mode black",
+        "rtable_price": "461.96"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          1.0
+        ],
+        "ltable_description": [
+          1.0
+        ],
+        "ltable_price": [
+          0.6666666666666666
+        ],
+        "rtable_name": [
+          0.6666666666666666
+        ],
+        "rtable_description": [
+          0.6666666666666666
+        ],
+        "rtable_price": [
+          0.6666666666666666
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "nikon graphite black 14.5 megapixel coolpix digital camera coolpixs710bk",
+          "ltable_description": "nikon graphite black 14.5 megapixel coolpix digital camera coolpixs710bk 14.5 effective megapixels 3.6 x zoom-nikkor lens 3.0 ' high-resolution wide-viewing angle lcd monitor optical lens shift vr image stabilization food and smile mode face-priority af camera red-eye",
+          "ltable_price": "nan",
+          "rtable_name": "canon eos rebel xs digital slr camera with ef-s 18-55mm 1:3.5 -5.6 is lens black 2762b003",
+          "rtable_description": "canon eos rebel xs digital slr camera with 10 megapixel , 2.5 ' lcd , 3 frames per sec & live view mode black",
+          "rtable_price": "461.96",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 285.8107588291168
+    },
+    {
+      "id": 39,
+      "ltuple": {
+        "ltable_name": "sony alpha digital slr black camera body dslra350",
+        "ltable_description": "sony alpha digital slr black camera body dslra350 14.2 megapixels tiltable 2.7 ' clear photo lcd plus screen continuous shooting while viewing smart teleconverter 2x zoom expanded iso sensitivity super steadyshot in-camera image stabilization bionz image processor dynamic range optimizer anti-dust technology auto pop-up flash eye-start autofocus system 9-point center cross af sensor black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "sony cyber-shot dsc-w120 digital camera silver dscw120",
+        "rtable_description": "16:9 2x digital zoom 2.5 ' active matrix tft color lcd",
+        "rtable_price": "106.42"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.7272727272727273
+        ],
+        "ltable_description": [
+          1.0
+        ],
+        "ltable_price": [
+          0.6363636363636364
+        ],
+        "rtable_name": [
+          0.45454545454545453
+        ],
+        "rtable_description": [
+          0.45454545454545453
+        ],
+        "rtable_price": [
+          0.45454545454545453
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "silver 1080p upscaling dvd player dvpns700hs",
+          "ltable_description": "sony silver 1080p upscaling dvd player dvpns700hs 1080p upscaling video output through hdmi connection bravia sync high resolution jpeg output precision cinema progressive technology precision drive child lock multi disc resume multi brand tv remote control silver finish",
+          "ltable_price": "nan",
+          "rtable_name": "sony cyber-shot dsc-w120 digital camera silver dscw120",
+          "rtable_description": "16:9 2x digital zoom 2.5 ' active matrix tft color lcd",
+          "rtable_price": "106.42",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 320.92362213134766
+    },
+    {
+      "id": 41,
+      "ltuple": {
+        "ltable_name": "canon pixma multifunction printer mx310",
+        "ltable_description": "canon pixma multifunction printer mx310 up to 4800 x 1200 color dpi resolution microscopic 2-picoliter sized ink droplets built-in auto-image fix quick start smart copying copies , scans , faxes and prints documents prints photos",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "canon pixma mx700 multifunction photo printer 2186b002",
+        "rtable_description": "canon pixma mx700 office all-in-one printer",
+        "rtable_price": "nan"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.7142857142857142
+        ],
+        "ltable_description": [
+          0.7619047619047619
+        ],
+        "ltable_price": [
+          0.7142857142857143
+        ],
+        "rtable_name": [
+          0.47619047619047616
+        ],
+        "rtable_description": [
+          0.47619047619047616
+        ],
+        "rtable_price": [
+          0.47619047619047616
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "electrolux harmony series",
+          "ltable_description": "canon pixma multifunction printer mx310 up to 4800 x 1200 color dpi resolution microscopic 2-picoliter sized ink droplets built-in auto-image fix quick start smart copying copies , scans , faxes and prints documents prints photos",
+          "ltable_price": "nan",
+          "rtable_name": "canon pixma mx700 multifunction photo printer 2186b002",
+          "rtable_description": "canon pixma mx700 office all-in-one printer",
+          "rtable_price": "nan",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 303.1552400588989
+    },
+    {
+      "id": 42,
+      "ltuple": {
+        "ltable_name": "canon silver 8.0 megapixel powershot digital camera sd1100is",
+        "ltable_description": "canon silver 8.0 megapixel powershot digital camera sd1100is 8.0 megapixel 3x optical zoom 2.5 ' color lcd 18 shooting modes red-eye correction face detection technology isaps technology swing silver finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "canon powershot sd1100 is digital elph camera rhythm & blue 2512b001",
+        "rtable_description": "canon powershot sd1100 is 8 megapixels , iso 1600 , 3x optical zoom digital camera rhythm & blue",
+        "rtable_price": "nan"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.8235294117647058
+        ],
+        "ltable_description": [
+          0.8235294117647058
+        ],
+        "ltable_price": [
+          0.5882352941176471
+        ],
+        "rtable_name": [
+          0.7647058823529412
+        ],
+        "rtable_description": [
+          0.5882352941176471
+        ],
+        "rtable_price": [
+          0.5882352941176471
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "cuisinart countertop griddler gr4",
+          "ltable_description": "cuisinart countertop griddler",
+          "ltable_price": "nan",
+          "rtable_name": "canon powershot sd1100 is digital elph camera rhythm & blue 2512b001",
+          "rtable_description": "canon powershot sd1100 is 8 megapixels , iso 1600 , 3x optical zoom digital camera rhythm & blue",
+          "rtable_price": "nan",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 310.2658941745758
+    },
+    {
+      "id": 43,
+      "ltuple": {
+        "ltable_name": "omnimount wall speaker mount 20wlbk",
+        "ltable_description": "omnimount wall speaker mount 20wlbk stainless steel shafts and all necessary hardware included supports speakers up to 20 lbs . sold as single black finish",
+        "ltable_price": "39.95"
+      },
+      "rtuple": {
+        "rtable_name": "omnimount ultra low profile ulpt-l flat panel wall mount ulpt-l a",
+        "rtable_description": "200 lb anthracite",
+        "rtable_price": "278.95"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.7037037037037036
+        ],
+        "ltable_description": [
+          0.7407407407407407
+        ],
+        "ltable_price": [
+          0.6296296296296295
+        ],
+        "rtable_name": [
+          0.37037037037037035
+        ],
+        "rtable_description": [
+          0.37037037037037035
+        ],
+        "rtable_price": [
+          0.37037037037037035
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "panasonic black 1080p up-conversion dvd recorder dmrea18k",
+          "ltable_description": "omnimount wall speaker mount 20wlbk stainless steel shafts and all necessary hardware included supports speakers up to 20 lbs . sold as single black finish",
+          "ltable_price": "39.95",
+          "rtable_name": "omnimount ultra low profile ulpt-l flat panel wall mount ulpt-l a",
+          "rtable_description": "200 lb anthracite",
+          "rtable_price": "278.95",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 275.1602051258087
+    },
+    {
+      "id": 44,
+      "ltuple": {
+        "ltable_name": "canon pink 8.0 megapixel powershot digital camera sd1100isp",
+        "ltable_description": "canon pink 8.0 megapixel powershot digital camera sd1100isp 8.0 megapixel 3x optical zoom 2.5 ' color lcd 18 shooting modes red-eye correction face detection technology isaps technology melody pink finish",
+        "ltable_price": "178.0"
+      },
+      "rtuple": {
+        "rtable_name": "canon powershot sx10 is digital camera 2665b001",
+        "rtable_description": "canon powershot sx10 is 10 megapixel digital camera w / 20x optical zoom , 28mm wide lens , 2.5 ' lcd , motion detection , & red eye correction",
+        "rtable_price": "339.88"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.6086956521739131
+        ],
+        "ltable_description": [
+          0.6086956521739131
+        ],
+        "ltable_price": [
+          0.8695652173913042
+        ],
+        "rtable_name": [
+          0.43478260869565216
+        ],
+        "rtable_description": [
+          0.43478260869565216
+        ],
+        "rtable_price": [
+          0.43478260869565216
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "canon pink 8.0 megapixel powershot digital camera sd1100isp",
+          "ltable_description": "canon pink 8.0 megapixel powershot digital camera sd1100isp 8.0 megapixel 3x optical zoom 2.5 ' color lcd 18 shooting modes red-eye correction face detection technology isaps technology melody pink finish",
+          "ltable_price": "nan",
+          "rtable_name": "canon powershot sx10 is digital camera 2665b001",
+          "rtable_description": "canon powershot sx10 is 10 megapixel digital camera w / 20x optical zoom , 28mm wide lens , 2.5 ' lcd , motion detection , & red eye correction",
+          "rtable_price": "339.88",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 328.1524770259857
+    },
+    {
+      "id": 45,
+      "ltuple": {
+        "ltable_name": "canon 2gb sd secure digital card 3505b001",
+        "ltable_description": "canon 2gb sd secure digital card 3505b001 compatible with all digital cameras and devices that accept sd cards",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "canon powershot a590 is digital camera 2462b001",
+        "rtable_description": "canon powershot a590 is 8 megapixels , 4x optical zoom , 2.5 ' lcd , iso 1600 digital camera",
+        "rtable_price": "nan"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.8421052631578947
+        ],
+        "ltable_description": [
+          0.894736842105263
+        ],
+        "ltable_price": [
+          0.5789473684210527
+        ],
+        "rtable_name": [
+          0.5263157894736842
+        ],
+        "rtable_description": [
+          0.5263157894736842
+        ],
+        "rtable_price": [
+          0.5263157894736842
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "microsoft office 2008 for mac home and student edition gza00006",
+          "ltable_description": "formats , the office art graphics engine and other features that result in compatibility and file fidelity includes word , excel , powerpoint , entourage , messenger , microsoft server exchange support , automator actions for workflows in microsoft office",
+          "ltable_price": "nan",
+          "rtable_name": "canon powershot a590 is digital camera 2462b001",
+          "rtable_description": "canon powershot a590 is 8 megapixels , 4x optical zoom , 2.5 ' lcd , iso 1600 digital camera",
+          "rtable_price": "nan",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 2618.8950741291046
+    },
+    {
+      "id": 46,
+      "ltuple": {
+        "ltable_name": "samsung 50 ' widescreen plasma hdtv pn50a650",
+        "ltable_description": "samsung 50 ' widescreen plasma hdtv pn50a650 touch of color ultra filterbright anti glare technology 1,000,000:1 dynamic contrast ratio picture-in-picture anti-burn-in technology sports/game/movie modes single integrated user interface with wheel-key remote atsc/ntsc/clear qa tuners",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "samsung pn50a650 50 ' 1080p plasma hdtv 1,000,000:1 dynamic contrast ratio anti burn-in technology",
+        "rtable_description": "nan",
+        "rtable_price": "1699.98"
+      },
+      "prediction": 1,
+      "label": 1,
+      "saliency": {
+        "ltable_name": [
+          0.7000000000000001
+        ],
+        "ltable_description": [
+          0.75
+        ],
+        "ltable_price": [
+          0.5
+        ],
+        "rtable_name": [
+          0.7
+        ],
+        "rtable_description": [
+          0.5
+        ],
+        "rtable_price": [
+          0.5
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "samsung 50 ' widescreen plasma hdtv pn50a650",
+          "ltable_description": "samsung 50 ' widescreen plasma hdtv pn50a650 touch of color ultra filterbright anti glare technology 1,000,000:1 dynamic contrast ratio picture-in-picture anti-burn-in technology sports/game/movie modes single integrated user interface with wheel-key remote atsc/ntsc/clear qa tuners",
+          "ltable_price": "nan",
+          "rtable_name": "sharp aquos bd-hp21u blu-ray disc player",
+          "rtable_description": "linksys etherfast 8-port 10/100 switch ( new/workgroup )",
+          "rtable_price": "nan",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 299.19555592536926
+    },
+    {
+      "id": 47,
+      "ltuple": {
+        "ltable_name": "sony np-fh100 infolithium h series standard rechargeable battery pack npfh100",
+        "ltable_description": "sony np-fh100 infolithium h series standard rechargeable battery pack npfh100 compatible with most handycam camcorders black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "sony np-fh100 lithium ion camcorder battery npfh100",
+        "rtable_description": "lithium ion ( li-ion ) 8.4 v dc photo battery",
+        "rtable_price": "nan"
+      },
+      "prediction": 1,
+      "label": 1,
+      "saliency": {
+        "ltable_name": [
+          0.9411764705882353
+        ],
+        "ltable_description": [
+          0.8235294117647058
+        ],
+        "ltable_price": [
+          0.5882352941176471
+        ],
+        "rtable_name": [
+          0.6470588235294118
+        ],
+        "rtable_description": [
+          0.5882352941176471
+        ],
+        "rtable_price": [
+          0.5882352941176471
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "access point wg102",
+          "ltable_description": "netgear wireless access point wg102 high-speed ieee 802.11 g , up to 108 mbps in turbo mode wi-fi protected access ( wpa 802.11i-ready security ) integrated ieee 802.3 af power over ethernet ( poe ) block ssid broadcast vpn pass-through support",
+          "ltable_price": "nan",
+          "rtable_name": "sony np-fh100 lithium ion camcorder battery npfh100",
+          "rtable_description": "lithium ion ( li-ion ) 8.4 v dc photo battery",
+          "rtable_price": "nan",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 330.2049639225006
+    },
+    {
+      "id": 48,
+      "ltuple": {
+        "ltable_name": "sony red cyber-shot digital camera dscw170r",
+        "ltable_description": "sony dscw170 red cyber-shot digital camera dscw170r 10.1 megapixels 2.7 ' lcd display 15 mb internal memory carl zeiss 5x optical zoom lens bionz real imaging processor technology 16:9 high-resolution mode 9-point auto focus automatic macro shooting high sensitivity mode burst mode face detection intelligent scene recognition mode in-camera retouching super steadyshot optical image stabilization with anti-blur solution music slideshow hdtv compatibility beginner-friendly function guide red finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "sony lcs-twa/r cyber-shot camera case",
+        "rtable_description": "top loading leather red",
+        "rtable_price": "27.92"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.6551724137931034
+        ],
+        "ltable_description": [
+          0.896551724137931
+        ],
+        "ltable_price": [
+          0.5517241379310345
+        ],
+        "rtable_name": [
+          0.3448275862068966
+        ],
+        "rtable_description": [
+          0.3448275862068966
+        ],
+        "rtable_price": [
+          0.3448275862068966
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "canon black leather case 3528b001",
+          "ltable_description": "canon psc-4000 black leather case 3528b001 genuine leather case designed for",
+          "ltable_price": "nan",
+          "rtable_name": "sony lcs-twa/r cyber-shot camera case",
+          "rtable_description": "top loading leather red",
+          "rtable_price": "27.92",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 324.0872447490692
+    },
+    {
+      "id": 49,
+      "ltuple": {
+        "ltable_name": "sony lcs-twa/b black soft leather carrying case lcstwab",
+        "ltable_description": "sony lcs-twa/b black soft leather carrying case lcstwab genuine leather construction compatible with cyber-shot w and t series digital cameras integrated belt loop and magnetic closure black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "sony lcs-csh soft camera case lcscsh",
+        "rtable_description": "top loading polypropylene black",
+        "rtable_price": "nan"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.7142857142857142
+        ],
+        "ltable_description": [
+          0.8571428571428572
+        ],
+        "ltable_price": [
+          0.47619047619047616
+        ],
+        "rtable_name": [
+          0.6190476190476191
+        ],
+        "rtable_description": [
+          0.47619047619047616
+        ],
+        "rtable_price": [
+          0.47619047619047616
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "tripp-lite black 25 foot svga hd15m to hd15m computer monitor cable p502025",
+          "ltable_description": "computer monitor cable p502025 25 foot length foil-shielding for maximum emi/rfi protection constructed from mini-coax and paired video gold plated connectors and gold plated copper contacts hd15 male to hd15 male molded connectors black finish",
+          "ltable_price": "nan",
+          "rtable_name": "sony lcs-csh soft camera case lcscsh",
+          "rtable_description": "top loading polypropylene black",
+          "rtable_price": "nan",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 325.26459431648254
+    }
+  ],
+  "total_time": 10638.762239217758,
+  "metrics": {
+    "faithfulness": {
+      "uncerta(pase)_azure": 0.0
+    },
+    "counterfactual_metrics": {
+      "uncerta(pase)_azure": {
+        "validity": 0.0,
+        "proximity": 0.0,
+        "sparsity": 0.0,
+        "diversity": 0.0
+      }
+    }
+  }
+}

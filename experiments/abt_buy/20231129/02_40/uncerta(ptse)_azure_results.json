@@ -1,0 +1,17 @@
+{
+  "data": [],
+  "total_time": 217.6730580329895,
+  "metrics": {
+    "faithfulness": {
+      "uncerta(ptse)_azure": 0.0
+    },
+    "counterfactual_metrics": {
+      "uncerta(ptse)_azure": {
+        "validity": 0.0,
+        "proximity": 0.0,
+        "sparsity": 0.0,
+        "diversity": 0.0
+      }
+    }
+  }
+}

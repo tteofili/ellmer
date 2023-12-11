@@ -1,0 +1,2361 @@
+{
+  "data": [
+    {
+      "id": 0,
+      "ltuple": {
+        "ltable_title": "microsoft visual studio test agent 2005 cd 1 processor license",
+        "ltable_manufacturer": "microsoft software",
+        "ltable_price": "5099.0"
+      },
+      "rtuple": {
+        "rtable_title": "individual software professor teaches microsoft office 2007",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "29.99"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.4545454545454546
+        ],
+        "ltable_manufacturer": [
+          0.5454545454545455
+        ],
+        "ltable_price": [
+          0.4545454545454546
+        ],
+        "rtable_title": [
+          0.8181818181818183
+        ],
+        "rtable_manufacturer": [
+          0.5454545454545454
+        ],
+        "rtable_price": [
+          0.5454545454545454
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "microsoft visual studio test agent 2005 cd 1 processor license",
+          "ltable_manufacturer": "microsoft software",
+          "ltable_price": "5099.0",
+          "rtable_title": "adobe audition 2.0 audio production software educational discount audio software for",
+          "rtable_manufacturer": "adobe-education-box",
+          "rtable_price": "38.99",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 130.7174642086029
+    },
+    {
+      "id": 1,
+      "ltuple": {
+        "ltable_title": "adobe dreamweaver cs3 [ mac ]",
+        "ltable_manufacturer": "adobe",
+        "ltable_price": "399.0"
+      },
+      "rtuple": {
+        "rtable_title": "adobe cs3 web premium",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "1659.99"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.40350877192982454
+        ],
+        "ltable_manufacturer": [
+          0.42105263157894735
+        ],
+        "ltable_price": [
+          0.3684210526315789
+        ],
+        "rtable_title": [
+          0.42105263157894735
+        ],
+        "rtable_manufacturer": [
+          0.3333333333333333
+        ],
+        "rtable_price": [
+          0.40350877192982454
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "refviz v2 mac",
+          "ltable_manufacturer": "broderbund",
+          "ltable_price": "nan",
+          "rtable_title": "adobe cs3 web premium",
+          "rtable_manufacturer": "nan",
+          "rtable_price": "1659.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 54.85239386558533
+    },
+    {
+      "id": 2,
+      "ltuple": {
+        "ltable_title": "instant immersion spanish 2.0",
+        "ltable_manufacturer": "topics entertainment",
+        "ltable_price": "29.99"
+      },
+      "rtuple": {
+        "rtable_title": "instant immers japanese dlx 2 .",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "36.11"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.4
+        ],
+        "ltable_manufacturer": [
+          0.4
+        ],
+        "ltable_price": [
+          0.4
+        ],
+        "rtable_title": [
+          1.0
+        ],
+        "rtable_manufacturer": [
+          0.6000000000000001
+        ],
+        "rtable_price": [
+          0.6000000000000001
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "instant immersion spanish 2.0",
+          "ltable_manufacturer": "topics entertainment",
+          "ltable_price": "29.99",
+          "rtable_title": "msd-w30-de-r manga studio debut v. 3.0 complete package 1 user cd",
+          "rtable_manufacturer": "intuit",
+          "rtable_price": "38.99",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 33.92442584037781
+    },
+    {
+      "id": 3,
+      "ltuple": {
+        "ltable_title": "i transfer dvds 2 ipod edition ( win/mac )",
+        "ltable_manufacturer": "me-too-software",
+        "ltable_price": "29.99"
+      },
+      "rtuple": {
+        "rtable_title": "ghost recon gold edition ( dvd-rom )",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "20.95"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.44897959183673464
+        ],
+        "ltable_manufacturer": [
+          0.4081632653061224
+        ],
+        "ltable_price": [
+          0.3877551020408163
+        ],
+        "rtable_title": [
+          0.3673469387755102
+        ],
+        "rtable_manufacturer": [
+          0.3673469387755102
+        ],
+        "rtable_price": [
+          0.3877551020408163
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "clickart 950 000 premier image pack ( dvd-rom )",
+          "ltable_manufacturer": "broderbund",
+          "ltable_price": "nan",
+          "rtable_title": "learning quickbooks 2007",
+          "rtable_manufacturer": "nan",
+          "rtable_price": "38.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 101.40138387680054
+    },
+    {
+      "id": 4,
+      "ltuple": {
+        "ltable_title": "adobe flash pro cs3 upgrade [ mac ]",
+        "ltable_manufacturer": "adobe",
+        "ltable_price": "199.0"
+      },
+      "rtuple": {
+        "rtable_title": "adobe illustrator cs3 ( mac )",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "599.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.423728813559322
+        ],
+        "ltable_manufacturer": [
+          0.423728813559322
+        ],
+        "ltable_price": [
+          0.4067796610169491
+        ],
+        "rtable_title": [
+          0.3220338983050847
+        ],
+        "rtable_manufacturer": [
+          0.3559322033898305
+        ],
+        "rtable_price": [
+          0.3389830508474576
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "sony sound effects",
+          "ltable_manufacturer": "broderbund",
+          "ltable_price": "nan",
+          "rtable_title": "learning quickbooks 2007",
+          "rtable_manufacturer": "intuit",
+          "rtable_price": "38.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 79.40133881568909
+    },
+    {
+      "id": 5,
+      "ltuple": {
+        "ltable_title": "instant immersion ingles audio deluxe",
+        "ltable_manufacturer": "topics entertainment",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_title": "instant immersion spanish deluxe 2.0 topics",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "39.99"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.8333333333333333
+        ],
+        "ltable_manufacturer": [
+          0.5
+        ],
+        "ltable_price": [
+          0.5
+        ],
+        "rtable_title": [
+          0.5
+        ],
+        "rtable_manufacturer": [
+          0.5
+        ],
+        "rtable_price": [
+          0.3333333333333333
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": ")",
+          "ltable_manufacturer": "topics entertainment",
+          "ltable_price": "nan",
+          "rtable_title": "learning quickbooks 2007",
+          "rtable_manufacturer": "intuit",
+          "rtable_price": "38.99",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 226.86847805976868
+    },
+    {
+      "id": 6,
+      "ltuple": {
+        "ltable_title": "acrobat professional 8 ( windows )",
+        "ltable_manufacturer": "adobe",
+        "ltable_price": "273.0"
+      },
+      "rtuple": {
+        "rtable_title": "web easy ( r ) professional 6",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "49.99"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.38888888888888884
+        ],
+        "ltable_manufacturer": [
+          0.4074074074074074
+        ],
+        "ltable_price": [
+          0.38888888888888884
+        ],
+        "rtable_title": [
+          0.38888888888888884
+        ],
+        "rtable_manufacturer": [
+          0.42592592592592593
+        ],
+        "rtable_price": [
+          0.31481481481481477
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "clickart 950 000 premier image pack ( dvd-rom )",
+          "ltable_manufacturer": "broderbund",
+          "ltable_price": "nan",
+          "rtable_title": "learning quickbooks 2007",
+          "rtable_manufacturer": "nan",
+          "rtable_price": "38.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 347.20561718940735
+    },
+    {
+      "id": 7,
+      "ltuple": {
+        "ltable_title": "microsoft licenses word olp c ( 05903871 )",
+        "ltable_manufacturer": "microsoft licenses",
+        "ltable_price": "205.73"
+      },
+      "rtuple": {
+        "rtable_title": "microsoft office visio standard 2007 ( pc )",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "249.95"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.6666666666666666
+        ],
+        "ltable_manufacturer": [
+          0.6666666666666666
+        ],
+        "ltable_price": [
+          0.6666666666666666
+        ],
+        "rtable_title": [
+          1.0
+        ],
+        "rtable_manufacturer": [
+          1.0
+        ],
+        "rtable_price": [
+          0.6666666666666666
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "microsoft licenses word olp c ( 05903871 )",
+          "ltable_manufacturer": "microsoft licenses",
+          "ltable_price": "205.73",
+          "rtable_title": "mac",
+          "rtable_manufacturer": "nan",
+          "rtable_price": "38.99",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 220.3816888332367
+    },
+    {
+      "id": 8,
+      "ltuple": {
+        "ltable_title": "microsoft onenote 2007 upgrade",
+        "ltable_manufacturer": "microsoft",
+        "ltable_price": "79.95"
+      },
+      "rtuple": {
+        "rtable_title": "164-04052 microsoft office publisher 2007 version upgrade package 1 pc cd win en",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "88.8"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.49122807017543857
+        ],
+        "ltable_manufacturer": [
+          0.45614035087719296
+        ],
+        "ltable_price": [
+          0.42105263157894735
+        ],
+        "rtable_title": [
+          0.3157894736842105
+        ],
+        "rtable_manufacturer": [
+          0.3157894736842105
+        ],
+        "rtable_price": [
+          0.2982456140350877
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "clickart 950 000 premier image pack ( dvd-rom )",
+          "ltable_manufacturer": "cisco systems enterprise",
+          "ltable_price": "nan",
+          "rtable_title": "learning quickbooks 2007",
+          "rtable_manufacturer": "intuit",
+          "rtable_price": "38.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 309.3440930843353
+    },
+    {
+      "id": 9,
+      "ltuple": {
+        "ltable_title": "steinberg nuendo 3 digital audio software",
+        "ltable_manufacturer": "steinberg",
+        "ltable_price": "2499.0"
+      },
+      "rtuple": {
+        "rtable_title": "steinberg wavelab studio 6 audio editing software educational discount music production software",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "149.95"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.4375
+        ],
+        "ltable_manufacturer": [
+          0.4375
+        ],
+        "ltable_price": [
+          0.421875
+        ],
+        "rtable_title": [
+          0.3125
+        ],
+        "rtable_manufacturer": [
+          0.296875
+        ],
+        "rtable_price": [
+          0.296875
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "madeline",
+          "ltable_manufacturer": "broderbund",
+          "ltable_price": "nan",
+          "rtable_title": "learning quickbooks 2007",
+          "rtable_manufacturer": "intuit",
+          "rtable_price": "38.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 311.6082718372345
+    },
+    {
+      "id": 10,
+      "ltuple": {
+        "ltable_title": "quickbooks point-of-sale basic 6.0",
+        "ltable_manufacturer": "intuit",
+        "ltable_price": "799.95"
+      },
+      "rtuple": {
+        "rtable_title": "quickbooks pro 2007 3 user",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "409.52"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.5
+        ],
+        "ltable_manufacturer": [
+          0.44000000000000006
+        ],
+        "ltable_price": [
+          0.48
+        ],
+        "rtable_title": [
+          0.44000000000000006
+        ],
+        "rtable_manufacturer": [
+          0.30000000000000004
+        ],
+        "rtable_price": [
+          0.32
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "american idol",
+          "ltable_manufacturer": "broderbund",
+          "ltable_price": "nan",
+          "rtable_title": "quickbooks pro 2007 3 user",
+          "rtable_manufacturer": "nan",
+          "rtable_price": "409.52",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 325.0129930973053
+    },
+    {
+      "id": 11,
+      "ltuple": {
+        "ltable_title": "microsoft visio standard 2007",
+        "ltable_manufacturer": "microsoft",
+        "ltable_price": "259.95"
+      },
+      "rtuple": {
+        "rtable_title": "microsoft w87-02380 office sbe 2007 win32",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "400.34"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.6
+        ],
+        "ltable_manufacturer": [
+          0.6666666666666666
+        ],
+        "ltable_price": [
+          0.6
+        ],
+        "rtable_title": [
+          0.8666666666666667
+        ],
+        "rtable_manufacturer": [
+          0.7333333333333334
+        ],
+        "rtable_price": [
+          0.6
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "microsoft visio standard 2007",
+          "ltable_manufacturer": "microsoft",
+          "ltable_price": "259.95",
+          "rtable_title": "software",
+          "rtable_manufacturer": "nan",
+          "rtable_price": "38.99",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 323.68519592285156
+    },
+    {
+      "id": 12,
+      "ltuple": {
+        "ltable_title": "quicken 2007 basic",
+        "ltable_manufacturer": "intuit",
+        "ltable_price": "29.95"
+      },
+      "rtuple": {
+        "rtable_title": "quicken ( r ) for mac 2007",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "69.99"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.4
+        ],
+        "ltable_manufacturer": [
+          0.4
+        ],
+        "ltable_price": [
+          0.38181818181818183
+        ],
+        "rtable_title": [
+          0.34545454545454546
+        ],
+        "rtable_manufacturer": [
+          0.38181818181818183
+        ],
+        "rtable_price": [
+          0.38181818181818183
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "clickart 950 000 premier image pack ( dvd-rom )",
+          "ltable_manufacturer": "broderbund",
+          "ltable_price": "nan",
+          "rtable_title": "learning quickbooks 2007",
+          "rtable_manufacturer": "nan",
+          "rtable_price": "38.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 315.3064548969269
+    },
+    {
+      "id": 13,
+      "ltuple": {
+        "ltable_title": "microsoft office 2004 professional ( mac )",
+        "ltable_manufacturer": "microsoft",
+        "ltable_price": "499.99"
+      },
+      "rtuple": {
+        "rtable_title": "microsoft onenote 2007 ( pc )",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "99.95"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.34545454545454546
+        ],
+        "ltable_manufacturer": [
+          0.34545454545454546
+        ],
+        "ltable_price": [
+          0.34545454545454546
+        ],
+        "rtable_title": [
+          0.4363636363636364
+        ],
+        "rtable_manufacturer": [
+          0.4545454545454546
+        ],
+        "rtable_price": [
+          0.38181818181818183
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "clickart 950 000 premier image pack ( dvd-rom )",
+          "ltable_manufacturer": "broderbund",
+          "ltable_price": "nan",
+          "rtable_title": "learning quickbooks 2007",
+          "rtable_manufacturer": "nan",
+          "rtable_price": "38.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 337.5079381465912
+    },
+    {
+      "id": 14,
+      "ltuple": {
+        "ltable_title": "steinberg cubase 4 digital audio software",
+        "ltable_manufacturer": "steinberg",
+        "ltable_price": "999.99"
+      },
+      "rtuple": {
+        "rtable_title": "migo software digital file shredder 2005",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "24.58"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.4516129032258065
+        ],
+        "ltable_manufacturer": [
+          0.4516129032258065
+        ],
+        "ltable_price": [
+          0.4516129032258065
+        ],
+        "rtable_title": [
+          0.3225806451612903
+        ],
+        "rtable_manufacturer": [
+          0.30645161290322576
+        ],
+        "rtable_price": [
+          0.25806451612903225
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "photostory on cd &",
+          "ltable_manufacturer": "broderbund",
+          "ltable_price": "nan",
+          "rtable_title": "learning quickbooks 2007",
+          "rtable_manufacturer": "intuit",
+          "rtable_price": "38.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 411.1043629646301
+    },
+    {
+      "id": 15,
+      "ltuple": {
+        "ltable_title": "microsoft works suite 2006",
+        "ltable_manufacturer": "microsoft",
+        "ltable_price": "99.0"
+      },
+      "rtuple": {
+        "rtable_title": "microsoft office 2004 student/teacher",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "145.99"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.36065573770491804
+        ],
+        "ltable_manufacturer": [
+          0.36065573770491804
+        ],
+        "ltable_price": [
+          0.3442622950819672
+        ],
+        "rtable_title": [
+          0.3934426229508196
+        ],
+        "rtable_manufacturer": [
+          0.37704918032786877
+        ],
+        "rtable_price": [
+          0.39344262295081966
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "clickart 950 000 premier image pack ( dvd-rom )",
+          "ltable_manufacturer": "broderbund",
+          "ltable_price": "nan",
+          "rtable_title": "communications inc. ibm viavoice advanced v. 10",
+          "rtable_manufacturer": "intuit",
+          "rtable_price": "38.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 1522.213968038559
+    },
+    {
+      "id": 16,
+      "ltuple": {
+        "ltable_title": "quicken legal business pro 2007",
+        "ltable_manufacturer": "nolo press",
+        "ltable_price": "79.99"
+      },
+      "rtuple": {
+        "rtable_title": "palo alto business plan pro 2007",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "83.99"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.36363636363636365
+        ],
+        "ltable_manufacturer": [
+          0.36363636363636365
+        ],
+        "ltable_price": [
+          0.36363636363636365
+        ],
+        "rtable_title": [
+          0.8181818181818183
+        ],
+        "rtable_manufacturer": [
+          0.7272727272727274
+        ],
+        "rtable_price": [
+          0.6363636363636364
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "quicken legal business pro 2007",
+          "ltable_manufacturer": "nolo press",
+          "ltable_price": "79.99",
+          "rtable_title": "enfocus software pp7.0-ug-001 pitstop pro 7.0 upgr",
+          "rtable_manufacturer": "nan",
+          "rtable_price": "38.99",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 2174.3261048793793
+    },
+    {
+      "id": 17,
+      "ltuple": {
+        "ltable_title": "apple final cut studio 2 ( mac )",
+        "ltable_manufacturer": "apple",
+        "ltable_price": "1299.0"
+      },
+      "rtuple": {
+        "rtable_title": "apple software m9372z/a final cut express 2.0 upgrade",
+        "rtable_manufacturer": "apple software",
+        "rtable_price": "79.99"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.4489795918367347
+        ],
+        "ltable_manufacturer": [
+          0.46938775510204084
+        ],
+        "ltable_price": [
+          0.38775510204081637
+        ],
+        "rtable_title": [
+          0.4489795918367347
+        ],
+        "rtable_manufacturer": [
+          0.30612244897959184
+        ],
+        "rtable_price": [
+          0.326530612244898
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "clickart 950 000 premier image pack ( dvd-rom )",
+          "ltable_manufacturer": "punch ! software",
+          "ltable_price": "nan",
+          "rtable_title": "apple software m9372z/a final cut express 2.0 upgrade",
+          "rtable_manufacturer": "apple software",
+          "rtable_price": "79.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 1112.143639087677
+    },
+    {
+      "id": 18,
+      "ltuple": {
+        "ltable_title": "adobe acrobat 7.0 professional",
+        "ltable_manufacturer": "adobe",
+        "ltable_price": "449.99"
+      },
+      "rtuple": {
+        "rtable_title": "adobe after effects professional 7.0 software effects software",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "998.95"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.5283018867924528
+        ],
+        "ltable_manufacturer": [
+          0.49056603773584906
+        ],
+        "ltable_price": [
+          0.4716981132075472
+        ],
+        "rtable_title": [
+          0.2830188679245283
+        ],
+        "rtable_manufacturer": [
+          0.3018867924528302
+        ],
+        "rtable_price": [
+          0.22641509433962265
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "ca arcserve bkup r11 .5 win svrless bkup opt sp1 - prod only",
+          "ltable_manufacturer": "broderbund",
+          "ltable_price": "nan",
+          "rtable_title": "learning quickbooks 2007",
+          "rtable_manufacturer": "intuit",
+          "rtable_price": "38.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 346.6883809566498
+    },
+    {
+      "id": 19,
+      "ltuple": {
+        "ltable_title": "microsoft powerpoint 2004 ( mac )",
+        "ltable_manufacturer": "microsoft",
+        "ltable_price": "229.99"
+      },
+      "rtuple": {
+        "rtable_title": "microsoft money 2007 home and business ( pc )",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "89.99"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.2711864406779661
+        ],
+        "ltable_manufacturer": [
+          0.2711864406779661
+        ],
+        "ltable_price": [
+          0.2542372881355932
+        ],
+        "rtable_title": [
+          0.5254237288135593
+        ],
+        "rtable_manufacturer": [
+          0.5254237288135593
+        ],
+        "rtable_price": [
+          0.4576271186440678
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "clickart 950 000 premier image pack ( dvd-rom )",
+          "ltable_manufacturer": "broderbund",
+          "ltable_price": "nan",
+          "rtable_title": "learning quickbooks 2007",
+          "rtable_manufacturer": "nan",
+          "rtable_price": "38.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 292.91689705848694
+    },
+    {
+      "id": 20,
+      "ltuple": {
+        "ltable_title": "adobe creative suite cs3 design premium [ mac ]",
+        "ltable_manufacturer": "adobe",
+        "ltable_price": "1799.0"
+      },
+      "rtuple": {
+        "rtable_title": "adobe cs3 design standard academic",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "385.99"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.4310344827586207
+        ],
+        "ltable_manufacturer": [
+          0.37931034482758624
+        ],
+        "ltable_price": [
+          0.37931034482758624
+        ],
+        "rtable_title": [
+          0.3793103448275862
+        ],
+        "rtable_manufacturer": [
+          0.39655172413793105
+        ],
+        "rtable_price": [
+          0.3103448275862069
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "clickart 950 000 premier image pack ( dvd-rom )",
+          "ltable_manufacturer": "broderbund",
+          "ltable_price": "nan",
+          "rtable_title": "learning quickbooks 2007",
+          "rtable_manufacturer": "nan",
+          "rtable_price": "38.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 334.33485102653503
+    },
+    {
+      "id": 21,
+      "ltuple": {
+        "ltable_title": "adobe cs3 design standard macosx dvd",
+        "ltable_manufacturer": "adobe",
+        "ltable_price": "399.0"
+      },
+      "rtuple": {
+        "rtable_title": "adobe cs3 design standard upgrade",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "413.99"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.4716981132075472
+        ],
+        "ltable_manufacturer": [
+          0.49056603773584906
+        ],
+        "ltable_price": [
+          0.5094339622641509
+        ],
+        "rtable_title": [
+          0.4150943396226415
+        ],
+        "rtable_manufacturer": [
+          0.2641509433962264
+        ],
+        "rtable_price": [
+          0.2641509433962264
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "my sim",
+          "ltable_manufacturer": "viva media",
+          "ltable_price": "nan",
+          "rtable_title": "adobe cs3 design standard upgrade",
+          "rtable_manufacturer": "nan",
+          "rtable_price": "413.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 341.5366442203522
+    },
+    {
+      "id": 22,
+      "ltuple": {
+        "ltable_title": "professional home design suite platinum",
+        "ltable_manufacturer": "punch ! software",
+        "ltable_price": "99.95"
+      },
+      "rtuple": {
+        "rtable_title": "scrapbook designer platinum",
+        "rtable_manufacturer": "riverdeep-learning-company",
+        "rtable_price": "17.9"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.42105263157894735
+        ],
+        "ltable_manufacturer": [
+          0.42105263157894735
+        ],
+        "ltable_price": [
+          0.42105263157894735
+        ],
+        "rtable_title": [
+          1.0
+        ],
+        "rtable_manufacturer": [
+          0.631578947368421
+        ],
+        "rtable_price": [
+          0.631578947368421
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "professional home design suite platinum",
+          "ltable_manufacturer": "punch ! software",
+          "ltable_price": "99.95",
+          "rtable_title": "pafgpcde01000p0rtpen laplink pcdefense internet security",
+          "rtable_manufacturer": "nan",
+          "rtable_price": "38.99",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 308.50475811958313
+    },
+    {
+      "id": 23,
+      "ltuple": {
+        "ltable_title": "sims 2 glamour life stuff pack",
+        "ltable_manufacturer": "aspyr media",
+        "ltable_price": "24.99"
+      },
+      "rtuple": {
+        "rtable_title": "aspyr media inc sims 2 glamour life stuff pack",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "23.44"
+      },
+      "prediction": 1,
+      "label": 1,
+      "saliency": {
+        "ltable_title": [
+          0.5
+        ],
+        "ltable_manufacturer": [
+          0.5
+        ],
+        "ltable_price": [
+          0.4
+        ],
+        "rtable_title": [
+          0.9
+        ],
+        "rtable_manufacturer": [
+          0.6000000000000001
+        ],
+        "rtable_price": [
+          0.5
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "sims 2 glamour life stuff pack",
+          "ltable_manufacturer": "aspyr media",
+          "ltable_price": "24.99",
+          "rtable_title": "encore software 10599 encore registry mechanic v. 5.1 complete product",
+          "rtable_manufacturer": "intuit",
+          "rtable_price": "38.99",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 242.58572793006897
+    },
+    {
+      "id": 24,
+      "ltuple": {
+        "ltable_title": "microsoft office 2004 professional ( mac )",
+        "ltable_manufacturer": "microsoft",
+        "ltable_price": "499.99"
+      },
+      "rtuple": {
+        "rtable_title": "diskeeper 2007 professional",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "46.95"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.411764705882353
+        ],
+        "ltable_manufacturer": [
+          0.411764705882353
+        ],
+        "ltable_price": [
+          0.37254901960784315
+        ],
+        "rtable_title": [
+          0.35294117647058826
+        ],
+        "rtable_manufacturer": [
+          0.45098039215686275
+        ],
+        "rtable_price": [
+          0.37254901960784315
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "clickart 950 000 premier image pack ( dvd-rom )",
+          "ltable_manufacturer": "broderbund",
+          "ltable_price": "nan",
+          "rtable_title": "learning quickbooks 2007",
+          "rtable_manufacturer": "nan",
+          "rtable_price": "38.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 327.9998080730438
+    },
+    {
+      "id": 25,
+      "ltuple": {
+        "ltable_title": "final draft av 2.5 win/mac",
+        "ltable_manufacturer": "final draft",
+        "ltable_price": "199.99"
+      },
+      "rtuple": {
+        "rtable_title": "final-draft final draft av 2.5 screenwriting software mac/win screen writing software",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "199.95"
+      },
+      "prediction": 1,
+      "label": 1,
+      "saliency": {
+        "ltable_title": [
+          0.6000000000000001
+        ],
+        "ltable_manufacturer": [
+          0.4
+        ],
+        "ltable_price": [
+          0.6000000000000001
+        ],
+        "rtable_title": [
+          0.8
+        ],
+        "rtable_manufacturer": [
+          0.6000000000000001
+        ],
+        "rtable_price": [
+          0.6000000000000001
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "final draft av 2.5 win/mac",
+          "ltable_manufacturer": "final draft",
+          "ltable_price": "199.99",
+          "rtable_title": "encore software 10282 sharks 2.0 ( win 95 98 me 2000 xp/mac 10.1 or higher",
+          "rtable_manufacturer": "e-b-c-marketing",
+          "rtable_price": "38.99",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 228.03509092330933
+    },
+    {
+      "id": 26,
+      "ltuple": {
+        "ltable_title": "punch ! master landscape & home design",
+        "ltable_manufacturer": "punch ! software",
+        "ltable_price": "59.99"
+      },
+      "rtuple": {
+        "rtable_title": "punch software 20100 punch ! 5 in 1 home design",
+        "rtable_manufacturer": "punch software",
+        "rtable_price": "35.99"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.6071428571428571
+        ],
+        "ltable_manufacturer": [
+          0.6428571428571429
+        ],
+        "ltable_price": [
+          0.42857142857142855
+        ],
+        "rtable_title": [
+          0.6071428571428571
+        ],
+        "rtable_manufacturer": [
+          0.4642857142857143
+        ],
+        "rtable_price": [
+          0.5
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "!",
+          "ltable_manufacturer": "selectsoft publishing",
+          "ltable_price": "59.99",
+          "rtable_title": "punch software 20100 punch ! 5 in 1 home design",
+          "rtable_manufacturer": "punch software",
+          "rtable_price": "35.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 349.3806777000427
+    },
+    {
+      "id": 27,
+      "ltuple": {
+        "ltable_title": "sony acid pro 6 professional music workstation",
+        "ltable_manufacturer": "sony-pictures-digital-entertainment",
+        "ltable_price": "499.95"
+      },
+      "rtuple": {
+        "rtable_title": "sibelius photoscore professional scanning software music production software",
+        "rtable_manufacturer": "sibelius-software-ltd .",
+        "rtable_price": "179.95"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.32
+        ],
+        "ltable_manufacturer": [
+          0.28
+        ],
+        "ltable_price": [
+          0.44000000000000006
+        ],
+        "rtable_title": [
+          0.44000000000000006
+        ],
+        "rtable_manufacturer": [
+          0.4600000000000001
+        ],
+        "rtable_price": [
+          0.4600000000000001
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "clickart 950 000 premier image pack ( dvd-rom )",
+          "ltable_manufacturer": "broderbund",
+          "ltable_price": "nan",
+          "rtable_title": "sibelius photoscore professional scanning software music production software",
+          "rtable_manufacturer": "sibelius-software-ltd .",
+          "rtable_price": "226.56",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 340.8837809562683
+    },
+    {
+      "id": 28,
+      "ltuple": {
+        "ltable_title": "adobe photoshop elements 4.0 ( mac )",
+        "ltable_manufacturer": "adobe",
+        "ltable_price": "89.99"
+      },
+      "rtuple": {
+        "rtable_title": "adobe photoshop elements 4.0 photo-editing software for mac",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "85.95"
+      },
+      "prediction": 1,
+      "label": 1,
+      "saliency": {
+        "ltable_title": [
+          0.4074074074074074
+        ],
+        "ltable_manufacturer": [
+          0.38888888888888884
+        ],
+        "ltable_price": [
+          0.35185185185185186
+        ],
+        "rtable_title": [
+          0.40740740740740744
+        ],
+        "rtable_manufacturer": [
+          0.4444444444444444
+        ],
+        "rtable_price": [
+          0.3333333333333333
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "clickart 950 000 premier image pack ( dvd-rom )",
+          "ltable_manufacturer": "broderbund",
+          "ltable_price": "nan",
+          "rtable_title": "learning quickbooks 2007",
+          "rtable_manufacturer": "nan",
+          "rtable_price": "38.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 304.4602098464966
+    },
+    {
+      "id": 29,
+      "ltuple": {
+        "ltable_title": "reel deal casino championship edition",
+        "ltable_manufacturer": "phantom efx",
+        "ltable_price": "19.99"
+      },
+      "rtuple": {
+        "rtable_title": "phantom efx reel deal casino shuffle master edition",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "17.24"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.5666666666666667
+        ],
+        "ltable_manufacturer": [
+          0.5666666666666667
+        ],
+        "ltable_price": [
+          0.5333333333333333
+        ],
+        "rtable_title": [
+          0.2333333333333333
+        ],
+        "rtable_manufacturer": [
+          0.18333333333333332
+        ],
+        "rtable_price": [
+          0.19999999999999998
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "microsoft visual studio test agent",
+          "ltable_manufacturer": "phantom efx",
+          "ltable_price": "19.99",
+          "rtable_title": "learning quickbooks 2007",
+          "rtable_manufacturer": "intuit",
+          "rtable_price": "38.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 302.2955641746521
+    },
+    {
+      "id": 30,
+      "ltuple": {
+        "ltable_title": "panda internet security 2007 3-user",
+        "ltable_manufacturer": "panda software",
+        "ltable_price": "69.95"
+      },
+      "rtuple": {
+        "rtable_title": "mcafee internet security suite 2007 3-user ( pc )",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "89.99"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.5714285714285714
+        ],
+        "ltable_manufacturer": [
+          0.42857142857142855
+        ],
+        "ltable_price": [
+          0.2857142857142857
+        ],
+        "rtable_title": [
+          0.7142857142857142
+        ],
+        "rtable_manufacturer": [
+          0.42857142857142855
+        ],
+        "rtable_price": [
+          0.42857142857142855
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "panda internet security 2007 3-user",
+          "ltable_manufacturer": "panda software",
+          "ltable_price": "69.95",
+          "rtable_title": "software",
+          "rtable_manufacturer": "intuit",
+          "rtable_price": "38.99",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 199.76914286613464
+    },
+    {
+      "id": 32,
+      "ltuple": {
+        "ltable_title": "microsoft office frontpage 2003 academic version windows )",
+        "ltable_manufacturer": "microsoft",
+        "ltable_price": "159.98"
+      },
+      "rtuple": {
+        "rtable_title": "microsoft ( r ) windows ( r ) xp professional edition with sp2",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "199.99"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.4745762711864407
+        ],
+        "ltable_manufacturer": [
+          0.4745762711864407
+        ],
+        "ltable_price": [
+          0.4406779661016949
+        ],
+        "rtable_title": [
+          0.3050847457627119
+        ],
+        "rtable_manufacturer": [
+          0.3559322033898305
+        ],
+        "rtable_price": [
+          0.2542372881355932
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "century software tinyterm plus v. 4.0 complete product",
+          "ltable_manufacturer": "broderbund",
+          "ltable_price": "nan",
+          "rtable_title": "learning quickbooks 2007",
+          "rtable_manufacturer": "intuit",
+          "rtable_price": "38.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 280.18354773521423
+    },
+    {
+      "id": 33,
+      "ltuple": {
+        "ltable_title": "microsoft office excel 2007",
+        "ltable_manufacturer": "microsoft",
+        "ltable_price": "229.95"
+      },
+      "rtuple": {
+        "rtable_title": "microsoft microsoft office 2004 software suite mac apple & mac software",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "399.95"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.4
+        ],
+        "ltable_manufacturer": [
+          0.38181818181818183
+        ],
+        "ltable_price": [
+          0.34545454545454546
+        ],
+        "rtable_title": [
+          0.38181818181818183
+        ],
+        "rtable_manufacturer": [
+          0.4727272727272727
+        ],
+        "rtable_price": [
+          0.36363636363636365
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "clickart 950 000 premier image pack ( dvd-rom )",
+          "ltable_manufacturer": "broderbund",
+          "ltable_price": "nan",
+          "rtable_title": "learning quickbooks 2007",
+          "rtable_manufacturer": "nan",
+          "rtable_price": "38.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 336.808913230896
+    },
+    {
+      "id": 34,
+      "ltuple": {
+        "ltable_title": "instant immersion 33 languages",
+        "ltable_manufacturer": "topics entertainment",
+        "ltable_price": "49.99"
+      },
+      "rtuple": {
+        "rtable_title": "instant immersion 33 languages",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "47.36"
+      },
+      "prediction": 1,
+      "label": 1,
+      "saliency": {
+        "ltable_title": [
+          0.6470588235294118
+        ],
+        "ltable_manufacturer": [
+          0.4411764705882353
+        ],
+        "ltable_price": [
+          0.47058823529411764
+        ],
+        "rtable_title": [
+          0.5882352941176471
+        ],
+        "rtable_manufacturer": [
+          0.4117647058823529
+        ],
+        "rtable_price": [
+          0.3823529411764706
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "steinberg halion symphonic orchestra virtual instrument ( academic",
+          "ltable_manufacturer": "steinberg",
+          "ltable_price": "49.99",
+          "rtable_title": "instant immersion 33 languages",
+          "rtable_manufacturer": "topics entertainment",
+          "rtable_price": "43.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 328.8200340270996
+    },
+    {
+      "id": 35,
+      "ltuple": {
+        "ltable_title": "instant immersion german audio",
+        "ltable_manufacturer": "topics entertainment",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_title": "topics entertainment instant immersion ingles audio deluxe",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "17.55"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.8571428571428571
+        ],
+        "ltable_manufacturer": [
+          0.5714285714285714
+        ],
+        "ltable_price": [
+          0.8571428571428571
+        ],
+        "rtable_title": [
+          0.7142857142857142
+        ],
+        "rtable_manufacturer": [
+          0.7142857142857142
+        ],
+        "rtable_price": [
+          0.5714285714285714
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "learn english ( win/mac ) ( jewel case )",
+          "ltable_manufacturer": "topics entertainment",
+          "ltable_price": "9.99",
+          "rtable_title": "learning quickbooks 2007",
+          "rtable_manufacturer": "intuit",
+          "rtable_price": "38.99",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 227.31262803077698
+    },
+    {
+      "id": 36,
+      "ltuple": {
+        "ltable_title": "microsoft publisher 2007 version upgrade",
+        "ltable_manufacturer": "microsoft",
+        "ltable_price": "99.95"
+      },
+      "rtuple": {
+        "rtable_title": "microsoft excel 2007 ( pc )",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "229.95"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.41666666666666663
+        ],
+        "ltable_manufacturer": [
+          0.41666666666666663
+        ],
+        "ltable_price": [
+          0.41666666666666663
+        ],
+        "rtable_title": [
+          0.35
+        ],
+        "rtable_manufacturer": [
+          0.3333333333333333
+        ],
+        "rtable_price": [
+          0.3
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "clickart 950 000 premier image pack ( dvd-rom )",
+          "ltable_manufacturer": "broderbund",
+          "ltable_price": "nan",
+          "rtable_title": "1yr 24x7 gold support 1000u sup sw ud adv hw",
+          "rtable_manufacturer": "intuit",
+          "rtable_price": "38.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 321.6213450431824
+    },
+    {
+      "id": 37,
+      "ltuple": {
+        "ltable_title": "microsoft visual studio professional 2005 upgrade",
+        "ltable_manufacturer": "microsoft software",
+        "ltable_price": "549.0"
+      },
+      "rtuple": {
+        "rtable_title": "microsoft windows vista home basic upgrade ( pc )",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "99.99"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.625
+        ],
+        "ltable_manufacturer": [
+          0.4375
+        ],
+        "ltable_price": [
+          0.4375
+        ],
+        "rtable_title": [
+          0.75
+        ],
+        "rtable_manufacturer": [
+          0.5
+        ],
+        "rtable_price": [
+          0.5
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "microsoft visual studio professional 2005 upgrade",
+          "ltable_manufacturer": "microsoft software",
+          "ltable_price": "549.0",
+          "rtable_title": "software cubase se 3.0 educational edition",
+          "rtable_manufacturer": "intuit",
+          "rtable_price": "38.99",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 228.81360793113708
+    },
+    {
+      "id": 38,
+      "ltuple": {
+        "ltable_title": "microsoft word 2007 version upgrade",
+        "ltable_manufacturer": "microsoft",
+        "ltable_price": "109.95"
+      },
+      "rtuple": {
+        "rtable_title": "microsoft ( r ) money 2007 premium",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "69.99"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.37288135593220334
+        ],
+        "ltable_manufacturer": [
+          0.35593220338983045
+        ],
+        "ltable_price": [
+          0.35593220338983045
+        ],
+        "rtable_title": [
+          0.42372881355932207
+        ],
+        "rtable_manufacturer": [
+          0.3898305084745763
+        ],
+        "rtable_price": [
+          0.3559322033898305
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "clickart 950 000 premier image pack ( dvd-rom )",
+          "ltable_manufacturer": "broderbund",
+          "ltable_price": "nan",
+          "rtable_title": "apple",
+          "rtable_manufacturer": "intuit",
+          "rtable_price": "38.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 308.004940032959
+    },
+    {
+      "id": 39,
+      "ltuple": {
+        "ltable_title": "halo ( mac )",
+        "ltable_manufacturer": "macsoft",
+        "ltable_price": "29.99"
+      },
+      "rtuple": {
+        "rtable_title": ". mac ( mac ) apple",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "99.99"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.5483870967741935
+        ],
+        "ltable_manufacturer": [
+          0.532258064516129
+        ],
+        "ltable_price": [
+          0.532258064516129
+        ],
+        "rtable_title": [
+          0.1935483870967742
+        ],
+        "rtable_manufacturer": [
+          0.2096774193548387
+        ],
+        "rtable_price": [
+          0.1935483870967742
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "visual",
+          "ltable_manufacturer": "broderbund",
+          "ltable_price": "nan",
+          "rtable_title": "learning quickbooks 2007",
+          "rtable_manufacturer": "intuit",
+          "rtable_price": "38.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 285.2010509967804
+    },
+    {
+      "id": 40,
+      "ltuple": {
+        "ltable_title": "hp dss software v. 4.0 complete package t1936aa ua0 )",
+        "ltable_manufacturer": "hewlett-packard - ( consumables )",
+        "ltable_price": "630.36"
+      },
+      "rtuple": {
+        "rtable_title": "passwords plus v. 1.0 complete package",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "28.5"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.30000000000000004
+        ],
+        "ltable_manufacturer": [
+          0.30000000000000004
+        ],
+        "ltable_price": [
+          0.5
+        ],
+        "rtable_title": [
+          0.5
+        ],
+        "rtable_manufacturer": [
+          0.4
+        ],
+        "rtable_price": [
+          0.5
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "hp dss software v. 4.0 complete package t1936aa ua0 )",
+          "ltable_manufacturer": "hewlett-packard - ( consumables )",
+          "ltable_price": "630.36",
+          "rtable_title": "win pa",
+          "rtable_manufacturer": "intuit",
+          "rtable_price": "38.99",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 296.95939207077026
+    },
+    {
+      "id": 41,
+      "ltuple": {
+        "ltable_title": "punch 5 in 1 home design",
+        "ltable_manufacturer": "punch ! software",
+        "ltable_price": "39.99"
+      },
+      "rtuple": {
+        "rtable_title": "punch software 20100 punch ! 5 in 1 home design",
+        "rtable_manufacturer": "punch software",
+        "rtable_price": "35.99"
+      },
+      "prediction": 1,
+      "label": 1,
+      "saliency": {
+        "ltable_title": [
+          0.75
+        ],
+        "ltable_manufacturer": [
+          0.5714285714285714
+        ],
+        "ltable_price": [
+          0.5
+        ],
+        "rtable_title": [
+          0.5714285714285714
+        ],
+        "rtable_manufacturer": [
+          0.4642857142857143
+        ],
+        "rtable_price": [
+          0.39285714285714285
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "photoshop elements",
+          "ltable_manufacturer": "onone software",
+          "ltable_price": "39.99",
+          "rtable_title": "punch software 20100 punch ! 5 in 1 home design",
+          "rtable_manufacturer": "punch software",
+          "rtable_price": "35.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 353.81698417663574
+    },
+    {
+      "id": 42,
+      "ltuple": {
+        "ltable_title": "punch ! home design architectura series 18",
+        "ltable_manufacturer": "punch ! software",
+        "ltable_price": "129.99"
+      },
+      "rtuple": {
+        "rtable_title": "punch software 26100 punch ! master landscape & home design architectural 1 user ( s ) pc",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "45.97"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.4
+        ],
+        "ltable_manufacturer": [
+          0.4
+        ],
+        "ltable_price": [
+          0.4
+        ],
+        "rtable_title": [
+          1.0
+        ],
+        "rtable_manufacturer": [
+          0.6000000000000001
+        ],
+        "rtable_price": [
+          0.6000000000000001
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "punch ! home design architectura series 18",
+          "ltable_manufacturer": "punch ! software",
+          "ltable_price": "129.99",
+          "rtable_title": "r ) complete iii for dos v. 5.0-10 .0",
+          "rtable_manufacturer": "intuit",
+          "rtable_price": "38.99",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 198.9272801876068
+    },
+    {
+      "id": 43,
+      "ltuple": {
+        "ltable_title": "adobe indesign cs3 upgrade from pagemaker",
+        "ltable_manufacturer": "adobe",
+        "ltable_price": "199.0"
+      },
+      "rtuple": {
+        "rtable_title": "adobe contribute cs3 upgrade",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "82.99"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          1.0
+        ],
+        "ltable_manufacturer": [
+          1.0
+        ],
+        "ltable_price": [
+          1.0
+        ],
+        "rtable_title": [
+          1.0
+        ],
+        "rtable_manufacturer": [
+          1.0
+        ],
+        "rtable_price": [
+          1.0
+        ]
+      },
+      "cfs": [
+        {}
+      ],
+      "latency": 189.71517515182495
+    },
+    {
+      "id": 44,
+      "ltuple": {
+        "ltable_title": "learning quickbooks 2007",
+        "ltable_manufacturer": "intuit",
+        "ltable_price": "39.95"
+      },
+      "rtuple": {
+        "rtable_title": "quickbooks ( r )",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "178.99"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.42857142857142855
+        ],
+        "ltable_manufacturer": [
+          0.42857142857142855
+        ],
+        "ltable_price": [
+          0.3333333333333333
+        ],
+        "rtable_title": [
+          0.47619047619047616
+        ],
+        "rtable_manufacturer": [
+          0.3333333333333333
+        ],
+        "rtable_price": [
+          0.38095238095238093
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "clickart 950 000 premier image pack ( dvd-rom )",
+          "ltable_manufacturer": "broderbund",
+          "ltable_price": "nan",
+          "rtable_title": "sony playstation 2 : socom 3 us navy",
+          "rtable_manufacturer": "nan",
+          "rtable_price": "103.99",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 205.32286596298218
+    },
+    {
+      "id": 45,
+      "ltuple": {
+        "ltable_title": "adobe creative suite cs3 production premium upsell",
+        "ltable_manufacturer": "adobe",
+        "ltable_price": "1199.0"
+      },
+      "rtuple": {
+        "rtable_title": "production prem cs3 mac upgrad",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "808.15"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.6888888888888889
+        ],
+        "ltable_manufacturer": [
+          0.5111111111111111
+        ],
+        "ltable_price": [
+          0.5333333333333333
+        ],
+        "rtable_title": [
+          0.3333333333333333
+        ],
+        "rtable_manufacturer": [
+          0.24444444444444444
+        ],
+        "rtable_price": [
+          0.26666666666666666
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "year subscription",
+          "ltable_manufacturer": "broderbund",
+          "ltable_price": "nan",
+          "rtable_title": "production prem cs3 mac upgrad",
+          "rtable_manufacturer": "adobe software",
+          "rtable_price": "805.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 319.3019120693207
+    },
+    {
+      "id": 46,
+      "ltuple": {
+        "ltable_title": "musicalis guitar workshop",
+        "ltable_manufacturer": "global-software-publishing",
+        "ltable_price": "9.99"
+      },
+      "rtuple": {
+        "rtable_title": "musicalis universal guitar workshop",
+        "rtable_manufacturer": "global-software-publishing",
+        "rtable_price": "12.9"
+      },
+      "prediction": 0,
+      "label": 1,
+      "saliency": {
+        "ltable_title": [
+          0.37499999999999994
+        ],
+        "ltable_manufacturer": [
+          0.3928571428571428
+        ],
+        "ltable_price": [
+          0.375
+        ],
+        "rtable_title": [
+          0.375
+        ],
+        "rtable_manufacturer": [
+          0.48214285714285715
+        ],
+        "rtable_price": [
+          0.32142857142857145
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "clickart 950 000 premier image pack ( dvd-rom )",
+          "ltable_manufacturer": "broderbund",
+          "ltable_price": "nan",
+          "rtable_title": "learning quickbooks 2007",
+          "rtable_manufacturer": "nan",
+          "rtable_price": "38.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 288.21946907043457
+    },
+    {
+      "id": 47,
+      "ltuple": {
+        "ltable_title": "mac os x server v10 .4.7 unlimited client",
+        "ltable_manufacturer": "apple",
+        "ltable_price": "999.0"
+      },
+      "rtuple": {
+        "rtable_title": "apple apple mac os x server 10 4 7 10 client",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "499.0"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.43859649122807015
+        ],
+        "ltable_manufacturer": [
+          0.43859649122807015
+        ],
+        "ltable_price": [
+          0.40350877192982454
+        ],
+        "rtable_title": [
+          0.2982456140350877
+        ],
+        "rtable_manufacturer": [
+          0.3508771929824561
+        ],
+        "rtable_price": [
+          0.3333333333333333
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "clickart 950 000 premier image pack ( dvd-rom )",
+          "ltable_manufacturer": "broderbund",
+          "ltable_price": "nan",
+          "rtable_title": "learning quickbooks 2007",
+          "rtable_manufacturer": "nan",
+          "rtable_price": "38.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 284.09153509140015
+    },
+    {
+      "id": 48,
+      "ltuple": {
+        "ltable_title": "microsoft office & windows training",
+        "ltable_manufacturer": "topics entertainment",
+        "ltable_price": "29.99"
+      },
+      "rtuple": {
+        "rtable_title": "microsoft windows vista ultimate retail no open box returns",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "399.99"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.75
+        ],
+        "ltable_manufacturer": [
+          0.625
+        ],
+        "ltable_price": [
+          0.5
+        ],
+        "rtable_title": [
+          0.75
+        ],
+        "rtable_manufacturer": [
+          0.625
+        ],
+        "rtable_price": [
+          0.5
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "hoyle mahjongg ( jewel case )",
+          "ltable_manufacturer": "topics entertainment",
+          "ltable_price": "29.99",
+          "rtable_title": "learning quickbooks 2007",
+          "rtable_manufacturer": "intuit",
+          "rtable_price": "38.99",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 233.7718529701233
+    },
+    {
+      "id": 49,
+      "ltuple": {
+        "ltable_title": "foreign policy & reform ( win/mac ) ( jewel case )",
+        "ltable_manufacturer": "fogware publishing",
+        "ltable_price": "9.99"
+      },
+      "rtuple": {
+        "rtable_title": "poetry fiction and drama ( win/mac ) ( jewel case ) ( 10172 )",
+        "rtable_manufacturer": "nan",
+        "rtable_price": "9.59"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.5535714285714286
+        ],
+        "ltable_manufacturer": [
+          0.5178571428571428
+        ],
+        "ltable_price": [
+          0.44642857142857145
+        ],
+        "rtable_title": [
+          0.26785714285714285
+        ],
+        "rtable_manufacturer": [
+          0.33928571428571425
+        ],
+        "rtable_price": [
+          0.25
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "studio ( mac )",
+          "ltable_manufacturer": "fogware publishing",
+          "ltable_price": "9.99",
+          "rtable_title": "learning quickbooks 2007",
+          "rtable_manufacturer": "intuit",
+          "rtable_price": "38.99",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 307.9122350215912
+    }
+  ],
+  "total_time": 17658.69200873375,
+  "metrics": {
+    "faithfulness": {
+      "certa(pase)_azure": 0.0
+    },
+    "counterfactual_metrics": {
+      "certa(pase)_azure": {
+        "validity": 0.6774193548365244,
+        "proximity": 0.8440860215026535,
+        "sparsity": 0.7889784946211106,
+        "diversity": 0.0
+      }
+    }
+  }
+}
