@@ -110,7 +110,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
 
             total_time = time() - start_time
 
-            expdir = f'./experiments/{d}/{datetime.now():%Y%m%d}/{datetime.now():%H_%M}/'
+            expdir = f'./experiments/{explanation_granularity}/{d}/{datetime.now():%Y%m%d}/{datetime.now():%H_%M}/'
             os.makedirs(expdir, exist_ok=True)
             llm_results = {"data": curr_llm_results, "total_time": total_time}
 
@@ -151,7 +151,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
             print(f'concordance statistics for {p1_name} - {p2_name}')
             observations = ellmer.metrics.get_concordance(p1_file, p2_file)
             print(f'{observations}')
-            obs_dir = f'experiments/concordance/{d}//{datetime.now():%Y%m%d}/{datetime.now():%H_%M}'
+            obs_dir = f'experiments/{explanation_granularity}/concordance/{d}//{datetime.now():%Y%m%d}/{datetime.now():%H_%M}'
             os.makedirs(obs_dir, exist_ok=True)
             observations.to_csv(f'{obs_dir}/{p1_name}_{p2_name}.csv')
 
