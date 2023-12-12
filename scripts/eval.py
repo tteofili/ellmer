@@ -27,7 +27,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
     pase = ellmer.models.GenericEllmer(explanation_granularity=explanation_granularity,
                                        deployment_name=llm_config['deployment_name'], temperature=temperature,
                                        model_name=llm_config['model_name'], model_type=llm_config['model_type'],
-                                       prompts={"pase": "ellmer/prompts/constrained14.txt"})
+                                       prompts={"pase": "ellmer/prompts/constrained9.txt"})
 
     ptse = ellmer.models.GenericEllmer(explanation_granularity=explanation_granularity,
                                        deployment_name=llm_config['deployment_name'], temperature=temperature,
