@@ -27,7 +27,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
     pase = ellmer.models.GenericEllmer(explanation_granularity=explanation_granularity,
                                        deployment_name=llm_config['deployment_name'], temperature=temperature,
                                        model_name=llm_config['model_name'], model_type=llm_config['model_type'],
-                                       prompts={"pase": "ellmer/prompts/constrained9.txt"})
+                                       prompts={"pase": "ellmer/prompts/constrained10.txt"})
 
     ptse = ellmer.models.GenericEllmer(explanation_granularity=explanation_granularity,
                                        deployment_name=llm_config['deployment_name'], temperature=temperature,
@@ -51,6 +51,9 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
                                       prompts={"ptse": {"er": "ellmer/prompts/er.txt"}})
 
     for d in dataset_names:
+        expdir = f'./experiments/{explanation_granularity}/{d}/{datetime.now():%Y%m%d}/{datetime.now():%H_%M}/'
+        obs_dir = f'experiments/{explanation_granularity}/concordance/{d}//{datetime.now():%Y%m%d}/{datetime.now():%H_%M}'
+
         print(f'using dataset {d}')
         dataset_dir = '/'.join([base_dir, d])
         lsource = pd.read_csv(dataset_dir + '/tableA.csv')
@@ -110,7 +113,6 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
 
             total_time = time() - start_time
 
-            expdir = f'./experiments/{explanation_granularity}/{d}/{datetime.now():%Y%m%d}/{datetime.now():%H_%M}/'
             os.makedirs(expdir, exist_ok=True)
             llm_results = {"data": curr_llm_results, "total_time": total_time}
 
@@ -122,11 +124,11 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
                 # generate quantitative explainability metrics for each set of generated explanations
 
                 # generate saliency metrics
-                faithfulness = ellmer.utils.get_faithfulness([key], llm.evaluation, expdir, test_data_df)
+                faithfulness = ellmer.metrics.get_faithfulness([key], llm.evaluation, expdir, test_data_df)
                 print(f'{key} faithfulness({key}):{faithfulness}')
 
                 # generate counterfactual metrics
-                cf_metrics = ellmer.utils.get_cf_metrics([key], llm.predict, expdir, test_data_df)
+                cf_metrics = ellmer.metrics.get_cf_metrics([key], llm.predict, expdir, test_data_df)
                 print(f'{key} cf_metrics({key}):{cf_metrics}')
 
                 metrics_results = {"faithfulness": faithfulness, "counterfactual_metrics": cf_metrics}
@@ -151,7 +153,6 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
             print(f'concordance statistics for {p1_name} - {p2_name}')
             observations = ellmer.metrics.get_concordance(p1_file, p2_file)
             print(f'{observations}')
-            obs_dir = f'experiments/{explanation_granularity}/concordance/{d}//{datetime.now():%Y%m%d}/{datetime.now():%H_%M}'
             os.makedirs(obs_dir, exist_ok=True)
             observations.to_csv(f'{obs_dir}/{p1_name}_{p2_name}.csv')
 
