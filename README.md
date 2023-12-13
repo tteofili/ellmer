@@ -1,7 +1,8 @@
+
+
 ELLMER
 =======
-
-![ellmer_logo](https://github.com/tteofili/ellmer/assets/512815/71b950f3-2b36-4a58-8f48-955380b30a09)
+<img src="https://github.com/tteofili/ellmer/assets/512815/71b950f3-2b36-4a58-8f48-955380b30a09" width=20%>
 
 Code for _ELLMER_: Explain Large Language Models for ER.
 
