@@ -1,6 +1,9 @@
 ELLMER
 =======
 
+![Uploading ellmer_logo.png…]()
+
+
 Code for _ELLMER_: Explain Large Language Models for ER.
 
 # Installation
