@@ -121,11 +121,11 @@ for llm_config in llm_configs:
                 # generate quantitative explainability metrics for each set of generated explanations
 
                 # generate saliency metrics
-                faithfulness = ellmer.utils.get_faithfulness([key], llm.evaluation, expdir, test_data_df)
+                faithfulness = ellmer.metrics.get_faithfulness([key], llm.evaluation, expdir, test_data_df)
                 print(f'{key} faithfulness({key}):{faithfulness}')
 
                 # generate counterfactual metrics
-                cf_metrics = ellmer.utils.get_cf_metrics([key], llm.predict, expdir, test_data_df)
+                cf_metrics = ellmer.metrics.get_cf_metrics([key], llm.predict, expdir, test_data_df)
                 print(f'{key} cf_metrics({key}):{cf_metrics}')
 
                 metrics_results = {"faithfulness": faithfulness, "counterfactual_metrics": cf_metrics}

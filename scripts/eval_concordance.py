@@ -1,7 +1,7 @@
 import argparse
 import json
 from scipy.stats import kendalltau
-from ellmer.utils import cosine_similarity
+from ellmer.metrics import cosine_similarity
 import pandas as pd
 
 
