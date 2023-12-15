@@ -1,0 +1,2514 @@
+{
+  "data": [
+    {
+      "id": 0,
+      "ltuple": {
+        "ltable_name": "sony pink cyber-shot 7.2 megapixel digital camera dscw120p",
+        "ltable_description": "sony pink cyber-shot 7.2 megapixel digital camera dscw120p 7.2 megapixel 4x optical zoom 2.5 ' tft lcd 15 mb internal memory face detection super steadyshot image stabilization smile shutter mode smart zoom pink finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "olympus fe-360 digital camera pink 226540",
+        "rtable_description": "8 megapixel 16:9 3x optical zoom 4x digital zoom 2.5 ' color lcd",
+        "rtable_price": "104.95"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "rtable_name__olympus": [
+          0.0
+        ],
+        "rtable_name__fe-360": [
+          0.0
+        ],
+        "rtable_name__digital": [
+          0.0
+        ],
+        "rtable_name__camera": [
+          0.0
+        ],
+        "rtable_name__pink": [
+          0.0
+        ],
+        "rtable_name__226540": [
+          0.0
+        ],
+        "rtable_description__8": [
+          0.0
+        ],
+        "rtable_description__megapixel": [
+          0.0
+        ],
+        "rtable_description__16:9": [
+          0.0
+        ],
+        "rtable_description__3x": [
+          0.0
+        ],
+        "rtable_description__optical": [
+          0.0
+        ],
+        "rtable_description__zoom": [
+          0.0
+        ],
+        "rtable_description__4x": [
+          0.0
+        ],
+        "rtable_description__digital": [
+          0.0
+        ],
+        "rtable_description__2.5": [
+          0.0
+        ],
+        "rtable_description__'": [
+          0.0
+        ],
+        "rtable_description__color": [
+          0.0
+        ],
+        "rtable_description__lcd": [
+          0.0
+        ],
+        "rtable_price__104.95": [
+          0.0
+        ],
+        "ltable_name__sony": [
+          0.0
+        ],
+        "ltable_name__pink": [
+          0.0
+        ],
+        "ltable_name__cyber-shot": [
+          0.3333333333333333
+        ],
+        "ltable_name__7.2": [
+          0.3333333333333333
+        ],
+        "ltable_name__megapixel": [
+          0.3333333333333333
+        ],
+        "ltable_name__digital": [
+          0.3333333333333333
+        ],
+        "ltable_name__camera": [
+          0.3333333333333333
+        ],
+        "ltable_name__dscw120p": [
+          0.3333333333333333
+        ],
+        "ltable_description__sony": [
+          0.3333333333333333
+        ],
+        "ltable_description__pink": [
+          0.0
+        ],
+        "ltable_description__cyber-shot": [
+          0.0
+        ],
+        "ltable_description__7.2": [
+          0.0
+        ],
+        "ltable_description__megapixel": [
+          0.0
+        ],
+        "ltable_description__digital": [
+          0.0
+        ],
+        "ltable_description__camera": [
+          0.0
+        ],
+        "ltable_description__dscw120p": [
+          0.0
+        ],
+        "ltable_description__4x": [
+          0.0
+        ],
+        "ltable_description__optical": [
+          0.0
+        ],
+        "ltable_description__zoom": [
+          0.0
+        ],
+        "ltable_description__2.5": [
+          0.0
+        ],
+        "ltable_description__'": [
+          0.0
+        ],
+        "ltable_description__tft": [
+          0.0
+        ],
+        "ltable_description__lcd": [
+          0.0
+        ],
+        "ltable_description__15": [
+          0.0
+        ],
+        "ltable_description__mb": [
+          0.0
+        ],
+        "ltable_description__internal": [
+          0.0
+        ],
+        "ltable_description__memory": [
+          0.0
+        ],
+        "ltable_description__face": [
+          0.0
+        ],
+        "ltable_description__detection": [
+          0.0
+        ],
+        "ltable_description__super": [
+          0.0
+        ],
+        "ltable_description__steadyshot": [
+          0.0
+        ],
+        "ltable_description__image": [
+          0.0
+        ],
+        "ltable_description__stabilization": [
+          0.0
+        ],
+        "ltable_description__smile": [
+          0.0
+        ],
+        "ltable_description__shutter": [
+          0.0
+        ],
+        "ltable_description__mode": [
+          0.0
+        ],
+        "ltable_description__smart": [
+          0.0
+        ],
+        "ltable_description__finish": [
+          0.0
+        ],
+        "ltable_price__nan": [
+          0.0
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "sony pink olympus fe-360 pink digital camera 226540",
+          "ltable_description": "8 pink cyber-shot 7.2 megapixel digital camera dscw120p 7.2 megapixel 4x optical zoom 2.5 ' tft lcd 15 mb internal memory face detection super steadyshot image stabilization smile shutter mode smart zoom pink finish",
+          "ltable_price": "nan",
+          "rtable_name": "olympus fe-360 digital camera pink 226540",
+          "rtable_description": "8 megapixel 16:9 3x optical zoom 4x digital zoom 2.5 ' color lcd",
+          "rtable_price": "104.95",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "ltuple": {
+        "ltable_name": "lg 2.0 cu . ft. over-the-range white microwave oven lmvm2085wh",
+        "ltable_description": "lg 2.0 cu . ft. over-the-range white microwave oven lmvm2085wh warming lamp glide & spin sliding tray with turntable sensor cook feature 300 cfm exhaust system horizontal keypad elegant hidden vent wideview window halogen cooktop lighting white finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "maytag 2.0 cu . ft. over-the-range microwave oven",
+        "rtable_description": "nan",
+        "rtable_price": "nan"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "rtable_name__linksys": [
+          0.0
+        ],
+        "rtable_name__etherfast": [
+          0.0
+        ],
+        "rtable_name__ezxs88w": [
+          0.0
+        ],
+        "rtable_name__ethernet": [
+          0.0
+        ],
+        "rtable_name__switch": [
+          0.0
+        ],
+        "rtable_description__linksys": [
+          0.0
+        ],
+        "rtable_description__etherfast": [
+          0.0
+        ],
+        "rtable_description__8-port": [
+          0.0
+        ],
+        "rtable_description__10/100": [
+          0.0
+        ],
+        "rtable_description__switch": [
+          0.0
+        ],
+        "rtable_description__(": [
+          0.0
+        ],
+        "rtable_description__new/workgroup": [
+          0.0
+        ],
+        "rtable_description__)": [
+          0.0
+        ],
+        "rtable_price__nan": [
+          0.0
+        ],
+        "ltable_name__lg": [
+          0.0
+        ],
+        "ltable_name__2.0": [
+          0.0
+        ],
+        "ltable_name__cu": [
+          0.0
+        ],
+        "ltable_name__.": [
+          0.0
+        ],
+        "ltable_name__ft.": [
+          0.0
+        ],
+        "ltable_name__over-the-range": [
+          0.3333333333333333
+        ],
+        "ltable_name__white": [
+          0.3333333333333333
+        ],
+        "ltable_name__microwave": [
+          0.3333333333333333
+        ],
+        "ltable_name__oven": [
+          0.3333333333333333
+        ],
+        "ltable_name__lmvm2085wh": [
+          0.3333333333333333
+        ],
+        "ltable_description__lg": [
+          0.0
+        ],
+        "ltable_description__2.0": [
+          0.0
+        ],
+        "ltable_description__cu": [
+          0.0
+        ],
+        "ltable_description__.": [
+          0.0
+        ],
+        "ltable_description__ft.": [
+          0.0
+        ],
+        "ltable_description__over-the-range": [
+          0.0
+        ],
+        "ltable_description__white": [
+          0.0
+        ],
+        "ltable_description__microwave": [
+          0.0
+        ],
+        "ltable_description__oven": [
+          0.0
+        ],
+        "ltable_description__lmvm2085wh": [
+          0.0
+        ],
+        "ltable_description__warming": [
+          0.0
+        ],
+        "ltable_description__lamp": [
+          0.0
+        ],
+        "ltable_description__glide": [
+          0.0
+        ],
+        "ltable_description__&": [
+          0.0
+        ],
+        "ltable_description__spin": [
+          0.0
+        ],
+        "ltable_description__sliding": [
+          0.0
+        ],
+        "ltable_description__tray": [
+          0.0
+        ],
+        "ltable_description__with": [
+          0.0
+        ],
+        "ltable_description__turntable": [
+          0.0
+        ],
+        "ltable_description__sensor": [
+          0.0
+        ],
+        "ltable_description__cook": [
+          0.0
+        ],
+        "ltable_description__feature": [
+          0.0
+        ],
+        "ltable_description__300": [
+          0.0
+        ],
+        "ltable_description__cfm": [
+          0.0
+        ],
+        "ltable_description__exhaust": [
+          0.0
+        ],
+        "ltable_description__system": [
+          0.0
+        ],
+        "ltable_description__horizontal": [
+          0.0
+        ],
+        "ltable_description__keypad": [
+          0.0
+        ],
+        "ltable_description__elegant": [
+          0.0
+        ],
+        "ltable_description__hidden": [
+          0.0
+        ],
+        "ltable_description__vent": [
+          0.0
+        ],
+        "ltable_description__wideview": [
+          0.0
+        ],
+        "ltable_description__window": [
+          0.0
+        ],
+        "ltable_description__halogen": [
+          0.0
+        ],
+        "ltable_description__cooktop": [
+          0.0
+        ],
+        "ltable_description__lighting": [
+          0.0
+        ],
+        "ltable_description__finish": [
+          0.0
+        ],
+        "ltable_price__nan": [
+          0.0
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "lg 2.0 cu . ft. linksys etherfast ezxs88w ethernet switch",
+          "ltable_description": "lg 2.0 cu . ft. over-the-range white microwave oven lmvm2085wh warming lamp glide & spin sliding tray with turntable sensor cook feature 300 cfm exhaust system horizontal keypad elegant hidden vent wideview window halogen cooktop lighting white finish",
+          "ltable_price": "nan",
+          "rtable_name": "linksys etherfast ezxs88w ethernet switch ezxs88w",
+          "rtable_description": "linksys etherfast 8-port 10/100 switch ( new/workgroup )",
+          "rtable_price": "nan",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "ltuple": {
+        "ltable_name": "panasonic black 8.5 ' portable dvd player dvdls83",
+        "ltable_description": "panasonic black 8.5 ' portable dvd player dvdls83 8.5 ' free style wide screen lcd display 6 hour battery multi format playback dual headphone jacks divx playback car dc adapter included black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "toshiba sd-p71s portable dvd player",
+        "rtable_description": "toshiba sd-p71s 7 ' portable dvd player",
+        "rtable_price": "119.36"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name__panasonic": [
+          0.0
+        ],
+        "ltable_name__black": [
+          0.0
+        ],
+        "ltable_name__8.5": [
+          0.0
+        ],
+        "ltable_name__'": [
+          0.0
+        ],
+        "ltable_name__portable": [
+          0.0
+        ],
+        "ltable_name__dvd": [
+          0.0
+        ],
+        "ltable_name__player": [
+          0.0
+        ],
+        "ltable_name__dvdls83": [
+          0.0
+        ],
+        "ltable_description__panasonic": [
+          0.0
+        ],
+        "ltable_description__black": [
+          1.0
+        ],
+        "ltable_description__8.5": [
+          0.0
+        ],
+        "ltable_description__'": [
+          0.0
+        ],
+        "ltable_description__portable": [
+          0.0
+        ],
+        "ltable_description__dvd": [
+          0.0
+        ],
+        "ltable_description__player": [
+          0.0
+        ],
+        "ltable_description__dvdls83": [
+          0.0
+        ],
+        "ltable_description__free": [
+          0.0
+        ],
+        "ltable_description__style": [
+          0.0
+        ],
+        "ltable_description__wide": [
+          0.0
+        ],
+        "ltable_description__screen": [
+          0.0
+        ],
+        "ltable_description__lcd": [
+          0.0
+        ],
+        "ltable_description__display": [
+          0.0
+        ],
+        "ltable_description__6": [
+          0.0
+        ],
+        "ltable_description__hour": [
+          0.0
+        ],
+        "ltable_description__battery": [
+          0.0
+        ],
+        "ltable_description__multi": [
+          0.0
+        ],
+        "ltable_description__format": [
+          0.0
+        ],
+        "ltable_description__playback": [
+          0.0
+        ],
+        "ltable_description__dual": [
+          0.0
+        ],
+        "ltable_description__headphone": [
+          0.0
+        ],
+        "ltable_description__jacks": [
+          0.0
+        ],
+        "ltable_description__divx": [
+          0.0
+        ],
+        "ltable_description__car": [
+          0.0
+        ],
+        "ltable_description__dc": [
+          1.0
+        ],
+        "ltable_description__adapter": [
+          1.0
+        ],
+        "ltable_description__included": [
+          1.0
+        ],
+        "ltable_description__finish": [
+          1.0
+        ],
+        "ltable_price__nan": [
+          1.0
+        ],
+        "rtable_name__toshiba": [
+          0.0
+        ],
+        "rtable_name__sd-p71s": [
+          0.0
+        ],
+        "rtable_name__portable": [
+          0.0
+        ],
+        "rtable_name__dvd": [
+          0.0
+        ],
+        "rtable_name__player": [
+          0.0
+        ],
+        "rtable_description__toshiba": [
+          0.0
+        ],
+        "rtable_description__sd-p71s": [
+          0.0
+        ],
+        "rtable_description__7": [
+          0.0
+        ],
+        "rtable_description__'": [
+          0.0
+        ],
+        "rtable_description__portable": [
+          0.0
+        ],
+        "rtable_description__dvd": [
+          0.0
+        ],
+        "rtable_description__player": [
+          0.0
+        ],
+        "rtable_price__119.36": [
+          0.0
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "panasonic black 8.5 ' portable dvd player dvdls83",
+          "ltable_description": "panasonic portable 8.5 ' portable dvd player dvdls83 8.5 ' free style wide screen lcd display 6 hour battery multi format playback dual headphone jacks divx playback car sd-p71s 7 ' black dvd",
+          "ltable_price": "119.36",
+          "rtable_name": "toshiba sd-p71s portable dvd player",
+          "rtable_description": "toshiba sd-p71s 7 ' portable dvd player",
+          "rtable_price": "119.36",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "ltuple": {
+        "ltable_name": "sony bravia theater black micro system davis50b",
+        "ltable_description": "sony bravia theater black micro system davis50b 5.1-channel surround sound golf ball-sized speakers compact design s-air digital wireless capability hdmi connectivity bravia sync digital cinema sound ( dcs ) technology s-master digital amplifier portable audio enhancer black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "sony bravia dav-is50 / b home theater system",
+        "rtable_description": "dvd player , 5.1 speakers 1 disc ( s ) progressive scan 450w rms dolby digital ex , dolby pro logic , dolby pro logic ii",
+        "rtable_price": "nan"
+      },
+      "prediction": 0,
+      "label": 1,
+      "saliency": {
+        "rtable_name__sony": [
+          0.0002960331557134399
+        ],
+        "rtable_name__bravia": [
+          0.0005920663114268798
+        ],
+        "rtable_name__dav-is50": [
+          0.0
+        ],
+        "rtable_name__/": [
+          0.0014801657785671995
+        ],
+        "rtable_name__b": [
+          0.002664298401420959
+        ],
+        "rtable_name__home": [
+          0.002368265245707519
+        ],
+        "rtable_name__theater": [
+          0.0011841326228537595
+        ],
+        "rtable_name__system": [
+          0.0011841326228537595
+        ],
+        "rtable_description__dvd": [
+          0.013025458851391355
+        ],
+        "rtable_description__player": [
+          0.009177027827116636
+        ],
+        "rtable_description__,": [
+          0.006512729425695677
+        ],
+        "rtable_description__5.1": [
+          0.0002960331557134399
+        ],
+        "rtable_description__speakers": [
+          0.0005920663114268798
+        ],
+        "rtable_description__1": [
+          0.0008880994671403196
+        ],
+        "rtable_description__disc": [
+          0.0005920663114268798
+        ],
+        "rtable_description__(": [
+          0.0002960331557134399
+        ],
+        "rtable_description__s": [
+          0.0
+        ],
+        "rtable_description__)": [
+          0.0
+        ],
+        "rtable_description__progressive": [
+          0.0005920663114268798
+        ],
+        "rtable_description__scan": [
+          0.0005920663114268798
+        ],
+        "rtable_description__450w": [
+          0.0008880994671403196
+        ],
+        "rtable_description__rms": [
+          0.0005920663114268798
+        ],
+        "rtable_description__dolby": [
+          0.0014801657785671993
+        ],
+        "rtable_description__digital": [
+          0.0
+        ],
+        "rtable_description__ex": [
+          0.0005920663114268798
+        ],
+        "rtable_description__pro": [
+          0.0014801657785671993
+        ],
+        "rtable_description__logic": [
+          0.0005920663114268798
+        ],
+        "rtable_description__ii": [
+          0.0
+        ],
+        "rtable_price__nan": [
+          0.0
+        ],
+        "ltable_name__sony": [
+          0.0005920663114268798
+        ],
+        "ltable_name__bravia": [
+          0.0005920663114268798
+        ],
+        "ltable_name__theater": [
+          0.0008880994671403196
+        ],
+        "ltable_name__black": [
+          0.0014801657785671993
+        ],
+        "ltable_name__micro": [
+          0.0014801657785671993
+        ],
+        "ltable_name__system": [
+          0.0014801657785671993
+        ],
+        "ltable_name__davis50b": [
+          0.0011841326228537595
+        ],
+        "ltable_description__sony": [
+          0.004736530491415038
+        ],
+        "ltable_description__bravia": [
+          0.013321492007104793
+        ],
+        "ltable_description__theater": [
+          0.016281823564239194
+        ],
+        "ltable_description__black": [
+          0.029011249259917105
+        ],
+        "ltable_description__micro": [
+          0.029011249259917105
+        ],
+        "ltable_description__system": [
+          0.02279455298993487
+        ],
+        "ltable_description__davis50b": [
+          0.02368265245707519
+        ],
+        "ltable_description__5.1-channel": [
+          0.016873889875666074
+        ],
+        "ltable_description__surround": [
+          0.009769094138543516
+        ],
+        "ltable_description__sound": [
+          0.018058022498519833
+        ],
+        "ltable_description__golf": [
+          0.011249259917110717
+        ],
+        "ltable_description__ball-sized": [
+          0.016873889875666074
+        ],
+        "ltable_description__speakers": [
+          0.010361160449970395
+        ],
+        "ltable_description__compact": [
+          0.009177027827116636
+        ],
+        "ltable_description__design": [
+          0.007104795737122557
+        ],
+        "ltable_description__s-air": [
+          0.012433392539964474
+        ],
+        "ltable_description__digital": [
+          0.01657785671995263
+        ],
+        "ltable_description__wireless": [
+          0.005032563647128478
+        ],
+        "ltable_description__capability": [
+          0.007400828892835997
+        ],
+        "ltable_description__hdmi": [
+          0.012137359384251034
+        ],
+        "ltable_description__connectivity": [
+          0.005920663114268797
+        ],
+        "ltable_description__sync": [
+          0.0038484310242747188
+        ],
+        "ltable_description__cinema": [
+          0.004736530491415038
+        ],
+        "ltable_description__(": [
+          0.016873889875666074
+        ],
+        "ltable_description__dcs": [
+          0.018650088809946713
+        ],
+        "ltable_description__)": [
+          0.009177027827116636
+        ],
+        "ltable_description__technology": [
+          0.008288928359976317
+        ],
+        "ltable_description__s-master": [
+          0.011841326228537594
+        ],
+        "ltable_description__amplifier": [
+          0.005920663114268798
+        ],
+        "ltable_description__portable": [
+          0.007696862048549437
+        ],
+        "ltable_description__audio": [
+          0.009769094138543516
+        ],
+        "ltable_description__enhancer": [
+          0.011545293072824155
+        ],
+        "ltable_description__finish": [
+          0.002664298401420959
+        ],
+        "ltable_price__nan": [
+          0.0
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "sony bravia theater black micro system davis50b",
+          "ltable_description": "sony bravia theater black micro system davis50b 5.1-channel surround sound golf ball-sized speakers compact design s-air digital wireless capability hdmi connectivity bravia sync digital cinema sound pro logic ) technology s-master digital amplifier portable audio enhancer black finish",
+          "ltable_price": "nan",
+          "rtable_name": "sony bravia dav-is50 / b home theater system",
+          "rtable_description": "dvd player , 5.1 speakers 1 disc ( s ) progressive scan 450w rms dolby digital ex , dolby pro logic , dolby pro logic ii",
+          "rtable_price": "nan",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "ltuple": {
+        "ltable_name": "panasonic dect 6.0 expandable digital cordless phone with all-digital answering system kxtg9344t",
+        "ltable_description": "panasonic dect 6.0 expandable digital cordless phone with all-digital answering system kxtg9344t 4 handsets system up to 6 multi-handset capability digital answering machine system ringer id call waiting caller id voicemail hold voice menu marker message mute clock alarm led lighting night mode call block speakerphone 11 days standby 5 hours talk time black metallic finish",
+        "ltable_price": "139.0"
+      },
+      "rtuple": {
+        "rtable_name": "panasonic kx-tg9342t cordless phone",
+        "rtable_description": "1 x phone line ( s ) black , metallic",
+        "rtable_price": "nan"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name__panasonic": [
+          0.0
+        ],
+        "ltable_name__dect": [
+          0.0
+        ],
+        "ltable_name__6.0": [
+          0.0
+        ],
+        "ltable_name__expandable": [
+          0.0
+        ],
+        "ltable_name__digital": [
+          0.0
+        ],
+        "ltable_name__cordless": [
+          0.0
+        ],
+        "ltable_name__phone": [
+          0.0
+        ],
+        "ltable_name__with": [
+          0.0
+        ],
+        "ltable_name__all-digital": [
+          0.0
+        ],
+        "ltable_name__answering": [
+          0.0
+        ],
+        "ltable_name__system": [
+          0.0
+        ],
+        "ltable_name__kxtg9344t": [
+          0.0
+        ],
+        "ltable_description__panasonic": [
+          0.0
+        ],
+        "ltable_description__dect": [
+          0.0
+        ],
+        "ltable_description__6.0": [
+          0.0
+        ],
+        "ltable_description__expandable": [
+          0.0
+        ],
+        "ltable_description__digital": [
+          0.0
+        ],
+        "ltable_description__cordless": [
+          0.0
+        ],
+        "ltable_description__phone": [
+          0.0
+        ],
+        "ltable_description__with": [
+          0.0
+        ],
+        "ltable_description__all-digital": [
+          0.0
+        ],
+        "ltable_description__answering": [
+          0.0
+        ],
+        "ltable_description__system": [
+          0.0
+        ],
+        "ltable_description__kxtg9344t": [
+          0.0
+        ],
+        "ltable_description__4": [
+          0.0
+        ],
+        "ltable_description__handsets": [
+          0.0
+        ],
+        "ltable_description__up": [
+          0.0
+        ],
+        "ltable_description__to": [
+          0.0
+        ],
+        "ltable_description__6": [
+          0.0
+        ],
+        "ltable_description__multi-handset": [
+          0.0
+        ],
+        "ltable_description__capability": [
+          0.0
+        ],
+        "ltable_description__machine": [
+          0.0
+        ],
+        "ltable_description__ringer": [
+          0.0
+        ],
+        "ltable_description__id": [
+          0.0
+        ],
+        "ltable_description__call": [
+          0.0
+        ],
+        "ltable_description__waiting": [
+          0.0
+        ],
+        "ltable_description__caller": [
+          0.0
+        ],
+        "ltable_description__voicemail": [
+          0.0
+        ],
+        "ltable_description__hold": [
+          0.0
+        ],
+        "ltable_description__voice": [
+          0.0
+        ],
+        "ltable_description__menu": [
+          0.0
+        ],
+        "ltable_description__marker": [
+          0.0
+        ],
+        "ltable_description__message": [
+          0.0
+        ],
+        "ltable_description__mute": [
+          0.0
+        ],
+        "ltable_description__clock": [
+          0.0
+        ],
+        "ltable_description__alarm": [
+          0.0
+        ],
+        "ltable_description__led": [
+          0.0
+        ],
+        "ltable_description__lighting": [
+          0.0
+        ],
+        "ltable_description__night": [
+          0.0
+        ],
+        "ltable_description__mode": [
+          0.0
+        ],
+        "ltable_description__block": [
+          0.0
+        ],
+        "ltable_description__speakerphone": [
+          0.0
+        ],
+        "ltable_description__11": [
+          0.0
+        ],
+        "ltable_description__days": [
+          0.0
+        ],
+        "ltable_description__standby": [
+          0.0
+        ],
+        "ltable_description__5": [
+          0.0
+        ],
+        "ltable_description__hours": [
+          0.0
+        ],
+        "ltable_description__talk": [
+          0.0
+        ],
+        "ltable_description__time": [
+          0.0
+        ],
+        "ltable_description__black": [
+          0.0
+        ],
+        "ltable_description__metallic": [
+          0.0
+        ],
+        "ltable_description__finish": [
+          0.0
+        ],
+        "ltable_price__139.0": [
+          0.0
+        ],
+        "rtable_name__panasonic": [
+          0.0
+        ],
+        "rtable_name__kx-tg9342t": [
+          0.0
+        ],
+        "rtable_name__cordless": [
+          0.0
+        ],
+        "rtable_name__phone": [
+          0.0
+        ],
+        "rtable_description__1": [
+          0.0
+        ],
+        "rtable_description__x": [
+          0.0
+        ],
+        "rtable_description__phone": [
+          0.0
+        ],
+        "rtable_description__line": [
+          0.0
+        ],
+        "rtable_description__(": [
+          0.0
+        ],
+        "rtable_description__s": [
+          0.0
+        ],
+        "rtable_description__)": [
+          0.0
+        ],
+        "rtable_description__black": [
+          0.0
+        ],
+        "rtable_description__,": [
+          0.0
+        ],
+        "rtable_description__metallic": [
+          0.0
+        ],
+        "rtable_price__nan": [
+          0.0
+        ]
+      },
+      "cfs": [
+        {}
+      ]
+    },
+    {
+      "id": 5,
+      "ltuple": {
+        "ltable_name": "sony cyber-shot black digital camera dsch10b",
+        "ltable_description": "sony dsch10 cyber-shot black digital camera dsch10b 8.1 megapixels 3.0 ' lcd display carl zeiss 10x optical zoom lens 31 mb internal memory versatile flash advanced sports mode 9-point auto focus high sensitivity mode burst mode face detection in-camera retouching super steadyshot optical image stabilization with anti-blur solution music slideshow hdtv compatibility stamina battery power beginner-friendly function guide black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "sony handycam dcr-sr85 digital camcorder dcrsr85",
+        "rtable_description": "16:9 2.7 ' hybrid lcd",
+        "rtable_price": "375.8"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "rtable_name__sony": [
+          0.0
+        ],
+        "rtable_name__handycam": [
+          0.1111111111111111
+        ],
+        "rtable_name__dcr-sr85": [
+          0.1111111111111111
+        ],
+        "rtable_name__digital": [
+          0.1111111111111111
+        ],
+        "rtable_name__camcorder": [
+          0.1111111111111111
+        ],
+        "rtable_name__dcrsr85": [
+          0.1111111111111111
+        ],
+        "rtable_description__16:9": [
+          0.0
+        ],
+        "rtable_description__2.7": [
+          0.0
+        ],
+        "rtable_description__'": [
+          0.0
+        ],
+        "rtable_description__hybrid": [
+          0.0
+        ],
+        "rtable_description__lcd": [
+          0.0
+        ],
+        "rtable_price__375.8": [
+          0.0
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "sony cyber-shot black digital camera dsch10b",
+          "ltable_description": "sony dsch10 cyber-shot black digital camera dsch10b 8.1 megapixels 3.0 ' lcd display carl zeiss 10x optical zoom lens 31 mb internal memory versatile flash advanced sports mode 9-point auto focus high sensitivity mode burst mode face detection in-camera retouching super steadyshot optical image stabilization with anti-blur solution music slideshow hdtv compatibility stamina battery power beginner-friendly function guide black finish",
+          "ltable_price": "nan",
+          "rtable_name": "sony cyber-shot black digital camera dsch10b",
+          "rtable_description": "16:9 2.7 ' hybrid lcd",
+          "rtable_price": "375.8",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "ltuple": {
+        "ltable_name": "olympus black 10 megapixels digital camera sp565uz",
+        "ltable_description": "olympus black 10 megapixels digital camera sp565uz dual image stabilization 10 megapixels 20x wide-angle zoom lens pre-capture face detection 33 shooting modes 48mb internal memory black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "olympus ps-bls1 lithium ion digital camera battery 260236",
+        "rtable_description": "lithium ion ( li-ion ) photo battery",
+        "rtable_price": "nan"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name__olympus": [
+          0.5
+        ],
+        "ltable_name__black": [
+          0.5
+        ],
+        "ltable_name__10": [
+          0.5
+        ],
+        "ltable_name__megapixels": [
+          0.5
+        ],
+        "ltable_name__digital": [
+          0.5
+        ],
+        "ltable_name__camera": [
+          0.5
+        ],
+        "ltable_name__sp565uz": [
+          0.5
+        ],
+        "ltable_description__olympus": [
+          0.0
+        ],
+        "ltable_description__black": [
+          0.0
+        ],
+        "ltable_description__10": [
+          0.0
+        ],
+        "ltable_description__megapixels": [
+          0.0
+        ],
+        "ltable_description__digital": [
+          0.0
+        ],
+        "ltable_description__camera": [
+          0.0
+        ],
+        "ltable_description__sp565uz": [
+          0.0
+        ],
+        "ltable_description__dual": [
+          0.0
+        ],
+        "ltable_description__image": [
+          0.0
+        ],
+        "ltable_description__stabilization": [
+          0.0
+        ],
+        "ltable_description__20x": [
+          0.0
+        ],
+        "ltable_description__wide-angle": [
+          0.0
+        ],
+        "ltable_description__zoom": [
+          0.0
+        ],
+        "ltable_description__lens": [
+          0.0
+        ],
+        "ltable_description__pre-capture": [
+          0.0
+        ],
+        "ltable_description__face": [
+          0.0
+        ],
+        "ltable_description__detection": [
+          0.0
+        ],
+        "ltable_description__33": [
+          0.0
+        ],
+        "ltable_description__shooting": [
+          0.0
+        ],
+        "ltable_description__modes": [
+          0.0
+        ],
+        "ltable_description__48mb": [
+          0.0
+        ],
+        "ltable_description__internal": [
+          0.0
+        ],
+        "ltable_description__memory": [
+          0.0
+        ],
+        "ltable_description__finish": [
+          0.0
+        ],
+        "ltable_price__nan": [
+          0.0
+        ],
+        "rtable_name__olympus": [
+          0.0
+        ],
+        "rtable_name__ps-bls1": [
+          0.0
+        ],
+        "rtable_name__lithium": [
+          0.0
+        ],
+        "rtable_name__ion": [
+          0.0
+        ],
+        "rtable_name__digital": [
+          0.0
+        ],
+        "rtable_name__camera": [
+          0.0
+        ],
+        "rtable_name__battery": [
+          0.0
+        ],
+        "rtable_name__260236": [
+          0.0
+        ],
+        "rtable_description__lithium": [
+          0.0
+        ],
+        "rtable_description__ion": [
+          0.0
+        ],
+        "rtable_description__(": [
+          0.0
+        ],
+        "rtable_description__li-ion": [
+          0.0
+        ],
+        "rtable_description__)": [
+          0.0
+        ],
+        "rtable_description__photo": [
+          0.0
+        ],
+        "rtable_description__battery": [
+          0.0
+        ],
+        "rtable_price__nan": [
+          0.0
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "ps-bls1 lithium ion battery digital camera 260236",
+          "ltable_description": "olympus black 10 megapixels digital camera sp565uz dual image stabilization 10 megapixels 20x wide-angle zoom lens pre-capture face detection 33 shooting modes 48mb internal memory black finish",
+          "ltable_price": "nan",
+          "rtable_name": "olympus ps-bls1 lithium ion digital camera battery 260236",
+          "rtable_description": "lithium ion ( li-ion ) photo battery",
+          "rtable_price": "nan",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "ltuple": {
+        "ltable_name": "canon black rechargeable battery 9612a001",
+        "ltable_description": "canon black rechargeable battery 9612a001 lithium-ion technology compatible with canon digital rebel xt and powershot s series digital cameras also compatible with canon elura series , optura series and zr series camcorders black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "canon canon cb-2lw battery charger 0763b001",
+        "rtable_description": "nan",
+        "rtable_price": "nan"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "rtable_name__linksys": [
+          0.0
+        ],
+        "rtable_name__etherfast": [
+          0.0
+        ],
+        "rtable_name__ezxs88w": [
+          0.0
+        ],
+        "rtable_name__ethernet": [
+          0.0
+        ],
+        "rtable_name__switch": [
+          0.0
+        ],
+        "rtable_description__linksys": [
+          0.0
+        ],
+        "rtable_description__etherfast": [
+          0.0
+        ],
+        "rtable_description__8-port": [
+          0.0
+        ],
+        "rtable_description__10/100": [
+          0.0
+        ],
+        "rtable_description__switch": [
+          0.0
+        ],
+        "rtable_description__(": [
+          0.0
+        ],
+        "rtable_description__new/workgroup": [
+          0.0
+        ],
+        "rtable_description__)": [
+          0.0
+        ],
+        "rtable_price__nan": [
+          0.0
+        ],
+        "ltable_name__canon": [
+          0.0
+        ],
+        "ltable_name__black": [
+          0.0
+        ],
+        "ltable_name__rechargeable": [
+          0.0
+        ],
+        "ltable_name__battery": [
+          0.0
+        ],
+        "ltable_name__9612a001": [
+          0.0
+        ],
+        "ltable_description__canon": [
+          0.0
+        ],
+        "ltable_description__black": [
+          0.0
+        ],
+        "ltable_description__rechargeable": [
+          0.0
+        ],
+        "ltable_description__battery": [
+          0.0
+        ],
+        "ltable_description__9612a001": [
+          0.0
+        ],
+        "ltable_description__lithium-ion": [
+          0.0
+        ],
+        "ltable_description__technology": [
+          0.0
+        ],
+        "ltable_description__compatible": [
+          0.0
+        ],
+        "ltable_description__with": [
+          0.0
+        ],
+        "ltable_description__digital": [
+          0.0
+        ],
+        "ltable_description__rebel": [
+          0.0
+        ],
+        "ltable_description__xt": [
+          0.0
+        ],
+        "ltable_description__and": [
+          0.0
+        ],
+        "ltable_description__powershot": [
+          0.0
+        ],
+        "ltable_description__s": [
+          0.0
+        ],
+        "ltable_description__series": [
+          0.0
+        ],
+        "ltable_description__cameras": [
+          0.0
+        ],
+        "ltable_description__also": [
+          0.0
+        ],
+        "ltable_description__elura": [
+          0.0
+        ],
+        "ltable_description__,": [
+          0.0
+        ],
+        "ltable_description__optura": [
+          0.0
+        ],
+        "ltable_description__zr": [
+          0.0
+        ],
+        "ltable_description__camcorders": [
+          0.0
+        ],
+        "ltable_description__finish": [
+          0.0
+        ],
+        "ltable_price__nan": [
+          0.0
+        ]
+      },
+      "cfs": [
+        {}
+      ]
+    },
+    {
+      "id": 8,
+      "ltuple": {
+        "ltable_name": "canon silver powershot digital camera sd880is",
+        "ltable_description": "canon silver powershot digital camera sd880is 10 megapixel 4x optical zoom optical image stabilizer 3.0 ' purecolor lcd ii digic 4 image processor face detection self-timer red-eye correction 19 shooting modes print/share button silver finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "canon dc310 digital camcorder 2694b001",
+        "rtable_description": "canon dc310 dvd camcorder w / 41x advanced zoom , built-in lens cover , image stabilization , & canon exclusive - digic dv ii",
+        "rtable_price": "289.95"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name__canon": [
+          0.0
+        ],
+        "ltable_name__silver": [
+          0.0
+        ],
+        "ltable_name__powershot": [
+          0.0
+        ],
+        "ltable_name__digital": [
+          0.0
+        ],
+        "ltable_name__camera": [
+          0.0
+        ],
+        "ltable_name__sd880is": [
+          0.0
+        ],
+        "ltable_description__canon": [
+          0.0
+        ],
+        "ltable_description__silver": [
+          0.0
+        ],
+        "ltable_description__powershot": [
+          0.0
+        ],
+        "ltable_description__digital": [
+          0.0
+        ],
+        "ltable_description__camera": [
+          0.0
+        ],
+        "ltable_description__sd880is": [
+          0.0
+        ],
+        "ltable_description__10": [
+          0.0
+        ],
+        "ltable_description__megapixel": [
+          0.0
+        ],
+        "ltable_description__4x": [
+          0.0
+        ],
+        "ltable_description__optical": [
+          0.0
+        ],
+        "ltable_description__zoom": [
+          0.0
+        ],
+        "ltable_description__image": [
+          0.0
+        ],
+        "ltable_description__stabilizer": [
+          0.0
+        ],
+        "ltable_description__3.0": [
+          0.0
+        ],
+        "ltable_description__'": [
+          0.0
+        ],
+        "ltable_description__purecolor": [
+          0.0
+        ],
+        "ltable_description__lcd": [
+          0.0
+        ],
+        "ltable_description__ii": [
+          0.0
+        ],
+        "ltable_description__digic": [
+          0.0
+        ],
+        "ltable_description__4": [
+          0.0
+        ],
+        "ltable_description__processor": [
+          0.0
+        ],
+        "ltable_description__face": [
+          0.0
+        ],
+        "ltable_description__detection": [
+          0.0
+        ],
+        "ltable_description__self-timer": [
+          0.0
+        ],
+        "ltable_description__red-eye": [
+          0.0
+        ],
+        "ltable_description__correction": [
+          0.0
+        ],
+        "ltable_description__19": [
+          0.0
+        ],
+        "ltable_description__shooting": [
+          0.0
+        ],
+        "ltable_description__modes": [
+          0.0
+        ],
+        "ltable_description__print/share": [
+          0.0
+        ],
+        "ltable_description__button": [
+          0.0
+        ],
+        "ltable_description__finish": [
+          0.0
+        ],
+        "ltable_price__nan": [
+          0.0
+        ],
+        "rtable_name__canon": [
+          0.0
+        ],
+        "rtable_name__dc310": [
+          0.0
+        ],
+        "rtable_name__digital": [
+          0.0
+        ],
+        "rtable_name__camcorder": [
+          0.0
+        ],
+        "rtable_name__2694b001": [
+          0.0
+        ],
+        "rtable_description__canon": [
+          0.0
+        ],
+        "rtable_description__dc310": [
+          0.0
+        ],
+        "rtable_description__dvd": [
+          0.0
+        ],
+        "rtable_description__camcorder": [
+          0.0
+        ],
+        "rtable_description__w": [
+          0.0
+        ],
+        "rtable_description__/": [
+          0.0
+        ],
+        "rtable_description__41x": [
+          0.0
+        ],
+        "rtable_description__advanced": [
+          0.0
+        ],
+        "rtable_description__zoom": [
+          0.0
+        ],
+        "rtable_description__,": [
+          0.0
+        ],
+        "rtable_description__built-in": [
+          0.0
+        ],
+        "rtable_description__lens": [
+          0.0
+        ],
+        "rtable_description__cover": [
+          0.0
+        ],
+        "rtable_description__image": [
+          0.0
+        ],
+        "rtable_description__stabilization": [
+          0.0
+        ],
+        "rtable_description__&": [
+          0.0
+        ],
+        "rtable_description__exclusive": [
+          0.0
+        ],
+        "rtable_description__-": [
+          0.0
+        ],
+        "rtable_description__digic": [
+          0.0
+        ],
+        "rtable_description__dv": [
+          0.0
+        ],
+        "rtable_description__ii": [
+          0.0
+        ],
+        "rtable_price__289.95": [
+          0.0
+        ]
+      },
+      "cfs": [
+        {}
+      ]
+    },
+    {
+      "id": 9,
+      "ltuple": {
+        "ltable_name": "audiovox commander mt xm satellite radio receiver xmrvrfm002",
+        "ltable_description": "audiovox commander mt xm satellite radio receiver xmrvrfm002 , dual line display tuneselect feature universal connector scan and jump features full function remote black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "directed electronics sportster 4 sirius satellite radio receiver sp4tk1",
+        "rtable_description": "xs fm transmitter 6 lines lcd",
+        "rtable_price": "169.99"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "rtable_name__directed": [
+          0
+        ],
+        "rtable_name__electronics": [
+          0
+        ],
+        "rtable_name__sportster": [
+          0
+        ],
+        "rtable_name__4": [
+          0
+        ],
+        "rtable_name__sirius": [
+          0
+        ],
+        "rtable_name__satellite": [
+          0
+        ],
+        "rtable_name__radio": [
+          0
+        ],
+        "rtable_name__receiver": [
+          0
+        ],
+        "rtable_name__sp4tk1": [
+          0
+        ],
+        "rtable_description__xs": [
+          0
+        ],
+        "rtable_description__fm": [
+          0
+        ],
+        "rtable_description__transmitter": [
+          0
+        ],
+        "rtable_description__6": [
+          0
+        ],
+        "rtable_description__lines": [
+          0
+        ],
+        "rtable_description__lcd": [
+          0
+        ],
+        "rtable_price__169.99": [
+          0
+        ],
+        "ltable_name__audiovox": [
+          0
+        ],
+        "ltable_name__commander": [
+          0
+        ],
+        "ltable_name__mt": [
+          0
+        ],
+        "ltable_name__xm": [
+          0
+        ],
+        "ltable_name__satellite": [
+          0
+        ],
+        "ltable_name__radio": [
+          0
+        ],
+        "ltable_name__receiver": [
+          0
+        ],
+        "ltable_name__xmrvrfm002": [
+          0
+        ],
+        "ltable_description__audiovox": [
+          0
+        ],
+        "ltable_description__commander": [
+          0
+        ],
+        "ltable_description__mt": [
+          0
+        ],
+        "ltable_description__xm": [
+          0
+        ],
+        "ltable_description__satellite": [
+          0
+        ],
+        "ltable_description__radio": [
+          0
+        ],
+        "ltable_description__receiver": [
+          0
+        ],
+        "ltable_description__xmrvrfm002": [
+          0
+        ],
+        "ltable_description__,": [
+          0
+        ],
+        "ltable_description__dual": [
+          0
+        ],
+        "ltable_description__line": [
+          0
+        ],
+        "ltable_description__display": [
+          0
+        ],
+        "ltable_description__tuneselect": [
+          0
+        ],
+        "ltable_description__feature": [
+          0
+        ],
+        "ltable_description__universal": [
+          0
+        ],
+        "ltable_description__connector": [
+          0
+        ],
+        "ltable_description__scan": [
+          0
+        ],
+        "ltable_description__and": [
+          0
+        ],
+        "ltable_description__jump": [
+          0
+        ],
+        "ltable_description__features": [
+          0
+        ],
+        "ltable_description__full": [
+          0
+        ],
+        "ltable_description__function": [
+          0
+        ],
+        "ltable_description__remote": [
+          0
+        ],
+        "ltable_description__black": [
+          0
+        ],
+        "ltable_description__finish": [
+          0
+        ],
+        "ltable_price__nan": [
+          0
+        ]
+      },
+      "cfs": [
+        {}
+      ]
+    },
+    {
+      "id": 10,
+      "ltuple": {
+        "ltable_name": "olympus black 10 megapixels digital camera sp565uz",
+        "ltable_description": "olympus black 10 megapixels digital camera sp565uz dual image stabilization 10 megapixels 20x wide-angle zoom lens pre-capture face detection 33 shooting modes 48mb internal memory black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "sony cyber-shot dsc-h50 digital camera black dsch50b",
+        "rtable_description": "9.1 megapixel 16:9 2x digital zoom 3 ' active matrix tft color lcd",
+        "rtable_price": "329.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "rtable_name__sony": [
+          0.0
+        ],
+        "rtable_name__cyber-shot": [
+          0.0
+        ],
+        "rtable_name__dsc-h50": [
+          0.0
+        ],
+        "rtable_name__digital": [
+          0.0
+        ],
+        "rtable_name__camera": [
+          0.0
+        ],
+        "rtable_name__black": [
+          0.0
+        ],
+        "rtable_name__dsch50b": [
+          0.0
+        ],
+        "rtable_description__9.1": [
+          0.0
+        ],
+        "rtable_description__megapixel": [
+          0.0
+        ],
+        "rtable_description__16:9": [
+          0.0
+        ],
+        "rtable_description__2x": [
+          0.0
+        ],
+        "rtable_description__digital": [
+          0.0
+        ],
+        "rtable_description__zoom": [
+          0.0
+        ],
+        "rtable_description__3": [
+          0.0
+        ],
+        "rtable_description__'": [
+          0.0
+        ],
+        "rtable_description__active": [
+          0.0
+        ],
+        "rtable_description__matrix": [
+          0.0
+        ],
+        "rtable_description__tft": [
+          0.0
+        ],
+        "rtable_description__color": [
+          0.0
+        ],
+        "rtable_description__lcd": [
+          0.0
+        ],
+        "rtable_price__329.0": [
+          0.0
+        ],
+        "ltable_name__olympus": [
+          0.0
+        ],
+        "ltable_name__black": [
+          0.0
+        ],
+        "ltable_name__10": [
+          0.0
+        ],
+        "ltable_name__megapixels": [
+          0.25
+        ],
+        "ltable_name__digital": [
+          0.25
+        ],
+        "ltable_name__camera": [
+          0.25
+        ],
+        "ltable_name__sp565uz": [
+          0.25
+        ],
+        "ltable_description__olympus": [
+          0.25
+        ],
+        "ltable_description__black": [
+          0.25
+        ],
+        "ltable_description__10": [
+          0.25
+        ],
+        "ltable_description__megapixels": [
+          0.25
+        ],
+        "ltable_description__digital": [
+          0.0
+        ],
+        "ltable_description__camera": [
+          0.0
+        ],
+        "ltable_description__sp565uz": [
+          0.0
+        ],
+        "ltable_description__dual": [
+          0.0
+        ],
+        "ltable_description__image": [
+          0.0
+        ],
+        "ltable_description__stabilization": [
+          0.0
+        ],
+        "ltable_description__20x": [
+          0.0
+        ],
+        "ltable_description__wide-angle": [
+          0.0
+        ],
+        "ltable_description__zoom": [
+          0.0
+        ],
+        "ltable_description__lens": [
+          0.0
+        ],
+        "ltable_description__pre-capture": [
+          0.0
+        ],
+        "ltable_description__face": [
+          0.0
+        ],
+        "ltable_description__detection": [
+          0.0
+        ],
+        "ltable_description__33": [
+          0.0
+        ],
+        "ltable_description__shooting": [
+          0.0
+        ],
+        "ltable_description__modes": [
+          0.0
+        ],
+        "ltable_description__48mb": [
+          0.0
+        ],
+        "ltable_description__internal": [
+          0.0
+        ],
+        "ltable_description__memory": [
+          0.0
+        ],
+        "ltable_description__finish": [
+          0.0
+        ],
+        "ltable_price__nan": [
+          0.0
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "olympus black 10 black digital camera dsch50b",
+          "ltable_description": "9.1 megapixel 16:9 2x digital camera sp565uz dual image stabilization 10 megapixels 20x wide-angle zoom lens pre-capture face detection 33 shooting modes 48mb internal memory black finish",
+          "ltable_price": "nan",
+          "rtable_name": "sony cyber-shot dsc-h50 digital camera black dsch50b",
+          "rtable_description": "9.1 megapixel 16:9 2x digital zoom 3 ' active matrix tft color lcd",
+          "rtable_price": "329.0",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "ltuple": {
+        "ltable_name": "panasonic black expandable digital cordless dect 6.0 phone system kxtg9348t",
+        "ltable_description": "panasonic black expandable digital cordless dect 6.0 phone system kxtg9348t automatic clarity booster 5 hours talk time 11 days standby white backlit lcd 6-step speakerphone volume 1 drop & splash resistant phone 1.9 ghz frequency range night mode black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "panasonic kx-tga670b cordless handset",
+        "rtable_description": "panasonic kx-tga670b additional handset for pankxtg6700b",
+        "rtable_price": "nan"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "rtable_name__panasonic": [
+          0.0
+        ],
+        "rtable_name__kx-tga670b": [
+          0.1111111111111111
+        ],
+        "rtable_name__cordless": [
+          0.1111111111111111
+        ],
+        "rtable_name__handset": [
+          0.1111111111111111
+        ],
+        "rtable_description__panasonic": [
+          0.1111111111111111
+        ],
+        "rtable_description__kx-tga670b": [
+          0.1111111111111111
+        ],
+        "rtable_description__additional": [
+          0.1111111111111111
+        ],
+        "rtable_description__handset": [
+          0.1111111111111111
+        ],
+        "rtable_description__for": [
+          0.1111111111111111
+        ],
+        "rtable_description__pankxtg6700b": [
+          0.1111111111111111
+        ],
+        "rtable_price__nan": [
+          0.0
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "panasonic black expandable digital cordless dect 6.0 phone system kxtg9348t",
+          "ltable_description": "panasonic black expandable digital cordless dect 6.0 phone system kxtg9348t automatic clarity booster 5 hours talk time 11 days standby white backlit lcd 6-step speakerphone volume 1 drop & splash resistant phone 1.9 ghz frequency range night mode black finish",
+          "ltable_price": "nan",
+          "rtable_name": "panasonic phone system kxtg9348t",
+          "rtable_description": "panasonic black expandable digital cordless dect",
+          "rtable_price": "nan",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "ltuple": {
+        "ltable_name": "panasonic dect 6.0 expandable digital cordless phone with all-digital answering system kxtg9342t",
+        "ltable_description": "panasonic dect 6.0 expandable digital cordless phone with all-digital answering system kxtg9342t 2 handsets system up to 6 multi-handset capability digital answering machine system ringer id call waiting caller id voicemail hold voice menu marker message mute clock alarm led lighting night mode call block speakerphone 11 days standby 5 hours talk time black metallic finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "panasonic kx-tg9332t cordless phone",
+        "rtable_description": "1 x phone line ( s ) black , metallic",
+        "rtable_price": "nan"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name__panasonic": [
+          0.09090909090909091
+        ],
+        "ltable_name__dect": [
+          0.09090909090909091
+        ],
+        "ltable_name__6.0": [
+          0.09090909090909091
+        ],
+        "ltable_name__expandable": [
+          0.0
+        ],
+        "ltable_name__digital": [
+          0.0
+        ],
+        "ltable_name__cordless": [
+          0.0
+        ],
+        "ltable_name__phone": [
+          0.0
+        ],
+        "ltable_name__with": [
+          0.0
+        ],
+        "ltable_name__all-digital": [
+          0.0
+        ],
+        "ltable_name__answering": [
+          0.09090909090909091
+        ],
+        "ltable_name__system": [
+          0.18181818181818182
+        ],
+        "ltable_name__kxtg9342t": [
+          0.18181818181818182
+        ],
+        "ltable_description__panasonic": [
+          0.0
+        ],
+        "ltable_description__dect": [
+          0.0
+        ],
+        "ltable_description__6.0": [
+          0.0
+        ],
+        "ltable_description__expandable": [
+          0.0
+        ],
+        "ltable_description__digital": [
+          0.0
+        ],
+        "ltable_description__cordless": [
+          0.0
+        ],
+        "ltable_description__phone": [
+          0.0
+        ],
+        "ltable_description__with": [
+          0.0
+        ],
+        "ltable_description__all-digital": [
+          0.0
+        ],
+        "ltable_description__answering": [
+          0.0
+        ],
+        "ltable_description__system": [
+          0.0
+        ],
+        "ltable_description__kxtg9342t": [
+          0.0
+        ],
+        "ltable_description__2": [
+          0.0
+        ],
+        "ltable_description__handsets": [
+          0.0
+        ],
+        "ltable_description__up": [
+          0.0
+        ],
+        "ltable_description__to": [
+          0.0
+        ],
+        "ltable_description__6": [
+          0.0
+        ],
+        "ltable_description__multi-handset": [
+          0.0
+        ],
+        "ltable_description__capability": [
+          0.0
+        ],
+        "ltable_description__machine": [
+          0.0
+        ],
+        "ltable_description__ringer": [
+          0.0
+        ],
+        "ltable_description__id": [
+          0.0
+        ],
+        "ltable_description__call": [
+          0.0
+        ],
+        "ltable_description__waiting": [
+          0.0
+        ],
+        "ltable_description__caller": [
+          0.0
+        ],
+        "ltable_description__voicemail": [
+          0.0
+        ],
+        "ltable_description__hold": [
+          0.0
+        ],
+        "ltable_description__voice": [
+          0.0
+        ],
+        "ltable_description__menu": [
+          0.0
+        ],
+        "ltable_description__marker": [
+          0.0
+        ],
+        "ltable_description__message": [
+          0.0
+        ],
+        "ltable_description__mute": [
+          0.0
+        ],
+        "ltable_description__clock": [
+          0.0
+        ],
+        "ltable_description__alarm": [
+          0.0
+        ],
+        "ltable_description__led": [
+          0.0
+        ],
+        "ltable_description__lighting": [
+          0.0
+        ],
+        "ltable_description__night": [
+          0.0
+        ],
+        "ltable_description__mode": [
+          0.0
+        ],
+        "ltable_description__block": [
+          0.0
+        ],
+        "ltable_description__speakerphone": [
+          0.0
+        ],
+        "ltable_description__11": [
+          0.0
+        ],
+        "ltable_description__days": [
+          0.0
+        ],
+        "ltable_description__standby": [
+          0.0
+        ],
+        "ltable_description__5": [
+          0.0
+        ],
+        "ltable_description__hours": [
+          0.0
+        ],
+        "ltable_description__talk": [
+          0.0
+        ],
+        "ltable_description__time": [
+          0.0
+        ],
+        "ltable_description__black": [
+          0.0
+        ],
+        "ltable_description__metallic": [
+          0.0
+        ],
+        "ltable_description__finish": [
+          0.0
+        ],
+        "ltable_price__nan": [
+          0.0
+        ],
+        "rtable_name__panasonic": [
+          0.0
+        ],
+        "rtable_name__kx-tg9332t": [
+          0.0
+        ],
+        "rtable_name__cordless": [
+          0.0
+        ],
+        "rtable_name__phone": [
+          0.0
+        ],
+        "rtable_description__1": [
+          0.0
+        ],
+        "rtable_description__x": [
+          0.0
+        ],
+        "rtable_description__phone": [
+          0.0
+        ],
+        "rtable_description__line": [
+          0.0
+        ],
+        "rtable_description__(": [
+          0.0
+        ],
+        "rtable_description__s": [
+          0.0
+        ],
+        "rtable_description__)": [
+          0.0
+        ],
+        "rtable_description__black": [
+          0.0
+        ],
+        "rtable_description__,": [
+          0.0
+        ],
+        "rtable_description__metallic": [
+          0.0
+        ],
+        "rtable_price__nan": [
+          0.0
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "kx-tg9332t cordless phone expandable digital cordless phone with all-digital answering system kxtg9342t",
+          "ltable_description": "panasonic dect 6.0 expandable digital cordless phone with all-digital answering system kxtg9342t 2 handsets system up to 6 multi-handset capability digital answering machine system ringer id call waiting caller id voicemail hold voice menu marker message mute clock alarm led lighting night mode call block speakerphone 11 days standby 5 hours talk time black metallic finish",
+          "ltable_price": "nan",
+          "rtable_name": "panasonic kx-tg9332t cordless phone",
+          "rtable_description": "1 x phone line ( s ) black , metallic",
+          "rtable_price": "nan",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "ltuple": {
+        "ltable_name": "sanus 15 ' 37 ' visionmount full-motion flat panel tv black wall mount mf215b1",
+        "ltable_description": "sanus 15 ' 37 ' visionmount full-motion flat panel tv black wall mount mf215b1 easily conceal hardware easy to install includes two vesa-compatible tv brackets virtual axis 3d black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "sanus visionmount flat panel tv wall mount vmpl3b",
+        "rtable_description": "steel 280 lb",
+        "rtable_price": "144.05"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "rtable_name__sanus": [
+          0
+        ],
+        "rtable_name__visionmount": [
+          0
+        ],
+        "rtable_name__flat": [
+          0
+        ],
+        "rtable_name__panel": [
+          0
+        ],
+        "rtable_name__tv": [
+          0
+        ],
+        "rtable_name__wall": [
+          0
+        ],
+        "rtable_name__mount": [
+          0
+        ],
+        "rtable_name__vmpl3b": [
+          0
+        ],
+        "rtable_description__steel": [
+          0
+        ],
+        "rtable_description__280": [
+          0
+        ],
+        "rtable_description__lb": [
+          0
+        ],
+        "rtable_price__144.05": [
+          0
+        ]
+      },
+      "cfs": [
+        {}
+      ]
+    },
+    {
+      "id": 14,
+      "ltuple": {
+        "ltable_name": "canon deluxe grey leather case 2349b001",
+        "ltable_description": "canon deluxe grey leather case 2349b001 genuine leather case designed for the powershot sd770 is , sd1100 and sd1000 grey finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "nikon digital camera leather case 5811",
+        "rtable_description": "leather black",
+        "rtable_price": "7.99"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "rtable_name__nikon": [
+          0.3333333333333333
+        ],
+        "rtable_name__digital": [
+          0.3333333333333333
+        ],
+        "rtable_name__camera": [
+          0.3333333333333333
+        ],
+        "rtable_name__leather": [
+          0.3333333333333333
+        ],
+        "rtable_name__case": [
+          0.3333333333333333
+        ],
+        "rtable_name__5811": [
+          0.3333333333333333
+        ],
+        "rtable_description__leather": [
+          0.3333333333333333
+        ],
+        "rtable_description__black": [
+          0.0
+        ],
+        "rtable_price__7.99": [
+          0.0
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "canon deluxe grey leather case 2349b001",
+          "ltable_description": "canon deluxe grey leather case 2349b001 genuine leather case designed for the powershot sd770 is , sd1100 and sd1000 grey finish",
+          "ltable_price": "nan",
+          "rtable_name": "canon deluxe grey leather case 2349b001",
+          "rtable_description": "canon black",
+          "rtable_price": "7.99",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ]
+    }
+  ],
+  "total_time": 337.48324704170227,
+  "metrics": {
+    "faithfulness": {
+      "certa(ptse)_azure_openai": 0.0
+    },
+    "counterfactual_metrics": {
+      "certa(ptse)_azure_openai": {
+        "validity": 0.99999999999,
+        "proximity": 0.5999999999940001,
+        "sparsity": 0.8499999999915,
+        "diversity": 0.0
+      }
+    }
+  }
+}

@@ -1,0 +1,964 @@
+{
+  "data": [
+    {
+      "id": 0,
+      "ltuple": {
+        "ltable_name": "sony pink cyber-shot 7.2 megapixel digital camera dscw120p",
+        "ltable_description": "sony pink cyber-shot 7.2 megapixel digital camera dscw120p 7.2 megapixel 4x optical zoom 2.5 ' tft lcd 15 mb internal memory face detection super steadyshot image stabilization smile shutter mode smart zoom pink finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "olympus fe-360 digital camera pink 226540",
+        "rtable_description": "8 megapixel 16:9 3x optical zoom 4x digital zoom 2.5 ' color lcd",
+        "rtable_price": "104.95"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "sony": 0.2,
+        "pink": 0.5,
+        "cyber-shot": 0.2,
+        "7.2": 0.3,
+        "megapixel": 0.3,
+        "digital": 0.2,
+        "camera": 0.2,
+        "dscw120p": 0.2,
+        "4x": 0.1,
+        "optical": 0.1,
+        "zoom": 0.1,
+        "2.5": 0.1,
+        "tft": 0.1,
+        "lcd": 0.1,
+        "15": 0.1,
+        "mb": 0.1,
+        "internal": 0.1,
+        "memory": 0.1,
+        "face": 0.1,
+        "detection": 0.1,
+        "super": 0.1,
+        "steadyshot": 0.1,
+        "image": 0.1,
+        "stabilization": 0.1,
+        "smile": 0.1,
+        "shutter": 0.1,
+        "mode": 0.1,
+        "smart": 0.1,
+        "finish": 0.1,
+        "olympus": 0.2,
+        "fe-360": 0.2,
+        "226540": 0.1,
+        "8": 0.1,
+        "16:9": 0.1,
+        "3x": 0.1,
+        "color": 0.1
+      },
+      "cfs": [
+        {
+          "ltable_name": "olympus pink cyber-shot 7.2 megapixel digital camera dscw120p",
+          "ltable_description": "olympus pink cyber-shot 7.2 megapixel digital camera dscw120p 7.2 megapixel 4x optical zoom 2.5 ' tft lcd 15 mb internal memory face detection super steadyshot image stabilization smile shutter mode smart zoom pink finish",
+          "ltable_price": "nan",
+          "rtable_name": "olympus fe-360 digital camera pink 226540",
+          "rtable_description": "8 megapixel 16:9 3x optical zoom 4x digital zoom 2.5 ' color lcd",
+          "rtable_price": "104.95"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "ltuple": {
+        "ltable_name": "lg 2.0 cu . ft. over-the-range white microwave oven lmvm2085wh",
+        "ltable_description": "lg 2.0 cu . ft. over-the-range white microwave oven lmvm2085wh warming lamp glide & spin sliding tray with turntable sensor cook feature 300 cfm exhaust system horizontal keypad elegant hidden vent wideview window halogen cooktop lighting white finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "maytag 2.0 cu . ft. over-the-range microwave oven",
+        "rtable_description": "nan",
+        "rtable_price": "nan"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "lg": 0.2,
+        "2.0": 0.2,
+        "cu": 0.2,
+        ".": 0.2,
+        "ft": 0.2,
+        "over-the-range": 0.2,
+        "white": 0.2,
+        "microwave": 0.2,
+        "oven": 0.2,
+        "lmvm2085wh": 0.2,
+        "maytag": 0.2,
+        "warming": 0,
+        "lamp": 0,
+        "glide": 0,
+        "&": 0,
+        "spin": 0,
+        "sliding": 0,
+        "tray": 0,
+        "with": 0,
+        "turntable": 0,
+        "sensor": 0,
+        "cook": 0,
+        "feature": 0,
+        "300": 0,
+        "cfm": 0,
+        "exhaust": 0,
+        "system": 0,
+        "horizontal": 0,
+        "keypad": 0,
+        "elegant": 0,
+        "hidden": 0,
+        "vent": 0,
+        "wideview": 0,
+        "window": 0,
+        "halogen": 0,
+        "cooktop": 0,
+        "lighting": 0,
+        "finish": 0,
+        "nan": 0
+      },
+      "cfs": [
+        {
+          "ltable_name": "maytag 2.0 cu . ft. over-the-range white microwave oven",
+          "ltable_description": "nan",
+          "ltable_price": "nan",
+          "rtable_name": "lg 2.0 cu . ft. over-the-range white microwave oven lmvm2085wh",
+          "rtable_description": "lg 2.0 cu . ft. over-the-range white microwave oven lmvm2085wh warming lamp glide & spin sliding tray with turntable sensor cook feature 300 cfm exhaust system horizontal keypad elegant hidden vent wideview window halogen cooktop lighting white finish",
+          "rtable_price": "nan"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "ltuple": {
+        "ltable_name": "panasonic black 8.5 ' portable dvd player dvdls83",
+        "ltable_description": "panasonic black 8.5 ' portable dvd player dvdls83 8.5 ' free style wide screen lcd display 6 hour battery multi format playback dual headphone jacks divx playback car dc adapter included black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "toshiba sd-p71s portable dvd player",
+        "rtable_description": "toshiba sd-p71s 7 ' portable dvd player",
+        "rtable_price": "119.36"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "panasonic": 0.2,
+        "black": 0.2,
+        "8.5": 0.2,
+        "portable": 0.2,
+        "dvd": 0.2,
+        "player": 0.2,
+        "toshiba": 0.2,
+        "7": 0.2
+      },
+      "cfs": [
+        {
+          "ltable_name": "toshiba black 8.5 ' portable dvd player dvdls83",
+          "ltable_description": "toshiba black 8.5 ' portable dvd player dvdls83 8.5 ' free style wide screen lcd display 6 hour battery multi format playback dual headphone jacks divx playback car dc adapter included black finish",
+          "ltable_price": "nan",
+          "rtable_name": "toshiba sd-p71s portable dvd player",
+          "rtable_description": "toshiba sd-p71s 7 ' portable dvd player",
+          "rtable_price": "119.36"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "ltuple": {
+        "ltable_name": "sony bravia theater black micro system davis50b",
+        "ltable_description": "sony bravia theater black micro system davis50b 5.1-channel surround sound golf ball-sized speakers compact design s-air digital wireless capability hdmi connectivity bravia sync digital cinema sound ( dcs ) technology s-master digital amplifier portable audio enhancer black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "sony bravia dav-is50 / b home theater system",
+        "rtable_description": "dvd player , 5.1 speakers 1 disc ( s ) progressive scan 450w rms dolby digital ex , dolby pro logic , dolby pro logic ii",
+        "rtable_price": "nan"
+      },
+      "prediction": 0,
+      "label": 1,
+      "saliency": {
+        "sony": 0.5,
+        "bravia": 0.5,
+        "theater": 0.5,
+        "black": 0.5,
+        "micro": 0.5,
+        "system": 0.5,
+        "davis50b": 1.0,
+        "5.1-channel": 0.5,
+        "surround": 0.5,
+        "sound": 0.5,
+        "golf": 0.1,
+        "ball-sized": 0.1,
+        "speakers": 0.5,
+        "compact": 0.5,
+        "design": 0.5,
+        "s-air": 0.1,
+        "digital": 0.5,
+        "wireless": 0.1,
+        "capability": 0.1,
+        "hdmi": 0.5,
+        "connectivity": 0.5,
+        "sync": 0.1,
+        "cinema": 0.1,
+        "dcs": 0.1,
+        "technology": 0.1,
+        "s-master": 0.1,
+        "amplifier": 0.1,
+        "portable": 0.1,
+        "audio": 0.1,
+        "enhancer": 0.1,
+        "finish": 0.5,
+        "dvd": 0.1,
+        "player": 0.1,
+        "1": 0.1,
+        "disc": 0.1,
+        "(": 0.1,
+        ")": 0.1,
+        "progressive": 0.1,
+        "scan": 0.1,
+        "450w": 0.1,
+        "rms": 0.1,
+        "dolby": 0.5,
+        "ex": 0.1,
+        "pro": 0.1,
+        "logic": 0.1,
+        "ii": 0.1
+      },
+      "cfs": [
+        {
+          "ltable_name": "sony bravia dav-is50 / b home theater system",
+          "ltable_description": "sony bravia theater black micro system davis50b 5.1-channel surround sound golf ball-sized speakers compact design s-air digital wireless capability hdmi connectivity bravia sync digital cinema sound ( dcs ) technology s-master digital amplifier portable audio enhancer black finish",
+          "ltable_price": "nan",
+          "rtable_name": "sony bravia dav-is50 / b home theater system",
+          "rtable_description": "dvd player , 5.1 speakers 1 disc ( s ) progressive scan 450w rms dolby digital ex , dolby pro logic , dolby pro logic ii",
+          "rtable_price": "nan"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "ltuple": {
+        "ltable_name": "panasonic dect 6.0 expandable digital cordless phone with all-digital answering system kxtg9344t",
+        "ltable_description": "panasonic dect 6.0 expandable digital cordless phone with all-digital answering system kxtg9344t 4 handsets system up to 6 multi-handset capability digital answering machine system ringer id call waiting caller id voicemail hold voice menu marker message mute clock alarm led lighting night mode call block speakerphone 11 days standby 5 hours talk time black metallic finish",
+        "ltable_price": "139.0"
+      },
+      "rtuple": {
+        "rtable_name": "panasonic kx-tg9342t cordless phone",
+        "rtable_description": "1 x phone line ( s ) black , metallic",
+        "rtable_price": "nan"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "panasonic": 0.8,
+        "dect": 0.6,
+        "6.0": 0.6,
+        "expandable": 0.4,
+        "digital": 0.6,
+        "cordless": 0.6,
+        "phone": 0.6,
+        "with": 0.2,
+        "all-digital": 0.4,
+        "answering": 0.4,
+        "system": 0.4,
+        "kxtg9344t": 0.4,
+        "4": 0.2,
+        "handsets": 0.2,
+        "up": 0.2,
+        "to": 0.2,
+        "multi-handset": 0.2,
+        "capability": 0.2,
+        "ringer": 0.2,
+        "id": 0.2,
+        "call": 0.2,
+        "waiting": 0.2,
+        "caller": 0.2,
+        "voicemail": 0.2,
+        "hold": 0.2,
+        "voice": 0.2,
+        "menu": 0.2,
+        "marker": 0.2,
+        "message": 0.2,
+        "mute": 0.2,
+        "clock": 0.2,
+        "alarm": 0.2,
+        "led": 0.2,
+        "lighting": 0.2,
+        "night": 0.2,
+        "mode": 0.2,
+        "block": 0.2,
+        "speakerphone": 0.2,
+        "11": 0.2,
+        "days": 0.2,
+        "standby": 0.2,
+        "5": 0.2,
+        "hours": 0.2,
+        "talk": 0.2,
+        "time": 0.2,
+        "black": 0.2,
+        "metallic": 0.2,
+        "finish": 0.2,
+        "1": 0.2,
+        "x": 0.2,
+        "line": 0.2,
+        "(": 0.2,
+        ")": 0.2,
+        ",": 0.2,
+        "nan": 0.2
+      },
+      "cfs": [
+        {
+          "ltable_name": "panasonic kx-tg9342t cordless phone",
+          "ltable_description": "1 x phone line ( s ) black , metallic",
+          "ltable_price": "139.0",
+          "rtable_name": "panasonic dect 6.0 expandable digital cordless phone with all-digital answering system kxtg9344t",
+          "rtable_description": "panasonic dect 6.0 expandable digital cordless phone with all-digital answering system kxtg9344t 4 handsets system up to 6 multi-handset capability digital answering machine system ringer id call waiting caller id voicemail hold voice menu marker message mute clock alarm led lighting night mode call block speakerphone 11 days standby 5 hours talk time black metallic finish",
+          "rtable_price": "nan"
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "ltuple": {
+        "ltable_name": "sony cyber-shot black digital camera dsch10b",
+        "ltable_description": "sony dsch10 cyber-shot black digital camera dsch10b 8.1 megapixels 3.0 ' lcd display carl zeiss 10x optical zoom lens 31 mb internal memory versatile flash advanced sports mode 9-point auto focus high sensitivity mode burst mode face detection in-camera retouching super steadyshot optical image stabilization with anti-blur solution music slideshow hdtv compatibility stamina battery power beginner-friendly function guide black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "sony handycam dcr-sr85 digital camcorder dcrsr85",
+        "rtable_description": "16:9 2.7 ' hybrid lcd",
+        "rtable_price": "375.8"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "sony": 1.0,
+        "digital": 0.8,
+        "camera": 0.8,
+        "dsch10": 0.6,
+        "black": 0.6,
+        "lcd": 0.4,
+        "display": 0.4,
+        "carl": 0.2,
+        "zeiss": 0.2,
+        "10x": 0.2,
+        "optical": 0.2,
+        "zoom": 0.2,
+        "lens": 0.2,
+        "31": 0.2,
+        "mb": 0.2,
+        "internal": 0.2,
+        "memory": 0.2,
+        "versatile": 0.2,
+        "flash": 0.2,
+        "advanced": 0.2,
+        "sports": 0.2,
+        "mode": 0.2,
+        "9": 0.0,
+        "point": 0.2,
+        "auto": 0.2,
+        "focus": 0.2,
+        "high": 0.2,
+        "sensitivity": 0.2,
+        "burst": 0.2,
+        "face": 0.2,
+        "detection": 0.2,
+        "in": 0.2,
+        "retouching": 0.2,
+        "super": 0.2,
+        "steadyshot": 0.2,
+        "image": 0.2,
+        "stabilization": 0.2,
+        "with": 0.2,
+        "anti": 0.2,
+        "blur": 0.2,
+        "solution": 0.2,
+        "music": 0.2,
+        "slideshow": 0.2,
+        "hdtv": 0.2,
+        "compatibility": 0.2,
+        "stamina": 0.2,
+        "battery": 0.2,
+        "power": 0.2,
+        "beginner": 0.2,
+        "friendly": 0.2,
+        "function": 0.2,
+        "guide": 0.2,
+        "finish": 0.2,
+        "handycam": 0.0,
+        "dcr": 0.0,
+        "sr85": 0.0,
+        "16": 0.0,
+        "hybrid": 0.0
+      },
+      "cfs": [
+        {
+          "ltable_name": "sony handycam dcr-sr85 digital camcorder dcrsr85",
+          "ltable_description": "16:9 2.7 ' hybrid lcd",
+          "ltable_price": "375.8",
+          "rtable_name": "sony cyber-shot black digital camera dsch10b",
+          "rtable_description": "sony dsch10 cyber-shot black digital camera dsch10b 8.1 megapixels 3.0 ' lcd display carl zeiss 10x optical zoom lens 31 mb internal memory versatile flash advanced sports mode 9-point auto focus high sensitivity mode burst mode face detection in-camera retouching super steadyshot optical image stabilization with anti-blur solution music slideshow hdtv compatibility stamina battery power beginner-friendly function guide black finish",
+          "rtable_price": "nan"
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "ltuple": {
+        "ltable_name": "olympus black 10 megapixels digital camera sp565uz",
+        "ltable_description": "olympus black 10 megapixels digital camera sp565uz dual image stabilization 10 megapixels 20x wide-angle zoom lens pre-capture face detection 33 shooting modes 48mb internal memory black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "olympus ps-bls1 lithium ion digital camera battery 260236",
+        "rtable_description": "lithium ion ( li-ion ) photo battery",
+        "rtable_price": "nan"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "olympus": 0.0,
+        "black": 0.0,
+        "10": 0.0,
+        "megapixels": 0.0,
+        "digital": 0.0,
+        "camera": 0.0,
+        "sp565uz": 0.0,
+        "dual": 0.0,
+        "image": 0.0,
+        "stabilization": 0.0,
+        "20x": 0.0,
+        "wide": 0.0,
+        "angle": 0.0,
+        "zoom": 0.0,
+        "lens": 0.0,
+        "pre": 0.0,
+        "capture": 0.0,
+        "face": 0.0,
+        "detection": 0.0,
+        "33": 0.0,
+        "shooting": 0.0,
+        "modes": 0.0,
+        "48mb": 0.0,
+        "internal": 0.0,
+        "memory": 0.0,
+        "finish": 0.0,
+        "ps": 0.0,
+        "bls1": 0.0,
+        "lithium": 0.0,
+        "ion": 0.0,
+        "photo": 0.0,
+        "battery": 0.0
+      },
+      "cfs": [
+        {
+          "ltable_name": "olympus ps-bls1 lithium ion digital camera battery 260236",
+          "ltable_description": "lithium ion ( li-ion ) photo battery",
+          "ltable_price": "nan",
+          "rtable_name": "olympus black 10 megapixels digital camera sp565uz",
+          "rtable_description": "olympus black 10 megapixels digital camera sp565uz dual image stabilization 10 megapixels 20x wide-angle zoom lens pre-capture face detection 33 shooting modes 48mb internal memory black finish",
+          "rtable_price": "nan"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "ltuple": {
+        "ltable_name": "canon black rechargeable battery 9612a001",
+        "ltable_description": "canon black rechargeable battery 9612a001 lithium-ion technology compatible with canon digital rebel xt and powershot s series digital cameras also compatible with canon elura series , optura series and zr series camcorders black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "canon canon cb-2lw battery charger 0763b001",
+        "rtable_description": "nan",
+        "rtable_price": "nan"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "canon": 1.0,
+        "black": 0.5,
+        "rechargeable": 0.5,
+        "battery": 0.5,
+        "9612a001": 0.5,
+        "lithium-ion": 0.5,
+        "technology": 0.5,
+        "compatible": 0.5,
+        "with": 0.5,
+        "digital": 0.5,
+        "rebel": 0.5,
+        "xt": 0.5,
+        "and": 0.5,
+        "powershot": 0.5,
+        "s": 0.5,
+        "series": 0.5,
+        "cameras": 0.5,
+        "also": 0.5,
+        "elura": 0.5,
+        "optura": 0.5,
+        "zr": 0.5,
+        "camcorders": 0.5,
+        "finish": 0.5,
+        "cb-2lw": 0.5,
+        "charger": 0.5,
+        "0763b001": 0.5
+      },
+      "cfs": [
+        {
+          "ltable_name": "canon black rechargeable battery 9612a001",
+          "ltable_description": "canon black rechargeable battery 9612a001 lithium-ion technology compatible with canon digital rebel xt and powershot s series digital cameras also compatible with canon elura series , optura series and zr series camcorders black finish",
+          "ltable_price": "nan",
+          "rtable_name": "canon black rechargeable battery 9612a001",
+          "rtable_description": "canon black rechargeable battery 9612a001 lithium-ion technology compatible with canon digital rebel xt and powershot s series digital cameras also compatible with canon elura series , optura series and zr series camcorders black finish",
+          "rtable_price": "nan"
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "ltuple": {
+        "ltable_name": "canon silver powershot digital camera sd880is",
+        "ltable_description": "canon silver powershot digital camera sd880is 10 megapixel 4x optical zoom optical image stabilizer 3.0 ' purecolor lcd ii digic 4 image processor face detection self-timer red-eye correction 19 shooting modes print/share button silver finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "canon dc310 digital camcorder 2694b001",
+        "rtable_description": "canon dc310 dvd camcorder w / 41x advanced zoom , built-in lens cover , image stabilization , & canon exclusive - digic dv ii",
+        "rtable_price": "289.95"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "canon": 1.0,
+        "silver": 0.8,
+        "digital": 0.8,
+        "camera": 0.8,
+        "sd880is": 0.8,
+        "dc310": 0.8,
+        "camcorder": 0.8,
+        "2694b001": 0.8
+      },
+      "cfs": [
+        {
+          "ltable_name": "canon dc310 digital camcorder 2694b001",
+          "ltable_description": "canon dc310 dvd camcorder w / 41x advanced zoom , built-in lens cover , image stabilization , & canon exclusive - digic dv ii",
+          "ltable_price": "289.95",
+          "rtable_name": "canon silver powershot digital camera sd880is",
+          "rtable_description": "canon silver powershot digital camera sd880is 10 megapixel 4x optical zoom optical image stabilizer 3.0 ' purecolor lcd ii digic 4 image processor face detection self-timer red-eye correction 19 shooting modes print/share button silver finish",
+          "rtable_price": "nan"
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "ltuple": {
+        "ltable_name": "audiovox commander mt xm satellite radio receiver xmrvrfm002",
+        "ltable_description": "audiovox commander mt xm satellite radio receiver xmrvrfm002 , dual line display tuneselect feature universal connector scan and jump features full function remote black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "directed electronics sportster 4 sirius satellite radio receiver sp4tk1",
+        "rtable_description": "xs fm transmitter 6 lines lcd",
+        "rtable_price": "169.99"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "audiovox": 0.0,
+        "commander": 0.0,
+        "mt": 0.0,
+        "xm": 0.0,
+        "satellite": 0.0,
+        "radio": 0.0,
+        "receiver": 0.0,
+        "xmrvrfm002": 0.0,
+        "dual": 0.0,
+        "line": 0.0,
+        "display": 0.0,
+        "tuneselect": 0.0,
+        "feature": 0.0,
+        "universal": 0.0,
+        "connector": 0.0,
+        "scan": 0.0,
+        "and": 0.0,
+        "jump": 0.0,
+        "features": 0.0,
+        "full": 0.0,
+        "function": 0.0,
+        "remote": 0.0,
+        "black": 0.0,
+        "finish": 0.0,
+        "directed": 0.0,
+        "electronics": 0.0,
+        "sportster": 0.0,
+        "4": 0.0,
+        "sirius": 0.0,
+        "sp4tk1": 0.0,
+        "xs": 0.0,
+        "fm": 0.0,
+        "transmitter": 0.0,
+        "6": 0.0,
+        "lines": 0.0,
+        "lcd": 0.0,
+        "169.99": 0.0
+      },
+      "cfs": [
+        {
+          "ltable_name": "directed electronics sportster 4 sirius satellite radio receiver sp4tk1",
+          "ltable_description": "xs fm transmitter 6 lines lcd",
+          "ltable_price": "169.99",
+          "rtable_name": "audiovox commander mt xm satellite radio receiver xmrvrfm002",
+          "rtable_description": "audiovox commander mt xm satellite radio receiver xmrvrfm002 , dual line display tuneselect feature universal connector scan and jump features full function remote black finish",
+          "rtable_price": "nan"
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "ltuple": {
+        "ltable_name": "olympus black 10 megapixels digital camera sp565uz",
+        "ltable_description": "olympus black 10 megapixels digital camera sp565uz dual image stabilization 10 megapixels 20x wide-angle zoom lens pre-capture face detection 33 shooting modes 48mb internal memory black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "sony cyber-shot dsc-h50 digital camera black dsch50b",
+        "rtable_description": "9.1 megapixel 16:9 2x digital zoom 3 ' active matrix tft color lcd",
+        "rtable_price": "329.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "olympus": 0.2,
+        "black": 0.3,
+        "10": 0.1,
+        "megapixels": 0.2,
+        "digital": 0.2,
+        "camera": 0.3,
+        "sp565uz": 0.2,
+        "dual": 0.1,
+        "image": 0.1,
+        "stabilization": 0.1,
+        "20x": 0.1,
+        "wide": 0.1,
+        "angle": 0.1,
+        "zoom": 0.1,
+        "lens": 0.1,
+        "pre": 0.1,
+        "capture": 0.1,
+        "face": 0.1,
+        "detection": 0.1,
+        "33": 0.1,
+        "shooting": 0.1,
+        "modes": 0.1,
+        "48mb": 0.1,
+        "internal": 0.1,
+        "memory": 0.1,
+        "finish": 0.1,
+        "sony": 0.2,
+        "cyber": 0.1,
+        "shot": 0.1,
+        "dsc": 0.1,
+        "h50": 0.2,
+        "9.1": 0.1,
+        "megapixel": 0.1,
+        "16": 0.1,
+        "9": 0.1,
+        "2x": 0.1,
+        "3": 0.1,
+        "active": 0.1,
+        "matrix": 0.1,
+        "tft": 0.1,
+        "color": 0.1,
+        "lcd": 0.1,
+        "329.0": 0.1
+      },
+      "cfs": [
+        {
+          "ltable_name": "sony black 10 megapixels digital camera sp565uz",
+          "ltable_description": "sony black 10 megapixels digital camera sp565uz dual image stabilization 10 megapixels 20x wide-angle zoom lens pre-capture face detection 33 shooting modes 48mb internal memory black finish",
+          "ltable_price": "nan",
+          "rtable_name": "sony cyber-shot dsc-h50 digital camera black dsch50b",
+          "rtable_description": "9.1 megapixel 16:9 2x digital zoom 3 ' active matrix tft color lcd",
+          "rtable_price": "329.0"
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "ltuple": {
+        "ltable_name": "panasonic black expandable digital cordless dect 6.0 phone system kxtg9348t",
+        "ltable_description": "panasonic black expandable digital cordless dect 6.0 phone system kxtg9348t automatic clarity booster 5 hours talk time 11 days standby white backlit lcd 6-step speakerphone volume 1 drop & splash resistant phone 1.9 ghz frequency range night mode black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "panasonic kx-tga670b cordless handset",
+        "rtable_description": "panasonic kx-tga670b additional handset for pankxtg6700b",
+        "rtable_price": "nan"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "panasonic": 1.0,
+        "black": 0.8,
+        "expandable": 0.7,
+        "digital": 0.6,
+        "cordless": 0.6,
+        "dect": 0.6,
+        "phone": 0.6,
+        "system": 0.6,
+        "kxtg9348t": 0.6,
+        "automatic": 0.4,
+        "clarity": 0.4,
+        "booster": 0.4,
+        "5": 0.4,
+        "hours": 0.4,
+        "talk": 0.4,
+        "time": 0.4,
+        "11": 0.4,
+        "days": 0.4,
+        "standby": 0.4,
+        "white": 0.4,
+        "backlit": 0.4,
+        "lcd": 0.4,
+        "6": 0.4,
+        "step": 0.4,
+        "speakerphone": 0.4,
+        "volume": 0.4,
+        "1": 0.4,
+        "drop": 0.4,
+        "splash": 0.4,
+        "resistant": 0.4,
+        "1.9": 0.4,
+        "ghz": 0.4,
+        "frequency": 0.4,
+        "range": 0.4,
+        "night": 0.4,
+        "mode": 0.4,
+        "finish": 0.4,
+        "kx-tga670b": 0.2,
+        "additional": 0.2,
+        "handset": 0.2,
+        "for": 0.2,
+        "pankxtg6700b": 0.2
+      },
+      "cfs": [
+        {
+          "ltable_name": "panasonic kx-tga670b cordless handset",
+          "ltable_description": "panasonic kx-tga670b additional handset for pankxtg6700b",
+          "ltable_price": "nan",
+          "rtable_name": "panasonic black expandable digital cordless dect 6.0 phone system kxtg9348t",
+          "rtable_description": "panasonic black expandable digital cordless dect 6.0 phone system kxtg9348t automatic clarity booster 5 hours talk time 11 days standby white backlit lcd 6-step speakerphone volume 1 drop & splash resistant phone 1.9 ghz frequency range night mode black finish",
+          "rtable_price": "nan"
+        }
+      ]
+    },
+    {
+      "id": 12,
+      "ltuple": {
+        "ltable_name": "panasonic dect 6.0 expandable digital cordless phone with all-digital answering system kxtg9342t",
+        "ltable_description": "panasonic dect 6.0 expandable digital cordless phone with all-digital answering system kxtg9342t 2 handsets system up to 6 multi-handset capability digital answering machine system ringer id call waiting caller id voicemail hold voice menu marker message mute clock alarm led lighting night mode call block speakerphone 11 days standby 5 hours talk time black metallic finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "panasonic kx-tg9332t cordless phone",
+        "rtable_description": "1 x phone line ( s ) black , metallic",
+        "rtable_price": "nan"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "panasonic": 1.0,
+        "dect": 0.5,
+        "6.0": 0.5,
+        "expandable": 0.5,
+        "digital": 0.5,
+        "cordless": 0.5,
+        "phone": 0.5,
+        "with": 0.5,
+        "all-digital": 0.5,
+        "answering": 0.5,
+        "system": 0.5,
+        "kxtg9342t": 0.5,
+        "2": 0.5,
+        "handsets": 0.5,
+        "up": 0.5,
+        "to": 0.5,
+        "multi-handset": 0.5,
+        "capability": 0.5,
+        "machine": 0.5,
+        "ringer": 0.5,
+        "id": 0.5,
+        "call": 0.5,
+        "waiting": 0.5,
+        "caller": 0.5,
+        "voicemail": 0.5,
+        "hold": 0.5,
+        "voice": 0.5,
+        "menu": 0.5,
+        "marker": 0.5,
+        "message": 0.5,
+        "mute": 0.5,
+        "clock": 0.5,
+        "alarm": 0.5,
+        "led": 0.5,
+        "lighting": 0.5,
+        "night": 0.5,
+        "mode": 0.5,
+        "block": 0.5,
+        "speakerphone": 0.5,
+        "11": 0.5,
+        "days": 0.5,
+        "standby": 0.5,
+        "5": 0.5,
+        "hours": 0.5,
+        "talk": 0.5,
+        "time": 0.5,
+        "black": 0.5,
+        "metallic": 0.5,
+        "finish": 0.5,
+        "1": 0.5,
+        "x": 0.5,
+        "line": 0.5,
+        "(": 0.5,
+        ")": 0.5
+      },
+      "cfs": [
+        {
+          "ltable_name": "panasonic kx-tg9332t cordless phone",
+          "ltable_description": "1 x phone line ( s ) black , metallic",
+          "ltable_price": "nan",
+          "rtable_name": "panasonic dect 6.0 expandable digital cordless phone with all-digital answering system kxtg9342t",
+          "rtable_description": "panasonic dect 6.0 expandable digital cordless phone with all-digital answering system kxtg9342t 2 handsets system up to 6 multi-handset capability digital answering machine system ringer id call waiting caller id voicemail hold voice menu marker message mute clock alarm led lighting night mode call block speakerphone 11 days standby 5 hours talk time black metallic finish",
+          "rtable_price": "nan"
+        }
+      ]
+    },
+    {
+      "id": 13,
+      "ltuple": {
+        "ltable_name": "sanus 15 ' 37 ' visionmount full-motion flat panel tv black wall mount mf215b1",
+        "ltable_description": "sanus 15 ' 37 ' visionmount full-motion flat panel tv black wall mount mf215b1 easily conceal hardware easy to install includes two vesa-compatible tv brackets virtual axis 3d black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "sanus visionmount flat panel tv wall mount vmpl3b",
+        "rtable_description": "steel 280 lb",
+        "rtable_price": "144.05"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "sanus": 0.2,
+        "15": 0.1,
+        "'": 0.1,
+        "37": 0.1,
+        "visionmount": 0.5,
+        "full": 0.1,
+        "-": 0.1,
+        "motion": 0.1,
+        "flat": 0.1,
+        "panel": 0.1,
+        "tv": 0.1,
+        "black": 0.1,
+        "wall": 0.1,
+        "mount": 0.1,
+        "mf215b1": 0.1,
+        "easily": 0.1,
+        "conceal": 0.1,
+        "hardware": 0.1,
+        "easy": 0.1,
+        "to": 0.1,
+        "install": 0.1,
+        "includes": 0.1,
+        "two": 0.1,
+        "vesa": 0.1,
+        "compatible": 0.1,
+        "brackets": 0.1,
+        "virtual": 0.1,
+        "axis": 0.1,
+        "3d": 0.1,
+        "finish": 0.1,
+        "steel": 0.1,
+        "280": 0.1,
+        "lb": 0.1,
+        "144.05": 0.1
+      },
+      "cfs": [
+        {
+          "ltable_name": "sanus visionmount flat panel tv wall mount vmpl3b",
+          "ltable_description": "steel 280 lb",
+          "ltable_price": "144.05",
+          "rtable_name": "sanus 15 ' 37 ' visionmount full-motion flat panel tv black wall mount mf215b1",
+          "rtable_description": "sanus 15 ' 37 ' visionmount full-motion flat panel tv black wall mount mf215b1 easily conceal hardware easy to install includes two vesa-compatible tv brackets virtual axis 3d black finish",
+          "rtable_price": "nan"
+        }
+      ]
+    },
+    {
+      "id": 14,
+      "ltuple": {
+        "ltable_name": "canon deluxe grey leather case 2349b001",
+        "ltable_description": "canon deluxe grey leather case 2349b001 genuine leather case designed for the powershot sd770 is , sd1100 and sd1000 grey finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "nikon digital camera leather case 5811",
+        "rtable_description": "leather black",
+        "rtable_price": "7.99"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "canon": 0.2,
+        "deluxe": 0.2,
+        "grey": 0.2,
+        "leather": 0.4,
+        "case": 0.4,
+        "2349b001": 0.2,
+        "genuine": 0.2,
+        "designed": 0.2,
+        "for": 0.2,
+        "the": 0.2,
+        "powershot": 0.2,
+        "sd770": 0.2,
+        "is": 0.2,
+        "sd1100": 0.2,
+        "and": 0.2,
+        "sd1000": 0.2,
+        "finish": 0.2,
+        "nikon": 0.2,
+        "digital": 0.2,
+        "camera": 0.4,
+        "5811": 0.2,
+        "black": 0.2,
+        "7.99": 0.2
+      },
+      "cfs": [
+        {
+          "ltable_name": "nikon deluxe grey leather case 2349b001",
+          "ltable_description": "nikon deluxe grey leather case 2349b001 genuine leather case designed for the powershot sd770 is , sd1100 and sd1000 grey finish",
+          "ltable_price": "nan",
+          "rtable_name": "nikon digital camera leather case 5811",
+          "rtable_description": "leather black",
+          "rtable_price": "7.99"
+        }
+      ]
+    }
+  ],
+  "total_time": 0.06862807273864746,
+  "metrics": {
+    "faithfulness": {
+      "ptsew_azure_openai": 0.0
+    },
+    "counterfactual_metrics": {
+      "ptsew_azure_openai": {
+        "validity": 0.7999999999946666,
+        "proximity": 0.8555555555498517,
+        "sparsity": 0.7148148148100495,
+        "diversity": 0.0
+      }
+    }
+  }
+}

@@ -1,0 +1,3528 @@
+{
+  "data": [
+    {
+      "id": 0,
+      "ltuple": {
+        "ltable_name": "citrus",
+        "ltable_addr": "' 6703 melrose ave. '",
+        "ltable_city": "` los angeles '",
+        "ltable_phone": "213/857 -0034",
+        "ltable_res_type": "californian",
+        "ltable_class": "6.0"
+      },
+      "rtuple": {
+        "rtable_name": "` le chardonnay ( los angeles ) '",
+        "rtable_addr": "' 8284 melrose ave. '",
+        "rtable_city": "` los angeles '",
+        "rtable_phone": "213-655-8880",
+        "rtable_res_type": "` french bistro '",
+        "rtable_class": "12.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.5454545454545455
+        ],
+        "ltable_addr": [
+          0.7272727272727272
+        ],
+        "ltable_city": [
+          0.40909090909090917
+        ],
+        "ltable_phone": [
+          0.5000000000000001
+        ],
+        "ltable_res_type": [
+          0.9545454545454543
+        ],
+        "ltable_class": [
+          0.45454545454545464
+        ],
+        "rtable_name": [
+          0.09090909090909091
+        ],
+        "rtable_addr": [
+          0.09090909090909091
+        ],
+        "rtable_city": [
+          0.09090909090909091
+        ],
+        "rtable_phone": [
+          0.09090909090909091
+        ],
+        "rtable_res_type": [
+          0.09090909090909091
+        ],
+        "rtable_class": [
+          0.09090909090909091
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "citrus",
+          "ltable_addr": "' 6703 melrose ave. '",
+          "ltable_city": "` los angeles '",
+          "ltable_phone": "213/857 -0034",
+          "ltable_res_type": "` or 415/982 -3811 asian '",
+          "ltable_class": "6",
+          "rtable_name": "` le chardonnay ( los angeles ) '",
+          "rtable_addr": "' 8284 melrose ave. '",
+          "rtable_city": "` los angeles '",
+          "rtable_phone": "213-655-8880",
+          "rtable_res_type": "` french bistro '",
+          "rtable_class": "12",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 419.7396709918976
+    },
+    {
+      "id": 1,
+      "ltuple": {
+        "ltable_name": "` yujean kang \\ 's gourmet chinese cuisine '",
+        "ltable_addr": "'67 n. raymond ave. '",
+        "ltable_city": "` los angeles '",
+        "ltable_phone": "818/585 -0855",
+        "ltable_res_type": "asian",
+        "ltable_class": "22.0"
+      },
+      "rtuple": {
+        "rtable_name": "` yujean kang \\ 's '",
+        "rtable_addr": "'67 n. raymond ave. '",
+        "rtable_city": "pasadena",
+        "rtable_phone": "818-585-0855",
+        "rtable_res_type": "chinese",
+        "rtable_class": "22.0"
+      },
+      "prediction": 1,
+      "label": 1,
+      "saliency": {
+        "ltable_name": [
+          0.3585434173669468
+        ],
+        "ltable_addr": [
+          0.33893557422969184
+        ],
+        "ltable_city": [
+          0.24649859943977584
+        ],
+        "ltable_phone": [
+          0.35574229691876746
+        ],
+        "ltable_res_type": [
+          0.3165266106442577
+        ],
+        "ltable_class": [
+          0.26610644257703076
+        ],
+        "rtable_name": [
+          0.350140056022409
+        ],
+        "rtable_addr": [
+          0.299719887955182
+        ],
+        "rtable_city": [
+          0.3221288515406162
+        ],
+        "rtable_phone": [
+          0.3389355742296919
+        ],
+        "rtable_res_type": [
+          0.29691876750700275
+        ],
+        "rtable_class": [
+          0.2829131652661064
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "fifty seven '",
+          "ltable_addr": "'57 e. 57th st. '",
+          "ltable_city": "` los angeles '",
+          "ltable_phone": "818/585 -0855",
+          "ltable_res_type": "american",
+          "ltable_class": "22",
+          "rtable_name": "` yujean kang \\ 's '",
+          "rtable_addr": "'67 n. raymond ave. '",
+          "rtable_city": "pasadena",
+          "rtable_phone": "818-585-0855",
+          "rtable_res_type": "chinese",
+          "rtable_class": "22",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 2526.6305119991302
+    },
+    {
+      "id": 2,
+      "ltuple": {
+        "ltable_name": "oritalia",
+        "ltable_addr": "' 1915 fillmore st. '",
+        "ltable_city": "` san francisco '",
+        "ltable_phone": "415/346 -1333",
+        "ltable_res_type": "italian",
+        "ltable_class": "501.0"
+      },
+      "rtuple": {
+        "rtable_name": "` trio cafe '",
+        "rtable_addr": "' 1870 fillmore st. '",
+        "rtable_city": "` san francisco '",
+        "rtable_phone": "415-563-2248",
+        "rtable_res_type": "american",
+        "rtable_class": "749.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.6666666666666667
+        ],
+        "ltable_addr": [
+          0.8888888888888891
+        ],
+        "ltable_city": [
+          1.0000000000000002
+        ],
+        "ltable_phone": [
+          0.4444444444444444
+        ],
+        "ltable_res_type": [
+          0.7777777777777779
+        ],
+        "ltable_class": [
+          0.4444444444444444
+        ],
+        "rtable_name": [
+          0.1111111111111111
+        ],
+        "rtable_addr": [
+          0.1111111111111111
+        ],
+        "rtable_city": [
+          0.1111111111111111
+        ],
+        "rtable_phone": [
+          0.1111111111111111
+        ],
+        "rtable_res_type": [
+          0.1111111111111111
+        ],
+        "rtable_class": [
+          0.1111111111111111
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "indochine",
+          "ltable_addr": "'",
+          "ltable_city": "` new york '",
+          "ltable_phone": "415/346 -1333",
+          "ltable_res_type": "italian",
+          "ltable_class": "501",
+          "rtable_name": "` trio cafe '",
+          "rtable_addr": "' 1870 fillmore st. '",
+          "rtable_city": "` san francisco '",
+          "rtable_phone": "415-563-2248",
+          "rtable_res_type": "american",
+          "rtable_class": "749",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 299.5341520309448
+    },
+    {
+      "id": 3,
+      "ltuple": {
+        "ltable_name": "` jo jo '",
+        "ltable_addr": "' 160 e. 64th st. '",
+        "ltable_city": "` new york '",
+        "ltable_phone": "212/223 -5656",
+        "ltable_res_type": "american",
+        "ltable_class": "38.0"
+      },
+      "rtuple": {
+        "rtable_name": "` jo jo '",
+        "rtable_addr": "' 160 e. 64th st. '",
+        "rtable_city": "` new york city '",
+        "rtable_phone": "212-223-5656",
+        "rtable_res_type": "` french bistro '",
+        "rtable_class": "38.0"
+      },
+      "prediction": 1,
+      "label": 1,
+      "saliency": {
+        "ltable_name": [
+          0.33633633633633625
+        ],
+        "ltable_addr": [
+          0.46546546546546536
+        ],
+        "ltable_city": [
+          0.28528528528528524
+        ],
+        "ltable_phone": [
+          0.33033033033033027
+        ],
+        "ltable_res_type": [
+          0.26426426426426425
+        ],
+        "ltable_class": [
+          0.2552552552552552
+        ],
+        "rtable_name": [
+          0.36336336336336345
+        ],
+        "rtable_addr": [
+          0.3393393393393394
+        ],
+        "rtable_city": [
+          0.26426426426426436
+        ],
+        "rtable_phone": [
+          0.3063063063063064
+        ],
+        "rtable_res_type": [
+          0.2642642642642643
+        ],
+        "rtable_class": [
+          0.2672672672672673
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` jo jo '",
+          "ltable_addr": "'28 1/2 bowery at bayard st. '",
+          "ltable_city": "` new york '",
+          "ltable_phone": "212/349 -0923",
+          "ltable_res_type": "american",
+          "ltable_class": "38",
+          "rtable_name": "` jo jo '",
+          "rtable_addr": "' 160 e. 64th st. '",
+          "rtable_city": "` new york city '",
+          "rtable_phone": "212-223-5656",
+          "rtable_res_type": "` french bistro '",
+          "rtable_class": "38",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 880.4602019786835
+    },
+    {
+      "id": 4,
+      "ltuple": {
+        "ltable_name": "` palace court '",
+        "ltable_addr": "' 3570 las vegas blvd. s '",
+        "ltable_city": "` las vegas '",
+        "ltable_phone": "702/731 -7547",
+        "ltable_res_type": "continental",
+        "ltable_class": "70.0"
+      },
+      "rtuple": {
+        "rtable_name": "` michael \\ 's ( las vegas ) '",
+        "rtable_addr": "' 3595 las vegas blvd. s. '",
+        "rtable_city": "` las vegas '",
+        "rtable_phone": "702-737-7111",
+        "rtable_res_type": "continental",
+        "rtable_class": "664.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.407239819004525
+        ],
+        "ltable_addr": [
+          0.3981900452488689
+        ],
+        "ltable_city": [
+          0.330316742081448
+        ],
+        "ltable_phone": [
+          0.38461538461538475
+        ],
+        "ltable_res_type": [
+          0.32352941176470595
+        ],
+        "ltable_class": [
+          0.38009049773755665
+        ],
+        "rtable_name": [
+          0.21266968325791855
+        ],
+        "rtable_addr": [
+          0.2669683257918552
+        ],
+        "rtable_city": [
+          0.19909502262443435
+        ],
+        "rtable_phone": [
+          0.23981900452488683
+        ],
+        "rtable_res_type": [
+          0.19909502262443435
+        ],
+        "rtable_class": [
+          0.24886877828054293
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` michael \\ 's ( las vegas ) '",
+          "ltable_addr": "' 3595 las vegas blvd. s. '",
+          "ltable_city": "` las vegas '",
+          "ltable_phone": "702/731 -7547",
+          "ltable_res_type": "continental",
+          "ltable_class": "70",
+          "rtable_name": "` michael \\ 's ( las vegas ) '",
+          "rtable_addr": "' 3595 las vegas blvd. s. '",
+          "rtable_city": "` las vegas '",
+          "rtable_phone": "702-737-7111",
+          "rtable_res_type": "continental",
+          "rtable_class": "664",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 606.7681457996368
+    },
+    {
+      "id": 5,
+      "ltuple": {
+        "ltable_name": "` beesley \\ 's of buckhead '",
+        "ltable_addr": "' 260 e. paces ferry road '",
+        "ltable_city": "atlanta",
+        "ltable_phone": "404/264 -1334",
+        "ltable_res_type": "continental",
+        "ltable_class": "384.0"
+      },
+      "rtuple": {
+        "rtable_name": "` hedgerose heights inn the '",
+        "rtable_addr": "' 490 e. paces ferry rd. ne '",
+        "rtable_city": "atlanta",
+        "rtable_phone": "404-233-7673",
+        "rtable_res_type": "continental",
+        "rtable_class": "82.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.3423423423423423
+        ],
+        "ltable_addr": [
+          0.3626126126126125
+        ],
+        "ltable_city": [
+          0.2635135135135135
+        ],
+        "ltable_phone": [
+          0.2792792792792792
+        ],
+        "ltable_res_type": [
+          0.2635135135135135
+        ],
+        "ltable_class": [
+          0.27252252252252246
+        ],
+        "rtable_name": [
+          0.3378378378378377
+        ],
+        "rtable_addr": [
+          0.31531531531531526
+        ],
+        "rtable_city": [
+          0.259009009009009
+        ],
+        "rtable_phone": [
+          0.295045045045045
+        ],
+        "rtable_res_type": [
+          0.259009009009009
+        ],
+        "rtable_class": [
+          0.2995495495495495
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` beesley \\ 's of buckhead '",
+          "ltable_addr": "' 260 e. paces ferry road '",
+          "ltable_city": "atlanta",
+          "ltable_phone": "404/264 -1334",
+          "ltable_res_type": "continental",
+          "ltable_class": "384",
+          "rtable_name": "` beesley \\ 's of buckhead '",
+          "rtable_addr": "' 490 e. paces ferry rd. ne '",
+          "rtable_city": "atlanta",
+          "rtable_phone": "404-233-7673",
+          "rtable_res_type": "continental",
+          "rtable_class": "82",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 561.7969841957092
+    },
+    {
+      "id": 6,
+      "ltuple": {
+        "ltable_name": "` bone \\ 's '",
+        "ltable_addr": "' 3130 piedmont road '",
+        "ltable_city": "atlanta",
+        "ltable_phone": "404/237 -2663",
+        "ltable_res_type": "american",
+        "ltable_class": "76.0"
+      },
+      "rtuple": {
+        "rtable_name": "` joe \\ 's '",
+        "rtable_addr": "' 1023 abbot kinney blvd. '",
+        "rtable_city": "venice",
+        "rtable_phone": "310-399-5811",
+        "rtable_res_type": "` american ( new ) '",
+        "rtable_class": "560.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.4999999999999999
+        ],
+        "ltable_addr": [
+          0.2857142857142857
+        ],
+        "ltable_city": [
+          0.4999999999999999
+        ],
+        "ltable_phone": [
+          0.2857142857142857
+        ],
+        "ltable_res_type": [
+          0.3571428571428571
+        ],
+        "ltable_class": [
+          0.2857142857142857
+        ],
+        "rtable_name": [
+          0.14285714285714285
+        ],
+        "rtable_addr": [
+          0.5714285714285713
+        ],
+        "rtable_city": [
+          0.3571428571428571
+        ],
+        "rtable_phone": [
+          0.4999999999999999
+        ],
+        "rtable_res_type": [
+          0.4285714285714285
+        ],
+        "rtable_class": [
+          0.2857142857142857
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` bone \\ 's '",
+          "ltable_addr": "' 3130 piedmont road '",
+          "ltable_city": "atlanta",
+          "ltable_phone": "404/237 -2663",
+          "ltable_res_type": "american",
+          "ltable_class": "76",
+          "rtable_name": "` joe \\ 's '",
+          "rtable_addr": "'",
+          "rtable_city": "venice",
+          "rtable_phone": "212-677-0606",
+          "rtable_res_type": "` american ( new ) '",
+          "rtable_class": "560",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 392.71932005882263
+    },
+    {
+      "id": 7,
+      "ltuple": {
+        "ltable_name": "` le colonial '",
+        "ltable_addr": "' 8783 beverly blvd. '",
+        "ltable_city": "` los angeles '",
+        "ltable_phone": "310/289 -0660",
+        "ltable_res_type": "asian",
+        "ltable_class": "144.0"
+      },
+      "rtuple": {
+        "rtable_name": "` jan \\ 's family restaurant '",
+        "rtable_addr": "' 8424 beverly blvd. '",
+        "rtable_city": "la",
+        "rtable_phone": "213-651-2866",
+        "rtable_res_type": "` coffee shops '",
+        "rtable_class": "557.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.29683698296836963
+        ],
+        "ltable_addr": [
+          0.29440389294403874
+        ],
+        "ltable_city": [
+          0.2481751824817517
+        ],
+        "ltable_phone": [
+          0.29197080291970784
+        ],
+        "ltable_res_type": [
+          0.26763990267639887
+        ],
+        "ltable_class": [
+          0.2506082725060826
+        ],
+        "rtable_name": [
+          0.3211678832116787
+        ],
+        "rtable_addr": [
+          0.3454987834549878
+        ],
+        "rtable_city": [
+          0.2895377128953771
+        ],
+        "rtable_phone": [
+          0.3479318734793187
+        ],
+        "rtable_res_type": [
+          0.31630170316301703
+        ],
+        "rtable_class": [
+          0.29440389294403896
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` le colonial '",
+          "ltable_addr": "' 8783 beverly blvd. '",
+          "ltable_city": "` los angeles '",
+          "ltable_phone": "310/289 -0660",
+          "ltable_res_type": "asian",
+          "ltable_class": "144",
+          "rtable_name": "` le colonial '",
+          "rtable_addr": "8783 beverly blvd. '",
+          "rtable_city": "la",
+          "rtable_phone": "213-651-2866",
+          "rtable_res_type": "` coffee shops '",
+          "rtable_class": "557",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 1038.5803718566895
+    },
+    {
+      "id": 8,
+      "ltuple": {
+        "ltable_name": "` heera of india '",
+        "ltable_addr": "' 595 piedmont ave. rio shopping mall '",
+        "ltable_city": "atlanta",
+        "ltable_phone": "404/876 -4408",
+        "ltable_res_type": "asian",
+        "ltable_class": "83.0"
+      },
+      "rtuple": {
+        "rtable_name": "` heera of india '",
+        "rtable_addr": "' 595 piedmont ave. '",
+        "rtable_city": "atlanta",
+        "rtable_phone": "404-876-4408",
+        "rtable_res_type": "indian",
+        "rtable_class": "83.0"
+      },
+      "prediction": 1,
+      "label": 1,
+      "saliency": {
+        "ltable_name": [
+          0.4409448818897638
+        ],
+        "ltable_addr": [
+          0.2716535433070866
+        ],
+        "ltable_city": [
+          0.22440944881889763
+        ],
+        "ltable_phone": [
+          0.2992125984251969
+        ],
+        "ltable_res_type": [
+          0.2283464566929134
+        ],
+        "ltable_class": [
+          0.2716535433070867
+        ],
+        "rtable_name": [
+          0.4921259842519687
+        ],
+        "rtable_addr": [
+          0.3385826771653543
+        ],
+        "rtable_city": [
+          0.33858267716535434
+        ],
+        "rtable_phone": [
+          0.389763779527559
+        ],
+        "rtable_res_type": [
+          0.3464566929133857
+        ],
+        "rtable_class": [
+          0.33070866141732286
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` heera of india '",
+          "ltable_addr": "' 595 piedmont ave. rio shopping mall '",
+          "ltable_city": "atlanta",
+          "ltable_phone": "404/876 -4408",
+          "ltable_res_type": "asian",
+          "ltable_class": "83",
+          "rtable_name": "` monte carlo '",
+          "rtable_addr": "' 595 piedmont ave. '",
+          "rtable_city": "atlanta",
+          "rtable_phone": "702-733-4524",
+          "rtable_res_type": "indian",
+          "rtable_class": "665",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 1031.7393791675568
+    },
+    {
+      "id": 9,
+      "ltuple": {
+        "ltable_name": "` dining room ritz-carlton buckhead '",
+        "ltable_addr": "' 3434 peachtree rd. '",
+        "ltable_city": "atlanta",
+        "ltable_phone": "404/237 -2700",
+        "ltable_res_type": "international",
+        "ltable_class": "90.0"
+      },
+      "rtuple": {
+        "rtable_name": "` brookhaven cafe '",
+        "rtable_addr": "' 4274 peachtree rd. '",
+        "rtable_city": "atlanta",
+        "rtable_phone": "404-231-5907",
+        "rtable_res_type": "vegetarian",
+        "rtable_class": "682.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {},
+      "cfs": [
+        {}
+      ],
+      "latency": 264.78002309799194
+    },
+    {
+      "id": 10,
+      "ltuple": {
+        "ltable_name": "bruno",
+        "ltable_addr": "' 240 e. 58th st. '",
+        "ltable_city": "` new york '",
+        "ltable_phone": "212/688 -4190",
+        "ltable_res_type": "italian",
+        "ltable_class": "195.0"
+      },
+      "rtuple": {
+        "rtable_name": "felidia",
+        "rtable_addr": "' 243 e. 58th st. '",
+        "rtable_city": "` new york city '",
+        "rtable_phone": "212-758-1479",
+        "rtable_res_type": "italian",
+        "rtable_class": "33.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.3333333333333333
+        ],
+        "ltable_addr": [
+          0.3333333333333333
+        ],
+        "ltable_city": [
+          0.3333333333333333
+        ],
+        "ltable_phone": [
+          0.3333333333333333
+        ],
+        "ltable_res_type": [
+          0.3333333333333333
+        ],
+        "ltable_class": [
+          0.3333333333333333
+        ],
+        "rtable_name": [
+          0.6666666666666666
+        ],
+        "rtable_addr": [
+          0.6666666666666666
+        ],
+        "rtable_city": [
+          0.6666666666666666
+        ],
+        "rtable_phone": [
+          1.0
+        ],
+        "rtable_res_type": [
+          0.6666666666666666
+        ],
+        "rtable_class": [
+          0.6666666666666666
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "bruno",
+          "ltable_addr": "' 240 e. 58th st. '",
+          "ltable_city": "` new york '",
+          "ltable_phone": "212/688 -4190",
+          "ltable_res_type": "italian",
+          "ltable_class": "195",
+          "rtable_name": "belvedere the '",
+          "rtable_addr": "' 243 e. 58th st. '",
+          "rtable_city": "` beverly hills '",
+          "rtable_phone": "310-788-2306",
+          "rtable_res_type": "italian",
+          "rtable_class": "33",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 260.88094997406006
+    },
+    {
+      "id": 11,
+      "ltuple": {
+        "ltable_name": "` border grill '",
+        "ltable_addr": "' 4th st. '",
+        "ltable_city": "` los angeles '",
+        "ltable_phone": "310/451 -1655",
+        "ltable_res_type": "mexican",
+        "ltable_class": "116.0"
+      },
+      "rtuple": {
+        "rtable_name": "` jackson diner '",
+        "rtable_addr": "' 37-03 74th st. '",
+        "rtable_city": "queens",
+        "rtable_phone": "718-672-1232",
+        "rtable_res_type": "indian",
+        "rtable_class": "616.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.2
+        ],
+        "ltable_addr": [
+          0.6000000000000001
+        ],
+        "ltable_city": [
+          1.0
+        ],
+        "ltable_phone": [
+          1.0
+        ],
+        "ltable_res_type": [
+          0.6000000000000001
+        ],
+        "ltable_class": [
+          0.6000000000000001
+        ],
+        "rtable_name": [
+          0.2
+        ],
+        "rtable_addr": [
+          0.2
+        ],
+        "rtable_city": [
+          0.2
+        ],
+        "rtable_phone": [
+          0.2
+        ],
+        "rtable_res_type": [
+          0.2
+        ],
+        "rtable_class": [
+          0.2
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` border grill '",
+          "ltable_addr": "' 4th st. '",
+          "ltable_city": "` new york '",
+          "ltable_phone": "212/744 -4107",
+          "ltable_res_type": "mexican",
+          "ltable_class": "116",
+          "rtable_name": "` jackson diner '",
+          "rtable_addr": "' 37-03 74th st. '",
+          "rtable_city": "queens",
+          "rtable_phone": "718-672-1232",
+          "rtable_res_type": "indian",
+          "rtable_class": "616",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 346.68991899490356
+    },
+    {
+      "id": 12,
+      "ltuple": {
+        "ltable_name": "` coyote cafe '",
+        "ltable_addr": "' 3799 las vegas blvd. s '",
+        "ltable_city": "` las vegas '",
+        "ltable_phone": "702/891 -7349",
+        "ltable_res_type": "southwestern",
+        "ltable_class": "68.0"
+      },
+      "rtuple": {
+        "rtable_name": "` palace court '",
+        "rtable_addr": "' 3570 las vegas blvd. s. '",
+        "rtable_city": "` las vegas '",
+        "rtable_phone": "702-731-7110",
+        "rtable_res_type": "` french ( new ) '",
+        "rtable_class": "70.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.44838709677419336
+        ],
+        "ltable_addr": [
+          0.43225806451612886
+        ],
+        "ltable_city": [
+          0.37419354838709656
+        ],
+        "ltable_phone": [
+          0.4225806451612901
+        ],
+        "ltable_res_type": [
+          0.4677419354838707
+        ],
+        "ltable_class": [
+          0.3741935483870966
+        ],
+        "rtable_name": [
+          0.3032258064516128
+        ],
+        "rtable_addr": [
+          0.21290322580645163
+        ],
+        "rtable_city": [
+          0.1806451612903226
+        ],
+        "rtable_phone": [
+          0.23225806451612907
+        ],
+        "rtable_res_type": [
+          0.23225806451612907
+        ],
+        "rtable_class": [
+          0.20000000000000004
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` coyote cafe '",
+          "ltable_addr": "' 3799 las vegas blvd. s '",
+          "ltable_city": "` las vegas '",
+          "ltable_phone": "702-731-7110",
+          "ltable_res_type": "` french ( new ) '",
+          "ltable_class": "68",
+          "rtable_name": "` palace court '",
+          "rtable_addr": "' 3570 las vegas blvd. s. '",
+          "rtable_city": "` las vegas '",
+          "rtable_phone": "702-731-7110",
+          "rtable_res_type": "` french ( new ) '",
+          "rtable_class": "70",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 850.8644280433655
+    },
+    {
+      "id": 13,
+      "ltuple": {
+        "ltable_name": "` jack sprat \\ 's grill '",
+        "ltable_addr": "' 10668 w. pico blvd. '",
+        "ltable_city": "` los angeles '",
+        "ltable_phone": "310/837 -6662",
+        "ltable_res_type": "` health food '",
+        "ltable_class": "140.0"
+      },
+      "rtuple": {
+        "rtable_name": "` apple pan the '",
+        "rtable_addr": "' 10801 w. pico blvd. '",
+        "rtable_city": "` west la '",
+        "rtable_phone": "310-475-3585",
+        "rtable_res_type": "american",
+        "rtable_class": "534.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.389010989010989
+        ],
+        "ltable_addr": [
+          0.46373626373626375
+        ],
+        "ltable_city": [
+          0.34945054945054943
+        ],
+        "ltable_phone": [
+          0.46813186813186813
+        ],
+        "ltable_res_type": [
+          0.3472527472527473
+        ],
+        "ltable_class": [
+          0.3758241758241758
+        ],
+        "rtable_name": [
+          0.20000000000000007
+        ],
+        "rtable_addr": [
+          0.21978021978021986
+        ],
+        "rtable_city": [
+          0.16043956043956048
+        ],
+        "rtable_phone": [
+          0.16703296703296708
+        ],
+        "rtable_res_type": [
+          0.15384615384615388
+        ],
+        "rtable_class": [
+          0.1582417582417583
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` jack sprat \\ 's grill '",
+          "ltable_addr": "' 10668 w. pico blvd. '",
+          "ltable_city": "` los angeles '",
+          "ltable_phone": "310-475-3585",
+          "ltable_res_type": "` health food '",
+          "ltable_class": "140",
+          "rtable_name": "` apple pan the '",
+          "rtable_addr": "' 10801 w. pico blvd. '",
+          "rtable_city": "` west la '",
+          "rtable_phone": "310-475-3585",
+          "rtable_res_type": "american",
+          "rtable_class": "534",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 958.2591161727905
+    },
+    {
+      "id": 14,
+      "ltuple": {
+        "ltable_name": "` circus circus '",
+        "ltable_addr": "' 2880 las vegas blvd. s '",
+        "ltable_city": "` las vegas '",
+        "ltable_phone": "702/734 -0410",
+        "ltable_res_type": "buffets",
+        "ltable_class": "437.0"
+      },
+      "rtuple": {
+        "rtable_name": "` michael \\ 's ( las vegas ) '",
+        "rtable_addr": "' 3595 las vegas blvd. s. '",
+        "rtable_city": "` las vegas '",
+        "rtable_phone": "702-737-7111",
+        "rtable_res_type": "continental",
+        "rtable_class": "664.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.2761394101876677
+        ],
+        "ltable_addr": [
+          0.23324396782841833
+        ],
+        "ltable_city": [
+          0.21447721179624674
+        ],
+        "ltable_phone": [
+          0.24932975871313684
+        ],
+        "ltable_res_type": [
+          0.23324396782841833
+        ],
+        "ltable_class": [
+          0.222520107238606
+        ],
+        "rtable_name": [
+          0.43431635388739964
+        ],
+        "rtable_addr": [
+          0.35924932975871327
+        ],
+        "rtable_city": [
+          0.30563002680965157
+        ],
+        "rtable_phone": [
+          0.38337801608579103
+        ],
+        "rtable_res_type": [
+          0.351206434316354
+        ],
+        "rtable_class": [
+          0.319034852546917
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` circus circus '",
+          "ltable_addr": "' 2880 las vegas blvd. s '",
+          "ltable_city": "` las vegas '",
+          "ltable_phone": "702/734 -0410",
+          "ltable_res_type": "buffets",
+          "ltable_class": "437",
+          "rtable_name": "` michael \\ 's ( las vegas ) '",
+          "rtable_addr": "' 2880 las vegas blvd. s '",
+          "rtable_city": "` las vegas '",
+          "rtable_phone": "702/734 -0410",
+          "rtable_res_type": "buffets",
+          "rtable_class": "664",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 722.3561358451843
+    },
+    {
+      "id": 15,
+      "ltuple": {
+        "ltable_name": "` le perigord '",
+        "ltable_addr": "' 405 e. 52nd st. '",
+        "ltable_city": "` new york '",
+        "ltable_phone": "212/755 -6244",
+        "ltable_res_type": "french",
+        "ltable_class": "291.0"
+      },
+      "rtuple": {
+        "rtable_name": "` la grenouille '",
+        "rtable_addr": "' 3 e. 52nd st. '",
+        "rtable_city": "` new york city '",
+        "rtable_phone": "212-752-1495",
+        "rtable_res_type": "` french ( classic ) '",
+        "rtable_class": "623.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.4671532846715326
+        ],
+        "ltable_addr": [
+          0.48905109489051074
+        ],
+        "ltable_city": [
+          0.40145985401459844
+        ],
+        "ltable_phone": [
+          0.46715328467153266
+        ],
+        "ltable_res_type": [
+          0.39902676399026754
+        ],
+        "ltable_class": [
+          0.4160583941605838
+        ],
+        "rtable_name": [
+          0.13138686131386854
+        ],
+        "rtable_addr": [
+          0.1751824817518247
+        ],
+        "rtable_city": [
+          0.11678832116788315
+        ],
+        "rtable_phone": [
+          0.13625304136253033
+        ],
+        "rtable_res_type": [
+          0.11435523114355226
+        ],
+        "rtable_class": [
+          0.12408759124087584
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` la grenouille '",
+          "ltable_addr": "' 405 e. 52nd st. '",
+          "ltable_city": "` new york '",
+          "ltable_phone": "212-752-1495",
+          "ltable_res_type": "french",
+          "ltable_class": "291",
+          "rtable_name": "` la grenouille '",
+          "rtable_addr": "' 3 e. 52nd st. '",
+          "rtable_city": "` new york city '",
+          "rtable_phone": "212-752-1495",
+          "rtable_res_type": "` french ( classic ) '",
+          "rtable_class": "623",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 956.0115029811859
+    },
+    {
+      "id": 16,
+      "ltuple": {
+        "ltable_name": "` les celebrites '",
+        "ltable_addr": "' 160 central park s '",
+        "ltable_city": "` new york '",
+        "ltable_phone": "212/484 -5113",
+        "ltable_res_type": "french",
+        "ltable_class": "42.0"
+      },
+      "rtuple": {
+        "rtable_name": "` san domenico '",
+        "rtable_addr": "' 240 central park s. '",
+        "rtable_city": "` new york city '",
+        "rtable_phone": "212-265-5959",
+        "rtable_res_type": "italian",
+        "rtable_class": "57.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.28818443804034577
+        ],
+        "ltable_addr": [
+          0.3832853025936598
+        ],
+        "ltable_city": [
+          0.27089337175792505
+        ],
+        "ltable_phone": [
+          0.30835734870317
+        ],
+        "ltable_res_type": [
+          0.3602305475504321
+        ],
+        "ltable_class": [
+          0.2968299711815562
+        ],
+        "rtable_name": [
+          0.27089337175792505
+        ],
+        "rtable_addr": [
+          0.34582132564841483
+        ],
+        "rtable_city": [
+          0.27089337175792505
+        ],
+        "rtable_phone": [
+          0.334293948126801
+        ],
+        "rtable_res_type": [
+          0.37463976945244937
+        ],
+        "rtable_class": [
+          0.2910662824207492
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` les celebrites '",
+          "ltable_addr": "' 160 central park s '",
+          "ltable_city": "` new york '",
+          "ltable_phone": "212/484 -5113",
+          "ltable_res_type": "french",
+          "ltable_class": "42",
+          "rtable_name": "` san domenico '",
+          "rtable_addr": "' 240 central park s. '",
+          "rtable_city": "` new york city '",
+          "rtable_phone": "212-265-5959",
+          "rtable_res_type": "french",
+          "rtable_class": "42",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 5823.709580898285
+    },
+    {
+      "id": 17,
+      "ltuple": {
+        "ltable_name": "` bugsy \\ 's diner '",
+        "ltable_addr": "' 3555 las vegas blvd. s '",
+        "ltable_city": "` las vegas '",
+        "ltable_phone": "702/733 -3111",
+        "ltable_res_type": "` coffee shops/diners '",
+        "ltable_class": "431.0"
+      },
+      "rtuple": {
+        "rtable_name": "` palace court '",
+        "rtable_addr": "' 3570 las vegas blvd. s. '",
+        "rtable_city": "` las vegas '",
+        "rtable_phone": "702-731-7110",
+        "rtable_res_type": "` french ( new ) '",
+        "rtable_class": "70.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.4281524926686215
+        ],
+        "ltable_addr": [
+          0.36070381231671544
+        ],
+        "ltable_city": [
+          0.3137829912023459
+        ],
+        "ltable_phone": [
+          0.34897360703812297
+        ],
+        "ltable_res_type": [
+          0.42228739002932536
+        ],
+        "ltable_class": [
+          0.3196480938416421
+        ],
+        "rtable_name": [
+          0.34604105571847493
+        ],
+        "rtable_addr": [
+          0.2492668621700879
+        ],
+        "rtable_city": [
+          0.22580645161290316
+        ],
+        "rtable_phone": [
+          0.26686217008797647
+        ],
+        "rtable_res_type": [
+          0.284457478005865
+        ],
+        "rtable_class": [
+          0.24046920821114362
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` palace court '",
+          "ltable_addr": "' 3570 las vegas blvd. s. '",
+          "ltable_city": "` las vegas '",
+          "ltable_phone": "702/733 -3111",
+          "ltable_res_type": "` french ( new",
+          "ltable_class": "431",
+          "rtable_name": "` palace court '",
+          "rtable_addr": "' 3570 las vegas blvd. s. '",
+          "rtable_city": "` las vegas '",
+          "rtable_phone": "702-731-7110",
+          "rtable_res_type": "` french ( new ) '",
+          "rtable_class": "70",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 5142.539672136307
+    },
+    {
+      "id": 18,
+      "ltuple": {
+        "ltable_name": "dive !",
+        "ltable_addr": "' 10250 santa monica blvd. '",
+        "ltable_city": "` los angeles '",
+        "ltable_phone": "310/788 -",
+        "ltable_res_type": "` dive american '",
+        "ltable_class": "128.0"
+      },
+      "rtuple": {
+        "rtable_name": "` palm the ( los angeles ) '",
+        "rtable_addr": "' 9001 santa monica blvd. '",
+        "rtable_city": "` w. hollywood '",
+        "rtable_phone": "310-550-8811",
+        "rtable_res_type": "steakhouses",
+        "rtable_class": "15.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.3324937027707809
+        ],
+        "ltable_addr": [
+          0.4105793450881613
+        ],
+        "ltable_city": [
+          0.32493702770780863
+        ],
+        "ltable_phone": [
+          0.33501259445843834
+        ],
+        "ltable_res_type": [
+          0.3400503778337532
+        ],
+        "ltable_class": [
+          0.3073047858942066
+        ],
+        "rtable_name": [
+          0.2947103274559194
+        ],
+        "rtable_addr": [
+          0.27959697732997474
+        ],
+        "rtable_city": [
+          0.23173803526448364
+        ],
+        "rtable_phone": [
+          0.25188916876574313
+        ],
+        "rtable_res_type": [
+          0.23677581863979852
+        ],
+        "rtable_class": [
+          0.22418136020151133
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "the ( los angeles ) '",
+          "ltable_addr": "' 10250 santa monica blvd. '",
+          "ltable_city": "` w. hollywood '",
+          "ltable_phone": "310-550-8811",
+          "ltable_res_type": "steakhouses",
+          "ltable_class": "15",
+          "rtable_name": "` palm the ( los angeles ) '",
+          "rtable_addr": "' 9001 santa monica blvd. '",
+          "rtable_city": "` w. hollywood '",
+          "rtable_phone": "310-550-8811",
+          "rtable_res_type": "steakhouses",
+          "rtable_class": "15",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 1071.083466053009
+    },
+    {
+      "id": 19,
+      "ltuple": {
+        "ltable_name": "` luna si '",
+        "ltable_addr": "' 1931 peachtree rd. '",
+        "ltable_city": "atlanta",
+        "ltable_phone": "404/355 -5993",
+        "ltable_res_type": "continental",
+        "ltable_class": "405.0"
+      },
+      "rtuple": {
+        "rtable_name": "nava",
+        "rtable_addr": "' 3060 peachtree rd. '",
+        "rtable_city": "atlanta",
+        "rtable_phone": "404-240-1984",
+        "rtable_res_type": "southwestern",
+        "rtable_class": "706.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          1.0
+        ],
+        "ltable_addr": [
+          1.0
+        ],
+        "ltable_city": [
+          0.8
+        ],
+        "ltable_phone": [
+          0.8
+        ],
+        "ltable_res_type": [
+          1.0
+        ],
+        "ltable_class": [
+          1.0
+        ],
+        "rtable_name": [
+          0.6
+        ],
+        "rtable_addr": [
+          0.6
+        ],
+        "rtable_city": [
+          0.6
+        ],
+        "rtable_phone": [
+          0.6
+        ],
+        "rtable_res_type": [
+          0.6
+        ],
+        "rtable_class": [
+          0.6
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` capozzoli \\ 's '",
+          "ltable_addr": "pkwy . '",
+          "ltable_city": "atlanta",
+          "ltable_phone": "702/731 -5311",
+          "ltable_res_type": "italian",
+          "ltable_class": "434",
+          "rtable_name": "nava",
+          "rtable_addr": "' 3060 peachtree rd. '",
+          "rtable_city": "atlanta",
+          "rtable_phone": "404-240-1984",
+          "rtable_res_type": "southwestern",
+          "rtable_class": "706",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 494.57985401153564
+    },
+    {
+      "id": 20,
+      "ltuple": {
+        "ltable_name": "toulouse",
+        "ltable_addr": "' b peachtree rd. '",
+        "ltable_city": "atlanta",
+        "ltable_phone": "404/351 -9533",
+        "ltable_res_type": "french",
+        "ltable_class": "92.0"
+      },
+      "rtuple": {
+        "rtable_name": "` ritz-carlton dining room ( buckhead ) '",
+        "rtable_addr": "' 3434 peachtree rd. ne '",
+        "rtable_city": "atlanta",
+        "rtable_phone": "404-237-2700",
+        "rtable_res_type": "` american ( new ) '",
+        "rtable_class": "90.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {},
+      "cfs": [
+        {}
+      ],
+      "latency": 233.70735907554626
+    },
+    {
+      "id": 21,
+      "ltuple": {
+        "ltable_name": "` ralph \\ 's diner '",
+        "ltable_addr": "' 3000 las vegas blvd. s '",
+        "ltable_city": "` las vegas '",
+        "ltable_phone": "702/732 -6330",
+        "ltable_res_type": "` coffee shops/diners '",
+        "ltable_class": "448.0"
+      },
+      "rtuple": {
+        "rtable_name": "'em eril \\ 's new orleans fish house '",
+        "rtable_addr": "' 3799 las vegas blvd. s. '",
+        "rtable_city": "` las vegas '",
+        "rtable_phone": "702-891-7374",
+        "rtable_res_type": "seafood",
+        "rtable_class": "659.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.38641686182669815
+        ],
+        "ltable_addr": [
+          0.3700234192037473
+        ],
+        "ltable_city": [
+          0.31147540983606575
+        ],
+        "ltable_phone": [
+          0.358313817330211
+        ],
+        "ltable_res_type": [
+          0.3395784543325529
+        ],
+        "ltable_class": [
+          0.3278688524590166
+        ],
+        "rtable_name": [
+          0.3161592505854803
+        ],
+        "rtable_addr": [
+          0.259953161592506
+        ],
+        "rtable_city": [
+          0.20140515222482444
+        ],
+        "rtable_phone": [
+          0.259953161592506
+        ],
+        "rtable_res_type": [
+          0.2224824355971898
+        ],
+        "rtable_class": [
+          0.21311475409836075
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "'em eril \\ 's new orleans fish house '",
+          "ltable_addr": "' 3000 las vegas blvd. s '",
+          "ltable_city": "` las vegas '",
+          "ltable_phone": "702/732 -6330",
+          "ltable_res_type": "` coffee shops/diners '",
+          "ltable_class": "448",
+          "rtable_name": "'em eril \\ 's new orleans fish house '",
+          "rtable_addr": "' 3799 las vegas blvd. s. '",
+          "rtable_city": "` las vegas '",
+          "rtable_phone": "702-891-7374",
+          "rtable_res_type": "seafood",
+          "rtable_class": "659",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 892.18439412117
+    },
+    {
+      "id": 22,
+      "ltuple": {
+        "ltable_name": "` indigo coastal grill '",
+        "ltable_addr": "' 1397 n. highland ave. '",
+        "ltable_city": "atlanta",
+        "ltable_phone": "404/876 -0676",
+        "ltable_res_type": "caribbean",
+        "ltable_class": "84.0"
+      },
+      "rtuple": {
+        "rtable_name": "` indigo coastal grill '",
+        "rtable_addr": "' 1397 n. highland ave. '",
+        "rtable_city": "atlanta",
+        "rtable_phone": "404-876-0676",
+        "rtable_res_type": "eclectic",
+        "rtable_class": "84.0"
+      },
+      "prediction": 1,
+      "label": 1,
+      "saliency": {
+        "ltable_name": [
+          0.2982456140350877
+        ],
+        "ltable_addr": [
+          0.1885964912280702
+        ],
+        "ltable_city": [
+          0.17543859649122806
+        ],
+        "ltable_phone": [
+          0.2675438596491228
+        ],
+        "ltable_res_type": [
+          0.17543859649122806
+        ],
+        "ltable_class": [
+          0.1885964912280702
+        ],
+        "rtable_name": [
+          0.6973684210526313
+        ],
+        "rtable_addr": [
+          0.4122807017543859
+        ],
+        "rtable_city": [
+          0.4780701754385963
+        ],
+        "rtable_phone": [
+          0.42543859649122795
+        ],
+        "rtable_res_type": [
+          0.4122807017543858
+        ],
+        "rtable_class": [
+          0.39035087719298245
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` indigo coastal grill '",
+          "ltable_addr": "' 1397 n. highland ave. '",
+          "ltable_city": "atlanta",
+          "ltable_phone": "404/876 -0676",
+          "ltable_res_type": "caribbean",
+          "ltable_class": "84",
+          "rtable_name": "` khan toke thai house '",
+          "rtable_addr": "' 1397 n. highland ave. '",
+          "rtable_city": "` san francisco '",
+          "rtable_phone": "404-876-0676",
+          "rtable_res_type": "eclectic",
+          "rtable_class": "84",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 3112.5556361675262
+    },
+    {
+      "id": 23,
+      "ltuple": {
+        "ltable_name": "oceana",
+        "ltable_addr": "'55 e. 54th st. '",
+        "ltable_city": "` new york '",
+        "ltable_phone": "212/759 -5941",
+        "ltable_res_type": "seafood",
+        "ltable_class": "50.0"
+      },
+      "rtuple": {
+        "rtable_name": "aquavit",
+        "rtable_addr": "'13 w. 54th st. '",
+        "rtable_city": "` new york city '",
+        "rtable_phone": "212-307-7311",
+        "rtable_res_type": "scandinavian",
+        "rtable_class": "24.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.0625
+        ],
+        "ltable_addr": [
+          0.0625
+        ],
+        "ltable_city": [
+          0.0625
+        ],
+        "ltable_phone": [
+          0.0625
+        ],
+        "ltable_res_type": [
+          0.0625
+        ],
+        "ltable_class": [
+          0.0625
+        ],
+        "rtable_name": [
+          0.375
+        ],
+        "rtable_addr": [
+          0.375
+        ],
+        "rtable_city": [
+          0.75
+        ],
+        "rtable_phone": [
+          0.4375
+        ],
+        "rtable_res_type": [
+          0.625
+        ],
+        "rtable_class": [
+          0.5625
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "oceana",
+          "ltable_addr": "'55 e. 54th st. '",
+          "ltable_city": "` new york '",
+          "ltable_phone": "212/759 -5941",
+          "ltable_res_type": "seafood",
+          "ltable_class": "50",
+          "rtable_name": "aquavit",
+          "rtable_addr": "'13 w. 54th st. '",
+          "rtable_city": "atlanta",
+          "rtable_phone": "212-307-7311",
+          "rtable_res_type": "scandinavian",
+          "rtable_class": "24",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 2447.1595549583435
+    },
+    {
+      "id": 24,
+      "ltuple": {
+        "ltable_name": "abruzzi",
+        "ltable_addr": "' 2355 peachtree rd. . peachtree battle shopping center '",
+        "ltable_city": "atlanta",
+        "ltable_phone": "404/261 -8186",
+        "ltable_res_type": "italian",
+        "ltable_class": "74.0"
+      },
+      "rtuple": {
+        "rtable_name": "abruzzi",
+        "rtable_addr": "' 2355 peachtree rd. ne '",
+        "rtable_city": "atlanta",
+        "rtable_phone": "404-261-8186",
+        "rtable_res_type": "italian",
+        "rtable_class": "74.0"
+      },
+      "prediction": 1,
+      "label": 1,
+      "saliency": {
+        "ltable_name": [
+          0.4666666666666668
+        ],
+        "ltable_addr": [
+          0.4627450980392158
+        ],
+        "ltable_city": [
+          0.3568627450980393
+        ],
+        "ltable_phone": [
+          0.44313725490196076
+        ],
+        "ltable_res_type": [
+          0.45490196078431366
+        ],
+        "ltable_class": [
+          0.3686274509803922
+        ],
+        "rtable_name": [
+          0.2941176470588236
+        ],
+        "rtable_addr": [
+          0.2588235294117647
+        ],
+        "rtable_city": [
+          0.23137254901960785
+        ],
+        "rtable_phone": [
+          0.28235294117647064
+        ],
+        "rtable_res_type": [
+          0.28627450980392166
+        ],
+        "rtable_class": [
+          0.24705882352941183
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "diva",
+          "ltable_addr": "' 341 w. broadway near grand st. '",
+          "ltable_city": "atlanta",
+          "ltable_phone": "212/941",
+          "ltable_res_type": "italian",
+          "ltable_class": "227",
+          "rtable_name": "abruzzi",
+          "rtable_addr": "' 2355 peachtree rd. ne '",
+          "rtable_city": "atlanta",
+          "rtable_phone": "404-261-8186",
+          "rtable_res_type": "italian",
+          "rtable_class": "74",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 9718.006290197372
+    },
+    {
+      "id": 25,
+      "ltuple": {
+        "ltable_name": "` mandarin court '",
+        "ltable_addr": "' 1510 e. flamingo rd. '",
+        "ltable_city": "` las vegas '",
+        "ltable_phone": "702/737 -1234",
+        "ltable_res_type": "asian",
+        "ltable_class": "443.0"
+      },
+      "rtuple": {
+        "rtable_name": "` fiore rotisserie & grille '",
+        "rtable_addr": "' 3700 w. flamingo rd. '",
+        "rtable_city": "` las vegas '",
+        "rtable_phone": "702-252-7702",
+        "rtable_res_type": "italian",
+        "rtable_class": "660.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.3842975206611573
+        ],
+        "ltable_addr": [
+          0.33057851239669445
+        ],
+        "ltable_city": [
+          0.2727272727272729
+        ],
+        "ltable_phone": [
+          0.34710743801652916
+        ],
+        "ltable_res_type": [
+          0.34710743801652905
+        ],
+        "ltable_class": [
+          0.2892561983471076
+        ],
+        "rtable_name": [
+          0.35950413223140504
+        ],
+        "rtable_addr": [
+          0.4049586776859505
+        ],
+        "rtable_city": [
+          0.2603305785123967
+        ],
+        "rtable_phone": [
+          0.30578512396694213
+        ],
+        "rtable_res_type": [
+          0.4628099173553719
+        ],
+        "rtable_class": [
+          0.2851239669421487
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` mandarin court '",
+          "ltable_addr": "' 1510 e. flamingo rd. '",
+          "ltable_city": "` las vegas '",
+          "ltable_phone": "702/737 -1234",
+          "ltable_res_type": "asian",
+          "ltable_class": "443",
+          "rtable_name": "mandarin court '",
+          "rtable_addr": "' 1510 e. flamingo rd. '",
+          "rtable_city": "` las vegas '",
+          "rtable_phone": "702-252-7702",
+          "rtable_res_type": "asian",
+          "rtable_class": "443",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 4040.3779990673065
+    },
+    {
+      "id": 26,
+      "ltuple": {
+        "ltable_name": "oceana",
+        "ltable_addr": "'55 e. 54th st. '",
+        "ltable_city": "` new york '",
+        "ltable_phone": "212/759 -5941",
+        "ltable_res_type": "seafood",
+        "ltable_class": "50.0"
+      },
+      "rtuple": {
+        "rtable_name": "` shun lee palace '",
+        "rtable_addr": "' 155 e. 55th st. '",
+        "rtable_city": "` new york city '",
+        "rtable_phone": "212-371-8844",
+        "rtable_res_type": "chinese",
+        "rtable_class": "60.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.375
+        ],
+        "ltable_addr": [
+          0.375
+        ],
+        "ltable_city": [
+          0.375
+        ],
+        "ltable_phone": [
+          0.375
+        ],
+        "ltable_res_type": [
+          0.375
+        ],
+        "ltable_class": [
+          0.25
+        ],
+        "rtable_name": [
+          0.375
+        ],
+        "rtable_addr": [
+          0.875
+        ],
+        "rtable_city": [
+          0.75
+        ],
+        "rtable_phone": [
+          0.625
+        ],
+        "rtable_res_type": [
+          0.5
+        ],
+        "rtable_class": [
+          0.75
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "oceana",
+          "ltable_addr": "'55 e. 54th st. '",
+          "ltable_city": "` new york '",
+          "ltable_phone": "212/759 -5941",
+          "ltable_res_type": "seafood",
+          "ltable_class": "50",
+          "rtable_name": "` shun lee palace '",
+          "rtable_addr": "'",
+          "rtable_city": "atlanta",
+          "rtable_phone": "212-371-8844",
+          "rtable_res_type": "chinese",
+          "rtable_class": "714",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 1370.8304340839386
+    },
+    {
+      "id": 27,
+      "ltuple": {
+        "ltable_name": "` steak house '",
+        "ltable_addr": "' 2880 las vegas blvd. s '",
+        "ltable_city": "` las vegas '",
+        "ltable_phone": "702/734 -0410",
+        "ltable_res_type": "` steak houses '",
+        "ltable_class": "72.0"
+      },
+      "rtuple": {
+        "rtable_name": "` palace court '",
+        "rtable_addr": "' 3570 las vegas blvd. s. '",
+        "rtable_city": "` las vegas '",
+        "rtable_phone": "702-731-7110",
+        "rtable_res_type": "` french ( new ) '",
+        "rtable_class": "70.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.48618784530386755
+        ],
+        "ltable_addr": [
+          0.5248618784530388
+        ],
+        "ltable_city": [
+          0.39226519337016585
+        ],
+        "ltable_phone": [
+          0.48895027624309406
+        ],
+        "ltable_res_type": [
+          0.5359116022099449
+        ],
+        "ltable_class": [
+          0.4116022099447515
+        ],
+        "rtable_name": [
+          0.19889502762430947
+        ],
+        "rtable_addr": [
+          0.16850828729281772
+        ],
+        "rtable_city": [
+          0.12430939226519341
+        ],
+        "rtable_phone": [
+          0.1491712707182321
+        ],
+        "rtable_res_type": [
+          0.1878453038674034
+        ],
+        "rtable_class": [
+          0.12707182320441993
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` steak house '",
+          "ltable_addr": "' 3570 las vegas blvd. s. '",
+          "ltable_city": "` las vegas '",
+          "ltable_phone": "702/734 -0410",
+          "ltable_res_type": "` french ( new ) '",
+          "ltable_class": "72",
+          "rtable_name": "` palace court '",
+          "rtable_addr": "' 3570 las vegas blvd. s. '",
+          "rtable_city": "` las vegas '",
+          "rtable_phone": "702-731-7110",
+          "rtable_res_type": "` french ( new ) '",
+          "rtable_class": "70",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 741.9996540546417
+    },
+    {
+      "id": 28,
+      "ltuple": {
+        "ltable_name": "bistro",
+        "ltable_addr": "' 3400 las vegas blvd. s '",
+        "ltable_city": "` las vegas '",
+        "ltable_phone": "702/791 -7111",
+        "ltable_res_type": "continental",
+        "ltable_class": "429.0"
+      },
+      "rtuple": {
+        "rtable_name": "` chin \\ 's '",
+        "rtable_addr": "' 3200 las vegas blvd. s. '",
+        "rtable_city": "` las vegas '",
+        "rtable_phone": "702-733-8899",
+        "rtable_res_type": "chinese",
+        "rtable_class": "67.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.4131147540983607
+        ],
+        "ltable_addr": [
+          0.3672131147540984
+        ],
+        "ltable_city": [
+          0.32459016393442625
+        ],
+        "ltable_phone": [
+          0.3639344262295082
+        ],
+        "ltable_res_type": [
+          0.4
+        ],
+        "ltable_class": [
+          0.35409836065573774
+        ],
+        "rtable_name": [
+          0.23278688524590155
+        ],
+        "rtable_addr": [
+          0.2885245901639343
+        ],
+        "rtable_city": [
+          0.21639344262295074
+        ],
+        "rtable_phone": [
+          0.2655737704918032
+        ],
+        "rtable_res_type": [
+          0.28524590163934416
+        ],
+        "rtable_class": [
+          0.22622950819672122
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` chin",
+          "ltable_addr": "' 3400 las vegas blvd. s '",
+          "ltable_city": "` las vegas '",
+          "ltable_phone": "702/791 -7111",
+          "ltable_res_type": "chinese",
+          "ltable_class": "67",
+          "rtable_name": "` chin \\ 's '",
+          "rtable_addr": "' 3200 las vegas blvd. s. '",
+          "rtable_city": "` las vegas '",
+          "rtable_phone": "702-733-8899",
+          "rtable_res_type": "chinese",
+          "rtable_class": "67",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 963.7770209312439
+    },
+    {
+      "id": 29,
+      "ltuple": {
+        "ltable_name": "` bugsy \\ 's diner '",
+        "ltable_addr": "' 3555 las vegas blvd. s '",
+        "ltable_city": "` las vegas '",
+        "ltable_phone": "702/733 -3111",
+        "ltable_res_type": "` coffee shops/diners '",
+        "ltable_class": "431.0"
+      },
+      "rtuple": {
+        "rtable_name": "` madame ching \\ 's '",
+        "rtable_addr": "' 3300 las vegas blvd. s. '",
+        "rtable_city": "` las vegas '",
+        "rtable_phone": "702-894-7111",
+        "rtable_res_type": "asian",
+        "rtable_class": "662.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.28
+        ],
+        "ltable_addr": [
+          0.2738461538461539
+        ],
+        "ltable_city": [
+          0.23076923076923087
+        ],
+        "ltable_phone": [
+          0.29846153846153844
+        ],
+        "ltable_res_type": [
+          0.2615384615384616
+        ],
+        "ltable_class": [
+          0.24923076923076934
+        ],
+        "rtable_name": [
+          0.4276923076923078
+        ],
+        "rtable_addr": [
+          0.36307692307692324
+        ],
+        "rtable_city": [
+          0.31076923076923085
+        ],
+        "rtable_phone": [
+          0.3907692307692309
+        ],
+        "rtable_res_type": [
+          0.4000000000000002
+        ],
+        "rtable_class": [
+          0.33846153846153854
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` bugsy \\ 's diner '",
+          "ltable_addr": "' 3555 las vegas blvd. s '",
+          "ltable_city": "` las vegas '",
+          "ltable_phone": "702/733 -3111",
+          "ltable_res_type": "` coffee shops/diners '",
+          "ltable_class": "431",
+          "rtable_name": "` bugsy \\ 's diner '",
+          "rtable_addr": "3555 las vegas blvd. s '",
+          "rtable_city": "` las vegas '",
+          "rtable_phone": "702/733 -3111",
+          "rtable_res_type": "` coffee shops/diners '",
+          "rtable_class": "662",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 773.8678522109985
+    },
+    {
+      "id": 30,
+      "ltuple": {
+        "ltable_name": "` cafe roma '",
+        "ltable_addr": "' 3570 las vegas blvd. s '",
+        "ltable_city": "` las vegas '",
+        "ltable_phone": "702/731 -7547",
+        "ltable_res_type": "` coffee shops/diners '",
+        "ltable_class": "433.0"
+      },
+      "rtuple": {
+        "rtable_name": "` buccaneer bay club '",
+        "rtable_addr": "' 3300 las vegas blvd. s. '",
+        "rtable_city": "` las vegas '",
+        "rtable_phone": "702-894-7350",
+        "rtable_res_type": "continental",
+        "rtable_class": "657.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.52
+        ],
+        "ltable_addr": [
+          0.5142857142857143
+        ],
+        "ltable_city": [
+          0.3714285714285715
+        ],
+        "ltable_phone": [
+          0.41428571428571426
+        ],
+        "ltable_res_type": [
+          0.3828571428571429
+        ],
+        "ltable_class": [
+          0.38857142857142857
+        ],
+        "rtable_name": [
+          0.2285714285714286
+        ],
+        "rtable_addr": [
+          0.19142857142857142
+        ],
+        "rtable_city": [
+          0.1542857142857143
+        ],
+        "rtable_phone": [
+          0.20285714285714285
+        ],
+        "rtable_res_type": [
+          0.16857142857142857
+        ],
+        "rtable_class": [
+          0.15714285714285714
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` buccaneer bay club '",
+          "ltable_addr": "las vegas blvd. s. '",
+          "ltable_city": "` las vegas '",
+          "ltable_phone": "702/731 -7547",
+          "ltable_res_type": "continental",
+          "ltable_class": "433",
+          "rtable_name": "` buccaneer bay club '",
+          "rtable_addr": "' 3300 las vegas blvd. s. '",
+          "rtable_city": "` las vegas '",
+          "rtable_phone": "702-894-7350",
+          "rtable_res_type": "continental",
+          "rtable_class": "657",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 974.4438509941101
+    },
+    {
+      "id": 31,
+      "ltuple": {
+        "ltable_name": "` lillie langtry \\ 's '",
+        "ltable_addr": "' 129 e. fremont st. '",
+        "ltable_city": "` las vegas '",
+        "ltable_phone": "702/385 -7111",
+        "ltable_res_type": "asian",
+        "ltable_class": "442.0"
+      },
+      "rtuple": {
+        "rtable_name": "` second street grill '",
+        "rtable_addr": "' 200 e. fremont st. '",
+        "rtable_city": "` las vegas '",
+        "rtable_phone": "702-385-6277",
+        "rtable_res_type": "` pacific rim '",
+        "rtable_class": "71.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.3545232273838631
+        ],
+        "ltable_addr": [
+          0.3985330073349634
+        ],
+        "ltable_city": [
+          0.31784841075794623
+        ],
+        "ltable_phone": [
+          0.3814180929095355
+        ],
+        "ltable_res_type": [
+          0.33007334963325186
+        ],
+        "ltable_class": [
+          0.34718826405867975
+        ],
+        "rtable_name": [
+          0.2909535452322737
+        ],
+        "rtable_addr": [
+          0.2860635696821515
+        ],
+        "rtable_city": [
+          0.21026894865525672
+        ],
+        "rtable_phone": [
+          0.2273838630806845
+        ],
+        "rtable_res_type": [
+          0.2102689486552567
+        ],
+        "rtable_class": [
+          0.22738386308068456
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` lillie langtry \\ 's '",
+          "ltable_addr": "' 200 e. fremont st. '",
+          "ltable_city": "las vegas '",
+          "ltable_phone": "702/385 -7111",
+          "ltable_res_type": "` pacific rim '",
+          "ltable_class": "71",
+          "rtable_name": "` second street grill '",
+          "rtable_addr": "' 200 e. fremont st. '",
+          "rtable_city": "` las vegas '",
+          "rtable_phone": "702-385-6277",
+          "rtable_res_type": "` pacific rim '",
+          "rtable_class": "71",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 909.3830449581146
+    },
+    {
+      "id": 32,
+      "ltuple": {
+        "ltable_name": "palisades",
+        "ltable_addr": "' 1829 peachtree rd. '",
+        "ltable_city": "atlanta",
+        "ltable_phone": "404/350 -6755",
+        "ltable_res_type": "continental",
+        "ltable_class": "410.0"
+      },
+      "rtuple": {
+        "rtable_name": "` brasserie le coze '",
+        "rtable_addr": "' 3393 peachtree rd. '",
+        "rtable_city": "atlanta",
+        "rtable_phone": "404-266-1440",
+        "rtable_res_type": "` french bistro '",
+        "rtable_class": "77.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.25
+        ],
+        "ltable_addr": [
+          0.25
+        ],
+        "ltable_city": [
+          0.25
+        ],
+        "ltable_phone": [
+          0.25
+        ],
+        "ltable_res_type": [
+          0.25
+        ],
+        "ltable_class": [
+          0.25
+        ],
+        "rtable_name": [
+          1.0
+        ],
+        "rtable_addr": [
+          1.0
+        ],
+        "rtable_city": [
+          0.625
+        ],
+        "rtable_phone": [
+          0.5
+        ],
+        "rtable_res_type": [
+          0.5
+        ],
+        "rtable_class": [
+          0.625
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "palisades",
+          "ltable_addr": "' 1829 peachtree rd. '",
+          "ltable_city": "atlanta",
+          "ltable_phone": "404/350 -6755",
+          "ltable_res_type": "continental",
+          "ltable_class": "410",
+          "rtable_name": "'",
+          "rtable_addr": "' 107th fl . '",
+          "rtable_city": "atlanta",
+          "rtable_phone": "404-266-1440",
+          "rtable_res_type": "` french bistro '",
+          "rtable_class": "77",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 438.67360186576843
+    },
+    {
+      "id": 34,
+      "ltuple": {
+        "ltable_name": "` schatzi on main '",
+        "ltable_addr": "' 3110 main st. '",
+        "ltable_city": "` los angeles '",
+        "ltable_phone": "310/399 -4800",
+        "ltable_res_type": "continental",
+        "ltable_class": "162.0"
+      },
+      "rtuple": {
+        "rtable_name": "` chinois on main '",
+        "rtable_addr": "' 2709 main st. '",
+        "rtable_city": "` santa monica '",
+        "rtable_phone": "310-392-9025",
+        "rtable_res_type": "` pacific new wave '",
+        "rtable_class": "5.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.38364779874213834
+        ],
+        "ltable_addr": [
+          0.29245283018867924
+        ],
+        "ltable_city": [
+          0.2672955974842767
+        ],
+        "ltable_phone": [
+          0.2830188679245283
+        ],
+        "ltable_res_type": [
+          0.23899371069182387
+        ],
+        "ltable_class": [
+          0.25471698113207547
+        ],
+        "rtable_name": [
+          0.440251572327044
+        ],
+        "rtable_addr": [
+          0.3270440251572327
+        ],
+        "rtable_city": [
+          0.34591194968553457
+        ],
+        "rtable_phone": [
+          0.38679245283018865
+        ],
+        "rtable_res_type": [
+          0.3081761006289308
+        ],
+        "rtable_class": [
+          0.2893081761006289
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` schatzi on main '",
+          "ltable_addr": "' 3110 main st. '",
+          "ltable_city": "` los angeles '",
+          "ltable_phone": "310/399 -4800",
+          "ltable_res_type": "continental",
+          "ltable_class": "162",
+          "rtable_name": "` schatzi on main '",
+          "rtable_addr": "' 2709 main st. '",
+          "rtable_city": "` santa monica '",
+          "rtable_phone": "310/399 -4800",
+          "rtable_res_type": "continental",
+          "rtable_class": "162",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 1312.4397439956665
+    },
+    {
+      "id": 35,
+      "ltuple": {
+        "ltable_name": "` island spice '",
+        "ltable_addr": "' 402 w. 44th st. '",
+        "ltable_city": "` new york '",
+        "ltable_phone": "212/765 -1737",
+        "ltable_res_type": "` tel caribbean '",
+        "ltable_class": "37.0"
+      },
+      "rtuple": {
+        "rtable_name": "` island spice '",
+        "rtable_addr": "' 402 w. 44th st. '",
+        "rtable_city": "` new york city '",
+        "rtable_phone": "212-765-1737",
+        "rtable_res_type": "caribbean",
+        "rtable_class": "37.0"
+      },
+      "prediction": 1,
+      "label": 1,
+      "saliency": {
+        "ltable_name": [
+          0.482051282051282
+        ],
+        "ltable_addr": [
+          0.3999999999999999
+        ],
+        "ltable_city": [
+          0.28717948717948716
+        ],
+        "ltable_phone": [
+          0.3743589743589743
+        ],
+        "ltable_res_type": [
+          0.3641025641025641
+        ],
+        "ltable_class": [
+          0.28717948717948716
+        ],
+        "rtable_name": [
+          0.4102564102564103
+        ],
+        "rtable_addr": [
+          0.3282051282051282
+        ],
+        "rtable_city": [
+          0.30769230769230765
+        ],
+        "rtable_phone": [
+          0.31794871794871793
+        ],
+        "rtable_res_type": [
+          0.3384615384615385
+        ],
+        "rtable_class": [
+          0.28717948717948716
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "zarzuela",
+          "ltable_addr": "' 2000 hyde st. '",
+          "ltable_city": "` new york '",
+          "ltable_phone": "415/346 -0800",
+          "ltable_res_type": "` tel caribbean '",
+          "ltable_class": "531",
+          "rtable_name": "` island spice '",
+          "rtable_addr": "' 402 w. 44th st. '",
+          "rtable_city": "` new york city '",
+          "rtable_phone": "212-765-1737",
+          "rtable_res_type": "caribbean",
+          "rtable_class": "37",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 984.8523919582367
+    },
+    {
+      "id": 36,
+      "ltuple": {
+        "ltable_name": "` le dome '",
+        "ltable_addr": "' 8720 sunset blvd. '",
+        "ltable_city": "` los angeles '",
+        "ltable_phone": "310/659 -6919",
+        "ltable_res_type": "french",
+        "ltable_class": "145.0"
+      },
+      "rtuple": {
+        "rtable_name": "` spago ( los angeles ) '",
+        "rtable_addr": "' 8795 sunset blvd. '",
+        "rtable_city": "` w. hollywood '",
+        "rtable_phone": "310-652-4025",
+        "rtable_res_type": "californian",
+        "rtable_class": "20.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.5141065830721002
+        ],
+        "ltable_addr": [
+          0.4890282131661441
+        ],
+        "ltable_city": [
+          0.44200626959247635
+        ],
+        "ltable_phone": [
+          0.48589341692789956
+        ],
+        "ltable_res_type": [
+          0.4388714733542318
+        ],
+        "ltable_class": [
+          0.4169278996865202
+        ],
+        "rtable_name": [
+          0.1786833855799373
+        ],
+        "rtable_addr": [
+          0.18181818181818185
+        ],
+        "rtable_city": [
+          0.15360501567398122
+        ],
+        "rtable_phone": [
+          0.17241379310344832
+        ],
+        "rtable_res_type": [
+          0.17241379310344832
+        ],
+        "rtable_class": [
+          0.16614420062695928
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` spago ( los angeles ) '",
+          "ltable_addr": "' 8795",
+          "ltable_city": "` w. hollywood '",
+          "ltable_phone": "310/659 -6919",
+          "ltable_res_type": "californian",
+          "ltable_class": "145",
+          "rtable_name": "` spago ( los angeles ) '",
+          "rtable_addr": "' 8795 sunset blvd. '",
+          "rtable_city": "` w. hollywood '",
+          "rtable_phone": "310-652-4025",
+          "rtable_res_type": "californian",
+          "rtable_class": "20",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 1390.4246377944946
+    },
+    {
+      "id": 37,
+      "ltuple": {
+        "ltable_name": "` mambo restaurante cubano '",
+        "ltable_addr": "' 1402 n. highland ave. '",
+        "ltable_city": "atlanta",
+        "ltable_phone": "404/874 -2626",
+        "ltable_res_type": "caribbean",
+        "ltable_class": "406.0"
+      },
+      "rtuple": {
+        "rtable_name": "` uncle bill \\ 's pancake house '",
+        "rtable_addr": "' 1305 highland ave. '",
+        "rtable_city": "` manhattan beach '",
+        "rtable_phone": "310-545-5177",
+        "rtable_res_type": "diners",
+        "rtable_class": "599.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.47448979591836754
+        ],
+        "ltable_addr": [
+          0.4234693877551022
+        ],
+        "ltable_city": [
+          0.43367346938775525
+        ],
+        "ltable_phone": [
+          0.4795918367346941
+        ],
+        "ltable_res_type": [
+          0.3877551020408164
+        ],
+        "ltable_class": [
+          0.37755102040816335
+        ],
+        "rtable_name": [
+          0.3571428571428572
+        ],
+        "rtable_addr": [
+          0.20408163265306123
+        ],
+        "rtable_city": [
+          0.2653061224489796
+        ],
+        "rtable_phone": [
+          0.24489795918367346
+        ],
+        "rtable_res_type": [
+          0.20408163265306123
+        ],
+        "rtable_class": [
+          0.18877551020408162
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` mambo restaurante cubano '",
+          "ltable_addr": "' 1402 n. highland ave. '",
+          "ltable_city": "atlanta",
+          "ltable_phone": "404/874 -2626",
+          "ltable_res_type": "caribbean",
+          "ltable_class": "406",
+          "rtable_name": "restaurante cubano '",
+          "rtable_addr": "' 1305 highland ave. '",
+          "rtable_city": "atlanta",
+          "rtable_phone": "404/874 -2626",
+          "rtable_res_type": "caribbean",
+          "rtable_class": "599",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 1447.941040277481
+    },
+    {
+      "id": 38,
+      "ltuple": {
+        "ltable_name": "` hedgerose heights inn '",
+        "ltable_addr": "' 490 e. paces ferry rd. '",
+        "ltable_city": "atlanta",
+        "ltable_phone": "404/233 -7673",
+        "ltable_res_type": "international",
+        "ltable_class": "82.0"
+      },
+      "rtuple": {
+        "rtable_name": "' 103 west '",
+        "rtable_addr": "' 103 w. paces ferry rd. '",
+        "rtable_city": "atlanta",
+        "rtable_phone": "404-233-5993",
+        "rtable_res_type": "continental",
+        "rtable_class": "675.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {},
+      "cfs": [
+        {}
+      ],
+      "latency": 358.9254472255707
+    },
+    {
+      "id": 39,
+      "ltuple": {
+        "ltable_name": "joss",
+        "ltable_addr": "' 9255 sunset blvd. '",
+        "ltable_city": "` los angeles '",
+        "ltable_phone": "310/276 -1886",
+        "ltable_res_type": "asian",
+        "ltable_class": "143.0"
+      },
+      "rtuple": {
+        "rtable_name": "` fenix at the argyle '",
+        "rtable_addr": "' 8358 sunset blvd. '",
+        "rtable_city": "` w. hollywood '",
+        "rtable_phone": "213-848-6677",
+        "rtable_res_type": "` french ( new ) '",
+        "rtable_class": "7.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {},
+      "cfs": [
+        {}
+      ],
+      "latency": 249.667494058609
+    },
+    {
+      "id": 40,
+      "ltuple": {
+        "ltable_name": "manora",
+        "ltable_addr": "' 3226 mission st. '",
+        "ltable_city": "` san francisco '",
+        "ltable_phone": "415/861 -6224",
+        "ltable_res_type": "asian",
+        "ltable_class": "494.0"
+      },
+      "rtuple": {
+        "rtable_name": "` dusit thai '",
+        "rtable_addr": "' 3221 mission st. '",
+        "rtable_city": "` san francisco '",
+        "rtable_phone": "415-826-4639",
+        "rtable_res_type": "thai",
+        "rtable_class": "728.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {},
+      "cfs": [
+        {}
+      ],
+      "latency": 255.70511198043823
+    },
+    {
+      "id": 41,
+      "ltuple": {
+        "ltable_name": "bistro",
+        "ltable_addr": "' 3400 las vegas blvd. s '",
+        "ltable_city": "` las vegas '",
+        "ltable_phone": "702/791 -7111",
+        "ltable_res_type": "continental",
+        "ltable_class": "429.0"
+      },
+      "rtuple": {
+        "rtable_name": "` monte carlo '",
+        "rtable_addr": "' 3145 las vegas blvd. s. '",
+        "rtable_city": "` las vegas '",
+        "rtable_phone": "702-733-4524",
+        "rtable_res_type": "` french ( new ) '",
+        "rtable_class": "665.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.3252525252525254
+        ],
+        "ltable_addr": [
+          0.3252525252525254
+        ],
+        "ltable_city": [
+          0.29292929292929304
+        ],
+        "ltable_phone": [
+          0.3151515151515153
+        ],
+        "ltable_res_type": [
+          0.3252525252525254
+        ],
+        "ltable_class": [
+          0.3010101010101011
+        ],
+        "rtable_name": [
+          0.25454545454545446
+        ],
+        "rtable_addr": [
+          0.2686868686868686
+        ],
+        "rtable_city": [
+          0.2282828282828282
+        ],
+        "rtable_phone": [
+          0.2707070707070706
+        ],
+        "rtable_res_type": [
+          0.2383838383838383
+        ],
+        "rtable_class": [
+          0.2383838383838383
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "bistro",
+          "ltable_addr": "' 3400 las vegas blvd. s '",
+          "ltable_city": "` las vegas '",
+          "ltable_phone": "702-733-4524",
+          "ltable_res_type": "continental",
+          "ltable_class": "665",
+          "rtable_name": "` monte carlo '",
+          "rtable_addr": "' 3145 las vegas blvd. s. '",
+          "rtable_city": "` las vegas '",
+          "rtable_phone": "702-733-4524",
+          "rtable_res_type": "` french ( new ) '",
+          "rtable_class": "665",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 911.3413608074188
+    },
+    {
+      "id": 42,
+      "ltuple": {
+        "ltable_name": "` le colonial '",
+        "ltable_addr": "' 8783 beverly blvd. '",
+        "ltable_city": "` los angeles '",
+        "ltable_phone": "310/289 -0660",
+        "ltable_res_type": "asian",
+        "ltable_class": "144.0"
+      },
+      "rtuple": {
+        "rtable_name": "` koo koo roo '",
+        "rtable_addr": "' 8393 w. beverly blvd. '",
+        "rtable_city": "la",
+        "rtable_phone": "213-655-9045",
+        "rtable_res_type": "chicken",
+        "rtable_class": "567.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {},
+      "cfs": [
+        {}
+      ],
+      "latency": 241.96653008460999
+    },
+    {
+      "id": 43,
+      "ltuple": {
+        "ltable_name": "` ca \\ ` brea '",
+        "ltable_addr": "' 346 s. la brea ave. '",
+        "ltable_city": "` los angeles '",
+        "ltable_phone": "213/938 -2863",
+        "ltable_res_type": "italian",
+        "ltable_class": "118.0"
+      },
+      "rtuple": {
+        "rtable_name": "` pink \\ 's famous chili dogs '",
+        "rtable_addr": "' 709 n. la brea ave. '",
+        "rtable_city": "la",
+        "rtable_phone": "213-931-4223",
+        "rtable_res_type": "` hot dogs '",
+        "rtable_class": "586.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.3795180722891565
+        ],
+        "ltable_addr": [
+          0.39457831325301196
+        ],
+        "ltable_city": [
+          0.34337349397590355
+        ],
+        "ltable_phone": [
+          0.3885542168674698
+        ],
+        "ltable_res_type": [
+          0.3373493975903614
+        ],
+        "ltable_class": [
+          0.3463855421686746
+        ],
+        "rtable_name": [
+          0.23795180722891568
+        ],
+        "rtable_addr": [
+          0.29518072289156627
+        ],
+        "rtable_city": [
+          0.19879518072289162
+        ],
+        "rtable_phone": [
+          0.22289156626506026
+        ],
+        "rtable_res_type": [
+          0.1987951807228916
+        ],
+        "rtable_class": [
+          0.1957831325301205
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` pink \\ 's famous chili dogs '",
+          "ltable_addr": "' 709 n. la brea",
+          "ltable_city": "la",
+          "ltable_phone": "213/938 -2863",
+          "ltable_res_type": "italian",
+          "ltable_class": "586",
+          "rtable_name": "` pink \\ 's famous chili dogs '",
+          "rtable_addr": "' 709 n. la brea ave. '",
+          "rtable_city": "la",
+          "rtable_phone": "213-931-4223",
+          "rtable_res_type": "` hot dogs '",
+          "rtable_class": "586",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 1543.579716205597
+    },
+    {
+      "id": 44,
+      "ltuple": {
+        "ltable_name": "` tommy tang \\ 's '",
+        "ltable_addr": "' 7313 melrose ave. '",
+        "ltable_city": "` los angeles '",
+        "ltable_phone": "213/937 -5733",
+        "ltable_res_type": "asian",
+        "ltable_class": "167.0"
+      },
+      "rtuple": {
+        "rtable_name": "citrus",
+        "rtable_addr": "' 6703 melrose ave. '",
+        "rtable_city": "` los angeles '",
+        "rtable_phone": "213-857-0034",
+        "rtable_res_type": "californian",
+        "rtable_class": "6.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.8095238095238095
+        ],
+        "ltable_addr": [
+          0.8095238095238095
+        ],
+        "ltable_city": [
+          0.5714285714285714
+        ],
+        "ltable_phone": [
+          0.5714285714285714
+        ],
+        "ltable_res_type": [
+          0.38095238095238093
+        ],
+        "ltable_class": [
+          0.5238095238095237
+        ],
+        "rtable_name": [
+          0.3333333333333333
+        ],
+        "rtable_addr": [
+          0.2857142857142857
+        ],
+        "rtable_city": [
+          0.3333333333333333
+        ],
+        "rtable_phone": [
+          0.23809523809523808
+        ],
+        "rtable_res_type": [
+          0.38095238095238093
+        ],
+        "rtable_class": [
+          0.23809523809523808
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` cha cha cha '",
+          "ltable_addr": "'",
+          "ltable_city": "` los angeles '",
+          "ltable_phone": "213/937 -5733",
+          "ltable_res_type": "asian",
+          "ltable_class": "124",
+          "rtable_name": "citrus",
+          "rtable_addr": "' 6703 melrose ave. '",
+          "rtable_city": "` los angeles '",
+          "rtable_phone": "213-857-0034",
+          "rtable_res_type": "californian",
+          "rtable_class": "6",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 2067.6560418605804
+    },
+    {
+      "id": 45,
+      "ltuple": {
+        "ltable_name": "` palace court '",
+        "ltable_addr": "' 3570 las vegas blvd. s '",
+        "ltable_city": "` las vegas '",
+        "ltable_phone": "702/731 -7547",
+        "ltable_res_type": "continental",
+        "ltable_class": "70.0"
+      },
+      "rtuple": {
+        "rtable_name": "` chin \\ 's '",
+        "rtable_addr": "' 3200 las vegas blvd. s. '",
+        "rtable_city": "` las vegas '",
+        "rtable_phone": "702-733-8899",
+        "rtable_res_type": "chinese",
+        "rtable_class": "67.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.44794952681388017
+        ],
+        "ltable_addr": [
+          0.41640378548895907
+        ],
+        "ltable_city": [
+          0.3375394321766562
+        ],
+        "ltable_phone": [
+          0.4132492113564669
+        ],
+        "ltable_res_type": [
+          0.41955835962145127
+        ],
+        "ltable_class": [
+          0.36277602523659314
+        ],
+        "rtable_name": [
+          0.252365930599369
+        ],
+        "rtable_addr": [
+          0.26498422712933756
+        ],
+        "rtable_city": [
+          0.1829652996845426
+        ],
+        "rtable_phone": [
+          0.2334384858044164
+        ],
+        "rtable_res_type": [
+          0.30599369085173495
+        ],
+        "rtable_class": [
+          0.2334384858044164
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` palace court '",
+          "ltable_addr": "' 3570 las vegas blvd. s '",
+          "ltable_city": "` las vegas '",
+          "ltable_phone": "702-733-8899",
+          "ltable_res_type": "chinese",
+          "ltable_class": "70",
+          "rtable_name": "` chin \\ 's '",
+          "rtable_addr": "' 3200 las vegas blvd. s. '",
+          "rtable_city": "` las vegas '",
+          "rtable_phone": "702-733-8899",
+          "rtable_res_type": "chinese",
+          "rtable_class": "67",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 791.3300490379333
+    },
+    {
+      "id": 46,
+      "ltuple": {
+        "ltable_name": "` bertolini \\ 's '",
+        "ltable_addr": "' 3570 las vegas blvd. s '",
+        "ltable_city": "` las vegas '",
+        "ltable_phone": "702/735 -4663",
+        "ltable_res_type": "italian",
+        "ltable_class": "427.0"
+      },
+      "rtuple": {
+        "rtable_name": "` morton \\ 's of chicago ( las vegas ) '",
+        "rtable_addr": "' 3200 las vegas blvd. s. '",
+        "rtable_city": "` las vegas '",
+        "rtable_phone": "702-893-0703",
+        "rtable_res_type": "steakhouses",
+        "rtable_class": "667.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.39119804400978
+        ],
+        "ltable_addr": [
+          0.3789731051344743
+        ],
+        "ltable_city": [
+          0.3105134474327629
+        ],
+        "ltable_phone": [
+          0.34718826405867975
+        ],
+        "ltable_res_type": [
+          0.35207823960880197
+        ],
+        "ltable_class": [
+          0.30806845965770174
+        ],
+        "rtable_name": [
+          0.2542787286063571
+        ],
+        "rtable_addr": [
+          0.2542787286063571
+        ],
+        "rtable_city": [
+          0.22249388753056243
+        ],
+        "rtable_phone": [
+          0.23716381418092922
+        ],
+        "rtable_res_type": [
+          0.22982885085574584
+        ],
+        "rtable_class": [
+          0.22493887530562356
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "'s of chicago ( las vegas ) '",
+          "ltable_addr": "' 3200 las vegas blvd. s. '",
+          "ltable_city": "` las vegas '",
+          "ltable_phone": "702/735 -4663",
+          "ltable_res_type": "steakhouses",
+          "ltable_class": "427",
+          "rtable_name": "` morton \\ 's of chicago ( las vegas ) '",
+          "rtable_addr": "' 3200 las vegas blvd. s. '",
+          "rtable_city": "` las vegas '",
+          "rtable_phone": "702-893-0703",
+          "rtable_res_type": "steakhouses",
+          "rtable_class": "667",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 1196.1507728099823
+    },
+    {
+      "id": 47,
+      "ltuple": {
+        "ltable_name": "` pen & pencil '",
+        "ltable_addr": "' 205 e. 45th st. '",
+        "ltable_city": "` new york '",
+        "ltable_phone": "212/682 -8660",
+        "ltable_res_type": "american",
+        "ltable_class": "325.0"
+      },
+      "rtuple": {
+        "rtable_name": "` shun lee palace '",
+        "rtable_addr": "' 155 e. 55th st. '",
+        "rtable_city": "` new york city '",
+        "rtable_phone": "212-371-8844",
+        "rtable_res_type": "chinese",
+        "rtable_class": "60.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.38056680161943324
+        ],
+        "ltable_addr": [
+          0.4534412955465587
+        ],
+        "ltable_city": [
+          0.3238866396761133
+        ],
+        "ltable_phone": [
+          0.4534412955465588
+        ],
+        "ltable_res_type": [
+          0.42914979757085026
+        ],
+        "ltable_class": [
+          0.32793522267206476
+        ],
+        "rtable_name": [
+          0.3157894736842105
+        ],
+        "rtable_addr": [
+          0.3441295546558705
+        ],
+        "rtable_city": [
+          0.24291497975708504
+        ],
+        "rtable_phone": [
+          0.2591093117408907
+        ],
+        "rtable_res_type": [
+          0.2631578947368421
+        ],
+        "rtable_class": [
+          0.21457489878542513
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` pen & pencil '",
+          "ltable_addr": "' 205 e. 45th st. '",
+          "ltable_city": "` new york '",
+          "ltable_phone": "212-371-8844",
+          "ltable_res_type": "chinese",
+          "ltable_class": "325",
+          "rtable_name": "` shun lee palace '",
+          "rtable_addr": "' 155 e. 55th st. '",
+          "rtable_city": "` new york city '",
+          "rtable_phone": "212-371-8844",
+          "rtable_res_type": "chinese",
+          "rtable_class": "60",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 1561.00190782547
+    },
+    {
+      "id": 48,
+      "ltuple": {
+        "ltable_name": "` steak house '",
+        "ltable_addr": "' 2880 las vegas blvd. s '",
+        "ltable_city": "` las vegas '",
+        "ltable_phone": "702/734 -0410",
+        "ltable_res_type": "` steak houses '",
+        "ltable_class": "72.0"
+      },
+      "rtuple": {
+        "rtable_name": "moongate",
+        "rtable_addr": "' 3400 las vegas blvd. s. '",
+        "rtable_city": "` las vegas '",
+        "rtable_phone": "702-791-7352",
+        "rtable_res_type": "chinese",
+        "rtable_class": "666.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.07142857142857142
+        ],
+        "ltable_addr": [
+          0.07142857142857142
+        ],
+        "ltable_city": [
+          0.07142857142857142
+        ],
+        "ltable_phone": [
+          0.07142857142857142
+        ],
+        "ltable_res_type": [
+          0.07142857142857142
+        ],
+        "ltable_class": [
+          0.07142857142857142
+        ],
+        "rtable_name": [
+          0.7857142857142855
+        ],
+        "rtable_addr": [
+          0.6428571428571427
+        ],
+        "rtable_city": [
+          0.4999999999999999
+        ],
+        "rtable_phone": [
+          0.7142857142857141
+        ],
+        "rtable_res_type": [
+          0.9999999999999997
+        ],
+        "rtable_class": [
+          0.6428571428571427
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` steak house '",
+          "ltable_addr": "' 2880 las vegas blvd. s '",
+          "ltable_city": "` las vegas '",
+          "ltable_phone": "702/734 -0410",
+          "ltable_res_type": "` steak houses '",
+          "ltable_class": "72",
+          "rtable_name": "` steak house the '",
+          "rtable_addr": "' 2880 las vegas blvd. s. '",
+          "rtable_city": "` las vegas '",
+          "rtable_phone": "702-791-7352",
+          "rtable_res_type": "steakhouses",
+          "rtable_class": "666",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 421.9398341178894
+    },
+    {
+      "id": 49,
+      "ltuple": {
+        "ltable_name": "` viva mercado \\ 's '",
+        "ltable_addr": "' 6182 w. flamingo rd. '",
+        "ltable_city": "` las vegas '",
+        "ltable_phone": "702/871 -8826",
+        "ltable_res_type": "mexican",
+        "ltable_class": "451.0"
+      },
+      "rtuple": {
+        "rtable_name": "` fiore rotisserie & grille '",
+        "rtable_addr": "' 3700 w. flamingo rd. '",
+        "rtable_city": "` las vegas '",
+        "rtable_phone": "702-252-7702",
+        "rtable_res_type": "italian",
+        "rtable_class": "660.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_name": [
+          0.2705479452054794
+        ],
+        "ltable_addr": [
+          0.35616438356164387
+        ],
+        "ltable_city": [
+          0.2705479452054794
+        ],
+        "ltable_phone": [
+          0.3253424657534247
+        ],
+        "ltable_res_type": [
+          0.3801369863013698
+        ],
+        "ltable_class": [
+          0.2876712328767123
+        ],
+        "rtable_name": [
+          0.3047945205479452
+        ],
+        "rtable_addr": [
+          0.40068493150684925
+        ],
+        "rtable_city": [
+          0.26369863013698625
+        ],
+        "rtable_phone": [
+          0.31506849315068486
+        ],
+        "rtable_res_type": [
+          0.45205479452054764
+        ],
+        "rtable_class": [
+          0.29452054794520544
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` viva mercado \\ 's '",
+          "ltable_addr": "' 6182 w. flamingo rd. '",
+          "ltable_city": "` las vegas '",
+          "ltable_phone": "702/871 -8826",
+          "ltable_res_type": "mexican",
+          "ltable_class": "451",
+          "rtable_name": "` fiore rotisserie & grille '",
+          "rtable_addr": "' 6182 w. flamingo rd. '",
+          "rtable_city": "` las vegas '",
+          "rtable_phone": "702-252-7702",
+          "rtable_res_type": "mexican",
+          "rtable_class": "660",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 963.5687599182129
+    }
+  ],
+  "total_time": 67677.99937319756,
+  "metrics": {
+    "faithfulness": {
+      "certa(pase)_azure": 0.0
+    },
+    "counterfactual_metrics": {
+      "certa(pase)_azure": {
+        "validity": 0.8387096774166493,
+        "proximity": 0.3575268817192768,
+        "sparsity": 0.9489247311797344,
+        "diversity": 0.0
+      }
+    }
+  }
+}

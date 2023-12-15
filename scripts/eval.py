@@ -51,8 +51,8 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
                                       prompts={"ptse": {"er": "ellmer/prompts/er.txt"}})
 
     for d in dataset_names:
-        expdir = f'./experiments/{explanation_granularity}/{d}/{datetime.now():%Y%m%d}/{datetime.now():%H_%M}/'
-        obs_dir = f'experiments/{explanation_granularity}/concordance/{d}//{datetime.now():%Y%m%d}/{datetime.now():%H_%M}'
+        expdir = f'./experiments/{model_type}/{model_name}/{explanation_granularity}/{d}/{datetime.now():%Y%m%d}/{datetime.now():%H_%M}/'
+        obs_dir = f'experiments/{model_type}/{model_name}/{explanation_granularity}/concordance/{d}//{datetime.now():%Y%m%d}/{datetime.now():%H_%M}'
 
         print(f'using dataset {d}')
         dataset_dir = '/'.join([base_dir, d])
