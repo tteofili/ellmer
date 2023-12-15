@@ -1,0 +1,94 @@
+{
+  "data": [
+    {
+      "id": 2,
+      "ltuple": {
+        "ltable_name": "oritalia",
+        "ltable_addr": "' 1915 fillmore st. '",
+        "ltable_city": "` san francisco '",
+        "ltable_phone": "415/346 -1333",
+        "ltable_res_type": "italian",
+        "ltable_class": "501.0"
+      },
+      "rtuple": {
+        "rtable_name": "` trio cafe '",
+        "rtable_addr": "' 1870 fillmore st. '",
+        "rtable_city": "` san francisco '",
+        "rtable_phone": "415-563-2248",
+        "rtable_res_type": "american",
+        "rtable_class": "749.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {},
+      "cfs": [
+        {}
+      ],
+      "latency": 105.10712599754333,
+      "filter_features": [
+        "oritalia",
+        "trio",
+        "cafe",
+        "fillmore",
+        "st.",
+        "san",
+        "francisco",
+        "415/346",
+        "-1333",
+        "415-563-2248"
+      ]
+    },
+    {
+      "id": 11,
+      "ltuple": {
+        "ltable_name": "` border grill '",
+        "ltable_addr": "' 4th st. '",
+        "ltable_city": "` los angeles '",
+        "ltable_phone": "310/451 -1655",
+        "ltable_res_type": "mexican",
+        "ltable_class": "116.0"
+      },
+      "rtuple": {
+        "rtable_name": "` jackson diner '",
+        "rtable_addr": "' 37-03 74th st. '",
+        "rtable_city": "queens",
+        "rtable_phone": "718-672-1232",
+        "rtable_res_type": "indian",
+        "rtable_class": "616.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {},
+      "cfs": [
+        {}
+      ],
+      "latency": 105.6810371875763,
+      "filter_features": [
+        "border",
+        "grill",
+        "4th",
+        "st.",
+        "los",
+        "angeles",
+        "310",
+        "451",
+        "1655",
+        "mexican"
+      ]
+    }
+  ],
+  "total_time": 480.9240040779114,
+  "metrics": {
+    "faithfulness": {
+      "uncerta(ptse)_azure_openai": 0.0
+    },
+    "counterfactual_metrics": {
+      "uncerta(ptse)_azure_openai": {
+        "validity": 0.0,
+        "proximity": 0.0,
+        "sparsity": 0.0,
+        "diversity": 0.0
+      }
+    }
+  }
+}

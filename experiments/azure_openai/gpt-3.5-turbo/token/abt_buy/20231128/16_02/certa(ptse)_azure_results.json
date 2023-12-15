@@ -1,0 +1,621 @@
+{
+  "data": [
+    {
+      "id": 0,
+      "ltuple": {
+        "ltable_name": "sony pink cyber-shot 7.2 megapixel digital camera dscw120p",
+        "ltable_description": "sony pink cyber-shot 7.2 megapixel digital camera dscw120p 7.2 megapixel 4x optical zoom 2.5 ' tft lcd 15 mb internal memory face detection super steadyshot image stabilization smile shutter mode smart zoom pink finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "olympus fe-360 digital camera pink 226540",
+        "rtable_description": "8 megapixel 16:9 3x optical zoom 4x digital zoom 2.5 ' color lcd",
+        "rtable_price": "104.95"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "rtable_name__olympus": [
+          1.0
+        ],
+        "rtable_name__fe-360": [
+          1.0
+        ],
+        "rtable_name__digital": [
+          1.0
+        ],
+        "rtable_name__camera": [
+          1.0
+        ],
+        "rtable_name__pink": [
+          1.0
+        ],
+        "rtable_name__226540": [
+          1.0
+        ],
+        "rtable_description__8": [
+          1.0
+        ],
+        "rtable_description__megapixel": [
+          1.0
+        ],
+        "rtable_description__16:9": [
+          1.0
+        ],
+        "rtable_description__3x": [
+          1.0
+        ],
+        "rtable_description__optical": [
+          0.0
+        ],
+        "rtable_description__zoom": [
+          0.0
+        ],
+        "rtable_description__4x": [
+          0.0
+        ],
+        "rtable_description__digital": [
+          0.0
+        ],
+        "rtable_description__2.5": [
+          0.0
+        ],
+        "rtable_description__'": [
+          0.0
+        ],
+        "rtable_description__color": [
+          0.0
+        ],
+        "rtable_description__lcd": [
+          0.0
+        ],
+        "rtable_price__104.95": [
+          0.0
+        ],
+        "ltable_name__sony": [
+          0.0
+        ],
+        "ltable_name__pink": [
+          0.0
+        ],
+        "ltable_name__cyber-shot": [
+          0.0
+        ],
+        "ltable_name__7.2": [
+          0.0
+        ],
+        "ltable_name__megapixel": [
+          0.0
+        ],
+        "ltable_name__digital": [
+          0.0
+        ],
+        "ltable_name__camera": [
+          0.0
+        ],
+        "ltable_name__dscw120p": [
+          0.0
+        ],
+        "ltable_description__sony": [
+          0.0
+        ],
+        "ltable_description__pink": [
+          0.0
+        ],
+        "ltable_description__cyber-shot": [
+          0.0
+        ],
+        "ltable_description__7.2": [
+          0.0
+        ],
+        "ltable_description__megapixel": [
+          0.0
+        ],
+        "ltable_description__digital": [
+          0.0
+        ],
+        "ltable_description__camera": [
+          0.0
+        ],
+        "ltable_description__dscw120p": [
+          0.0
+        ],
+        "ltable_description__4x": [
+          0.0
+        ],
+        "ltable_description__optical": [
+          0.0
+        ],
+        "ltable_description__zoom": [
+          0.0
+        ],
+        "ltable_description__2.5": [
+          0.0
+        ],
+        "ltable_description__'": [
+          0.0
+        ],
+        "ltable_description__tft": [
+          0.0
+        ],
+        "ltable_description__lcd": [
+          0.0
+        ],
+        "ltable_description__15": [
+          0.0
+        ],
+        "ltable_description__mb": [
+          0.0
+        ],
+        "ltable_description__internal": [
+          0.0
+        ],
+        "ltable_description__memory": [
+          0.0
+        ],
+        "ltable_description__face": [
+          0.0
+        ],
+        "ltable_description__detection": [
+          0.0
+        ],
+        "ltable_description__super": [
+          0.0
+        ],
+        "ltable_description__steadyshot": [
+          0.0
+        ],
+        "ltable_description__image": [
+          0.0
+        ],
+        "ltable_description__stabilization": [
+          0.0
+        ],
+        "ltable_description__smile": [
+          0.0
+        ],
+        "ltable_description__shutter": [
+          0.0
+        ],
+        "ltable_description__mode": [
+          0.0
+        ],
+        "ltable_description__smart": [
+          0.0
+        ],
+        "ltable_description__finish": [
+          0.0
+        ],
+        "ltable_price__nan": [
+          0.0
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "sony pink cyber-shot 7.2 megapixel digital camera dscw120p",
+          "ltable_description": "sony pink cyber-shot 7.2 megapixel digital camera dscw120p 7.2 megapixel 4x optical zoom 2.5 ' tft lcd 15 mb internal memory face detection super steadyshot image stabilization smile shutter mode smart zoom pink finish",
+          "ltable_price": "nan",
+          "rtable_name": "digital cyber-shot 7.2 megapixel pink camera",
+          "rtable_description": "sony pink cyber-shot 7.2 optical zoom 4x digital zoom 2.5 ' color lcd",
+          "rtable_price": "104.95",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 403.6627850532532
+    },
+    {
+      "id": 1,
+      "ltuple": {
+        "ltable_name": "lg 2.0 cu . ft. over-the-range white microwave oven lmvm2085wh",
+        "ltable_description": "lg 2.0 cu . ft. over-the-range white microwave oven lmvm2085wh warming lamp glide & spin sliding tray with turntable sensor cook feature 300 cfm exhaust system horizontal keypad elegant hidden vent wideview window halogen cooktop lighting white finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "maytag 2.0 cu . ft. over-the-range microwave oven",
+        "rtable_description": "nan",
+        "rtable_price": "nan"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "rtable_name__linksys": [
+          0.0
+        ],
+        "rtable_name__etherfast": [
+          0.0
+        ],
+        "rtable_name__ezxs88w": [
+          0.0
+        ],
+        "rtable_name__ethernet": [
+          0.0
+        ],
+        "rtable_name__switch": [
+          0.0
+        ],
+        "rtable_description__linksys": [
+          0.0
+        ],
+        "rtable_description__etherfast": [
+          0.0
+        ],
+        "rtable_description__8-port": [
+          0.0
+        ],
+        "rtable_description__10/100": [
+          0.0
+        ],
+        "rtable_description__switch": [
+          0.0
+        ],
+        "rtable_description__(": [
+          0.0
+        ],
+        "rtable_description__new/workgroup": [
+          0.0
+        ],
+        "rtable_description__)": [
+          0.0
+        ],
+        "rtable_price__nan": [
+          0.0
+        ],
+        "ltable_name__lg": [
+          0.0
+        ],
+        "ltable_name__2.0": [
+          0.0
+        ],
+        "ltable_name__cu": [
+          0.0
+        ],
+        "ltable_name__.": [
+          0.0
+        ],
+        "ltable_name__ft.": [
+          0.0
+        ],
+        "ltable_name__over-the-range": [
+          0.25
+        ],
+        "ltable_name__white": [
+          0.25
+        ],
+        "ltable_name__microwave": [
+          0.25
+        ],
+        "ltable_name__oven": [
+          0.25
+        ],
+        "ltable_name__lmvm2085wh": [
+          0.25
+        ],
+        "ltable_description__lg": [
+          0.0
+        ],
+        "ltable_description__2.0": [
+          0.0
+        ],
+        "ltable_description__cu": [
+          0.0
+        ],
+        "ltable_description__.": [
+          0.0
+        ],
+        "ltable_description__ft.": [
+          0.0
+        ],
+        "ltable_description__over-the-range": [
+          0.0
+        ],
+        "ltable_description__white": [
+          0.0
+        ],
+        "ltable_description__microwave": [
+          0.0
+        ],
+        "ltable_description__oven": [
+          0.0
+        ],
+        "ltable_description__lmvm2085wh": [
+          0.0
+        ],
+        "ltable_description__warming": [
+          0.0
+        ],
+        "ltable_description__lamp": [
+          0.0
+        ],
+        "ltable_description__glide": [
+          0.0
+        ],
+        "ltable_description__&": [
+          0.0
+        ],
+        "ltable_description__spin": [
+          0.0
+        ],
+        "ltable_description__sliding": [
+          0.0
+        ],
+        "ltable_description__tray": [
+          0.0
+        ],
+        "ltable_description__with": [
+          0.0
+        ],
+        "ltable_description__turntable": [
+          0.0
+        ],
+        "ltable_description__sensor": [
+          0.0
+        ],
+        "ltable_description__cook": [
+          0.0
+        ],
+        "ltable_description__feature": [
+          0.0
+        ],
+        "ltable_description__300": [
+          0.0
+        ],
+        "ltable_description__cfm": [
+          0.0
+        ],
+        "ltable_description__exhaust": [
+          0.0
+        ],
+        "ltable_description__system": [
+          0.0
+        ],
+        "ltable_description__horizontal": [
+          0.0
+        ],
+        "ltable_description__keypad": [
+          0.0
+        ],
+        "ltable_description__elegant": [
+          0.0
+        ],
+        "ltable_description__hidden": [
+          0.0
+        ],
+        "ltable_description__vent": [
+          0.0
+        ],
+        "ltable_description__wideview": [
+          0.0
+        ],
+        "ltable_description__window": [
+          0.0
+        ],
+        "ltable_description__halogen": [
+          0.0
+        ],
+        "ltable_description__cooktop": [
+          0.0
+        ],
+        "ltable_description__lighting": [
+          0.0
+        ],
+        "ltable_description__finish": [
+          0.0
+        ],
+        "ltable_price__nan": [
+          0.0
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "lg 2.0 cu . ft. linksys etherfast ezxs88w ethernet switch",
+          "ltable_description": "lg 2.0 cu . ft. over-the-range white microwave oven lmvm2085wh warming lamp glide & spin sliding tray with turntable sensor cook feature 300 cfm exhaust system horizontal keypad elegant hidden vent wideview window halogen cooktop lighting white finish",
+          "ltable_price": "nan",
+          "rtable_name": "linksys etherfast ezxs88w ethernet switch ezxs88w",
+          "rtable_description": "linksys etherfast 8-port 10/100 switch ( new/workgroup )",
+          "rtable_price": "nan",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 206.83966994285583
+    },
+    {
+      "id": 2,
+      "ltuple": {
+        "ltable_name": "panasonic black 8.5 ' portable dvd player dvdls83",
+        "ltable_description": "panasonic black 8.5 ' portable dvd player dvdls83 8.5 ' free style wide screen lcd display 6 hour battery multi format playback dual headphone jacks divx playback car dc adapter included black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "toshiba sd-p71s portable dvd player",
+        "rtable_description": "toshiba sd-p71s 7 ' portable dvd player",
+        "rtable_price": "119.36"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "rtable_name__toshiba": [
+          0.0
+        ],
+        "rtable_name__sd-p71s": [
+          0.0
+        ],
+        "rtable_name__portable": [
+          0.0
+        ],
+        "rtable_name__dvd": [
+          0.0
+        ],
+        "rtable_name__player": [
+          0.0
+        ],
+        "rtable_description__toshiba": [
+          0.0
+        ],
+        "rtable_description__sd-p71s": [
+          0.0
+        ],
+        "rtable_description__7": [
+          0.0
+        ],
+        "rtable_description__'": [
+          0.0
+        ],
+        "rtable_description__portable": [
+          0.0
+        ],
+        "rtable_description__dvd": [
+          0.0
+        ],
+        "rtable_description__player": [
+          0.0
+        ],
+        "rtable_price__119.36": [
+          0.0
+        ],
+        "ltable_name__panasonic": [
+          0.0
+        ],
+        "ltable_name__black": [
+          0.0
+        ],
+        "ltable_name__8.5": [
+          0.0
+        ],
+        "ltable_name__'": [
+          0.0
+        ],
+        "ltable_name__portable": [
+          0.0
+        ],
+        "ltable_name__dvd": [
+          1.0
+        ],
+        "ltable_name__player": [
+          1.0
+        ],
+        "ltable_name__dvdls83": [
+          1.0
+        ],
+        "ltable_description__panasonic": [
+          1.0
+        ],
+        "ltable_description__black": [
+          1.0
+        ],
+        "ltable_description__8.5": [
+          1.0
+        ],
+        "ltable_description__'": [
+          0.0
+        ],
+        "ltable_description__portable": [
+          0.0
+        ],
+        "ltable_description__dvd": [
+          0.0
+        ],
+        "ltable_description__player": [
+          0.0
+        ],
+        "ltable_description__dvdls83": [
+          0.0
+        ],
+        "ltable_description__free": [
+          0.0
+        ],
+        "ltable_description__style": [
+          0.0
+        ],
+        "ltable_description__wide": [
+          0.0
+        ],
+        "ltable_description__screen": [
+          0.0
+        ],
+        "ltable_description__lcd": [
+          0.0
+        ],
+        "ltable_description__display": [
+          0.0
+        ],
+        "ltable_description__6": [
+          0.0
+        ],
+        "ltable_description__hour": [
+          0.0
+        ],
+        "ltable_description__battery": [
+          0.0
+        ],
+        "ltable_description__multi": [
+          0.0
+        ],
+        "ltable_description__format": [
+          0.0
+        ],
+        "ltable_description__playback": [
+          0.0
+        ],
+        "ltable_description__dual": [
+          0.0
+        ],
+        "ltable_description__headphone": [
+          0.0
+        ],
+        "ltable_description__jacks": [
+          0.0
+        ],
+        "ltable_description__divx": [
+          0.0
+        ],
+        "ltable_description__car": [
+          0.0
+        ],
+        "ltable_description__dc": [
+          0.0
+        ],
+        "ltable_description__adapter": [
+          0.0
+        ],
+        "ltable_description__included": [
+          0.0
+        ],
+        "ltable_description__finish": [
+          0.0
+        ],
+        "ltable_price__nan": [
+          0.0
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "panasonic black 8.5 ' portable sd-p71s portable dvd",
+          "ltable_description": "toshiba sd-p71s 7 ' portable dvd player dvdls83 8.5 ' free style wide screen lcd display 6 hour battery multi format playback dual headphone jacks divx playback car dc adapter included black finish",
+          "ltable_price": "nan",
+          "rtable_name": "toshiba sd-p71s portable dvd player",
+          "rtable_description": "toshiba sd-p71s 7 ' portable dvd player",
+          "rtable_price": "119.36",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 197.0876202583313
+    }
+  ],
+  "total_time": 807.5913980007172,
+  "metrics": {
+    "faithfulness": {
+      "certa(ptse)_azure": 0.0
+    },
+    "counterfactual_metrics": {
+      "certa(ptse)_azure": {
+        "validity": 0.9999999999666667,
+        "proximity": 0.7222222221981482,
+        "sparsity": 0.8194444444171295,
+        "diversity": 0.0
+      }
+    }
+  }
+}

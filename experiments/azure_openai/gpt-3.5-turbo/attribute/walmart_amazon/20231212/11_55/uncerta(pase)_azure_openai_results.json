@@ -1,0 +1,93 @@
+{
+  "data": [
+    {
+      "id": 0,
+      "ltuple": {
+        "ltable_title": "sony 16gb class 4 sd memory card",
+        "ltable_category": "usb drives",
+        "ltable_brand": "sony",
+        "ltable_modelno": "sf16n4/tqp",
+        "ltable_price": "0.0"
+      },
+      "rtuple": {
+        "rtable_title": "pny 4gb class 4 navy sd card",
+        "rtable_category": "car audio video",
+        "rtable_brand": "pny",
+        "rtable_modelno": "p-sdhc4g4-ef / navy",
+        "rtable_price": "11.18"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_title": [
+          0.6326530612244899
+        ],
+        "ltable_category": [
+          0.6938775510204083
+        ],
+        "ltable_brand": [
+          0.6530612244897961
+        ],
+        "ltable_modelno": [
+          0.6530612244897961
+        ],
+        "ltable_price": [
+          0.6122448979591839
+        ],
+        "rtable_title": [
+          0.20408163265306123
+        ],
+        "rtable_category": [
+          0.20408163265306123
+        ],
+        "rtable_brand": [
+          0.20408163265306123
+        ],
+        "rtable_modelno": [
+          0.20408163265306123
+        ],
+        "rtable_price": [
+          0.20408163265306123
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_title": "sony 16gb class 4 sd memory card",
+          "ltable_category": "camera",
+          "ltable_brand": "sony",
+          "ltable_modelno": "sf16n4/tqp",
+          "ltable_price": "12.0",
+          "rtable_title": "pny 4gb class 4 navy sd card",
+          "rtable_category": "car audio video",
+          "rtable_brand": "pny",
+          "rtable_modelno": "p-sdhc4g4-ef / navy",
+          "rtable_price": "11.18",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 15.152790069580078,
+      "filter_features": [
+        "ltable_title",
+        "ltable_category",
+        "ltable_brand",
+        "ltable_modelno",
+        "ltable_price"
+      ]
+    }
+  ],
+  "total_time": 447.3176980018616,
+  "metrics": {
+    "faithfulness": {
+      "uncerta(pase)_azure_openai": 0.0
+    },
+    "counterfactual_metrics": {
+      "uncerta(pase)_azure_openai": {
+        "validity": 0.9999999999,
+        "proximity": 0.29999999996999993,
+        "sparsity": 0.949999999905,
+        "diversity": 0.0
+      }
+    }
+  }
+}

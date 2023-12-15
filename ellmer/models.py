@@ -207,7 +207,7 @@ class GenericEllmer(Ellmer):
         elif model_type == 'falcon':
             self.llm = falcon_pipeline(model_id=model_name)
         elif model_type == 'llama2':
-            self.llm = llama2_llm(verbose=verbose)
+            self.llm = llama2_llm(verbose=verbose, temperature=temperature, quantized_model_path=model_name)
         self.verbose = verbose
         self.explanation_granularity = explanation_granularity
         if "self" == explainer_fn:

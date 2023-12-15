@@ -1,0 +1,552 @@
+{
+  "ptsew_azure_openai": {
+    "data": [
+      {
+        "id": 0,
+        "ltuple": {
+          "ltable_title": "sony 16gb class 4 sd memory card",
+          "ltable_category": "usb drives",
+          "ltable_brand": "sony",
+          "ltable_modelno": "sf16n4/tqp",
+          "ltable_price": "0.0"
+        },
+        "rtuple": {
+          "rtable_title": "pny 4gb class 4 navy sd card",
+          "rtable_category": "car audio video",
+          "rtable_brand": "pny",
+          "rtable_modelno": "p-sdhc4g4-ef / navy",
+          "rtable_price": "11.18"
+        },
+        "prediction": 0,
+        "label": 0,
+        "saliency": {
+          "ltable_title": 0.0,
+          "ltable_category": 0.0,
+          "ltable_brand": 0.0,
+          "ltable_modelno": 0.0,
+          "ltable_price": 0.0,
+          "rtable_title": 0.0,
+          "rtable_category": 0.0,
+          "rtable_brand": 0.5,
+          "rtable_modelno": 0.0,
+          "rtable_price": 0.5
+        },
+        "cfs": [
+          {
+            "ltable_title": "sony 16gb class 4 sd memory card",
+            "ltable_category": "usb drives",
+            "ltable_brand": "pny",
+            "ltable_modelno": "sf16n4/tqp",
+            "ltable_price": "0.0",
+            "rtable_title": "pny 4gb class 4 navy sd card",
+            "rtable_category": "car audio video",
+            "rtable_brand": "sony",
+            "rtable_modelno": "p-sdhc4g4-ef / navy",
+            "rtable_price": "11.18"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "ltuple": {
+          "ltable_title": "sony 16gb class 4 sd memory card",
+          "ltable_category": "usb drives",
+          "ltable_brand": "sony",
+          "ltable_modelno": "sf16n4/tqp",
+          "ltable_price": "0.0"
+        },
+        "rtuple": {
+          "rtable_title": "pny 4gb class 4 navy sd card",
+          "rtable_category": "car audio video",
+          "rtable_brand": "pny",
+          "rtable_modelno": "p-sdhc4g4-ef / navy",
+          "rtable_price": "11.18"
+        },
+        "prediction": 0,
+        "label": 0,
+        "saliency": {
+          "ltable_title": 0.0,
+          "ltable_category": 0.0,
+          "ltable_brand": 0.0,
+          "ltable_modelno": 0.0,
+          "ltable_price": 0.0,
+          "rtable_title": 0.0,
+          "rtable_category": 0.0,
+          "rtable_brand": 0.5,
+          "rtable_modelno": 0.0,
+          "rtable_price": 0.5
+        },
+        "cfs": [
+          {
+            "ltable_title": "sony 16gb class 4 sd memory card",
+            "ltable_category": "usb drives",
+            "ltable_brand": "pny",
+            "ltable_modelno": "sf16n4/tqp",
+            "ltable_price": "0.0",
+            "rtable_title": "pny 4gb class 4 navy sd card",
+            "rtable_category": "car audio video",
+            "rtable_brand": "sony",
+            "rtable_modelno": "p-sdhc4g4-ef / navy",
+            "rtable_price": "11.18"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "ltuple": {
+          "ltable_title": "sony 16gb class 4 sd memory card",
+          "ltable_category": "usb drives",
+          "ltable_brand": "sony",
+          "ltable_modelno": "sf16n4/tqp",
+          "ltable_price": "0.0"
+        },
+        "rtuple": {
+          "rtable_title": "pny 4gb class 4 navy sd card",
+          "rtable_category": "car audio video",
+          "rtable_brand": "pny",
+          "rtable_modelno": "p-sdhc4g4-ef / navy",
+          "rtable_price": "11.18"
+        },
+        "prediction": 0,
+        "label": 0,
+        "saliency": {
+          "ltable_title": 0.0,
+          "ltable_category": 0.0,
+          "ltable_brand": 0.0,
+          "ltable_modelno": 0.0,
+          "ltable_price": 0.0,
+          "rtable_title": 0.0,
+          "rtable_category": 0.0,
+          "rtable_brand": 0.5,
+          "rtable_modelno": 0.0,
+          "rtable_price": 0.5
+        },
+        "cfs": [
+          {
+            "ltable_title": "sony 16gb class 4 sd memory card",
+            "ltable_category": "usb drives",
+            "ltable_brand": "pny",
+            "ltable_modelno": "sf16n4/tqp",
+            "ltable_price": "0.0",
+            "rtable_title": "pny 4gb class 4 navy sd card",
+            "rtable_category": "car audio video",
+            "rtable_brand": "sony",
+            "rtable_modelno": "p-sdhc4g4-ef / navy",
+            "rtable_price": "11.18"
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "ltuple": {
+          "ltable_title": "zotac geforce gt430 1gb ddr3 pci-express 2.0 graphics card",
+          "ltable_category": "electronics - general",
+          "ltable_brand": "zotac",
+          "ltable_modelno": "zt-40604-10l",
+          "ltable_price": "88.88"
+        },
+        "rtuple": {
+          "rtable_title": "evga geforce gts450 superclocked 1 gb gddr5 pci-express 2.0 graphics card 01g-p3-1452-tr",
+          "rtable_category": "graphics cards",
+          "rtable_brand": "evga",
+          "rtable_modelno": "01g-p3-1452-tr",
+          "rtable_price": "119.88"
+        },
+        "prediction": 0,
+        "label": 0,
+        "saliency": {
+          "ltable_brand": 0.5,
+          "ltable_modelno": 0.5,
+          "ltable_category": 0.3,
+          "ltable_price": 0.2,
+          "ltable_title": 0.0,
+          "rtable_brand": 0.5,
+          "rtable_modelno": 0.5,
+          "rtable_category": 0.3,
+          "rtable_price": 0.2,
+          "rtable_title": 0.0
+        },
+        "cfs": [
+          {
+            "ltable_title": "zotac geforce gt430 1gb ddr3 pci-express 2.0 graphics card",
+            "ltable_category": "graphics cards",
+            "ltable_brand": "evga",
+            "ltable_modelno": "01g-p3-1452-tr",
+            "ltable_price": "119.88",
+            "rtable_title": "evga geforce gts450 superclocked 1 gb gddr5 pci-express 2.0 graphics card 01g-p3-1452-tr",
+            "rtable_category": "electronics - general",
+            "rtable_brand": "zotac",
+            "rtable_modelno": "zt-40604-10l",
+            "rtable_price": "88.88"
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "ltuple": {
+          "ltable_title": "zotac geforce gt430 1gb ddr3 pci-express 2.0 graphics card",
+          "ltable_category": "electronics - general",
+          "ltable_brand": "zotac",
+          "ltable_modelno": "zt-40604-10l",
+          "ltable_price": "88.88"
+        },
+        "rtuple": {
+          "rtable_title": "evga geforce gts450 superclocked 1 gb gddr5 pci-express 2.0 graphics card 01g-p3-1452-tr",
+          "rtable_category": "graphics cards",
+          "rtable_brand": "evga",
+          "rtable_modelno": "01g-p3-1452-tr",
+          "rtable_price": "119.88"
+        },
+        "prediction": 0,
+        "label": 0,
+        "saliency": {
+          "ltable_brand": 0.5,
+          "ltable_modelno": 0.5,
+          "ltable_category": 0.3,
+          "ltable_price": 0.2,
+          "ltable_title": 0.0,
+          "rtable_brand": 0.5,
+          "rtable_modelno": 0.5,
+          "rtable_category": 0.3,
+          "rtable_price": 0.2,
+          "rtable_title": 0.0
+        },
+        "cfs": [
+          {
+            "ltable_title": "zotac geforce gt430 1gb ddr3 pci-express 2.0 graphics card",
+            "ltable_category": "graphics cards",
+            "ltable_brand": "evga",
+            "ltable_modelno": "01g-p3-1452-tr",
+            "ltable_price": "119.88",
+            "rtable_title": "evga geforce gts450 superclocked 1 gb gddr5 pci-express 2.0 graphics card 01g-p3-1452-tr",
+            "rtable_category": "electronics - general",
+            "rtable_brand": "zotac",
+            "rtable_modelno": "zt-40604-10l",
+            "rtable_price": "88.88"
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "ltuple": {
+          "ltable_title": "zotac geforce gt430 1gb ddr3 pci-express 2.0 graphics card",
+          "ltable_category": "electronics - general",
+          "ltable_brand": "zotac",
+          "ltable_modelno": "zt-40604-10l",
+          "ltable_price": "88.88"
+        },
+        "rtuple": {
+          "rtable_title": "evga geforce gts450 superclocked 1 gb gddr5 pci-express 2.0 graphics card 01g-p3-1452-tr",
+          "rtable_category": "graphics cards",
+          "rtable_brand": "evga",
+          "rtable_modelno": "01g-p3-1452-tr",
+          "rtable_price": "119.88"
+        },
+        "prediction": 0,
+        "label": 0,
+        "saliency": {
+          "ltable_brand": 0.5,
+          "ltable_modelno": 0.5,
+          "ltable_category": 0.3,
+          "ltable_price": 0.2,
+          "ltable_title": 0.0,
+          "rtable_brand": 0.5,
+          "rtable_modelno": 0.5,
+          "rtable_category": 0.3,
+          "rtable_price": 0.2,
+          "rtable_title": 0.0
+        },
+        "cfs": [
+          {
+            "ltable_title": "zotac geforce gt430 1gb ddr3 pci-express 2.0 graphics card",
+            "ltable_category": "graphics cards",
+            "ltable_brand": "evga",
+            "ltable_modelno": "01g-p3-1452-tr",
+            "ltable_price": "119.88",
+            "rtable_title": "evga geforce gts450 superclocked 1 gb gddr5 pci-express 2.0 graphics card 01g-p3-1452-tr",
+            "rtable_category": "electronics - general",
+            "rtable_brand": "zotac",
+            "rtable_modelno": "zt-40604-10l",
+            "rtable_price": "88.88"
+          }
+        ]
+      }
+    ],
+    "total_time": 0.03233671188354492
+  },
+  "pase_azure_openai": {
+    "data": [
+      {
+        "id": 0,
+        "ltuple": {
+          "ltable_title": "sony 16gb class 4 sd memory card",
+          "ltable_category": "usb drives",
+          "ltable_brand": "sony",
+          "ltable_modelno": "sf16n4/tqp",
+          "ltable_price": "0.0"
+        },
+        "rtuple": {
+          "rtable_title": "pny 4gb class 4 navy sd card",
+          "rtable_category": "car audio video",
+          "rtable_brand": "pny",
+          "rtable_modelno": "p-sdhc4g4-ef / navy",
+          "rtable_price": "11.18"
+        },
+        "prediction": 0,
+        "label": 0,
+        "saliency": {
+          "ltable_title": 0.0,
+          "ltable_category": 0.0,
+          "ltable_brand": 0.0,
+          "ltable_modelno": 0.0,
+          "ltable_price": 0.0,
+          "rtable_title": 0.0,
+          "rtable_category": 0.0,
+          "rtable_brand": 0.0,
+          "rtable_modelno": 0.0,
+          "rtable_price": 0.0
+        },
+        "cfs": [
+          {
+            "ltable_title": "sony 16gb class 4 sd memory card",
+            "ltable_category": "usb drives",
+            "ltable_brand": "sony",
+            "ltable_modelno": "sf16n4/tqp",
+            "ltable_price": "0.0",
+            "rtable_title": "pny 4gb class 4 navy sd card",
+            "rtable_category": "car audio video",
+            "rtable_brand": "pny",
+            "rtable_modelno": "p-sdhc4g4-ef / navy",
+            "rtable_price": "11.18"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "ltuple": {
+          "ltable_title": "sony 16gb class 4 sd memory card",
+          "ltable_category": "usb drives",
+          "ltable_brand": "sony",
+          "ltable_modelno": "sf16n4/tqp",
+          "ltable_price": "0.0"
+        },
+        "rtuple": {
+          "rtable_title": "pny 4gb class 4 navy sd card",
+          "rtable_category": "car audio video",
+          "rtable_brand": "pny",
+          "rtable_modelno": "p-sdhc4g4-ef / navy",
+          "rtable_price": "11.18"
+        },
+        "prediction": 0,
+        "label": 0,
+        "saliency": {
+          "ltable_title": 0.0,
+          "ltable_category": 0.0,
+          "ltable_brand": 0.0,
+          "ltable_modelno": 0.0,
+          "ltable_price": 0.0,
+          "rtable_title": 0.0,
+          "rtable_category": 0.0,
+          "rtable_brand": 0.0,
+          "rtable_modelno": 0.0,
+          "rtable_price": 0.0
+        },
+        "cfs": [
+          {
+            "ltable_title": "sony 16gb class 4 sd memory card",
+            "ltable_category": "usb drives",
+            "ltable_brand": "sony",
+            "ltable_modelno": "sf16n4/tqp",
+            "ltable_price": "0.0",
+            "rtable_title": "pny 4gb class 4 navy sd card",
+            "rtable_category": "car audio video",
+            "rtable_brand": "pny",
+            "rtable_modelno": "p-sdhc4g4-ef / navy",
+            "rtable_price": "11.18"
+          }
+        ]
+      },
+      {
+        "id": 0,
+        "ltuple": {
+          "ltable_title": "sony 16gb class 4 sd memory card",
+          "ltable_category": "usb drives",
+          "ltable_brand": "sony",
+          "ltable_modelno": "sf16n4/tqp",
+          "ltable_price": "0.0"
+        },
+        "rtuple": {
+          "rtable_title": "pny 4gb class 4 navy sd card",
+          "rtable_category": "car audio video",
+          "rtable_brand": "pny",
+          "rtable_modelno": "p-sdhc4g4-ef / navy",
+          "rtable_price": "11.18"
+        },
+        "prediction": 0,
+        "label": 0,
+        "saliency": {
+          "ltable_title": 0.0,
+          "ltable_category": 0.0,
+          "ltable_brand": 0.0,
+          "ltable_modelno": 0.0,
+          "ltable_price": 0.0,
+          "rtable_title": 0.0,
+          "rtable_category": 0.0,
+          "rtable_brand": 0.0,
+          "rtable_modelno": 0.0,
+          "rtable_price": 0.0
+        },
+        "cfs": [
+          {
+            "ltable_title": "sony 16gb class 4 sd memory card",
+            "ltable_category": "usb drives",
+            "ltable_brand": "sony",
+            "ltable_modelno": "sf16n4/tqp",
+            "ltable_price": "0.0",
+            "rtable_title": "pny 4gb class 4 navy sd card",
+            "rtable_category": "car audio video",
+            "rtable_brand": "pny",
+            "rtable_modelno": "p-sdhc4g4-ef / navy",
+            "rtable_price": "11.18"
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "ltuple": {
+          "ltable_title": "zotac geforce gt430 1gb ddr3 pci-express 2.0 graphics card",
+          "ltable_category": "electronics - general",
+          "ltable_brand": "zotac",
+          "ltable_modelno": "zt-40604-10l",
+          "ltable_price": "88.88"
+        },
+        "rtuple": {
+          "rtable_title": "evga geforce gts450 superclocked 1 gb gddr5 pci-express 2.0 graphics card 01g-p3-1452-tr",
+          "rtable_category": "graphics cards",
+          "rtable_brand": "evga",
+          "rtable_modelno": "01g-p3-1452-tr",
+          "rtable_price": "119.88"
+        },
+        "prediction": 0,
+        "label": 0,
+        "saliency": {
+          "ltable_title": 0.0,
+          "ltable_category": 0.0,
+          "ltable_brand": 0.0,
+          "ltable_modelno": 0.0,
+          "ltable_price": 0.0,
+          "rtable_title": 0.0,
+          "rtable_category": 0.0,
+          "rtable_brand": 0.0,
+          "rtable_modelno": 0.0,
+          "rtable_price": 0.0
+        },
+        "cfs": [
+          {
+            "ltable_title": "zotac geforce gt430 1gb ddr3 pci-express 2.0 graphics card",
+            "ltable_category": "electronics - general",
+            "ltable_brand": "zotac",
+            "ltable_modelno": "zt-40604-10l",
+            "ltable_price": "88.88",
+            "rtable_title": "evga geforce gts450 superclocked 1 gb gddr5 pci-express 2.0 graphics card 01g-p3-1452-tr",
+            "rtable_category": "graphics cards",
+            "rtable_brand": "evga",
+            "rtable_modelno": "01g-p3-1452-tr",
+            "rtable_price": "119.88"
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "ltuple": {
+          "ltable_title": "zotac geforce gt430 1gb ddr3 pci-express 2.0 graphics card",
+          "ltable_category": "electronics - general",
+          "ltable_brand": "zotac",
+          "ltable_modelno": "zt-40604-10l",
+          "ltable_price": "88.88"
+        },
+        "rtuple": {
+          "rtable_title": "evga geforce gts450 superclocked 1 gb gddr5 pci-express 2.0 graphics card 01g-p3-1452-tr",
+          "rtable_category": "graphics cards",
+          "rtable_brand": "evga",
+          "rtable_modelno": "01g-p3-1452-tr",
+          "rtable_price": "119.88"
+        },
+        "prediction": 0,
+        "label": 0,
+        "saliency": {
+          "ltable_title": 0.0,
+          "ltable_category": 0.0,
+          "ltable_brand": 0.0,
+          "ltable_modelno": 0.0,
+          "ltable_price": 0.0,
+          "rtable_title": 0.0,
+          "rtable_category": 0.0,
+          "rtable_brand": 0.0,
+          "rtable_modelno": 0.0,
+          "rtable_price": 0.0
+        },
+        "cfs": [
+          {
+            "ltable_title": "zotac geforce gt430 1gb ddr3 pci-express 2.0 graphics card",
+            "ltable_category": "electronics - general",
+            "ltable_brand": "zotac",
+            "ltable_modelno": "zt-40604-10l",
+            "ltable_price": "88.88",
+            "rtable_title": "evga geforce gts450 superclocked 1 gb gddr5 pci-express 2.0 graphics card 01g-p3-1452-tr",
+            "rtable_category": "graphics cards",
+            "rtable_brand": "evga",
+            "rtable_modelno": "01g-p3-1452-tr",
+            "rtable_price": "119.88"
+          }
+        ]
+      },
+      {
+        "id": 1,
+        "ltuple": {
+          "ltable_title": "zotac geforce gt430 1gb ddr3 pci-express 2.0 graphics card",
+          "ltable_category": "electronics - general",
+          "ltable_brand": "zotac",
+          "ltable_modelno": "zt-40604-10l",
+          "ltable_price": "88.88"
+        },
+        "rtuple": {
+          "rtable_title": "evga geforce gts450 superclocked 1 gb gddr5 pci-express 2.0 graphics card 01g-p3-1452-tr",
+          "rtable_category": "graphics cards",
+          "rtable_brand": "evga",
+          "rtable_modelno": "01g-p3-1452-tr",
+          "rtable_price": "119.88"
+        },
+        "prediction": 0,
+        "label": 0,
+        "saliency": {
+          "ltable_title": 0.0,
+          "ltable_category": 0.0,
+          "ltable_brand": 0.0,
+          "ltable_modelno": 0.0,
+          "ltable_price": 0.0,
+          "rtable_title": 0.0,
+          "rtable_category": 0.0,
+          "rtable_brand": 0.0,
+          "rtable_modelno": 0.0,
+          "rtable_price": 0.0
+        },
+        "cfs": [
+          {
+            "ltable_title": "zotac geforce gt430 1gb ddr3 pci-express 2.0 graphics card",
+            "ltable_category": "electronics - general",
+            "ltable_brand": "zotac",
+            "ltable_modelno": "zt-40604-10l",
+            "ltable_price": "88.88",
+            "rtable_title": "evga geforce gts450 superclocked 1 gb gddr5 pci-express 2.0 graphics card 01g-p3-1452-tr",
+            "rtable_category": "graphics cards",
+            "rtable_brand": "evga",
+            "rtable_modelno": "01g-p3-1452-tr",
+            "rtable_price": "119.88"
+          }
+        ]
+      }
+    ],
+    "total_time": 0.007684230804443359
+  }
+}
