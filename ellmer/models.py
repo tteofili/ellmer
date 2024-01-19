@@ -1119,6 +1119,7 @@ def falcon_pipeline(model_id="vilsonrodrigues/falcon-7b-instruct-sharded"):
         model_id,
         device_map="auto",
         quantization_config=quantization_config,
+        trust_remote_code=True
     )
 
     tokenizer = AutoTokenizer.from_pretrained(model_id)
