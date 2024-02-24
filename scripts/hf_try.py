@@ -17,8 +17,14 @@ from sklearn.metrics import f1_score
 from tqdm import tqdm
 from certa.utils import merge_sources
 from langchain.llms import HuggingFacePipeline
+import ellmer.models
 
-prompts = {"pase": "ellmer/prompts/constrained13.txt"}
+from huggingface_hub.hf_api import HfFolder
+
+HfFolder.save_token(os.getenv('HUGGINGFACEHUB_API_TOKEN'))
+
+# prompts = {"pase": "ellmer/prompts/constrained8.txt"}
+prompts = {"pase": "ellmer/prompts/constrained12.txt"}
 samples = 2
 conversation = []
 prompt = prompts['pase']
@@ -30,7 +36,7 @@ template = ChatPromptTemplate.from_messages(conversation)
 # new_conversation = conversation + [('ai', 'Ok, I can generate the two tables and return them in the form of a JSON'), ('user', 'ok, return the json')]
 
 dataset_names = ['beers', 'abt_buy', 'fodo_zaga', 'walmart_amazon']
-base_dir = '/Users/tteofili/dev/cheapER/datasets/'
+base_dir = '/Users/tommasoteofili/dev/cheapER/datasets'
 
 d = dataset_names[0]
 print(f'using dataset {d}')
@@ -50,23 +56,36 @@ curr_llm_results = []
 test_data_df = test_df[:samples]
 ranged = range(len(test_data_df))
 
+explanation_granularity = 'attribute'
+temperature = 0.01
+verbose = True
+
 for repo_name in [
-    "tiiuae/falcon-7b",
+    'HuggingFaceH4/zephyr-7b-beta',
     'tiiuae/falcon-7b-instruct',
-    "Writer/camel-5b-hf",
-    "google/flan-t5-xxl",
-    "internlm/internlm-chat-7b",
-    "Qwen/Qwen-7B"
-    "databricks/dolly-v2-3b",
-    #"tiiuae/falcon-40b",
-    #'EleutherAI/gpt-neox-20b',
+    "tiiuae/falcon-7b",
 ]:
 
-    hub = HuggingFaceHub(repo_id=repo_name, model_kwargs={'temperature': 0.01, 'max_length': 128})
-    print("******")
-    print("******")
-    print("******")
-    print(repo_name)
+    pase = ellmer.models.GenericEllmer(explanation_granularity=explanation_granularity,
+                                       deployment_name='', temperature=temperature,
+                                       model_name=repo_name, model_type='hf',
+                                       prompts={"pase": "ellmer/prompts/constrained13.txt"})
+
+    ptse = ellmer.models.GenericEllmer(explanation_granularity=explanation_granularity,
+                                       deployment_name='', temperature=temperature,
+                                       model_name=repo_name, model_type='hf',
+                                       prompts={"ptse": {"er": "ellmer/prompts/er.txt",
+                                                         "saliency": "ellmer/prompts/er-saliency-lc.txt",
+                                                         "cf": "ellmer/prompts/er-cf-lc.txt"}})
+
+    ptsew = ellmer.models.GenericEllmer(explanation_granularity=explanation_granularity,
+                                        deployment_name='', temperature=temperature,
+                                        model_name=repo_name, model_type='hf', verbose=verbose,
+                                        prompts={
+                                            "ptse": {"er": "ellmer/prompts/er.txt",
+                                                     "why": "ellmer/prompts/er-why.txt",
+                                                     "saliency": "ellmer/prompts/er-saliency-lc.txt",
+                                                     "cf": "ellmer/prompts/er-cf-lc.txt"}})
     for idx in tqdm(ranged, disable=False):
         try:
             rand_row = test_df.iloc[[idx]]
@@ -81,15 +100,18 @@ for repo_name in [
 
             answer = llm.predict_messages(messages=prompt.messages, ltuple=ltuple, rtuple=rtuple)'''
             print('---')
+            print('---')
+            print('---')
             print(ltuple)
             print('---')
             print(rtuple)
             print('---')
-            llm_chain = LLMChain(llm=hub, prompt=template)
-            #answer1 = llm_chain.apply([{"ltuple": str(ltuple), "rtuple": str(rtuple), "feature": 'attribute'}])
-            #print(answer1)
-            answer2 = llm_chain.predict(ltuple=str(ltuple), rtuple=str(rtuple), feature='attribute')
-            print(answer2)
+            answer_dictionary = pase.predict_and_explain(ltuple, rtuple)
+            print('---')
+            print(answer_dictionary)
+            print('---')
+            print('---')
+            print('---')
         except:
             traceback.print_exc()
     print("******")

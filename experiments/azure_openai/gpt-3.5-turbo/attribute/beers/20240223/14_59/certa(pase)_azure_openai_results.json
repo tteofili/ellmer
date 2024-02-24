@@ -1,0 +1,136 @@
+{
+  "data": [
+    {
+      "id": 0,
+      "ltuple": {
+        "ltable_Beer_Name": "Bulleit Bourbon Barrel Aged G'Knight",
+        "ltable_Brew_Factory_Name": "Oskar Blues Grill & Brew",
+        "ltable_Style": "American Amber / Red Ale",
+        "ltable_ABV": "8.70 %"
+      },
+      "rtuple": {
+        "rtable_Beer_Name": "Figure Eight Bourbon Barrel Aged Jumbo Love",
+        "rtable_Brew_Factory_Name": "Figure Eight Brewing",
+        "rtable_Style": "Barley Wine",
+        "rtable_ABV": "-"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_Beer_Name": [
+          0.875
+        ],
+        "ltable_Brew_Factory_Name": [
+          0.7916666666666667
+        ],
+        "ltable_Style": [
+          0.5833333333333334
+        ],
+        "ltable_ABV": [
+          0.6666666666666666
+        ],
+        "rtable_Beer_Name": [
+          0.5416666666666666
+        ],
+        "rtable_Brew_Factory_Name": [
+          0.5
+        ],
+        "rtable_Style": [
+          0.45833333333333337
+        ],
+        "rtable_ABV": [
+          0.5416666666666666
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_Beer_Name": "Bourbon Barrel Ro Shampo Imperial",
+          "ltable_Brew_Factory_Name": "Figure 8 Brewing",
+          "ltable_Style": "American Amber / Red Ale",
+          "ltable_ABV": "-",
+          "rtable_Beer_Name": "Figure Eight Bourbon Barrel Aged Jumbo Love",
+          "rtable_Brew_Factory_Name": "Figure Eight Brewing",
+          "rtable_Style": "Barley Wine",
+          "rtable_ABV": "-",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 32.00316071510315
+    },
+    {
+      "id": 1,
+      "ltuple": {
+        "ltable_Beer_Name": "Double Dragon Imperial Red Ale",
+        "ltable_Brew_Factory_Name": "Phillips Brewing Company",
+        "ltable_Style": "American Amber / Red Ale",
+        "ltable_ABV": "8.20 %"
+      },
+      "rtuple": {
+        "rtable_Beer_Name": "Scuttlebutt Mateo Loco Imperial Red Ale",
+        "rtable_Brew_Factory_Name": "Scuttlebutt Brewing Co. .",
+        "rtable_Style": "American Strong Ale",
+        "rtable_ABV": "7.10 %"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_Beer_Name": [
+          0.23684210526315785
+        ],
+        "ltable_Brew_Factory_Name": [
+          0.19736842105263158
+        ],
+        "ltable_Style": [
+          0.19736842105263158
+        ],
+        "ltable_ABV": [
+          0.15789473684210525
+        ],
+        "rtable_Beer_Name": [
+          0.5921052631578947
+        ],
+        "rtable_Brew_Factory_Name": [
+          0.4868421052631579
+        ],
+        "rtable_Style": [
+          0.4736842105263157
+        ],
+        "rtable_ABV": [
+          0.5921052631578948
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_Beer_Name": "Double Dragon Imperial Red Ale",
+          "ltable_Brew_Factory_Name": "Phillips Brewing Company",
+          "ltable_Style": "American Amber / Red Ale",
+          "ltable_ABV": "8.20 %",
+          "rtable_Beer_Name": "Scuttlebutt Mateo Loco Imperial Red Ale",
+          "rtable_Brew_Factory_Name": "Scuttlebutt Brewing Co. .",
+          "rtable_Style": "American Strong Ale",
+          "rtable_ABV": "8.20 %",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 668.3860673904419
+    }
+  ],
+  "total_time": 700.3913810253143,
+  "metrics": {
+    "faithfulness": {
+      "certa(pase)_azure_openai": 0.0
+    },
+    "counterfactual_metrics": {
+      "certa(pase)_azure_openai": {
+        "validity": 0.99999999995,
+        "proximity": 0.2499999999875,
+        "sparsity": 0.9499999999525,
+        "diversity": 0.0
+      }
+    }
+  },
+  "tokens": 368528.0,
+  "predictions": 959.0
+}
