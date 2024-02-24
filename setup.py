@@ -26,7 +26,8 @@ setuptools.setup(
           'einops',
           'safetensors',
           'torch',
-          'openai'
+          'openai',
+          'nltk'
       ],
     classifiers=[
         "Programming Language :: Python :: 3",

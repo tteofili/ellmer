@@ -1,0 +1,192 @@
+{
+  "data": [
+    {
+      "id": 0,
+      "ltuple": {
+        "ltable_Beer_Name": "Bulleit Bourbon Barrel Aged G'Knight",
+        "ltable_Brew_Factory_Name": "Oskar Blues Grill & Brew",
+        "ltable_Style": "American Amber / Red Ale",
+        "ltable_ABV": "8.70 %"
+      },
+      "rtuple": {
+        "rtable_Beer_Name": "Figure Eight Bourbon Barrel Aged Jumbo Love",
+        "rtable_Brew_Factory_Name": "Figure Eight Brewing",
+        "rtable_Style": "Barley Wine",
+        "rtable_ABV": "-"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_Beer_Name": [
+          1.0
+        ],
+        "ltable_Brew_Factory_Name": [
+          1.0
+        ],
+        "ltable_Style": [
+          1.0
+        ],
+        "ltable_ABV": [
+          0.8
+        ],
+        "rtable_Beer_Name": [
+          0.8
+        ],
+        "rtable_Brew_Factory_Name": [
+          0.8
+        ],
+        "rtable_Style": [
+          0.8
+        ],
+        "rtable_ABV": [
+          0.8
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_Beer_Name": "Jumbo Love",
+          "ltable_Brew_Factory_Name": "Figure 8 Brewing",
+          "ltable_Style": "Barleywine",
+          "ltable_ABV": "8.70 %",
+          "rtable_Beer_Name": "Figure Eight Bourbon Barrel Aged Jumbo Love",
+          "rtable_Brew_Factory_Name": "Figure Eight Brewing",
+          "rtable_Style": "Barley Wine",
+          "rtable_ABV": "-",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 59.295483112335205
+    },
+    {
+      "id": 1,
+      "ltuple": {
+        "ltable_Beer_Name": "Double Dragon Imperial Red Ale",
+        "ltable_Brew_Factory_Name": "Phillips Brewing Company",
+        "ltable_Style": "American Amber / Red Ale",
+        "ltable_ABV": "8.20 %"
+      },
+      "rtuple": {
+        "rtable_Beer_Name": "Scuttlebutt Mateo Loco Imperial Red Ale",
+        "rtable_Brew_Factory_Name": "Scuttlebutt Brewing Co. .",
+        "rtable_Style": "American Strong Ale",
+        "rtable_ABV": "7.10 %"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_Beer_Name": [
+          0.6415094339622641
+        ],
+        "ltable_Brew_Factory_Name": [
+          0.3773584905660377
+        ],
+        "ltable_Style": [
+          0.41509433962264153
+        ],
+        "ltable_ABV": [
+          0.39622641509433965
+        ],
+        "rtable_Beer_Name": [
+          0.5471698113207547
+        ],
+        "rtable_Brew_Factory_Name": [
+          0.32075471698113206
+        ],
+        "rtable_Style": [
+          0.3584905660377358
+        ],
+        "rtable_ABV": [
+          0.3773584905660377
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_Beer_Name": "Scuttlebutt Mateo Loco Imperial Red Ale",
+          "ltable_Brew_Factory_Name": "Phillips Brewing Company",
+          "ltable_Style": "American",
+          "ltable_ABV": "7.10 %",
+          "rtable_Beer_Name": "Scuttlebutt Mateo Loco Imperial Red Ale",
+          "rtable_Brew_Factory_Name": "Scuttlebutt Brewing Co. .",
+          "rtable_Style": "American Strong Ale",
+          "rtable_ABV": "7.10 %",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 70.02001190185547
+    },
+    {
+      "id": 2,
+      "ltuple": {
+        "ltable_Beer_Name": "Honey Basil Amber",
+        "ltable_Brew_Factory_Name": "Rude Hippo Brewing Company",
+        "ltable_Style": "American Amber / Red Ale",
+        "ltable_ABV": "7.40 %"
+      },
+      "rtuple": {
+        "rtable_Beer_Name": "Rude Hippo Honey Basil Amber",
+        "rtable_Brew_Factory_Name": "18th Street Brewery",
+        "rtable_Style": "Amber Ale",
+        "rtable_ABV": "7.40 %"
+      },
+      "prediction": 1,
+      "label": 1,
+      "saliency": {
+        "ltable_Beer_Name": [
+          0.21678321678321683
+        ],
+        "ltable_Brew_Factory_Name": [
+          0.21678321678321683
+        ],
+        "ltable_Style": [
+          0.21678321678321683
+        ],
+        "ltable_ABV": [
+          0.21678321678321683
+        ],
+        "rtable_Beer_Name": [
+          0.4125874125874126
+        ],
+        "rtable_Brew_Factory_Name": [
+          0.36363636363636365
+        ],
+        "rtable_Style": [
+          0.4125874125874126
+        ],
+        "rtable_ABV": [
+          0.4125874125874126
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_Beer_Name": "Honey Basil Amber",
+          "ltable_Brew_Factory_Name": "Rude Hippo Brewing Company",
+          "ltable_Style": "American Amber / Red Ale",
+          "ltable_ABV": "7.40 %",
+          "rtable_Beer_Name": "Rude Hippo Honey Basil Amber",
+          "rtable_Brew_Factory_Name": "18th Street Brewery",
+          "rtable_Style": "Amber Ale",
+          "rtable_ABV": "3.70 %",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 59.222066164016724
+    }
+  ],
+  "total_time": 188.54081392288208,
+  "metrics": {
+    "faithfulness": {
+      "certa(ptse)_azure_openai": 0.0
+    },
+    "counterfactual_metrics": {
+      "certa(ptse)_azure_openai": {
+        "validity": 0.6666666666444444,
+        "proximity": 0.29166666665694446,
+        "sparsity": 0.9416666666352779,
+        "diversity": 0.0
+      }
+    }
+  }
+}

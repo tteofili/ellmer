@@ -27,7 +27,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
     pase = ellmer.models.GenericEllmer(explanation_granularity=explanation_granularity,
                                        deployment_name=llm_config['deployment_name'], temperature=temperature,
                                        model_name=llm_config['model_name'], model_type=llm_config['model_type'],
-                                       prompts={"pase": "ellmer/prompts/constrained10.txt"})
+                                       prompts={"pase": "ellmer/prompts/constrained13.txt"})
 
     ptse = ellmer.models.GenericEllmer(explanation_granularity=explanation_granularity,
                                        deployment_name=llm_config['deployment_name'], temperature=temperature,
@@ -133,7 +133,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
 
                 metrics_results = {"faithfulness": faithfulness, "counterfactual_metrics": cf_metrics}
 
-                llm_results = {"data": curr_llm_results, "total_time": total_time, "metrics": metrics_results}
+                llm_results = {"data": curr_llm_results, "total_time": total_time, "metrics": metrics_results, "tokens": llm.count_tokens()/samples, "predictions":llm.count_predictions()/samples}
 
                 output_file_path = expdir + key + '_results.json'
                 with open(output_file_path, 'w') as fout:
@@ -162,7 +162,7 @@ if __name__ == "__main__":
     parser.add_argument('--base_dir', metavar='b', type=str, help='the datasets base directory',
                         required=True)
     parser.add_argument('--model_type', metavar='m', type=str, help='the LLM type to evaluate',
-                        choices=['azure_openai', 'falcon', 'llama2'], required=True)
+                        choices=['azure_openai', 'falcon', 'llama2', 'hf'], required=True)
     parser.add_argument('--datasets', metavar='d', type=str, nargs='+', required=True,
                         help='the dataset(s) to be used for the evaluation')
     parser.add_argument('--samples', metavar='s', type=int, default=-1,

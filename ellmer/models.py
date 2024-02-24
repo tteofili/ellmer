@@ -5,6 +5,8 @@ from langchain import PromptTemplate, HuggingFaceHub, OpenAI
 from langchain.chains import LLMChain
 from langchain.chat_models import AzureChatOpenAI
 from langchain.llms import HuggingFacePipeline, LlamaCpp
+from langchain_community.chat_models.huggingface import ChatHuggingFace
+
 import random
 from certa.models.ermodel import ERModel
 import numpy as np
@@ -65,6 +67,12 @@ class Ellmer:
         labels = data_df['label'].astype(int).values
         return f1_score(y_true=labels, y_pred=predictions)
 
+    def count_predictions(self):
+        return self.pred_count
+
+    def count_tokens(self):
+        return self.tokens
+
 
 class CertaEllmer(Ellmer):
 
@@ -115,6 +123,12 @@ class CertaEllmer(Ellmer):
             if len(result) > 1:
                 print(f'warning: found more than 1 item!({len(result)})')
         return result.iloc[0]
+
+    def count_predictions(self):
+        return self.delegate.count_predictions()
+
+    def count_tokens(self):
+        return self.delegate.count_tokens()
 
 
 class UnCertaEllmer(CertaEllmer):
@@ -186,6 +200,12 @@ class UnCertaEllmer(CertaEllmer):
         return {"prediction": prediction, "saliency": saliency_explanation, "cf": cf_explanation,
                 "filter_features": filter_features}
 
+    def count_predictions(self):
+        return self.delegate.count_predictions()
+
+    def count_tokens(self):
+        return self.delegate.count_tokens()
+
 
 class GenericEllmer(Ellmer):
 
@@ -195,8 +215,10 @@ class GenericEllmer(Ellmer):
         self.fake = fake
         self.model_type = model_type
         if model_type == 'hf':
-            self.llm = HuggingFaceHub(repo_id=model_name,
-                                      model_kwargs={'temperature': temperature, 'max_length': max_length})
+            llm = HuggingFaceHub(repo_id=model_name, task="text-generation",
+                                      model_kwargs={'temperature': temperature, 'max_length': max_length,
+                                                    'max_new_tokens':1024})
+            self.llm = ChatHuggingFace(llm=llm)
         elif model_type == 'openai':
             self.llm = OpenAI(temperature=temperature, model_name=model_name)
         elif model_type == 'azure_openai':
@@ -215,6 +237,8 @@ class GenericEllmer(Ellmer):
         else:
             self.explainer_fn = explainer_fn
         self.prompts = prompts
+        self.pred_count = 0
+        self.tokens = 0
 
     def predict_tuples(self, ltuple, rtuple):
         conversation = []
@@ -236,6 +260,9 @@ class GenericEllmer(Ellmer):
 
             # parse answer into prediction
             _, prediction = ellmer.utils.text_to_match(er_answer, self.llm)
+            self.pred_count += 1
+            self.tokens += sum([len(m[1].split(' ')) for m in conversation]) # input tokens
+            self.tokens += len(er_answer.split(' ')) # output tokens
         else:
             prediction = self.predict_and_explain(ltuple, rtuple)['prediction']
         if self.verbose:
@@ -258,7 +285,7 @@ class GenericEllmer(Ellmer):
             if self.verbose:
                 prep_t = time() - prep_t
                 print(f'prep_time:{prep_t}')
-            if self.model_type in ['hf', 'falcon', 'llama2']:
+            if self.model_type in ['falcon', 'llama2']:
                 if self.verbose:
                     pre_pred_t = time()
                 chain = LLMChain(llm=self.llm, prompt=template)
@@ -270,6 +297,14 @@ class GenericEllmer(Ellmer):
                 if self.verbose:
                     pred_t = time() - pred_t
                     print(f'pred_time:{pred_t}')
+                    print(f'content:{content}')
+            elif self.model_type in ['hf']:
+                raw_content = self.llm.invoke(conversation)
+                print(raw_content)
+                try:
+                    content = raw_content.content.split('<|assistant|>')[2]
+                except:
+                    content = '{}'
             else:
                 if self.verbose:
                     pre_pred_t = time()
@@ -293,6 +328,9 @@ class GenericEllmer(Ellmer):
                 print(f'parse_time:{parse_t}')
             if prediction is None:
                 print(f'empty prediction!\nquestion{question}\nconversation{conversation}')
+            self.pred_count += 1
+            self.tokens += sum([len(m[1].split(' ')) for m in conversation])  # input tokens
+            self.tokens += len(content.split(' '))  # output tokens
             return {"prediction": prediction, "saliency": saliency_explanation, "cf": cf_explanation}
         elif "ptse" in self.prompts:
             if self.verbose:
@@ -319,6 +357,7 @@ class GenericEllmer(Ellmer):
                 if self.verbose:
                     pred_t = time() - pred_t
                     print(f'er_pred_time:{pred_t}')
+                    print(f'er_answer:{er_answer}')
             else:
                 if self.verbose:
                     pre_pred_t = time()
@@ -341,6 +380,9 @@ class GenericEllmer(Ellmer):
             if self.verbose:
                 parse_t = time() - parse_t
                 print(f'er_parse_time:{parse_t}')
+
+            self.pred_count += 1
+
             conversation.append(("assistant", er_answer))
 
             why = None
@@ -369,6 +411,7 @@ class GenericEllmer(Ellmer):
                     if self.verbose:
                         pred_t = time() - pred_t
                         print(f'why_pred_time:{pred_t}')
+                        print(f'why_answer:{why_answer}')
                 else:
                     if self.verbose:
                         pre_pred_t = time()
@@ -387,6 +430,7 @@ class GenericEllmer(Ellmer):
                     print(why_answer)
                 why = why_answer
                 conversation.append(("assistant", why_answer))
+                self.pred_count += 1
 
             # saliency explanation
             if "saliency" in ptse_prompts:
@@ -411,6 +455,7 @@ class GenericEllmer(Ellmer):
                     if self.verbose:
                         pred_t = time() - pred_t
                         print(f'saliency_pred_time:{pred_t}')
+                        print(f'saliency_answer:{saliency_answer}')
                 else:
                     if self.verbose:
                         pre_pred_t = time()
@@ -446,6 +491,7 @@ class GenericEllmer(Ellmer):
                     parse_t = time() - parse_t
                     print(f'saliency_parse_time:{parse_t}')
                 conversation.append(("assistant", "{" + str(saliency_explanation) + "}"))
+                self.pred_count += 1
 
             # counterfactual explanation
             if "cf" in ptse_prompts:
@@ -470,7 +516,7 @@ class GenericEllmer(Ellmer):
                     if self.verbose:
                         pred_t = time() - pred_t
                         print(f'cf_pred_time:{pred_t}')
-                    print(cf_answer)
+                        print(f'cf_answer:{cf_answer}')
                 else:
                     if self.verbose:
                         pre_pred_t = time()
@@ -534,6 +580,9 @@ class GenericEllmer(Ellmer):
                     parse_t = time() - parse_t
                     print(f'cf_parse_time:{parse_t}')
                 conversation.append(("assistant", str(cf_explanation)))
+                self.pred_count += 1
+
+            self.tokens += sum([len(m[1].split(' ')) for m in conversation])
             return {"prediction": prediction, "why": why, "saliency": saliency_explanation, "cf": cf_explanation}
 
 
@@ -1108,24 +1157,29 @@ class AzureOpenAIERModel(ERModel):
         return pd.concat(xcs, axis=0)
 
 
-def falcon_pipeline(model_id="vilsonrodrigues/falcon-7b-instruct-sharded"):
-    quantization_config = BitsAndBytesConfig(
-        load_in_4bit=True,
-        bnb_4bit_compute_dtype=torch.float16,
-        bnb_4bit_quant_type="nf4",
-        bnb_4bit_use_double_quant=True,
-    )
-    model_4bit = AutoModelForCausalLM.from_pretrained(
-        model_id,
-        device_map="auto",
-        quantization_config=quantization_config,
-        trust_remote_code=True
-    )
+def falcon_pipeline(model_id="vilsonrodrigues/falcon-7b-instruct-sharded", quantized:bool = False):
+
+    if quantized:
+        quantization_config = BitsAndBytesConfig(
+            load_in_4bit=True,
+            bnb_4bit_compute_dtype=torch.float16,
+            bnb_4bit_quant_type="nf4",
+            bnb_4bit_use_double_quant=True,
+        )
+        model_4bit = AutoModelForCausalLM.from_pretrained(
+            model_id,
+            device_map="auto",
+            quantization_config=quantization_config,
+            trust_remote_code=True
+        )
+        model = model_4bit
+    else:
+        model = model_id
 
     tokenizer = AutoTokenizer.from_pretrained(model_id)
     fpip = pipeline(
         "text-generation",
-        model=model_4bit,
+        model=model,
         tokenizer=tokenizer,
         use_cache=True,
         device_map="auto",
