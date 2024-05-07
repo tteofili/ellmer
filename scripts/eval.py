@@ -27,7 +27,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
     pase = ellmer.models.GenericEllmer(explanation_granularity=explanation_granularity,
                                        deployment_name=llm_config['deployment_name'], temperature=temperature,
                                        model_name=llm_config['model_name'], model_type=llm_config['model_type'],
-                                       prompts={"pase": "ellmer/prompts/constrained13.txt"})
+                                       prompts={"pase": "ellmer/prompts/constrained7.txt"})
 
     ptse = ellmer.models.GenericEllmer(explanation_granularity=explanation_granularity,
                                        deployment_name=llm_config['deployment_name'], temperature=temperature,
@@ -99,9 +99,13 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
                     prediction = answer_dictionary['prediction']
                     saliency = answer_dictionary['saliency']
                     cfs = [answer_dictionary['cf']]
+                    if 'conversation' in answer_dictionary:
+                        conversation = answer_dictionary['conversation']
+                    else:
+                        conversation = ''
                     row_dict = {"id": idx, "ltuple": ltuple, "rtuple": rtuple, "prediction": prediction,
                               "label": rand_row['label'].values[0], "saliency": saliency, "cfs": cfs,
-                              "latency": ptime}
+                              "latency": ptime, "conversation": conversation}
                     if "filter_features" in answer_dictionary:
                         row_dict["filter_features"] = answer_dictionary["filter_features"]
                     curr_llm_results.append(row_dict)
@@ -179,7 +183,7 @@ if __name__ == "__main__":
                         default="gpt-3.5-turbo")
     parser.add_argument('--deployment_name', metavar='dn', type=str, help='deployment name',
                         default="gpt-35-turbo")
-    parser.add_argument('--tag', metavar='tg', type=str, help='run tag', default="run tag")
+    parser.add_argument('--tag', metavar='tg', type=str, help='run tag', default="sample")
     parser.add_argument('--temperature', metavar='tp', type=float, help='LLM temperature', default=0.01)
 
     args = parser.parse_args()

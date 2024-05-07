@@ -23,7 +23,8 @@ from transformers import BitsAndBytesConfig, AutoModelForCausalLM, AutoTokenizer
 from time import time
 
 hf_models = ['EleutherAI/gpt-neox-20b', 'tiiuae/falcon-7b-instruct', "Writer/camel-5b-hf", "databricks/dolly-v2-3b",
-             "google/flan-t5-xxl", "tiiuae/falcon-40b", "tiiuae/falcon-7b", "internlm/internlm-chat-7b", "Qwen/Qwen-7B"]
+             "google/flan-t5-xxl", "tiiuae/falcon-40b", "tiiuae/falcon-7b", "internlm/internlm-chat-7b", "Qwen/Qwen-7B",
+             "meta-llama/Llama-2-7b-chat-hf"]
 
 openai.api_base = os.getenv("OPENAI_API_BASE")
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -141,7 +142,7 @@ class UnCertaEllmer(CertaEllmer):
         self.predict_fn = lambda x: self.delegate.predict(x)
         self.num_draws = num_draws
 
-    def predict_and_explain(self, ltuple, rtuple, max_predict: int = -1, verbose: bool = False):
+    def predict_and_explain(self, ltuple, rtuple, max_predict: int = -1, verbose: bool = False, combine: str = 'freq'):
         satisfied = False
         prediction = {}
         saliency_explanation = {}
@@ -161,20 +162,41 @@ class UnCertaEllmer(CertaEllmer):
                 ltuple_series = self.get_row(ltuple, self.certa.lsource, prefix="ltable_")
                 rtuple_series = self.get_row(rtuple, self.certa.rsource, prefix="rtable_")
 
-                # get most frequent features from the self-explanations
-                filter_features = []
-                for se in pae_dicts:
-                    sorted_attributes_dict = sorted(se.items(), key=operator.itemgetter(1), reverse=True)[:top_k]
-                    freq_tokens = [f[0] for f in sorted_attributes_dict]
-                    filter_features = filter_features + freq_tokens
-                fc = {}
-                for f in filter_features:
-                    if f in fc:
-                        fc[f] = fc[f] + 1
-                    else:
-                        fc[f] = 1
-                sorted_fc = sorted(fc.items(), key=operator.itemgetter(1), reverse=True)[:top_k]
-                filter_features = [sfc[0] for sfc in sorted_fc]
+                if combine == 'freq':
+                    # get most frequent features from the self-explanations
+                    filter_features = []
+                    for se in pae_dicts:
+                        sorted_attributes_dict = sorted(se.items(), key=operator.itemgetter(1), reverse=True)[:top_k]
+                        top_features = [f[0] for f in sorted_attributes_dict]
+                        filter_features = filter_features + top_features
+                    fc = {}
+                    for f in filter_features:
+                        if f in fc:
+                            fc[f] = fc[f] + 1
+                        else:
+                            fc[f] = 1
+                    sorted_fc = sorted(fc.items(), key=operator.itemgetter(1), reverse=True)[:top_k]
+                    filter_features = [sfc[0] for sfc in sorted_fc]
+                elif combine == 'union':
+                    # get all features from the self-explanations
+                    filter_features = []
+                    for se in pae_dicts:
+                        sorted_attributes_dict = sorted(se.items(), key=operator.itemgetter(1), reverse=True)[:top_k]
+                        top_features = [f[0] for f in sorted_attributes_dict]
+                        filter_features.append(top_features)
+                    filter_features = list(set(filter_features))
+                elif combine == 'intersection':
+                    # get recurring features only from the self-explanations
+                    filter_features = set()
+                    for se in pae_dicts:
+                        sorted_attributes_dict = sorted(se.items(), key=operator.itemgetter(1), reverse=True)[:top_k]
+                        top_features = set([f[0] for f in sorted_attributes_dict])
+                        if len(filter_features) == 0:
+                            filter_features = top_features
+                        filter_features = filter_features.intersection(top_features)
+                else:
+                    raise ValueError("Unknown combination method")
+
                 saliency_df, cf_summary, cfs, tri, _ = self.certa.explain(ltuple_series, rtuple_series, self.predict_fn,
                                                                           token="token" == self.explanation_granularity,
                                                                           num_triangles=self.num_triangles,
@@ -191,7 +213,7 @@ class UnCertaEllmer(CertaEllmer):
                     if type(sev) == list:
                         aggregated_pn += sev[0]
                     else:
-                        aggregated_pn +=sev
+                        aggregated_pn += sev
                 if aggregated_pn >= 0.5:
                     satisfied = True
                 top_k += 1
@@ -216,8 +238,8 @@ class GenericEllmer(Ellmer):
         self.model_type = model_type
         if model_type == 'hf':
             llm = HuggingFaceHub(repo_id=model_name, task="text-generation",
-                                      model_kwargs={'temperature': temperature, 'max_length': max_length,
-                                                    'max_new_tokens':1024})
+                                 model_kwargs={'temperature': temperature, 'max_length': max_length,
+                                               'max_new_tokens': 1024})
             self.llm = ChatHuggingFace(llm=llm)
         elif model_type == 'openai':
             self.llm = OpenAI(temperature=temperature, model_name=model_name)
@@ -261,8 +283,8 @@ class GenericEllmer(Ellmer):
             # parse answer into prediction
             _, prediction = ellmer.utils.text_to_match(er_answer, self.llm)
             self.pred_count += 1
-            self.tokens += sum([len(m[1].split(' ')) for m in conversation]) # input tokens
-            self.tokens += len(er_answer.split(' ')) # output tokens
+            self.tokens += sum([len(m[1].split(' ')) for m in conversation])  # input tokens
+            self.tokens += len(er_answer.split(' '))  # output tokens
         else:
             prediction = self.predict_and_explain(ltuple, rtuple)['prediction']
         if self.verbose:
@@ -299,12 +321,12 @@ class GenericEllmer(Ellmer):
                     print(f'pred_time:{pred_t}')
                     print(f'content:{content}')
             elif self.model_type in ['hf']:
-                raw_content = self.llm.invoke(conversation)
-                print(raw_content)
+                messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple, rtuple=rtuple)
+                raw_content = self.llm.invoke(messages)
                 try:
-                    content = raw_content.content.split('<|assistant|>')[2]
+                    content = raw_content.content.split('[/INST]')[-1]
                 except:
-                    content = '{}'
+                    content = raw_content.content
             else:
                 if self.verbose:
                     pre_pred_t = time()
@@ -320,8 +342,8 @@ class GenericEllmer(Ellmer):
                 content = answer.content
             if self.verbose:
                 print(content)
-            if self.verbose:
                 parse_t = time()
+            conversation.append(("assistant", content))
             prediction, saliency_explanation, cf_explanation = parse_pase_answer(content, self.llm)
             if self.verbose:
                 parse_t = time() - parse_t
@@ -331,7 +353,8 @@ class GenericEllmer(Ellmer):
             self.pred_count += 1
             self.tokens += sum([len(m[1].split(' ')) for m in conversation])  # input tokens
             self.tokens += len(content.split(' '))  # output tokens
-            return {"prediction": prediction, "saliency": saliency_explanation, "cf": cf_explanation}
+            return {"prediction": prediction, "saliency": saliency_explanation, "cf": cf_explanation,
+                    "conversation": conversation}
         elif "ptse" in self.prompts:
             if self.verbose:
                 prep_t = time()
@@ -345,7 +368,7 @@ class GenericEllmer(Ellmer):
             if self.verbose:
                 prep_t = time() - prep_t
                 print(f'er_prep_time:{prep_t}')
-            if self.model_type in ['hf', 'falcon', 'llama2']:
+            if self.model_type in ['falcon', 'llama2']:
                 if self.verbose:
                     pre_pred_t = time()
                 chain = LLMChain(llm=self.llm, prompt=template)
@@ -358,6 +381,13 @@ class GenericEllmer(Ellmer):
                     pred_t = time() - pred_t
                     print(f'er_pred_time:{pred_t}')
                     print(f'er_answer:{er_answer}')
+            elif self.model_type in ['hf']:
+                messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple, rtuple=rtuple)
+                er_answer = self.llm.invoke(messages).content
+                try:
+                    er_answer = er_answer.split('[/INST]')[2]
+                except:
+                    pass
             else:
                 if self.verbose:
                     pre_pred_t = time()
@@ -399,7 +429,7 @@ class GenericEllmer(Ellmer):
                 if self.verbose:
                     prep_t = time() - prep_t
                     print(f'why_prep_time:{prep_t}')
-                if self.model_type in ['hf', 'falcon', 'llama2']:
+                if self.model_type in ['falcon', 'llama2']:
                     if self.verbose:
                         pre_pred_t = time()
                     chain = LLMChain(llm=self.llm, prompt=template)
@@ -412,6 +442,14 @@ class GenericEllmer(Ellmer):
                         pred_t = time() - pred_t
                         print(f'why_pred_time:{pred_t}')
                         print(f'why_answer:{why_answer}')
+                elif self.model_type in ['hf']:
+                    messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple,
+                                                        rtuple=rtuple)
+                    why_answer = self.llm.invoke(messages).content
+                    try:
+                        why_answer = why_answer.split('[/INST]')[-1]
+                    except:
+                        pass
                 else:
                     if self.verbose:
                         pre_pred_t = time()
@@ -442,7 +480,7 @@ class GenericEllmer(Ellmer):
                 if self.verbose:
                     prep_t = time() - prep_t
                     print(f'saliency_prep_time:{prep_t}')
-                if self.model_type in ['hf', 'falcon', 'llama2']:
+                if self.model_type in ['falcon', 'llama2']:
                     if self.verbose:
                         pre_pred_t = time()
                     chain = LLMChain(llm=self.llm, prompt=template)
@@ -456,6 +494,14 @@ class GenericEllmer(Ellmer):
                         pred_t = time() - pred_t
                         print(f'saliency_pred_time:{pred_t}')
                         print(f'saliency_answer:{saliency_answer}')
+                elif self.model_type in ['hf']:
+                    messages = template.format_messages(ltuple=ltuple, rtuple=rtuple, prediction=prediction,
+                                                        feature=self.explanation_granularity)
+                    saliency_answer = self.llm.invoke(messages).content
+                    try:
+                        saliency_answer = saliency_answer.split('[/INST]')[-1]
+                    except:
+                        pass
                 else:
                     if self.verbose:
                         pre_pred_t = time()
@@ -473,12 +519,17 @@ class GenericEllmer(Ellmer):
                     saliency_answer = answer.content
                 if self.verbose:
                     print(saliency_answer)
-                if self.verbose:
                     parse_t = time()
                 saliency_explanation = dict()
                 try:
-                    saliency = saliency_answer.replace('`', '').replace('´', '').split('```')[1]
-                    saliency_dict = json.loads(saliency)
+                    saliency_content = saliency_answer
+                    try:
+                        saliency_content = saliency_answer.split('```')[1].replace('`', '').replace('´', '')
+                    except:
+                        if '```' in saliency_answer:
+                            start_index = saliency_answer.index('```')
+                            saliency_content = saliency_answer[start_index + 3:saliency_answer.index('```', start_index + 3)]
+                    saliency_dict = json.loads(saliency_content)
                     saliency_explanation = saliency_dict
                 except:
                     try:
@@ -490,7 +541,7 @@ class GenericEllmer(Ellmer):
                 if self.verbose:
                     parse_t = time() - parse_t
                     print(f'saliency_parse_time:{parse_t}')
-                conversation.append(("assistant", "{" + str(saliency_explanation) + "}"))
+                conversation.append(("assistant", json.dumps(saliency_explanation).replace('{','').replace('}','')))
                 self.pred_count += 1
 
             # counterfactual explanation
@@ -503,7 +554,7 @@ class GenericEllmer(Ellmer):
                 if self.verbose:
                     prep_t = time() - prep_t
                     print(f'cf_prep_time:{prep_t}')
-                if self.model_type in ['hf', 'falcon', 'llama2']:
+                if self.model_type in ['falcon', 'llama2']:
                     if self.verbose:
                         pre_pred_t = time()
                     chain = LLMChain(llm=self.llm, prompt=template)
@@ -517,6 +568,14 @@ class GenericEllmer(Ellmer):
                         pred_t = time() - pred_t
                         print(f'cf_pred_time:{pred_t}')
                         print(f'cf_answer:{cf_answer}')
+                elif self.model_type in ['hf']:
+                    messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple,
+                                                        rtuple=rtuple, prediction=prediction)
+                    cf_answer = self.llm.invoke(messages).content
+                    try:
+                        cf_answer = cf_answer.split('[/INST]')[-1]
+                    except:
+                        pass
                 else:
                     if self.verbose:
                         pre_pred_t = time()
@@ -534,7 +593,6 @@ class GenericEllmer(Ellmer):
                     cf_answer = answer.content
                 if self.verbose:
                     print(cf_answer)
-                if self.verbose:
                     parse_t = time()
                 cf_explanation = dict()
                 try:
@@ -583,7 +641,8 @@ class GenericEllmer(Ellmer):
                 self.pred_count += 1
 
             self.tokens += sum([len(m[1].split(' ')) for m in conversation])
-            return {"prediction": prediction, "why": why, "saliency": saliency_explanation, "cf": cf_explanation}
+            return {"prediction": prediction, "why": why, "saliency": saliency_explanation, "cf": cf_explanation,
+                    "conversation": conversation}
 
 
 def parse_pase_answer(answer, llm):
@@ -663,6 +722,7 @@ def parse_pase_answer(answer, llm):
     return matching, saliency, cf
 
 
+# deprecated
 class Certa(Ellmer):
 
     def __init__(self, explanation_granularity, delegate, certa, num_triangles=10):
@@ -698,6 +758,7 @@ class Certa(Ellmer):
         return matching, saliency, counterfactuals
 
 
+# deprecated
 class PASE(Ellmer):
 
     def __init__(self, explanation_granularity, temperature):
@@ -744,6 +805,7 @@ class PASE(Ellmer):
         return {"prediction": matching, "saliency_explanation": saliency, "cf": cf}
 
 
+# deprecated
 class PTSE(Ellmer):
 
     def __init__(self, explanation_granularity, why, temperature):
@@ -792,6 +854,7 @@ class PTSE(Ellmer):
         return matching, saliency, [cf]
 
 
+# deprecated
 class LLMERModel(ERModel):
     count = 0
     idks = 0
@@ -897,6 +960,7 @@ class LLMERModel(ERModel):
         return no_match_score, match_score
 
 
+# deprecated
 class PredictThenSelfExplainER:
     def __init__(self, explanation_granularity: str = "attribute", why: bool = False, temperature=0):
         self.explanation_granularity = explanation_granularity
@@ -1057,6 +1121,7 @@ class PredictThenSelfExplainER:
         return f1_score(y_true=labels, y_pred=predictions)
 
 
+# deprecated
 class PredictAndSelfExplainER:
 
     def __init__(self, explanation_granularity: str = "attribute", temperature: float = 0):
@@ -1116,6 +1181,7 @@ class PredictAndSelfExplainER:
         return f1_score(y_true=labels, y_pred=predictions)
 
 
+# deprecated
 class AzureOpenAIERModel(ERModel):
 
     def __init__(self, temperature: float = 0):
@@ -1157,8 +1223,7 @@ class AzureOpenAIERModel(ERModel):
         return pd.concat(xcs, axis=0)
 
 
-def falcon_pipeline(model_id="vilsonrodrigues/falcon-7b-instruct-sharded", quantized:bool = False):
-
+def falcon_pipeline(model_id="vilsonrodrigues/falcon-7b-instruct-sharded", quantized: bool = False):
     if quantized:
         quantization_config = BitsAndBytesConfig(
             load_in_4bit=True,
