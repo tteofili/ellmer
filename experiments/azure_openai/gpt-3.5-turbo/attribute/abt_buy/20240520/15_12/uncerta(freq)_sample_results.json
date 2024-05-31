@@ -1,0 +1,19 @@
+{
+  "data": [],
+  "total_time": 61.85635995864868,
+  "metrics": {
+    "faithfulness": {
+      "uncerta(freq)_sample": 0.0
+    },
+    "counterfactual_metrics": {
+      "uncerta(freq)_sample": {
+        "validity": 0.0,
+        "proximity": 0.0,
+        "sparsity": 0.0,
+        "diversity": 0.0
+      }
+    }
+  },
+  "tokens": 46577.0,
+  "predictions": 899.5
+}

@@ -1,0 +1,128 @@
+{
+  "data": [
+    {
+      "id": 0,
+      "ltuple": {
+        "ltable_name": "sony pink cyber-shot 7.2 megapixel digital camera dscw120p",
+        "ltable_description": "sony pink cyber-shot 7.2 megapixel digital camera dscw120p 7.2 megapixel 4x optical zoom 2.5 ' tft lcd 15 mb internal memory face detection super steadyshot image stabilization smile shutter mode smart zoom pink finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "olympus fe-360 digital camera pink 226540",
+        "rtable_description": "8 megapixel 16:9 3x optical zoom 4x digital zoom 2.5 ' color lcd",
+        "rtable_price": "104.95"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_description": [
+          1.0
+        ]
+      },
+      "cfs": [
+        {}
+      ],
+      "latency": 77.48479986190796,
+      "conversation": "",
+      "filter_features": [
+        "ltable_description"
+      ],
+      "self_explanations": [
+        {
+          "ltable_name": 0.1,
+          "ltable_description": 0.8,
+          "ltable_price": 0.1,
+          "rtable_name": 0.2,
+          "rtable_description": 0.7,
+          "rtable_price": 0.1
+        },
+        {
+          "ltable_name": 0.0,
+          "ltable_description": 0.0,
+          "ltable_price": 0.0,
+          "rtable_name": 0.0,
+          "rtable_description": 0.0,
+          "rtable_price": 0.0
+        },
+        {
+          "ltable_name": 0.0,
+          "ltable_description": 0.0,
+          "ltable_price": 0.0,
+          "rtable_name": 0.0,
+          "rtable_description": 0.0,
+          "rtable_price": 0.0
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "ltuple": {
+        "ltable_name": "lg 2.0 cu . ft. over-the-range white microwave oven lmvm2085wh",
+        "ltable_description": "lg 2.0 cu . ft. over-the-range white microwave oven lmvm2085wh warming lamp glide & spin sliding tray with turntable sensor cook feature 300 cfm exhaust system horizontal keypad elegant hidden vent wideview window halogen cooktop lighting white finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "maytag 2.0 cu . ft. over-the-range microwave oven",
+        "rtable_description": "nan",
+        "rtable_price": "nan"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_description": [
+          1.0
+        ]
+      },
+      "cfs": [
+        {}
+      ],
+      "latency": 131.58718180656433,
+      "conversation": "",
+      "filter_features": [
+        "ltable_description"
+      ],
+      "self_explanations": [
+        {
+          "ltable_name": 0.2,
+          "ltable_description": 0.8,
+          "ltable_price": 0.0,
+          "rtable_name": 0.0,
+          "rtable_description": 0.0,
+          "rtable_price": 0.0
+        },
+        {
+          "ltable_name": 0.0,
+          "ltable_description": 0.0,
+          "ltable_price": 0.0,
+          "rtable_name": 0.0,
+          "rtable_description": 0.0,
+          "rtable_price": 0.0
+        },
+        {
+          "ltable_name": 0.0,
+          "ltable_description": 0.0,
+          "ltable_price": 0.0,
+          "rtable_name": 0.0,
+          "rtable_description": 0.0,
+          "rtable_price": 0.0
+        }
+      ]
+    }
+  ],
+  "total_time": 209.09624791145325,
+  "metrics": {
+    "faithfulness": {
+      "uncerta(freq)_sample": 0.0
+    },
+    "counterfactual_metrics": {
+      "uncerta(freq)_sample": {
+        "validity": 0.0,
+        "proximity": 0.0,
+        "sparsity": 0.0,
+        "diversity": 0.0
+      }
+    }
+  },
+  "tokens": 45220.0,
+  "predictions": 873.5
+}

@@ -1,0 +1,403 @@
+{
+  "data": [
+    {
+      "id": 0,
+      "ltuple": {
+        "ltable_Beer_Name": "Bulleit Bourbon Barrel Aged G'Knight",
+        "ltable_Brew_Factory_Name": "Oskar Blues Grill & Brew",
+        "ltable_Style": "American Amber / Red Ale",
+        "ltable_ABV": "8.70 %"
+      },
+      "rtuple": {
+        "rtable_Beer_Name": "Figure Eight Bourbon Barrel Aged Jumbo Love",
+        "rtable_Brew_Factory_Name": "Figure Eight Brewing",
+        "rtable_Style": "Barley Wine",
+        "rtable_ABV": "-"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_Beer_Name": [
+          0.45
+        ],
+        "ltable_Brew_Factory_Name": [
+          0.45
+        ],
+        "ltable_Style": [
+          0.45
+        ],
+        "ltable_ABV": [
+          0.25
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_Beer_Name": "Jumbo Love",
+          "ltable_Brew_Factory_Name": "Figure 8 Brewing",
+          "ltable_Style": "Barleywine",
+          "ltable_ABV": "8.70 %",
+          "rtable_Beer_Name": "Figure Eight Bourbon Barrel Aged Jumbo Love",
+          "rtable_Brew_Factory_Name": "Figure Eight Brewing",
+          "rtable_Style": "Barley Wine",
+          "rtable_ABV": "-",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 186.03248691558838,
+      "conversation": "",
+      "filter_features": [
+        "ltable_ABV",
+        "ltable_Style",
+        "ltable_Beer_Name",
+        "ltable_Brew_Factory_Name"
+      ],
+      "self_explanations": [
+        {
+          "ltable_Beer_Name": 0.2,
+          "ltable_Brew_Factory_Name": 0.1,
+          "ltable_Style": 0.3,
+          "ltable_ABV": 0.4
+        },
+        {
+          "ltable_Beer_Name": 0.0,
+          "ltable_Brew_Factory_Name": 0.0,
+          "ltable_Style": 0.0,
+          "ltable_ABV": 0.0,
+          "rtable_Beer_Name": 0.0,
+          "rtable_Brew_Factory_Name": 0.0,
+          "rtable_Style": 0.0,
+          "rtable_ABV": 0.0
+        },
+        {
+          "ltable_Beer_Name": 0.0,
+          "ltable_Brew_Factory_Name": 0.0,
+          "ltable_Style": 0.0,
+          "ltable_ABV": 0.0,
+          "rtable_Beer_Name": 0.0,
+          "rtable_Brew_Factory_Name": 0.0,
+          "rtable_Style": 0.0,
+          "rtable_ABV": 0.0
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "ltuple": {
+        "ltable_Beer_Name": "Double Dragon Imperial Red Ale",
+        "ltable_Brew_Factory_Name": "Phillips Brewing Company",
+        "ltable_Style": "American Amber / Red Ale",
+        "ltable_ABV": "8.20 %"
+      },
+      "rtuple": {
+        "rtable_Beer_Name": "Scuttlebutt Mateo Loco Imperial Red Ale",
+        "rtable_Brew_Factory_Name": "Scuttlebutt Brewing Co. .",
+        "rtable_Style": "American Strong Ale",
+        "rtable_ABV": "7.10 %"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_Beer_Name": [
+          0.6153846153846154
+        ],
+        "ltable_Style": [
+          0.3076923076923077
+        ],
+        "ltable_ABV": [
+          0.3076923076923077
+        ],
+        "rtable_Style": [
+          0.0
+        ],
+        "rtable_ABV": [
+          0.0
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_Beer_Name": "Scuttlebutt Mateo Loco Imperial Red Ale",
+          "ltable_Brew_Factory_Name": "Phillips Brewing Company",
+          "ltable_Style": "American Amber / Red Ale",
+          "ltable_ABV": "8.20 %",
+          "rtable_Beer_Name": "Scuttlebutt Mateo Loco Imperial Red Ale",
+          "rtable_Brew_Factory_Name": "Scuttlebutt Brewing Co. .",
+          "rtable_Style": "American Strong Ale",
+          "rtable_ABV": "7.10 %",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 278.8301749229431,
+      "conversation": "",
+      "filter_features": [
+        "ltable_ABV",
+        "rtable_ABV",
+        "ltable_Style",
+        "rtable_Style",
+        "ltable_Beer_Name"
+      ],
+      "self_explanations": [
+        {
+          "ltable_Beer_Name": 0.2,
+          "ltable_Brew_Factory_Name": 0.1,
+          "ltable_Style": 0.3,
+          "ltable_ABV": 0.4,
+          "rtable_Beer_Name": 0.2,
+          "rtable_Brew_Factory_Name": 0.1,
+          "rtable_Style": 0.3,
+          "rtable_ABV": 0.4
+        },
+        {
+          "ltable_Beer_Name": 0.0,
+          "ltable_Brew_Factory_Name": 0.0,
+          "ltable_Style": 0.0,
+          "ltable_ABV": 0.0,
+          "rtable_Beer_Name": 0.0,
+          "rtable_Brew_Factory_Name": 0.0,
+          "rtable_Style": 0.0,
+          "rtable_ABV": 0.0
+        },
+        {
+          "ltable_Beer_Name": 0.0,
+          "ltable_Brew_Factory_Name": 0.0,
+          "ltable_Style": 0.0,
+          "ltable_ABV": 0.0,
+          "rtable_Beer_Name": 0.0,
+          "rtable_Brew_Factory_Name": 0.0,
+          "rtable_Style": 0.0,
+          "rtable_ABV": 0.0
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "ltuple": {
+        "ltable_Beer_Name": "Honey Basil Amber",
+        "ltable_Brew_Factory_Name": "Rude Hippo Brewing Company",
+        "ltable_Style": "American Amber / Red Ale",
+        "ltable_ABV": "7.40 %"
+      },
+      "rtuple": {
+        "rtable_Beer_Name": "Rude Hippo Honey Basil Amber",
+        "rtable_Brew_Factory_Name": "18th Street Brewery",
+        "rtable_Style": "Amber Ale",
+        "rtable_ABV": "7.40 %"
+      },
+      "prediction": 1,
+      "label": 1,
+      "saliency": {
+        "ltable_Beer_Name": [
+          1.0
+        ],
+        "ltable_ABV": [
+          1.0
+        ]
+      },
+      "cfs": [
+        {}
+      ],
+      "latency": 2139.4181311130524,
+      "conversation": "",
+      "filter_features": [
+        "ltable_ABV",
+        "ltable_Beer_Name"
+      ],
+      "self_explanations": [
+        {
+          "ltable_Beer_Name": 0.2,
+          "ltable_Brew_Factory_Name": 0.1,
+          "ltable_Style": 0.3,
+          "ltable_ABV": 0.4,
+          "rtable_Beer_Name": 0.0,
+          "rtable_Brew_Factory_Name": 0.0,
+          "rtable_Style": 0.0,
+          "rtable_ABV": 0.0
+        },
+        {
+          "ltable_Beer_Name": 0.8,
+          "ltable_Brew_Factory_Name": 0.2,
+          "ltable_Style": 0.6,
+          "ltable_ABV": 1.0
+        },
+        {
+          "ltable_Beer_Name": 1.0,
+          "rtable_Beer_Name": 0.8,
+          "ltable_Brew_Factory_Name": 0.7,
+          "rtable_Brew_Factory_Name": 0.6,
+          "ltable_Style": 0.5,
+          "rtable_Style": 0.4,
+          "ltable_ABV": 1.0,
+          "rtable_ABV": 1.0
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "ltuple": {
+        "ltable_Beer_Name": "Clifford 's Big Red Ale",
+        "ltable_Brew_Factory_Name": "Funky Buddha Brewery",
+        "ltable_Style": "American Amber / Red Ale",
+        "ltable_ABV": "9.70 %"
+      },
+      "rtuple": {
+        "rtable_Beer_Name": "Big Island Red Giant Ale",
+        "rtable_Brew_Factory_Name": "Big Island Brewhaus",
+        "rtable_Style": "American Strong Ale",
+        "rtable_ABV": "6.50 %"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_Beer_Name": [
+          0.5761904761904761
+        ],
+        "ltable_Brew_Factory_Name": [
+          0.6238095238095238
+        ],
+        "ltable_Style": [
+          0.14761904761904762
+        ],
+        "ltable_ABV": [
+          0.6238095238095238
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_Beer_Name": "Red Giant Ale",
+          "ltable_Brew_Factory_Name": "Big Island Brewhaus &",
+          "ltable_Style": "American Amber / Red Ale",
+          "ltable_ABV": "6.50 %",
+          "rtable_Beer_Name": "Big Island Red Giant Ale",
+          "rtable_Brew_Factory_Name": "Big Island Brewhaus",
+          "rtable_Style": "American Strong Ale",
+          "rtable_ABV": "6.50 %",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 1133.7101829051971,
+      "conversation": "",
+      "filter_features": [
+        "ltable_ABV",
+        "ltable_Style",
+        "ltable_Beer_Name",
+        "ltable_Brew_Factory_Name"
+      ],
+      "self_explanations": [
+        {
+          "ltable_Beer_Name": 0.2,
+          "ltable_Brew_Factory_Name": 0.1,
+          "ltable_Style": 0.3,
+          "ltable_ABV": 0.4,
+          "rtable_Beer_Name": 0.0,
+          "rtable_Brew_Factory_Name": 0.0,
+          "rtable_Style": 0.0,
+          "rtable_ABV": 0.0
+        },
+        {
+          "ltable_Beer_Name": 0.0,
+          "ltable_Brew_Factory_Name": 0.0,
+          "ltable_Style": 0.0,
+          "ltable_ABV": 0.0,
+          "rtable_Beer_Name": 0.0,
+          "rtable_Brew_Factory_Name": 0.0,
+          "rtable_Style": 0.0,
+          "rtable_ABV": 0.0
+        },
+        {
+          "ltable_Beer_Name": 0.0,
+          "ltable_Brew_Factory_Name": 0.0,
+          "ltable_Style": 0.0,
+          "ltable_ABV": 0.0,
+          "rtable_Beer_Name": 0.5,
+          "rtable_Brew_Factory_Name": 0.0,
+          "rtable_Style": 0.0,
+          "rtable_ABV": 0.0
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "ltuple": {
+        "ltable_Beer_Name": "Real McCoy Amber Ale",
+        "ltable_Brew_Factory_Name": "Mammoth Brewing Company",
+        "ltable_Style": "American Amber / Red Ale",
+        "ltable_ABV": "4.50 %"
+      },
+      "rtuple": {
+        "rtable_Beer_Name": "Mammoth Real McCoy Amber Ale",
+        "rtable_Brew_Factory_Name": "Mammoth Brewing Company",
+        "rtable_Style": "Altbier",
+        "rtable_ABV": "4.50 %"
+      },
+      "prediction": 0,
+      "label": 1,
+      "saliency": {
+        "ltable_Brew_Factory_Name": [
+          0.5
+        ],
+        "rtable_Brew_Factory_Name": [
+          0.0
+        ]
+      },
+      "cfs": [
+        {}
+      ],
+      "latency": 58.89990305900574,
+      "conversation": "",
+      "filter_features": [
+        "ltable_Brew_Factory_Name",
+        "rtable_Brew_Factory_Name"
+      ],
+      "self_explanations": [
+        {
+          "ltable_Beer_Name": 0.2,
+          "ltable_Brew_Factory_Name": 0.1,
+          "ltable_Style": 0.3,
+          "ltable_ABV": 0.4,
+          "rtable_Beer_Name": 0.0,
+          "rtable_Brew_Factory_Name": 0.0,
+          "rtable_Style": 0.0,
+          "rtable_ABV": 0.0
+        },
+        {
+          "ltable_Beer_Name": 0.0,
+          "ltable_Brew_Factory_Name": 1.0,
+          "ltable_Style": 0.0,
+          "ltable_ABV": 0.0,
+          "rtable_Beer_Name": 0.0,
+          "rtable_Brew_Factory_Name": 1.0,
+          "rtable_Style": 0.0,
+          "rtable_ABV": 0.0
+        },
+        {
+          "ltable_Beer_Name": 0.0,
+          "rtable_Beer_Name": 0.0,
+          "ltable_Brew_Factory_Name": 1.0,
+          "rtable_Brew_Factory_Name": 1.0,
+          "ltable_Style": 0.0,
+          "rtable_Style": 0.0,
+          "ltable_ABV": 1.0,
+          "rtable_ABV": 1.0
+        }
+      ]
+    }
+  ],
+  "total_time": 3796.896965742111,
+  "metrics": {
+    "faithfulness": {
+      "uncerta(freq)_sample": 0.0
+    },
+    "counterfactual_metrics": {
+      "uncerta(freq)_sample": {
+        "validity": 0.9999999999666667,
+        "proximity": 0.29166666665694446,
+        "sparsity": 0.9416666666352779,
+        "diversity": 0.0
+      }
+    }
+  },
+  "tokens": 352407.0,
+  "predictions": 6804.2
+}

@@ -1,0 +1,1837 @@
+{
+  "data": [
+    {
+      "id": 0,
+      "ltuple": {
+        "ltable_name": "sony pink cyber-shot 7.2 megapixel digital camera dscw120p",
+        "ltable_description": "sony pink cyber-shot 7.2 megapixel digital camera dscw120p 7.2 megapixel 4x optical zoom 2.5 ' tft lcd 15 mb internal memory face detection super steadyshot image stabilization smile shutter mode smart zoom pink finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "olympus fe-360 digital camera pink 226540",
+        "rtable_description": "8 megapixel 16:9 3x optical zoom 4x digital zoom 2.5 ' color lcd",
+        "rtable_price": "104.95"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_description__sony": [
+          0.5
+        ],
+        "ltable_description__pink": [
+          0.5
+        ],
+        "ltable_description__cyber-shot": [
+          0.5
+        ],
+        "ltable_description__7.2": [
+          0.0
+        ],
+        "ltable_description__megapixel": [
+          0.0
+        ],
+        "ltable_description__digital": [
+          0.0
+        ],
+        "ltable_description__camera": [
+          0.0
+        ],
+        "ltable_description__dscw120p": [
+          0.0
+        ],
+        "ltable_description__4x": [
+          0.0
+        ],
+        "ltable_description__optical": [
+          0.0
+        ],
+        "ltable_description__zoom": [
+          0.0
+        ],
+        "ltable_description__2.5": [
+          0.0
+        ],
+        "ltable_description__'": [
+          0.0
+        ],
+        "ltable_description__tft": [
+          0.0
+        ],
+        "ltable_description__lcd": [
+          0.0
+        ],
+        "ltable_description__15": [
+          0.0
+        ],
+        "ltable_description__mb": [
+          0.0
+        ],
+        "ltable_description__internal": [
+          0.0
+        ],
+        "ltable_description__memory": [
+          0.0
+        ],
+        "ltable_description__face": [
+          0.0
+        ],
+        "ltable_description__detection": [
+          0.0
+        ],
+        "ltable_description__super": [
+          0.0
+        ],
+        "ltable_description__steadyshot": [
+          0.0
+        ],
+        "ltable_description__image": [
+          0.0
+        ],
+        "ltable_description__stabilization": [
+          0.0
+        ],
+        "ltable_description__smile": [
+          0.0
+        ],
+        "ltable_description__shutter": [
+          0.0
+        ],
+        "ltable_description__mode": [
+          0.0
+        ],
+        "ltable_description__smart": [
+          0.0
+        ],
+        "ltable_description__finish": [
+          0.5
+        ],
+        "ltable_name__sony": [
+          0.5
+        ],
+        "ltable_name__pink": [
+          0.5
+        ],
+        "ltable_name__cyber-shot": [
+          0.5
+        ],
+        "ltable_name__7.2": [
+          0.0
+        ],
+        "ltable_name__megapixel": [
+          0.0
+        ],
+        "ltable_name__digital": [
+          0.0
+        ],
+        "ltable_name__camera": [
+          0.0
+        ],
+        "ltable_name__dscw120p": [
+          0.0
+        ],
+        "ltable_price__nan": [
+          0.0
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "camera digital fe360pnk 7.2 megapixel digital camera dscw120p",
+          "ltable_description": "8 olympus megapixel 7.2 megapixel digital camera dscw120p 7.2 megapixel 4x optical zoom 2.5 ' tft lcd 15 mb internal memory face detection super steadyshot image stabilization smile shutter mode smart zoom pink pink",
+          "ltable_price": "nan",
+          "rtable_name": "olympus fe-360 digital camera pink 226540",
+          "rtable_description": "8 megapixel 16:9 3x optical zoom 4x digital zoom 2.5 ' color lcd",
+          "rtable_price": "104.95",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 109.17132592201233,
+      "conversation": "",
+      "filter_features": [
+        "ltable_description__sony",
+        "ltable_description__pink",
+        "ltable_description__cyber-shot",
+        "ltable_description__7.2",
+        "ltable_description__megapixel",
+        "ltable_description__digital",
+        "ltable_description__camera",
+        "ltable_description__dscw120p",
+        "ltable_description__7.2",
+        "ltable_description__megapixel",
+        "ltable_description__4x",
+        "ltable_description__optical",
+        "ltable_description__zoom",
+        "ltable_description__2.5",
+        "ltable_description__'",
+        "ltable_description__tft",
+        "ltable_description__lcd",
+        "ltable_description__15",
+        "ltable_description__mb",
+        "ltable_description__internal",
+        "ltable_description__memory",
+        "ltable_description__face",
+        "ltable_description__detection",
+        "ltable_description__super",
+        "ltable_description__steadyshot",
+        "ltable_description__image",
+        "ltable_description__stabilization",
+        "ltable_description__smile",
+        "ltable_description__shutter",
+        "ltable_description__mode",
+        "ltable_description__smart",
+        "ltable_description__zoom",
+        "ltable_description__pink",
+        "ltable_description__finish",
+        "rtable_description__8",
+        "rtable_description__megapixel",
+        "rtable_description__16:9",
+        "rtable_description__3x",
+        "rtable_description__optical",
+        "rtable_description__zoom",
+        "rtable_description__4x",
+        "rtable_description__digital",
+        "rtable_description__zoom",
+        "rtable_description__2.5",
+        "rtable_description__'",
+        "rtable_description__color",
+        "rtable_description__lcd",
+        "rtable_name__olympus",
+        "rtable_name__fe-360",
+        "rtable_name__digital",
+        "rtable_name__camera",
+        "rtable_name__pink",
+        "rtable_name__226540",
+        "ltable_name__sony",
+        "ltable_name__pink",
+        "ltable_name__cyber-shot",
+        "ltable_name__7.2",
+        "ltable_name__megapixel",
+        "ltable_name__digital",
+        "ltable_name__camera",
+        "ltable_name__dscw120p",
+        "ltable_price__nan",
+        "rtable_price__104.95",
+        "ltable_name__pink",
+        "ltable_description__pink",
+        "rtable_name__pink",
+        "ltable_description__finish",
+        "ltable_name__sony",
+        "ltable_description__sony",
+        "ltable_name__cyber-shot",
+        "ltable_description__cyber-shot",
+        "ltable_name__7.2",
+        "ltable_description__7.2",
+        "ltable_name__megapixel",
+        "ltable_description__megapixel",
+        "rtable_description__megapixel",
+        "ltable_name__digital",
+        "ltable_description__digital",
+        "rtable_name__digital",
+        "rtable_description__digital"
+      ],
+      "self_explanations": [
+        {
+          "ltable_name": 0.1,
+          "ltable_description": 0.8,
+          "ltable_price": 0.1,
+          "rtable_name": 0.2,
+          "rtable_description": 0.7,
+          "rtable_price": 0.1
+        },
+        {
+          "sony": 0.0,
+          "pink": 0.5,
+          "cyber-shot": 0.0,
+          "7.2": 0.0,
+          "megapixel": 0.0,
+          "digital": 0.0,
+          "camera": 0.0,
+          "dscw120p": 0.0,
+          "4x": 0.0,
+          "optical": 0.0,
+          "zoom": 0.0,
+          "2.5": 0.0,
+          "'": 0.0,
+          "tft": 0.0,
+          "lcd": 0.0,
+          "15": 0.0,
+          "mb": 0.0,
+          "internal": 0.0,
+          "memory": 0.0,
+          "face": 0.0,
+          "detection": 0.0,
+          "super": 0.0,
+          "steadyshot": 0.0,
+          "image": 0.0,
+          "stabilization": 0.0,
+          "smile": 0.0,
+          "shutter": 0.0,
+          "mode": 0.0,
+          "smart": 0.0,
+          "finish": 0.5,
+          "olympus": 0.0,
+          "fe-360": 0.0,
+          "226540": 0.0,
+          "8": 0.0,
+          "16:9": 0.0,
+          "3x": 0.0,
+          "color": 0.0
+        },
+        {
+          "sony": 0.2,
+          "pink": 0.5,
+          "cyber-shot": 0.2,
+          "7.2": 0.3,
+          "megapixel": 0.3,
+          "digital": 0.2,
+          "camera": 0.2,
+          "dscw120p": 0.2,
+          "4x": 0.1,
+          "optical": 0.1,
+          "zoom": 0.1,
+          "2.5": 0.1,
+          "tft": 0.1,
+          "lcd": 0.1,
+          "15": 0.1,
+          "mb": 0.1,
+          "internal": 0.1,
+          "memory": 0.1,
+          "face": 0.1,
+          "detection": 0.1,
+          "super": 0.1,
+          "steadyshot": 0.1,
+          "image": 0.1,
+          "stabilization": 0.1,
+          "smile": 0.1,
+          "shutter": 0.1,
+          "mode": 0.1,
+          "smart": 0.1,
+          "finish": 0.1,
+          "olympus": 0.2,
+          "fe-360": 0.2,
+          "226540": 0.1,
+          "8": 0.1,
+          "16:9": 0.1,
+          "3x": 0.1,
+          "color": 0.1
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "ltuple": {
+        "ltable_name": "lg 2.0 cu . ft. over-the-range white microwave oven lmvm2085wh",
+        "ltable_description": "lg 2.0 cu . ft. over-the-range white microwave oven lmvm2085wh warming lamp glide & spin sliding tray with turntable sensor cook feature 300 cfm exhaust system horizontal keypad elegant hidden vent wideview window halogen cooktop lighting white finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "maytag 2.0 cu . ft. over-the-range microwave oven",
+        "rtable_description": "nan",
+        "rtable_price": "nan"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_description__lg": [
+          0.0
+        ],
+        "ltable_description__2.0": [
+          0.0
+        ],
+        "ltable_description__cu": [
+          0.0
+        ],
+        "ltable_description__.": [
+          0.0
+        ],
+        "ltable_description__ft.": [
+          0.0
+        ],
+        "ltable_description__over-the-range": [
+          0.0
+        ],
+        "ltable_description__white": [
+          0.0
+        ],
+        "ltable_description__microwave": [
+          0.0
+        ],
+        "ltable_description__oven": [
+          0.0
+        ],
+        "ltable_description__lmvm2085wh": [
+          0.0
+        ],
+        "ltable_description__warming": [
+          0.0
+        ],
+        "ltable_description__lamp": [
+          0.0
+        ],
+        "ltable_description__glide": [
+          0.0
+        ],
+        "ltable_description__&": [
+          0.0
+        ],
+        "ltable_description__spin": [
+          0.0
+        ],
+        "ltable_description__sliding": [
+          0.0
+        ],
+        "ltable_description__tray": [
+          0.0
+        ],
+        "ltable_description__with": [
+          0.0
+        ],
+        "ltable_description__turntable": [
+          0.0
+        ],
+        "ltable_description__sensor": [
+          0.0
+        ],
+        "ltable_description__cook": [
+          0.0
+        ],
+        "ltable_description__feature": [
+          0.0
+        ],
+        "ltable_description__300": [
+          0.0
+        ],
+        "ltable_description__cfm": [
+          0.0
+        ],
+        "ltable_description__exhaust": [
+          0.0
+        ],
+        "ltable_description__system": [
+          0.0
+        ],
+        "ltable_description__horizontal": [
+          0.0
+        ],
+        "ltable_description__keypad": [
+          0.0
+        ],
+        "ltable_description__elegant": [
+          0.0
+        ],
+        "ltable_description__hidden": [
+          0.0
+        ],
+        "ltable_description__vent": [
+          0.0
+        ],
+        "ltable_description__wideview": [
+          0.0
+        ],
+        "ltable_description__window": [
+          0.0
+        ],
+        "ltable_description__halogen": [
+          0.0
+        ],
+        "ltable_description__cooktop": [
+          0.0
+        ],
+        "ltable_description__lighting": [
+          0.0
+        ],
+        "ltable_description__finish": [
+          0.0
+        ],
+        "ltable_name__lg": [
+          0.0
+        ],
+        "ltable_name__2.0": [
+          0.0
+        ],
+        "ltable_name__cu": [
+          0.0
+        ],
+        "ltable_name__.": [
+          0.0
+        ],
+        "ltable_name__ft.": [
+          0.0
+        ],
+        "ltable_name__over-the-range": [
+          0.5
+        ],
+        "ltable_name__white": [
+          0.5
+        ],
+        "ltable_name__microwave": [
+          0.5
+        ],
+        "ltable_name__oven": [
+          0.5
+        ],
+        "ltable_name__lmvm2085wh": [
+          0.5
+        ],
+        "ltable_price__nan": [
+          0.0
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "lg 2.0 cu . ft. linksys etherfast ezxs88w ethernet switch",
+          "ltable_description": "lg 2.0 cu . ft. over-the-range white microwave oven lmvm2085wh warming lamp glide & spin sliding tray with turntable sensor cook feature 300 cfm exhaust system horizontal keypad elegant hidden vent wideview window halogen cooktop lighting white finish",
+          "ltable_price": "nan",
+          "rtable_name": "linksys etherfast ezxs88w ethernet switch ezxs88w",
+          "rtable_description": "linksys etherfast 8-port 10/100 switch ( new/workgroup )",
+          "rtable_price": "nan",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 18.34934687614441,
+      "conversation": "",
+      "filter_features": [
+        "ltable_description__lg",
+        "ltable_description__2.0",
+        "ltable_description__cu",
+        "ltable_description__.",
+        "ltable_description__ft.",
+        "ltable_description__over-the-range",
+        "ltable_description__white",
+        "ltable_description__microwave",
+        "ltable_description__oven",
+        "ltable_description__lmvm2085wh",
+        "ltable_description__warming",
+        "ltable_description__lamp",
+        "ltable_description__glide",
+        "ltable_description__&",
+        "ltable_description__spin",
+        "ltable_description__sliding",
+        "ltable_description__tray",
+        "ltable_description__with",
+        "ltable_description__turntable",
+        "ltable_description__sensor",
+        "ltable_description__cook",
+        "ltable_description__feature",
+        "ltable_description__300",
+        "ltable_description__cfm",
+        "ltable_description__exhaust",
+        "ltable_description__system",
+        "ltable_description__horizontal",
+        "ltable_description__keypad",
+        "ltable_description__elegant",
+        "ltable_description__hidden",
+        "ltable_description__vent",
+        "ltable_description__wideview",
+        "ltable_description__window",
+        "ltable_description__halogen",
+        "ltable_description__cooktop",
+        "ltable_description__lighting",
+        "ltable_description__white",
+        "ltable_description__finish",
+        "ltable_name__lg",
+        "ltable_name__2.0",
+        "ltable_name__cu",
+        "ltable_name__.",
+        "ltable_name__ft.",
+        "ltable_name__over-the-range",
+        "ltable_name__white",
+        "ltable_name__microwave",
+        "ltable_name__oven",
+        "ltable_name__lmvm2085wh",
+        "ltable_price__nan",
+        "rtable_name__maytag",
+        "rtable_name__2.0",
+        "rtable_name__cu",
+        "rtable_name__.",
+        "rtable_name__ft.",
+        "rtable_name__over-the-range",
+        "rtable_name__microwave",
+        "rtable_name__oven",
+        "rtable_description__nan",
+        "ltable_name__lg",
+        "ltable_description__lg",
+        "ltable_name__2.0",
+        "ltable_description__2.0",
+        "rtable_name__2.0",
+        "ltable_name__cu",
+        "ltable_description__cu",
+        "rtable_name__cu",
+        "ltable_name__.",
+        "ltable_description__.",
+        "rtable_name__."
+      ],
+      "self_explanations": [
+        {
+          "ltable_name": 0.2,
+          "ltable_description": 0.8,
+          "ltable_price": 0.0,
+          "rtable_name": 0.0,
+          "rtable_description": 0.0,
+          "rtable_price": 0.0
+        },
+        {
+          "lg": 0.0,
+          "2.0": 0.0,
+          "cu": 0.0,
+          ".": 0.0,
+          "ft": 0.0,
+          "over-the-range": 0.0,
+          "white": 0.0,
+          "microwave": 0.0,
+          "oven": 0.0,
+          "lmvm2085wh": 0.0,
+          "warming": 0.0,
+          "lamp": 0.0,
+          "glide": 0.0,
+          "&": 0.0,
+          "spin": 0.0,
+          "sliding": 0.0,
+          "tray": 0.0,
+          "with": 0.0,
+          "turntable": 0.0,
+          "sensor": 0.0,
+          "cook": 0.0,
+          "feature": 0.0,
+          "300": 0.0,
+          "cfm": 0.0,
+          "exhaust": 0.0,
+          "system": 0.0,
+          "horizontal": 0.0,
+          "keypad": 0.0,
+          "elegant": 0.0,
+          "hidden": 0.0,
+          "vent": 0.0,
+          "wideview": 0.0,
+          "window": 0.0,
+          "halogen": 0.0,
+          "cooktop": 0.0,
+          "lighting": 0.0,
+          "finish": 0.0,
+          "maytag": 0.0
+        },
+        {
+          "lg": 0.2,
+          "2.0": 0.2,
+          "cu": 0.2,
+          ".": 0.2,
+          "ft": 0.2,
+          "over-the-range": 0.2,
+          "white": 0.2,
+          "microwave": 0.2,
+          "oven": 0.2,
+          "lmvm2085wh": 0.2,
+          "warming": 0.1,
+          "lamp": 0.1,
+          "glide": 0.1,
+          "&": 0.1,
+          "spin": 0.1,
+          "sliding": 0.1,
+          "tray": 0.1,
+          "with": 0.1,
+          "turntable": 0.1,
+          "sensor": 0.1,
+          "cook": 0.1,
+          "feature": 0.1,
+          "300": 0.1,
+          "cfm": 0.1,
+          "exhaust": 0.1,
+          "system": 0.1,
+          "horizontal": 0.1,
+          "keypad": 0.1,
+          "elegant": 0.1,
+          "hidden": 0.1,
+          "vent": 0.1,
+          "wideview": 0.1,
+          "window": 0.1,
+          "halogen": 0.1,
+          "cooktop": 0.1,
+          "lighting": 0.1,
+          "finish": 0.1,
+          "maytag": 0.2
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "ltuple": {
+        "ltable_name": "panasonic black 8.5 ' portable dvd player dvdls83",
+        "ltable_description": "panasonic black 8.5 ' portable dvd player dvdls83 8.5 ' free style wide screen lcd display 6 hour battery multi format playback dual headphone jacks divx playback car dc adapter included black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "toshiba sd-p71s portable dvd player",
+        "rtable_description": "toshiba sd-p71s 7 ' portable dvd player",
+        "rtable_price": "119.36"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "rtable_description__toshiba": [
+          0.0
+        ],
+        "rtable_description__sd-p71s": [
+          0.0
+        ],
+        "rtable_description__7": [
+          0.0
+        ],
+        "rtable_description__'": [
+          0.0
+        ],
+        "rtable_description__portable": [
+          0.0
+        ],
+        "rtable_description__dvd": [
+          0.0
+        ],
+        "rtable_description__player": [
+          0.0
+        ],
+        "rtable_price__119.36": [
+          0.0
+        ],
+        "rtable_name__portable": [
+          0.0
+        ],
+        "rtable_name__dvd": [
+          0.0
+        ],
+        "ltable_description__panasonic": [
+          0.3333333333333333
+        ],
+        "ltable_description__black": [
+          0.3333333333333333
+        ],
+        "ltable_description__8.5": [
+          0.3333333333333333
+        ],
+        "ltable_description__'": [
+          0.3333333333333333
+        ],
+        "ltable_description__portable": [
+          0.0
+        ],
+        "ltable_description__dvd": [
+          0.0
+        ],
+        "ltable_description__player": [
+          0.0
+        ],
+        "ltable_description__dvdls83": [
+          0.0
+        ],
+        "ltable_description__free": [
+          0.0
+        ],
+        "ltable_description__style": [
+          0.0
+        ],
+        "ltable_description__wide": [
+          0.0
+        ],
+        "ltable_description__screen": [
+          0.0
+        ],
+        "ltable_description__lcd": [
+          0.0
+        ],
+        "ltable_description__display": [
+          0.0
+        ],
+        "ltable_description__6": [
+          0.0
+        ],
+        "ltable_description__hour": [
+          0.0
+        ],
+        "ltable_description__battery": [
+          0.0
+        ],
+        "ltable_description__multi": [
+          0.0
+        ],
+        "ltable_description__format": [
+          0.0
+        ],
+        "ltable_description__playback": [
+          0.0
+        ],
+        "ltable_description__dual": [
+          0.0
+        ],
+        "ltable_description__headphone": [
+          0.0
+        ],
+        "ltable_description__jacks": [
+          0.0
+        ],
+        "ltable_description__divx": [
+          0.0
+        ],
+        "ltable_description__car": [
+          0.0
+        ],
+        "ltable_description__dc": [
+          0.0
+        ],
+        "ltable_description__adapter": [
+          0.0
+        ],
+        "ltable_description__included": [
+          0.0
+        ],
+        "ltable_description__finish": [
+          0.0
+        ],
+        "ltable_name__panasonic": [
+          0.3333333333333333
+        ],
+        "ltable_name__black": [
+          0.3333333333333333
+        ],
+        "ltable_name__8.5": [
+          0.3333333333333333
+        ],
+        "ltable_name__'": [
+          0.3333333333333333
+        ],
+        "ltable_name__portable": [
+          0.3333333333333333
+        ],
+        "ltable_name__dvd": [
+          0.0
+        ],
+        "ltable_name__player": [
+          0.0
+        ],
+        "ltable_name__dvdls83": [
+          0.3333333333333333
+        ],
+        "ltable_price__nan": [
+          0.3333333333333333
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "sdp71s black dvd player portable dvd player toshiba",
+          "ltable_description": "toshiba black portable dvd portable dvd player dvdls83 8.5 ' free style wide screen lcd display 6 hour battery multi format playback dual headphone jacks divx playback car dc adapter included black finish",
+          "ltable_price": "nan",
+          "rtable_name": "toshiba sd-p71s portable dvd player",
+          "rtable_description": "toshiba sd-p71s 7 ' portable dvd player",
+          "rtable_price": "119.36",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 32.65932106971741,
+      "conversation": "",
+      "filter_features": [
+        "rtable_description__toshiba",
+        "rtable_description__sd-p71s",
+        "rtable_description__7",
+        "rtable_description__'",
+        "rtable_description__portable",
+        "rtable_description__dvd",
+        "rtable_description__player",
+        "ltable_description__panasonic",
+        "ltable_description__black",
+        "ltable_description__8.5",
+        "ltable_description__'",
+        "ltable_description__portable",
+        "ltable_description__dvd",
+        "ltable_description__player",
+        "ltable_description__dvdls83",
+        "ltable_description__8.5",
+        "ltable_description__'",
+        "ltable_description__free",
+        "ltable_description__style",
+        "ltable_description__wide",
+        "ltable_description__screen",
+        "ltable_description__lcd",
+        "ltable_description__display",
+        "ltable_description__6",
+        "ltable_description__hour",
+        "ltable_description__battery",
+        "ltable_description__multi",
+        "ltable_description__format",
+        "ltable_description__playback",
+        "ltable_description__dual",
+        "ltable_description__headphone",
+        "ltable_description__jacks",
+        "ltable_description__divx",
+        "ltable_description__playback",
+        "ltable_description__car",
+        "ltable_description__dc",
+        "ltable_description__adapter",
+        "ltable_description__included",
+        "ltable_description__black",
+        "ltable_description__finish",
+        "ltable_name__panasonic",
+        "ltable_name__black",
+        "ltable_name__8.5",
+        "ltable_name__'",
+        "ltable_name__portable",
+        "ltable_name__dvd",
+        "ltable_name__player",
+        "ltable_name__dvdls83",
+        "ltable_price__nan",
+        "rtable_price__119.36",
+        "ltable_name__panasonic",
+        "ltable_description__panasonic",
+        "ltable_name__black",
+        "ltable_description__black",
+        "ltable_name__8.5",
+        "ltable_description__8.5",
+        "ltable_name__'",
+        "ltable_description__'",
+        "rtable_description__'",
+        "ltable_name__portable",
+        "ltable_description__portable",
+        "rtable_name__portable",
+        "rtable_description__portable",
+        "ltable_name__dvd",
+        "ltable_description__dvd",
+        "rtable_name__dvd",
+        "rtable_description__dvd"
+      ],
+      "self_explanations": [
+        {
+          "ltable_name": 0.2,
+          "ltable_description": 0.6,
+          "ltable_price": 0.2,
+          "rtable_name": 0.1,
+          "rtable_description": 0.7,
+          "rtable_price": 0.2
+        },
+        {
+          "panasonic": 0.0,
+          "black": 0.0,
+          "8.5": 0.0,
+          "'": 0.0,
+          "portable": 0.0,
+          "dvd": 0.0,
+          "player": 0.0,
+          "dvdls83": 0.0,
+          "free": 0.0,
+          "style": 0.0,
+          "wide": 0.0,
+          "screen": 0.0,
+          "lcd": 0.0,
+          "display": 0.0,
+          "6": 0.0,
+          "hour": 0.0,
+          "battery": 0.0,
+          "multi": 0.0,
+          "format": 0.0,
+          "playback": 0.0,
+          "dual": 0.0,
+          "headphone": 0.0,
+          "jacks": 0.0,
+          "divx": 0.0,
+          "car": 0.0,
+          "dc": 0.0,
+          "adapter": 0.0,
+          "included": 0.0,
+          "finish": 0.0,
+          "toshiba": 0.0,
+          "sd": 0.0,
+          "p71s": 0.0,
+          "7": 0.0
+        },
+        {
+          "panasonic": 0.2,
+          "black": 0.2,
+          "8.5": 0.2,
+          "portable": 0.2,
+          "dvd": 0.2,
+          "player": 0.2,
+          "toshiba": 0.0,
+          "7": 0.0
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "ltuple": {
+        "ltable_name": "sony bravia theater black micro system davis50b",
+        "ltable_description": "sony bravia theater black micro system davis50b 5.1-channel surround sound golf ball-sized speakers compact design s-air digital wireless capability hdmi connectivity bravia sync digital cinema sound ( dcs ) technology s-master digital amplifier portable audio enhancer black finish",
+        "ltable_price": "nan"
+      },
+      "rtuple": {
+        "rtable_name": "sony bravia dav-is50 / b home theater system",
+        "rtable_description": "dvd player , 5.1 speakers 1 disc ( s ) progressive scan 450w rms dolby digital ex , dolby pro logic , dolby pro logic ii",
+        "rtable_price": "nan"
+      },
+      "prediction": 0,
+      "label": 1,
+      "saliency": {
+        "rtable_description__dvd": [
+          0.07465277777777778
+        ],
+        "rtable_description__player": [
+          0.05555555555555556
+        ],
+        "rtable_description__,": [
+          0.04687500000000001
+        ],
+        "rtable_description__5.1": [
+          0.003472222222222222
+        ],
+        "rtable_description__speakers": [
+          0.005208333333333333
+        ],
+        "rtable_description__1": [
+          0.005208333333333333
+        ],
+        "rtable_description__disc": [
+          0.005208333333333333
+        ],
+        "rtable_description__(": [
+          0.0
+        ],
+        "rtable_description__s": [
+          0.001736111111111111
+        ],
+        "rtable_description__)": [
+          0.001736111111111111
+        ],
+        "rtable_description__progressive": [
+          0.005208333333333333
+        ],
+        "rtable_description__scan": [
+          0.006944444444444444
+        ],
+        "rtable_description__450w": [
+          0.005208333333333333
+        ],
+        "rtable_description__rms": [
+          0.005208333333333333
+        ],
+        "rtable_description__dolby": [
+          0.012152777777777778
+        ],
+        "rtable_description__digital": [
+          0.001736111111111111
+        ],
+        "rtable_description__ex": [
+          0.008680555555555556
+        ],
+        "rtable_description__pro": [
+          0.006944444444444444
+        ],
+        "rtable_description__logic": [
+          0.001736111111111111
+        ],
+        "rtable_description__ii": [
+          0.001736111111111111
+        ],
+        "rtable_name__sony": [
+          0.003472222222222222
+        ],
+        "rtable_name__bravia": [
+          0.003472222222222222
+        ],
+        "rtable_name__dav-is50": [
+          0.0
+        ],
+        "rtable_name__/": [
+          0.010416666666666666
+        ],
+        "rtable_name__b": [
+          0.015625
+        ],
+        "rtable_name__home": [
+          0.012152777777777776
+        ],
+        "rtable_name__theater": [
+          0.006944444444444444
+        ],
+        "rtable_name__system": [
+          0.005208333333333333
+        ],
+        "ltable_description__sony": [
+          0.019097222222222224
+        ],
+        "ltable_description__bravia": [
+          0.04687500000000001
+        ],
+        "ltable_description__theater": [
+          0.0625
+        ],
+        "ltable_description__black": [
+          0.10590277777777778
+        ],
+        "ltable_description__micro": [
+          0.11631944444444445
+        ],
+        "ltable_description__system": [
+          0.0763888888888889
+        ],
+        "ltable_description__davis50b": [
+          0.11111111111111112
+        ],
+        "ltable_description__5.1-channel": [
+          0.06770833333333333
+        ],
+        "ltable_description__surround": [
+          0.03645833333333333
+        ],
+        "ltable_description__sound": [
+          0.045138888888888895
+        ],
+        "ltable_description__golf": [
+          0.03993055555555555
+        ],
+        "ltable_description__ball-sized": [
+          0.05729166666666667
+        ],
+        "ltable_description__speakers": [
+          0.034722222222222224
+        ],
+        "ltable_description__compact": [
+          0.020833333333333332
+        ],
+        "ltable_description__design": [
+          0.01909722222222222
+        ],
+        "ltable_description__s-air": [
+          0.03645833333333333
+        ],
+        "ltable_description__digital": [
+          0.05902777777777779
+        ],
+        "ltable_description__wireless": [
+          0.017361111111111112
+        ],
+        "ltable_description__capability": [
+          0.027777777777777776
+        ],
+        "ltable_description__hdmi": [
+          0.048611111111111105
+        ],
+        "ltable_description__connectivity": [
+          0.020833333333333336
+        ],
+        "ltable_description__sync": [
+          0.015625
+        ],
+        "ltable_description__cinema": [
+          0.013888888888888888
+        ],
+        "ltable_description__(": [
+          0.05555555555555555
+        ],
+        "ltable_description__dcs": [
+          0.0625
+        ],
+        "ltable_description__)": [
+          0.04340277777777778
+        ],
+        "ltable_description__technology": [
+          0.026041666666666668
+        ],
+        "ltable_description__s-master": [
+          0.03993055555555556
+        ],
+        "ltable_description__amplifier": [
+          0.024305555555555552
+        ],
+        "ltable_description__portable": [
+          0.027777777777777776
+        ],
+        "ltable_description__audio": [
+          0.03125
+        ],
+        "ltable_description__enhancer": [
+          0.03819444444444444
+        ],
+        "ltable_description__finish": [
+          0.012152777777777776
+        ],
+        "ltable_name__sony": [
+          0.034722222222222224
+        ],
+        "ltable_name__bravia": [
+          0.034722222222222224
+        ],
+        "ltable_name__theater": [
+          0.03298611111111111
+        ],
+        "ltable_name__black": [
+          0.034722222222222224
+        ],
+        "ltable_name__micro": [
+          0.045138888888888895
+        ],
+        "ltable_name__system": [
+          0.026041666666666664
+        ],
+        "ltable_name__davis50b": [
+          0.013888888888888888
+        ],
+        "ltable_price__nan": [
+          0.0
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "sony bravia theater black micro system davis50b",
+          "ltable_description": "sony bravia theater black micro system davis50b 5.1-channel surround sound golf ball-sized speakers compact design s-air digital wireless capability hdmi connectivity bravia sync digital cinema sound scan progressive ) technology s-master digital amplifier portable audio enhancer black finish",
+          "ltable_price": "nan",
+          "rtable_name": "sony bravia dav-is50 / b home theater system",
+          "rtable_description": "dvd player , 5.1 speakers 1 disc ( s ) progressive scan 450w rms dolby digital ex , dolby pro logic , dolby pro logic ii",
+          "rtable_price": "nan",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 317.9683382511139,
+      "conversation": "",
+      "filter_features": [
+        "ltable_description__sony",
+        "ltable_description__bravia",
+        "ltable_description__theater",
+        "ltable_description__black",
+        "ltable_description__micro",
+        "ltable_description__system",
+        "ltable_description__davis50b",
+        "ltable_description__5.1-channel",
+        "ltable_description__surround",
+        "ltable_description__sound",
+        "ltable_description__golf",
+        "ltable_description__ball-sized",
+        "ltable_description__speakers",
+        "ltable_description__compact",
+        "ltable_description__design",
+        "ltable_description__s-air",
+        "ltable_description__digital",
+        "ltable_description__wireless",
+        "ltable_description__capability",
+        "ltable_description__hdmi",
+        "ltable_description__connectivity",
+        "ltable_description__bravia",
+        "ltable_description__sync",
+        "ltable_description__digital",
+        "ltable_description__cinema",
+        "ltable_description__sound",
+        "ltable_description__(",
+        "ltable_description__dcs",
+        "ltable_description__)",
+        "ltable_description__technology",
+        "ltable_description__s-master",
+        "ltable_description__digital",
+        "ltable_description__amplifier",
+        "ltable_description__portable",
+        "ltable_description__audio",
+        "ltable_description__enhancer",
+        "ltable_description__black",
+        "ltable_description__finish",
+        "rtable_description__dvd",
+        "rtable_description__player",
+        "rtable_description__,",
+        "rtable_description__5.1",
+        "rtable_description__speakers",
+        "rtable_description__1",
+        "rtable_description__disc",
+        "rtable_description__(",
+        "rtable_description__s",
+        "rtable_description__)",
+        "rtable_description__progressive",
+        "rtable_description__scan",
+        "rtable_description__450w",
+        "rtable_description__rms",
+        "rtable_description__dolby",
+        "rtable_description__digital",
+        "rtable_description__ex",
+        "rtable_description__,",
+        "rtable_description__dolby",
+        "rtable_description__pro",
+        "rtable_description__logic",
+        "rtable_description__,",
+        "rtable_description__dolby",
+        "rtable_description__pro",
+        "rtable_description__logic",
+        "rtable_description__ii",
+        "ltable_name__sony",
+        "ltable_name__bravia",
+        "ltable_name__theater",
+        "ltable_name__black",
+        "ltable_name__micro",
+        "ltable_name__system",
+        "ltable_name__davis50b",
+        "rtable_name__sony",
+        "rtable_name__bravia",
+        "rtable_name__dav-is50",
+        "rtable_name__/",
+        "rtable_name__b",
+        "rtable_name__home",
+        "rtable_name__theater",
+        "rtable_name__system",
+        "ltable_price__nan",
+        "ltable_name__sony",
+        "ltable_description__sony",
+        "rtable_name__sony",
+        "ltable_name__bravia",
+        "ltable_description__bravia",
+        "rtable_name__bravia",
+        "ltable_name__theater",
+        "ltable_description__theater",
+        "rtable_name__theater",
+        "ltable_name__black",
+        "ltable_description__black",
+        "ltable_name__micro",
+        "ltable_description__micro",
+        "ltable_name__davis50b",
+        "ltable_description__davis50b"
+      ],
+      "self_explanations": [
+        {
+          "ltable_name": 0.2,
+          "ltable_description": 0.8,
+          "ltable_price": 0.0,
+          "rtable_name": 0.2,
+          "rtable_description": 0.8,
+          "rtable_price": 0.0
+        },
+        {
+          "sony": 0.2,
+          "bravia": 0.2,
+          "theater": 0.2,
+          "black": 0.2,
+          "micro": 0.2,
+          "system": 0.2,
+          "davis50b": 0.2,
+          "5.1-channel": 0.2,
+          "surround": 0.2,
+          "sound": 0.2,
+          "golf": 0.2,
+          "ball-sized": 0.2,
+          "speakers": 0.2,
+          "compact": 0.2,
+          "design": 0.2,
+          "s-air": 0.2,
+          "digital": 0.2,
+          "wireless": 0.2,
+          "capability": 0.2,
+          "hdmi": 0.2,
+          "connectivity": 0.2,
+          "sync": 0.2,
+          "cinema": 0.2,
+          "dcs": 0.2,
+          "technology": 0.2,
+          "s-master": 0.2,
+          "amplifier": 0.2,
+          "portable": 0.2,
+          "audio": 0.2,
+          "enhancer": 0.2,
+          "finish": 0.2,
+          "dvd": 0.2,
+          "player": 0.2,
+          "1": 0.2,
+          "disc": 0.2,
+          "(": 0.2,
+          "s": 0.2,
+          ")": 0.2,
+          "progressive": 0.2,
+          "scan": 0.2,
+          "450w": 0.2,
+          "rms": 0.2,
+          "dolby": 0.2,
+          "ex": 0.2,
+          "pro": 0.2,
+          "logic": 0.2,
+          "ii": 0.2,
+          "home": 0.2
+        },
+        {
+          "sony": 0.5,
+          "bravia": 0.5,
+          "theater": 0.5,
+          "black": 0.5,
+          "micro": 0.5,
+          "system": 0.5,
+          "davis50b": 1.0,
+          "5.1-channel": 0.5,
+          "surround": 0.5,
+          "sound": 0.5,
+          "golf": 0.1,
+          "ball-sized": 0.1,
+          "speakers": 0.5,
+          "compact": 0.5,
+          "design": 0.5,
+          "s-air": 0.1,
+          "digital": 0.5,
+          "wireless": 0.1,
+          "capability": 0.1,
+          "hdmi": 0.5,
+          "connectivity": 0.5,
+          "sync": 0.1,
+          "cinema": 0.1,
+          "dcs": 0.1,
+          "technology": 0.1,
+          "s-master": 0.1,
+          "amplifier": 0.1,
+          "portable": 0.1,
+          "audio": 0.1,
+          "enhancer": 0.1,
+          "finish": 0.5,
+          "dvd": 0.1,
+          "player": 0.1,
+          "1": 0.1,
+          "disc": 0.1,
+          "(": 0.1,
+          ")": 0.1,
+          "progressive": 0.1,
+          "scan": 0.1,
+          "450w": 0.1,
+          "rms": 0.1,
+          "dolby": 0.5,
+          "ex": 0.1,
+          "pro": 0.1,
+          "logic": 0.1,
+          "ii": 0.1,
+          "nan": 0.5
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "ltuple": {
+        "ltable_name": "panasonic dect 6.0 expandable digital cordless phone with all-digital answering system kxtg9344t",
+        "ltable_description": "panasonic dect 6.0 expandable digital cordless phone with all-digital answering system kxtg9344t 4 handsets system up to 6 multi-handset capability digital answering machine system ringer id call waiting caller id voicemail hold voice menu marker message mute clock alarm led lighting night mode call block speakerphone 11 days standby 5 hours talk time black metallic finish",
+        "ltable_price": "139.0"
+      },
+      "rtuple": {
+        "rtable_name": "panasonic kx-tg9342t cordless phone",
+        "rtable_description": "1 x phone line ( s ) black , metallic",
+        "rtable_price": "nan"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "rtable_name__panasonic": [
+          0.0
+        ],
+        "rtable_name__cordless": [
+          0.0
+        ],
+        "ltable_description__panasonic": [
+          0.0
+        ],
+        "ltable_description__dect": [
+          0.0
+        ],
+        "ltable_description__6.0": [
+          0.0
+        ],
+        "ltable_description__expandable": [
+          0.0
+        ],
+        "ltable_description__digital": [
+          0.0
+        ],
+        "ltable_description__cordless": [
+          0.0
+        ],
+        "ltable_description__phone": [
+          0.0
+        ],
+        "ltable_description__with": [
+          0.0
+        ],
+        "ltable_description__all-digital": [
+          0.0
+        ],
+        "ltable_description__answering": [
+          0.0
+        ],
+        "ltable_description__system": [
+          0.0
+        ],
+        "ltable_description__kxtg9344t": [
+          0.0
+        ],
+        "ltable_description__4": [
+          0.0
+        ],
+        "ltable_description__handsets": [
+          0.0
+        ],
+        "ltable_description__up": [
+          0.0
+        ],
+        "ltable_description__to": [
+          0.0
+        ],
+        "ltable_description__6": [
+          0.0
+        ],
+        "ltable_description__multi-handset": [
+          0.0
+        ],
+        "ltable_description__capability": [
+          0.0
+        ],
+        "ltable_description__machine": [
+          0.0
+        ],
+        "ltable_description__ringer": [
+          0.0
+        ],
+        "ltable_description__id": [
+          0.0
+        ],
+        "ltable_description__call": [
+          0.0
+        ],
+        "ltable_description__waiting": [
+          0.0
+        ],
+        "ltable_description__caller": [
+          0.0
+        ],
+        "ltable_description__voicemail": [
+          0.0
+        ],
+        "ltable_description__hold": [
+          0.0
+        ],
+        "ltable_description__voice": [
+          0.0
+        ],
+        "ltable_description__menu": [
+          0.0
+        ],
+        "ltable_description__marker": [
+          0.0
+        ],
+        "ltable_description__message": [
+          0.0
+        ],
+        "ltable_description__mute": [
+          0.0
+        ],
+        "ltable_description__clock": [
+          0.0
+        ],
+        "ltable_description__alarm": [
+          0.0
+        ],
+        "ltable_description__led": [
+          0.0
+        ],
+        "ltable_description__lighting": [
+          0.0
+        ],
+        "ltable_description__night": [
+          0.0
+        ],
+        "ltable_description__mode": [
+          0.0
+        ],
+        "ltable_description__block": [
+          0.0
+        ],
+        "ltable_description__speakerphone": [
+          0.0
+        ],
+        "ltable_description__11": [
+          0.0
+        ],
+        "ltable_description__days": [
+          0.0
+        ],
+        "ltable_description__standby": [
+          0.0
+        ],
+        "ltable_description__5": [
+          0.0
+        ],
+        "ltable_description__hours": [
+          0.0
+        ],
+        "ltable_description__talk": [
+          0.0
+        ],
+        "ltable_description__time": [
+          0.0
+        ],
+        "ltable_description__black": [
+          0.0
+        ],
+        "ltable_description__metallic": [
+          0.0
+        ],
+        "ltable_description__finish": [
+          0.0
+        ],
+        "ltable_name__panasonic": [
+          0.5
+        ],
+        "ltable_name__dect": [
+          0.0
+        ],
+        "ltable_name__6.0": [
+          0.0
+        ],
+        "ltable_name__expandable": [
+          0.0
+        ],
+        "ltable_name__digital": [
+          0.0
+        ],
+        "ltable_name__cordless": [
+          0.0
+        ],
+        "ltable_name__phone": [
+          0.0
+        ],
+        "ltable_name__with": [
+          0.0
+        ],
+        "ltable_name__all-digital": [
+          0.0
+        ],
+        "ltable_name__answering": [
+          0.5
+        ],
+        "ltable_name__system": [
+          1.0
+        ],
+        "ltable_name__kxtg9344t": [
+          1.0
+        ],
+        "ltable_price__139.0": [
+          1.0
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "panasonic dect 6.0 expandable digital cordless phone with all-digital kx-tg9342t cordless phone",
+          "ltable_description": "panasonic dect 6.0 expandable digital cordless phone with all-digital answering system kxtg9344t 4 handsets system up to 6 multi-handset capability digital answering machine system ringer id call waiting caller id voicemail hold voice menu marker message mute clock alarm led lighting night mode call block speakerphone 11 days standby 5 hours talk time black metallic finish",
+          "ltable_price": "nan",
+          "rtable_name": "panasonic kx-tg9342t cordless phone",
+          "rtable_description": "1 x phone line ( s ) black , metallic",
+          "rtable_price": "nan",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 13.992789030075073,
+      "conversation": "",
+      "filter_features": [
+        "ltable_description__panasonic",
+        "ltable_description__dect",
+        "ltable_description__6.0",
+        "ltable_description__expandable",
+        "ltable_description__digital",
+        "ltable_description__cordless",
+        "ltable_description__phone",
+        "ltable_description__with",
+        "ltable_description__all-digital",
+        "ltable_description__answering",
+        "ltable_description__system",
+        "ltable_description__kxtg9344t",
+        "ltable_description__4",
+        "ltable_description__handsets",
+        "ltable_description__system",
+        "ltable_description__up",
+        "ltable_description__to",
+        "ltable_description__6",
+        "ltable_description__multi-handset",
+        "ltable_description__capability",
+        "ltable_description__digital",
+        "ltable_description__answering",
+        "ltable_description__machine",
+        "ltable_description__system",
+        "ltable_description__ringer",
+        "ltable_description__id",
+        "ltable_description__call",
+        "ltable_description__waiting",
+        "ltable_description__caller",
+        "ltable_description__id",
+        "ltable_description__voicemail",
+        "ltable_description__hold",
+        "ltable_description__voice",
+        "ltable_description__menu",
+        "ltable_description__marker",
+        "ltable_description__message",
+        "ltable_description__mute",
+        "ltable_description__clock",
+        "ltable_description__alarm",
+        "ltable_description__led",
+        "ltable_description__lighting",
+        "ltable_description__night",
+        "ltable_description__mode",
+        "ltable_description__call",
+        "ltable_description__block",
+        "ltable_description__speakerphone",
+        "ltable_description__11",
+        "ltable_description__days",
+        "ltable_description__standby",
+        "ltable_description__5",
+        "ltable_description__hours",
+        "ltable_description__talk",
+        "ltable_description__time",
+        "ltable_description__black",
+        "ltable_description__metallic",
+        "ltable_description__finish",
+        "ltable_name__panasonic",
+        "ltable_name__dect",
+        "ltable_name__6.0",
+        "ltable_name__expandable",
+        "ltable_name__digital",
+        "ltable_name__cordless",
+        "ltable_name__phone",
+        "ltable_name__with",
+        "ltable_name__all-digital",
+        "ltable_name__answering",
+        "ltable_name__system",
+        "ltable_name__kxtg9344t",
+        "ltable_price__139.0",
+        "ltable_name__panasonic",
+        "ltable_description__panasonic",
+        "rtable_name__panasonic",
+        "ltable_name__dect",
+        "ltable_description__dect",
+        "ltable_name__expandable",
+        "ltable_description__expandable",
+        "ltable_name__digital",
+        "ltable_description__digital",
+        "ltable_name__cordless",
+        "ltable_description__cordless",
+        "rtable_name__cordless",
+        "ltable_name__6.0",
+        "ltable_description__6.0"
+      ],
+      "self_explanations": [
+        {
+          "ltable_name": 0.2,
+          "ltable_description": 0.8,
+          "ltable_price": 0.0
+        },
+        {
+          "panasonic": 0.2,
+          "dect": 0.2,
+          "expandable": 0.2,
+          "digital": 0.2,
+          "cordless": 0.2,
+          "phone": 0.2,
+          "answering": 0.2,
+          "system": 0.2,
+          "kxtg9344t": 0.2,
+          "handsets": 0.2,
+          "multi": 0.2,
+          "capability": 0.2,
+          "machine": 0.2,
+          "ringer": 0.2,
+          "id": 0.2,
+          "call": 0.2,
+          "waiting": 0.2,
+          "caller": 0.2,
+          "voicemail": 0.2,
+          "hold": 0.2,
+          "voice": 0.2,
+          "menu": 0.2,
+          "marker": 0.2,
+          "message": 0.2,
+          "mute": 0.2,
+          "clock": 0.2,
+          "alarm": 0.2,
+          "led": 0.2,
+          "lighting": 0.2,
+          "night": 0.2,
+          "mode": 0.2,
+          "block": 0.2,
+          "speakerphone": 0.2,
+          "11": 0.2,
+          "days": 0.2,
+          "standby": 0.2,
+          "5": 0.2,
+          "hours": 0.2,
+          "talk": 0.2,
+          "time": 0.2,
+          "black": 0.2,
+          "metallic": 0.2,
+          "finish": 0.2,
+          "1": 0.0,
+          "x": 0.0,
+          "line": 0.0,
+          "s": 0.0,
+          "nan": 0.0
+        },
+        {
+          "panasonic": 0.8,
+          "dect": 0.6,
+          "6.0": 0.6,
+          "expandable": 0.4,
+          "digital": 0.4,
+          "cordless": 0.4,
+          "phone": 0.4,
+          "answering": 0.4,
+          "system": 0.4,
+          "kxtg9344t": 0.4,
+          "handsets": 0.2,
+          "up": 0.2,
+          "to": 0.2,
+          "multi": 0.2,
+          "handset": 0.2,
+          "capability": 0.2,
+          "ringer": 0.2,
+          "id": 0.2,
+          "call": 0.2,
+          "waiting": 0.2,
+          "caller": 0.2,
+          "voicemail": 0.2,
+          "hold": 0.2,
+          "voice": 0.2,
+          "menu": 0.2,
+          "marker": 0.2,
+          "message": 0.2,
+          "mute": 0.2,
+          "clock": 0.2,
+          "alarm": 0.2,
+          "led": 0.2,
+          "lighting": 0.2,
+          "night": 0.2,
+          "mode": 0.2,
+          "block": 0.2,
+          "speakerphone": 0.2,
+          "11": 0.2,
+          "days": 0.2,
+          "standby": 0.2,
+          "5": 0.2,
+          "hours": 0.2,
+          "talk": 0.2,
+          "time": 0.2,
+          "black": 0.2,
+          "metallic": 0.2,
+          "finish": 0.2,
+          "1": 0.0,
+          "x": 0.0,
+          "line": 0.0,
+          "s": 0.0,
+          "nan": 0.0
+        }
+      ]
+    }
+  ],
+  "total_time": 492.14365887641907,
+  "metrics": {
+    "faithfulness": {
+      "uncerta(union)_sample": 0.0
+    },
+    "counterfactual_metrics": {
+      "uncerta(union)_sample": {
+        "validity": 0.99999999998,
+        "proximity": 0.6333333333206668,
+        "sparsity": 0.8416666666498333,
+        "diversity": 0.0
+      }
+    }
+  },
+  "tokens": 2165258.6,
+  "predictions": 42325.8
+}
