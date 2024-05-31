@@ -1,0 +1,1 @@
+{"data": [], "total_time": 2.929934024810791, "metrics": {"faithfulness": {"certa(ptse)_sample": 0.0}, "counterfactual_metrics": {"certa(ptse)_sample": {"validity": 0.0, "proximity": 0.0, "sparsity": 0.0, "diversity": 0.0}}}, "tokens": 157.8, "predictions": 3.0}

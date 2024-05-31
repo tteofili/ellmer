@@ -1,0 +1,19 @@
+{
+  "data": [],
+  "total_time": 136.40574502944946,
+  "metrics": {
+    "faithfulness": {
+      "ptse_sample": 0.45714285714285713
+    },
+    "counterfactual_metrics": {
+      "ptse_sample": {
+        "validity": 0.0,
+        "proximity": 0.0,
+        "sparsity": 0.0,
+        "diversity": 0.0
+      }
+    }
+  },
+  "tokens": 720.0,
+  "predictions": 6.0
+}

@@ -1,0 +1,134 @@
+{
+  "data": [
+    {
+      "id": 0,
+      "ltuple": {
+        "ltable_name": "citrus",
+        "ltable_addr": "' 6703 melrose ave. '",
+        "ltable_city": "` los angeles '",
+        "ltable_phone": "213/857 -0034",
+        "ltable_res_type": "californian",
+        "ltable_class": "6.0"
+      },
+      "rtuple": {
+        "rtable_name": "` le chardonnay ( los angeles ) '",
+        "rtable_addr": "' 8284 melrose ave. '",
+        "rtable_city": "` los angeles '",
+        "rtable_phone": "213-655-8880",
+        "rtable_res_type": "` french bistro '",
+        "rtable_class": "12.0"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {},
+      "cfs": [
+        {}
+      ],
+      "latency": 18.860877752304077,
+      "conversation": "",
+      "filter_features": [
+        [
+          "ltable_name",
+          "ltable_addr",
+          "ltable_city",
+          "ltable_phone",
+          "ltable_res_type",
+          "ltable_class"
+        ],
+        [
+          "rtable_name",
+          "ltable_name",
+          "rtable_addr",
+          "ltable_addr",
+          "rtable_city",
+          "ltable_city",
+          "rtable_phone",
+          "ltable_phone"
+        ],
+        [
+          "ltable_name",
+          "ltable_addr",
+          "ltable_city",
+          "ltable_phone",
+          "rtable_name",
+          "rtable_addr",
+          "rtable_city",
+          "rtable_phone"
+        ]
+      ]
+    },
+    {
+      "id": 1,
+      "ltuple": {
+        "ltable_name": "` yujean kang \\ 's gourmet chinese cuisine '",
+        "ltable_addr": "'67 n. raymond ave. '",
+        "ltable_city": "` los angeles '",
+        "ltable_phone": "818/585 -0855",
+        "ltable_res_type": "asian",
+        "ltable_class": "22.0"
+      },
+      "rtuple": {
+        "rtable_name": "` yujean kang \\ 's '",
+        "rtable_addr": "'67 n. raymond ave. '",
+        "rtable_city": "pasadena",
+        "rtable_phone": "818-585-0855",
+        "rtable_res_type": "chinese",
+        "rtable_class": "22.0"
+      },
+      "prediction": 1,
+      "label": 1,
+      "saliency": {},
+      "cfs": [
+        {}
+      ],
+      "latency": 18.41163206100464,
+      "conversation": "",
+      "filter_features": [
+        [
+          "ltable_name",
+          "ltable_addr",
+          "ltable_city",
+          "ltable_phone",
+          "ltable_res_type",
+          "ltable_class"
+        ],
+        [
+          "ltable_name",
+          "ltable_addr",
+          "rtable_name",
+          "ltable_city",
+          "rtable_addr",
+          "ltable_phone",
+          "rtable_city",
+          "rtable_phone"
+        ],
+        [
+          "ltable_name",
+          "ltable_addr",
+          "ltable_city",
+          "ltable_phone",
+          "rtable_name",
+          "rtable_addr",
+          "rtable_city",
+          "rtable_phone"
+        ]
+      ]
+    }
+  ],
+  "total_time": 37.273717164993286,
+  "metrics": {
+    "faithfulness": {
+      "uncerta(union)_sample": 0.0
+    },
+    "counterfactual_metrics": {
+      "uncerta(union)_sample": {
+        "validity": 0.0,
+        "proximity": 0.0,
+        "sparsity": 0.0,
+        "diversity": 0.0
+      }
+    }
+  },
+  "tokens": 902030.0,
+  "predictions": 16060.0
+}

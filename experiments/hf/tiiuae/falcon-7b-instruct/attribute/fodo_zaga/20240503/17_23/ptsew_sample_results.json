@@ -1,0 +1,19 @@
+{
+  "data": [],
+  "total_time": 0.7300338745117188,
+  "metrics": {
+    "faithfulness": {
+      "ptsew_sample": 0.45714285714285713
+    },
+    "counterfactual_metrics": {
+      "ptsew_sample": {
+        "validity": 0.0,
+        "proximity": 0.0,
+        "sparsity": 0.0,
+        "diversity": 0.0
+      }
+    }
+  },
+  "tokens": 720.0,
+  "predictions": 6.0
+}

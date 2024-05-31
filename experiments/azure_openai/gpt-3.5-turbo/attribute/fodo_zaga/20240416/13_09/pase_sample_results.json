@@ -1,0 +1,240 @@
+{
+  "data": [
+    {
+      "id": 0,
+      "ltuple": {
+        "ltable_name": "citrus",
+        "ltable_addr": "' 6703 melrose ave. '",
+        "ltable_city": "` los angeles '",
+        "ltable_phone": "213/857 -0034",
+        "ltable_res_type": "californian",
+        "ltable_class": "6.0"
+      },
+      "rtuple": {
+        "rtable_name": "` le chardonnay ( los angeles ) '",
+        "rtable_addr": "' 8284 melrose ave. '",
+        "rtable_city": "` los angeles '",
+        "rtable_phone": "213-655-8880",
+        "rtable_res_type": "` french bistro '",
+        "rtable_class": "12.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {},
+      "cfs": [
+        {}
+      ],
+      "latency": 0.013230085372924805,
+      "conversation": [
+        [
+          "system",
+          "You are an expert assistant for Entity Resolution tasks."
+        ],
+        [
+          "user",
+          " Given two records you answer the following questions 1) do they refer to the same entity ? 2) What are the saliency scores attached to each {feature} for your prediction? 3) What is a {feature}-level counterfactual explanation for your prediction? Return all three responses as a single formatted JSON"
+        ],
+        [
+          "ai",
+          " Ok give me the two records and I will return a JSON containing my three answers."
+        ],
+        [
+          "user",
+          "record1:\n{ltuple}\n record2:\n{rtuple}\n"
+        ]
+      ]
+    },
+    {
+      "id": 1,
+      "ltuple": {
+        "ltable_name": "` yujean kang \\ 's gourmet chinese cuisine '",
+        "ltable_addr": "'67 n. raymond ave. '",
+        "ltable_city": "` los angeles '",
+        "ltable_phone": "818/585 -0855",
+        "ltable_res_type": "asian",
+        "ltable_class": "22.0"
+      },
+      "rtuple": {
+        "rtable_name": "` yujean kang \\ 's '",
+        "rtable_addr": "'67 n. raymond ave. '",
+        "rtable_city": "pasadena",
+        "rtable_phone": "818-585-0855",
+        "rtable_res_type": "chinese",
+        "rtable_class": "22.0"
+      },
+      "prediction": 1,
+      "label": 1,
+      "saliency": {},
+      "cfs": [
+        {}
+      ],
+      "latency": 0.0032389163970947266,
+      "conversation": [
+        [
+          "system",
+          "You are an expert assistant for Entity Resolution tasks."
+        ],
+        [
+          "user",
+          " Given two records you answer the following questions 1) do they refer to the same entity ? 2) What are the saliency scores attached to each {feature} for your prediction? 3) What is a {feature}-level counterfactual explanation for your prediction? Return all three responses as a single formatted JSON"
+        ],
+        [
+          "ai",
+          " Ok give me the two records and I will return a JSON containing my three answers."
+        ],
+        [
+          "user",
+          "record1:\n{ltuple}\n record2:\n{rtuple}\n"
+        ]
+      ]
+    },
+    {
+      "id": 2,
+      "ltuple": {
+        "ltable_name": "oritalia",
+        "ltable_addr": "' 1915 fillmore st. '",
+        "ltable_city": "` san francisco '",
+        "ltable_phone": "415/346 -1333",
+        "ltable_res_type": "italian",
+        "ltable_class": "501.0"
+      },
+      "rtuple": {
+        "rtable_name": "` trio cafe '",
+        "rtable_addr": "' 1870 fillmore st. '",
+        "rtable_city": "` san francisco '",
+        "rtable_phone": "415-563-2248",
+        "rtable_res_type": "american",
+        "rtable_class": "749.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {},
+      "cfs": [
+        {}
+      ],
+      "latency": 0.002521038055419922,
+      "conversation": [
+        [
+          "system",
+          "You are an expert assistant for Entity Resolution tasks."
+        ],
+        [
+          "user",
+          " Given two records you answer the following questions 1) do they refer to the same entity ? 2) What are the saliency scores attached to each {feature} for your prediction? 3) What is a {feature}-level counterfactual explanation for your prediction? Return all three responses as a single formatted JSON"
+        ],
+        [
+          "ai",
+          " Ok give me the two records and I will return a JSON containing my three answers."
+        ],
+        [
+          "user",
+          "record1:\n{ltuple}\n record2:\n{rtuple}\n"
+        ]
+      ]
+    },
+    {
+      "id": 3,
+      "ltuple": {
+        "ltable_name": "` jo jo '",
+        "ltable_addr": "' 160 e. 64th st. '",
+        "ltable_city": "` new york '",
+        "ltable_phone": "212/223 -5656",
+        "ltable_res_type": "american",
+        "ltable_class": "38.0"
+      },
+      "rtuple": {
+        "rtable_name": "` jo jo '",
+        "rtable_addr": "' 160 e. 64th st. '",
+        "rtable_city": "` new york city '",
+        "rtable_phone": "212-223-5656",
+        "rtable_res_type": "` french bistro '",
+        "rtable_class": "38.0"
+      },
+      "prediction": 1,
+      "label": 1,
+      "saliency": {},
+      "cfs": [
+        {}
+      ],
+      "latency": 0.002488851547241211,
+      "conversation": [
+        [
+          "system",
+          "You are an expert assistant for Entity Resolution tasks."
+        ],
+        [
+          "user",
+          " Given two records you answer the following questions 1) do they refer to the same entity ? 2) What are the saliency scores attached to each {feature} for your prediction? 3) What is a {feature}-level counterfactual explanation for your prediction? Return all three responses as a single formatted JSON"
+        ],
+        [
+          "ai",
+          " Ok give me the two records and I will return a JSON containing my three answers."
+        ],
+        [
+          "user",
+          "record1:\n{ltuple}\n record2:\n{rtuple}\n"
+        ]
+      ]
+    },
+    {
+      "id": 4,
+      "ltuple": {
+        "ltable_name": "` palace court '",
+        "ltable_addr": "' 3570 las vegas blvd. s '",
+        "ltable_city": "` las vegas '",
+        "ltable_phone": "702/731 -7547",
+        "ltable_res_type": "continental",
+        "ltable_class": "70.0"
+      },
+      "rtuple": {
+        "rtable_name": "` michael \\ 's ( las vegas ) '",
+        "rtable_addr": "' 3595 las vegas blvd. s. '",
+        "rtable_city": "` las vegas '",
+        "rtable_phone": "702-737-7111",
+        "rtable_res_type": "continental",
+        "rtable_class": "664.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {},
+      "cfs": [
+        {}
+      ],
+      "latency": 0.002521038055419922,
+      "conversation": [
+        [
+          "system",
+          "You are an expert assistant for Entity Resolution tasks."
+        ],
+        [
+          "user",
+          " Given two records you answer the following questions 1) do they refer to the same entity ? 2) What are the saliency scores attached to each {feature} for your prediction? 3) What is a {feature}-level counterfactual explanation for your prediction? Return all three responses as a single formatted JSON"
+        ],
+        [
+          "ai",
+          " Ok give me the two records and I will return a JSON containing my three answers."
+        ],
+        [
+          "user",
+          "record1:\n{ltuple}\n record2:\n{rtuple}\n"
+        ]
+      ]
+    }
+  ],
+  "total_time": 0.04145503044128418,
+  "metrics": {
+    "faithfulness": {
+      "pase_sample": 0.8
+    },
+    "counterfactual_metrics": {
+      "pase_sample": {
+        "validity": 0.0,
+        "proximity": 0.0,
+        "sparsity": 0.0,
+        "diversity": 0.0
+      }
+    }
+  },
+  "tokens": 3867.6,
+  "predictions": 6.0
+}

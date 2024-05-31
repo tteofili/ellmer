@@ -133,7 +133,8 @@ class CertaEllmer(Ellmer):
 
 
 class UnCertaEllmer(CertaEllmer):
-    def __init__(self, explanation_granularity, pred_delegate, certa, ellmers, num_draws=1, num_triangles=10):
+    def __init__(self, explanation_granularity, pred_delegate, certa, ellmers, num_draws=1, num_triangles=10,
+                 combine : str = 'freq', top_k: int = 1):
         self.explanation_granularity = explanation_granularity
         self.certa = certa
         self.num_triangles = num_triangles
@@ -141,14 +142,27 @@ class UnCertaEllmer(CertaEllmer):
         self.ellmers = ellmers
         self.predict_fn = lambda x: self.delegate.predict(x)
         self.num_draws = num_draws
+        self.combine = combine
+        self.top_k = top_k
 
-    def predict_and_explain(self, ltuple, rtuple, max_predict: int = -1, verbose: bool = False, combine: str = 'freq'):
+    def predict_and_explain(self, ltuple, rtuple, max_predict: int = -1, verbose: bool = False):
         satisfied = False
         prediction = {}
         saliency_explanation = {}
         cf_explanation = {}
         filter_features = []
-        top_k = int((len(ltuple) + len(rtuple)) / 2)
+        tri = []
+
+        if 'attribute' == self.explanation_granularity:
+            no_features = len(ltuple) + len(rtuple)
+        elif 'token' == self.explanation_granularity:
+            no_features = len(str(ltuple).split(' ')) + len(str(rtuple).split(' '))
+        else:
+            raise ValueError('invalid explanation granularity')
+
+        top_k = self.top_k
+        pae_dicts = []
+        its = 0
         while not satisfied:
             pae_dicts = []
             for e in self.ellmers:
@@ -162,13 +176,15 @@ class UnCertaEllmer(CertaEllmer):
                 ltuple_series = self.get_row(ltuple, self.certa.lsource, prefix="ltable_")
                 rtuple_series = self.get_row(rtuple, self.certa.rsource, prefix="rtable_")
 
-                if combine == 'freq':
+                if self.combine == 'freq':
                     # get most frequent features from the self-explanations
                     filter_features = []
                     for se in pae_dicts:
-                        sorted_attributes_dict = sorted(se.items(), key=operator.itemgetter(1), reverse=True)[:top_k]
-                        top_features = [f[0] for f in sorted_attributes_dict]
-                        filter_features = filter_features + top_features
+                        fse = {k: v for k, v in se.items() if v > 0}
+                        if len(fse) > 0:
+                            sorted_attributes_dict = sorted(fse.items(), key=operator.itemgetter(1), reverse=True)[:top_k]
+                            top_features = [f[0] for f in sorted_attributes_dict]
+                            filter_features = filter_features + top_features
                     fc = {}
                     for f in filter_features:
                         if f in fc:
@@ -177,15 +193,16 @@ class UnCertaEllmer(CertaEllmer):
                             fc[f] = 1
                     sorted_fc = sorted(fc.items(), key=operator.itemgetter(1), reverse=True)[:top_k]
                     filter_features = [sfc[0] for sfc in sorted_fc]
-                elif combine == 'union':
+                elif self.combine == 'union':
                     # get all features from the self-explanations
                     filter_features = []
                     for se in pae_dicts:
                         sorted_attributes_dict = sorted(se.items(), key=operator.itemgetter(1), reverse=True)[:top_k]
                         top_features = [f[0] for f in sorted_attributes_dict]
-                        filter_features.append(top_features)
-                    filter_features = list(set(filter_features))
-                elif combine == 'intersection':
+                        for tf in top_features:
+                            if tf not in filter_features:
+                                filter_features.append(tf)
+                elif self.combine == 'intersection':
                     # get recurring features only from the self-explanations
                     filter_features = set()
                     for se in pae_dicts:
@@ -194,33 +211,54 @@ class UnCertaEllmer(CertaEllmer):
                         if len(filter_features) == 0:
                             filter_features = top_features
                         filter_features = filter_features.intersection(top_features)
+                    filter_features = list(filter_features)
                 else:
                     raise ValueError("Unknown combination method")
-
-                saliency_df, cf_summary, cfs, tri, _ = self.certa.explain(ltuple_series, rtuple_series, self.predict_fn,
-                                                                          token="token" == self.explanation_granularity,
-                                                                          num_triangles=self.num_triangles,
-                                                                          max_predict=max_predict,
-                                                                          filter_features=filter_features)
-                saliency_explanation = saliency_df.to_dict('list')
-                if len(cfs) > 0:
-                    cf_explanation = cfs.drop(
-                        ['alteredAttributes', 'droppedValues', 'copiedValues', 'triangle', 'attr_count'],
-                        axis=1).iloc[0].T.to_dict()
-                print(saliency_explanation)
-                aggregated_pn = 0
-                for sev in saliency_explanation.values():
-                    if type(sev) == list:
-                        aggregated_pn += sev[0]
-                    else:
-                        aggregated_pn += sev
-                if aggregated_pn >= 0.5:
-                    satisfied = True
+                if len(filter_features) > 0:
+                    if 'token' == self.explanation_granularity:
+                        token_attributes_filtered = []
+                        for ff in filter_features:
+                            if ff.startswith('ltable_'):
+                                for token in ltuple[ff].split(' '):
+                                    token_attributes_filtered.append(ff+'__'+token)
+                            if ff.startswith('rtable_'):
+                                for token in rtuple[ff].split(' '):
+                                    token_attributes_filtered.append(ff+'__'+ token)
+                            else:
+                                for ic in ltuple.keys():
+                                    if ff in ltuple[ic].split(' '):
+                                        token_attributes_filtered.append(ic+'__' + ff)
+                                for ic in rtuple.keys():
+                                    if ff in rtuple[ic].split(' '):
+                                        token_attributes_filtered.append(ic+'__' + ff)
+                        filter_features = token_attributes_filtered
+                    saliency_df, cf_summary, cfs, tri, _ = self.certa.explain(ltuple_series, rtuple_series, self.predict_fn,
+                                                                              token="token" == self.explanation_granularity,
+                                                                              num_triangles=self.num_triangles,
+                                                                              max_predict=max_predict,
+                                                                              filter_features=filter_features)
+                    if len(saliency_df) > 0 and len(cf_summary) > 0:
+                        saliency_explanation = saliency_df.to_dict('list')
+                        if len(cfs) > 0:
+                            cf_explanation = cfs.drop(
+                                ['alteredAttributes', 'droppedValues', 'copiedValues', 'triangle', 'attr_count'],
+                                axis=1).iloc[0].T.to_dict()
+                        print(saliency_explanation)
+                        aggregated_pn = 0
+                        for sev in saliency_explanation.values():
+                            if type(sev) == list:
+                                aggregated_pn += sev[0]
+                            else:
+                                aggregated_pn += sev
+                        if aggregated_pn >= 0.5 and max(cf_summary.to_dict().values()) > 0:
+                            satisfied = True
                 top_k += 1
-                if top_k == len(ltuple) + len(rtuple) - 1:
+                its +=1
+                if satisfied or top_k == no_features or its == 10:
                     break
         return {"prediction": prediction, "saliency": saliency_explanation, "cf": cf_explanation,
-                "filter_features": filter_features}
+                "filter_features": filter_features, "self_explanations": pae_dicts, "top_k": top_k, "iterations": its,
+                "triangles": len(tri)}
 
     def count_predictions(self):
         return self.delegate.count_predictions()
@@ -272,9 +310,16 @@ class GenericEllmer(Ellmer):
             question = "record1:\n{ltuple}\n record2:\n{rtuple}\n"
             conversation.append(("user", question))
             template = ChatPromptTemplate.from_messages(conversation)
-            if self.model_type in ['hf', 'falcon', 'llama2']:
+            if self.model_type in ['falcon', 'llama2']:
                 chain = LLMChain(llm=self.llm, prompt=template)
                 er_answer = chain.predict(ltuple=ltuple, rtuple=rtuple)
+            elif self.model_type in ['hf']:
+                messages = template.format_messages(ltuple=ltuple, rtuple=rtuple)
+                raw_content = self.llm.invoke(messages)
+                try:
+                    er_answer = raw_content.content.split('[/INST]')[-1]
+                except:
+                    er_answer = raw_content.content
             else:
                 messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple, rtuple=rtuple)
                 answer = self.llm(messages)
@@ -353,6 +398,13 @@ class GenericEllmer(Ellmer):
             self.pred_count += 1
             self.tokens += sum([len(m[1].split(' ')) for m in conversation])  # input tokens
             self.tokens += len(content.split(' '))  # output tokens
+            try:
+                saliency_explanation = dict([(x[0], x[1]['saliency']) for x in list(saliency_explanation.items())])
+            except:
+                try:
+                    saliency_explanation = dict([(x[0], x[1]['saliency_score']) for x in list(saliency_explanation.items())])
+                except:
+                    pass
             return {"prediction": prediction, "saliency": saliency_explanation, "cf": cf_explanation,
                     "conversation": conversation}
         elif "ptse" in self.prompts:
@@ -641,6 +693,13 @@ class GenericEllmer(Ellmer):
                 self.pred_count += 1
 
             self.tokens += sum([len(m[1].split(' ')) for m in conversation])
+            try:
+                saliency_explanation = dict([(x[0], x[1]['saliency']) for x in list(saliency_explanation.items())])
+            except:
+                try:
+                    saliency_explanation = dict([(x[0], x[1]['saliency_score']) for x in list(saliency_explanation.items())])
+                except:
+                    pass
             return {"prediction": prediction, "why": why, "saliency": saliency_explanation, "cf": cf_explanation,
                     "conversation": conversation}
 
