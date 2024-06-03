@@ -255,6 +255,7 @@ class UnCertaEllmer(CertaEllmer):
                 top_k += 1
                 its +=1
                 if satisfied or top_k == no_features or its == 10:
+                    top_k -= 1
                     break
         return {"prediction": prediction, "saliency": saliency_explanation, "cf": cf_explanation,
                 "filter_features": filter_features, "self_explanations": pae_dicts, "top_k": top_k, "iterations": its,
