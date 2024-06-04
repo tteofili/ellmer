@@ -1,0 +1,3 @@
+system:You are an expert assistant for Entity Matching tasks.
+user:Do these two entities refer to the same real-world entity?
+assistant:Ok, I will reply with just "yes" or "no", now give me the two entities.
