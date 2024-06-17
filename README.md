@@ -42,8 +42,8 @@ If you extend or use this work, please cite:
 
 ```
 @article{teofili2023ellmer,
-  title={ELLMER: Explain Large Language Models for Entity Resolution},
+  title={Can we trust LLM Self-Explanations for Entity Resolution?},
   author={Teofili, Tommaso and Firmani, Donatella and Koudas, Nick and Merialdo, Paolo and Srivastava, Divesh},
-  year={2023}
+  year={2024}
 }
 ```
