@@ -4,7 +4,7 @@ ELLMER
 =======
 <img src="https://github.com/tteofili/ellmer/assets/512815/71b950f3-2b36-4a58-8f48-955380b30a09" width=20%>
 
-Code for _ELLMER_: Explain Large Language Models for ER.
+Code for _Can we trust LLM Self-Explanations for Entity Resolution?_.
 
 # Installation
 
@@ -41,9 +41,9 @@ Other optional parameters can be specified in the [script](scripts/eval.py#l160)
 If you extend or use this work, please cite:
 
 ```
-@article{teofili2023ellmer,
-  title={ELLMER: Explain Large Language Models for Entity Resolution},
+@article{teofili2024ellmer,
+  title={Can we trust LLM Self-Explanations for Entity Resolution?},
   author={Teofili, Tommaso and Firmani, Donatella and Koudas, Nick and Merialdo, Paolo and Srivastava, Divesh},
-  year={2023}
+  year={2024}
 }
 ```
