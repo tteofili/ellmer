@@ -1,0 +1,7 @@
+,total_time,tokens,predictions,top_k,faithfulness,model,dataset,uncerta(freq)_sample,uncerta(union)_sample,uncerta(intersection)_sample
+0,24.39682102203369,37624.5,719.5,2,{'uncerta(freq)_sample': 0.0},uncerta(freq)_sample,abt_buy,"{'validity': 0.99999999995, 'proximity': 0.8333333332916667, 'sparsity': 0.7916666666270833, 'diversity': 0.0}",,
+1,12.17016077041626,58331.0,1112.0,2,{'uncerta(union)_sample': 0.0},uncerta(union)_sample,abt_buy,,"{'validity': 0.99999999995, 'proximity': 0.8333333332916667, 'sparsity': 0.7916666666270833, 'diversity': 0.0}",
+2,23.880749940872192,96112.5,1834.5,2,{'uncerta(intersection)_sample': 0.0},uncerta(intersection)_sample,abt_buy,,,"{'validity': 0.99999999995, 'proximity': 0.8333333332916667, 'sparsity': 0.7916666666270833, 'diversity': 0.0}"
+3,146.17508912086487,157639.0,3020.5,2,{'uncerta(freq)_sample': 0.0},uncerta(freq)_sample,walmart_amazon,"{'validity': 0.99999999995, 'proximity': 0.44999999997749995, 'sparsity': 0.92499999995375, 'diversity': 0.0}",,
+4,42.34269595146179,176916.0,3392.5,2,{'uncerta(union)_sample': 0.0},uncerta(union)_sample,walmart_amazon,,"{'validity': 0.99999999995, 'proximity': 0.44999999997749995, 'sparsity': 0.92499999995375, 'diversity': 0.0}",
+5,267.93223690986633,293534.0,5637.5,2,{'uncerta(intersection)_sample': 0.0},uncerta(intersection)_sample,walmart_amazon,,,"{'validity': 0.9999999999, 'proximity': 0.49999999995, 'sparsity': 0.916666666575, 'diversity': 0.0}"

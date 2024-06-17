@@ -1,0 +1,742 @@
+{
+  "data": [
+    {
+      "id": 0,
+      "ltuple": {
+        "ltable_name": "citrus",
+        "ltable_addr": "' 6703 melrose ave. '",
+        "ltable_city": "` los angeles '",
+        "ltable_phone": "213/857 -0034",
+        "ltable_res_type": "californian",
+        "ltable_class": "6.0"
+      },
+      "rtuple": {
+        "rtable_name": "` le chardonnay ( los angeles ) '",
+        "rtable_addr": "' 8284 melrose ave. '",
+        "rtable_city": "` los angeles '",
+        "rtable_phone": "213-655-8880",
+        "rtable_res_type": "` french bistro '",
+        "rtable_class": "12.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "ltable_city__`": [
+          0.0
+        ],
+        "ltable_city__los": [
+          0.0
+        ],
+        "ltable_city__angeles": [
+          0.0
+        ],
+        "ltable_city__'": [
+          0.0
+        ],
+        "ltable_name__citrus": [
+          0.0
+        ],
+        "ltable_res_type__californian": [
+          0.25
+        ],
+        "ltable_addr__'": [
+          0.25
+        ],
+        "ltable_addr__6703": [
+          0.25
+        ],
+        "ltable_addr__melrose": [
+          0.0
+        ],
+        "ltable_addr__ave.": [
+          0.0
+        ],
+        "ltable_phone__213/857": [
+          0.0
+        ],
+        "ltable_phone__-0034": [
+          0.0
+        ],
+        "rtable_city__`": [
+          0.0
+        ],
+        "rtable_city__los": [
+          0.0
+        ],
+        "rtable_city__angeles": [
+          0.0
+        ],
+        "rtable_city__'": [
+          0.0
+        ],
+        "rtable_addr__'": [
+          0.0
+        ],
+        "rtable_addr__8284": [
+          0.0
+        ],
+        "rtable_addr__melrose": [
+          0.0
+        ],
+        "rtable_addr__ave.": [
+          0.0
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "citrus",
+          "ltable_addr": "' 8284 melrose ave. '",
+          "ltable_city": "` los angeles '",
+          "ltable_phone": "213/857 -0034",
+          "ltable_res_type": "french",
+          "ltable_class": "6",
+          "rtable_name": "` le chardonnay ( los angeles ) '",
+          "rtable_addr": "' 8284 melrose ave. '",
+          "rtable_city": "` los angeles '",
+          "rtable_phone": "213-655-8880",
+          "rtable_res_type": "` french bistro '",
+          "rtable_class": "12",
+          "nomatch_score": "0",
+          "match_score": "1"
+        }
+      ],
+      "latency": 67.04211711883545,
+      "conversation": "",
+      "filter_features": [
+        "ltable_city__`",
+        "ltable_city__los",
+        "ltable_city__angeles",
+        "ltable_city__'",
+        "rtable_city__`",
+        "rtable_city__los",
+        "rtable_city__angeles",
+        "rtable_city__'",
+        "ltable_name__citrus",
+        "ltable_res_type__californian",
+        "rtable_addr__'",
+        "rtable_addr__8284",
+        "rtable_addr__melrose",
+        "rtable_addr__ave.",
+        "rtable_addr__'",
+        "ltable_addr__'",
+        "ltable_addr__6703",
+        "ltable_addr__melrose",
+        "ltable_addr__ave.",
+        "ltable_addr__'",
+        "ltable_phone__213/857",
+        "ltable_phone__-0034"
+      ],
+      "self_explanations": [
+        {
+          "ltable_name": 0.2,
+          "ltable_addr": 0.1,
+          "ltable_city": 0.3,
+          "ltable_phone": 0.1,
+          "ltable_res_type": 0.2,
+          "ltable_class": 0.1,
+          "rtable_name": 0.1,
+          "rtable_addr": 0.2,
+          "rtable_city": 0.3,
+          "rtable_phone": 0.1,
+          "rtable_res_type": 0.1,
+          "rtable_class": 0.1
+        },
+        {
+          "ltable_name": 0.0,
+          "ltable_addr": 0.0,
+          "ltable_city": 1.0,
+          "ltable_phone": 0.0,
+          "ltable_res_type": 0.0,
+          "ltable_class": 0.0,
+          "rtable_name": 0.0,
+          "rtable_addr": 0.0,
+          "rtable_city": 1.0,
+          "rtable_phone": 0.0,
+          "rtable_res_type": 0.0,
+          "rtable_class": 0.0
+        },
+        {
+          "citrus": 0.0,
+          "le": 0.0,
+          "chardonnay": 0.0,
+          "los": 0.5,
+          "angeles": 0.5,
+          "6703": 0.0,
+          "melrose": 0.0,
+          "ave": 0.0,
+          "8284": 0.0,
+          "213": 0.0,
+          "857": 0.0,
+          "0034": 0.0,
+          "655": 0.0,
+          "8880": 0.0,
+          "californian": 0.0,
+          "french": 0.0,
+          "bistro": 0.0,
+          "6.0": 0.0,
+          "12.0": 0.0
+        }
+      ],
+      "iterations": 2,
+      "top_k": 8
+    },
+    {
+      "id": 1,
+      "ltuple": {
+        "ltable_name": "` yujean kang \\ 's gourmet chinese cuisine '",
+        "ltable_addr": "'67 n. raymond ave. '",
+        "ltable_city": "` los angeles '",
+        "ltable_phone": "818/585 -0855",
+        "ltable_res_type": "asian",
+        "ltable_class": "22.0"
+      },
+      "rtuple": {
+        "rtable_name": "` yujean kang \\ 's '",
+        "rtable_addr": "'67 n. raymond ave. '",
+        "rtable_city": "pasadena",
+        "rtable_phone": "818-585-0855",
+        "rtable_res_type": "chinese",
+        "rtable_class": "22.0"
+      },
+      "prediction": 1,
+      "label": 1,
+      "saliency": {
+        "ltable_name__yujean": [
+          0.045454545454545456
+        ],
+        "ltable_name__kang": [
+          0.05303030303030303
+        ],
+        "ltable_name__chinese": [
+          0.06060606060606061
+        ],
+        "ltable_city__`": [
+          0.030303030303030304
+        ],
+        "ltable_city__los": [
+          0.03787878787878788
+        ],
+        "ltable_city__angeles": [
+          0.030303030303030304
+        ],
+        "ltable_city__'": [
+          0.007575757575757576
+        ],
+        "rtable_name__yujean": [
+          0.09090909090909091
+        ],
+        "rtable_name__kang": [
+          0.09090909090909088
+        ],
+        "rtable_res_type__chinese": [
+          0.03787878787878788
+        ],
+        "rtable_city__pasadena": [
+          0.015151515151515152
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` yujean kang \\ 's gourmet chinese cuisine '",
+          "ltable_addr": "'67 n. raymond ave. '",
+          "ltable_city": "` new york '",
+          "ltable_phone": "818/585 -0855",
+          "ltable_res_type": "asian",
+          "ltable_class": "22",
+          "rtable_name": "` yujean kang \\ 's '",
+          "rtable_addr": "'67 n. raymond ave. '",
+          "rtable_city": "pasadena",
+          "rtable_phone": "818-585-0855",
+          "rtable_res_type": "chinese",
+          "rtable_class": "22",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 66.57126092910767,
+      "conversation": "",
+      "filter_features": [
+        "ltable_name__yujean",
+        "rtable_name__yujean",
+        "ltable_name__kang",
+        "rtable_name__kang",
+        "ltable_name__chinese",
+        "rtable_res_type__chinese",
+        "ltable_city__`",
+        "ltable_city__los",
+        "ltable_city__angeles",
+        "ltable_city__'",
+        "rtable_city__pasadena"
+      ],
+      "self_explanations": [
+        {
+          "ltable_name": 0.2,
+          "ltable_addr": 0.1,
+          "ltable_city": 0.3,
+          "ltable_phone": 0.1,
+          "ltable_res_type": 0.2,
+          "ltable_class": 0.1,
+          "rtable_name": 0.2,
+          "rtable_addr": 0.1,
+          "rtable_city": 0.3,
+          "rtable_phone": 0.1,
+          "rtable_res_type": 0.2,
+          "rtable_class": 0.1
+        },
+        {
+          "yujean": 0.2,
+          "kang": 0.2,
+          "gourmet": 0.1,
+          "chinese": 0.2,
+          "cuisine": 0.1,
+          "67": 0.1,
+          "n.": 0.1,
+          "raymond": 0.1,
+          "ave.": 0.1,
+          "los": 0.1,
+          "angeles": 0.1,
+          "818/585": 0.1,
+          "-0855": 0.1,
+          "asian": 0.1,
+          "22.0": 0.1
+        },
+        {
+          "yujean": 0.2,
+          "kang": 0.2,
+          "gourmet": 0.1,
+          "chinese": 0.2,
+          "cuisine": 0.1,
+          "67": 0.2,
+          "n.": 0.1,
+          "raymond": 0.2,
+          "ave.": 0.1,
+          "los": 0.1,
+          "angeles": 0.1,
+          "818/585": 0.1,
+          "-0855": 0.1,
+          "asian": 0.1,
+          "22.0": 0.1,
+          "pasadena": 0.1,
+          "818-585-0855": 0.1
+        }
+      ],
+      "iterations": 1,
+      "top_k": 6
+    },
+    {
+      "id": 3,
+      "ltuple": {
+        "ltable_name": "` jo jo '",
+        "ltable_addr": "' 160 e. 64th st. '",
+        "ltable_city": "` new york '",
+        "ltable_phone": "212/223 -5656",
+        "ltable_res_type": "american",
+        "ltable_class": "38.0"
+      },
+      "rtuple": {
+        "rtable_name": "` jo jo '",
+        "rtable_addr": "' 160 e. 64th st. '",
+        "rtable_city": "` new york city '",
+        "rtable_phone": "212-223-5656",
+        "rtable_res_type": "` french bistro '",
+        "rtable_class": "38.0"
+      },
+      "prediction": 1,
+      "label": 1,
+      "saliency": {
+        "ltable_addr__160": [
+          0.04288939051918736
+        ],
+        "ltable_addr__e.": [
+          0.0744920993227991
+        ],
+        "ltable_addr__64th": [
+          0.0744920993227991
+        ],
+        "ltable_addr__st.": [
+          0.04288939051918736
+        ],
+        "ltable_city__new": [
+          0.0
+        ],
+        "rtable_addr__160": [
+          0.013544018058690743
+        ],
+        "rtable_addr__e.": [
+          0.020316027088036117
+        ],
+        "rtable_addr__64th": [
+          0.022573363431151242
+        ],
+        "rtable_addr__st.": [
+          0.01805869074492099
+        ],
+        "rtable_city__new": [
+          0.004514672686230248
+        ]
+      },
+      "cfs": [
+        {
+          "ltable_name": "` jo jo '",
+          "ltable_addr": "' 160 e. 64th st. '",
+          "ltable_city": "` new york '",
+          "ltable_phone": "212/223 -5656",
+          "ltable_res_type": "american",
+          "ltable_class": "38",
+          "rtable_name": "` jo jo '",
+          "rtable_addr": "' 160 e. hwy . '",
+          "rtable_city": "` atlanta york city '",
+          "rtable_phone": "212-223-5656",
+          "rtable_res_type": "` french bistro '",
+          "rtable_class": "38",
+          "nomatch_score": "1",
+          "match_score": "0"
+        }
+      ],
+      "latency": 74.70762395858765,
+      "conversation": "",
+      "filter_features": [
+        "ltable_addr__160",
+        "rtable_addr__160",
+        "ltable_addr__e.",
+        "rtable_addr__e.",
+        "ltable_addr__64th",
+        "rtable_addr__64th",
+        "ltable_addr__st.",
+        "rtable_addr__st.",
+        "ltable_city__new",
+        "rtable_city__new"
+      ],
+      "self_explanations": [
+        {
+          "ltable_name": 0.0,
+          "ltable_addr": 0.0,
+          "ltable_city": 0.0,
+          "ltable_phone": 0.0,
+          "ltable_res_type": 0.0,
+          "ltable_class": 0.0,
+          "rtable_name": 0.0,
+          "rtable_addr": 0.0,
+          "rtable_city": 0.0,
+          "rtable_phone": 0.0,
+          "rtable_res_type": 0.0,
+          "rtable_class": 0.0
+        },
+        {
+          "160": 0.2,
+          "e.": 0.2,
+          "64th": 0.2,
+          "st.": 0.2,
+          "new": 0.2,
+          "york": 0.2,
+          "212/223": 0.2,
+          "-5656": 0.2,
+          "american": 0.2,
+          "38.0": 0.2,
+          "french": 0.2,
+          "bistro": 0.2,
+          "city": 0.2,
+          "212-223": 0.2
+        },
+        {
+          "": 2.0,
+          "jo": 2.0,
+          "'": 2.0,
+          "160": 2.0,
+          "e.": 2.0,
+          "64th": 2.0,
+          "st.": 2.0,
+          "new": 1.0,
+          "york": 1.0,
+          "city": 1.0,
+          "212/223": 1.0,
+          "-5656": 1.0,
+          "american": 1.0,
+          "french": 1.0,
+          "bistro": 1.0,
+          "38.0": 2.0
+        }
+      ],
+      "iterations": 1,
+      "top_k": 6
+    },
+    {
+      "id": 4,
+      "ltuple": {
+        "ltable_name": "` palace court '",
+        "ltable_addr": "' 3570 las vegas blvd. s '",
+        "ltable_city": "` las vegas '",
+        "ltable_phone": "702/731 -7547",
+        "ltable_res_type": "continental",
+        "ltable_class": "70.0"
+      },
+      "rtuple": {
+        "rtable_name": "` michael \\ 's ( las vegas ) '",
+        "rtable_addr": "' 3595 las vegas blvd. s. '",
+        "rtable_city": "` las vegas '",
+        "rtable_phone": "702-737-7111",
+        "rtable_res_type": "continental",
+        "rtable_class": "664.0"
+      },
+      "prediction": 0,
+      "label": 0,
+      "saliency": {
+        "rtable_city__`": [
+          0
+        ],
+        "rtable_city__las": [
+          0
+        ],
+        "rtable_city__vegas": [
+          0
+        ],
+        "rtable_city__'": [
+          0
+        ],
+        "rtable_addr__'": [
+          0
+        ],
+        "rtable_addr__3595": [
+          0
+        ],
+        "rtable_addr__las": [
+          0
+        ],
+        "rtable_addr__vegas": [
+          0
+        ],
+        "rtable_addr__blvd.": [
+          0
+        ],
+        "rtable_addr__s.": [
+          0
+        ],
+        "rtable_res_type__continental": [
+          0
+        ],
+        "rtable_name__`": [
+          0
+        ],
+        "rtable_name__michael": [
+          0
+        ],
+        "rtable_name__\\": [
+          0
+        ],
+        "rtable_name__'s": [
+          0
+        ],
+        "rtable_name__(": [
+          0
+        ],
+        "rtable_name__las": [
+          0
+        ],
+        "rtable_name__vegas": [
+          0
+        ],
+        "rtable_name__)": [
+          0
+        ],
+        "rtable_name__'": [
+          0
+        ],
+        "rtable_phone__702-737-7111": [
+          0
+        ],
+        "ltable_city__`": [
+          0
+        ],
+        "ltable_city__las": [
+          0
+        ],
+        "ltable_city__vegas": [
+          0
+        ],
+        "ltable_city__'": [
+          0
+        ],
+        "ltable_addr__'": [
+          0
+        ],
+        "ltable_addr__3570": [
+          0
+        ],
+        "ltable_addr__las": [
+          0
+        ],
+        "ltable_addr__vegas": [
+          0
+        ],
+        "ltable_addr__blvd.": [
+          0
+        ],
+        "ltable_addr__s": [
+          0
+        ],
+        "ltable_res_type__continental": [
+          0
+        ],
+        "ltable_name__`": [
+          0
+        ],
+        "ltable_name__palace": [
+          0
+        ],
+        "ltable_name__court": [
+          0
+        ],
+        "ltable_name__'": [
+          0
+        ],
+        "ltable_phone__702/731": [
+          0
+        ],
+        "ltable_phone__-7547": [
+          0
+        ]
+      },
+      "cfs": [
+        {}
+      ],
+      "latency": 185.96321177482605,
+      "conversation": "",
+      "filter_features": [
+        "ltable_city__`",
+        "ltable_city__las",
+        "ltable_city__vegas",
+        "ltable_city__'",
+        "rtable_city__`",
+        "rtable_city__las",
+        "rtable_city__vegas",
+        "rtable_city__'",
+        "ltable_addr__'",
+        "ltable_addr__3570",
+        "ltable_addr__las",
+        "ltable_addr__vegas",
+        "ltable_addr__blvd.",
+        "ltable_addr__s",
+        "ltable_addr__'",
+        "ltable_class__70.0",
+        "rtable_addr__'",
+        "rtable_addr__3595",
+        "rtable_addr__las",
+        "rtable_addr__vegas",
+        "rtable_addr__blvd.",
+        "rtable_addr__s.",
+        "rtable_addr__'",
+        "rtable_class__664.0",
+        "ltable_res_type__continental",
+        "rtable_res_type__continental",
+        "ltable_name__`",
+        "ltable_name__palace",
+        "ltable_name__court",
+        "ltable_name__'",
+        "rtable_name__`",
+        "rtable_name__michael",
+        "rtable_name__\\",
+        "rtable_name__'s",
+        "rtable_name__(",
+        "rtable_name__las",
+        "rtable_name__vegas",
+        "rtable_name__)",
+        "rtable_name__'",
+        "ltable_phone__702/731",
+        "ltable_phone__-7547",
+        "rtable_phone__702-737-7111",
+        "ltable_name__palace",
+        "ltable_name__court",
+        "ltable_addr__3570",
+        "ltable_addr__las",
+        "ltable_city__las",
+        "rtable_name__las",
+        "rtable_addr__las",
+        "rtable_city__las",
+        "ltable_addr__vegas",
+        "ltable_city__vegas",
+        "rtable_name__vegas",
+        "rtable_addr__vegas",
+        "rtable_city__vegas",
+        "ltable_addr__blvd.",
+        "rtable_addr__blvd.",
+        "ltable_addr__s",
+        "ltable_phone__702/731",
+        "ltable_phone__-7547",
+        "rtable_name__michael",
+        "rtable_name__'s"
+      ],
+      "self_explanations": [
+        {
+          "ltable_name": 0.1,
+          "ltable_addr": 0.2,
+          "ltable_city": 0.3,
+          "ltable_phone": 0.05,
+          "ltable_res_type": 0.15,
+          "ltable_class": 0.2,
+          "rtable_name": 0.1,
+          "rtable_addr": 0.2,
+          "rtable_city": 0.3,
+          "rtable_phone": 0.05,
+          "rtable_res_type": 0.15,
+          "rtable_class": 0.2
+        },
+        {
+          "palace": 0.0,
+          "court": 0.0,
+          "3570": 0.0,
+          "las": 0.0,
+          "vegas": 0.0,
+          "blvd.": 0.0,
+          "s": 0.0,
+          "702/731": 0.0,
+          "-7547": 0.0,
+          "michael": 0.0,
+          "'s": 0.0,
+          "(": 0.0,
+          ")": 0.0,
+          "3595": 0.0,
+          "702-737-7111": 0.0,
+          "continental": 0.0,
+          "70.0": 0.0,
+          "664.0": 0.0
+        },
+        {
+          "palace": 0.2,
+          "court": 0.2,
+          "3570": 0.2,
+          "las": 0.2,
+          "vegas": 0.2,
+          "blvd.": 0.2,
+          "s": 0.2,
+          "702/731": 0.2,
+          "-7547": 0.2,
+          "michael": 0.2,
+          "'s": 0.2,
+          "(": 0.2,
+          ")": 0.2,
+          "3595": 0.2,
+          "702-737-7111": 0.2,
+          "664.0": 0.2
+        }
+      ],
+      "iterations": 10,
+      "top_k": 24
+    }
+  ],
+  "total_time": 1860.952908039093,
+  "metrics": {
+    "faithfulness": {
+      "uncerta(freq)_sample": 0.0
+    },
+    "counterfactual_metrics": {
+      "uncerta(freq)_sample": {
+        "validity": 0.499999999975,
+        "proximity": 0.29166666665208335,
+        "sparsity": 0.9583333332854166,
+        "diversity": 0.0
+      }
+    }
+  },
+  "tokens": 19662978.8,
+  "predictions": 385095.4
+}

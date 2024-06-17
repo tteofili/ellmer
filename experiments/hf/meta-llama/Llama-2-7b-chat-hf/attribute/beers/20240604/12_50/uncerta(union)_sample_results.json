@@ -1,0 +1,116 @@
+{
+  "data": [
+    {
+      "id": 0,
+      "ltuple": {
+        "ltable_Beer_Name": "Bulleit Bourbon Barrel Aged G'Knight",
+        "ltable_Brew_Factory_Name": "Oskar Blues Grill & Brew",
+        "ltable_Style": "American Amber / Red Ale",
+        "ltable_ABV": "8.70 %"
+      },
+      "rtuple": {
+        "rtable_Beer_Name": "Figure Eight Bourbon Barrel Aged Jumbo Love",
+        "rtable_Brew_Factory_Name": "Figure Eight Brewing",
+        "rtable_Style": "Barley Wine",
+        "rtable_ABV": "-"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {},
+      "cfs": [
+        {}
+      ],
+      "latency": 62.126896142959595,
+      "conversation": "",
+      "filter_features": [
+        "Beer_Name",
+        "Brew_Factory_Name",
+        "Style",
+        "ABV"
+      ],
+      "self_explanations": [
+        {},
+        {
+          "Beer_Name": 0.7,
+          "Brew_Factory_Name": 0.6,
+          "Style": 0.5,
+          "ABV": 0.4
+        },
+        {
+          "Beer_Name": 0.7,
+          "Brew_Factory_Name": 0.6,
+          "Style": 0.5,
+          "ABV": 0.4
+        }
+      ],
+      "iterations": 6,
+      "top_k": 7
+    },
+    {
+      "id": 1,
+      "ltuple": {
+        "ltable_Beer_Name": "Double Dragon Imperial Red Ale",
+        "ltable_Brew_Factory_Name": "Phillips Brewing Company",
+        "ltable_Style": "American Amber / Red Ale",
+        "ltable_ABV": "8.20 %"
+      },
+      "rtuple": {
+        "rtable_Beer_Name": "Scuttlebutt Mateo Loco Imperial Red Ale",
+        "rtable_Brew_Factory_Name": "Scuttlebutt Brewing Co. .",
+        "rtable_Style": "American Strong Ale",
+        "rtable_ABV": "7.10 %"
+      },
+      "prediction": 1,
+      "label": 0,
+      "saliency": {},
+      "cfs": [
+        {}
+      ],
+      "latency": 49.94227886199951,
+      "conversation": "",
+      "filter_features": [
+        "ltable_Beer_Name",
+        "ltable_Brew_Factory_Name",
+        "ltable_Style",
+        "ltable_ABV",
+        "Beer_Name",
+        "Brew_Factory_Name",
+        "Style",
+        "ABV"
+      ],
+      "self_explanations": [
+        {},
+        {
+          "ltable_Beer_Name": 0.7,
+          "ltable_Brew_Factory_Name": 0.6,
+          "ltable_Style": 0.5,
+          "ltable_ABV": 0.4
+        },
+        {
+          "Beer_Name": 0.7,
+          "Brew_Factory_Name": 0.6,
+          "Style": 0.5,
+          "ABV": 0.4
+        }
+      ],
+      "iterations": 6,
+      "top_k": 7
+    }
+  ],
+  "total_time": 112.07300186157227,
+  "metrics": {
+    "faithfulness": {
+      "uncerta(union)_sample": 0.0
+    },
+    "counterfactual_metrics": {
+      "uncerta(union)_sample": {
+        "validity": 0.0,
+        "proximity": 0.0,
+        "sparsity": 0.0,
+        "diversity": 0.0
+      }
+    }
+  },
+  "tokens": 742821.5,
+  "predictions": 12763.5
+}
