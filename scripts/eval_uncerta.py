@@ -45,6 +45,8 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
                                                      "saliency": "ellmer/prompts/er-saliency-lc.txt",
                                                      "cf": "ellmer/prompts/er-cf-lc.txt"}})
 
+    evals = []
+
     for d in dataset_names:
         expdir = f'./experiments/{model_type}/{model_name}/{explanation_granularity}/{d}/{datetime.now():%Y%m%d}/{datetime.now():%H_%M}/'
         obs_dir = f'experiments/{model_type}/{model_name}/{explanation_granularity}/concordance/{d}//{datetime.now():%Y%m%d}/{datetime.now():%H_%M}'
@@ -116,6 +118,11 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
             with open(output_file_path, 'w') as fout:
                 json.dump(llm_results, fout)
 
+            faithfulness = 'nan'
+            cf_metrics = {}
+            count_tokens_samples = 'nan'
+            predictions_samples = 'nan'
+
             if quantitative:
                 # generate quantitative explainability metrics for each set of generated explanations
 
@@ -129,7 +136,10 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
 
                 metrics_results = {"faithfulness": faithfulness, "counterfactual_metrics": cf_metrics}
 
-                llm_results = {"data": curr_llm_results, "total_time": total_time, "metrics": metrics_results, "tokens": llm.count_tokens()/samples, "predictions":llm.count_predictions()/samples}
+                count_tokens_samples = llm.count_tokens() / samples
+                predictions_samples = llm.count_predictions() / samples
+                llm_results = {"data": curr_llm_results, "total_time": total_time, "metrics": metrics_results,
+                               "tokens": count_tokens_samples, "predictions": predictions_samples}
 
                 output_file_path = expdir + key + '_results.json'
                 with open(output_file_path, 'w') as fout:
@@ -137,6 +147,13 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
 
             result_files.append((key, output_file_path))
             print(f'{key} data generated in {total_time}s')
+
+            row_dict = {"total_time": total_time, "tokens": count_tokens_samples, "predictions": predictions_samples,
+                        "top_k": uncerta_top_k, "faithfulness": faithfulness, "model": key, "dataset": d}
+            for cfk, cfv in cf_metrics.items():
+                row_dict[cfk] = cfv
+            eval_row = pd.Series(row_dict)
+            evals.append(eval_row)
 
         # generate concordance statistics for each pair of results
         for pair in itertools.combinations(result_files, 2):
@@ -152,6 +169,10 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
             os.makedirs(obs_dir, exist_ok=True)
             observations.to_csv(f'{obs_dir}/{p1_name}_{p2_name}.csv')
 
+    eval_df = pd.DataFrame(evals)
+    eval_expdir = f'./experiments/{model_type}/{model_name}/{explanation_granularity}/{datetime.now():%Y%m%d}/{datetime.now():%H_%M}/'
+    os.makedirs(eval_expdir, exist_ok=True)
+    eval_df.to_csv(eval_expdir+"uncerta.csv")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run saliency experiments.')
@@ -177,7 +198,7 @@ if __name__ == "__main__":
                         default="gpt-35-turbo")
     parser.add_argument('--tag', metavar='tg', type=str, help='run tag', default="sample")
     parser.add_argument('--temperature', metavar='tp', type=float, help='LLM temperature', default=0.01)
-    parser.add_argument('--uncerta_top_k', metavar='k', type=int, default=2,
+    parser.add_argument('--uncerta_top_k', metavar='k', type=int, default=-1,
                         help='uncerta top_k')
 
     args = parser.parse_args()

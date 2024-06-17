@@ -178,14 +178,16 @@ def get_concordance(pred1_file, pred2_file):
             traceback.print_exc()
             pass
 
-    obs_df = pd.concat(observations, axis=1).T
-    print(f"pred1-pred2 eq rate: {eq_ratio(obs_df['pred1'].values, obs_df['pred2'].values)}")
-    print(f"pred1-gt eq rate: {eq_ratio(obs_df['label'].values, obs_df['pred2'].values)}")
-    print(f"pred2-gt eq rate: {eq_ratio(obs_df['pred1'].values, obs_df['label'].values)}")
-    print(f"avg kt: {obs_df['kt'].mean()}")
-    print(f"avg cf cos_sim: {obs_df['cos_sim'].mean()}")
-
-    return obs_df
+    if len(observations) > 0:
+        obs_df = pd.concat(observations, axis=1).T
+        print(f"pred1-pred2 eq rate: {eq_ratio(obs_df['pred1'].values, obs_df['pred2'].values)}")
+        print(f"pred1-gt eq rate: {eq_ratio(obs_df['label'].values, obs_df['pred2'].values)}")
+        print(f"pred2-gt eq rate: {eq_ratio(obs_df['pred1'].values, obs_df['label'].values)}")
+        print(f"avg kt: {obs_df['kt'].mean()}")
+        print(f"avg cf cos_sim: {obs_df['cos_sim'].mean()}")
+        return obs_df
+    else:
+        return pd.DataFrame()
 
 
 def rbo(list1, list2, p=0.9):

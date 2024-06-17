@@ -1,0 +1,19 @@
+{
+  "data": [],
+  "total_time": 0.3993520736694336,
+  "metrics": {
+    "faithfulness": {
+      "hybrid_diff_(union)_sample": 0.0
+    },
+    "counterfactual_metrics": {
+      "hybrid_diff_(union)_sample": {
+        "validity": 0.0,
+        "proximity": 0.0,
+        "sparsity": 0.0,
+        "diversity": 0.0
+      }
+    }
+  },
+  "tokens": 289086.8,
+  "predictions": 4640.4
+}
