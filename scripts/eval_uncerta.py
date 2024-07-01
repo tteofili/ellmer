@@ -24,19 +24,19 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
 
     llm_config = {"model_type": model_type, "model_name": model_name, "deployment_name": deployment_name, "tag": tag}
 
-    pase = ellmer.models.GenericEllmer(explanation_granularity=explanation_granularity,
+    pase = ellmer.models.SelfExplainer(explanation_granularity=explanation_granularity,
                                        deployment_name=llm_config['deployment_name'], temperature=temperature,
                                        model_name=llm_config['model_name'], model_type=llm_config['model_type'],
                                        prompts={"pase": "ellmer/prompts/constrained7.txt"})
 
-    ptse = ellmer.models.GenericEllmer(explanation_granularity=explanation_granularity,
+    ptse = ellmer.models.SelfExplainer(explanation_granularity=explanation_granularity,
                                        deployment_name=llm_config['deployment_name'], temperature=temperature,
                                        model_name=llm_config['model_name'], model_type=llm_config['model_type'],
                                        prompts={"ptse": {"er": "ellmer/prompts/er.txt",
                                                          "saliency": "ellmer/prompts/er-saliency-lc.txt",
                                                          "cf": "ellmer/prompts/er-cf-lc.txt"}})
 
-    ptsew = ellmer.models.GenericEllmer(explanation_granularity=explanation_granularity,
+    ptsew = ellmer.models.SelfExplainer(explanation_granularity=explanation_granularity,
                                         deployment_name=llm_config['deployment_name'], temperature=temperature,
                                         model_name=llm_config['model_name'], model_type=llm_config['model_type'],
                                         prompts={
@@ -62,15 +62,15 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
         certa = CertaExplainer(lsource, rsource)
 
         ellmers = {
-            "uncerta(freq)_" + llm_config['tag']: ellmer.models.UnCertaEllmer(explanation_granularity, ptse, certa,
-                                                                              [pase, ptse, ptsew],
-                                                                              num_triangles=num_triangles, top_k=uncerta_top_k),
-            "uncerta(union)_" + llm_config['tag']: ellmer.models.UnCertaEllmer(explanation_granularity, ptse, certa,
-                                                                              [pase, ptse, ptsew], combine='union',
-                                                                              num_triangles=num_triangles, top_k=uncerta_top_k),
-            "uncerta(intersection)_" + llm_config['tag']: ellmer.models.UnCertaEllmer(explanation_granularity, ptse, certa,
-                                                                               [pase, ptse, ptsew], combine='intersection',
-                                                                               num_triangles=num_triangles, top_k=uncerta_top_k),
+            "uncerta(freq)_" + llm_config['tag']: ellmer.models.HybridCerta(explanation_granularity, ptse, certa,
+                                                                            [pase, ptse, ptsew],
+                                                                            num_triangles=num_triangles, top_k=uncerta_top_k),
+            "uncerta(union)_" + llm_config['tag']: ellmer.models.HybridCerta(explanation_granularity, ptse, certa,
+                                                                             [pase, ptse, ptsew], combine='union',
+                                                                             num_triangles=num_triangles, top_k=uncerta_top_k),
+            "uncerta(intersection)_" + llm_config['tag']: ellmer.models.HybridCerta(explanation_granularity, ptse, certa,
+                                                                                    [pase, ptse, ptsew], combine='intersection',
+                                                                                    num_triangles=num_triangles, top_k=uncerta_top_k),
         }
 
         result_files = []

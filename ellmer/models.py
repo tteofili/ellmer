@@ -6,11 +6,8 @@ from langchain.chains import LLMChain
 from langchain.chat_models import AzureChatOpenAI
 from langchain.llms import HuggingFacePipeline, LlamaCpp
 from langchain_community.chat_models.huggingface import ChatHuggingFace
-import lemon
 import re
 import certa.utils
-import numpy as np
-import pandas as pd
 from lime.lime_text import LimeTextExplainer
 
 import matplotlib.pyplot as plt
@@ -42,7 +39,7 @@ openai.api_base = os.getenv("OPENAI_API_BASE")
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
-class Ellmer:
+class BaseLLMExplainer:
 
     def predict_and_explain(self, ltuple, rtuple):
         prediction = self.predict_tuples(ltuple, rtuple)
@@ -87,7 +84,7 @@ class Ellmer:
         return self.tokens
 
 
-class CertaEllmer(Ellmer):
+class FullCerta(BaseLLMExplainer):
 
     def __init__(self, explanation_granularity, delegate, certa, num_triangles=10):
         self.explanation_granularity = explanation_granularity
@@ -144,7 +141,7 @@ class CertaEllmer(Ellmer):
         return self.delegate.count_tokens()
 
 
-class UnCertaEllmer(CertaEllmer):
+class HybridCerta(FullCerta):
     def __init__(self, explanation_granularity, pred_delegate, certa, ellmers, num_draws=1, num_triangles=10,
                  combine : str = 'freq', top_k: int = -1):
         self.explanation_granularity = explanation_granularity
@@ -290,7 +287,7 @@ class UnCertaEllmer(CertaEllmer):
         return self.delegate.count_tokens()
 
 
-class GenericEllmer(Ellmer):
+class SelfExplainer(BaseLLMExplainer):
 
     def __init__(self, model_type='azure_openai', temperature=0.01, max_length=512, fake=False, model_name="",
                  verbose=False, delegate=None, explanation_granularity="attribute", explainer_fn="self", prompts=None,
@@ -805,7 +802,7 @@ def parse_pase_answer(answer, llm):
 
 
 # deprecated
-class Certa(Ellmer):
+class Certa(BaseLLMExplainer):
 
     def __init__(self, explanation_granularity, delegate, certa, num_triangles=10):
         self.explanation_granularity = explanation_granularity
@@ -841,7 +838,7 @@ class Certa(Ellmer):
 
 
 # deprecated
-class PASE(Ellmer):
+class PASE(BaseLLMExplainer):
 
     def __init__(self, explanation_granularity, temperature):
         self.llm = PredictAndSelfExplainER(explanation_granularity=explanation_granularity,
@@ -888,7 +885,7 @@ class PASE(Ellmer):
 
 
 # deprecated
-class PTSE(Ellmer):
+class PTSE(BaseLLMExplainer):
 
     def __init__(self, explanation_granularity, why, temperature):
         self.llm = PredictThenSelfExplainER(explanation_granularity=explanation_granularity, why=why,
@@ -1550,30 +1547,6 @@ class MinunExplainer(object):
                                         lbs[attr_idx][0] = mid + 1
                         if tag == False:
                             break
-        '''
-        print(perms)
-        for item in flip_indices:
-            cur_indice = [0]*num_dim
-            print(item)
-            for idx,dim in enumerate(item[1]):
-                    cur_indice[dim] = item[0][idx]
-            # start from cur_indice to search the remaining one
-            print("Before prediction: "+str(cur_indice))
-            for d in item[1]:
-                cur_indice[d] += 1
-                while cur_indice[d] < perms[d]:
-                    print(cur_indice)
-                    sample = self._format_ditto_instance(cands4attrs,cur_indice,instance)
-                    predict, logit = self._eval_model([sample])
-                    eval_cnt += 1
-                    if str(predict[0]) != str(instance[2]): # result is flipped
-                        num = sum(cur_indice)
-                        candidates.append((sample,num,max(logit[0][0],logit[0][1]),cur_indice))
-                        if len(candidates) >= k:
-                            return candidates, eval_cnt
-                    cur_indice[d] += 1
-        print("============ End of Case ===============")
-        '''
         return candidates, eval_cnt
 
     def _entity2pair_attrs(self, instance):
@@ -2237,7 +2210,7 @@ class PlotExplanation(object):
         fig.tight_layout()
 
 
-class HybridMinunLemon(Ellmer):
+class HybridGeneric(BaseLLMExplainer):
 
     def __init__(self, explanation_granularity, pred_delegate, ellmers, lsource, rsource,
                  num_draws=1, num_triangles=10, combine : str = 'freq', top_k: int = 1):

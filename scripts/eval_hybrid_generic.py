@@ -3,7 +3,6 @@ from langchain.cache import InMemoryCache, SQLiteCache
 import langchain
 import pandas as pd
 from certa.utils import merge_sources
-from certa.explain import CertaExplainer
 from datetime import datetime
 import os
 import ellmer.models
@@ -14,9 +13,8 @@ import traceback
 from tqdm import tqdm
 import argparse
 
-
 def eval(cache, samples, num_triangles, explanation_granularity, quantitative, base_dir, dataset_names, model_type,
-         model_name, deployment_name, tag, temperature):
+         model_name, deployment_name, tag, temperature, uncerta_top_k):
     if cache == "memory":
         langchain.llm_cache = InMemoryCache()
     elif cache == "sqlite":
@@ -45,11 +43,6 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
                                                      "saliency": "ellmer/prompts/er-saliency-lc.txt",
                                                      "cf": "ellmer/prompts/er-cf-lc.txt"}})
 
-    ptn = ellmer.models.SelfExplainer(explanation_granularity=explanation_granularity,
-                                      deployment_name=llm_config['deployment_name'], temperature=temperature,
-                                      model_name=llm_config['model_name'], model_type=llm_config['model_type'],
-                                      prompts={"ptse": {"er": "ellmer/prompts/er.txt"}})
-
     evals = []
 
     for d in dataset_names:
@@ -64,22 +57,16 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
         test_df = merge_sources(test, 'ltable_', 'rtable_', lsource, rsource, ['label'],
                                 [])
 
-        certa = CertaExplainer(lsource, rsource)
-
         ellmers = {
-            "pase_" + llm_config['tag']: pase,
-            "ptse_" + llm_config['tag']: ptse,
-            "ptsew_" + llm_config['tag']: ptsew,
-            "certa(ptse)_" + llm_config['tag']: ellmer.models.FullCerta(explanation_granularity, ptn, certa,
-                                                                        num_triangles),
-            "certa(pase)_" + llm_config['tag']: ellmer.models.FullCerta(explanation_granularity, pase, certa,
-                                                                        num_triangles),
-            "uncerta(pase)_" + llm_config['tag']: ellmer.models.HybridCerta(explanation_granularity, pase, certa,
-                                                                            [pase, ptse, ptsew],
-                                                                            num_triangles=num_triangles),
-            "uncerta(ptse)_" + llm_config['tag']: ellmer.models.HybridCerta(explanation_granularity, ptse, certa,
-                                                                            [pase, ptse, ptsew],
-                                                                            num_triangles=num_triangles),
+            "hybrid_diff_(freq)_" + llm_config['tag']: ellmer.models.HybridGeneric(explanation_granularity, ptse,
+                                                                                   [pase, ptse, ptsew], lsource, rsource,
+                                                                                   num_triangles=num_triangles, top_k=uncerta_top_k),
+            "hybrid_diff_(union)_" + llm_config['tag']: ellmer.models.HybridGeneric(explanation_granularity, ptse,
+                                                                                    [pase, ptse, ptsew], lsource, rsource, combine='union',
+                                                                                    num_triangles=num_triangles, top_k=uncerta_top_k),
+            "hybrid_diff_(intersection)_" + llm_config['tag']: ellmer.models.HybridGeneric(explanation_granularity, ptse,
+                                                                                           [pase, ptse, ptsew], lsource, rsource, combine='intersection',
+                                                                                           num_triangles=num_triangles, top_k=uncerta_top_k),
         }
 
         result_files = []
@@ -108,8 +95,9 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
                     row_dict = {"id": idx, "ltuple": ltuple, "rtuple": rtuple, "prediction": prediction,
                               "label": rand_row['label'].values[0], "saliency": saliency, "cfs": cfs,
                               "latency": ptime, "conversation": conversation}
-                    if "filter_features" in answer_dictionary:
-                        row_dict["filter_features"] = answer_dictionary["filter_features"]
+                    for f in ['filter_features', 'self_explanations', 'iterations', 'top_k']:
+                        row_dict[f] = answer_dictionary[f]
+
                     curr_llm_results.append(row_dict)
                 except Exception:
                     traceback.print_exc()
@@ -120,7 +108,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
             total_time = time() - start_time
 
             os.makedirs(expdir, exist_ok=True)
-            llm_results = {"data": curr_llm_results, "total_time": total_time}
+            llm_results = {"data": curr_llm_results, "total_time": total_time, "top_k": uncerta_top_k}
 
             output_file_path = expdir + key + '_results.json'
             with open(output_file_path, 'w') as fout:
@@ -157,7 +145,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
             print(f'{key} data generated in {total_time}s')
 
             row_dict = {"total_time": total_time, "tokens": count_tokens_samples, "predictions": predictions_samples,
-                        "faithfulness": faithfulness, "model": key, "dataset": d}
+                        "top_k": uncerta_top_k, "faithfulness": faithfulness, "model": key, "dataset": d}
             for cfk, cfv in cf_metrics.items():
                 row_dict[cfk] = cfv
             eval_row = pd.Series(row_dict)
@@ -180,7 +168,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
     eval_df = pd.DataFrame(evals)
     eval_expdir = f'./experiments/{model_type}/{model_name}/{explanation_granularity}/{datetime.now():%Y%m%d}/{datetime.now():%H_%M}/'
     os.makedirs(eval_expdir, exist_ok=True)
-    eval_df.to_csv(eval_expdir + "eval.csv")
+    eval_df.to_csv(eval_expdir+"hybrid_diff.csv")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run saliency experiments.')
@@ -206,6 +194,8 @@ if __name__ == "__main__":
                         default="gpt-35-turbo")
     parser.add_argument('--tag', metavar='tg', type=str, help='run tag', default="sample")
     parser.add_argument('--temperature', metavar='tp', type=float, help='LLM temperature', default=0.01)
+    parser.add_argument('--uncerta_top_k', metavar='k', type=int, default=2,
+                        help='uncerta top_k')
 
     args = parser.parse_args()
     base_datadir = args.base_dir
@@ -218,6 +208,7 @@ if __name__ == "__main__":
     quantitative = args.quantitative
     dataset_names = args.datasets
     base_dir = args.base_dir
+    uncerta_top_k = args.uncerta_top_k
 
     model_type = args.model_type
     model_name = args.model_name
@@ -225,4 +216,4 @@ if __name__ == "__main__":
     tag = args.tag
 
     eval(cache, samples, num_triangles, explanation_granularity, quantitative, base_dir, dataset_names, model_type,
-         model_name, deployment_name, tag, temperature)
+         model_name, deployment_name, tag, temperature, uncerta_top_k)

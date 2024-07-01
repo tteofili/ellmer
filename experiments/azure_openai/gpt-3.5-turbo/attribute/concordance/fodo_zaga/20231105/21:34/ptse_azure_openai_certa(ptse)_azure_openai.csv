@@ -1,6 +1,0 @@
-,id,pred1,pred2,label,agree,kt,cos_sim
-0,0,0,0,False,True,,0.0
-1,1,1,1,True,True,,0.9301754336943971
-2,2,0,0,False,True,,0.8924516453719396
-3,3,1,1,True,True,,0.9764082219405036
-4,4,0,0,False,True,,0.8460434230488472
