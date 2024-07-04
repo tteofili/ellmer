@@ -31,10 +31,6 @@ import torch
 from transformers import BitsAndBytesConfig, AutoModelForCausalLM, AutoTokenizer, pipeline
 from time import time
 
-hf_models = ['EleutherAI/gpt-neox-20b', 'tiiuae/falcon-7b-instruct', "Writer/camel-5b-hf", "databricks/dolly-v2-3b",
-             "google/flan-t5-xxl", "tiiuae/falcon-40b", "tiiuae/falcon-7b", "internlm/internlm-chat-7b", "Qwen/Qwen-7B",
-             "meta-llama/Llama-2-7b-chat-hf"]
-
 openai.api_base = os.getenv("OPENAI_API_BASE")
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
@@ -230,12 +226,8 @@ class HybridCerta(FullCerta):
                     for ff in filter_features:
                         if ff.startswith('ltable_'):
                             continue
-                            #for token in ltuple[ff].split(' '):
-                            #    token_attributes_filtered.append(ff+'__'+token)
                         if ff.startswith('rtable_'):
                             continue
-                            #for token in rtuple[ff].split(' '):
-                            #    token_attributes_filtered.append(ff+'__'+ token)
                         else:
                             for ic in ltuple.keys():
                                 if ff in ltuple[ic].split(' '):
@@ -942,10 +934,9 @@ class LLMERModel(ERModel):
     fake = False
     verbose = False
 
-    def __init__(self, model_type='azure_openai', temperature=0.01, max_length=512, fake=False, hf_repo=hf_models[0],
+    def __init__(self, model_type='azure_openai', temperature=0.01, max_length=512, fake=False, hf_repo="tiiuae/falcon-7b",
                  verbose=False, delegate=None):
         template = "given the record:\n{ltuple}\n and the record:\n{rtuple}\n do they refer to the same entity in the real world?\nreply yes or no"
-        # ellmer.utils.read_prompt("ellmer/prompts/er2.txt")
         self.prompt = PromptTemplate(
             input_variables=["ltuple", "rtuple"],
             template=template,
@@ -1371,15 +1362,11 @@ class MinunExplainer(object):
         Returns:
             exp_result(DefaultDict): the explaination of given instance in the format of key-value pairs, where
         '''
-        # 1. For each pais of attribute in the instance, identify all possible edit ops
-        # 2. Repeatly search for N samples with _generate_samples algorithms
+        # 1. For each pair of attribute in the instance, identify all possible edit ops
+        # 2. Repeatedly search for N samples with _generate_samples algorithms
         # 3. for each sample, evaluate the black box model by calling _eval_model function
         # 4. End above loop if finding k samples that can flip the results or finish enumerating the search space
-        # 5. refine the candidates and return explaination
-        '''list(pd_instance.loc[:, pd_instance.columns.str.startswith('ltable_')].values[0])
-        list(pd_instance.loc[:, pd_instance.columns.str.startswith('rtable_')].values[0])
-        pd_instance['label']
-        [c.replace('ltable_', '') for c in pd_instance.columns if c.startswith('ltable_')]'''
+        # 5. refine the candidates and return explanation
 
         attrs = self._entity2pair_attrs(instance)
         cands4attrs = [[]]
@@ -2309,11 +2296,7 @@ class HybridGeneric(BaseLLMExplainer):
                     filter_features = token_attributes_filtered
 
                 pair_df = certa.utils.get_row(pd.Series(ltuple), pd.Series(rtuple), lprefix='', rprefix='')
-                '''def predict_proba(lt, rt):
-                    res = np.zeros(2)
-                    res[self.delegate.predict_tuples(lt, rt)].add(1)
-                    return res
-'''
+
                 exclude_attrs = []
                 if 'attribute' == self.explanation_granularity:
                     exclude_attrs = filter_features
@@ -2335,8 +2318,6 @@ class HybridGeneric(BaseLLMExplainer):
                         saliency_df = ld
                     else:
                         saliency_df = land_explanation.groupby('column')['impact'].sum().to_dict()
-
-                    #saliency_df = lemon.explain(self.lsource, self.rsource, pair_df, predict_proba)
                     cfs = self.minun.explain((list(ltuple.values()), list(rtuple.values()), prediction, list(ltuple.keys())+list(rtuple.keys())))
 
                     if len(saliency_df) > 0:
