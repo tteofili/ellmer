@@ -74,12 +74,11 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
                                                                         num_triangles),
             "certa(pase)_" + llm_config['tag']: ellmer.models.FullCerta(explanation_granularity, pase, certa,
                                                                         num_triangles),
-            "uncerta(pase)_" + llm_config['tag']: ellmer.models.HybridCerta(explanation_granularity, pase, certa,
+            "ellmer(certa)_" + llm_config['tag']: ellmer.models.HybridCerta(explanation_granularity, ptse, certa,
                                                                             [pase, ptse, ptsew],
                                                                             num_triangles=num_triangles),
-            "uncerta(ptse)_" + llm_config['tag']: ellmer.models.HybridCerta(explanation_granularity, ptse, certa,
-                                                                            [pase, ptse, ptsew],
-                                                                            num_triangles=num_triangles),
+            "ellmer(lm)_" + llm_config['tag']: ellmer.models.HybridGeneric(explanation_granularity, ptse,
+                                                                           [pase, ptse, ptsew], lsource, rsource),
         }
 
         result_files = []
@@ -106,8 +105,8 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
                     else:
                         conversation = ''
                     row_dict = {"id": idx, "ltuple": ltuple, "rtuple": rtuple, "prediction": prediction,
-                              "label": rand_row['label'].values[0], "saliency": saliency, "cfs": cfs,
-                              "latency": ptime, "conversation": conversation}
+                                "label": rand_row['label'].values[0], "saliency": saliency, "cfs": cfs,
+                                "latency": ptime, "conversation": conversation}
                     if "filter_features" in answer_dictionary:
                         row_dict["filter_features"] = answer_dictionary["filter_features"]
                     curr_llm_results.append(row_dict)
@@ -181,6 +180,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
     eval_expdir = f'./experiments/{model_type}/{model_name}/{explanation_granularity}/{datetime.now():%Y%m%d}/{datetime.now():%H_%M}/'
     os.makedirs(eval_expdir, exist_ok=True)
     eval_df.to_csv(eval_expdir + "eval.csv")
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='Run saliency experiments.')

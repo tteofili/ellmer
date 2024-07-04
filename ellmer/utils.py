@@ -23,7 +23,6 @@ def predict(x: pd.DataFrame, llm_fn, verbose: bool = True, mojito: bool = False)
             full_df = np.dstack((xc['nomatch_score'], xc['match_score'])).squeeze()
             xc = full_df
         xcs.append(xc)
-        # print(f'{count},{self.summarized},{self.idks}')
     return pd.concat(xcs, axis=0)
 
 
