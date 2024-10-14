@@ -44,32 +44,35 @@ def text_to_match(answer, llm_fn, n=0):
     idks = 0
     no_match_score = 0
     match_score = 0
-    if answer.lower().startswith("yes"):
+    answer = answer.strip().lower()
+    if answer.startswith("yes") or answer.endswith("yes") or answer == "1" or answer == 'matching':
         match_score = 1
-    elif answer.lower().startswith("no"):
+    elif answer.startswith("no") or answer.endswith("no") or answer == "0" or answer == 'non-matching':
         no_match_score = 1
-    else:
-        if "yes".casefold() in answer.casefold():
-            match_score = 1
-        elif "no".casefold() in answer.casefold():
-            no_match_score = 1
-        elif n == 0:
-            template = "summarize \"response\" as yes or no"
+    elif n == 0:
+        template = "summarize the following sentence as a 'matching' or 'non-matching': \"response\""
+        try:
+            summarized_answer = llm_fn(template.replace("response", answer))
+        except:
             try:
-                summarized_answer = llm_fn(template.replace("response", answer))
+                summarized_answer = llm_fn.invoke(template.replace("response", answer))
+                summarized_answer = summarized_answer.content
             except:
                 summarized_answer = "false"
-            summarized += 1
-            snms, sms = text_to_match(summarized_answer, llm_fn, n=1)
-            if snms == 0 and sms == 0:
-                idks += 1
-                no_match_score = 1
+        summarized += 1
+        snms, sms = text_to_match(summarized_answer, llm_fn, n=1)
+        if snms == 0 and sms == 0:
+            idks += 1
+            no_match_score = 1
+        else:
+            no_match_score = snms
+            match_score = sms
     return no_match_score, match_score
 
 
 def read_prompt(file_path: str):
     with open(file_path) as file:
-        lines = [(line.rstrip().split(':')) for line in file]
+        lines = [(line.rstrip().split('::')) for line in file]
     return lines
 
 

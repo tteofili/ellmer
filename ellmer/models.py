@@ -1,11 +1,14 @@
 import traceback
 import operator
-from langchain.prompts import ChatPromptTemplate
+from collections import Counter
+from langchain.prompts import ChatPromptTemplate, FewShotPromptTemplate
 from langchain import PromptTemplate, HuggingFaceHub, OpenAI
 from langchain.chains import LLMChain
 from langchain.chat_models import AzureChatOpenAI
 from langchain.llms import HuggingFacePipeline, LlamaCpp
 from langchain_community.chat_models.huggingface import ChatHuggingFace
+from langchain_core.prompts import FewShotChatMessagePromptTemplate
+
 import re
 import certa.utils
 from lime.lime_text import LimeTextExplainer
@@ -82,14 +85,15 @@ class BaseLLMExplainer:
 
 class FullCerta(BaseLLMExplainer):
 
-    def __init__(self, explanation_granularity, delegate, certa, num_triangles=10):
+    def __init__(self, explanation_granularity, delegate, certa, num_triangles=10, max_predict=-1):
         self.explanation_granularity = explanation_granularity
         self.certa = certa
         self.num_triangles = num_triangles
         self.delegate = delegate
         self.predict_fn = lambda x: self.delegate.predict(x)
+        self.max_predict = max_predict
 
-    def predict_and_explain(self, ltuple, rtuple, max_predict: int = -1, verbose: bool = False):
+    def predict_and_explain(self, ltuple, rtuple, verbose: bool = False):
         pae = self.delegate.predict_tuples(ltuple, rtuple)
         prediction = pae
         saliency_explanation = None
@@ -98,9 +102,9 @@ class FullCerta(BaseLLMExplainer):
             ltuple_series = self.get_row(ltuple, self.certa.lsource, prefix="ltable_")
             rtuple_series = self.get_row(rtuple, self.certa.rsource, prefix="rtable_")
             saliency_df, cf_summary, cfs, _, _, _ = self.certa.explain(ltuple_series, rtuple_series, self.predict_fn,
-                                                                      token="token" == self.explanation_granularity,
-                                                                      num_triangles=self.num_triangles,
-                                                                      max_predict=max_predict)
+                                                                       token="token" == self.explanation_granularity,
+                                                                       num_triangles=self.num_triangles,
+                                                                       max_predict=self.max_predict, llm=self.delegate.llm)
             saliency_explanation = saliency_df.to_dict('list')
             if len(cfs) > 0:
                 cf_explanation = cfs.drop(
@@ -128,7 +132,37 @@ class FullCerta(BaseLLMExplainer):
                     result = result_new
             if len(result) > 1:
                 print(f'warning: found more than 1 item!({len(result)})')
-        return result.iloc[0]
+                filtered_df = df.copy()
+                for c in df.columns:
+                    if c in filtered_df.columns and c in rc:
+                        new_filtered_df = filtered_df.loc[filtered_df[c].isin(rc[c])]
+                        if len(new_filtered_df) == 1:
+                            return new_filtered_df.iloc[0]
+                        elif len(new_filtered_df) > 0:
+                            filtered_df = new_filtered_df
+                if len(filtered_df) > 0:
+                    return filtered_df.drop_duplicates().iloc[0]
+        else:
+            return result.iloc[0]
+
+    def record_to_text(self, record, ignored_columns=['id', 'ltable_id', 'rtable_id', 'label']):
+        return " ".join([str(val) for k, val in record.to_dict().items() if k not in [ignored_columns]])
+
+    def cs(self, text1, text2):
+        WORD = re.compile(r'\w+')
+        vec1 = Counter(WORD.findall(text1))
+        vec2 = Counter(WORD.findall(text2))
+        intersection = set(vec1.keys()) & set(vec2.keys())
+        numerator = sum([vec1[x] * vec2[x] for x in intersection])
+
+        sum1 = sum([vec1[x] ** 2 for x in vec1.keys()])
+        sum2 = sum([vec2[x] ** 2 for x in vec2.keys()])
+        denominator = math.sqrt(sum1) * math.sqrt(sum2)
+
+        if not denominator:
+            return 0.0
+        else:
+            return float(numerator) / denominator
 
     def count_predictions(self):
         return self.delegate.count_predictions()
@@ -139,7 +173,7 @@ class FullCerta(BaseLLMExplainer):
 
 class HybridCerta(FullCerta):
     def __init__(self, explanation_granularity, pred_delegate, certa, ellmers, num_draws=1, num_triangles=10,
-                 combine : str = 'freq', top_k: int = -1):
+                 combine: str = 'freq', top_k: int = -1):
         self.explanation_granularity = explanation_granularity
         self.certa = certa
         self.num_triangles = num_triangles
@@ -231,20 +265,22 @@ class HybridCerta(FullCerta):
                         else:
                             for ic in ltuple.keys():
                                 if ff in ltuple[ic].split(' '):
-                                    token_attributes_filtered.append(ic+'__' + ff)
+                                    token_attributes_filtered.append(ic + '__' + ff)
                             for ic in rtuple.keys():
                                 if ff in rtuple[ic].split(' '):
-                                    token_attributes_filtered.append(ic+'__' + ff)
+                                    token_attributes_filtered.append(ic + '__' + ff)
                     filter_features = token_attributes_filtered
                 # regenerate support_samples, when empty
                 if support_samples is not None and len(support_samples) == 0:
                     support_samples = None
                     num_triangles *= 2
-                saliency_df, cf_summary, cfs, tri, _, support_samples = self.certa.explain(ltuple_series, rtuple_series, self.predict_fn,
-                                                                          token="token" == self.explanation_granularity,
-                                                                          num_triangles=num_triangles,
-                                                                          max_predict=max_predict,
-                                                                          filter_features=filter_features, support_samples=support_samples)
+                saliency_df, cf_summary, cfs, tri, _, support_samples = self.certa.explain(ltuple_series, rtuple_series,
+                                                                                           self.predict_fn,
+                                                                                           token="token" == self.explanation_granularity,
+                                                                                           num_triangles=num_triangles,
+                                                                                           max_predict=max_predict,
+                                                                                           filter_features=filter_features,
+                                                                                           support_samples=support_samples)
                 if len(saliency_df) > 0 and len(cf_summary) > 0:
                     saliency_explanation = saliency_df.to_dict('list')
                     if len(cfs) > 0:
@@ -264,7 +300,7 @@ class HybridCerta(FullCerta):
                 top_k += 1
             elif 'token' == self.explanation_granularity:
                 top_k += 5
-            its +=1
+            its += 1
             if satisfied or top_k == no_features or its == 10:
                 top_k -= 1
                 break
@@ -326,7 +362,7 @@ class SelfExplainer(BaseLLMExplainer):
                 chain = LLMChain(llm=self.llm, prompt=template)
                 er_answer = chain.predict(ltuple=ltuple, rtuple=rtuple)
             elif self.model_type in ['hf']:
-                messages = template.format_messages(ltuple=ltuple, rtuple=rtuple)
+                messages = template.format_messages(ltuple=ltuple, rtuple=rtuple, feature=self.explanation_granularity,)
                 raw_content = self.llm.invoke(messages)
                 try:
                     er_answer = raw_content.content.split('[/INST]')[-1]
@@ -414,7 +450,8 @@ class SelfExplainer(BaseLLMExplainer):
                 saliency_explanation = dict([(x[0], x[1]['saliency']) for x in list(saliency_explanation.items())])
             except:
                 try:
-                    saliency_explanation = dict([(x[0], x[1]['saliency_score']) for x in list(saliency_explanation.items())])
+                    saliency_explanation = dict(
+                        [(x[0], x[1]['saliency_score']) for x in list(saliency_explanation.items())])
                 except:
                     pass
             return {"prediction": prediction, "saliency": saliency_explanation, "cf": cf_explanation,
@@ -570,8 +607,7 @@ class SelfExplainer(BaseLLMExplainer):
                     if self.verbose:
                         pre_pred_t = time()
                     messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple,
-                                                        rtuple=rtuple,
-                                                        prediction=prediction)
+                                                        rtuple=rtuple, prediction=prediction)
                     if self.verbose:
                         pre_pred_t = time() - pre_pred_t
                         print(f'saliency_pre_pred_time:{pre_pred_t}')
@@ -592,7 +628,8 @@ class SelfExplainer(BaseLLMExplainer):
                     except:
                         if '```' in saliency_answer:
                             start_index = saliency_answer.index('```')
-                            saliency_content = saliency_answer[start_index + 3:saliency_answer.index('```', start_index + 3)]
+                            saliency_content = saliency_answer[
+                                               start_index + 3:saliency_answer.index('```', start_index + 3)]
                     saliency_dict = json.loads(saliency_content)
                     saliency_explanation = saliency_dict
                 except:
@@ -605,7 +642,7 @@ class SelfExplainer(BaseLLMExplainer):
                 if self.verbose:
                     parse_t = time() - parse_t
                     print(f'saliency_parse_time:{parse_t}')
-                conversation.append(("assistant", json.dumps(saliency_explanation).replace('{','').replace('}','')))
+                conversation.append(("assistant", json.dumps(saliency_explanation).replace('{', '').replace('}', '')))
                 self.pred_count += 1
 
             # counterfactual explanation
@@ -709,7 +746,8 @@ class SelfExplainer(BaseLLMExplainer):
                 saliency_explanation = dict([(x[0], x[1]['saliency']) for x in list(saliency_explanation.items())])
             except:
                 try:
-                    saliency_explanation = dict([(x[0], x[1]['saliency_score']) for x in list(saliency_explanation.items())])
+                    saliency_explanation = dict(
+                        [(x[0], x[1]['saliency_score']) for x in list(saliency_explanation.items())])
                 except:
                     pass
             return {"prediction": prediction, "why": why, "saliency": saliency_explanation, "cf": cf_explanation,
@@ -721,13 +759,32 @@ def parse_pase_answer(answer, llm):
     saliency = dict()
     cf = dict()
 
+    original_answer = answer
     try:
         # find the json content
         split = answer.split('```')
-        if len(split) > 1:
+        if len(split) == 2:
             answer = split[1]
             if answer.startswith('json'):
                 answer = answer[4:]
+        elif len(split) > 1:
+            json_answer = None
+            for a in split:
+                try:
+                    json_answer = json.loads(a)
+                    return parse_pase_answer(json_answer, llm)
+                except:
+                    if '}}' in a:
+                        return parse_pase_answer(a, llm)
+            if json_answer is None:
+                for a in split:
+                    nm, ns, ncf = parse_pase_answer(a, llm)
+                    try:
+                        if nm is not None and ns is not None and cf is not None:
+                            return nm, ns, ncf
+                    except:
+                        pass
+            return "0", "{}", "{}"
         elif "\n\n{" in answer and "}\n\n" in answer:
             answer = '{' + ''.join(answer.split("\n\n{")[1].split("}\n\n")[0]) + '}'
 
@@ -754,12 +811,13 @@ def parse_pase_answer(answer, llm):
             else:
                 print(f"cannot find 'matching' key in {answer}")
                 prediction = None
-            if prediction:
-                matching = 1
-            elif not prediction:
-                matching = 0
+            if prediction is not None:
+                if prediction.lower() == 'yes' or prediction.lower() == 'true' or prediction.lower() == '1':
+                    matching = 1
+                elif not prediction:
+                    matching = 0
             else:
-                _, matching = ellmer.utils.text_to_match(prediction, llm.__call__)
+                _, matching = ellmer.utils.text_to_match(original_answer, llm)
             try:
                 if "saliency_explanation" in answer.keys():
                     saliency = answer['saliency_explanation']
@@ -818,8 +876,8 @@ class Certa(BaseLLMExplainer):
         rtuple_series = self.get_row(rtuple, self.certa.rsource, prefix="rtable_")
 
         saliency_df, cf_summary, cfs, _, _, _ = self.certa.explain(ltuple_series, rtuple_series, self.predict_fn,
-                                                                  token="token" == self.explanation_granularity,
-                                                                  num_triangles=self.num_triangles, max_predict=100)
+                                                                   token="token" == self.explanation_granularity,
+                                                                   num_triangles=self.num_triangles, max_predict=100)
         saliency = saliency_df.to_dict('list')
         if len(cfs) > 0:
             counterfactuals = [cfs.drop(
@@ -827,6 +885,78 @@ class Certa(BaseLLMExplainer):
         else:
             counterfactuals = [{}]
         return matching, saliency, counterfactuals
+
+
+class ICLSelfExplainer(SelfExplainer):
+
+    def __init__(self, examples, **kwargs):
+        SelfExplainer.__init__(self, **kwargs)
+        self.examples = examples
+
+    def predict_and_explain(self, ltuple, rtuple):
+
+        example_prompt = ChatPromptTemplate.from_messages(
+            [
+                ("human", "{input}"),
+                ("ai", "prediction:{prediction}, saliency:{saliency}, counterfactual:{cf}"),
+            ]
+        )
+        few_shot_prompt = FewShotChatMessagePromptTemplate(
+            example_prompt=example_prompt,
+            examples=self.examples,
+        )
+        final_prompt = ChatPromptTemplate.from_messages(
+            [
+                ("system", "You are an expert assistant for Entity Resolution tasks."),
+                few_shot_prompt,
+                ("human", "{input}"),
+            ]
+        )
+        chain = final_prompt | self.llm
+        question = self.prompts['input']
+        formatted_question = question.format(ltuple=ltuple, rtuple=rtuple)
+        self.tokens += sum([len(str(m).split(' ')) for m in final_prompt.messages])  # input tokens
+        answer = chain.invoke({"input": formatted_question})
+        answer_content = answer.content
+        self.tokens += len(answer.content.split(' '))  # output tokens
+        prediction = "0"
+        saliency = {}
+        cf = {}
+        try:
+            if "prediction:" in answer_content:
+                p_start = answer_content.find("prediction:") + len("prediction:")
+                p_end = answer_content.find(",", p_start)
+                prediction = answer_content[p_start:p_end]
+            else:
+                _, prediction = ellmer.utils.text_to_match(answer_content, self.llm)
+        except:
+            pass
+        if prediction not in ["0", "1", 0, 1]:
+            _, prediction = ellmer.utils.text_to_match(answer_content, self.llm)
+        try:
+            s_start = answer_content.find("saliency:") + len("saliency:")
+            s_end = answer_content.find("}", s_start) + 1
+            saliency = answer_content[s_start:s_end].replace("'", "\"")
+            saliency = json.loads(saliency)
+            ns = dict()
+            for k, v in saliency.items():
+                if type(v) == list:
+                    ns[k] = v[0]
+                else:
+                    ns[k] = v
+            saliency = ns
+        except:
+            pass
+        try:
+            cf_start = answer_content.find("counterfactual:") + len("counterfactual:")
+            cf_end = answer_content.find("}", cf_start) + 1
+            cf = answer_content[cf_start:cf_end].replace("'", "\"")
+            cf = json.loads(cf)
+        except:
+            pass
+        self.pred_count += 1
+
+        return {"prediction": prediction, "saliency": saliency, "cf": cf}
 
 
 # deprecated
@@ -934,7 +1064,8 @@ class LLMERModel(ERModel):
     fake = False
     verbose = False
 
-    def __init__(self, model_type='azure_openai', temperature=0.01, max_length=512, fake=False, hf_repo="tiiuae/falcon-7b",
+    def __init__(self, model_type='azure_openai', temperature=0.01, max_length=512, fake=False,
+                 hf_repo="tiiuae/falcon-7b",
                  verbose=False, delegate=None):
         template = "given the record:\n{ltuple}\n and the record:\n{rtuple}\n do they refer to the same entity in the real world?\nreply yes or no"
         self.prompt = PromptTemplate(
@@ -1777,7 +1908,7 @@ def formulate_instance(tableA, tableB, inst):
 class Landmark(object):
 
     def __init__(self, model, dataset, exclude_attrs=['id', 'label'], split_expression=' ',
-                 lprefix='ltable_', rprefix='rtable_', exclude_tokens = None, **argv, ):
+                 lprefix='ltable_', rprefix='rtable_', exclude_tokens=None, **argv, ):
         """
 
         :param model: the model to be explained
@@ -2054,7 +2185,7 @@ class Landmark(object):
 
         return view
 
-    def plot(self, explanation, el, figsize=(16,6)):
+    def plot(self, explanation, el, figsize=(16, 6)):
         exp_double = self.double_explanation_conversion(explanation, el)
         PlotExplanation.plot(exp_double, figsize)
 
@@ -2102,7 +2233,6 @@ class Mapper(object):
                                      word_prefix=chr(ord('A') + colpos) + f"{wordpos:02d}_" + word)
                     res_list.append(word_dict.copy())
         return pd.DataFrame(res_list)
-
 
 
 class PlotExplanation(object):
@@ -2200,7 +2330,7 @@ class PlotExplanation(object):
 class HybridGeneric(BaseLLMExplainer):
 
     def __init__(self, explanation_granularity, pred_delegate, ellmers, lsource, rsource,
-                 num_draws=1, num_triangles=10, combine : str = 'freq', top_k: int = 1):
+                 num_draws=1, num_triangles=10, combine: str = 'freq', top_k: int = 1):
         self.explanation_granularity = explanation_granularity
         self.minun = MinunExplainer(pred_delegate)
         self.num_triangles = num_triangles
@@ -2282,17 +2412,17 @@ class HybridGeneric(BaseLLMExplainer):
                     for ff in filter_features:
                         if ff.startswith('ltable_'):
                             for token in ltuple[ff].split(' '):
-                                token_attributes_filtered.append(ff+'__'+token)
+                                token_attributes_filtered.append(ff + '__' + token)
                         if ff.startswith('rtable_'):
                             for token in rtuple[ff].split(' '):
-                                token_attributes_filtered.append(ff+'__'+ token)
+                                token_attributes_filtered.append(ff + '__' + token)
                         else:
                             for ic in ltuple.keys():
                                 if ff in ltuple[ic].split(' '):
-                                    token_attributes_filtered.append(ic+'__' + ff)
+                                    token_attributes_filtered.append(ic + '__' + ff)
                             for ic in rtuple.keys():
                                 if ff in rtuple[ic].split(' '):
-                                    token_attributes_filtered.append(ic+'__' + ff)
+                                    token_attributes_filtered.append(ic + '__' + ff)
                     filter_features = token_attributes_filtered
 
                 pair_df = certa.utils.get_row(pd.Series(ltuple), pd.Series(rtuple), lprefix='', rprefix='')
@@ -2304,9 +2434,9 @@ class HybridGeneric(BaseLLMExplainer):
                 if 'token' == self.explanation_granularity:
                     exclude_tokens = [ta.split("__")[1] for ta in filter_features]
 
-
                 try:
-                    land_explanation = Landmark(self.delegate, pair_df, exclude_attrs=exclude_attrs, exclude_tokens=exclude_tokens).explain_instance(pair_df)
+                    land_explanation = Landmark(self.delegate, pair_df, exclude_attrs=exclude_attrs,
+                                                exclude_tokens=exclude_tokens).explain_instance(pair_df)
                     if 'token' == self.explanation_granularity:
                         ld = dict()
                         for i in range(len(land_explanation)):
@@ -2318,7 +2448,8 @@ class HybridGeneric(BaseLLMExplainer):
                         saliency_df = ld
                     else:
                         saliency_df = land_explanation.groupby('column')['impact'].sum().to_dict()
-                    cfs = self.minun.explain((list(ltuple.values()), list(rtuple.values()), prediction, list(ltuple.keys())+list(rtuple.keys())))
+                    cfs = self.minun.explain((list(ltuple.values()), list(rtuple.values()), prediction,
+                                              list(ltuple.keys()) + list(rtuple.keys())))
 
                     if len(saliency_df) > 0:
                         saliency_explanation = saliency_df
@@ -2333,7 +2464,7 @@ class HybridGeneric(BaseLLMExplainer):
                 except:
                     pass
             top_k += 2
-            its +=1
+            its += 1
             if satisfied or top_k == no_features or its == 10:
                 top_k -= 1
                 break

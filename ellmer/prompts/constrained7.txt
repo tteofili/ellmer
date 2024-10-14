@@ -1,7 +1,7 @@
-system:You are an expert assistant for Entity Resolution tasks.
-user:A feature-level saliency explanation highlights the most relevant features of the input data that contributed the most to your decision about the input records. In a feature-level saliency explanation, a saliency score is attached to each feature. It aids in understanding which features you paid attention to the most during your decision-making process.
-assistant:Ok, I can generate a feature-level saliency explanation as a dictionary where each feature is a key having its saliency score as value.
-user: A feature-level counterfactual explanation consists of an altered pair of records with one or more key features changed, such that your prediction flips.
-assistant: Ok, I can generate a feature-level counterfactual explanation in the form of two records, having key features changed.
-user: Given a pair of records, I want you to return (i) a yes/no response indicating the matching/non-matching prediction, (ii) a saliency explanation table having a column for each input feature containing each feature's saliency score, (iii) a counterfactual explanation table having a column for each input attribute containing its counterfactual value. Please format your response as a json
-assistant: Ok, now give me the two records.
+system::You are an expert assistant for Entity Resolution tasks.
+user::A feature-level saliency explanation highlights the most relevant features of the input data that contributed the most to your decision about the input records. In a feature-level saliency explanation, a saliency score is attached to each feature. It aids in understanding which features you paid attention to the most during your decision-making process.
+assistant::Ok, I can generate a feature-level saliency explanation as a dictionary where each feature is a key having its saliency score as value.
+user:: A feature-level counterfactual explanation consists of an altered pair of records with one or more key features changed, such that your prediction flips.
+assistant:: Ok, I can generate a feature-level counterfactual explanation in the form of two records, having key features changed.
+user:: Given a pair of records, I want you to return (i) a yes/no response indicating the matching/non-matching prediction, (ii) a saliency explanation table having a column for each input feature containing each feature's saliency score, (iii) a counterfactual explanation table having a column for each input attribute containing its counterfactual value. Please format your response as a json
+assistant:: Ok, now give me the two records.
