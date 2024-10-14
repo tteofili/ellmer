@@ -12,7 +12,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url= 'https://github.com/tteofili/ellmer.git',
-    packages=['ellmer', 'ellmer.prompts'],
+    packages=['ellmer', 'ellmer.prompts', 'ellmer.post_hoc'],
     install_requires=[
           'pandas',
           'numpy',

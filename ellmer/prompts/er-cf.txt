@@ -1,3 +1,3 @@
-user:A feature-level counterfactual explanation consists of an altered input with one or more key features of the input data changed, such that your prediction flips.
-assistant:Ok, I can generate a feature-level counterfactual explanation in the form of two records, having a column for each input attribute containing its counterfactual value.
-user:Return a counterfactual explanation for the above prediction in JSON format.
+user::A feature-level counterfactual explanation consists of an altered input with one or more key features of the input data changed, such that your prediction flips.
+assistant::Ok, I can generate a feature-level counterfactual explanation in the form of two records, having a column for each input attribute containing its counterfactual value.
+user::Return a counterfactual explanation for the above prediction in JSON format.

@@ -268,6 +268,8 @@ def get_faithfulness(saliency_names: list, eval_fn, base_dir: str, test_set_df: 
                     reverse = False
                 attributes_dict = dict()
                 sal_dict = saliencies[i]
+                if type(sal_dict) == str:
+                    continue
                 for k,v in sal_dict.items():
                     try:
                         attributes_dict[k] = float(v)
@@ -328,6 +330,9 @@ def get_cf_metrics(explainer_names: list, predict_fn, base_dir, test_set_df: pd.
             try:
                 if i >= len(cfs):
                     break
+
+                if type(cfs[i]) == str:
+                    continue
 
                 if len(cfs[i]) == 0 or len(cfs[i][0].keys()) == 0 or indexes[i] != i:
                     continue

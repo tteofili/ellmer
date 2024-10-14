@@ -2,8 +2,8 @@ import itertools
 from langchain.cache import InMemoryCache, SQLiteCache
 import langchain
 import pandas as pd
-from certa.utils import merge_sources
-from certa.explain import CertaExplainer
+from ellmer.post_hoc.utils import merge_sources
+from ellmer.post_hoc.explain import LLMCertaExplainer
 from datetime import datetime
 import os
 import ellmer.models
@@ -24,56 +24,93 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
 
     llm_config = {"model_type": model_type, "model_name": model_name, "deployment_name": deployment_name, "tag": tag}
 
-    zershot = ellmer.models.SelfExplainer(explanation_granularity=explanation_granularity,
-                                       deployment_name=llm_config['deployment_name'], temperature=temperature,
-                                       model_name=llm_config['model_name'], model_type=llm_config['model_type'],
-                                       prompts={"pase": "ellmer/prompts/constrained7.txt"})
-
-    cot = ellmer.models.SelfExplainer(explanation_granularity=explanation_granularity,
-                                       deployment_name=llm_config['deployment_name'], temperature=temperature,
-                                       model_name=llm_config['model_name'], model_type=llm_config['model_type'],
-                                       prompts={"ptse": {"er": "ellmer/prompts/er.txt",
-                                                         "saliency": "ellmer/prompts/er-saliency-lc.txt",
-                                                         "cf": "ellmer/prompts/er-cf-lc.txt"}})
-
-    cot2 = ellmer.models.SelfExplainer(explanation_granularity=explanation_granularity,
-                                        deployment_name=llm_config['deployment_name'], temperature=temperature,
-                                        model_name=llm_config['model_name'], model_type=llm_config['model_type'],
-                                        prompts={
-                                            "ptse": {"er": "ellmer/prompts/er.txt",
-                                                     "why": "ellmer/prompts/er-why.txt",
-                                                     "saliency": "ellmer/prompts/er-saliency-lc.txt",
-                                                     "cf": "ellmer/prompts/er-cf-lc.txt"}})
-
     predict_only = ellmer.models.SelfExplainer(explanation_granularity=explanation_granularity,
-                                      deployment_name=llm_config['deployment_name'], temperature=temperature,
-                                      model_name=llm_config['model_name'], model_type=llm_config['model_type'],
-                                      prompts={"ptse": {"er": "ellmer/prompts/er.txt"}})
+                                               deployment_name=llm_config['deployment_name'],
+                                               temperature=temperature,
+                                               model_name=llm_config['model_name'],
+                                               model_type=llm_config['model_type'],
+                                               prompts={"ptse": {"er": "ellmer/prompts/er7.txt"}})
 
     evals = []
 
     for d in dataset_names:
-        expdir = f'./experiments/{model_type}/{model_name}/{explanation_granularity}/{d}/{datetime.now():%Y%m%d}/{datetime.now():%H_%M}/'
-        obs_dir = f'experiments/{model_type}/{model_name}/{explanation_granularity}/concordance/{d}//{datetime.now():%Y%m%d}/{datetime.now():%H_%M}'
-
         print(f'using dataset {d}')
         dataset_dir = '/'.join([base_dir, d])
         lsource = pd.read_csv(dataset_dir + '/tableA.csv')
         rsource = pd.read_csv(dataset_dir + '/tableB.csv')
+        train = pd.read_csv(dataset_dir + '/test.csv')
         test = pd.read_csv(dataset_dir + '/test.csv')
         test_df = merge_sources(test, 'ltable_', 'rtable_', lsource, rsource, ['label'],
                                 [])
+        train_df = merge_sources(train, 'ltable_', 'rtable_', lsource, rsource, ['label'],
+                                 [])
 
-        certa = CertaExplainer(lsource, rsource)
+        certa = LLMCertaExplainer(lsource, rsource)
+        full_certa = ellmer.models.FullCerta(explanation_granularity, predict_only, certa, num_triangles, max_predict=100)
+
+        examples = []
+        # generate predictions and explanations
+        few_shot_no = 5
+        train_data_matching_df = train_df[train_df['label'] == 1][:few_shot_no]
+        train_data_non_matching_df = train_df[train_df['label'] == 0][:few_shot_no]
+        data_df = pd.concat([train_data_matching_df, train_data_non_matching_df])
+        ranged = range(len(data_df))
+        for idx in tqdm(ranged, disable=False):
+            try:
+                rand_row = data_df.iloc[[idx]]
+                ltuple, rtuple = ellmer.utils.get_tuples(rand_row)
+                answer_dictionary = full_certa.predict_and_explain(ltuple, rtuple)
+                prediction = answer_dictionary['prediction']
+                saliency_explanation = answer_dictionary['saliency']
+                cf_explanation = answer_dictionary['cf']
+
+                examples.append({"input": f"record1:\n{ltuple}\n record2:\n{rtuple}\n",
+                                 "prediction": prediction, "saliency": saliency_explanation,
+                                 "cf": cf_explanation})
+            except Exception:
+                traceback.print_exc()
+                print(f'error, waiting...')
+                sleep(10)
+
+        fs1 = ellmer.models.ICLSelfExplainer(examples=examples,
+                                             explanation_granularity=explanation_granularity,
+                                             deployment_name=llm_config['deployment_name'],
+                                             temperature=temperature,
+                                             model_name=llm_config['model_name'],
+                                             model_type=llm_config['model_type'],
+                                             prompts={"fs": "ellmer/prompts/fs1.txt", "input":
+                                                     "record1:\n{ltuple}\n record2:\n{rtuple}\n"})
+
+        fs2 = ellmer.models.ICLSelfExplainer(examples=examples,
+                                             explanation_granularity=explanation_granularity,
+                                             deployment_name=llm_config['deployment_name'],
+                                             temperature=temperature,
+                                             model_name=llm_config['model_name'],
+                                             model_type=llm_config['model_type'],
+                                             prompts={"fs": "ellmer/prompts/fs1.txt", "input":
+                                                     "{ltuple}[SEP]{rtuple}"})
+
+        fs3 = ellmer.models.ICLSelfExplainer(examples=examples,
+                                             explanation_granularity=explanation_granularity,
+                                             deployment_name=llm_config['deployment_name'],
+                                             temperature=temperature,
+                                             model_name=llm_config['model_name'],
+                                             model_type=llm_config['model_type'],
+                                             prompts={"fs": "ellmer/prompts/fs1.txt", "input":
+                                                     "E1:{ltuple} - E2:{rtuple}"})
+
+        expdir = f'./experiments/{model_type}/{model_name}/{explanation_granularity}/{d}/{datetime.now():%Y%m%d}/{datetime.now():%H_%M}/'
+        obs_dir = f'experiments/{model_type}/{model_name}/{explanation_granularity}/concordance/{d}//{datetime.now():%Y%m%d}/{datetime.now():%H_%M}'
 
         ellmers = {
-            "zs_" + llm_config['tag']: zershot,
-            "cot_" + llm_config['tag']: cot2,
-            "certa(cot)_" + llm_config['tag']: ellmer.models.FullCerta(explanation_granularity, predict_only, certa,
-                                                                        num_triangles),
-            "hybrid_" + llm_config['tag']: ellmer.models.HybridCerta(explanation_granularity, cot, certa,
-                                                                            [zershot, cot, cot2],
-                                                                            num_triangles=num_triangles),
+            "fs1_" + llm_config['tag']: fs1,
+            "fs2_" + llm_config['tag']: fs2,
+            "fs3_" + llm_config['tag']: fs3,
+            "certa_" + llm_config['tag']: full_certa,
+            "ellmer(certa)_" + llm_config['tag']: ellmer.models.HybridCerta(explanation_granularity, predict_only,
+                                                                            certa,
+                                                                            [fs1, fs2, fs3],
+                                                                            num_triangles=num_triangles)
         }
 
         result_files = []

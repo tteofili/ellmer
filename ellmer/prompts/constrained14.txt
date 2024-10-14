@@ -1,3 +1,3 @@
-system:You are an expert assistant for Entity Resolution tasks.
-user: Given two records you answer the following 1) whether they refer to the same entity (yes / no) ? 2) The saliency explanation for your scores attached to each {feature} for your prediction? 3) What is a {feature}-level counterfactual explanation for your prediction? Return all three responses as a single formatted JSON
-ai: Ok give me the two records and I will return a JSON containing my three answers.
+system::You are an expert assistant for Entity Resolution tasks.
+user:: Given two records you answer the following 1) whether they refer to the same entity (yes / no) ? 2) The saliency explanation for your scores attached to each {feature} for your prediction? 3) What is a {feature}-level counterfactual explanation for your prediction? Return all three responses as a single formatted JSON
+ai:: Ok give me the two records and I will return a JSON containing my three answers.
