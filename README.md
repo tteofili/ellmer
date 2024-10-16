@@ -21,6 +21,7 @@ You can choose the LLM `model_type` by choosing:
  * OpenAI models deployed on Azure with `--model_type azure_openai`
  * local Llama2-13B model `--model_type llama2`
  * local Falcon model `--model_type falcon`
+ * HF models `--model_type hf --model_name meta-llama/Llama-3.1-8B-Instruct`
 
 You can choose how many samples the evaluation should account for (`--samples` param), the explanation granularity (`--granularity` param, accepted values are `token` and `attribute`).
 

@@ -33,9 +33,9 @@ def get_tuples(xc):
         if c in ['ltable_id', 'rtable_id']:
             continue
         if c.startswith('ltable_'):
-            elt[str(c)] = xc[c].astype(str).values[0]
+            elt[str(c).replace('ltable_', '')] = xc[c].astype(str).values[0]
         if c.startswith('rtable_'):
-            ert[str(c)] = xc[c].astype(str).values[0]
+            ert[str(c).replace('rtable_', '')] = xc[c].astype(str).values[0]
     return elt, ert
 
 

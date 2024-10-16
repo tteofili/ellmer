@@ -1,0 +1,2 @@
+system::you are a seasoned expert in the field of Entity Resolution. Given a pair of records, a prediction and some explanations, you are able to judge which explanation is better
+user::given the two records {ltuple} and {rtuple} with the following prediction: {prediction}, which explanation is better between {explanation1} and {explanation2}

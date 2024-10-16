@@ -3,7 +3,7 @@ from langchain.cache import InMemoryCache, SQLiteCache
 import langchain
 import pandas as pd
 from certa.utils import merge_sources
-from certa.explain import CertaExplainer
+from ellmer.post_hoc.explain import LLMCertaExplainer
 from datetime import datetime
 import os
 import ellmer.models
@@ -64,7 +64,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
         test_df = merge_sources(test, 'ltable_', 'rtable_', lsource, rsource, ['label'],
                                 [])
 
-        certa = CertaExplainer(lsource, rsource)
+        certa = LLMCertaExplainer(lsource, rsource)
 
         ellmers = {
             "zs_" + llm_config['tag']: zershot,
