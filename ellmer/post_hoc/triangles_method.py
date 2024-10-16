@@ -691,6 +691,10 @@ def explain_samples(dataset: pd.DataFrame, sources: list, predict_fn: callable, 
             for f in filter_features:
                 if f in attributes:
                     attributes_new.append(f)
+                elif 'ltable_'+f in attributes:
+                    attributes_new.append('ltable_'+f)
+                elif 'rtable_'+f in attributes:
+                    attributes_new.append('rtable_'+f)
             attributes = attributes_new
 
         if len(all_triangles) > 0:

@@ -73,7 +73,7 @@ class BaseLLMExplainer:
     def evaluation(self, data_df):
         predictions = self.predict(data_df)
         predictions = predictions['match_score'].astype(int).values
-        labels = data_df['label'].astype(int).values
+        labels = int(data_df['label'].astype(float).values)
         return f1_score(y_true=labels, y_pred=predictions)
 
     def count_predictions(self):
@@ -355,7 +355,8 @@ class SelfExplainer(BaseLLMExplainer):
             er_prompt = ptse_prompts['er']
             for prompt_message in ellmer.utils.read_prompt(er_prompt):
                 conversation.append((prompt_message[0], prompt_message[1]))
-            question = "record1:\n{ltuple}\n record2:\n{rtuple}\n"
+            #question = "record1:\n{ltuple}\n record2:\n{rtuple}\n"
+            question = "record1: {ltuple}\n  record2: {rtuple}"
             conversation.append(("user", question))
             template = ChatPromptTemplate.from_messages(conversation)
             if self.model_type in ['falcon', 'llama2']:
@@ -394,7 +395,7 @@ class SelfExplainer(BaseLLMExplainer):
             prompt = self.prompts['pase']
             for prompt_message in ellmer.utils.read_prompt(prompt):
                 conversation.append((prompt_message[0], prompt_message[1]))
-            question = "record1:\n{ltuple}\n record2:\n{rtuple}\n"
+            question = "record1: {ltuple} \nrecord2: {rtuple}"
             conversation.append(("user", question))
             template = ChatPromptTemplate.from_messages(conversation)
             if self.verbose:
@@ -463,7 +464,7 @@ class SelfExplainer(BaseLLMExplainer):
             er_prompt = ptse_prompts['er']
             for prompt_message in ellmer.utils.read_prompt(er_prompt):
                 conversation.append((prompt_message[0], prompt_message[1]))
-            question = "record1:\n{ltuple}\n record2:\n{rtuple}\n"
+            question = "record1: {ltuple} \nrecord2: {rtuple}"
             conversation.append(("user", question))
             template = ChatPromptTemplate.from_messages(conversation)
             if self.verbose:
@@ -894,11 +895,12 @@ class ICLSelfExplainer(SelfExplainer):
         self.examples = examples
 
     def predict_and_explain(self, ltuple, rtuple):
+        conversation = []
 
         example_prompt = ChatPromptTemplate.from_messages(
             [
                 ("human", "{input}"),
-                ("ai", "prediction:{prediction}, saliency:{saliency}, counterfactual:{cf}"),
+                ("ai", "prediction:{prediction}, reason:{why}"),
             ]
         )
         few_shot_prompt = FewShotChatMessagePromptTemplate(
@@ -912,12 +914,15 @@ class ICLSelfExplainer(SelfExplainer):
                 ("human", "{input}"),
             ]
         )
+        conversation = final_prompt.messages
         chain = final_prompt | self.llm
         question = self.prompts['input']
         formatted_question = question.format(ltuple=ltuple, rtuple=rtuple)
+        conversation.append(formatted_question)
         self.tokens += sum([len(str(m).split(' ')) for m in final_prompt.messages])  # input tokens
         answer = chain.invoke({"input": formatted_question})
         answer_content = answer.content
+        conversation.append(answer_content)
         self.tokens += len(answer.content.split(' '))  # output tokens
         prediction = "0"
         saliency = {}
@@ -956,7 +961,7 @@ class ICLSelfExplainer(SelfExplainer):
             pass
         self.pred_count += 1
 
-        return {"prediction": prediction, "saliency": saliency, "cf": cf}
+        return {"prediction": prediction, "saliency": saliency, "cf": cf, "conversation": conversation}
 
 
 # deprecated
