@@ -6,12 +6,9 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     name="ellmer",
     version="0.0.1",
-    author="Tommaso Teofili",
-    author_email="tommaso.teofili@gmail.com",
     description="Explain Large Language Models for Entity Resolution",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url= 'https://github.com/tteofili/ellmer.git',
     packages=['ellmer', 'ellmer.prompts', 'ellmer.post_hoc'],
     install_requires=[
           'pandas',
