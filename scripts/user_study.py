@@ -128,7 +128,7 @@ if __name__ == "__main__":
         raise Exception("no llm")
 
     judge_prompt = "ellmer/prompts/user1.txt"
-    base_directory = '/Users/tteofili/Desktop/explanations/'
+    base_directory = '/path/to/explanations/'
     target = "carparts-token"
     directory = base_directory + target
     all_files = [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f))]
