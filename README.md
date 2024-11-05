@@ -37,14 +37,3 @@ Other optional parameters can be specified in the [script](scripts/eval.py#l160)
 
 * [ChatGPT self-explanations prompt sensitivity](notebooks/examples.ipynb).
 
-# Citing ELLMER
-
-If you extend or use this work, please cite:
-
-```
-@article{teofili2024ellmer,
-  title={Can we trust LLM Self-Explanations for Entity Resolution?},
-  author={Teofili, Tommaso and Firmani, Donatella and Koudas, Nick and Merialdo, Paolo and Srivastava, Divesh},
-  year={2024}
-}
-```
