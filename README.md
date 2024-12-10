@@ -2,7 +2,6 @@
 
 ELLMER
 =======
-<img src="https://github.com/tteofili/ellmer/assets/512815/71b950f3-2b36-4a58-8f48-955380b30a09" width=20%>
 
 Code for the paper "_Can we trust LLM Self-Explanations for Entity Resolution?_".
 
