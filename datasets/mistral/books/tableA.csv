@@ -1,304 +1,204 @@
 id,title,author,genre,publication_year,plot
-1,The Whispering Woods,Emily Hart,Fantasy,2010,A young girl discovers a hidden world in the woods behind her house.
-2,Echoes of Time,David Thompson,Science Fiction,2015,A scientist invents a time machine and travels to the future to save humanity.
-3,Shadows of the Past,Laura Green,Mystery,2008,A detective unravels a series of murders linked to an ancient curse.
-4,The Lost Kingdom,Michael Brown,Fantasy,2012,A prince embarks on a quest to reclaim his lost kingdom from a dark sorcerer.
-5,Beyond the Stars,Sarah White,Science Fiction,2018,A spaceship crew discovers a new planet with intelligent life forms.
-6,Murder in the Manor,Robert King,Mystery,2005,A wealthy family gathers for a weekend in a manor but one of them is murdered.
-7,The Enchanted Forest,Amanda Clark,Fantasy,2014,A group of children enter a magical forest and encounter mythical creatures.
-8,The Time Traveler's Dilemma,John Davis,Science Fiction,2017,A time traveler must decide whether to change the past or let history unfold.
-9,The Haunted Mansion,Victoria Lane,Horror,2011,A family moves into a haunted mansion and must confront the ghosts within.
-10,The Forgotten City,Thomas Lee,Fantasy,2013,A young adventurer discovers a forgotten city hidden beneath the earth.
-11,The Alien Invasion,Karen Smith,Science Fiction,2016,Aliens invade Earth and a group of survivors must fight back.
-12,The Mystery of the Lighthouse,James Wilson,Mystery,2009,A lighthouse keeper's mysterious death leads to a series of revelations.
-13,The Dragon's Lair,Emma Johnson,Fantasy,2010,A dragon slayer must confront the most powerful dragon in the realm.
-14,The Space Odyssey,Daniel Miller,Science Fiction,2019,A crew embarks on a journey to explore the outer reaches of the galaxy.
-15,The Curse of the Pharaoh,Olivia Scott,Mystery,2007,An archaeologist uncovers an ancient tomb and unleashes a deadly curse.
-16,The Enchanted Castle,Sophia Turner,Fantasy,2015,A princess must break a spell to save her kingdom from eternal darkness.
-17,The Time Paradox,Paul Adams,Science Fiction,2018,A time traveler creates a paradox that threatens the existence of the universe.
-18,The Ghostly Presence,Rebecca Young,Horror,2012,A woman moves into a new house and begins to experience strange occurrences.
-19,The Lost Civilization,Ethan Gray,Fantasy,2014,An explorer discovers a lost civilization deep in the jungle.
-20,The Alien Encounter,Megan Brown,Science Fiction,2017,A group of scientists make first contact with an alien species.
-21,The Mystery of the Museum,Samuel Harris,Mystery,2010,A series of thefts at a museum leads to a complex mystery.
-22,The Dragon's Quest,Ava Clark,Fantasy,2011,A young dragon rider embarks on a quest to save their kingdom.
-23,The Space Exploration,Benjamin Turner,Science Fiction,2019,A spaceship crew explores a new galaxy and encounters strange phenomena.
-24,The Haunted House,Charlotte Lee,Horror,2013,A family moves into a haunted house and must confront the spirits within.
-25,The Forgotten Realm,Henry Scott,Fantasy,2015,A warrior must journey to a forgotten realm to save his people.
-26,The Alien Invasion,Isabella Smith,Science Fiction,2018,Aliens invade Earth and a group of survivors must fight back.
-27,The Mystery of the Manor,William Wilson,Mystery,2011,A wealthy family gathers for a weekend in a manor but one of them is murdered.
-28,The Enchanted Forest,Natalie Johnson,Fantasy,2016,A group of children enter a magical forest and encounter mythical creatures.
-29,The Time Traveler's Dilemma,Alexander Davis,Science Fiction,2019,A time traveler must decide whether to change the past or let history unfold.
-30,The Haunted Mansion,Victoria Lane,Horror,2012,A family moves into a haunted mansion and must confront the ghosts within.
-31,The Forgotten City,Thomas Lee,Fantasy,2014,A young adventurer discovers a forgotten city hidden beneath the earth.
-32,The Alien Invasion,Karen Smith,Science Fiction,2017,Aliens invade Earth and a group of survivors must fight back.
-33,The Mystery of the Lighthouse,James Wilson,Mystery,2010,A lighthouse keeper's mysterious death leads to a series of revelations.
-34,The Dragon's Lair,Emma Johnson,Fantasy,2011,A dragon slayer must confront the most powerful dragon in the realm.
-35,The Space Odyssey,Daniel Miller,Science Fiction,2019,A crew embarks on a journey to explore the outer reaches of the galaxy.
-36,The Curse of the Pharaoh,Olivia Scott,Mystery,2008,An archaeologist uncovers an ancient tomb and unleashes a deadly curse.
-37,The Enchanted Castle,Sophia Turner,Fantasy,2015,A princess must break a spell to save her kingdom from eternal darkness.
-38,The Time Paradox,Paul Adams,Science Fiction,2018,A time traveler creates a paradox that threatens the existence of the universe.
-39,The Ghostly Presence,Rebecca Young,Horror,2013,A woman moves into a new house and begins to experience strange occurrences.
-40,The Lost Civilization,Ethan Gray,Fantasy,2016,An explorer discovers a lost civilization deep in the jungle.
-41,The Alien Encounter,Megan Brown,Science Fiction,2019,A group of scientists make first contact with an alien species.
-42,The Mystery of the Museum,Samuel Harris,Mystery,2011,A series of thefts at a museum leads to a complex mystery.
-43,The Dragon's Quest,Ava Clark,Fantasy,2012,A young dragon rider embarks on a quest to save their kingdom.
-44,The Space Exploration,Benjamin Turner,Science Fiction,2019,A spaceship crew explores a new galaxy and encounters strange phenomena.
-45,The Haunted House,Charlotte Lee,Horror,2014,A family moves into a haunted house and must confront the spirits within.
-46,The Forgotten Realm,Henry Scott,Fantasy,2016,A warrior must journey to a forgotten realm to save his people.
-47,The Alien Invasion,Isabella Smith,Science Fiction,2019,Aliens invade Earth and a group of survivors must fight back.
-48,The Mystery of the Manor,William Wilson,Mystery,2012,A wealthy family gathers for a weekend in a manor but one of them is murdered.
-49,The Enchanted Forest,Natalie Johnson,Fantasy,2017,A group of children enter a magical forest and encounter mythical creatures.
-50,The Time Traveler's Dilemma,Alexander Davis,Science Fiction,2019,A time traveler must decide whether to change the past or let history unfold.
-51,The Haunted Mansion,Victoria Lane,Horror,2013,A family moves into a haunted mansion and must confront the ghosts within.
-52,The Forgotten City,Thomas Lee,Fantasy,2015,A young adventurer discovers a forgotten city hidden beneath the earth.
-53,The Alien Invasion,Karen Smith,Science Fiction,2018,Aliens invade Earth and a group of survivors must fight back.
-54,The Mystery of the Lighthouse,James Wilson,Mystery,2011,A lighthouse keeper's mysterious death leads to a series of revelations.
-55,The Dragon's Lair,Emma Johnson,Fantasy,2012,A dragon slayer must confront the most powerful dragon in the realm.
-56,The Space Odyssey,Daniel Miller,Science Fiction,2019,A crew embarks on a journey to explore the outer reaches of the galaxy.
-57,The Curse of the Pharaoh,Olivia Scott,Mystery,2009,An archaeologist uncovers an ancient tomb and unleashes a deadly curse.
-58,The Enchanted Castle,Sophia Turner,Fantasy,2016,A princess must break a spell to save her kingdom from eternal darkness.
-59,The Time Paradox,Paul Adams,Science Fiction,2019,A time traveler creates a paradox that threatens the existence of the universe.
-60,The Ghostly Presence,Rebecca Young,Horror,2014,A woman moves into a new house and begins to experience strange occurrences.
-61,The Lost Civilization,Ethan Gray,Fantasy,2017,An explorer discovers a lost civilization deep in the jungle.
-62,The Alien Encounter,Megan Brown,Science Fiction,2019,A group of scientists make first contact with an alien species.
-63,The Mystery of the Museum,Samuel Harris,Mystery,2012,A series of thefts at a museum leads to a complex mystery.
-64,The Dragon's Quest,Ava Clark,Fantasy,2013,A young dragon rider embarks on a quest to save their kingdom.
-65,The Space Exploration,Benjamin Turner,Science Fiction,2019,A spaceship crew explores a new galaxy and encounters strange phenomena.
-66,The Haunted House,Charlotte Lee,Horror,2015,A family moves into a haunted house and must confront the spirits within.
-67,The Forgotten Realm,Henry Scott,Fantasy,2017,A warrior must journey to a forgotten realm to save his people.
-68,The Alien Invasion,Isabella Smith,Science Fiction,2019,Aliens invade Earth and a group of survivors must fight back.
-69,The Mystery of the Manor,William Wilson,Mystery,2013,A wealthy family gathers for a weekend in a manor but one of them is murdered.
-70,The Enchanted Forest,Natalie Johnson,Fantasy,2018,A group of children enter a magical forest and encounter mythical creatures.
-71,The Time Traveler's Dilemma,Alexander Davis,Science Fiction,2019,A time traveler must decide whether to change the past or let history unfold.
-72,The Haunted Mansion,Victoria Lane,Horror,2014,A family moves into a haunted mansion and must confront the ghosts within.
-73,The Forgotten City,Thomas Lee,Fantasy,2016,A young adventurer discovers a forgotten city hidden beneath the earth.
-74,The Alien Invasion,Karen Smith,Science Fiction,2019,Aliens invade Earth and a group of survivors must fight back.
-75,The Mystery of the Lighthouse,James Wilson,Mystery,2012,A lighthouse keeper's mysterious death leads to a series of revelations.
-76,The Dragon's Lair,Emma Johnson,Fantasy,2013,A dragon slayer must confront the most powerful dragon in the realm.
-77,The Space Odyssey,Daniel Miller,Science Fiction,2019,A crew embarks on a journey to explore the outer reaches of the galaxy.
-78,The Curse of the Pharaoh,Olivia Scott,Mystery,2010,An archaeologist uncovers an ancient tomb and unleashes a deadly curse.
-79,The Enchanted Castle,Sophia Turner,Fantasy,2017,A princess must break a spell to save her kingdom from eternal darkness.
-80,The Time Paradox,Paul Adams,Science Fiction,2019,A time traveler creates a paradox that threatens the existence of the universe.
-81,The Ghostly Presence,Rebecca Young,Horror,2015,A woman moves into a new house and begins to experience strange occurrences.
-82,The Lost Civilization,Ethan Gray,Fantasy,2018,An explorer discovers a lost civilization deep in the jungle.
-83,The Alien Encounter,Megan Brown,Science Fiction,2019,A group of scientists make first contact with an alien species.
-84,The Mystery of the Museum,Samuel Harris,Mystery,2013,A series of thefts at a museum leads to a complex mystery.
-85,The Dragon's Quest,Ava Clark,Fantasy,2014,A young dragon rider embarks on a quest to save their kingdom.
-86,The Space Exploration,Benjamin Turner,Science Fiction,2019,A spaceship crew explores a new galaxy and encounters strange phenomena.
-87,The Haunted House,Charlotte Lee,Horror,2016,A family moves into a haunted house and must confront the spirits within.
-88,The Forgotten Realm,Henry Scott,Fantasy,2018,A warrior must journey to a forgotten realm to save his people.
-89,The Alien Invasion,Isabella Smith,Science Fiction,2019,Aliens invade Earth and a group of survivors must fight back.
-90,The Mystery of the Manor,William Wilson,Mystery,2014,A wealthy family gathers for a weekend in a manor but one of them is murdered.
-91,The Enchanted Forest,Natalie Johnson,Fantasy,2019,A group of children enter a magical forest and encounter mythical creatures.
-92,The Time Traveler's Dilemma,Alexander Davis,Science Fiction,2019,A time traveler must decide whether to change the past or let history unfold.
-93,The Haunted Mansion,Victoria Lane,Horror,2015,A family moves into a haunted mansion and must confront the ghosts within.
-94,The Forgotten City,Thomas Lee,Fantasy,2017,A young adventurer discovers a forgotten city hidden beneath the earth.
-95,The Alien Invasion,Karen Smith,Science Fiction,2019,Aliens invade Earth and a group of survivors must fight back.
-96,The Mystery of the Lighthouse,James Wilson,Mystery,2013,A lighthouse keeper's mysterious death leads to a series of revelations.
-97,The Dragon's Lair,Emma Johnson,Fantasy,2014,A dragon slayer must confront the most powerful dragon in the realm.
-98,The Space Odyssey,Daniel Miller,Science Fiction,2019,A crew embarks on a journey to explore the outer reaches of the galaxy.
-99,The Curse of the Pharaoh,Olivia Scott,Mystery,2011,An archaeologist uncovers an ancient tomb and unleashes a deadly curse.
-100,The Enchanted Castle,Sophia Turner,Fantasy,2018,A princess must break a spell to save her kingdom from eternal darkness.
-101,The Time Paradox,Paul Adams,Science Fiction,2019,A time traveler creates a paradox that threatens the existence of the universe.
-102,The Ghostly Presence,Rebecca Young,Horror,2016,A woman moves into a new house and begins to experience strange occurrences.
-103,The Lost Civilization,Ethan Gray,Fantasy,2019,An explorer discovers a lost civilization deep in the jungle.
-104,The Alien Encounter,Megan Brown,Science Fiction,2019,A group of scientists make first contact with an alien species.
-105,The Mystery of the Museum,Samuel Harris,Mystery,2014,A series of thefts at a museum leads to a complex mystery.
-106,The Dragon's Quest,Ava Clark,Fantasy,2015,A young dragon rider embarks on a quest to save their kingdom.
-107,The Space Exploration,Benjamin Turner,Science Fiction,2019,A spaceship crew explores a new galaxy and encounters strange phenomena.
-108,The Haunted House,Charlotte Lee,Horror,2017,A family moves into a haunted house and must confront the spirits within.
-109,The Forgotten Realm,Henry Scott,Fantasy,2019,A warrior must journey to a forgotten realm to save his people.
-110,The Alien Invasion,Isabella Smith,Science Fiction,2019,Aliens invade Earth and a group of survivors must fight back.
-111,The Mystery of the Manor,William Wilson,Mystery,2015,A wealthy family gathers for a weekend in a manor but one of them is murdered.
-112,The Enchanted Forest,Natalie Johnson,Fantasy,2019,A group of children enter a magical forest and encounter mythical creatures.
-113,The Time Traveler's Dilemma,Alexander Davis,Science Fiction,2019,A time traveler must decide whether to change the past or let history unfold.
-114,The Haunted Mansion,Victoria Lane,Horror,2016,A family moves into a haunted mansion and must confront the ghosts within.
-115,The Forgotten City,Thomas Lee,Fantasy,2018,A young adventurer discovers a forgotten city hidden beneath the earth.
-116,The Alien Invasion,Karen Smith,Science Fiction,2019,Aliens invade Earth and a group of survivors must fight back.
-117,The Mystery of the Lighthouse,James Wilson,Mystery,2014,A lighthouse keeper's mysterious death leads to a series of revelations.
-118,The Dragon's Lair,Emma Johnson,Fantasy,2015,A dragon slayer must confront the most powerful dragon in the realm.
-119,The Space Odyssey,Daniel Miller,Science Fiction,2019,A crew embarks on a journey to explore the outer reaches of the galaxy.
-120,The Curse of the Pharaoh,Olivia Scott,Mystery,2012,An archaeologist uncovers an ancient tomb and unleashes a deadly curse.
-121,The Enchanted Castle,Sophia Turner,Fantasy,2019,A princess must break a spell to save her kingdom from eternal darkness.
-122,The Time Paradox,Paul Adams,Science Fiction,2019,A time traveler creates a paradox that threatens the existence of the universe.
-123,The Ghostly Presence,Rebecca Young,Horror,2017,A woman moves into a new house and begins to experience strange occurrences.
-124,The Lost Civilization,Ethan Gray,Fantasy,2019,An explorer discovers a lost civilization deep in the jungle.
-125,The Alien Encounter,Megan Brown,Science Fiction,2019,A group of scientists make first contact with an alien species.
-126,The Mystery of the Museum,Samuel Harris,Mystery,2015,A series of thefts at a museum leads to a complex mystery.
-127,The Dragon's Quest,Ava Clark,Fantasy,2016,A young dragon rider embarks on a quest to save their kingdom.
-128,The Space Exploration,Benjamin Turner,Science Fiction,2019,A spaceship crew explores a new galaxy and encounters strange phenomena.
-129,The Haunted House,Charlotte Lee,Horror,2018,A family moves into a haunted house and must confront the spirits within.
-130,The Forgotten Realm,Henry Scott,Fantasy,2019,A warrior must journey to a forgotten realm to save his people.
-131,The Alien Invasion,Isabella Smith,Science Fiction,2019,Aliens invade Earth and a group of survivors must fight back.
-132,The Mystery of the Manor,William Wilson,Mystery,2016,A wealthy family gathers for a weekend in a manor but one of them is murdered.
-133,The Enchanted Forest,Natalie Johnson,Fantasy,2019,A group of children enter a magical forest and encounter mythical creatures.
-134,The Time Traveler's Dilemma,Alexander Davis,Science Fiction,2019,A time traveler must decide whether to change the past or let history unfold.
-135,The Haunted Mansion,Victoria Lane,Horror,2017,A family moves into a haunted mansion and must confront the ghosts within.
-136,The Forgotten City,Thomas Lee,Fantasy,2019,A young adventurer discovers a forgotten city hidden beneath the earth.
-137,The Alien Invasion,Karen Smith,Science Fiction,2019,Aliens invade Earth and a group of survivors must fight back.
-138,The Mystery of the Lighthouse,James Wilson,Mystery,2015,A lighthouse keeper's mysterious death leads to a series of revelations.
-139,The Dragon's Lair,Emma Johnson,Fantasy,2016,A dragon slayer must confront the most powerful dragon in the realm.
-140,The Space Odyssey,Daniel Miller,Science Fiction,2019,A crew embarks on a journey to explore the outer reaches of the galaxy.
-141,The Curse of the Pharaoh,Olivia Scott,Mystery,2013,An archaeologist uncovers an ancient tomb and unleashes a deadly curse.
-142,The Enchanted Castle,Sophia Turner,Fantasy,2019,A princess must break a spell to save her kingdom from eternal darkness.
-143,The Time Paradox,Paul Adams,Science Fiction,2019,A time traveler creates a paradox that threatens the existence of the universe.
-144,The Ghostly Presence,Rebecca Young,Horror,2018,A woman moves into a new house and begins to experience strange occurrences.
-145,The Lost Civilization,Ethan Gray,Fantasy,2019,An explorer discovers a lost civilization deep in the jungle.
-146,The Alien Encounter,Megan Brown,Science Fiction,2019,A group of scientists make first contact with an alien species.
-147,The Mystery of the Museum,Samuel Harris,Mystery,2016,A series of thefts at a museum leads to a complex mystery.
-148,The Dragon's Quest,Ava Clark,Fantasy,2017,A young dragon rider embarks on a quest to save their kingdom.
-149,The Space Exploration,Benjamin Turner,Science Fiction,2019,A spaceship crew explores a new galaxy and encounters strange phenomena.
-150,The Haunted House,Charlotte Lee,Horror,2019,A family moves into a haunted house and must confront the spirits within.
-151,The Forgotten Realm,Henry Scott,Fantasy,2019,A warrior must journey to a forgotten realm to save his people.
-152,The Alien Invasion,Isabella Smith,Science Fiction,2019,Aliens invade Earth and a group of survivors must fight back.
-153,The Mystery of the Manor,William Wilson,Mystery,2017,A wealthy family gathers for a weekend in a manor but one of them is murdered.
-154,The Enchanted Forest,Natalie Johnson,Fantasy,2019,A group of children enter a magical forest and encounter mythical creatures.
-155,The Time Traveler's Dilemma,Alexander Davis,Science Fiction,2019,A time traveler must decide whether to change the past or let history unfold.
-156,The Haunted Mansion,Victoria Lane,Horror,2018,A family moves into a haunted mansion and must confront the ghosts within.
-157,The Forgotten City,Thomas Lee,Fantasy,2019,A young adventurer discovers a forgotten city hidden beneath the earth.
-158,The Alien Invasion,Karen Smith,Science Fiction,2019,Aliens invade Earth and a group of survivors must fight back.
-159,The Mystery of the Lighthouse,James Wilson,Mystery,2016,A lighthouse keeper's mysterious death leads to a series of revelations.
-160,The Dragon's Lair,Emma Johnson,Fantasy,2017,A dragon slayer must confront the most powerful dragon in the realm.
-161,The Space Odyssey,Daniel Miller,Science Fiction,2019,A crew embarks on a journey to explore the outer reaches of the galaxy.
-162,The Curse of the Pharaoh,Olivia Scott,Mystery,2014,An archaeologist uncovers an ancient tomb and unleashes a deadly curse.
-163,The Enchanted Castle,Sophia Turner,Fantasy,2019,A princess must break a spell to save her kingdom from eternal darkness.
-164,The Time Paradox,Paul Adams,Science Fiction,2019,A time traveler creates a paradox that threatens the existence of the universe.
-165,The Ghostly Presence,Rebecca Young,Horror,2019,A woman moves into a new house and begins to experience strange occurrences.
-166,The Lost Civilization,Ethan Gray,Fantasy,2019,An explorer discovers a lost civilization deep in the jungle.
-167,The Alien Encounter,Megan Brown,Science Fiction,2019,A group of scientists make first contact with an alien species.
-168,The Mystery of the Museum,Samuel Harris,Mystery,2017,A series of thefts at a museum leads to a complex mystery.
-169,The Dragon's Quest,Ava Clark,Fantasy,2018,A young dragon rider embarks on a quest to save their kingdom.
-170,The Space Exploration,Benjamin Turner,Science Fiction,2019,A spaceship crew explores a new galaxy and encounters strange phenomena.
-171,The Haunted House,Charlotte Lee,Horror,2019,A family moves into a haunted house and must confront the spirits within.
-172,The Forgotten Realm,Henry Scott,Fantasy,2019,A warrior must journey to a forgotten realm to save his people.
-173,The Alien Invasion,Isabella Smith,Science Fiction,2019,Aliens invade Earth and a group of survivors must fight back.
-174,The Mystery of the Manor,William Wilson,Mystery,2018,A wealthy family gathers for a weekend in a manor but one of them is murdered.
-175,The Enchanted Forest,Natalie Johnson,Fantasy,2019,A group of children enter a magical forest and encounter mythical creatures.
-176,The Time Traveler's Dilemma,Alexander Davis,Science Fiction,2019,A time traveler must decide whether to change the past or let history unfold.
-177,The Haunted Mansion,Victoria Lane,Horror,2019,A family moves into a haunted mansion and must confront the ghosts within.
-178,The Forgotten City,Thomas Lee,Fantasy,2019,A young adventurer discovers a forgotten city hidden beneath the earth.
-179,The Alien Invasion,Karen Smith,Science Fiction,2019,Aliens invade Earth and a group of survivors must fight back.
-180,The Mystery of the Lighthouse,James Wilson,Mystery,2017,A lighthouse keeper's mysterious death leads to a series of revelations.
-181,The Dragon's Lair,Emma Johnson,Fantasy,2018,A dragon slayer must confront the most powerful dragon in the realm.
-182,The Space Odyssey,Daniel Miller,Science Fiction,2019,A crew embarks on a journey to explore the outer reaches of the galaxy.
-183,The Curse of the Pharaoh,Olivia Scott,Mystery,2015,An archaeologist uncovers an ancient tomb and unleashes a deadly curse.
-184,The Enchanted Castle,Sophia Turner,Fantasy,2019,A princess must break a spell to save her kingdom from eternal darkness.
-185,The Time Paradox,Paul Adams,Science Fiction,2019,A time traveler creates a paradox that threatens the existence of the universe.
-186,The Ghostly Presence,Rebecca Young,Horror,2019,A woman moves into a new house and begins to experience strange occurrences.
-187,The Lost Civilization,Ethan Gray,Fantasy,2019,An explorer discovers a lost civilization deep in the jungle.
-188,The Alien Encounter,Megan Brown,Science Fiction,2019,A group of scientists make first contact with an alien species.
-189,The Mystery of the Museum,Samuel Harris,Mystery,2018,A series of thefts at a museum leads to a complex mystery.
-190,The Dragon's Quest,Ava Clark,Fantasy,2019,A young dragon rider embarks on a quest to save their kingdom.
-191,The Space Exploration,Benjamin Turner,Science Fiction,2019,A spaceship crew explores a new galaxy and encounters strange phenomena.
-192,The Haunted House,Charlotte Lee,Horror,2019,A family moves into a haunted house and must confront the spirits within.
-193,The Forgotten Realm,Henry Scott,Fantasy,2019,A warrior must journey to a forgotten realm to save his people.
-194,The Alien Invasion,Isabella Smith,Science Fiction,2019,Aliens invade Earth and a group of survivors must fight back.
-195,The Mystery of the Manor,William Wilson,Mystery,2019,A wealthy family gathers for a weekend in a manor but one of them is murdered.
-196,The Enchanted Forest,Natalie Johnson,Fantasy,2019,A group of children enter a magical forest and encounter mythical creatures.
-197,The Time Traveler's Dilemma,Alexander Davis,Science Fiction,2019,A time traveler must decide whether to change the past or let history unfold.
-198,The Haunted Mansion,Victoria Lane,Horror,2019,A family moves into a haunted mansion and must confront the ghosts within.
-199,The Forgotten City,Thomas Lee,Fantasy,2019,A young adventurer discovers a forgotten city hidden beneath the earth.
-200,The Alien Invasion,Karen Smith,Science Fiction,2019,Aliens invade Earth and a group of survivors must fight back.
-201,The Whispering Woods,Emily Thorne,Fantasy,2020,A young girl discovers a hidden magical forest where she must confront her fears to save her village.
-202,Echoes of Time,Johnathan Black,Science Fiction,2019,A scientist invents a time machine and travels back to prevent a global catastrophe.
-203,Shadows of the Past,Victoria Lane,Mystery,2018,A detective unravels a series of murders that seem to be connected to an old unsolved case.
-204,The Lost Kingdom,David King,Adventure,2017,A group of explorers search for a legendary kingdom hidden deep within the Amazon rainforest.
-205,Beyond the Stars,Sara White,Romance,2016,A love story between an astronaut and a scientist who meet during a space mission.
-206,The Haunted Mansion,Michael Dark,Horror,2015,A family moves into an old mansion and begins to experience supernatural events.
-207,The Forgotten City,Lucy Green,Historical Fiction,2014,A tale of a city lost to time and the archaeologist who discovers its secrets.
-208,The Enchanted Mirror,Olivia Blue,Fantasy,2013,A magical mirror that grants wishes leads a young boy on a dangerous adventure.
-209,The Digital Frontier,Thomas Gray,Science Fiction,2012,A hacker uncovers a conspiracy that threatens the digital world.
-210,The Vanishing Act,Emma Stone,Mystery,2011,A magician's assistant disappears during a performance leading to a complex investigation.
-211,The Hidden Treasure,Richard Brown,Adventure,2010,A treasure hunter searches for a legendary pirate's hidden fortune.
-212,The Starlit Path,Amelia Rose,Romance,2009,A couple finds love while hiking the Appalachian Trail.
-213,The Cursed Castle,Henry Black,Horror,2008,A group of friends spends the night in a haunted castle and faces their darkest fears.
-214,The Ancient Prophecy,Clara White,Historical Fiction,2007,An ancient prophecy comes true changing the course of history.
-215,The Mystic Forest,Eleanor Green,Fantasy,2006,A young girl enters a mystical forest and encounters magical creatures.
-216,The Time Traveler's Dilemma,Benjamin Gray,Science Fiction,2005,A time traveler must decide whether to change the past or let history unfold.
-217,The Silent Witness,Sophia Stone,Mystery,2004,A detective solves a murder case with the help of a mute witness.
-218,The Lost Island,Samuel Brown,Adventure,2003,A group of explorers discovers a lost island filled with ancient ruins.
-219,The Moonlit Serenade,Isabella Rose,Romance,2002,A musician and a dancer fall in love during a moonlit performance.
-220,The Haunted House,Alexander Dark,Horror,2001,A family moves into a haunted house and experiences terrifying events.
-221,The Forgotten Legacy,Victoria Lane,Historical Fiction,2000,A historian uncovers a forgotten legacy that changes the course of history.
-222,The Enchanted Garden,Olivia Blue,Fantasy,1999,A magical garden comes to life leading a young girl on a thrilling adventure.
-223,The Digital Revolution,Thomas Gray,Science Fiction,1998,A computer programmer creates an AI that takes over the world.
-224,The Vanishing Point,Emma Stone,Mystery,1997,A detective investigates a series of disappearances that seem to be connected.
-225,The Hidden Cave,Richard Brown,Adventure,1996,A group of explorers discovers a hidden cave filled with ancient treasures.
-226,The Starlit Dance,Amelia Rose,Romance,1995,A couple finds love while dancing under the stars.
-227,The Cursed Mansion,Henry Black,Horror,1994,A group of friends spends the night in a haunted mansion and faces their darkest fears.
-228,The Ancient Secret,Clara White,Historical Fiction,1993,An ancient secret is revealed changing the course of history.
-229,The Mystic Lake,Eleanor Green,Fantasy,1992,A young girl discovers a mystical lake that grants wishes.
-230,The Time Traveler's Choice,Benjamin Gray,Science Fiction,1991,A time traveler must choose between changing the past or letting history unfold.
-231,The Silent Victim,Sophia Stone,Mystery,1990,A detective solves a murder case with the help of a silent witness.
-232,The Lost City,Samuel Brown,Adventure,1989,A group of explorers discovers a lost city hidden deep within the jungle.
-233,The Moonlit Waltz,Isabella Rose,Romance,1988,A musician and a dancer fall in love during a moonlit performance.
-234,The Haunted Manor,Alexander Dark,Horror,1987,A family moves into a haunted manor and experiences terrifying events.
-235,The Forgotten Heritage,Victoria Lane,Historical Fiction,1986,A historian uncovers a forgotten heritage that changes the course of history.
-236,The Enchanted Meadow,Olivia Blue,Fantasy,1985,A magical meadow comes to life leading a young girl on a thrilling adventure.
-237,The Digital Age,Thomas Gray,Science Fiction,1984,A computer programmer creates an AI that takes over the world.
-238,The Vanishing Trail,Emma Stone,Mystery,1983,A detective investigates a series of disappearances that seem to be connected.
-239,The Hidden Temple,Richard Brown,Adventure,1982,A group of explorers discovers a hidden temple filled with ancient treasures.
-240,The Starlit Embrace,Amelia Rose,Romance,1981,A couple finds love while embracing under the stars.
-241,The Cursed Estate,Henry Black,Horror,1980,A group of friends spends the night in a haunted estate and faces their darkest fears.
-242,The Ancient Mystery,Clara White,Historical Fiction,1979,An ancient mystery is revealed changing the course of history.
-243,The Mystic River,Eleanor Green,Fantasy,1978,A young girl discovers a mystical river that grants wishes.
-244,The Time Traveler's Decision,Benjamin Gray,Science Fiction,1977,A time traveler must decide whether to change the past or let history unfold.
-245,The Silent Observer,Sophia Stone,Mystery,1976,A detective solves a murder case with the help of a silent observer.
-246,The Lost Ruins,Samuel Brown,Adventure,1975,A group of explorers discovers lost ruins hidden deep within the forest.
-247,The Moonlit Melody,Isabella Rose,Romance,1974,A musician and a dancer fall in love during a moonlit performance.
-248,The Haunted Villa,Alexander Dark,Horror,1973,A family moves into a haunted villa and experiences terrifying events.
-249,The Forgotten Legacy,Victoria Lane,Historical Fiction,1972,A historian uncovers a forgotten legacy that changes the course of history.
-250,The Enchanted Valley,Olivia Blue,Fantasy,1971,A magical valley comes to life leading a young girl on a thrilling adventure.
-251,The Digital Era,Thomas Gray,Science Fiction,1970,A computer programmer creates an AI that takes over the world.
-252,The Vanishing Path,Emma Stone,Mystery,1969,A detective investigates a series of disappearances that seem to be connected.
-253,The Hidden Sanctuary,Richard Brown,Adventure,1968,A group of explorers discovers a hidden sanctuary filled with ancient treasures.
-254,The Starlit Kiss,Amelia Rose,Romance,1967,A couple finds love while kissing under the stars.
-255,The Cursed Hall,Henry Black,Horror,1966,A group of friends spends the night in a haunted hall and faces their darkest fears.
-256,The Ancient Riddle,Clara White,Historical Fiction,1965,An ancient riddle is revealed changing the course of history.
-257,The Mystic Mountain,Eleanor Green,Fantasy,1964,A young girl discovers a mystical mountain that grants wishes.
-258,The Time Traveler's Journey,Benjamin Gray,Science Fiction,1963,A time traveler embarks on a journey through time to change the past.
-259,The Silent Guardian,Sophia Stone,Mystery,1962,A detective solves a murder case with the help of a silent guardian.
-260,The Lost Fortress,Samuel Brown,Adventure,1961,A group of explorers discovers a lost fortress hidden deep within the mountains.
-261,The Moonlit Harmony,Isabella Rose,Romance,1960,A musician and a dancer fall in love during a moonlit performance.
-262,The Haunted Chateau,Alexander Dark,Horror,1959,A family moves into a haunted chateau and experiences terrifying events.
-263,The Forgotten Inheritance,Victoria Lane,Historical Fiction,1958,A historian uncovers a forgotten inheritance that changes the course of history.
-264,The Enchanted Glade,Olivia Blue,Fantasy,1957,A magical glade comes to life leading a young girl on a thrilling adventure.
-265,The Digital Future,Thomas Gray,Science Fiction,1956,A computer programmer creates an AI that takes over the world.
-266,The Vanishing Trace,Emma Stone,Mystery,1955,A detective investigates a series of disappearances that seem to be connected.
-267,The Hidden Shrine,Richard Brown,Adventure,1954,A group of explorers discovers a hidden shrine filled with ancient treasures.
-268,The Starlit Caress,Amelia Rose,Romance,1953,A couple finds love while caressing under the stars.
-269,The Cursed Abode,Henry Black,Horror,1952,A group of friends spends the night in a haunted abode and faces their darkest fears.
-270,The Ancient Enigma,Clara White,Historical Fiction,1951,An ancient enigma is revealed changing the course of history.
-271,The Mystic Cave,Eleanor Green,Fantasy,1950,A young girl discovers a mystical cave that grants wishes.
-272,The Time Traveler's Quest,Benjamin Gray,Science Fiction,1949,A time traveler embarks on a quest through time to change the past.
-273,The Silent Sentinel,Sophia Stone,Mystery,1948,A detective solves a murder case with the help of a silent sentinel.
-274,The Lost Citadel,Samuel Brown,Adventure,1947,A group of explorers discovers a lost citadel hidden deep within the desert.
-275,The Moonlit Symphony,Isabella Rose,Romance,1946,A musician and a dancer fall in love during a moonlit performance.
-276,The Haunted Palace,Alexander Dark,Horror,1945,A family moves into a haunted palace and experiences terrifying events.
-277,The Forgotten Bequest,Victoria Lane,Historical Fiction,1944,A historian uncovers a forgotten bequest that changes the course of history.
-278,The Enchanted Grove,Olivia Blue,Fantasy,1943,A magical grove comes to life leading a young girl on a thrilling adventure.
-279,The Digital World,Thomas Gray,Science Fiction,1942,A computer programmer creates an AI that takes over the world.
-280,The Vanishing Clue,Emma Stone,Mystery,1941,A detective investigates a series of disappearances that seem to be connected.
-281,The Hidden Altar,Richard Brown,Adventure,1940,A group of explorers discovers a hidden altar filled with ancient treasures.
-282,The Starlit Embrace,Amelia Rose,Romance,1939,A couple finds love while embracing under the stars.
-283,The Cursed Domain,Henry Black,Horror,1938,A group of friends spends the night in a haunted domain and faces their darkest fears.
-284,The Ancient Puzzle,Clara White,Historical Fiction,1937,An ancient puzzle is revealed changing the course of history.
-285,The Mystic Forest,Eleanor Green,Fantasy,1936,A young girl discovers a mystical forest that grants wishes.
-286,The Time Traveler's Mission,Benjamin Gray,Science Fiction,1935,A time traveler embarks on a mission through time to change the past.
-287,The Silent Protector,Sophia Stone,Mystery,1934,A detective solves a murder case with the help of a silent protector.
-288,The Lost Stronghold,Samuel Brown,Adventure,1933,A group of explorers discovers a lost stronghold hidden deep within the mountains.
-289,The Moonlit Rhapsody,Isabella Rose,Romance,1932,A musician and a dancer fall in love during a moonlit performance.
-290,The Haunted Residence,Alexander Dark,Horror,1931,A family moves into a haunted residence and experiences terrifying events.
-291,The Forgotten Testament,Victoria Lane,Historical Fiction,1930,A historian uncovers a forgotten testament that changes the course of history.
-292,The Enchanted Copse,Olivia Blue,Fantasy,1929,A magical copse comes to life leading a young girl on a thrilling adventure.
-293,The Digital Age,Thomas Gray,Science Fiction,1928,A computer programmer creates an AI that takes over the world.
-294,The Vanishing Evidence,Emma Stone,Mystery,1927,A detective investigates a series of disappearances that seem to be connected.
-295,The Hidden Chapel,Richard Brown,Adventure,1926,A group of explorers discovers a hidden chapel filled with ancient treasures.
-296,The Starlit Serenade,Amelia Rose,Romance,1925,A couple finds love while serenading under the stars.
-297,The Cursed Dwelling,Henry Black,Horror,1924,A group of friends spends the night in a haunted dwelling and faces their darkest fears.
-298,The Ancient Conundrum,Clara White,Historical Fiction,1923,An ancient conundrum is revealed changing the course of history.
-299,The Mystic Lake,Eleanor Green,Fantasy,1922,A young girl discovers a mystical lake that grants wishes.
-300,The Time Traveler's Odyssey,Benjamin Gray,Science Fiction,1921,A time traveler embarks on an odyssey through time to change the past.
+1,The Whispering Shadows,Alice Johnson,Mystery,2021,A detective unravels a series of murders linked to an ancient curse in a small coastal town.
+2,Galactic Dawn,Brian Smith,Science Fiction,2022,Humanity's first interstellar voyage leads to the discovery of an alien civilization on the brink of extinction.
+3,Echoes of the Past,Catherine Lee,Historical Fiction,2020,A young woman in 1920s New York uncovers her family's hidden past during the American Revolution.
+4,The Enchanted Forest,David Brown,Fantasy,2023,A group of children stumble upon a magical forest where mythical creatures roam and ancient magic is reawakened.
+5,Silent Screams,Emma White,Thriller,2019,"A serial killer targets victims based on their deepest fears, leaving a trail of cryptic clues for the police."
+6,Beyond the Stars,Frank Miller,Science Fiction,2021,Astronauts on a mission to colonize Mars encounter an extraterrestrial entity that challenges their understanding of life.
+7,The Lost Kingdom,Grace Clark,Fantasy,2022,"A prophecy foretells the return of a lost kingdom, and a young hero must embark on a quest to restore it."
+8,Shadows of War,Henry Davis,Historical Fiction,2020,A soldier's journey through the horrors of World War II and his struggle to find redemption.
+9,The Haunted Mansion,Irene Green,Horror,2023,"A family moves into an old mansion with a dark past, unleashing supernatural forces that threaten their lives."
+10,The Time Traveler's Dilemma,Jack Wilson,Science Fiction,2019,A time traveler must navigate the paradoxes of his actions to prevent a catastrophic future.
+11,The Secret Garden,Jane Austin,Romance,2021,"A young gardener falls in love with the daughter of a wealthy landowner, but their love is forbidden by societal norms."
+12,The Mystery of the Lighthouse,John Black,Mystery,2022,A lighthouse keeper's mysterious disappearance leads to the uncovering of a hidden treasure and a century-old secret.
+13,The Dragon's Lair,Karen White,Fantasy,2020,A young dragon rider must face the ultimate test to prove her worth and save her kingdom from destruction.
+14,The Forgotten City,Laura Brown,Adventure,2023,"An archaeologist discovers an ancient city hidden deep in the Amazon rainforest, guarded by deadly traps and curses."
+15,The Phantom's Curse,Linda Green,Horror,2019,"A phantom haunts an opera house, seeking revenge on those who wronged him in life."
+16,The Space Odyssey,Michael Smith,Science Fiction,2021,"A spaceship crew embarks on a journey to the edge of the universe, encountering cosmic wonders and dangers."
+17,The Enchanted Mirror,Nancy Clark,Fantasy,2022,"A magical mirror reveals parallel worlds, and a young girl must navigate them to save her family."
+18,The Battle of the Titans,Oliver Davis,Historical Fiction,2020,"A epic tale of the clash between ancient Greek gods and titans, told through the eyes of a mortal hero."
+19,The Haunted Asylum,Patricia White,Horror,2023,"An abandoned asylum holds dark secrets, and a group of friends must survive the night within its haunted walls."
+20,The Time Machine,Paul Wilson,Science Fiction,2019,"A scientist invents a time machine and travels to the future, discovering a world vastly different from his own."
+21,The Hidden Treasure,Rachel Austin,Adventure,2021,"A treasure hunter searches for a legendary pirate's treasure, facing dangerous rivals and ancient curses."
+22,The Mystery of the Manor,Richard Black,Mystery,2022,A series of unexplained events in an old manor house lead to the uncovering of a family secret.
+23,The Dragon's Quest,Sandra White,Fantasy,2020,"A young dragon embarks on a quest to find the lost dragon stone, the key to restoring balance to the world."
+24,The Lost City,Sarah Brown,Adventure,2023,"An explorer discovers a lost city in the heart of the jungle, guarded by ancient traps and mythical creatures."
+25,The Phantom's Revenge,Susan Green,Horror,2019,"A phantom seeks vengeance on those who betrayed him, haunting their dreams and driving them to madness."
+26,The Galactic War,Thomas Smith,Science Fiction,2021,A interstellar war between alien civilizations threatens the existence of humanity.
+27,The Enchanted Forest,Tina Clark,Fantasy,2022,A group of children enter a magical forest where they must solve riddles and face mythical creatures to find their way home.
+28,The Battle of the Gods,Tony Davis,Historical Fiction,2020,"Ancient gods clash in a battle for supremacy, with mortals caught in the crossfire."
+29,The Haunted Castle,Victoria White,Horror,2023,"A castle with a dark past is haunted by the spirits of its former inhabitants, seeking revenge on the living."
+30,The Time Traveler's Journey,Vincent Wilson,Science Fiction,2019,"A time traveler journeys through different eras, witnessing historical events and altering the course of history."
+31,The Secret Garden,Wendy Austin,Romance,2021,A young woman discovers a hidden garden that holds the key to her family's past and her own future.
+32,The Mystery of the Mansion,William Black,Mystery,2022,A series of mysterious events in an old mansion lead to the uncovering of a hidden treasure and a family secret.
+33,The Dragon's Flight,Yvonne White,Fantasy,2020,A young dragon rider must embark on a perilous journey to save her kingdom from a dark sorcerer.
+34,The Lost Temple,Zara Brown,Adventure,2023,"An adventurer discovers a lost temple deep in the jungle, guarded by ancient traps and curses."
+35,The Phantom's Lament,Zoe Green,Horror,2019,"A phantom haunts a theater, seeking revenge on those who wronged him in life."
+36,The Galactic Odyssey,Aaron Smith,Science Fiction,2021,"A spaceship crew embarks on a journey to the edge of the universe, encountering cosmic wonders and dangers."
+37,The Enchanted Lake,Bella Clark,Fantasy,2022,"A magical lake holds the key to a hidden world, and a young girl must navigate its depths to save her family."
+38,The Battle of the Heroes,Ben Davis,Historical Fiction,2020,"Ancient heroes clash in a battle for glory, with mortals caught in the crossfire."
+39,The Haunted House,Carla White,Horror,2023,"A house with a dark past is haunted by the spirits of its former inhabitants, seeking revenge on the living."
+40,The Time Traveler's Quest,Charles Wilson,Science Fiction,2019,A time traveler must navigate the paradoxes of his actions to prevent a catastrophic future.
+41,The Secret Island,Diana Austin,Romance,2021,A young woman discovers a hidden island that holds the key to her family's past and her own future.
+42,The Mystery of the Museum,Douglas Black,Mystery,2022,A series of mysterious events in an old museum lead to the uncovering of a hidden treasure and a family secret.
+43,The Dragon's Wrath,Ella White,Fantasy,2020,A young dragon rider must face the ultimate test to prove her worth and save her kingdom from destruction.
+44,The Lost Ruins,Eva Brown,Adventure,2023,"An explorer discovers lost ruins deep in the jungle, guarded by ancient traps and mythical creatures."
+45,The Phantom's Tale,Fiona Green,Horror,2019,"A phantom haunts a mansion, seeking revenge on those who wronged him in life."
+46,The Galactic Adventure,Frank Smith,Science Fiction,2021,"A spaceship crew embarks on a journey to the edge of the universe, encountering cosmic wonders and dangers."
+47,The Enchanted Valley,Gina Clark,Fantasy,2022,"A magical valley holds the key to a hidden world, and a young girl must navigate its depths to save her family."
+48,The Battle of the Kings,Greg Davis,Historical Fiction,2020,"Ancient kings clash in a battle for supremacy, with mortals caught in the crossfire."
+49,The Haunted Village,Hannah White,Horror,2023,"A village with a dark past is haunted by the spirits of its former inhabitants, seeking revenge on the living."
+50,The Time Traveler's Mission,Harold Wilson,Science Fiction,2019,A time traveler must navigate the paradoxes of his actions to prevent a catastrophic future.
+51,The Secret Cove,Helen Austin,Romance,2021,A young woman discovers a hidden cove that holds the key to her family's past and her own future.
+52,The Mystery of the Library,Henry Black,Mystery,2022,A series of mysterious events in an old library lead to the uncovering of a hidden treasure and a family secret.
+53,The Dragon's Fury,Irene White,Fantasy,2020,A young dragon rider must face the ultimate test to prove her worth and save her kingdom from destruction.
+54,The Lost Sanctuary,Isabella Brown,Adventure,2023,"An adventurer discovers a lost sanctuary deep in the jungle, guarded by ancient traps and curses."
+55,The Phantom's Song,Jane Green,Horror,2019,"A phantom haunts a concert hall, seeking revenge on those who wronged him in life."
+56,The Galactic Expedition,Jason Smith,Science Fiction,2021,"A spaceship crew embarks on a journey to the edge of the universe, encountering cosmic wonders and dangers."
+57,The Enchanted Mountain,Jessica Clark,Fantasy,2022,"A magical mountain holds the key to a hidden world, and a young girl must navigate its depths to save her family."
+58,The Battle of the Warriors,John Davis,Historical Fiction,2020,"Ancient warriors clash in a battle for glory, with mortals caught in the crossfire."
+59,The Haunted Forest,Julia White,Horror,2023,"A forest with a dark past is haunted by the spirits of its former inhabitants, seeking revenge on the living."
+60,The Time Traveler's Odyssey,Justin Wilson,Science Fiction,2019,A time traveler must navigate the paradoxes of his actions to prevent a catastrophic future.
+61,The Secret Beach,Karen Austin,Romance,2021,A young woman discovers a hidden beach that holds the key to her family's past and her own future.
+62,The Mystery of the Attic,Kevin Black,Mystery,2022,A series of mysterious events in an old attic lead to the uncovering of a hidden treasure and a family secret.
+63,The Dragon's Rage,Kim White,Fantasy,2020,A young dragon rider must face the ultimate test to prove her worth and save her kingdom from destruction.
+64,The Lost Oasis,Kristen Brown,Adventure,2023,"An explorer discovers a lost oasis deep in the desert, guarded by ancient traps and curses."
+65,The Phantom's Dance,Laura Green,Horror,2019,"A phantom haunts a dance hall, seeking revenge on those who wronged him in life."
+66,The Galactic Voyage,Liam Smith,Science Fiction,2021,"A spaceship crew embarks on a journey to the edge of the universe, encountering cosmic wonders and dangers."
+67,The Enchanted Cave,Linda Clark,Fantasy,2022,"A magical cave holds the key to a hidden world, and a young girl must navigate its depths to save her family."
+68,The Battle of the Champions,Luke Davis,Historical Fiction,2020,"Ancient champions clash in a battle for glory, with mortals caught in the crossfire."
+69,The Haunted Mansion,Lydia White,Horror,2023,"A mansion with a dark past is haunted by the spirits of its former inhabitants, seeking revenge on the living."
+70,The Time Traveler's Saga,Marcus Wilson,Science Fiction,2019,A time traveler must navigate the paradoxes of his actions to prevent a catastrophic future.
+71,The Secret Grove,Maria Austin,Romance,2021,A young woman discovers a hidden grove that holds the key to her family's past and her own future.
+72,The Mystery of the Basement,Mark Black,Mystery,2022,A series of mysterious events in an old basement lead to the uncovering of a hidden treasure and a family secret.
+73,The Dragon's Roar,Megan White,Fantasy,2020,A young dragon rider must face the ultimate test to prove her worth and save her kingdom from destruction.
+74,The Lost Paradise,Melissa Brown,Adventure,2023,"An explorer discovers a lost paradise deep in the jungle, guarded by ancient traps and mythical creatures."
+75,The Phantom's Melody,Michael Green,Horror,2019,"A phantom haunts a music hall, seeking revenge on those who wronged him in life."
+76,The Galactic Journey,Mike Smith,Science Fiction,2021,"A spaceship crew embarks on a journey to the edge of the universe, encountering cosmic wonders and dangers."
+77,The Enchanted River,Molly Clark,Fantasy,2022,"A magical river holds the key to a hidden world, and a young girl must navigate its depths to save her family."
+78,The Battle of the Heroes,Nathan Davis,Historical Fiction,2020,"Ancient heroes clash in a battle for glory, with mortals caught in the crossfire."
+79,The Haunted Cemetery,Nicole White,Horror,2023,"A cemetery with a dark past is haunted by the spirits of its former inhabitants, seeking revenge on the living."
+80,The Time Traveler's Chronicle,Noah Wilson,Science Fiction,2019,A time traveler must navigate the paradoxes of his actions to prevent a catastrophic future.
+81,The Secret Lagoon,Olivia Austin,Romance,2021,A young woman discovers a hidden lagoon that holds the key to her family's past and her own future.
+82,The Mystery of the Cellar,Owen Black,Mystery,2022,A series of mysterious events in an old cellar lead to the uncovering of a hidden treasure and a family secret.
+83,The Dragon's Cry,Pamela White,Fantasy,2020,A young dragon rider must face the ultimate test to prove her worth and save her kingdom from destruction.
+84,The Lost Sanctum,Patricia Brown,Adventure,2023,"An explorer discovers a lost sanctum deep in the jungle, guarded by ancient traps and curses."
+85,The Phantom's Symphony,Paul Green,Horror,2019,"A phantom haunts a symphony hall, seeking revenge on those who wronged him in life."
+86,The Galactic Quest,Peter Smith,Science Fiction,2021,"A spaceship crew embarks on a journey to the edge of the universe, encountering cosmic wonders and dangers."
+87,The Enchanted Woods,Rebecca Clark,Fantasy,2022,"A magical woods holds the key to a hidden world, and a young girl must navigate its depths to save her family."
+88,The Battle of the Legends,Richard Davis,Historical Fiction,2020,"Ancient legends clash in a battle for glory, with mortals caught in the crossfire."
+89,The Haunted Manor,Rita White,Horror,2023,"A manor with a dark past is haunted by the spirits of its former inhabitants, seeking revenge on the living."
+90,The Time Traveler's Epic,Robert Wilson,Science Fiction,2019,A time traveler must navigate the paradoxes of his actions to prevent a catastrophic future.
+91,The Secret Haven,Rose Austin,Romance,2021,A young woman discovers a hidden haven that holds the key to her family's past and her own future.
+92,The Mystery of the Garage,Ryan Black,Mystery,2022,A series of mysterious events in an old garage lead to the uncovering of a hidden treasure and a family secret.
+93,The Dragon's Howl,Sandra White,Fantasy,2020,A young dragon rider must face the ultimate test to prove her worth and save her kingdom from destruction.
+94,The Lost Shrine,Sara Brown,Adventure,2023,"An explorer discovers a lost shrine deep in the jungle, guarded by ancient traps and curses."
+95,The Phantom's Requiem,Scott Green,Horror,2019,"A phantom haunts a cathedral, seeking revenge on those who wronged him in life."
+96,The Galactic Mission,Sean Smith,Science Fiction,2021,"A spaceship crew embarks on a journey to the edge of the universe, encountering cosmic wonders and dangers."
+97,The Enchanted Meadow,Sophia Clark,Fantasy,2022,"A magical meadow holds the key to a hidden world, and a young girl must navigate its depths to save her family."
+98,The Battle of the Titans,Steve Davis,Historical Fiction,2020,"Ancient titans clash in a battle for supremacy, with mortals caught in the crossfire."
+99,The Haunted Chapel,Susan White,Horror,2023,"A chapel with a dark past is haunted by the spirits of its former inhabitants, seeking revenge on the living."
+100,The Time Traveler's Adventure,Thomas Wilson,Science Fiction,2019,A time traveler must navigate the paradoxes of his actions to prevent a catastrophic future.
+101,The Secret Oasis,Tina Austin,Romance,2021,A young woman discovers a hidden oasis that holds the key to her family's past and her own future.
+102,The Mystery of the Shed,Tony Black,Mystery,2022,A series of mysterious events in an old shed lead to the uncovering of a hidden treasure and a family secret.
+103,The Dragon's Scream,Tracy White,Fantasy,2020,A young dragon rider must face the ultimate test to prove her worth and save her kingdom from destruction.
+104,The Lost Temple,Trevor Brown,Adventure,2023,"An explorer discovers a lost temple deep in the jungle, guarded by ancient traps and curses."
+105,The Phantom's Lullaby,Victor Green,Horror,2019,"A phantom haunts a nursery, seeking revenge on those who wronged him in life."
+106,The Galactic Odyssey,Vincent Smith,Science Fiction,2021,"A spaceship crew embarks on a journey to the edge of the universe, encountering cosmic wonders and dangers."
+107,The Enchanted Glade,Violet Clark,Fantasy,2022,"A magical glade holds the key to a hidden world, and a young girl must navigate its depths to save her family."
+108,The Battle of the Gods,Walter Davis,Historical Fiction,2020,"Ancient gods clash in a battle for supremacy, with mortals caught in the crossfire."
+109,The Haunted Abbey,Wendy White,Horror,2023,"An abbey with a dark past is haunted by the spirits of its former inhabitants, seeking revenge on the living."
+110,The Time Traveler's Journey,William Wilson,Science Fiction,2019,A time traveler must navigate the paradoxes of his actions to prevent a catastrophic future.
+111,The Secret Sanctuary,Yvonne Austin,Romance,2021,A young woman discovers a hidden sanctuary that holds the key to her family's past and her own future.
+112,The Mystery of the Barn,Zachary Black,Mystery,2022,A series of mysterious events in an old barn lead to the uncovering of a hidden treasure and a family secret.
+113,The Dragon's Roar,Zara White,Fantasy,2020,A young dragon rider must face the ultimate test to prove her worth and save her kingdom from destruction.
+114,The Lost Ruins,Zoe Brown,Adventure,2023,"An explorer discovers lost ruins deep in the jungle, guarded by ancient traps and mythical creatures."
+115,The Phantom's Lament,Zach Green,Horror,2019,"A phantom haunts a theater, seeking revenge on those who wronged him in life."
+116,The Galactic Adventure,Aaron Smith,Science Fiction,2021,"A spaceship crew embarks on a journey to the edge of the universe, encountering cosmic wonders and dangers."
+117,The Enchanted Lake,Bella Clark,Fantasy,2022,"A magical lake holds the key to a hidden world, and a young girl must navigate its depths to save her family."
+118,The Battle of the Heroes,Ben Davis,Historical Fiction,2020,"Ancient heroes clash in a battle for glory, with mortals caught in the crossfire."
+119,The Haunted House,Carla White,Horror,2023,"A house with a dark past is haunted by the spirits of its former inhabitants, seeking revenge on the living."
+120,The Time Traveler's Quest,Charles Wilson,Science Fiction,2019,A time traveler must navigate the paradoxes of his actions to prevent a catastrophic future.
+121,The Secret Island,Diana Austin,Romance,2021,A young woman discovers a hidden island that holds the key to her family's past and her own future.
+122,The Mystery of the Museum,Douglas Black,Mystery,2022,A series of mysterious events in an old museum lead to the uncovering of a hidden treasure and a family secret.
+123,The Dragon's Wrath,Ella White,Fantasy,2020,A young dragon rider must face the ultimate test to prove her worth and save her kingdom from destruction.
+124,The Lost Ruins,Eva Brown,Adventure,2023,"An explorer discovers lost ruins deep in the jungle, guarded by ancient traps and mythical creatures."
+125,The Phantom's Tale,Fiona Green,Horror,2019,"A phantom haunts a mansion, seeking revenge on those who wronged him in life."
+126,The Galactic Adventure,Frank Smith,Science Fiction,2021,"A spaceship crew embarks on a journey to the edge of the universe, encountering cosmic wonders and dangers."
+127,The Enchanted Valley,Gina Clark,Fantasy,2022,"A magical valley holds the key to a hidden world, and a young girl must navigate its depths to save her family."
+128,The Battle of the Kings,Greg Davis,Historical Fiction,2020,"Ancient kings clash in a battle for supremacy, with mortals caught in the crossfire."
+129,The Haunted Village,Hannah White,Horror,2023,"A village with a dark past is haunted by the spirits of its former inhabitants, seeking revenge on the living."
+130,The Time Traveler's Mission,Harold Wilson,Science Fiction,2019,A time traveler must navigate the paradoxes of his actions to prevent a catastrophic future.
+131,The Secret Cove,Helen Austin,Romance,2021,A young woman discovers a hidden cove that holds the key to her family's past and her own future.
+132,The Mystery of the Library,Henry Black,Mystery,2022,A series of mysterious events in an old library lead to the uncovering of a hidden treasure and a family secret.
+133,The Dragon's Fury,Irene White,Fantasy,2020,A young dragon rider must face the ultimate test to prove her worth and save her kingdom from destruction.
+134,The Lost Sanctuary,Isabella Brown,Adventure,2023,"An adventurer discovers a lost sanctuary deep in the jungle, guarded by ancient traps and curses."
+135,The Phantom's Song,Jane Green,Horror,2019,"A phantom haunts a concert hall, seeking revenge on those who wronged him in life."
+136,The Galactic Expedition,Jason Smith,Science Fiction,2021,"A spaceship crew embarks on a journey to the edge of the universe, encountering cosmic wonders and dangers."
+137,The Enchanted Mountain,Jessica Clark,Fantasy,2022,"A magical mountain holds the key to a hidden world, and a young girl must navigate its depths to save her family."
+138,The Battle of the Warriors,John Davis,Historical Fiction,2020,"Ancient warriors clash in a battle for glory, with mortals caught in the crossfire."
+139,The Haunted Forest,Julia White,Horror,2023,"A forest with a dark past is haunted by the spirits of its former inhabitants, seeking revenge on the living."
+140,The Time Traveler's Odyssey,Justin Wilson,Science Fiction,2019,A time traveler must navigate the paradoxes of his actions to prevent a catastrophic future.
+141,The Secret Beach,Karen Austin,Romance,2021,A young woman discovers a hidden beach that holds the key to her family's past and her own future.
+142,The Mystery of the Attic,Kevin Black,Mystery,2022,A series of mysterious events in an old attic lead to the uncovering of a hidden treasure and a family secret.
+143,The Dragon's Rage,Kim White,Fantasy,2020,A young dragon rider must face the ultimate test to prove her worth and save her kingdom from destruction.
+144,The Lost Oasis,Kristen Brown,Adventure,2023,"An explorer discovers a lost oasis deep in the desert, guarded by ancient traps and curses."
+145,The Phantom's Dance,Laura Green,Horror,2019,"A phantom haunts a dance hall, seeking revenge on those who wronged him in life."
+146,The Galactic Voyage,Liam Smith,Science Fiction,2021,"A spaceship crew embarks on a journey to the edge of the universe, encountering cosmic wonders and dangers."
+147,The Enchanted Cave,Linda Clark,Fantasy,2022,"A magical cave holds the key to a hidden world, and a young girl must navigate its depths to save her family."
+148,The Battle of the Champions,Luke Davis,Historical Fiction,2020,"Ancient champions clash in a battle for glory, with mortals caught in the crossfire."
+149,The Haunted Mansion,Lydia White,Horror,2023,"A mansion with a dark past is haunted by the spirits of its former inhabitants, seeking revenge on the living."
+150,The Time Traveler's Saga,Marcus Wilson,Science Fiction,2019,A time traveler must navigate the paradoxes of his actions to prevent a catastrophic future.
+151,The Secret Grove,Maria Austin,Romance,2021,A young woman discovers a hidden grove that holds the key to her family's past and her own future.
+152,The Mystery of the Basement,Mark Black,Mystery,2022,A series of mysterious events in an old basement lead to the uncovering of a hidden treasure and a family secret.
+153,The Dragon's Roar,Megan White,Fantasy,2020,A young dragon rider must face the ultimate test to prove her worth and save her kingdom from destruction.
+154,The Lost Paradise,Melissa Brown,Adventure,2023,"An explorer discovers a lost paradise deep in the jungle, guarded by ancient traps and mythical creatures."
+155,The Phantom's Melody,Michael Green,Horror,2019,"A phantom haunts a music hall, seeking revenge on those who wronged him in life."
+156,The Galactic Journey,Mike Smith,Science Fiction,2021,"A spaceship crew embarks on a journey to the edge of the universe, encountering cosmic wonders and dangers."
+157,The Enchanted River,Molly Clark,Fantasy,2022,"A magical river holds the key to a hidden world, and a young girl must navigate its depths to save her family."
+158,The Battle of the Heroes,Nathan Davis,Historical Fiction,2020,"Ancient heroes clash in a battle for glory, with mortals caught in the crossfire."
+159,The Haunted Cemetery,Nicole White,Horror,2023,"A cemetery with a dark past is haunted by the spirits of its former inhabitants, seeking revenge on the living."
+160,The Time Traveler's Chronicle,Noah Wilson,Science Fiction,2019,A time traveler must navigate the paradoxes of his actions to prevent a catastrophic future.
+161,The Secret Lagoon,Olivia Austin,Romance,2021,A young woman discovers a hidden lagoon that holds the key to her family's past and her own future.
+162,The Mystery of the Cellar,Owen Black,Mystery,2022,A series of mysterious events in an old cellar lead to the uncovering of a hidden treasure and a family secret.
+163,The Dragon's Cry,Pamela White,Fantasy,2020,A young dragon rider must face the ultimate test to prove her worth and save her kingdom from destruction.
+164,The Lost Sanctum,Patricia Brown,Adventure,2023,"An explorer discovers a lost sanctum deep in the jungle, guarded by ancient traps and curses."
+165,The Phantom's Symphony,Paul Green,Horror,2019,"A phantom haunts a symphony hall, seeking revenge on those who wronged him in life."
+166,The Galactic Quest,Peter Smith,Science Fiction,2021,"A spaceship crew embarks on a journey to the edge of the universe, encountering cosmic wonders and dangers."
+167,The Enchanted Woods,Rebecca Clark,Fantasy,2022,"A magical woods holds the key to a hidden world, and a young girl must navigate its depths to save her family."
+168,The Battle of the Legends,Richard Davis,Historical Fiction,2020,"Ancient legends clash in a battle for glory, with mortals caught in the crossfire."
+169,The Haunted Manor,Rita White,Horror,2023,"A manor with a dark past is haunted by the spirits of its former inhabitants, seeking revenge on the living."
+170,The Time Traveler's Epic,Robert Wilson,Science Fiction,2019,A time traveler must navigate the paradoxes of his actions to prevent a catastrophic future.
+171,The Secret Haven,Rose Austin,Romance,2021,A young woman discovers a hidden haven that holds the key to her family's past and her own future.
+172,The Mystery of the Garage,Ryan Black,Mystery,2022,A series of mysterious events in an old garage lead to the uncovering of a hidden treasure and a family secret.
+173,The Dragon's Howl,Sandra White,Fantasy,2020,A young dragon rider must face the ultimate test to prove her worth and save her kingdom from destruction.
+174,The Lost Shrine,Sara Brown,Adventure,2023,"An explorer discovers a lost shrine deep in the jungle, guarded by ancient traps and curses."
+175,The Phantom's Requiem,Scott Green,Horror,2019,"A phantom haunts a cathedral, seeking revenge on those who wronged him in life."
+176,The Galactic Mission,Sean Smith,Science Fiction,2021,"A spaceship crew embarks on a journey to the edge of the universe, encountering cosmic wonders and dangers."
+177,The Enchanted Meadow,Sophia Clark,Fantasy,2022,"A magical meadow holds the key to a hidden world, and a young girl must navigate its depths to save her family."
+178,The Battle of the Titans,Steve Davis,Historical Fiction,2020,"Ancient titans clash in a battle for supremacy, with mortals caught in the crossfire."
+179,The Haunted Chapel,Susan White,Horror,2023,"A chapel with a dark past is haunted by the spirits of its former inhabitants, seeking revenge on the living."
+180,The Time Traveler's Adventure,Thomas Wilson,Science Fiction,2019,A time traveler must navigate the paradoxes of his actions to prevent a catastrophic future.
+181,The Secret Oasis,Tina Austin,Romance,2021,A young woman discovers a hidden oasis that holds the key to her family's past and her own future.
+182,The Mystery of the Shed,Tony Black,Mystery,2022,A series of mysterious events in an old shed lead to the uncovering of a hidden treasure and a family secret.
+183,The Dragon's Scream,Tracy White,Fantasy,2020,A young dragon rider must face the ultimate test to prove her worth and save her kingdom from destruction.
+184,The Lost Temple,Trevor Brown,Adventure,2023,"An explorer discovers a lost temple deep in the jungle, guarded by ancient traps and curses."
+185,The Phantom's Lullaby,Victor Green,Horror,2019,"A phantom haunts a nursery, seeking revenge on those who wronged him in life."
+186,The Galactic Odyssey,Vincent Smith,Science Fiction,2021,"A spaceship crew embarks on a journey to the edge of the universe, encountering cosmic wonders and dangers."
+187,The Enchanted Glade,Violet Clark,Fantasy,2022,"A magical glade holds the key to a hidden world, and a young girl must navigate its depths to save her family."
+188,The Battle of the Gods,Walter Davis,Historical Fiction,2020,"Ancient gods clash in a battle for supremacy, with mortals caught in the crossfire."
+189,The Haunted Abbey,Wendy White,Horror,2023,"An abbey with a dark past is haunted by the spirits of its former inhabitants, seeking revenge on the living."
+190,The Time Traveler's Journey,William Wilson,Science Fiction,2019,A time traveler must navigate the paradoxes of his actions to prevent a catastrophic future.
+191,The Secret Sanctuary,Yvonne Austin,Romance,2021,A young woman discovers a hidden sanctuary that holds the key to her family's past and her own future.
+192,The Mystery of the Barn,Zachary Black,Mystery,2022,A series of mysterious events in an old barn lead to the uncovering of a hidden treasure and a family secret.
+193,The Dragon's Roar,Zara White,Fantasy,2020,A young dragon rider must face the ultimate test to prove her worth and save her kingdom from destruction.
+194,The Lost Ruins,Zoe Brown,Adventure,2023,"An explorer discovers lost ruins deep in the jungle, guarded by ancient traps and mythical creatures."
+195,The Phantom's Lament,Zach Green,Horror,2019,"A phantom haunts a theater, seeking revenge on those who wronged him in life."
+196,The Galactic Adventure,Aaron Smith,Science Fiction,2021,"A spaceship crew embarks on a journey to the edge of the universe, encountering cosmic wonders and dangers."
+197,The Enchanted Lake,Bella Clark,Fantasy,2022,"A magical lake holds the key to a hidden world, and a young girl must navigate its depths to save her family."
+198,The Battle of the Heroes,Ben Davis,Historical Fiction,2020,"Ancient heroes clash in a battle for glory, with mortals caught in the crossfire."
+199,The Haunted House,Carla White,Horror,2023,"A house with a dark past is haunted by the spirits of its former inhabitants, seeking revenge on the living."
+200,The Time Traveler's Quest,Charles Wilson,Science Fiction,2019,A time traveler must navigate the paradoxes of his actions to prevent a catastrophic future.
 301,El Bosque Susurrante,Emilia Torres,Fantasy,2020,Una joven descubre un bosque mágico donde debe enfrentar sus miedos para salvar su aldea.
 302,Les Échos du Temps,Jean-Pierre Noir,Science Fiction,2019,Un scientifique invente une machine à voyager dans le temps et retourne en arrière pour empêcher une catastrophe mondiale.
 303,Die Schatten der Vergangenheit,Viktoria Straße,Mystery,2018,Ein Detektiv entwirrt eine Reihe von Morden die mit einem alten ungelösten Fall verbunden zu sein scheinen.
@@ -519,3 +419,103 @@ id,title,author,genre,publication_year,plot
 518,Il Palazzo Infestato,Alessandro Oscuro,Horror,1973,A family moves into a haunted palace and experiences terrifying events.
 519,L'Eredità Dimenticata,Vittoria Via,Historical Fiction,1972,A historian uncovers a forgotten inheritance that changes the course of history.
 520,Il Boschetto Incantato,Olivia Blu,Fantasy,1971,A magical grove comes to life leading a young girl on a thrilling adventure.
+521,Das Verfluchte Schloss,Alexander Dunkel,Horror,1945,Eine Familie zieht in ein Spukschloss und erlebt beängstigende Ereignisse.
+522,Das Vergessene Erbe,Viktoria Straße,Historical Fiction,1944,Ein Historiker entdeckt ein vergessenes Erbe das den Lauf der Geschichte verändert.
+523,Der Verzauberte Hain,Olivia Blau,Fantasy,1943,Ein magischer Hain erwacht zum Leben und führt ein junges Mädchen auf ein spannendes Abenteuer.
+524,Das Digitale Zeitalter,Thomas Grau,Science Fiction,1942,Ein Computerprogrammierer erstellt eine KI die die Welt übernimmt.
+525,Die Spur des Verschwindens,Emma Stein,Mystery,1941,Ein Detektiv untersucht eine Reihe von Verschwinden die miteinander verbunden zu sein scheinen.
+526,Das Verborgene Heiligtum,Richard Braun,Adventure,1940,Eine Gruppe von Forschern entdeckt ein verborgenes Heiligtum das mit antiken Schätzen gefüllt ist.
+527,Die Sternenliebkosung,Amelia Rose,Romance,1939,Ein Paar findet die Liebe während es unter den Sternen streichelt.
+528,Das Verfluchte Haus,Heinrich Schwarz,Horror,1938,Eine Gruppe von Freunden verbringt die Nacht in einem verfluchten Haus und stellt sich ihren dunkelsten Ängsten.
+529,Das Alte Rätsel,Clara Weiß,Historical Fiction,1937,Ein altes Rätsel wird enthüllt und verändert den Lauf der Geschichte.
+530,Der Mystische Fluss,Eleonore Grün,Fantasy,1936,Ein junges Mädchen entdeckt einen mystischen Fluss der Wünsche erfüllt.
+531,Die Odyssee des Zeitreisenden,Benjamin Grau,Science Fiction,1935,Ein Zeitreisender begibt sich auf eine Odyssee durch die Zeit um die Vergangenheit zu ändern.
+532,Der Wächter der Stille,Sophia Stein,Mystery,1934,Ein Detektiv löst einen Mordfall mit Hilfe eines stillen Wächters.
+533,Die Verlorene Festung,Samuel Braun,Adventure,1933,Eine Gruppe von Forschern entdeckt eine verlorene Festung die tief in den Bergen verborgen ist.
+534,Die Mondsymphonie,Isabella Rose,Romance,1932,Ein Musiker und eine Tänzerin verlieben sich während einer mondbeschienenen Aufführung.
+535,Le Château Hanté,Alexandre Sombre,Horror,1931,Eine Familie zieht in ein Spukschloss und erlebt beängstigende Ereignisse.
+536,L'Héritage Oublié,Victoria Rue,Historical Fiction,1930,Ein Historiker entdeckt ein vergessenes Erbe das den Lauf der Geschichte verändert.
+537,La Clairière Enchantée,Olivia Bleu,Fantasy,1929,Eine magische Lichtung erwacht zum Leben und führt ein junges Mädchen auf ein spannendes Abenteuer.
+538,L'Ère Numérique,Thomas Gris,Science Fiction,1928,Ein Computerprogrammierer erstellt eine KI die die Welt übernimmt.
+539,La Piste de Disparition,Emma Pierre,Mystery,1927,Ein Detektiv untersucht eine Reihe von Verschwinden die miteinander verbunden zu sein scheinen.
+540,Le Sanctuaire Caché,Richard Brun,Adventure,1926,Eine Gruppe von Forschern entdeckt ein verborgenes Heiligtum das mit antiken Schätzen gefüllt ist.
+541,La Caresse Étoilée,Amelia Rose,Romance,1925,Ein Paar findet die Liebe während es unter den Sternen streichelt.
+542,La Demeure Maudite,Henri Noir,Horror,1924,Eine Gruppe von Freunden verbringt die Nacht in einem verfluchten Haus und stellt sich ihren dunkelsten Ängsten.
+543,L'Énigme Ancienne,Clara Blanche,Historical Fiction,1923,Ein altes Rätsel wird enthüllt und verändert den Lauf der Geschichte.
+544,Le Lac Mystique,Eleanor Verte,Fantasy,1922,Ein junges Mädchen entdeckt einen mystischen See der Wünsche erfüllt.
+545,L'Odyssée du Voyageur du Temps,Benjamin Gris,Science Fiction,1921,Ein Zeitreisender begibt sich auf eine Odyssee durch die Zeit um die Vergangenheit zu ändern.
+546,El Bosque Susurrante,Emilia Torres,Fantasy,2020,Una joven descubre un bosque mágico donde debe enfrentar sus miedos para salvar su aldea.
+547,Les Échos du Temps,Jean-Pierre Noir,Science Fiction,2019,Un scientifique invente une machine à voyager dans le temps et retourne en arrière pour empêcher une catastrophe mondiale.
+548,Die Schatten der Vergangenheit,Viktoria Straße,Mystery,2018,Ein Detektiv entwirrt eine Reihe von Morden die mit einem alten ungelösten Fall verbunden zu sein scheinen.
+549,Il Regno Perduto,Davide Re,Adventure,2017,Ein Gruppe von Forschern sucht nach einem legendären Königreich das tief im Amazonas-Regenwald verborgen ist.
+550,La Danza delle Stelle,Sara Bianca,Romance,2016,Eine Liebesgeschichte zwischen einem Astronauten und einer Wissenschaftlerin die sich während einer Weltraummission kennenlernen.
+551,La Maison Hantée,Michel Sombre,Horror,2015,Eine Familie zieht in ein altes Herrenhaus und beginnt übernatürliche Ereignisse zu erleben.
+552,A Cidade Esquecida,Lucia Verde,Historical Fiction,2014,Eine Geschichte über eine Stadt die in der Zeit verloren ging und den Archäologen der ihre Geheimnisse entdeckt.
+553,El Espejo Encantado,Olivia Azul,Fantasy,2013,Ein magischer Spiegel der Wünsche erfüllt führt einen jungen Jungen auf ein gefährliches Abenteuer.
+554,La Frontière Numérique,Thomas Gris,Science Fiction,2012,Ein Hacker entdeckt eine Verschwörung die die digitale Welt bedroht.
+555,L'Acte de Disparition,Emma Pierre,Mystery,2011,Ein Magierassistent verschwindet während einer Aufführung was zu einer komplexen Untersuchung führt.
+556,El Tesoro Oculto,Ricardo Marrón,Adventure,2010,Ein Schatzsucher sucht nach dem versteckten Vermögen eines legendären Piraten.
+557,El Sendero Estrellado,Amelia Rosa,Romance,2009,Ein Paar findet die Liebe während es den Appalachen-Trail wandert.
+558,La Mansión Maldita,Enrique Negro,Horror,2008,Eine Gruppe von Freunden verbringt die Nacht in einem verfluchten Schloss und stellt sich ihren dunkelsten Ängsten.
+559,La Profecía Antigua,Clara Blanca,Historical Fiction,2007,Eine alte Prophezeiung erfüllt sich und verändert den Lauf der Geschichte.
+560,El Bosque Místico,Eleonor Verde,Fantasy,2006,Ein junges Mädchen betritt einen mystischen Wald und begegnet magischen Kreaturen.
+561,El Dilema del Viajero del Tiempo,Benjamín Gris,Science Fiction,2005,Ein Zeitreisender muss entscheiden ob er die Vergangenheit ändern oder die Geschichte ihren Lauf nehmen lassen soll.
+562,El Testigo Silencioso,Sofía Piedra,Mystery,2004,Ein Detektiv löst einen Mordfall mit Hilfe eines stummen Zeugen.
+563,La Isla Perdida,Samuel Marrón,Adventure,2003,Eine Gruppe von Forschern entdeckt eine verlorene Insel die mit antiken Ruinen gefüllt ist.
+564,La Serenata Lunar,Isabella Rosa,Romance,2002,Ein Musiker und eine Tänzerin verlieben sich während einer mondbeschienenen Aufführung.
+565,La Casa Encantada,Alejandro Oscuro,Horror,2001,Eine Familie zieht in ein Spukhaus und erlebt beängstigende Ereignisse.
+566,El Legado Olvidado,Victoria Calle,Historical Fiction,2000,Ein Historiker entdeckt ein vergessenes Erbe das den Lauf der Geschichte verändert.
+567,El Jardín Encantado,Olivia Azul,Fantasy,1999,Ein magischer Garten erwacht zum Leben und führt ein junges Mädchen auf ein spannendes Abenteuer.
+568,La Revolución Digital,Thomas Gris,Science Fiction,1998,Ein Computerprogrammierer erstellt eine KI die die Welt übernimmt.
+569,El Punto de Desaparición,Emma Pierre,Mystery,1997,Ein Detektiv untersucht eine Reihe von Verschwinden die miteinander verbunden zu sein scheinen.
+570,La Cueva Oculta,Ricardo Marrón,Adventure,1996,Eine Gruppe von Forschern entdeckt eine verborgene Höhle die mit antiken Schätzen gefüllt ist.
+571,El Baile Estrellado,Amelia Rosa,Romance,1995,Ein Paar findet die Liebe während es unter den Sternen tanzt.
+572,La Mansión Maldita,Enrique Negro,Horror,1994,Eine Gruppe von Freunden verbringt die Nacht in einem verfluchten Herrenhaus und stellt sich ihren dunkelsten Ängsten.
+573,El Secreto Antiguo,Clara Blanca,Historical Fiction,1993,Ein altes Geheimnis wird enthüllt und verändert den Lauf der Geschichte.
+574,El Lago Místico,Eleonor Verde,Fantasy,1992,Ein junges Mädchen entdeckt einen mystischen See der Wünsche erfüllt.
+575,El Viaje del Viajero del Tiempo,Benjamín Gris,Science Fiction,1991,Ein Zeitreisender muss entscheiden ob er die Vergangenheit ändern oder die Geschichte ihren Lauf nehmen lassen soll.
+576,El Observador Silencioso,Sofía Piedra,Mystery,1990,Ein Detektiv löst einen Mordfall mit Hilfe eines stillen Zeugen.
+577,La Ciudad Perdida,Samuel Marrón,Adventure,1989,Eine Gruppe von Forschern entdeckt eine verlorene Stadt die tief im Dschungel verborgen ist.
+578,La Melodía Lunar,Isabella Rosa,Romance,1988,Ein Musiker und eine Tänzerin verlieben sich während einer mondbeschienenen Aufführung.
+579,La Villa Encantada,Alejandro Oscuro,Horror,1987,Eine Familie zieht in eine Spukvilla und erlebt beängstigende Ereignisse.
+580,El Legado Olvidado,Victoria Calle,Historical Fiction,1986,Ein Historiker entdeckt ein vergessenes Erbe das den Lauf der Geschichte verändert.
+581,El Prado Encantado,Olivia Azul,Fantasy,1985,Eine magische Wiese erwacht zum Leben und führt ein junges Mädchen auf ein spannendes Abenteuer.
+582,La Era Digital,Thomas Gris,Science Fiction,1984,Ein Computerprogrammierer erstellt eine KI die die Welt übernimmt.
+583,El Rastro de Desaparición,Emma Pierre,Mystery,1983,Ein Detektiv untersucht eine Reihe von Verschwinden die miteinander verbunden zu sein scheinen.
+584,El Templo Oculto,Ricardo Marrón,Adventure,1982,Eine Gruppe von Forschern entdeckt einen verborgenen Tempel der mit antiken Schätzen gefüllt ist.
+585,El Abrazo Estrellado,Amelia Rosa,Romance,1981,Ein Paar findet die Liebe während es unter den Sternen umarmt.
+586,La Residencia Maldita,Enrique Negro,Horror,1980,Eine Gruppe von Freunden verbringt die Nacht in einem verfluchten Anwesen und stellt sich ihren dunkelsten Ängsten.
+587,El Enigma Antiguo,Clara Blanca,Historical Fiction,1979,Ein altes Rätsel wird enthüllt und verändert den Lauf der Geschichte.
+588,El Río Místico,Eleonor Verde,Fantasy,1978,Ein junges Mädchen entdeckt einen mystischen Fluss der Wünsche erfüllt.
+589,La Odisea del Viajero del Tiempo,Benjamín Gris,Science Fiction,1977,Ein Zeitreisender begibt sich auf eine Odyssee durch die Zeit um die Vergangenheit zu ändern.
+590,El Guardián Silencioso,Sofía Piedra,Mystery,1976,Ein Detektiv löst einen Mordfall mit Hilfe eines stillen Wächters.
+791,The Whispering Shadows,Alice Green,Mystery,2020,A detective uncovers a series of murders linked to an ancient curse in a small coastal town.
+792,L'Alba Galattica,Benjamin Smith,Science Fiction,2019,Il primo viaggio interstellare dell'umanità porta alla scoperta di una civiltà aliena sull'orlo dell'estinzione.
+793,Ecos del Pasado,Catherine White,Historical Fiction,2018,Una joven arqueóloga desentraña los secretos de una civilización perdida mientras lucha con el pasado oculto de su propia familia.
+794,Der Verzauberte Wald,David Brown,Fantasy,2021,"Eine Gruppe von Kindern stolpert über einen magischen Wald, in dem mythische Kreaturen ihnen helfen, ihre Ängste zu überwinden."
+795,Sinfonía de Medianoche,Emma Black,Romance,2022,Un renombrado pianista y un compositor en apuros encuentran amor e inspiración en la compañía del otro.
+796,La Marée Cramoisie,Frank Davis,Adventure,2017,Un capitaine pirate audacieux et son équipage entreprennent un voyage périlleux pour trouver un trésor légendaire.
+797,Sogni Infranti,Grace Johnson,Drama,2023,L'ascesa alla fama di una giovane attrice è minacciata da un oscuro segreto del suo passato.
+798,La Mansión Embrujada,Henry Clark,Horror,2016,Una familia se muda a una vieja mansión sin saber de la siniestra presencia que acecha dentro de sus paredes.
+799,Das Dilemma des Zeitreisenden,Isabella Lee,Science Fiction,2024,"Ein Zeitreisender muss entscheiden, ob er die Zukunft oder die Vergangenheit retten will, wenn er vor einem moralischen Dilemma steht."
+800,Il Regno Perduto,Jack Wilson,Fantasy,2015,"Un giovane principe intraprende una ricerca per recuperare il suo regno perduto, affrontando pericoli e scoprendo nuovi alleati."
+801,The Hidden Treasure,Jane Adams,Adventure,2014,A group of friends embark on a treasure hunt that leads them to uncover a hidden pirate treasure.
+802,La Città Sommersa,John Brown,Science Fiction,2013,"Una città sottomarina viene scoperta da un gruppo di scienziati, rivelando segreti di una civiltà avanzata."
+803,El Sueño de la Sirena,Karen Davis,Fantasy,2012,Una sirena si innamora di un marinaio e deve scegliere tra il suo mondo sottomarino e il mondo umano.
+804,Der Schatten des Vampirs,Linda Evans,Horror,2011,Ein Vampirjäger verfolgt einen mächtigen Vampir durch die Straßen einer dunklen Stadt.
+805,L'Amour Éternel,Michael Green,Romance,2010,"Un amour éternel naît entre un vampire et une humaine, défiant les lois de la nature et du temps."
+806,The Forgotten Island,Nancy White,Adventure,2009,A group of explorers discover a forgotten island with ancient ruins and hidden treasures.
+807,Il Segreto del Castello,Oliver Black,Mystery,2008,Un castello abbandonato nasconde un segreto oscuro che un gruppo di amici deve svelare.
+808,La Melodía del Corazón,Patricia Brown,Romance,2007,Una melodía misteriosa une a dos personas que estaban destinadas a encontrarse.
+809,Der Fluch des Pharaos,Quentin Davis,Adventure,2006,Un arqueólogo descubre una tumba maldita y debe enfrentarse a la maldición del faraón.
+810,El Viaje del Tiempo,Rachel Evans,Science Fiction,2005,Un científico inventa una máquina del tiempo y viaja al pasado para cambiar el curso de la historia.
+891,The Lost Kingdom,Jane Smith,English,Fantasy,A young hero embarks on a quest to find a lost kingdom hidden deep within a magical forest.
+892,Il Mistero di Venezia,Mario Rossi,Italian,Mystery,Un detective veneziano scopre un antico segreto nascosto nei canali della città.
+893,Die Geheimnisse des Waldes,Hans Müller,German,Adventure,Ein Abenteurer entdeckt die Geheimnisse eines verzauberten Waldes und kämpft gegen dunkle Mächte.
+894,El Sueño de la Sirena,Carlos García,Spanish,Romance,Una joven sirena se enamora de un marinero y debe enfrentar las consecuencias de su amor prohibido.
+895,Le Secret de la Tour,Marie Dupont,French,Historical,Une jeune femme découvre un ancien secret caché dans une tour médiévale et doit protéger son héritage.
+896,The Whispering Shadows,Emily Johnson,English,Horror,A group of friends uncover a dark presence in an abandoned mansion that whispers their deepest fears.
+897,Il Viaggio nel Tempo,Giovanni Bianchi,Italian,Science Fiction,Un gruppo di scienziati viaggia nel tempo per salvare il futuro dell'umanità.
+898,Die Legende des Drachen,Anna Schmidt,German,Fantasy,Ein junger Drachenreiter muss die Welt vor einer dunklen Bedrohung retten.
+899,El Enigma del Faro,Laura Pérez,Spanish,Mystery,Un detective investiga una serie de misteriosas desapariciones en un antiguo faro.
+911,The Whispering Pebbles,Alice Green,English,Fantasy,"In a world where pebbles whisper ancient secrets, a young girl must decipher their messages to save her village from a looming darkness."
