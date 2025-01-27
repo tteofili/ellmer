@@ -1,0 +1,496 @@
+id,title,author,genre,publication_year,plot
+1,Whispers in the Woods,Emily Hart,Fantasy,2010,A young girl uncovers a concealed world within the forest behind her residence.
+2,Echoes Through Time,David Thompson,Science Fiction,2015,A scientist develops a time machine and travels to the future to rescue humanity.
+3,Shadows from the Past,Laura Green,Mystery,2008,A detective unravels a series of murders linked to an ancient curse.
+4,The Lost Realm,Michael Brown,Fantasy,2012,A prince embarks on a quest to reclaim his lost kingdom from a dark sorcerer.
+5,Beyond the Stars,Sarah White,Science Fiction,2018,A spaceship crew discovers a new planet inhabited by intelligent life forms.
+6,Murder at the Manor,Robert King,Mystery,2005,A wealthy family gathers for a weekend at a manor but one of them is murdered.
+7,The Enchanted Woods,Amanda Clark,Fantasy,2014,A group of children enter a magical forest and encounter mythical creatures.
+8,The Time Traveler's Predicament,John Davis,Science Fiction,2017,A time traveler must decide whether to alter the past or let history unfold.
+9,The Haunted Estate,Victoria Lane,Horror,2011,A family moves into a haunted mansion and must confront the ghosts within.
+10,The Forgotten Metropolis,Thomas Lee,Fantasy,2013,A young adventurer discovers a forgotten city hidden beneath the earth.
+11,The Alien Incursion,Karen Smith,Science Fiction,2016,Aliens invade Earth and a group of survivors must fight back.
+12,The Mystery of the Beacon,James Wilson,Mystery,2009,A lighthouse keeper's mysterious death leads to a series of revelations.
+13,The Dragon's Den,Emma Johnson,Fantasy,2010,A dragon slayer must confront the most powerful dragon in the realm.
+14,The Galactic Odyssey,Daniel Miller,Science Fiction,2019,A crew embarks on a journey to explore the outer reaches of the galaxy.
+15,The Pharaoh's Curse,Olivia Scott,Mystery,2007,An archaeologist uncovers an ancient tomb and unleashes a deadly curse.
+16,The Enchanted Fortress,Sophia Turner,Fantasy,2015,A princess must break a spell to save her kingdom from eternal darkness.
+17,The Time Paradox,Paul Adams,Science Fiction,2018,A time traveler creates a paradox that threatens the existence of the universe.
+18,The Ghostly Manifestation,Rebecca Young,Horror,2012,A woman moves into a new house and begins to experience strange occurrences.
+19,The Lost Society,Ethan Gray,Fantasy,2014,An explorer discovers a lost civilization deep in the jungle.
+20,The Alien Encounter,Megan Brown,Science Fiction,2017,A group of scientists make first contact with an alien species.
+21,The Mystery of the Exhibition,Samuel Harris,Mystery,2010,A series of thefts at a museum leads to a complex mystery.
+22,The Dragon's Mission,Ava Clark,Fantasy,2011,A young dragon rider embarks on a quest to save their kingdom.
+23,The Cosmic Exploration,Benjamin Turner,Science Fiction,2019,A spaceship crew explores a new galaxy and encounters strange phenomena.
+24,The Haunted Abode,Charlotte Lee,Horror,2013,A family moves into a haunted house and must confront the spirits within.
+25,The Forgotten Domain,Henry Scott,Fantasy,2015,A warrior must journey to a forgotten realm to save his people.
+26,The Alien Invasion,Isabella Smith,Science Fiction,2018,Aliens invade Earth and a group of survivors must fight back.
+27,The Mystery of the Estate,William Wilson,Mystery,2011,A wealthy family gathers for a weekend in a manor but one of them is murdered.
+28,The Enchanted Grove,Natalie Johnson,Fantasy,2016,A group of children enter a magical forest and encounter mythical creatures.
+29,The Time Traveler's Quandary,Alexander Davis,Science Fiction,2019,A time traveler must decide whether to change the past or let history unfold.
+30,The Haunted Residence,Victoria Lane,Horror,2012,A family moves into a haunted mansion and must confront the ghosts within.
+31,The Forgotten Cityscape,Thomas Lee,Fantasy,2014,A young adventurer discovers a forgotten city hidden beneath the earth.
+32,The Alien Intrusion,Karen Smith,Science Fiction,2017,Aliens invade Earth and a group of survivors must fight back.
+33,The Mystery of the Light Tower,James Wilson,Mystery,2010,A lighthouse keeper's mysterious death leads to a series of revelations.
+34,The Dragon's Hideout,Emma Johnson,Fantasy,2011,A dragon slayer must confront the most powerful dragon in the realm.
+35,The Space Journey,Daniel Miller,Science Fiction,2019,A crew embarks on a journey to explore the outer reaches of the galaxy.
+36,The Curse of the Pharaoh,Olivia Scott,Mystery,2008,An archaeologist uncovers an ancient tomb and unleashes a deadly curse.
+37,The Enchanted Stronghold,Sophia Turner,Fantasy,2015,A princess must break a spell to save her kingdom from eternal darkness.
+38,The Time Conundrum,Paul Adams,Science Fiction,2018,A time traveler creates a paradox that threatens the existence of the universe.
+39,The Ghostly Apparition,Rebecca Young,Horror,2013,A woman moves into a new house and begins to experience strange occurrences.
+40,The Lost Tribe,Ethan Gray,Fantasy,2016,An explorer discovers a lost civilization deep in the jungle.
+41,The Alien Meeting,Megan Brown,Science Fiction,2019,A group of scientists make first contact with an alien species.
+42,The Mystery of the Gallery,Samuel Harris,Mystery,2011,A series of thefts at a museum leads to a complex mystery.
+43,The Dragon's Expedition,Ava Clark,Fantasy,2012,A young dragon rider embarks on a quest to save their kingdom.
+44,The Space Voyage,Benjamin Turner,Science Fiction,2019,A spaceship crew explores a new galaxy and encounters strange phenomena.
+45,The Haunted Dwelling,Charlotte Lee,Horror,2014,A family moves into a haunted house and must confront the spirits within.
+46,The Forgotten Territory,Henry Scott,Fantasy,2016,A warrior must journey to a forgotten realm to save his people.
+47,The Alien Assault,Isabella Smith,Science Fiction,2019,Aliens invade Earth and a group of survivors must fight back.
+48,The Mystery of the Mansion,William Wilson,Mystery,2012,A wealthy family gathers for a weekend in a manor but one of them is murdered.
+49,The Enchanted Thicket,Natalie Johnson,Fantasy,2017,A group of children enter a magical forest and encounter mythical creatures.
+50,The Time Traveler's Challenge,Alexander Davis,Science Fiction,2019,A time traveler must decide whether to change the past or let history unfold.
+51,The Silent Sea,Alice Walker,Fantasy,2010,A young boy discovers a hidden underwater kingdom filled with secrets.
+52,The Quantum Enigma,Brian Johnson,Science Fiction,2015,A physicist uncovers a quantum anomaly that threatens reality.
+53,The Vanishing Heir,Catherine Moore,Mystery,2008,A detective searches for a missing heir to a wealthy estate.
+54,The Crystal Kingdom,Daniel Harris,Fantasy,2012,A princess must find a magical crystal to save her kingdom.
+55,The Stellar Frontier,Eleanor Brown,Science Fiction,2018,A spaceship crew explores the frontiers of the galaxy.
+56,The Murder at Midnight,Franklin Lee,Mystery,2005,A detective investigates a murder that occurs at the stroke of midnight.
+57,The Whispering Willows,Grace Clark,Fantasy,2014,A group of friends discover a magical willow tree that grants wishes.
+58,The Chrono Paradox,Henry Davis,Science Fiction,2017,A time traveler faces a paradox that could erase his existence.
+59,The Haunted Hill,Isabella Lane,Horror,2011,A family moves to a haunted hill and encounters terrifying spirits.
+60,The Ancient Ruins,James Scott,Fantasy,2013,An archaeologist uncovers ancient ruins that hold dark secrets.
+61,The Alien Colony,Katherine Smith,Science Fiction,2016,Humans discover an alien colony on a distant planet.
+62,The Mystery of the Mirror,Linda Wilson,Mystery,2009,A detective solves a mystery involving a magical mirror.
+63,The Dragon's Nest,Margaret Johnson,Fantasy,2011,A dragon slayer seeks to destroy the nest of a powerful dragon.
+64,The Galactic Quest,Nathan Miller,Science Fiction,2019,A spaceship crew embarks on a quest across the galaxy.
+65,The Pharaoh's Tomb,Olivia Turner,Mystery,2007,An archaeologist uncovers a pharaoh's tomb filled with ancient treasures.
+66,The Enchanted Tower,Patricia Adams,Fantasy,2015,A princess is trapped in an enchanted tower and must escape.
+67,The Time Loop,Paul Young,Science Fiction,2018,A time traveler gets stuck in a time loop and must find a way out.
+68,The Ghostly Encounter,Rebecca Gray,Horror,2012,A woman encounters a ghostly figure in her new home.
+69,The Lost Island,Richard Scott,Fantasy,2014,An explorer discovers a lost island filled with strange creatures.
+70,The Alien Contact,Sarah Brown,Science Fiction,2017,A group of scientists make contact with an alien civilization.
+71,The Mystery of the Museum,Samuel Harris,Mystery,2010,A series of thefts at a museum leads to a complex mystery.
+72,The Dragon's Flight,Sophia Clark,Fantasy,2011,A young dragon rider embarks on a dangerous flight to save their kingdom.
+73,The Space Odyssey,Thomas Turner,Science Fiction,2019,A spaceship crew embarks on an odyssey through space.
+74,The Haunted Forest,Victoria Lee,Horror,2013,A family moves into a haunted forest and must confront the spirits within.
+75,The Forgotten Kingdom,William Scott,Fantasy,2015,A warrior must journey to a forgotten kingdom to save his people.
+76,The Alien Invasion,Yvonne Smith,Science Fiction,2018,Aliens invade Earth and a group of survivors must fight back.
+77,The Mystery of the Mansion,Zachary Wilson,Mystery,2011,A wealthy family gathers for a weekend in a mansion but one of them is murdered.
+78,The Enchanted Garden,Abigail Johnson,Fantasy,2016,A group of children enter a magical garden and encounter mythical creatures.
+79,The Time Traveler's Dilemma,Alexander Davis,Science Fiction,2019,A time traveler must decide whether to change the past or let history unfold.
+80,The Haunted House,Beatrice Lane,Horror,2012,A family moves into a haunted house and must confront the ghosts within.
+81,The Forgotten City,Carlos Lee,Fantasy,2014,A young adventurer discovers a forgotten city hidden beneath the earth.
+82,The Alien Invasion,Diana Smith,Science Fiction,2017,Aliens invade Earth and a group of survivors must fight back.
+83,The Mystery of the Lighthouse,Edward Wilson,Mystery,2010,A lighthouse keeper's mysterious death leads to a series of revelations.
+84,The Dragon's Lair,Emily Johnson,Fantasy,2011,A dragon slayer must confront the most powerful dragon in the realm.
+85,The Space Odyssey,Frank Miller,Science Fiction,2019,A crew embarks on a journey to explore the outer reaches of the galaxy.
+86,The Curse of the Pharaoh,Gina Scott,Mystery,2008,An archaeologist uncovers an ancient tomb and unleashes a deadly curse.
+87,The Enchanted Castle,Hannah Turner,Fantasy,2015,A princess must break a spell to save her kingdom from eternal darkness.
+88,The Time Paradox,Ian Adams,Science Fiction,2018,A time traveler creates a paradox that threatens the existence of the universe.
+89,The Ghostly Presence,Jane Young,Horror,2013,A woman moves into a new house and begins to experience strange occurrences.
+90,The Lost Civilization,John Gray,Fantasy,2016,An explorer discovers a lost civilization deep in the jungle.
+91,The Alien Encounter,Julia Brown,Science Fiction,2019,A group of scientists make first contact with an alien species.
+92,The Mystery of the Museum,Kevin Harris,Mystery,2011,A series of thefts at a museum leads to a complex mystery.
+93,The Dragon's Quest,Laura Clark,Fantasy,2012,A young dragon rider embarks on a quest to save their kingdom.
+94,The Space Exploration,Michael Turner,Science Fiction,2019,A spaceship crew explores a new galaxy and encounters strange phenomena.
+95,The Haunted House,Nancy Lee,Horror,2014,A family moves into a haunted house and must confront the spirits within.
+96,The Forgotten Realm,Oliver Scott,Fantasy,2016,A warrior must journey to a forgotten realm to save his people.
+97,The Alien Invasion,Patricia Smith,Science Fiction,2019,Aliens invade Earth and a group of survivors must fight back.
+98,The Mystery of the Manor,Robert Wilson,Mystery,2012,A wealthy family gathers for a weekend in a manor but one of them is murdered.
+99,The Enchanted Forest,Sandra Johnson,Fantasy,2017,A group of children enter a magical forest and encounter mythical creatures.
+100,The Time Traveler's Dilemma,Steven Davis,Science Fiction,2019,A time traveler must decide whether to change the past or let history unfold.
+101,The Haunted Mansion,Tina Lane,Horror,2013,A family moves into a haunted mansion and must confront the ghosts within.
+102,The Forgotten City,Ulysses Lee,Fantasy,2015,A young adventurer discovers a forgotten city hidden beneath the earth.
+103,The Alien Invasion,Vera Smith,Science Fiction,2018,Aliens invade Earth and a group of survivors must fight back.
+104,The Mystery of the Lighthouse,Walter Wilson,Mystery,2011,A lighthouse keeper's mysterious death leads to a series of revelations.
+105,The Dragon's Lair,Xena Johnson,Fantasy,2012,A dragon slayer must confront the most powerful dragon in the realm.
+106,The Space Odyssey,Yuri Miller,Science Fiction,2019,A crew embarks on a journey to explore the outer reaches of the galaxy.
+107,The Curse of the Pharaoh,Zara Scott,Mystery,2009,An archaeologist uncovers an ancient tomb and unleashes a deadly curse.
+108,The Enchanted Castle,Aaron Turner,Fantasy,2015,A princess must break a spell to save her kingdom from eternal darkness.
+109,The Time Paradox,Bella Adams,Science Fiction,2018,A time traveler creates a paradox that threatens the existence of the universe.
+110,The Ghostly Presence,Carl Young,Horror,2013,A woman moves into a new house and begins to experience strange occurrences.
+111,The Lost Civilization,Dana Gray,Fantasy,2016,An explorer discovers a lost civilization deep in the jungle.
+112,The Alien Encounter,Ella Brown,Science Fiction,2019,A group of scientists make first contact with an alien species.
+113,The Mystery of the Museum,Finn Harris,Mystery,2011,A series of thefts at a museum leads to a complex mystery.
+114,The Dragon's Quest,Gwen Clark,Fantasy,2012,A young dragon rider embarks on a quest to save their kingdom.
+115,The Space Exploration,Harry Turner,Science Fiction,2019,A spaceship crew explores a new galaxy and encounters strange phenomena.
+116,The Haunted House,Ivy Lee,Horror,2014,A family moves into a haunted house and must confront the spirits within.
+117,The Forgotten Realm,Jack Scott,Fantasy,2016,A warrior must journey to a forgotten realm to save his people.
+118,The Alien Invasion,Jill Smith,Science Fiction,2019,Aliens invade Earth and a group of survivors must fight back.
+119,The Mystery of the Manor,Kyle Wilson,Mystery,2012,A wealthy family gathers for a weekend in a manor but one of them is murdered.
+120,The Enchanted Forest,Lara Johnson,Fantasy,2017,A group of children enter a magical forest and encounter mythical creatures.
+121,The Time Traveler's Dilemma,Marcus Davis,Science Fiction,2019,A time traveler must decide whether to change the past or let history unfold.
+122,The Haunted Mansion,Nora Lane,Horror,2013,A family moves into a haunted mansion and must confront the ghosts within.
+123,The Forgotten City,Oscar Lee,Fantasy,2015,A young adventurer discovers a forgotten city hidden beneath the earth.
+124,The Alien Invasion,Pamela Smith,Science Fiction,2018,Aliens invade Earth and a group of survivors must fight back.
+125,The Mystery of the Lighthouse,Quentin Wilson,Mystery,2011,A lighthouse keeper's mysterious death leads to a series of revelations.
+126,The Dragon's Lair,Rachel Johnson,Fantasy,2012,A dragon slayer must confront the most powerful dragon in the realm.
+127,The Space Odyssey,Samuel Miller,Science Fiction,2019,A crew embarks on a journey to explore the outer reaches of the galaxy.
+128,The Curse of the Pharaoh,Sophie Scott,Mystery,2008,An archaeologist uncovers an ancient tomb and unleashes a deadly curse.
+129,The Enchanted Castle,Tara Turner,Fantasy,2015,A princess must break a spell to save her kingdom from eternal darkness.
+130,The Time Paradox,Uma Adams,Science Fiction,2018,A time traveler creates a paradox that threatens the existence of the universe.
+131,The Ghostly Presence,Vera Young,Horror,2013,A woman moves into a new house and begins to experience strange occurrences.
+132,The Lost Civilization,Walter Gray,Fantasy,2016,An explorer discovers a lost civilization deep in the jungle.
+133,The Alien Encounter,Xena Brown,Science Fiction,2019,A group of scientists make first contact with an alien species.
+134,The Mystery of the Museum,Yuri Harris,Mystery,2011,A series of thefts at a museum leads to a complex mystery.
+135,The Dragon's Quest,Zara Clark,Fantasy,2012,A young dragon rider embarks on a quest to save their kingdom.
+136,The Space Exploration,Aaron Turner,Science Fiction,2019,A spaceship crew explores a new galaxy and encounters strange phenomena.
+137,The Haunted House,Bella Lee,Horror,2014,A family moves into a haunted house and must confront the spirits within.
+138,The Forgotten Realm,Carlos Scott,Fantasy,2016,A warrior must journey to a forgotten realm to save his people.
+139,The Alien Invasion,Diana Smith,Science Fiction,2019,Aliens invade Earth and a group of survivors must fight back.
+140,The Mystery of the Manor,Edward Wilson,Mystery,2012,A wealthy family gathers for a weekend in a manor but one of them is murdered.
+141,The Enchanted Forest,Emily Johnson,Fantasy,2017,A group of children enter a magical forest and encounter mythical creatures.
+142,The Time Traveler's Dilemma,Frank Davis,Science Fiction,2019,A time traveler must decide whether to change the past or let history unfold.
+143,The Haunted Mansion,Gina Lane,Horror,2013,A family moves into a haunted mansion and must confront the ghosts within.
+144,The Forgotten City,Hannah Lee,Fantasy,2015,A young adventurer discovers a forgotten city hidden beneath the earth.
+145,The Alien Invasion,Ian Smith,Science Fiction,2018,Aliens invade Earth and a group of survivors must fight back.
+146,The Mystery of the Lighthouse,Jane Wilson,Mystery,2011,A lighthouse keeper's mysterious death leads to a series of revelations.
+147,The Dragon's Lair,John Johnson,Fantasy,2012,A dragon slayer must confront the most powerful dragon in the realm.
+148,The Space Odyssey,Kevin Miller,Science Fiction,2019,A crew embarks on a journey to explore the outer reaches of the galaxy.
+149,The Curse of the Pharaoh,Laura Scott,Mystery,2009,An archaeologist uncovers an ancient tomb and unleashes a deadly curse.
+150,The Enchanted Castle,Linda Turner,Fantasy,2015,A princess must break a spell to save her kingdom from eternal darkness.
+151,El Bosque Susurrante,Emilia Torres,Fantasy,2020,Una joven descubre un bosque mágico donde debe enfrentar sus miedos para salvar su aldea.
+152,Les Échos du Temps,Jean-Pierre Noir,Science Fiction,2019,Un scientifique invente une machine à voyager dans le temps et retourne en arrière pour empêcher une catastrophe mondiale.
+153,Die Schatten der Vergangenheit,Viktoria Straße,Mystery,2018,Ein Detektiv entwirrt eine Reihe von Morden die mit einem alten ungelösten Fall verbunden zu sein scheinen.
+154,Il Regno Perduto,Davide Re,Adventure,2017,Ein Gruppe von Forschern sucht nach einem legendären Königreich das tief im Amazonas-Regenwald verborgen ist.
+155,La Danza delle Stelle,Sara Bianca,Romance,2016,Eine Liebesgeschichte zwischen einem Astronauten und einer Wissenschaftlerin die sich während einer Weltraummission kennenlernen.
+156,La Maison Hantée,Michel Sombre,Horror,2015,Eine Familie zieht in ein altes Herrenhaus und beginnt übernatürliche Ereignisse zu erleben.
+157,A Cidade Esquecida,Lucia Verde,Historical Fiction,2014,Eine Geschichte über eine Stadt die in der Zeit verloren ging und den Archäologen der ihre Geheimnisse entdeckt.
+158,El Espejo Encantado,Olivia Azul,Fantasy,2013,Ein magischer Spiegel der Wünsche erfüllt führt einen jungen Jungen auf ein gefährliches Abenteuer.
+159,La Frontière Numérique,Thomas Gris,Science Fiction,2012,Ein Hacker entdeckt eine Verschwörung die die digitale Welt bedroht.
+160,L'Acte de Disparition,Emma Pierre,Mystery,2011,Ein Magierassistent verschwindet während einer Aufführung was zu einer komplexen Untersuchung führt.
+161,El Tesoro Oculto,Ricardo Marrón,Adventure,2010,Ein Schatzsucher sucht nach dem versteckten Vermögen eines legendären Piraten.
+162,El Sendero Estrellado,Amelia Rosa,Romance,2009,Ein Paar findet die Liebe während es den Appalachen-Trail wandert.
+163,La Mansión Maldita,Enrique Negro,Horror,2008,Eine Gruppe von Freunden verbringt die Nacht in einem verfluchten Schloss und stellt sich ihren dunkelsten Ängsten.
+164,La Profecía Antigua,Clara Blanca,Historical Fiction,2007,Eine alte Prophezeiung erfüllt sich und verändert den Lauf der Geschichte.
+165,El Bosque Místico,Eleonor Verde,Fantasy,2006,Ein junges Mädchen betritt einen mystischen Wald und begegnet magischen Kreaturen.
+166,El Dilema del Viajero del Tiempo,Benjamín Gris,Science Fiction,2005,Ein Zeitreisender muss entscheiden ob er die Vergangenheit ändern oder die Geschichte ihren Lauf nehmen lassen soll.
+167,El Testigo Silencioso,Sofía Piedra,Mystery,2004,Ein Detektiv löst einen Mordfall mit Hilfe eines stummen Zeugen.
+168,La Isla Perdida,Samuel Marrón,Adventure,2003,Eine Gruppe von Forschern entdeckt eine verlorene Insel die mit antiken Ruinen gefüllt ist.
+169,La Serenata Lunar,Isabella Rosa,Romance,2002,Ein Musiker und eine Tänzerin verlieben sich während einer mondbeschienenen Aufführung.
+170,La Casa Encantada,Alejandro Oscuro,Horror,2001,Eine Familie zieht in ein Spukhaus und erlebt beängstigende Ereignisse.
+171,El Legado Olvidado,Victoria Calle,Historical Fiction,2000,Ein Historiker entdeckt ein vergessenes Erbe das den Lauf der Geschichte verändert.
+172,El Jardín Encantado,Olivia Azul,Fantasy,1999,Ein magischer Garten erwacht zum Leben und führt ein junges Mädchen auf ein spannendes Abenteuer.
+173,La Revolución Digital,Thomas Gris,Science Fiction,1998,Ein Computerprogrammierer erstellt eine KI die die Welt übernimmt.
+174,El Punto de Desaparición,Emma Pierre,Mystery,1997,Ein Detektiv untersucht eine Reihe von Verschwinden die miteinander verbunden zu sein scheinen.
+175,La Cueva Oculta,Ricardo Marrón,Adventure,1996,Eine Gruppe von Forschern entdeckt eine verborgene Höhle die mit antiken Schätzen gefüllt ist.
+176,El Baile Estrellado,Amelia Rosa,Romance,1995,Ein Paar findet die Liebe während es unter den Sternen tanzt.
+177,La Mansión Maldita,Enrique Negro,Horror,1994,Eine Gruppe von Freunden verbringt die Nacht in einem verfluchten Herrenhaus und stellt sich ihren dunkelsten Ängsten.
+178,El Secreto Antiguo,Clara Blanca,Historical Fiction,1993,Ein altes Geheimnis wird enthüllt und verändert den Lauf der Geschichte.
+179,El Lago Místico,Eleonor Verde,Fantasy,1992,Ein junges Mädchen entdeckt einen mystischen See der Wünsche erfüllt.
+180,El Viaje del Viajero del Tiempo,Benjamín Gris,Science Fiction,1991,Ein Zeitreisender muss entscheiden ob er die Vergangenheit ändern oder die Geschichte ihren Lauf nehmen lassen soll.
+181,El Observador Silencioso,Sofía Piedra,Mystery,1990,Ein Detektiv löst einen Mordfall mit Hilfe eines stillen Zeugen.
+182,La Ciudad Perdida,Samuel Marrón,Adventure,1989,Eine Gruppe von Forschern entdeckt eine verlorene Stadt die tief im Dschungel verborgen ist.
+183,La Melodía Lunar,Isabella Rosa,Romance,1988,Ein Musiker und eine Tänzerin verlieben sich während einer mondbeschienenen Aufführung.
+184,La Villa Encantada,Alejandro Oscuro,Horror,1987,Eine Familie zieht in eine Spukvilla und erlebt beängstigende Ereignisse.
+185,El Legado Olvidado,Victoria Calle,Historical Fiction,1986,Ein Historiker entdeckt ein vergessenes Erbe das den Lauf der Geschichte verändert.
+186,El Prado Encantado,Olivia Azul,Fantasy,1985,Eine magische Wiese erwacht zum Leben und führt ein junges Mädchen auf ein spannendes Abenteuer.
+187,La Era Digital,Thomas Gris,Science Fiction,1984,Ein Computerprogrammierer erstellt eine KI die die Welt übernimmt.
+188,El Rastro de Desaparición,Emma Pierre,Mystery,1983,Ein Detektiv untersucht eine Reihe von Verschwinden die miteinander verbunden zu sein scheinen.
+189,El Templo Oculto,Ricardo Marrón,Adventure,1982,Eine Gruppe von Forschern entdeckt einen verborgenen Tempel der mit antiken Schätzen gefüllt ist.
+190,El Abrazo Estrellado,Amelia Rosa,Romance,1981,Ein Paar findet die Liebe während es unter den Sternen umarmt.
+191,La Residencia Maldita,Enrique Negro,Horror,1980,Eine Gruppe von Freunden verbringt die Nacht in einem verfluchten Anwesen und stellt sich ihren dunkelsten Ängsten.
+192,El Enigma Antiguo,Clara Blanca,Historical Fiction,1979,Ein altes Rätsel wird enthüllt und verändert den Lauf der Geschichte.
+193,El Río Místico,Eleonor Verde,Fantasy,1978,Ein junges Mädchen entdeckt einen mystischen Fluss der Wünsche erfüllt.
+194,La Odisea del Viajero del Tiempo,Benjamín Gris,Science Fiction,1977,Ein Zeitreisender begibt sich auf eine Odyssee durch die Zeit um die Vergangenheit zu ändern.
+195,El Guardián Silencioso,Sofía Piedra,Mystery,1976,Ein Detektiv löst einen Mordfall mit Hilfe eines stillen Wächters.
+196,La Fortaleza Perdida,Samuel Marrón,Adventure,1975,Eine Gruppe von Forschern entdeckt eine verlorene Festung die tief in den Bergen verborgen ist.
+197,La Armonía Lunar,Isabella Rosa,Romance,1974,Ein Musiker und eine Tänzerin verlieben sich während einer mondbeschienenen Aufführung.
+198,La Chateau Hanté,Alexandre Sombre,Horror,1973,Eine Familie zieht in ein Spukschloss und erlebt beängstigende Ereignisse.
+199,L'Héritage Oublié,Victoria Rue,Historical Fiction,1972,Ein Historiker entdeckt ein vergessenes Erbe das den Lauf der Geschichte verändert.
+200,La Clairière Enchantée,Olivia Bleu,Fantasy,1971,Eine magische Lichtung erwacht zum Leben und führt ein junges Mädchen auf ein spannendes Abenteuer.
+201,L'Ère Numérique,Thomas Gris,Science Fiction,1970,Ein Computerprogrammierer erstellt eine KI die die Welt übernimmt.
+202,La Piste de Disparition,Emma Pierre,Mystery,1969,Ein Detektiv untersucht eine Reihe von Verschwinden die miteinander verbunden zu sein scheinen.
+203,Le Sanctuaire Caché,Richard Brun,Adventure,1968,Eine Gruppe von Forschern entdeckt ein verborgenes Heiligtum das mit antiken Schätzen gefüllt ist.
+204,La Caresse Étoilée,Amelia Rose,Romance,1967,Ein Paar findet die Liebe während es unter den Sternen streichelt.
+205,La Demeure Maudite,Henri Noir,Horror,1966,Eine Gruppe von Freunden verbringt die Nacht in einem verfluchten Haus und stellt sich ihren dunkelsten Ängsten.
+206,L'Énigme Ancienne,Clara Blanche,Historical Fiction,1965,Ein altes Rätsel wird enthüllt und verändert den Lauf der Geschichte.
+207,Le Lac Mystique,Eleanor Verte,Fantasy,1964,Ein junges Mädchen entdeckt einen mystischen See der Wünsche erfüllt.
+208,L'Odyssée du Voyageur du Temps,Benjamin Gris,Science Fiction,1963,Ein Zeitreisender begibt sich auf eine Odyssee durch die Zeit um die Vergangenheit zu ändern.
+209,Le Sentinelle Silencieuse,Sophia Pierre,Mystery,1962,Ein Detektiv löst einen Mordfall mit Hilfe eines stillen Wächters.
+210,La Citadelle Perdue,Samuel Brun,Adventure,1961,Eine Gruppe von Forschern entdeckt eine verlorene Zitadelle die tief in der Wüste verborgen ist.
+211,La Symphonie Lunaire,Isabella Rose,Romance,1960,Ein Musiker und eine Tänzerin verlieben sich während einer mondbeschienenen Aufführung.
+212,Il Palazzo Infestato,Alessandro Oscuro,Horror,1959,Eine Familie zieht in einen Spukpalast und erlebt beängstigende Ereignisse.
+213,L'Eredità Dimenticata,Vittoria Via,Historical Fiction,1958,Ein Historiker entdeckt ein vergessenes Erbe das den Lauf der Geschichte verändert.
+214,Il Boschetto Incantato,Olivia Blu,Fantasy,1957,Ein magisches Wäldchen erwacht zum Leben und führt ein junges Mädchen auf ein spannendes Abenteuer.
+215,L'Era Digitale,Tommaso Grigio,Science Fiction,1956,Ein Computerprogrammierer erstellt eine KI die die Welt übernimmt.
+216,La Traccia di Scomparsa,Emma Pietra,Mystery,1955,Ein Detektiv untersucht eine Reihe von Verschwinden die miteinander verbunden zu sein scheinen.
+217,Il Santuario Nascosto,Riccardo Bruno,Adventure,1954,Eine Gruppe von Forschern entdeckt ein verborgenes Heiligtum das mit antiken Schätzen gefüllt ist.
+218,La Carezza Stellata,Amelia Rosa,Romance,1953,Ein Paar findet die Liebe während es unter den Sternen streichelt.
+219,La Dimora Maledetta,Enrico Nero,Horror,1952,Eine Gruppe von Freunden verbringt die Nacht in einem verfluchten Haus und stellt sich ihren dunkelsten Ängsten.
+220,L'Enigma Antico,Clara Bianca,Historical Fiction,1951,Ein altes Rätsel wird enthüllt und verändert den Lauf der Geschichte.
+221,Il Lago Mistico,Eleonora Verde,Fantasy,1950,Ein junges Mädchen entdeckt einen mystischen See der Wünsche erfüllt.
+222,L'Odissea del Viaggiatore del Tempo,Beniamino Grigio,Science Fiction,1949,Ein Zeitreisender begibt sich auf eine Odyssee durch die Zeit um die Vergangenheit zu ändern.
+223,La Sentinella Silenziosa,Sofia Pietra,Mystery,1948,Ein Detektiv löst einen Mordfall mit Hilfe eines stillen Wächters.
+224,La Cittadella Perduta,Samuele Bruno,Adventure,1947,Eine Gruppe von Forschern entdeckt eine verlorene Zitadelle die tief in der Wüste verborgen ist.
+225,La Sinfonia Lunare,Isabella Rosa,Romance,1946,Ein Musiker und eine Tänzerin verlieben sich während einer mondbeschienenen Aufführung.
+226,Das Verfluchte Schloss,Alexander Dunkel,Horror,1945,Eine Familie zieht in ein Spukschloss und erlebt beängstigende Ereignisse.
+227,Das Vergessene Erbe,Viktoria Straße,Historical Fiction,1944,Ein Historiker entdeckt ein vergessenes Erbe das den Lauf der Geschichte verändert.
+228,Der Verzauberte Hain,Olivia Blau,Fantasy,1943,Ein magischer Hain erwacht zum Leben und führt ein junges Mädchen auf ein spannendes Abenteuer.
+229,Das Digitale Zeitalter,Thomas Grau,Science Fiction,1942,Ein Computerprogrammierer erstellt eine KI die die Welt übernimmt.
+230,Die Spur des Verschwindens,Emma Stein,Mystery,1941,Ein Detektiv untersucht eine Reihe von Verschwinden die miteinander verbunden zu sein scheinen.
+231,Das Verborgene Heiligtum,Richard Braun,Adventure,1940,Eine Gruppe von Forschern entdeckt ein verborgenes Heiligtum das mit antiken Schätzen gefüllt ist.
+232,Die Sternenliebkosung,Amelia Rose,Romance,1939,Ein Paar findet die Liebe während es unter den Sternen streichelt.
+233,Das Verfluchte Haus,Heinrich Schwarz,Horror,1938,Eine Gruppe von Freunden verbringt die Nacht in einem verfluchten Haus und stellt sich ihren dunkelsten Ängsten.
+234,Das Alte Rätsel,Clara Weiß,Historical Fiction,1937,Ein altes Rätsel wird enthüllt und verändert den Lauf der Geschichte.
+235,Der Mystische Fluss,Eleonore Grün,Fantasy,1936,Ein junges Mädchen entdeckt einen mystischen Fluss der Wünsche erfüllt.
+236,Die Odyssee des Zeitreisenden,Benjamin Grau,Science Fiction,1935,Ein Zeitreisender begibt sich auf eine Odyssee durch die Zeit um die Vergangenheit zu ändern.
+237,Der Wächter der Stille,Sophia Stein,Mystery,1934,Ein Detektiv löst einen Mordfall mit Hilfe eines stillen Wächters.
+238,Die Verlorene Festung,Samuel Braun,Adventure,1933,Eine Gruppe von Forschern entdeckt eine verlorene Festung die tief in den Bergen verborgen ist.
+239,Die Mondsymphonie,Isabella Rose,Romance,1932,Ein Musiker und eine Tänzerin verlieben sich während einer mondbeschienenen Aufführung.
+240,Le Château Hanté,Alexandre Sombre,Horror,1931,Eine Familie zieht in ein Spukschloss und erlebt beängstigende Ereignisse.
+241,L'Héritage Oublié,Victoria Rue,Historical Fiction,1930,Ein Historiker entdeckt ein vergessenes Erbe das den Lauf der Geschichte verändert.
+242,La Clairière Enchantée,Olivia Bleu,Fantasy,1929,Eine magische Lichtung erwacht zum Leben und führt ein junges Mädchen auf ein spannendes Abenteuer.
+243,L'Ère Numérique,Thomas Gris,Science Fiction,1928,Ein Computerprogrammierer erstellt eine KI die die Welt übernimmt.
+244,La Piste de Disparition,Emma Pierre,Mystery,1927,Ein Detektiv untersucht eine Reihe von Verschwinden die miteinander verbunden zu sein scheinen.
+245,Le Sanctuaire Caché,Richard Brun,Adventure,1926,Eine Gruppe von Forschern entdeckt ein verborgenes Heiligtum das mit antiken Schätzen gefüllt ist.
+246,La Caresse Étoilée,Amelia Rose,Romance,1925,Ein Paar findet die Liebe während es unter den Sternen streichelt.
+247,La Demeure Maudite,Henri Noir,Horror,1924,Eine Gruppe von Freunden verbringt die Nacht in einem verfluchten Haus und stellt sich ihren dunkelsten Ängsten.
+248,L'Énigme Ancienne,Clara Blanche,Historical Fiction,1923,Ein altes Rätsel wird enthüllt und verändert den Lauf der Geschichte.
+249,Le Lac Mystique,Eleanor Verte,Fantasy,1922,Ein junges Mädchen entdeckt einen mystischen See der Wünsche erfüllt.
+250,L'Odyssée du Voyageur du Temps,Benjamin Gris,Science Fiction,1921,Ein Zeitreisender begibt sich auf eine Odyssee durch die Zeit um die Vergangenheit zu ändern.
+251,El Bosque Susurrante,Emilia Torres,Fantasy,2020,Una joven descubre un bosque mágico donde debe enfrentar sus miedos para salvar su aldea.
+252,Les Échos du Temps,Jean-Pierre Noir,Science Fiction,2019,Un scientifique invente une machine à voyager dans le temps et retourne en arrière pour empêcher une catastrophe mondiale.
+253,Die Schatten der Vergangenheit,Viktoria Straße,Mystery,2018,Ein Detektiv entwirrt eine Reihe von Morden die mit einem alten ungelösten Fall verbunden zu sein scheinen.
+254,Il Regno Perduto,Davide Re,Adventure,2017,Ein Gruppe von Forschern sucht nach einem legendären Königreich das tief im Amazonas-Regenwald verborgen ist.
+255,La Danza delle Stelle,Sara Bianca,Romance,2016,Eine Liebesgeschichte zwischen einem Astronauten und einer Wissenschaftlerin die sich während einer Weltraummission kennenlernen.
+256,La Maison Hantée,Michel Sombre,Horror,2015,Eine Familie zieht in ein altes Herrenhaus und beginnt übernatürliche Ereignisse zu erleben.
+257,A Cidade Esquecida,Lucia Verde,Historical Fiction,2014,Eine Geschichte über eine Stadt die in der Zeit verloren ging und den Archäologen der ihre Geheimnisse entdeckt.
+258,El Espejo Encantado,Olivia Azul,Fantasy,2013,Ein magischer Spiegel der Wünsche erfüllt führt einen jungen Jungen auf ein gefährliches Abenteuer.
+259,La Frontière Numérique,Thomas Gris,Science Fiction,2012,Ein Hacker entdeckt eine Verschwörung die die digitale Welt bedroht.
+260,L'Acte de Disparition,Emma Pierre,Mystery,2011,Ein Magierassistent verschwindet während einer Aufführung was zu einer komplexen Untersuchung führt.
+261,El Tesoro Oculto,Ricardo Marrón,Adventure,2010,Ein Schatzsucher sucht nach dem versteckten Vermögen eines legendären Piraten.
+262,El Sendero Estrellado,Amelia Rosa,Romance,2009,Ein Paar findet die Liebe während es den Appalachen-Trail wandert.
+263,La Mansión Maldita,Enrique Negro,Horror,2008,Eine Gruppe von Freunden verbringt die Nacht in einem verfluchten Schloss und stellt sich ihren dunkelsten Ängsten.
+264,La Profecía Antigua,Clara Blanca,Historical Fiction,2007,Eine alte Prophezeiung erfüllt sich und verändert den Lauf der Geschichte.
+265,El Bosque Místico,Eleonor Verde,Fantasy,2006,Ein junges Mädchen betritt einen mystischen Wald und begegnet magischen Kreaturen.
+266,El Dilema del Viajero del Tiempo,Benjamín Gris,Science Fiction,2005,Ein Zeitreisender muss entscheiden ob er die Vergangenheit ändern oder die Geschichte ihren Lauf nehmen lassen soll.
+267,El Testigo Silencioso,Sofía Piedra,Mystery,2004,Ein Detektiv löst einen Mordfall mit Hilfe eines stummen Zeugen.
+268,La Isla Perdida,Samuel Marrón,Adventure,2003,Eine Gruppe von Forschern entdeckt eine verlorene Insel die mit antiken Ruinen gefüllt ist.
+269,La Serenata Lunar,Isabella Rosa,Romance,2002,Ein Musiker und eine Tänzerin verlieben sich während einer mondbeschienenen Aufführung.
+270,La Casa Encantada,Alejandro Oscuro,Horror,2001,Eine Familie zieht in ein Spukhaus und erlebt beängstigende Ereignisse.
+271,El Legado Olvidado,Victoria Calle,Historical Fiction,2000,Ein Historiker entdeckt ein vergessenes Erbe das den Lauf der Geschichte verändert.
+272,El Jardín Encantado,Olivia Azul,Fantasy,1999,Ein magischer Garten erwacht zum Leben und führt ein junges Mädchen auf ein spannendes Abenteuer.
+273,La Revolución Digital,Thomas Gris,Science Fiction,1998,Ein Computerprogrammierer erstellt eine KI die die Welt übernimmt.
+274,El Punto de Desaparición,Emma Pierre,Mystery,1997,Ein Detektiv untersucht eine Reihe von Verschwinden die miteinander verbunden zu sein scheinen.
+275,La Cueva Oculta,Ricardo Marrón,Adventure,1996,Eine Gruppe von Forschern entdeckt eine verborgene Höhle die mit antiken Schätzen gefüllt ist.
+276,El Baile Estrellado,Amelia Rosa,Romance,1995,Ein Paar findet die Liebe während es unter den Sternen tanzt.
+277,La Mansión Maldita,Enrique Negro,Horror,1994,Eine Gruppe von Freunden verbringt die Nacht in einem verfluchten Herrenhaus und stellt sich ihren dunkelsten Ängsten.
+278,El Secreto Antiguo,Clara Blanca,Historical Fiction,1993,Ein altes Geheimnis wird enthüllt und verändert den Lauf der Geschichte.
+279,El Lago Místico,Eleonor Verde,Fantasy,1992,Ein junges Mädchen entdeckt einen mystischen See der Wünsche erfüllt.
+280,El Viaje del Viajero del Tiempo,Benjamín Gris,Science Fiction,1991,Ein Zeitreisender muss entscheiden ob er die Vergangenheit ändern oder die Geschichte ihren Lauf nehmen lassen soll.
+281,El Observador Silencioso,Sofía Piedra,Mystery,1990,Ein Detektiv löst einen Mordfall mit Hilfe eines stillen Zeugen.
+282,La Ciudad Perdida,Samuel Marrón,Adventure,1989,Eine Gruppe von Forschern entdeckt eine verlorene Stadt die tief im Dschungel verborgen ist.
+283,La Melodía Lunar,Isabella Rosa,Romance,1988,Ein Musiker und eine Tänzerin verlieben sich während einer mondbeschienenen Aufführung.
+284,La Villa Encantada,Alejandro Oscuro,Horror,1987,Eine Familie zieht in eine Spukvilla und erlebt beängstigende Ereignisse.
+285,El Legado Olvidado,Victoria Calle,Historical Fiction,1986,Ein Historiker entdeckt ein vergessenes Erbe das den Lauf der Geschichte verändert.
+286,El Prado Encantado,Olivia Azul,Fantasy,1985,Eine magische Wiese erwacht zum Leben und führt ein junges Mädchen auf ein spannendes Abenteuer.
+287,La Era Digital,Thomas Gris,Science Fiction,1984,Ein Computerprogrammierer erstellt eine KI die die Welt übernimmt.
+288,El Rastro de Desaparición,Emma Pierre,Mystery,1983,Ein Detektiv untersucht eine Reihe von Verschwinden die miteinander verbunden zu sein scheinen.
+289,El Templo Oculto,Ricardo Marrón,Adventure,1982,Eine Gruppe von Forschern entdeckt einen verborgenen Tempel der mit antiken Schätzen gefüllt ist.
+290,El Abrazo Estrellado,Amelia Rosa,Romance,1981,Ein Paar findet die Liebe während es unter den Sternen umarmt.
+291,La Residencia Maldita,Enrique Negro,Horror,1980,Eine Gruppe von Freunden verbringt die Nacht in einem verfluchten Anwesen und stellt sich ihren dunkelsten Ängsten.
+292,El Enigma Antiguo,Clara Blanca,Historical Fiction,1979,Ein altes Rätsel wird enthüllt und verändert den Lauf der Geschichte.
+293,El Río Místico,Eleonor Verde,Fantasy,1978,Ein junges Mädchen entdeckt einen mystischen Fluss der Wünsche erfüllt.
+294,La Odisea del Viajero del Tiempo,Benjamín Gris,Science Fiction,1977,Ein Zeitreisender begibt sich auf eine Odyssee durch die Zeit um die Vergangenheit zu ändern.
+295,El Guardián Silencioso,Sofía Piedra,Mystery,1976,Ein Detektiv löst einen Mordfall mit Hilfe eines stillen Wächters.
+296,La Fortaleza Perdida,Samuel Marrón,Adventure,1975,Eine Gruppe von Forschern entdeckt eine verlorene Festung die tief in den Bergen verborgen ist.
+297,La Armonía Lunar,Isabella Rosa,Romance,1974,Ein Musiker und eine Tänzerin verlieben sich während einer mondbeschienenen Aufführung.
+298,La Chateau Hanté,Alexandre Sombre,Horror,1973,Eine Familie zieht in ein Spukschloss und erlebt beängstigende Ereignisse.
+299,L'Héritage Oublié,Victoria Rue,Historical Fiction,1972,Ein Historiker entdeckt ein vergessenes Erbe das den Lauf der Geschichte verändert.
+300,La Clairière Enchantée,Olivia Bleu,Fantasy,1971,Eine magische Lichtung erwacht zum Leben und führt ein junges Mädchen auf ein spannendes Abenteuer.
+301,L'Ère Numérique,Thomas Gris,Science Fiction,1970,Ein Computerprogrammierer erstellt eine KI die die Welt übernimmt.
+302,La Piste de Disparition,Emma Pierre,Mystery,1969,Ein Detektiv untersucht eine Reihe von Verschwinden die miteinander verbunden zu sein scheinen.
+303,Le Sanctuaire Caché,Richard Brun,Adventure,1968,Eine Gruppe von Forschern entdeckt ein verborgenes Heiligtum das mit antiken Schätzen gefüllt ist.
+304,La Caresse Étoilée,Amelia Rose,Romance,1967,Ein Paar findet die Liebe während es unter den Sternen streichelt.
+305,La Demeure Maudite,Henri Noir,Horror,1966,Eine Gruppe von Freunden verbringt die Nacht in einem verfluchten Haus und stellt sich ihren dunkelsten Ängsten.
+306,L'Énigme Ancienne,Clara Blanche,Historical Fiction,1965,Ein altes Rätsel wird enthüllt und verändert den Lauf der Geschichte.
+307,Le Lac Mystique,Eleanor Verte,Fantasy,1964,Ein junges Mädchen entdeckt einen mystischen See der Wünsche erfüllt.
+308,L'Odyssée du Voyageur du Temps,Benjamin Gris,Science Fiction,1963,Ein Zeitreisender begibt sich auf eine Odyssee durch die Zeit um die Vergangenheit zu ändern.
+309,Le Sentinelle Silencieuse,Sophia Pierre,Mystery,1962,Ein Detektiv löst einen Mordfall mit Hilfe eines stillen Wächters.
+310,La Citadelle Perdue,Samuel Brun,Adventure,1961,Eine Gruppe von Forschern entdeckt eine verlorene Zitadelle die tief in der Wüste verborgen ist.
+311,La Symphonie Lunaire,Isabella Rose,Romance,1960,Ein Musiker und eine Tänzerin verlieben sich während einer mondbeschienenen Aufführung.
+312,Il Palazzo Infestato,Alessandro Oscuro,Horror,1959,Eine Familie zieht in einen Spukpalast und erlebt beängstigende Ereignisse.
+313,L'Eredità Dimenticata,Vittoria Via,Historical Fiction,1958,Ein Historiker entdeckt ein vergessenes Erbe das den Lauf der Geschichte verändert.
+314,Il Boschetto Incantato,Olivia Blu,Fantasy,1957,Ein magisches Wäldchen erwacht zum Leben und führt ein junges Mädchen auf ein spannendes Abenteuer.
+315,L'Era Digitale,Tommaso Grigio,Science Fiction,1956,Ein Computerprogrammierer erstellt eine KI die die Welt übernimmt.
+316,La Traccia di Scomparsa,Emma Pietra,Mystery,1955,Ein Detektiv untersucht eine Reihe von Verschwinden die miteinander verbunden zu sein scheinen.
+317,Il Santuario Nascosto,Riccardo Bruno,Adventure,1954,Eine Gruppe von Forschern entdeckt ein verborgenes Heiligtum das mit antiken Schätzen gefüllt ist.
+318,La Carezza Stellata,Amelia Rosa,Romance,1953,Ein Paar findet die Liebe während es unter den Sternen streichelt.
+319,La Dimora Maledetta,Enrico Nero,Horror,1952,Eine Gruppe von Freunden verbringt die Nacht in einem verfluchten Haus und stellt sich ihren dunkelsten Ängsten.
+320,L'Enigma Antico,Clara Bianca,Historical Fiction,1951,Ein altes Rätsel wird enthüllt und verändert den Lauf der Geschichte.
+321,Il Lago Mistico,Eleonora Verde,Fantasy,1950,Ein junges Mädchen entdeckt einen mystischen See der Wünsche erfüllt.
+322,L'Odissea del Viaggiatore del Tempo,Beniamino Grigio,Science Fiction,1949,Ein Zeitreisender begibt sich auf eine Odyssee durch die Zeit um die Vergangenheit zu ändern.
+323,La Sentinella Silenziosa,Sofia Pietra,Mystery,1948,Ein Detektiv löst einen Mordfall mit Hilfe eines stillen Wächters.
+324,La Cittadella Perduta,Samuele Bruno,Adventure,1947,Eine Gruppe von Forschern entdeckt eine verlorene Zitadelle die tief in der Wüste verborgen ist.
+325,La Sinfonia Lunare,Isabella Rosa,Romance,1946,Ein Musiker und eine Tänzerin verlieben sich während einer mondbeschienenen Aufführung.
+326,Das Verfluchte Schloss,Alexander Dunkel,Horror,1945,Eine Familie zieht in ein Spukschloss und erlebt beängstigende Ereignisse.
+327,Das Vergessene Erbe,Viktoria Straße,Historical Fiction,1944,Ein Historiker entdeckt ein vergessenes Erbe das den Lauf der Geschichte verändert.
+328,Der Verzauberte Hain,Olivia Blau,Fantasy,1943,Ein magischer Hain erwacht zum Leben und führt ein junges Mädchen auf ein spannendes Abenteuer.
+329,Das Digitale Zeitalter,Thomas Grau,Science Fiction,1942,Ein Computerprogrammierer erstellt eine KI die die Welt übernimmt.
+330,Die Spur des Verschwindens,Emma Stein,Mystery,1941,Ein Detektiv untersucht eine Reihe von Verschwinden die miteinander verbunden zu sein scheinen.
+331,Das Verborgene Heiligtum,Richard Braun,Adventure,1940,Eine Gruppe von Forschern entdeckt ein verborgenes Heiligtum das mit antiken Schätzen gefüllt ist.
+332,Die Sternenliebkosung,Amelia Rose,Romance,1939,Ein Paar findet die Liebe während es unter den Sternen streichelt.
+333,Das Verfluchte Haus,Heinrich Schwarz,Horror,1938,Eine Gruppe von Freunden verbringt die Nacht in einem verfluchten Haus und stellt sich ihren dunkelsten Ängsten.
+334,Das Alte Rätsel,Clara Weiß,Historical Fiction,1937,Ein altes Rätsel wird enthüllt und verändert den Lauf der Geschichte.
+335,Der Mystische Fluss,Eleonore Grün,Fantasy,1936,Ein junges Mädchen entdeckt einen mystischen Fluss der Wünsche erfüllt.
+336,Die Odyssee des Zeitreisenden,Benjamin Grau,Science Fiction,1935,Ein Zeitreisender begibt sich auf eine Odyssee durch die Zeit um die Vergangenheit zu ändern.
+337,Der Wächter der Stille,Sophia Stein,Mystery,1934,Ein Detektiv löst einen Mordfall mit Hilfe eines stillen Wächters.
+338,Die Verlorene Festung,Samuel Braun,Adventure,1933,Eine Gruppe von Forschern entdeckt eine verlorene Festung die tief in den Bergen verborgen ist.
+339,Die Mondsymphonie,Isabella Rose,Romance,1932,Ein Musiker und eine Tänzerin verlieben sich während einer mondbeschienenen Aufführung.
+340,Le Château Hanté,Alexandre Sombre,Horror,1931,Eine Familie zieht in ein Spukschloss und erlebt beängstigende Ereignisse.
+341,L'Héritage Oublié,Victoria Rue,Historical Fiction,1930,Ein Historiker entdeckt ein vergessenes Erbe das den Lauf der Geschichte verändert.
+342,La Clairière Enchantée,Olivia Bleu,Fantasy,1929,Eine magische Lichtung erwacht zum Leben und führt ein junges Mädchen auf ein spannendes Abenteuer.
+343,L'Ère Numérique,Thomas Gris,Science Fiction,1928,Ein Computerprogrammierer erstellt eine KI die die Welt übernimmt.
+344,La Piste de Disparition,Emma Pierre,Mystery,1927,Ein Detektiv untersucht eine Reihe von Verschwinden die miteinander verbunden zu sein scheinen.
+345,Le Sanctuaire Caché,Richard Brun,Adventure,1926,Eine Gruppe von Forschern entdeckt ein verborgenes Heiligtum das mit antiken Schätzen gefüllt ist.
+346,La Caresse Étoilée,Amelia Rose,Romance,1925,Ein Paar findet die Liebe während es unter den Sternen streichelt.
+347,La Demeure Maudite,Henri Noir,Horror,1924,Eine Gruppe von Freunden verbringt die Nacht in einem verfluchten Haus und stellt sich ihren dunkelsten Ängsten.
+348,L'Énigme Ancienne,Clara Blanche,Historical Fiction,1923,Ein altes Rätsel wird enthüllt und verändert den Lauf der Geschichte.
+349,Le Lac Mystique,Eleanor Verte,Fantasy,1922,Ein junges Mädchen entdeckt einen mystischen See der Wünsche erfüllt.
+350,L'Odyssée du Voyageur du Temps,Benjamin Gris,Science Fiction,1921,Ein Zeitreisender begibt sich auf eine Odyssee durch die Zeit um die Vergangenheit zu ändern.
+351,The Whispering Woods,Emily Thorne,Fantasy,2020,A young girl discovers a hidden magical forest where she must confront her fears to save her village.
+352,Les Échos du Temps,Jean-Pierre Noir,Science Fiction,2019,A scientist invents a time machine and travels back to prevent a global catastrophe.
+353,Die Schatten der Vergangenheit,Viktoria Straße,Mystery,2018,A detective unravels a series of murders that seem to be connected to an old unsolved case.
+354,Il Regno Perduto,Davide Re,Adventure,2017,A group of explorers search for a legendary kingdom hidden deep within the Amazon rainforest.
+355,La Danza delle Stelle,Sara Bianca,Romance,2016,A love story between an astronaut and a scientist who meet during a space mission.
+356,La Maison Hantée,Michel Sombre,Horror,2015,A family moves into an old mansion and begins to experience supernatural events.
+357,A Cidade Esquecida,Lucia Verde,Historical Fiction,2014,A tale of a city lost to time and the archaeologist who discovers its secrets.
+358,El Espejo Encantado,Olivia Azul,Fantasy,2013,A magical mirror that grants wishes leads a young boy on a dangerous adventure.
+359,La Frontière Numérique,Thomas Gris,Science Fiction,2012,A hacker uncovers a conspiracy that threatens the digital world.
+360,L'Acte de Disparition,Emma Pierre,Mystery,2011,A magician's assistant disappears during a performance leading to a complex investigation.
+361,El Tesoro Oculto,Ricardo Marrón,Adventure,2010,A treasure hunter searches for a legendary pirate's hidden fortune.
+362,El Sendero Estrellado,Amelia Rosa,Romance,2009,A couple finds love while hiking the Appalachian Trail.
+363,La Mansión Maldita,Enrique Negro,Horror,2008,A group of friends spends the night in a haunted mansion and faces their darkest fears.
+364,La Profecía Antigua,Clara Blanca,Historical Fiction,2007,An ancient prophecy comes true changing the course of history.
+365,El Bosque Místico,Eleonor Verde,Fantasy,2006,A young girl enters a mystical forest and encounters magical creatures.
+366,El Dilema del Viajero del Tiempo,Benjamín Gris,Science Fiction,2005,A time traveler must decide whether to change the past or let history unfold.
+367,El Testigo Silencioso,Sofía Piedra,Mystery,2004,A detective solves a murder case with the help of a mute witness.
+368,La Isla Perdida,Samuel Marrón,Adventure,2003,A group of explorers discovers a lost island filled with ancient ruins.
+369,La Serenata Lunar,Isabella Rosa,Romance,2002,A musician and a dancer fall in love during a moonlit performance.
+370,La Casa Encantada,Alejandro Oscuro,Horror,2001,A family moves into a haunted house and experiences terrifying events.
+371,El Legado Olvidado,Victoria Calle,Historical Fiction,2000,A historian uncovers a forgotten legacy that changes the course of history.
+372,El Jardín Encantado,Olivia Azul,Fantasy,1999,A magical garden comes to life leading a young girl on a thrilling adventure.
+373,La Revolución Digital,Thomas Gris,Science Fiction,1998,A computer programmer creates an AI that takes over the world.
+374,El Punto de Desaparición,Emma Pierre,Mystery,1997,A detective investigates a series of disappearances that seem to be connected.
+375,La Cueva Oculta,Ricardo Marrón,Adventure,1996,A group of explorers discovers a hidden cave filled with ancient treasures.
+376,El Baile Estrellado,Amelia Rosa,Romance,1995,A couple finds love while dancing under the stars.
+377,La Mansión Maldita,Enrique Negro,Horror,1994,A group of friends spends the night in a haunted mansion and faces their darkest fears.
+378,El Secreto Antiguo,Clara Blanca,Historical Fiction,1993,An ancient secret is revealed changing the course of history.
+379,El Lago Místico,Eleonor Verde,Fantasy,1992,A young girl discovers a mystical lake that grants wishes.
+380,El Viaje del Viajero del Tiempo,Benjamín Gris,Science Fiction,1991,A time traveler embarks on a journey through time to change the past.
+381,El Observador Silencioso,Sofía Piedra,Mystery,1990,A detective solves a murder case with the help of a silent observer.
+382,La Ciudad Perdida,Samuel Marrón,Adventure,1989,A group of explorers discovers a lost city hidden deep within the jungle.
+383,La Melodía Lunar,Isabella Rosa,Romance,1988,A musician and a dancer fall in love during a moonlit performance.
+384,La Villa Encantada,Alejandro Oscuro,Horror,1987,A family moves into a haunted villa and experiences terrifying events.
+385,El Legado Olvidado,Victoria Calle,Historical Fiction,1986,A historian uncovers a forgotten legacy that changes the course of history.
+386,El Prado Encantado,Olivia Azul,Fantasy,1985,A magical meadow comes to life leading a young girl on a thrilling adventure.
+387,La Era Digital,Thomas Gris,Science Fiction,1984,A computer programmer creates an AI that takes over the world.
+388,El Rastro de Desaparición,Emma Pierre,Mystery,1983,A detective investigates a series of disappearances that seem to be connected.
+389,El Templo Oculto,Ricardo Marrón,Adventure,1982,A group of explorers discovers a hidden temple filled with ancient treasures.
+390,El Abrazo Estrellado,Amelia Rosa,Romance,1981,A couple finds love while embracing under the stars.
+391,La Residencia Maldita,Enrique Negro,Horror,1980,A group of friends spends the night in a haunted residence and faces their darkest fears.
+392,El Enigma Antiguo,Clara Blanca,Historical Fiction,1979,An ancient enigma is revealed changing the course of history.
+393,El Río Místico,Eleonor Verde,Fantasy,1978,A young girl discovers a mystical river that grants wishes.
+394,La Odisea del Viajero del Tiempo,Benjamín Gris,Science Fiction,1977,A time traveler embarks on an odyssey through time to change the past.
+395,El Guardián Silencioso,Sofía Piedra,Mystery,1976,A detective solves a murder case with the help of a silent guardian.
+396,La Fortaleza Perdida,Samuel Marrón,Adventure,1975,A group of explorers discovers a lost fortress hidden deep within the mountains.
+397,La Armonía Lunar,Isabella Rosa,Romance,1974,A musician and a dancer fall in love during a moonlit performance.
+398,Il Palazzo Infestato,Alessandro Oscuro,Horror,1973,A family moves into a haunted palace and experiences terrifying events.
+399,L'Eredità Dimenticata,Vittoria Via,Historical Fiction,1972,A historian uncovers a forgotten inheritance that changes the course of history.
+400,Il Boschetto Incantato,Olivia Blu,Fantasy,1971,A magical grove comes to life leading a young girl on a thrilling adventure.
+401,L'Era Digitale,Tommaso Grigio,Science Fiction,1970,A computer programmer creates an AI that takes over the world.
+402,La Traccia di Scomparsa,Emma Pietra,Mystery,1969,A detective investigates a series of disappearances that seem to be connected.
+403,Il Santuario Nascosto,Riccardo Bruno,Adventure,1968,A group of explorers discovers a hidden sanctuary filled with ancient treasures.
+404,La Carezza Stellata,Amelia Rosa,Romance,1967,A couple finds love while caressing under the stars.
+405,La Dimora Maledetta,Enrico Nero,Horror,1966,A group of friends spends the night in a haunted abode and faces their darkest fears.
+406,L'Enigma Antico,Clara Bianca,Historical Fiction,1965,An ancient enigma is revealed changing the course of history.
+407,Il Lago Mistico,Eleonora Verde,Fantasy,1964,A young girl discovers a mystical lake that grants wishes.
+408,L'Odissea del Viaggiatore del Tempo,Beniamino Grigio,Science Fiction,1963,A time traveler embarks on an odyssey through time to change the past.
+409,La Sentinella Silenziosa,Sofia Pietra,Mystery,1962,A detective solves a murder case with the help of a silent sentinel.
+410,La Cittadella Perduta,Samuele Bruno,Adventure,1961,A group of explorers discovers a lost citadel hidden deep within the desert.
+411,La Sinfonia Lunare,Isabella Rosa,Romance,1960,A musician and a dancer fall in love during a moonlit performance.
+412,Das Verfluchte Schloss,Alexander Dunkel,Horror,1959,A family moves into a haunted castle and experiences terrifying events.
+413,Das Vergessene Erbe,Viktoria Straße,Historical Fiction,1958,A historian uncovers a forgotten heritage that changes the course of history.
+414,Der Verzauberte Hain,Olivia Blau,Fantasy,1957,A magical grove comes to life leading a young girl on a thrilling adventure.
+415,Das Digitale Zeitalter,Thomas Grau,Science Fiction,1956,A computer programmer creates an AI that takes over the world.
+416,Die Spur des Verschwindens,Emma Stein,Mystery,1955,A detective investigates a series of disappearances that seem to be connected.
+417,Das Verborgene Heiligtum,Richard Braun,Adventure,1954,A group of explorers discovers a hidden sanctuary filled with ancient treasures.
+418,Die Sternenliebkosung,Amelia Rose,Romance,1953,A couple finds love while caressing under the stars.
+419,Das Verfluchte Haus,Heinrich Schwarz,Horror,1952,A group of friends spends the night in a haunted house and faces their darkest fears.
+420,Das Alte Rätsel,Clara Weiß,Historical Fiction,1951,An ancient riddle is revealed changing the course of history.
+421,Der Mystische Fluss,Eleonore Grün,Fantasy,1950,A young girl discovers a mystical river that grants wishes.
+422,Die Odyssee des Zeitreisenden,Benjamin Grau,Science Fiction,1949,A time traveler embarks on an odyssey through time to change the past.
+423,Der Wächter der Stille,Sophia Stein,Mystery,1948,A detective solves a murder case with the help of a silent guardian.
+424,Die Verlorene Festung,Samuel Braun,Adventure,1947,A group of explorers discovers a lost fortress hidden deep within the mountains.
+425,Die Mondsymphonie,Isabella Rose,Romance,1946,A musician and a dancer fall in love during a moonlit performance.
+426,Le Château Hanté,Alexandre Sombre,Horror,1945,A family moves into a haunted castle and experiences terrifying events.
+427,L'Héritage Oublié,Victoria Rue,Historical Fiction,1944,A historian uncovers a forgotten heritage that changes the course of history.
+428,La Clairière Enchantée,Olivia Bleu,Fantasy,1943,A magical clearing comes to life leading a young girl on a thrilling adventure.
+429,L'Ère Numérique,Thomas Gris,Science Fiction,1942,A computer programmer creates an AI that takes over the world.
+430,La Piste de Disparition,Emma Pierre,Mystery,1941,A detective investigates a series of disappearances that seem to be connected.
+431,Le Sanctuaire Caché,Richard Brun,Adventure,1940,A group of explorers discovers a hidden sanctuary filled with ancient treasures.
+432,La Caresse Étoilée,Amelia Rose,Romance,1939,A couple finds love while caressing under the stars.
+433,La Demeure Maudite,Henri Noir,Horror,1938,A group of friends spends the night in a haunted house and faces their darkest fears.
+434,L'Énigme Ancienne,Clara Blanche,Historical Fiction,1937,An ancient enigma is revealed changing the course of history.
+435,Le Lac Mystique,Eleanor Verte,Fantasy,1936,A young girl discovers a mystical lake that grants wishes.
+436,L'Odyssée du Voyageur du Temps,Benjamin Gris,Science Fiction,1935,A time traveler embarks on an odyssey through time to change the past.
+437,Le Sentinelle Silencieuse,Sophia Pierre,Mystery,1934,A detective solves a murder case with the help of a silent sentinel.
+438,La Citadelle Perdue,Samuel Brun,Adventure,1933,A group of explorers discovers a lost citadel hidden deep within the desert.
+439,La Symphonie Lunaire,Isabella Rose,Romance,1932,A musician and a dancer fall in love during a moonlit performance.
+440,Il Palazzo Infestato,Alessandro Oscuro,Horror,1931,A family moves into a haunted palace and experiences terrifying events.
+441,L'Eredità Dimenticata,Vittoria Via,Historical Fiction,1930,A historian uncovers a forgotten inheritance that changes the course of history.
+442,Il Boschetto Incantato,Olivia Blu,Fantasy,1929,A magical grove comes to life leading a young girl on a thrilling adventure.
+443,L'Era Digitale,Tommaso Grigio,Science Fiction,1928,A computer programmer creates an AI that takes over the world.
+444,La Traccia di Scomparsa,Emma Pietra,Mystery,1927,A detective investigates a series of disappearances that seem to be connected.
+445,Il Santuario Nascosto,Riccardo Bruno,Adventure,1926,A group of explorers discovers a hidden sanctuary filled with ancient treasures.
+446,La Carezza Stellata,Amelia Rosa,Romance,1925,A couple finds love while caressing under the stars.
+447,La Dimora Maledetta,Enrico Nero,Horror,1924,A group of friends spends the night in a haunted house and faces their darkest fears.
+448,L'Enigma Antico,Clara Bianca,Historical Fiction,1923,An ancient enigma is revealed changing the course of history.
+449,Il Lago Mistico,Eleonora Verde,Fantasy,1922,A young girl discovers a mystical lake that grants wishes.
+450,L'Odissea del Viaggiatore del Tempo,Beniamino Grigio,Science Fiction,1921,A time traveler embarks on an odyssey through time to change the past.
+451,The Whispering Woods,Emily Thorne,Fantasy,2020,A young girl discovers a hidden magical forest where she must confront her fears to save her village.
+452,Les Échos du Temps,Jean-Pierre Noir,Science Fiction,2019,A scientist invents a time machine and travels back to prevent a global catastrophe.
+453,Die Schatten der Vergangenheit,Viktoria Straße,Mystery,2018,A detective unravels a series of murders that seem to be connected to an old unsolved case.
+454,Il Regno Perduto,Davide Re,Adventure,2017,A group of explorers search for a legendary kingdom hidden deep within the Amazon rainforest.
+455,La Danza delle Stelle,Sara Bianca,Romance,2016,A love story between an astronaut and a scientist who meet during a space mission.
+456,La Maison Hantée,Michel Sombre,Horror,2015,A family moves into an old mansion and begins to experience supernatural events.
+457,A Cidade Esquecida,Lucia Verde,Historical Fiction,2014,A tale of a city lost to time and the archaeologist who discovers its secrets.
+458,El Espejo Encantado,Olivia Azul,Fantasy,2013,A magical mirror that grants wishes leads a young boy on a dangerous adventure.
+459,La Frontière Numérique,Thomas Gris,Science Fiction,2012,A hacker uncovers a conspiracy that threatens the digital world.
+460,L'Acte de Disparition,Emma Pierre,Mystery,2011,A magician's assistant disappears during a performance leading to a complex investigation.
+461,El Tesoro Oculto,Ricardo Marrón,Adventure,2010,A treasure hunter searches for a legendary pirate's hidden fortune.
+462,El Sendero Estrellado,Amelia Rosa,Romance,2009,A couple finds love while hiking the Appalachian Trail.
+463,La Mansión Maldita,Enrique Negro,Horror,2008,A group of friends spends the night in a haunted mansion and faces their darkest fears.
+464,La Profecía Antigua,Clara Blanca,Historical Fiction,2007,An ancient prophecy comes true changing the course of history.
+465,El Bosque Místico,Eleonor Verde,Fantasy,2006,A young girl enters a mystical forest and encounters magical creatures.
+466,El Dilema del Viajero del Tiempo,Benjamín Gris,Science Fiction,2005,A time traveler must decide whether to change the past or let history unfold.
+467,El Testigo Silencioso,Sofía Piedra,Mystery,2004,A detective solves a murder case with the help of a mute witness.
+468,La Isla Perdida,Samuel Marrón,Adventure,2003,A group of explorers discovers a lost island filled with ancient ruins.
+469,La Serenata Lunar,Isabella Rosa,Romance,2002,A musician and a dancer fall in love during a moonlit performance.
+470,La Casa Encantada,Alejandro Oscuro,Horror,2001,A family moves into a haunted house and experiences terrifying events.
+471,El Legado Olvidado,Victoria Calle,Historical Fiction,2000,A historian uncovers a forgotten legacy that changes the course of history.
+472,El Jardín Encantado,Olivia Azul,Fantasy,1999,A magical garden comes to life leading a young girl on a thrilling adventure.
+473,La Revolución Digital,Thomas Gris,Science Fiction,1998,A computer programmer creates an AI that takes over the world.
+474,El Punto de Desaparición,Emma Pierre,Mystery,1997,A detective investigates a series of disappearances that seem to be connected.
+475,La Cueva Oculta,Ricardo Marrón,Adventure,1996,A group of explorers discovers a hidden cave filled with ancient treasures.
+476,El Baile Estrellado,Amelia Rosa,Romance,1995,A couple finds love while dancing under the stars.
+477,La Mansión Maldita,Enrique Negro,Horror,1994,A group of friends spends the night in a haunted mansion and faces their darkest fears.
+478,El Secreto Antiguo,Clara Blanca,Historical Fiction,1993,An ancient secret is revealed changing the course of history.
+479,El Lago Místico,Eleonor Verde,Fantasy,1992,A young girl discovers a mystical lake that grants wishes.
+480,El Viaje del Viajero del Tiempo,Benjamín Gris,Science Fiction,1991,A time traveler embarks on a journey through time to change the past.
+481,El Observador Silencioso,Sofía Piedra,Mystery,1990,A detective solves a murder case with the help of a silent observer.
+482,La Ciudad Perdida,Samuel Marrón,Adventure,1989,A group of explorers discovers a lost city hidden deep within the jungle.
+483,La Melodía Lunar,Isabella Rosa,Romance,1988,A musician and a dancer fall in love during a moonlit performance.
+484,La Villa Encantada,Alejandro Oscuro,Horror,1987,A family moves into a haunted villa and experiences terrifying events.
+485,El Legado Olvidado,Victoria Calle,Historical Fiction,1986,A historian uncovers a forgotten legacy that changes the course of history.
+486,El Prado Encantado,Olivia Azul,Fantasy,1985,A magical meadow comes to life leading a young girl on a thrilling adventure.
+487,La Era Digital,Thomas Gris,Science Fiction,1984,A computer programmer creates an AI that takes over the world.
+488,El Rastro de Desaparición,Emma Pierre,Mystery,1983,A detective investigates a series of disappearances that seem to be connected.
+489,El Templo Oculto,Ricardo Marrón,Adventure,1982,A group of explorers discovers a hidden temple filled with ancient treasures.
+490,El Abrazo Estrellado,Amelia Rosa,Romance,1981,A couple finds love while embracing under the stars.
+491,La Residencia Maldita,Enrique Negro,Horror,1980,A group of friends spends the night in a haunted residence and faces their darkest fears.
+492,El Enigma Antiguo,Clara Blanca,Historical Fiction,1979,An ancient enigma is revealed changing the course of history.
+493,El Río Místico,Eleonor Verde,Fantasy,1978,A young girl discovers a mystical river that grants wishes.
+494,La Odisea del Viajero del Tiempo,Benjamín Gris,Science Fiction,1977,A time traveler embarks on an odyssey through time to change the past.
+495,El Guardián Silencioso,Sofía Piedra,Mystery,1976,A detective solves a murder case with the help of a silent guardian.
