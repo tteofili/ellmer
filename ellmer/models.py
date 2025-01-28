@@ -246,6 +246,12 @@ class HybridCerta(FullCerta):
                         filter_features = top_features
                     filter_features = filter_features.intersection(top_features)
                 filter_features = list(filter_features)
+            elif self.combine == 'random':
+                filter_features = set()
+                for se in pae_dicts:
+                    for _ in range(top_k):
+                        filter_features.add(random.choice(se)[0])
+                filter_features = list(filter_features)
             else:
                 raise ValueError("Unknown combination method")
             if len(filter_features) > 0:
