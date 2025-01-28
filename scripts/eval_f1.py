@@ -39,9 +39,10 @@ def eval(cache, samples, base_dir, dataset_names, model_type,
 
         labels = []
         predictions = []
-        # generate predictions and explanations
+        # generate predictions
         test_data_df = test_df[:samples]
         ranged = range(len(test_data_df))
+        predictions_df = pd.DataFrame()
         for idx in tqdm(ranged, disable=False):
             try:
                 rand_row = test_df.iloc[[idx]]
@@ -52,9 +53,11 @@ def eval(cache, samples, base_dir, dataset_names, model_type,
                 prediction = answer_dictionary['match_score'].values[0]
                 if math.isnan(prediction):
                     continue
+                rand_row['prediction'] = prediction
                 print(f'{prediction}-{label}')
                 predictions.append(prediction)
                 labels.append(label)
+                predictions_df = pd.concat([predictions_df, pd.DataFrame(rand_row[['prediction', 'label', 'ltable_id', 'rtable_id']])], axis=0)
             except Exception:
                 traceback.print_exc()
                 print(f'error, waiting...')
@@ -62,6 +65,7 @@ def eval(cache, samples, base_dir, dataset_names, model_type,
 
         f1 = f1_score(y_true=labels, y_pred=predictions)
         print(f'f1 for {d}: {f1}')
+        predictions_df.to_csv(f'predictions_{d}.csv', index=False)
 
         evals.append(f'{d}:{f1}')
 
@@ -73,7 +77,7 @@ def eval(cache, samples, base_dir, dataset_names, model_type,
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Run saliency experiments.')
+    parser = argparse.ArgumentParser(description='Run predictions.')
     parser.add_argument('--base_dir', metavar='b', type=str, help='the datasets base directory',
                         required=True)
     parser.add_argument('--model_type', metavar='m', type=str, help='the LLM type to evaluate',
