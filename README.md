@@ -3,7 +3,7 @@
 ELLMER
 =======
 
-Code for the paper "_Can we trust LLM Self-Explanations for Entity Resolution?_".
+Code for the paper "_Can we trust LLM Self-Explanations for Entity Resolution? Exploring a Hybrid Approach with Ellm_".
 
 # Installation
 
