@@ -24,7 +24,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
 
     llm_config = {"model_type": model_type, "model_name": model_name, "deployment_name": deployment_name, "tag": tag}
 
-    zershot = ellmer.models.SelfExplainer(explanation_granularity=explanation_granularity,
+    zeroshot = ellmer.models.SelfExplainer(explanation_granularity=explanation_granularity,
                                        deployment_name=llm_config['deployment_name'], temperature=temperature,
                                        model_name=llm_config['model_name'], model_type=llm_config['model_type'],
                                        prompts={"pase": "ellmer/prompts/constrained7.txt"})
@@ -67,13 +67,13 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
         certa = LLMCertaExplainer(lsource, rsource)
 
         ellmers = {
-            "zs_" + llm_config['tag']: zershot,
-            "cot_" + llm_config['tag']: cot2,
-            "certa(cot)_" + llm_config['tag']: ellmer.models.FullCerta(explanation_granularity, predict_only, certa,
-                                                                        num_triangles),
+            #"zs_" + llm_config['tag']: zeroshot,
+            #"cot_" + llm_config['tag']: cot2,
+            #"certa(cot)_" + llm_config['tag']: ellmer.models.FullCerta(explanation_granularity, predict_only, certa,
+            #                                                            num_triangles),
             "hybrid_" + llm_config['tag']: ellmer.models.HybridCerta(explanation_granularity, cot, certa,
-                                                                            [zershot, cot, cot2],
-                                                                            num_triangles=num_triangles),
+                                                                            [zeroshot, cot, cot2],
+                                                                            num_triangles=num_triangles, combine='random'),
         }
 
         result_files = []
