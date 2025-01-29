@@ -73,7 +73,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
                                                                         num_triangles),
             "hybrid_" + llm_config['tag']: ellmer.models.HybridCerta(explanation_granularity, cot, certa,
                                                                             [zeroshot, cot, cot2],
-                                                                            num_triangles=num_triangles, combine='random'),
+                                                                            num_triangles=num_triangles),
         }
 
         result_files = []
