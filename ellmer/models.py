@@ -486,10 +486,16 @@ class SelfExplainer(BaseLLMExplainer):
             elif self.model_type in ['hf']:
                 messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple, rtuple=rtuple)
                 er_answer = self.llm.invoke(messages).content
-                try:
-                    er_answer = er_answer.split('[/INST]')[2]
-                except:
-                    pass
+                if '[/INST]' in er_answer:
+                    try:
+                        er_answer = er_answer.split('[/INST]')[-1]
+                    except:
+                        pass
+                elif "<|end_header_id|>" in er_answer:
+                    try:
+                        er_answer = er_answer.split("<|end_header_id|>")[-1]
+                    except:
+                        pass
             else:
                 if self.verbose:
                     pre_pred_t = time()
@@ -515,7 +521,10 @@ class SelfExplainer(BaseLLMExplainer):
 
             self.pred_count += 1
 
-            conversation.append(("assistant", er_answer))
+            if len(er_answer) > 5:
+                conversation.append(("assistant", prediction))
+            else:
+                conversation.append(("assistant", er_answer))
 
             why = None
             saliency_explanation = None
@@ -548,10 +557,16 @@ class SelfExplainer(BaseLLMExplainer):
                     messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple,
                                                         rtuple=rtuple)
                     why_answer = self.llm.invoke(messages).content
-                    try:
-                        why_answer = why_answer.split('[/INST]')[-1]
-                    except:
-                        pass
+                    if '[/INST]' in why_answer:
+                        try:
+                            why_answer = why_answer.split('[/INST]')[-1]
+                        except:
+                            pass
+                    elif "<|end_header_id|>" in why_answer:
+                        try:
+                            why_answer = why_answer.split("<|end_header_id|>")[-1]
+                        except:
+                            pass
                 else:
                     if self.verbose:
                         pre_pred_t = time()
@@ -600,10 +615,16 @@ class SelfExplainer(BaseLLMExplainer):
                     messages = template.format_messages(ltuple=ltuple, rtuple=rtuple, prediction=prediction,
                                                         feature=self.explanation_granularity)
                     saliency_answer = self.llm.invoke(messages).content
-                    try:
-                        saliency_answer = saliency_answer.split('[/INST]')[-1]
-                    except:
-                        pass
+                    if '[/INST]' in saliency_answer:
+                        try:
+                            saliency_answer = saliency_answer.split('[/INST]')[-1]
+                        except:
+                            pass
+                    elif "<|end_header_id|>" in saliency_answer:
+                        try:
+                            saliency_answer = saliency_answer.split("<|end_header_id|>")[-1]
+                        except:
+                            pass
                 else:
                     if self.verbose:
                         pre_pred_t = time()
@@ -674,10 +695,16 @@ class SelfExplainer(BaseLLMExplainer):
                     messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple,
                                                         rtuple=rtuple, prediction=prediction)
                     cf_answer = self.llm.invoke(messages).content
-                    try:
-                        cf_answer = cf_answer.split('[/INST]')[-1]
-                    except:
-                        pass
+                    if '[/INST]' in cf_answer:
+                        try:
+                            cf_answer = cf_answer.split('[/INST]')[-1]
+                        except:
+                            pass
+                    elif "<|end_header_id|>" in cf_answer:
+                        try:
+                            cf_answer = cf_answer.split("<|end_header_id|>")[-1]
+                        except:
+                            pass
                 else:
                     if self.verbose:
                         pre_pred_t = time()
