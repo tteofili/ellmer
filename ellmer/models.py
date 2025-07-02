@@ -8,6 +8,7 @@ from langchain.chat_models import AzureChatOpenAI
 from langchain.llms import HuggingFacePipeline, LlamaCpp
 from langchain_community.chat_models.huggingface import ChatHuggingFace
 from langchain_core.prompts import FewShotChatMessagePromptTemplate
+from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 
 import re
 import certa.utils
@@ -214,11 +215,15 @@ class HybridCerta(FullCerta):
                 # get most frequent features from the self-explanations
                 filter_features = []
                 for se in pae_dicts:
-                    fse = {k: v for k, v in se.items() if v > 0}
-                    if len(fse) > 0:
-                        sorted_attributes_dict = sorted(fse.items(), key=operator.itemgetter(1), reverse=True)[:top_k]
-                        top_features = [f[0] for f in sorted_attributes_dict]
-                        filter_features = filter_features + top_features
+                    if type(se) is dict:
+                        try:
+                            fse = {k: v for k, v in se.items() if v > 0}
+                            if len(fse) > 0:
+                                sorted_attributes_dict = sorted(fse.items(), key=operator.itemgetter(1), reverse=True)[:top_k]
+                                top_features = [f[0] for f in sorted_attributes_dict]
+                                filter_features = filter_features + top_features
+                        except:
+                            pass
                 fc = {}
                 for f in filter_features:
                     if f in fc:
@@ -323,9 +328,8 @@ class SelfExplainer(BaseLLMExplainer):
         self.fake = fake
         self.model_type = model_type
         if model_type == 'hf':
-            llm = HuggingFaceHub(repo_id=model_name, task="text-generation",
-                                 model_kwargs={'temperature': temperature, 'max_length': max_length,
-                                               'max_new_tokens': 1024})
+            llm = HuggingFaceEndpoint(repo_id=model_name, task="text-generation",
+                                 temperature= temperature, max_new_tokens= 1024)
             self.llm = ChatHuggingFace(llm=llm, token=True)
         elif model_type == 'openai':
             self.llm = OpenAI(temperature=temperature, model_name=model_name)
@@ -348,14 +352,15 @@ class SelfExplainer(BaseLLMExplainer):
         self.pred_count = 0
         self.tokens = 0
 
-    def predict_tuples(self, ltuple, rtuple):
+    def predict_tuples(self, ltuple, rtuple, append_conversation=None):
         conversation = []
         if "ptse" in self.prompts:
             ptse_prompts = self.prompts["ptse"]
             er_prompt = ptse_prompts['er']
             for prompt_message in ellmer.utils.read_prompt(er_prompt):
                 conversation.append((prompt_message[0], prompt_message[1]))
-            #question = "record1:\n{ltuple}\n record2:\n{rtuple}\n"
+            if append_conversation is not None:
+                conversation.extend(append_conversation)
             question = "record1: {ltuple}\n  record2: {rtuple}"
             conversation.append(("user", question))
             template = ChatPromptTemplate.from_messages(conversation)
@@ -783,9 +788,19 @@ class SelfExplainer(BaseLLMExplainer):
 
 
 def parse_pase_answer(answer, llm):
+    if type(answer) != str:
+        answer = str(answer)
+
     matching = 0
     saliency = dict()
     cf = dict()
+
+    try:
+        prediction, saliency, cf = ellmer.utils.text_to_data(answer, llm)
+        if prediction is not None and saliency is not None and cf is not None:
+            return prediction, saliency, cf
+    except:
+        pass
 
     original_answer = answer
     try:
@@ -799,7 +814,7 @@ def parse_pase_answer(answer, llm):
             json_answer = None
             for a in split:
                 try:
-                    json_answer = json.loads(a)
+                    json_answer = json.loads(a.replace('json', ''))
                     return parse_pase_answer(json_answer, llm)
                 except:
                     if '}}' in a:
@@ -808,7 +823,7 @@ def parse_pase_answer(answer, llm):
                 for a in split:
                     nm, ns, ncf = parse_pase_answer(a, llm)
                     try:
-                        if nm is not None and ns is not None and cf is not None:
+                        if nm is not None and len(ns) is not 0 and len(cf) is not 0:
                             return nm, ns, ncf
                     except:
                         pass
@@ -819,7 +834,10 @@ def parse_pase_answer(answer, llm):
         # decode the json content
         try:
             answer = answer.replace('´', '').replace('`', '')
-            answer = json.loads(answer)
+            try:
+                answer = json.loads(answer)
+            except:
+                answer = json.loads(answer[:len(answer) - 1])
             if 'answers' in answer:
                 answer = answer['answers']
             if "matching" in answer.keys():
@@ -836,10 +854,13 @@ def parse_pase_answer(answer, llm):
                 prediction = answer['entity_resolution']
             elif '1' in answer.keys():
                 prediction = answer['1']
+            elif 'is_match' in answer.keys():
+                prediction = answer['is_match']
             else:
                 print(f"cannot find 'matching' key in {answer}")
                 prediction = None
             if prediction is not None:
+                prediction = str(prediction).strip()
                 if prediction.lower() == 'yes' or prediction.lower() == 'true' or prediction.lower() == '1':
                     matching = 1
                 elif not prediction:
@@ -858,6 +879,8 @@ def parse_pase_answer(answer, llm):
             try:
                 if "counterfactual_explanation" in answer.keys():
                     cf = answer['counterfactual_explanation']
+                elif "counterfactual" in answer.keys():
+                    cf = answer['counterfactual']
                 elif "counterfactual_explanation_table" in answer.keys():
                     cf = answer['counterfactual_explanation_table']
                 elif "attribute_counterfactual" in answer.keys():
@@ -922,14 +945,11 @@ class ICLSelfExplainer(SelfExplainer):
         self.examples = examples
 
     def predict_and_explain(self, ltuple, rtuple):
-        conversation = []
-
-        example_prompt = ChatPromptTemplate.from_messages(
-            [
-                ("human", "{input}"),
-                ("ai", "prediction:{prediction}, reason:{why}"),
-            ]
-        )
+        fs_prompts = self.prompts["fs"]
+        fs_conversation = []
+        for prompt_message in ellmer.utils.read_prompt(fs_prompts):
+            fs_conversation.append((prompt_message[0], prompt_message[1]))
+        example_prompt = ChatPromptTemplate.from_messages(fs_conversation)
         few_shot_prompt = FewShotChatMessagePromptTemplate(
             example_prompt=example_prompt,
             examples=self.examples,

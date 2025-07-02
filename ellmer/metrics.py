@@ -239,6 +239,7 @@ def get_cosine(vec1, vec2):
 
 
 def get_faithfulness(saliency_names: list, eval_fn, base_dir: str, test_set_df: pd.DataFrame):
+    print(test_set_df.shape)
     np.random.seed(0)
 
     thresholds = [0.1, 0.33, 0.5, 0.7, 0.9]
