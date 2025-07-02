@@ -3,6 +3,7 @@ import numpy as np
 import openai
 import random
 import time
+import json
 
 
 def predict(x: pd.DataFrame, llm_fn, verbose: bool = True, mojito: bool = False):
@@ -37,6 +38,40 @@ def get_tuples(xc):
         if c.startswith('rtable_'):
             ert[str(c).replace('rtable_', '')] = xc[c].astype(str).values[0]
     return elt, ert
+
+
+def text_to_data(answer, llm_fn):
+    template = ("transform the following content into a json with entries for: the matching prediction (key = 'matching'),"
+                "the saliency explanation (key = 'saliency_explanation') as a dictionary, the counterfactual explanation "
+                "(key = 'counterfactual_explanation') as a dictionary."
+                "the matching prediction has to be either 1 for matching or 0 for non-matching."
+                "the saliency explanation is a dictionary with features as keys and saliency scores as values (e.g., "
+                "{'ltable_abc':0.1, 'ltable_cde':0.3, 'rtable_abc':0.1, 'rtable_cde':0.3})"
+                "the counterfactual explanation is a dictionary with features as keys and counterfactual values as values"
+                "e.g., {'ltable_abc':'foo bar', 'ltable_cde':'lorem ipsum', 'rtable_abc':'foo ban', 'rtable_cde':'lorem ipsum'})"
+                "in case of features with the same name, add 'ltable_' prefix to the former and 'rtable_' prefix to the latter."
+                "return only the json, here's the content: \"content\"")
+    json_str_answer = "{'matching': null, 'saliency_explanation': null, 'counterfactual_explanation': null}"
+    try:
+        json_str_answer = llm_fn.invoke(template.replace("content", answer))
+        json_str_answer = json_str_answer.content
+    except:
+        try:
+            json_str_answer = llm_fn(template.replace("content", answer))
+        except:
+            pass
+    if json_str_answer.startswith('```json'):
+        json_str_answer = json_str_answer.replace('```json','').replace('```','')
+    answer_dict = json.loads(json_str_answer)
+    if 'matching' in answer_dict:
+        prediction = answer_dict['matching']
+    elif 'is_match' in answer_dict:
+        prediction = answer_dict['is_match']
+    else:
+        prediction = text_to_match(answer, llm_fn)
+    saliency = answer_dict['saliency_explanation']
+    cf = answer_dict['counterfactual_explanation']
+    return prediction, saliency, cf
 
 
 def text_to_match(answer, llm_fn, n=0):

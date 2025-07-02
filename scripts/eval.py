@@ -50,6 +50,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
                                       model_name=llm_config['model_name'], model_type=llm_config['model_type'],
                                       prompts={"ptse": {"er": "ellmer/prompts/er.txt"}})
 
+
     evals = []
 
     for d in dataset_names:
@@ -61,14 +62,55 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
         lsource = pd.read_csv(dataset_dir + '/tableA.csv')
         rsource = pd.read_csv(dataset_dir + '/tableB.csv')
         test = pd.read_csv(dataset_dir + '/test.csv')
+        train = pd.read_csv(dataset_dir + '/test.csv')
+
         test_df = merge_sources(test, 'ltable_', 'rtable_', lsource, rsource, ['label'],
                                 [])
+        train_df = merge_sources(train, 'ltable_', 'rtable_', lsource, rsource, ['label'],
+                                 [])
 
         certa = LLMCertaExplainer(lsource, rsource)
+
+        full_certa = ellmer.models.FullCerta(explanation_granularity, predict_only, certa, num_triangles,
+                                             max_predict=100)
+
+        examples = []
+
+        # generate predictions and explanations
+        few_shot_no = 5
+        train_data_matching_df = train_df[train_df['label'] == 1][:few_shot_no]
+        train_data_non_matching_df = train_df[train_df['label'] == 0][:few_shot_no]
+        data_df = pd.concat([train_data_matching_df, train_data_non_matching_df])
+        ranged = range(len(data_df))
+        for idx in tqdm(ranged, disable=False):
+            try:
+                rand_row = data_df.iloc[[idx]]
+                ltuple, rtuple = ellmer.utils.get_tuples(rand_row)
+                answer_dictionary = full_certa.predict_and_explain(ltuple, rtuple)
+                prediction = answer_dictionary['prediction']
+                saliency_explanation = answer_dictionary['saliency']
+                cf_explanation = answer_dictionary['cf']
+
+                examples.append({"input": f"record1:\n{ltuple}\n record2:\n{rtuple}\n",
+                                 "prediction": prediction, "saliency": saliency_explanation,
+                                 "cf": cf_explanation})
+            except Exception:
+                traceback.print_exc()
+                print(f'error while finding few shot samples')
+
+        fs1 = ellmer.models.ICLSelfExplainer(examples=examples,
+                                             explanation_granularity=explanation_granularity,
+                                             deployment_name=llm_config['deployment_name'],
+                                             temperature=temperature,
+                                             model_name=llm_config['model_name'],
+                                             model_type=llm_config['model_type'],
+                                             prompts={"fs": "ellmer/prompts/fs1.txt", "input":
+                                                 "record1:\n{ltuple}\n record2:\n{rtuple}\n"})
 
         ellmers = {
             "zs_" + llm_config['tag']: zeroshot,
             "cot_" + llm_config['tag']: cot2,
+            "fs_" + llm_config['tag']: fs1,
             "certa(cot)_" + llm_config['tag']: ellmer.models.FullCerta(explanation_granularity, predict_only, certa,
                                                                         num_triangles),
             "hybrid_" + llm_config['tag']: ellmer.models.HybridCerta(explanation_granularity, cot, certa,
@@ -193,7 +235,7 @@ if __name__ == "__main__":
                         help='no. of open triangles used to generate CERTA explanations')
     parser.add_argument('--granularity', metavar='tk', type=str, default='attribute',
                         choices=['attribute', 'token'], help='explanation granularity')
-    parser.add_argument('--quantitative', metavar='q', type=bool, default=True,
+    parser.add_argument('--quantitative', metavar='q', type=bool, default=False,
                         help='whether to generate quantitative explanation evaluation results')
     parser.add_argument('--model_name', metavar='mn', type=str, help='model name/identifier',
                         default="gpt-3.5-turbo")

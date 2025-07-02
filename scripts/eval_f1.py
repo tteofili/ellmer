@@ -61,7 +61,6 @@ def eval(cache, samples, base_dir, dataset_names, model_type,
             except Exception:
                 traceback.print_exc()
                 print(f'error, waiting...')
-                sleep(10)
 
         f1 = f1_score(y_true=labels, y_pred=predictions)
         print(f'f1 for {d}: {f1}')
