@@ -1,5 +1,4 @@
 import itertools
-import ellmer.models
 import ellmer.metrics
 from langchain.prompts import ChatPromptTemplate
 from langchain import HuggingFaceHub

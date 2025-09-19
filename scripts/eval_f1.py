@@ -4,9 +4,7 @@ import pandas as pd
 from certa.utils import merge_sources
 from datetime import datetime
 import os
-import ellmer.models
-import ellmer.metrics
-from time import sleep
+from ellmer.selfexplainer import SelfExplainer
 import math
 import traceback
 from tqdm import tqdm
@@ -22,7 +20,7 @@ def eval(cache, samples, base_dir, dataset_names, model_type,
 
     llm_config = {"model_type": model_type, "model_name": model_name, "deployment_name": deployment_name, "tag": tag}
 
-    predict_only = ellmer.models.SelfExplainer(deployment_name=llm_config['deployment_name'], temperature=temperature,
+    predict_only = SelfExplainer(deployment_name=llm_config['deployment_name'], temperature=temperature,
                                       model_name=llm_config['model_name'], model_type=llm_config['model_type'],
                                       prompts={"ptse": {"er": "ellmer/prompts/er.txt"}})
 

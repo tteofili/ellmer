@@ -262,7 +262,7 @@ def get_faithfulness(saliency_names: list, eval_fn, base_dir: str, test_set_df: 
             saliencies.append(v['saliency'])
             predictions.append(v['prediction'])
         for threshold in thresholds:
-            top_k = int(threshold * attr_len)
+            top_k = max(1, int(threshold * attr_len))
             test_set_df_c = test_set_df.copy().astype(str)
             for i in range(len(predictions)):
                 if int(predictions[i]) == 0:

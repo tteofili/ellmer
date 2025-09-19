@@ -4,9 +4,10 @@ import pandas as pd
 from certa.utils import merge_sources
 from datetime import datetime
 import os
-import ellmer.models
 import ellmer.metrics
-from ellmer.post_hoc import explain
+from ellmer.hybrid import HybridCerta
+from ellmer.selfexplainer import SelfExplainer
+from ellmer.post_hoc.certa_explain import LLMCertaExplainer
 import math
 import traceback
 from tqdm import tqdm
@@ -22,19 +23,19 @@ def compare(cache, samples, base_dir, dataset_names, model_type, model_name, dep
 
     llm_config = {"model_type": model_type, "model_name": model_name, "deployment_name": deployment_name, "tag": tag}
 
-    zeroshot = ellmer.models.SelfExplainer(explanation_granularity=explanation_granularity,
+    zeroshot = SelfExplainer(explanation_granularity=explanation_granularity,
                                            deployment_name=llm_config['deployment_name'], temperature=temperature,
                                            model_name=llm_config['model_name'], model_type=llm_config['model_type'],
                                            prompts={"pase": "ellmer/prompts/constrained7.txt"})
 
-    cot = ellmer.models.SelfExplainer(explanation_granularity=explanation_granularity,
+    cot = SelfExplainer(explanation_granularity=explanation_granularity,
                                       deployment_name=llm_config['deployment_name'], temperature=temperature,
                                       model_name=llm_config['model_name'], model_type=llm_config['model_type'],
                                       prompts={"ptse": {"er": "ellmer/prompts/er.txt",
                                                         "saliency": "ellmer/prompts/er-saliency-lc.txt",
                                                         "cf": "ellmer/prompts/er-cf-lc.txt"}})
 
-    cot2 = ellmer.models.SelfExplainer(explanation_granularity=explanation_granularity,
+    cot2 = SelfExplainer(explanation_granularity=explanation_granularity,
                                        deployment_name=llm_config['deployment_name'], temperature=temperature,
                                        model_name=llm_config['model_name'], model_type=llm_config['model_type'],
                                        prompts={
@@ -54,9 +55,9 @@ def compare(cache, samples, base_dir, dataset_names, model_type, model_name, dep
         test_df = merge_sources(test, 'ltable_', 'rtable_', lsource, rsource, ['label'],
                                 [])
 
-        certa = explain.LLMCertaExplainer(lsource, rsource)
+        certa = LLMCertaExplainer(lsource, rsource)
 
-        ellmer_explainer = ellmer.models.HybridCerta(explanation_granularity, cot, certa,[zeroshot, cot, cot2],
+        ellmer_explainer = HybridCerta(explanation_granularity, cot, certa,[zeroshot, cot, cot2],
                                                                                 num_triangles=10)
         labels = []
         predictions = []
@@ -107,7 +108,7 @@ def compare(cache, samples, base_dir, dataset_names, model_type, model_name, dep
 
         labels = []
         predictions = []
-        explanations_enhanced_llm = ellmer.models.SelfExplainer(explanation_granularity=explanation_granularity,
+        explanations_enhanced_llm = SelfExplainer(explanation_granularity=explanation_granularity,
                                                deployment_name=llm_config['deployment_name'], temperature=temperature,
                                                model_name=llm_config['model_name'], model_type=llm_config['model_type'],
                                                prompts={"ptse": {"er": "ellmer/prompts/er.txt"}})
