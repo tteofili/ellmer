@@ -6,8 +6,10 @@ from ellmer.post_hoc.utils import merge_sources
 from ellmer.post_hoc.explain import LLMCertaExplainer
 from datetime import datetime
 import os
-import ellmer.models
 import ellmer.metrics
+from ellmer.full_certa import FullCerta
+from ellmer.hybrid import HybridCerta
+from ellmer.selfexplainer import SelfExplainer, ICLSelfExplainer
 from time import sleep, time
 import json
 import traceback
@@ -24,7 +26,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
 
     llm_config = {"model_type": model_type, "model_name": model_name, "deployment_name": deployment_name, "tag": tag}
 
-    predict_only = ellmer.models.SelfExplainer(explanation_granularity=explanation_granularity,
+    predict_only = SelfExplainer(explanation_granularity=explanation_granularity,
                                                deployment_name=llm_config['deployment_name'],
                                                temperature=temperature,
                                                model_name=llm_config['model_name'],
@@ -46,7 +48,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
                                  [])
 
         certa = LLMCertaExplainer(lsource, rsource)
-        full_certa = ellmer.models.FullCerta(explanation_granularity, predict_only, certa, num_triangles, max_predict=100)
+        full_certa = FullCerta(explanation_granularity, predict_only, certa, num_triangles, max_predict=100)
 
         examples = []
         # generate predictions and explanations
@@ -72,7 +74,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
                 print(f'error, waiting...')
                 sleep(10)
 
-        fs1 = ellmer.models.ICLSelfExplainer(examples=examples,
+        fs1 = ICLSelfExplainer(examples=examples,
                                              explanation_granularity=explanation_granularity,
                                              deployment_name=llm_config['deployment_name'],
                                              temperature=temperature,
@@ -81,7 +83,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
                                              prompts={"fs": "ellmer/prompts/fs1.txt", "input":
                                                      "record1:\n{ltuple}\n record2:\n{rtuple}\n"})
 
-        fs2 = ellmer.models.ICLSelfExplainer(examples=examples,
+        fs2 = ICLSelfExplainer(examples=examples,
                                              explanation_granularity=explanation_granularity,
                                              deployment_name=llm_config['deployment_name'],
                                              temperature=temperature,
@@ -90,7 +92,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
                                              prompts={"fs": "ellmer/prompts/fs1.txt", "input":
                                                      "{ltuple}[SEP]{rtuple}"})
 
-        fs3 = ellmer.models.ICLSelfExplainer(examples=examples,
+        fs3 = ICLSelfExplainer(examples=examples,
                                              explanation_granularity=explanation_granularity,
                                              deployment_name=llm_config['deployment_name'],
                                              temperature=temperature,
@@ -107,7 +109,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
             "fs2_" + llm_config['tag']: fs2,
             "fs3_" + llm_config['tag']: fs3,
             "certa_" + llm_config['tag']: full_certa,
-            "ellmer(certa)_" + llm_config['tag']: ellmer.models.HybridCerta(explanation_granularity, predict_only,
+            "ellmer(certa)_" + llm_config['tag']: HybridCerta(explanation_granularity, predict_only,
                                                                             certa,
                                                                             [fs1, fs2, fs3],
                                                                             num_triangles=num_triangles)

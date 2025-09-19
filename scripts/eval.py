@@ -6,7 +6,9 @@ from certa.utils import merge_sources
 from ellmer.post_hoc.explain import LLMCertaExplainer
 from datetime import datetime
 import os
-import ellmer.models
+from ellmer.selfexplainer import SelfExplainer, ICLSelfExplainer
+from ellmer.full_certa import FullCerta
+from ellmer.hybrid import HybridCerta
 import ellmer.metrics
 from time import sleep, time
 import json
@@ -24,19 +26,19 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
 
     llm_config = {"model_type": model_type, "model_name": model_name, "deployment_name": deployment_name, "tag": tag}
 
-    zeroshot = ellmer.models.SelfExplainer(explanation_granularity=explanation_granularity,
+    zeroshot = SelfExplainer(explanation_granularity=explanation_granularity,
                                        deployment_name=llm_config['deployment_name'], temperature=temperature,
                                        model_name=llm_config['model_name'], model_type=llm_config['model_type'],
                                        prompts={"pase": "ellmer/prompts/constrained7.txt"})
 
-    cot = ellmer.models.SelfExplainer(explanation_granularity=explanation_granularity,
+    cot = SelfExplainer(explanation_granularity=explanation_granularity,
                                        deployment_name=llm_config['deployment_name'], temperature=temperature,
                                        model_name=llm_config['model_name'], model_type=llm_config['model_type'],
                                        prompts={"ptse": {"er": "ellmer/prompts/er.txt",
                                                          "saliency": "ellmer/prompts/er-saliency-lc.txt",
                                                          "cf": "ellmer/prompts/er-cf-lc.txt"}})
 
-    cot2 = ellmer.models.SelfExplainer(explanation_granularity=explanation_granularity,
+    cot2 = SelfExplainer(explanation_granularity=explanation_granularity,
                                         deployment_name=llm_config['deployment_name'], temperature=temperature,
                                         model_name=llm_config['model_name'], model_type=llm_config['model_type'],
                                         prompts={
@@ -45,11 +47,10 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
                                                      "saliency": "ellmer/prompts/er-saliency-lc.txt",
                                                      "cf": "ellmer/prompts/er-cf-lc.txt"}})
 
-    predict_only = ellmer.models.SelfExplainer(explanation_granularity=explanation_granularity,
+    predict_only = SelfExplainer(explanation_granularity=explanation_granularity,
                                       deployment_name=llm_config['deployment_name'], temperature=temperature,
                                       model_name=llm_config['model_name'], model_type=llm_config['model_type'],
                                       prompts={"ptse": {"er": "ellmer/prompts/er.txt"}})
-
 
     evals = []
 
@@ -71,13 +72,13 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
 
         certa = LLMCertaExplainer(lsource, rsource)
 
-        full_certa = ellmer.models.FullCerta(explanation_granularity, predict_only, certa, num_triangles,
+        full_certa = FullCerta(explanation_granularity, predict_only, certa, num_triangles,
                                              max_predict=100)
 
         examples = []
 
         # generate predictions and explanations
-        few_shot_no = 5
+        '''few_shot_no = 5
         train_data_matching_df = train_df[train_df['label'] == 1][:few_shot_no]
         train_data_non_matching_df = train_df[train_df['label'] == 0][:few_shot_no]
         data_df = pd.concat([train_data_matching_df, train_data_non_matching_df])
@@ -98,24 +99,24 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
                 traceback.print_exc()
                 print(f'error while finding few shot samples')
 
-        fs1 = ellmer.models.ICLSelfExplainer(examples=examples,
+        fs1 = ICLSelfExplainer(examples=examples,
                                              explanation_granularity=explanation_granularity,
                                              deployment_name=llm_config['deployment_name'],
                                              temperature=temperature,
                                              model_name=llm_config['model_name'],
                                              model_type=llm_config['model_type'],
                                              prompts={"fs": "ellmer/prompts/fs1.txt", "input":
-                                                 "record1:\n{ltuple}\n record2:\n{rtuple}\n"})
+                                                 "record1:\n{ltuple}\n record2:\n{rtuple}\n"})'''
 
         ellmers = {
             "zs_" + llm_config['tag']: zeroshot,
             "cot_" + llm_config['tag']: cot2,
-            "fs_" + llm_config['tag']: fs1,
-            "certa(cot)_" + llm_config['tag']: ellmer.models.FullCerta(explanation_granularity, predict_only, certa,
-                                                                        num_triangles),
-            "hybrid_" + llm_config['tag']: ellmer.models.HybridCerta(explanation_granularity, cot, certa,
-                                                                            [zeroshot, cot, cot2],
-                                                                            num_triangles=num_triangles),
+            #"fs_" + llm_config['tag']: fs1,
+            #"certa(cot)_" + llm_config['tag']: FullCerta(explanation_granularity, predict_only, certa,
+            #                                                            num_triangles),
+            #"hybrid_" + llm_config['tag']: HybridCerta(explanation_granularity, cot, certa,
+            #                                                                [zeroshot, cot, cot2],
+            #                                                                num_triangles=num_triangles),
         }
 
         result_files = []
