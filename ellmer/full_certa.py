@@ -32,7 +32,7 @@ class FullCerta(BaseLLMExplainer):
             saliency_explanation = saliency_df.to_dict('list')
             if len(cfs) > 0:
                 cf_explanation = cfs.drop(
-                    ['alteredAttributes', 'droppedValues', 'copiedValues', 'triangle', 'attr_count'],
+                    ['altered_attributes', 'dropped_values', 'copied_values', 'triangle', 'attr_count'],
                     axis=1).iloc[0].T.to_dict()
             else:
                 cf_explanation = {}
@@ -43,7 +43,12 @@ class FullCerta(BaseLLMExplainer):
         for k, v in row.items():
             new_k = k.replace(prefix, "")
             rc[new_k] = [v]
-        result = df[df.drop(['id'], axis=1).isin(rc).all(axis=1)]
+        if 'id' in df.columns:
+            result = df[df.drop(['id'], axis=1).isin(rc).all(axis=1)]
+        elif prefix+'id' in df.columns:
+            result = df[df.drop([prefix+'id'], axis=1).isin(rc).all(axis=1)]
+        else:
+            result = df[df.isin(rc).all(axis=1)]
         if len(result) == 0:
             result = df.copy()
             for k, v in rc.items():
