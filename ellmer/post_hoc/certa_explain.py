@@ -3,7 +3,7 @@ import logging
 import numpy as np
 import pandas as pd
 
-from ellmer.post_hoc import local_explain, triangles_method
+from ellmer.post_hoc import certa_local_support, certa_triangles_method
 from ellmer.post_hoc.utils import lattice, get_row
 
 class LLMCertaExplainer(object):
@@ -17,7 +17,7 @@ class LLMCertaExplainer(object):
             to always use DA generated records even when the no. of found support records is sufficient.
         '''
         if data_augmentation in ['always', 'on_demand']:
-            gen_left, gen_right = local_explain.generate_subsequences(lsource, rsource)
+            gen_left, gen_right = certa_local_support.generate_subsequences(lsource, rsource)
             self.lsource = pd.concat([lsource, gen_left])
             self.rsource = pd.concat([rsource, gen_right])
             if data_augmentation == 'always':
@@ -56,12 +56,12 @@ class LLMCertaExplainer(object):
                 the open triangles, the support_samples used
         """
 
-        prediction = local_explain.get_original_prediction(l_tuple, r_tuple, predict_fn)
+        prediction = certa_local_support.get_original_prediction(l_tuple, r_tuple, predict_fn)
         pc = np.argmax(prediction)
         if support_samples is None:
             if verbose:
                 print(f'getting support')
-            support_samples, gleft_df, gright_df = local_explain.support_predictions(l_tuple, r_tuple, self.lsource,
+            support_samples, gleft_df, gright_df = certa_local_support.support_predictions(l_tuple, r_tuple, self.lsource,
                                                                                      self.rsource,
                                                                                      predict_fn, lprefix, rprefix,
                                                                                      class_to_explain=pc, use_w=left,
@@ -69,25 +69,29 @@ class LLMCertaExplainer(object):
                                                                                      num_triangles=num_triangles,
                                                                                      max_predict=max_predict, llm=llm)
         else:
-            _, gleft_df, gright_df = local_explain.expand_copies(lprefix, self.lsource, l_tuple, r_tuple, rprefix, self.rsource)
+            _, gleft_df, gright_df = certa_local_support.expand_copies(lprefix, self.lsource, l_tuple, r_tuple, rprefix, self.rsource)
 
         if attr_length <= 0:
             attr_length = min(len(l_tuple) - 1, len(r_tuple) - 1)
         if len(support_samples) > 0:
-            extended_sources = [pd.concat([self.lsource, gright_df]), pd.concat([self.rsource, gleft_df])]
+            self.lsource = pd.concat([self.lsource, gright_df])
+            self.rsource = pd.concat([self.rsource, gleft_df])
+            extended_sources = [self.lsource.copy(), self.rsource.copy()]
             if verbose:
                 print(f'traversing lattices')
-            pns, pss, cf_ex, triangles = triangles_method.explain_samples(support_samples, extended_sources, predict_fn,
-                                                                          lprefix, rprefix, pc, attr_length, None,
-                                                                          persist_predictions=debug, token=token,
-                                                                          filter_features=filter_features)
-            cf_summary = triangles_method.cf_summary(pss)
+            print(f'support size: {len(support_samples)}')
+            print(support_samples)
+            pns, pss, cf_ex, triangles = certa_triangles_method.explain_samples(support_samples, extended_sources, predict_fn,
+                                                                                lprefix, rprefix, pc, attr_length,
+                                                                                persist_predictions=debug, token=token,
+                                                                                filter_features=filter_features)
+            cf_summary = certa_triangles_method.cf_summary(pss)
             saliency_df = pd.DataFrame(data=[pns.values()], columns=pns.keys())
             if len(cf_ex) > 0:
-                cf_ex['attr_count'] = cf_ex.alteredAttributes.astype(str) \
+                cf_ex['attr_count'] = cf_ex.altered_attributes.astype(str) \
                     .str.split(',').str.len()
-                cf_ex = cf_ex[cf_ex['alteredAttributes'].isin([tuple(k.split('/')) for k in cf_summary.keys()])] \
-                    .astype(str).drop_duplicates(subset=['copiedValues', 'alteredAttributes', 'droppedValues'])
+                cf_ex = cf_ex[cf_ex['altered_attributes'].isin([tuple(k.split('/')) for k in cf_summary.keys()])] \
+                    .astype(str).drop_duplicates(subset=['copied_values', 'altered_attributes', 'dropped_values'])
             lattices = []
             if debug:
                 # generate lattice debug data
@@ -97,10 +101,10 @@ class LLMCertaExplainer(object):
                 for i in np.arange(len(triangle_ids)):
                     try:
                         triangle = triangle_ids[i]
-                        triangle_lattice = gbo.get_group(triangle)[['alteredAttributes', 'match_score']]
-                        triangle_lattice['alteredAttributes'] = triangle_lattice['alteredAttributes'].apply(lambda x: tuple(
+                        triangle_lattice = gbo.get_group(triangle)[['altered_attributes', 'match_score']]
+                        triangle_lattice['altered_attributes'] = triangle_lattice['altered_attributes'].apply(lambda x: tuple(
                             x.replace("'", '').replace('(', '').replace(')', '').replace(',', '').split(' ')))
-                        lattice_dict = dict(zip(triangle_lattice.alteredAttributes, triangle_lattice.match_score)) # FIXME in token case, create more lattices / triangles out of triangle_lattice object
+                        lattice_dict = dict(zip(triangle_lattice.altered_attributes, triangle_lattice.match_score)) # FIXME in token case, create more lattices / triangles out of triangle_lattice object
                         triangle_edges = triangle.split(' ')
                         if triangle[0].startswith('0'):
                             powerset = [set()] + [set(s) for s in lattice_dict.keys()] + [
@@ -129,9 +133,9 @@ class LLMCertaExplainer(object):
                         tl_tuple.index = tl_tuple.index.str.lstrip("ltable_")
                         tr_tuple.index = tr_tuple.index.str.lstrip("rtable_")
 
-                        top_lattice_prediction = local_explain.get_original_prediction(tl_tuple, tr_tuple, predict_fn)
+                        top_lattice_prediction = certa_local_support.get_original_prediction(tl_tuple, tr_tuple, predict_fn)
                         if np.argmax(top_lattice_prediction) == pc:
-                            top_lattice_prediction = local_explain.get_original_prediction(tr_tuple, tl_tuple, predict_fn)
+                            top_lattice_prediction = certa_local_support.get_original_prediction(tr_tuple, tl_tuple, predict_fn)
                         rank = [prediction[1]] + list(lattice_dict.values()) + [top_lattice_prediction[1]]
                         if len(powerset) != len(rank):
                             print(f'skipping differing: {powerset}\n {rank}')
@@ -139,11 +143,11 @@ class LLMCertaExplainer(object):
                         triangle_df = pd.concat([p, f, s], axis=1).T
                         triangle_df['type'] = ['pivot', 'free', 'support']
                         lattice_predictions = gbo.get_group(triangle).drop(
-                            ['Unnamed: 0', 'triangle', 'droppedValues', 'copiedValues', 'nomatch_score'],
+                            ['Unnamed: 0', 'triangle', 'dropped_values', 'copied_values', 'nomatch_score'],
                             axis=1)
 
                         op = get_row(l_tuple, r_tuple).drop(['ltable_id', 'rtable_id'], axis=1)
-                        op['alteredAttributes'] = ''
+                        op['altered_attributes'] = ''
                         op['match_score'] = prediction[1]
 
                         sp = get_row(tl_tuple, tr_tuple)
@@ -151,16 +155,16 @@ class LLMCertaExplainer(object):
                             sp = sp.drop(['ltable_id'], axis=1)
                         if 'rtable_id' in sp.columns:
                             sp = sp.drop(['rtable_id'], axis=1)
-                        sp['alteredAttributes'] = str(powerset[-1:][0])
+                        sp['altered_attributes'] = str(powerset[-1:][0])
                         sp['match_score'] = top_lattice_prediction[1]
 
-                        lattice_predictions['alteredAttributes'] = lattice_predictions['alteredAttributes'].apply(
+                        lattice_predictions['altered_attributes'] = lattice_predictions['altered_attributes'].apply(
                             lambda x: tuple(
                                 x.replace("'", '').replace('(', '').replace(')', '').replace(',', '').split(' ')))
 
                         lattice_predictions = pd.concat([sp, lattice_predictions, op], ignore_index=True)
 
-                        lattice_predictions = lattice_predictions.sort_values(by="alteredAttributes",
+                        lattice_predictions = lattice_predictions.sort_values(by="altered_attributes",
                                                                               key=lambda x: x.str.count(
                                                                                   '|'.join(['ltable_', 'rtable_'])),
                                                                               ascending=False)

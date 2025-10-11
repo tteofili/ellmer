@@ -80,6 +80,78 @@ def support_predictions(r1: pd.Series, r2: pd.Series, lsource: pd.DataFrame,
         logging.warning('no triangles found')
         return pd.DataFrame(), copies_left, copies_right
 
+WORD = re.compile(r'\w+')
+
+def find_similarities(test_df: pd.DataFrame, strict: bool):
+    lprefix = 'ltable_'
+    rprefix = 'rtable_'
+    ignore_columns = ['id']
+
+    l_columns = [col for col in list(test_df) if (col.startswith(lprefix)) and (col not in ignore_columns)]
+    r_columns = [col for col in list(test_df) if col.startswith(rprefix) and (col not in ignore_columns)]
+
+    l_string_test_df = test_df[l_columns].astype('str').agg(' '.join, axis=1)
+    r_string_test_df = test_df[r_columns].astype('str').agg(' '.join, axis=1)
+    label_df = test_df['label']
+
+    merged_string = pd.concat([l_string_test_df, r_string_test_df, label_df], ignore_index=True, axis=1)
+
+    sim_df = merged_string.apply(lambda x: get_cosine(x[0], x[1]), axis=1)
+
+    tuples_ls_df = pd.concat([merged_string, sim_df], ignore_index=True, axis=1)
+
+    lpos_df = tuples_ls_df[tuples_ls_df[2] == 1]
+    lneg_df = tuples_ls_df[tuples_ls_df[2] == 0]
+
+    theta_mean_std_max_strict = lpos_df[3].mean()
+    theta_mean_std_min_strict = lneg_df[3].mean()
+
+    if strict:
+        theta_mean_std_max_strict = theta_mean_std_max_strict + lpos_df[3].std()
+        theta_mean_std_min_strict = theta_mean_std_min_strict - lneg_df[3].std()
+
+    return theta_mean_std_min_strict, theta_mean_std_max_strict
+
+# calculate similarity between two text vectors
+def get_cosine(text1, text2):
+    vec1 = text_to_vector(text1)
+    vec2 = text_to_vector(text2)
+    intersection = set(vec1.keys()) & set(vec2.keys())
+    numerator = sum([vec1[x] * vec2[x] for x in intersection])
+
+    sum1 = sum([vec1[x] ** 2 for x in vec1.keys()])
+    sum2 = sum([vec2[x] ** 2 for x in vec2.keys()])
+    denominator = math.sqrt(sum1) * math.sqrt(sum2)
+
+    if not denominator:
+        return 0.0
+    else:
+        return float(numerator) / denominator
+
+
+def text_to_vector(text):
+    words = WORD.findall(text)
+    return Counter(words)
+
+def find_candidates(record, source, min_similarity, find_positives):
+    record2text = " ".join([val for k, val in record.to_dict().items() if k not in ['id']])
+    source_without_id = source.copy()
+    source_without_id = source_without_id.drop(['id'], axis=1)
+    source_ids = source.id.values
+    # for a faster iteration
+    source_without_id = source_without_id.values
+    candidates = []
+    for idx, row in enumerate(source_without_id):
+        currentRecord = " ".join(row)
+        currentSimilarity = get_cosine(record2text, currentRecord)
+        if find_positives:
+            if currentSimilarity >= min_similarity:
+                candidates.append((record['id'], source_ids[idx]))
+        else:
+            if currentSimilarity < min_similarity:
+                candidates.append((record['id'], source_ids[idx]))
+    return pd.DataFrame(candidates, columns=['ltable_id', 'rtable_id'])
+
 
 def find_candidates_predict(record, source, find_positives, predict_fn, num_candidates, lj=True, scored: bool = True,
                             max_predict=-1, lprefix='ltable_', rprefix='rtable_', batched: bool = True,
@@ -110,7 +182,7 @@ def find_candidates_predict(record, source, find_positives, predict_fn, num_cand
         samples = samples.sort_values(by='score', ascending=not find_positives)
         samples = samples.drop(['score'], axis=1)
 
-    samples = samples[:num_candidates * 2]
+    samples = samples[:num_candidates * 100]
     result = pd.DataFrame()
     if batched:
         batch = num_candidates * 4
@@ -141,6 +213,11 @@ def find_candidates_predict(record, source, find_positives, predict_fn, num_cand
             out = predicted[predicted["match_score"] < 0.5]
         if len(out) > 0:
             result = pd.concat([result, out], axis=0)
+    #result = augment_with_llm(find_positives, lj, llm, num_candidates, predict_fn, record, result, source, lprefix, rprefix)
+    return result
+
+
+def augment_with_llm(find_positives, lj, llm, num_candidates, predict_fn, record, result, source, lprefix, rprefix):
     if len(result) < num_candidates and llm is not None:
         try:
             template = f'''

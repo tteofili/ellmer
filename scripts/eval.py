@@ -3,7 +3,7 @@ from langchain.cache import InMemoryCache, SQLiteCache
 import langchain
 import pandas as pd
 from certa.utils import merge_sources
-from ellmer.post_hoc.explain import LLMCertaExplainer
+from ellmer.post_hoc.certa_explain import LLMCertaExplainer
 from datetime import datetime
 import os
 from ellmer.selfexplainer import SelfExplainer, ICLSelfExplainer
@@ -29,7 +29,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
     zeroshot = SelfExplainer(explanation_granularity=explanation_granularity,
                                        deployment_name=llm_config['deployment_name'], temperature=temperature,
                                        model_name=llm_config['model_name'], model_type=llm_config['model_type'],
-                                       prompts={"pase": "ellmer/prompts/constrained7.txt"})
+                                       prompts={"pase": "ellmer/prompts/constrained15.txt"})
 
     cot = SelfExplainer(explanation_granularity=explanation_granularity,
                                        deployment_name=llm_config['deployment_name'], temperature=temperature,
@@ -78,7 +78,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
         examples = []
 
         # generate predictions and explanations
-        '''few_shot_no = 5
+        few_shot_no = 2
         train_data_matching_df = train_df[train_df['label'] == 1][:few_shot_no]
         train_data_non_matching_df = train_df[train_df['label'] == 0][:few_shot_no]
         data_df = pd.concat([train_data_matching_df, train_data_non_matching_df])
@@ -100,23 +100,23 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
                 print(f'error while finding few shot samples')
 
         fs1 = ICLSelfExplainer(examples=examples,
-                                             explanation_granularity=explanation_granularity,
-                                             deployment_name=llm_config['deployment_name'],
-                                             temperature=temperature,
-                                             model_name=llm_config['model_name'],
-                                             model_type=llm_config['model_type'],
-                                             prompts={"fs": "ellmer/prompts/fs1.txt", "input":
-                                                 "record1:\n{ltuple}\n record2:\n{rtuple}\n"})'''
+                               explanation_granularity=explanation_granularity,
+                               deployment_name=llm_config['deployment_name'],
+                               temperature=temperature,
+                               model_name=llm_config['model_name'],
+                               model_type=llm_config['model_type'],
+                               prompts={"fs": "ellmer/prompts/fs1.txt", "input":
+                                   "record1:\n{ltuple}\n record2:\n{rtuple}\n"})
 
         ellmers = {
             "zs_" + llm_config['tag']: zeroshot,
             "cot_" + llm_config['tag']: cot2,
-            #"fs_" + llm_config['tag']: fs1,
-            #"certa(cot)_" + llm_config['tag']: FullCerta(explanation_granularity, predict_only, certa,
-            #                                                            num_triangles),
-            #"hybrid_" + llm_config['tag']: HybridCerta(explanation_granularity, cot, certa,
-            #                                                                [zeroshot, cot, cot2],
-            #                                                                num_triangles=num_triangles),
+            "fs_" + llm_config['tag']: fs1,
+            "certa(cot)_" + llm_config['tag']: FullCerta(explanation_granularity, predict_only, certa,
+                                                                        num_triangles),
+            "hybrid_" + llm_config['tag']: HybridCerta(explanation_granularity, cot, certa,
+                                                                            [zeroshot, cot, cot2],
+                                                                            num_triangles=num_triangles),
         }
 
         result_files = []

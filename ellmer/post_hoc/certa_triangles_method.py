@@ -2,6 +2,13 @@ from collections import defaultdict
 from functools import partialmethod
 from itertools import combinations, chain
 
+import pandas as pd
+import logging
+import functools
+from joblib import Parallel, delayed
+
+import random
+from copy import deepcopy
 import nltk
 import numpy as np
 from tqdm import tqdm
@@ -278,6 +285,214 @@ def token_perturbations_from_triangle(triangle_ids, sources_map, attributes, max
         return all_perturbations, pd.DataFrame(), pd.DataFrame(), all_good, dict()
 
 
+def tokenize_record(record):
+    return {k: str(v).split() for k, v in record.items()}
+
+def detokenize_record(tokenized):
+    return {k: " ".join(v) for k, v in tokenized.items()}
+
+def find_diff_spans(free_toks, support_toks, allowed_attributes=None, max_n=3):
+    """
+    Identify token spans (attr, start, n) where free differs from support,
+    only for allowed attributes.
+    """
+    allowed_attributes = allowed_attributes or list(free_toks.keys())
+    spans = []
+    for attr in allowed_attributes:
+        if attr not in free_toks or attr not in support_toks:
+            continue
+        f = free_toks[attr]
+        s = support_toks[attr]
+        max_len = max(len(f), len(s))
+        for i in range(max_len):
+            for n in range(1, max_n + 1):
+                if i + n > max_len:
+                    continue
+                f_ngram = f[i:i+n]
+                s_ngram = s[i:i+n]
+                if f_ngram != s_ngram:
+                    spans.append((attr, i, n))
+    return spans
+
+def apply_ngram_change(state_toks, support_toks, attr, start, n):
+    """
+    Replace tokens [start:start+n] in one attribute with the support’s n-gram.
+    Also return dropped and copied tokens for explainability.
+    """
+    new_state = deepcopy(state_toks)
+    f = new_state[attr]
+    s = support_toks[attr]
+
+    dropped = f[start:start+n] if start < len(f) else []
+    copied = s[start:start+n]
+
+    # replace or extend
+    if start < len(f):
+        new_state[attr] = f[:start] + copied + f[start+n:]
+    else:
+        new_state[attr].extend(copied)
+
+    return new_state, dropped, copied
+
+def generate_one_ngram_path(free, support, max_n=3, randomize=False, allowed_attributes=None):
+    """Generate one transformation path with explainable token-level perturbations."""
+    free_toks = tokenize_record(free)
+    support_toks = tokenize_record(support)
+    spans = find_diff_spans(free_toks, support_toks, allowed_attributes, max_n=max_n)
+
+    if randomize:
+        random.shuffle(spans)
+    else:
+        spans.sort()
+
+    path = []
+    current = deepcopy(free_toks)
+
+    alt_attributes = []
+    for step, (attr, start, n) in enumerate(spans, 1):
+        if attr not in allowed_attributes or current[attr] == support_toks[attr]:
+            continue
+
+        new_state, dropped, copied = apply_ngram_change(current, support_toks, attr, start, n)
+        if new_state == current:
+            continue
+        for d in dropped:
+            alt_attributes.append(attr+'__'+d)
+        current = new_state
+        rec = detokenize_record(current)
+        rec.update({
+            "step": step,
+            "altered_attributes": tuple(alt_attributes),
+            "changed_span": (start, n),
+            "dropped_values": dropped,
+            "copied_values": copied
+        })
+        path.append(rec)
+
+        # stop only if all allowed attributes match
+        if all(current[a] == support_toks[a] for a in allowed_attributes if a in current):
+            break
+
+    return path
+
+def generate_multiple_ngram_paths(free, support, n_paths=10, max_n=3, allowed_attributes=None):
+    """Generate up to n_paths different explainable n-gram-based transformation paths."""
+    paths = []
+    for i in range(n_paths):
+        random.seed(i)
+        path = generate_one_ngram_path(
+            free, support, max_n=max_n, randomize=True, allowed_attributes=allowed_attributes
+        )
+        paths.append(path)
+    return paths
+
+
+def full_token_perturbations_from_triangle(triangle_ids, sources_map, attributes, max_len_attribute_set,
+                                           class_to_explain, lprefix, rprefix, predict_fn, num_paths = 3):
+    triangle = __get_records(sources_map, triangle_ids, lprefix, rprefix)  # get triangle values
+    support = triangle[2].copy()
+    free = triangle[0].copy()
+    prefix = support.index[0].split('_')[0] + '_'
+    if prefix+'id' in attributes:
+        attributes.remove(prefix+'id')
+    if prefix+'id' in free:
+        free.drop(prefix+'id')
+    if prefix+'id' in support:
+        support.drop(prefix+'id')
+
+    #print(f'{free} <-- {support}')
+    allowed_attributes = set([a.split("__")[0]for a in attributes if not a.startswith('ltable_id') and not a.startswith('rtable_id') ]) # attributes need to be attributes
+    all_paths = generate_multiple_ngram_paths(free, support, allowed_attributes=allowed_attributes, max_n=1, n_paths=num_paths)
+    #print(f"Generated {len(all_paths)} paths")
+    all_perturbation_dfs = []
+    for path in all_paths:
+        all_perturbation_dfs.append(pd.DataFrame(path))
+
+    perturbations_df = pd.concat(all_perturbation_dfs, axis=0)
+    if perturbations_df.empty:
+        return pd.DataFrame(), pd.DataFrame(), pd.DataFrame(), {}
+
+    r2 = triangle[1].copy() # pivot record is untouched
+    r2_df = pd.DataFrame([r2] * len(perturbations_df))
+    if support.axes[0][0].startswith(rprefix):
+        all_perturbations = pd.concat([perturbations_df.reset_index(drop=True), r2_df.reset_index(drop=True)], axis=1)
+    else:
+        all_perturbations = pd.concat([r2_df.reset_index(drop=True), perturbations_df.reset_index(drop=True)], axis=1)
+    all_perturbations = all_perturbations.drop([f"{lprefix}id", f"{rprefix}id"], axis=1)
+
+    triangle_values = 'triangle'
+    all_perturbations[triangle_values] = ' '.join(triangle_ids)
+    all_predictions = []
+    all_flipped = []
+    all_ranking = []
+    for cur_step in range(1, max_len_attribute_set):
+        predictions, curr_flipped_predictions, all_good, ranking = predict_step(all_perturbations,
+                                                                               class_to_explain,
+                                                                               cur_step,
+                                                                               max_len_attribute_set,
+                                                                               predict_fn, triangle_values)
+        all_predictions.append(predictions)
+        if len(curr_flipped_predictions) > 0:
+            all_flipped.append(curr_flipped_predictions)
+        if len(ranking) > 0:
+            all_ranking.append(ranking)
+        if all_good:
+            # todo: compensate rankings
+            break
+    if len(all_flipped) == 0:
+        all_flipped = pd.DataFrame()
+    else:
+        all_flipped = pd.concat(all_flipped)
+    rankings = collect_rankings(all_ranking)
+    return all_perturbations, pd.concat(all_predictions), all_flipped, rankings
+
+
+def collect_rankings(all_ranking):
+    rankings = {}
+    for d in all_ranking:
+        for k, v in d.items():
+            rankings[k] = rankings.get(k, 0) + v
+    return rankings
+
+
+def predict_step(all_perturbations, class_to_explain, cur_step, max_len_attribute_set, predict_fn, triangle_values):
+    all_good = False
+    altered_attributes = 'altered_attributes'
+    dropped_values = 'dropped_values'
+    copied_values = 'copied_values'
+    changed_span = 'changed_span'
+    step = 'step'
+
+    try:
+        to_be_predicted = all_perturbations[all_perturbations[step] == cur_step]
+        if len(to_be_predicted) == 0:
+            return pd.DataFrame(), pd.DataFrame(), all_good, {}
+
+        curr_perturbed_attr = to_be_predicted.altered_attributes.values
+        to_be_predicted = to_be_predicted.drop([step, altered_attributes, dropped_values, copied_values, triangle_values, changed_span], axis=1)
+
+        predictions = predict_fn(to_be_predicted)
+
+        predictions = pd.concat(
+            [predictions, all_perturbations[[altered_attributes, dropped_values, copied_values, triangle_values]]],
+            axis=1)
+
+        proba = predictions[['nomatch_score', 'match_score']].values
+        curr_flipped_predictions = predictions[proba[:, class_to_explain] < 0.5]
+        ranking = get_attribute_ranking(proba, curr_perturbed_attr, class_to_explain)
+
+        if len(curr_flipped_predictions) == len(to_be_predicted):
+            logging.info(f'skipped predictions at depth >= {max_len_attribute_set}')
+            all_good = True
+        else:
+            logging.debug(f'predicted depth {max_len_attribute_set}')
+
+        return predictions, curr_flipped_predictions, all_good, ranking
+    except Exception as e:
+        logging.error(f"Prediction error: {e}")
+        return pd.DataFrame(), pd.DataFrame(), all_good, {}
+
+
 def fast_token_perturbations_from_triangle(triangle_ids, sources_map, attributes, max_len_attribute_set,
                                            class_to_explain, lprefix, rprefix, predict_fn, subsequences: bool = True):
     all_good = False
@@ -361,21 +576,53 @@ def fast_token_perturbations_from_triangle(triangle_ids, sources_map, attributes
     if perturbations_df.empty:
         return pd.DataFrame(), pd.DataFrame(), pd.DataFrame(), all_good, {}
 
-    r2 = triangle[1].copy()
+    r2 = triangle[1].copy() # pivot record is untouched
     r2_df = pd.DataFrame([r2] * len(perturbations_df))
-    all_perturbations = pd.concat([perturbations_df.reset_index(drop=True), r2_df.reset_index(drop=True)], axis=1)
+    if support.axes[0][0].startswith(rprefix):
+        all_perturbations = pd.concat([perturbations_df.reset_index(drop=True), r2_df.reset_index(drop=True)], axis=1)
+    else:
+        all_perturbations = pd.concat([r2_df.reset_index(drop=True), perturbations_df.reset_index(drop=True)], axis=1)
     all_perturbations = all_perturbations.drop([f"{lprefix}id", f"{rprefix}id"], axis=1)
-    all_perturbations['alteredAttributes'] = perturbed_attributes
-    all_perturbations['droppedValues'] = droppedValues
-    all_perturbations['copiedValues'] = copiedValues
-    all_perturbations['triangle'] = ' '.join(triangle_ids)
 
-    currPerturbedAttr = all_perturbations.alteredAttributes.values
+    altered_attributes = 'altered_attributes'
+    dropped_values = 'dropped_values'
+    copied_values = 'copied_values'
+    triangle_values = 'triangle'
+
+    all_perturbations[('%s' % altered_attributes)] = perturbed_attributes
+    all_perturbations[('%s' % dropped_values)] = droppedValues
+    all_perturbations[copied_values] = copiedValues
+    all_perturbations[triangle_values] = ' '.join(triangle_ids)
+
+    if len(all_perturbations) > 100:
+        logging.info(f'perturbations_df size: {len(all_perturbations)}')
+
+        # Calculate similarity scores
+        similarities = []
+        for _, row in all_perturbations.iterrows():
+            text1 = ' '.join(str(v) for v in triangle[0].values)
+            text2 = ' '.join(str(v) for v in triangle[1].values)
+            row_text = ' '.join(str(v) for v in row.values)
+            sim1 = nltk.jaccard_distance(set(text1.split()), set(row_text.split()))
+            sim2 = nltk.jaccard_distance(set(text2.split()), set(row_text.split()))
+            similarities.append((sim1 + sim2) / 2)
+
+        # Sort by similarity and keep top 100
+        all_perturbations['similarity'] = similarities
+        pert_len = max(10, min(100, int(len(all_perturbations) / 10)))
+        if class_to_explain:
+            all_perturbations = all_perturbations.nsmallest(pert_len,'similarity')
+        else:
+            all_perturbations = all_perturbations.nlargest(pert_len, 'similarity')
+        all_perturbations = all_perturbations.drop('similarity', axis=1)
+        logging.info(f'trimmed perturbations_df size: {len(all_perturbations)}')
+
+    currPerturbedAttr = all_perturbations.altered_attributes.values
     try:
         predictions = predict_fn(
-            all_perturbations.drop(['alteredAttributes', 'droppedValues', 'copiedValues', 'triangle'], axis=1))
+            all_perturbations.drop([altered_attributes, dropped_values, copied_values, triangle_values], axis=1))
         predictions = pd.concat(
-            [predictions, all_perturbations[['alteredAttributes', 'droppedValues', 'copiedValues', 'triangle']]],
+            [predictions, all_perturbations[[altered_attributes, dropped_values, copied_values, triangle_values]]],
             axis=1)
 
         proba = predictions[['nomatch_score', 'match_score']].values
@@ -483,12 +730,23 @@ def check_properties(triangle, sourcesMap, predict_fn):
     except:
         return False, False, False
 
+def token_triangle_process(all_triangles, attributes, class_to_explain, predict_fn, sourcesMap, lprefix,
+                           rprefix, num_threads=-1, max_combinations=-1, num_paths:int = 3):
+    results = Parallel(n_jobs=num_threads, prefer='threads')(
+        delayed(full_token_perturbations_from_triangle)(
+            triangle, sourcesMap, attributes, max_combinations, class_to_explain, lprefix, rprefix, predict_fn, num_paths
+        ) for triangle in tqdm(all_triangles)
+    )
 
-import pandas as pd
-import logging
-import functools
-from joblib import Parallel, delayed
-from tqdm import tqdm
+    pert_df, pred_df, cfp_df, ranking = zip(*results)
+
+    perturbations_df = pd.concat(pert_df, ignore_index=True)
+    predictions = pd.concat(pred_df, ignore_index=True)
+    curr_flipped_predictions = pd.concat(cfp_df, ignore_index=True)
+    rankings = collect_rankings(ranking)
+
+    return perturbations_df, predictions, curr_flipped_predictions, rankings
+
 
 def lattice_stratified_process(depth, all_triangles, attributes, class_to_explain, predict_fn, sourcesMap, lprefix,
                                rprefix, num_threads=-1):
@@ -533,30 +791,59 @@ def perturb_predict_token(pair: pd.DataFrame, all_triangles: list, tokenlevel_at
     all_good = False
     flipped = False
 
+    tot_flipped = 0
     for a in range(1, token_combinations):
-        if early_stop and a > 3 and flipped:
-            print(f'{len(flipped_predictions)} flipped predictions found!')
+        if early_stop and a > 3 and flipped or all_good:
+            print(f'{tot_flipped} flipped predictions found @depth={a}')
             break
         print(f'depth-{a}')
-        if all_good:
-            break
 
         pert_df, pred_df, cfp_df, all_good, ranking = lattice_stratified_process(
             a, all_triangles, tokenlevel_attributes, class_to_explain, predict_fn, sources_map, lprefix, rprefix,
             num_threads=num_threads
         )
-        if len(cfp_df) > 0:
+        new_flipped_size = len(cfp_df)
+        print(f'{new_flipped_size} new flipped predictions found!')
+        tot_flipped += new_flipped_size
+        if tot_flipped > 0:
             flipped = True
 
         flipped_predictions.append(cfp_df)
         all_predictions = pd.concat([pred_df, all_predictions], ignore_index=True)
         rankings.append(ranking)
 
-        if len(cfp_df) == len(pert_df):
+        if new_flipped_size == len(pert_df):
             logging.info(f'skipped predictions at depth >= {a}')
             all_good = True
         else:
             logging.debug(f'predicted depth {a}')
+
+    flipped_predictions_df = pd.concat(flipped_predictions, ignore_index=True) if flipped_predictions else pd.DataFrame()
+
+    return flipped_predictions_df, rankings, all_predictions
+
+
+def triangle_parallel_token_explain(pair: pd.DataFrame, all_triangles: list, tokenlevel_attributes: list, class_to_explain: int,
+                                    predict_fn, sources_map: dict, lprefix: str, rprefix: str, num_paths:int = 3, num_threads: int = -1):
+    fr = sources_map[0][sources_map[0].ltable_id == int(pair.ltable_id)].iloc[0]
+    pr = sources_map[1][sources_map[1].rtable_id == int(pair.rtable_id)].iloc[0]
+
+    row_text = get_row_string(fr, pr)
+
+    token_combinations = min(len(tokenlevel_attributes), len(row_text.split(' ')))
+
+    all_predictions = pd.DataFrame()
+    rankings = []
+    flipped_predictions = []
+
+    pert_df, pred_df, cfp_df, ranking = token_triangle_process(
+        all_triangles, tokenlevel_attributes, class_to_explain, predict_fn, sources_map, lprefix, rprefix,
+        num_threads=num_threads, max_combinations=token_combinations, num_paths=num_paths
+    )
+
+    flipped_predictions.append(cfp_df)
+    all_predictions = pd.concat([pred_df, all_predictions], ignore_index=True)
+    rankings.append(ranking)
 
     flipped_predictions_df = pd.concat(flipped_predictions, ignore_index=True) if flipped_predictions else pd.DataFrame()
 
@@ -590,12 +877,12 @@ def process_triangle(triangle: tuple, attributes: list, class_to_explain: int, p
 
 
 def explain_samples(dataset: pd.DataFrame, sources: list, predict_fn: callable, lprefix, rprefix,
-                    class_to_explain: int, attr_length: int, summarizer, check: bool = False,
+                    class_to_explain: int, attr_length: int, check: bool = False,
                     discard_bad: bool = False, return_top: bool = False, persist_predictions: bool = False,
                     token: bool = False, two_step_token: bool = False, use_nec: bool = True,
                     filter_features: list = None):
-    _renameColumnsWithPrefix(lprefix, sources[0])
-    _renameColumnsWithPrefix(rprefix, sources[1])
+    _renameColumnsWithPrefix(lprefix, sources[0]) # <--- fix this!!
+    _renameColumnsWithPrefix(rprefix, sources[1]) # <--- fix this!!
 
     # all_triangles, sourcesMap = getMixedTriangles(dataset, sources)
     all_triangles, sourcesMap = get_triangles(dataset, sources)
@@ -646,13 +933,12 @@ def explain_samples(dataset: pd.DataFrame, sources: list, predict_fn: callable, 
 
             if len(all_triangles) > 0:
                 saliency, filtered_exp, flipped_predictions, all_triangles = token_level_expl(pair, all_triangles,
-                                                                                             attr_length,
-                                                                                             attributes,
-                                                                                             class_to_explain, lprefix,
-                                                                                             persist_predictions,
-                                                                                             predict_fn, return_top,
-                                                                                             rprefix, sourcesMap,
-                                                                                             summarizer)
+                                                                                              attr_length,
+                                                                                              attributes,
+                                                                                              class_to_explain, lprefix,
+                                                                                              persist_predictions,
+                                                                                              predict_fn, return_top,
+                                                                                              rprefix, sourcesMap)
                 return saliency, filtered_exp, flipped_predictions, all_triangles
             else:
                 logging.warning(f'empty triangles !?')
@@ -677,7 +963,7 @@ def explain_samples(dataset: pd.DataFrame, sources: list, predict_fn: callable, 
 
         if len(all_triangles) > 0 and attr_length > 0:
             return token_level_expl(pair, all_triangles, attr_length, attributes, class_to_explain, lprefix,
-                                    persist_predictions, predict_fn, return_top, rprefix, sourcesMap, summarizer)
+                                    persist_predictions, predict_fn, return_top, rprefix, sourcesMap)
         else:
             logging.warning(f'empty triangles !?')
             return dict(), pd.DataFrame(), pd.DataFrame(), []
@@ -722,23 +1008,24 @@ def explain_samples(dataset: pd.DataFrame, sources: list, predict_fn: callable, 
             return dict(), pd.DataFrame(), pd.DataFrame(), []
 
 
-def token_level_expl(pair, allTriangles, attr_length, attributes, class_to_explain, lprefix, persist_predictions,
-                     predict_fn, return_top, rprefix, sourcesMap, summarizer):
-    flipped_predictions, rankings, all_predictions = perturb_predict_token(pair, allTriangles, attributes,
-                                                                           class_to_explain, predict_fn, sourcesMap,
-                                                                           lprefix, rprefix, summarizer)
+def token_level_expl(pair, all_triangles, attr_length, attributes, class_to_explain, lprefix, persist_predictions,
+                     predict_fn, return_top, rprefix, sourcesMap, num_paths=3):
+    flipped_predictions, rankings, all_predictions = triangle_parallel_token_explain(pair, all_triangles, attributes,
+                                                                                     class_to_explain, predict_fn, sourcesMap,
+                                                                                     lprefix, rprefix, num_paths=num_paths)
     if persist_predictions:
         all_predictions.to_csv(f'predictions-{attr_length}.csv')
-    explanation = aggregate_rankings(rankings, len_triangles=1, attr_length=attr_length)
-    if 'alteredAttributes' in all_predictions.columns:
-        all_predictions['alteredAttributes'] = all_predictions['alteredAttributes'].astype(str).apply(
+    explanation = aggregate_rankings(rankings, len_triangles=len(all_triangles), attr_length=attr_length)
+
+    if 'altered_attributes' in all_predictions.columns:
+        all_predictions['altered_attributes'] = all_predictions['altered_attributes'].astype(str).apply(
             lambda x: x.replace("'", '').replace('(', '').replace(',)', '').replace(', ', '/').replace(')', ''))
     else:
-        print('No alteredAttributes')
+        print('No altered_attributes')
         print(all_predictions)
     flips = len(flipped_predictions)
     if flips > 0:
-        perturb_count = all_predictions.groupby('alteredAttributes').size()
+        perturb_count = all_predictions.groupby('altered_attributes').size()
         for att in explanation.index:
             if att in perturb_count:
                 explanation[att] = explanation[att] / perturb_count[att]
@@ -757,7 +1044,7 @@ def token_level_expl(pair, allTriangles, attr_length, attributes, class_to_expla
                     if flips > 0:
                         saliency[a] += v / flips
 
-        flipped_predictions['attr_count'] = flipped_predictions.alteredAttributes.astype(str) \
+        flipped_predictions['attr_count'] = flipped_predictions.altered_attributes.astype(str) \
                 .str.split(',').str.len()
         flipped_predictions = flipped_predictions.sort_values(by=['attr_count'])
         if return_top:
@@ -766,7 +1053,7 @@ def token_level_expl(pair, allTriangles, attr_length, attributes, class_to_expla
         else:
             filtered_exp = explanation
 
-        return saliency, filtered_exp, flipped_predictions, allTriangles
+        return saliency, filtered_exp, flipped_predictions, all_triangles
     else:
         logging.warning(f'empty explanation !?')
         return dict(), pd.DataFrame(), pd.DataFrame(), []
@@ -1006,9 +1293,18 @@ def aggregate_rankings(ranking_l: list, len_triangles: int, attr_length: int):
     aggregateRanking = defaultdict(int)
     for ranking in ranking_l:
         for altered_attr in ranking.keys():
-            if len(altered_attr) <= attr_length:
+            if attr_length == -1 or len(altered_attr) <= attr_length:
                 aggregateRanking[altered_attr] += ranking[altered_attr]
     aggregateRanking_normalized = {k: (v / len_triangles) for (k, v) in aggregateRanking.items()}
 
     alteredAttr = list(map(lambda t: "/".join(t), aggregateRanking_normalized.keys()))
     return pd.Series(data=list(aggregateRanking_normalized.values()), index=alteredAttr)
+
+def aggregate_rankings_simple(ranking_l: list, len_triangles: int):
+    aggregateRanking = defaultdict(int)
+    for ranking in ranking_l:
+        for altered_attr in ranking.keys():
+            aggregateRanking[altered_attr] += ranking[altered_attr]
+    aggregateRanking_normalized = {k: (v / len_triangles) for (k, v) in aggregateRanking.items()}
+
+    return pd.Series(aggregateRanking_normalized)

@@ -622,16 +622,19 @@ class ICLSelfExplainer(SelfExplainer):
                 ("human", "{input}"),
             ]
         )
-        conversation = final_prompt.messages
         chain = final_prompt | self.llm
         question = self.prompts['input']
         formatted_question = question.format(ltuple=ltuple, rtuple=rtuple)
+        answer = chain.invoke({"input": formatted_question.replace('"', '').replace("'",'')})
+
+        conversation = [str(m) for m in final_prompt.messages]
         conversation.append(formatted_question)
-        self.tokens += sum([len(str(m).split(' ')) for m in final_prompt.messages])  # input tokens
-        answer = chain.invoke({"input": formatted_question})
+        if self.verbose:
+            self.tokens += sum([len(str(m).split(' ')) for m in final_prompt.messages])  # input tokens
         answer_content = answer.content
         conversation.append(answer_content)
-        self.tokens += len(answer.content.split(' '))  # output tokens
+        if self.verbose:
+            self.tokens += len(answer.content.split(' '))  # output tokens
         prediction = "0"
         saliency = {}
         cf = {}
