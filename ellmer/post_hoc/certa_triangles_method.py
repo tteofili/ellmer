@@ -134,7 +134,7 @@ def create_perturbations_from_triangle(triangleIds, sourcesMap, attributes, max_
     else:
         all_perturbations = pd.concat([r2_df, perturbations_df], axis=1)
     all_perturbations = all_perturbations.drop([lprefix + 'id', rprefix + 'id'], axis=1)
-    all_perturbations['alteredAttributes'] = perturbed_attributes
+    all_perturbations['altered_attributes'] = perturbed_attributes
     all_perturbations['droppedValues'] = dropped_values
     all_perturbations['copiedValues'] = copied_values
 
@@ -255,17 +255,17 @@ def token_perturbations_from_triangle(triangle_ids, sources_map, attributes, max
         else:
             all_perturbations = pd.concat([r2_df, perturbations_df], axis=1)
         all_perturbations = all_perturbations.drop([lprefix + 'id', rprefix + 'id'], axis=1)
-    all_perturbations['alteredAttributes'] = perturbed_attributes
+    all_perturbations['altered_attributes'] = perturbed_attributes
     all_perturbations['droppedValues'] = droppedValues
     all_perturbations['copiedValues'] = copiedValues
     all_perturbations['triangle'] = ' '.join(triangle_ids)
 
-    currPerturbedAttr = all_perturbations.alteredAttributes.values
+    currPerturbedAttr = all_perturbations.altered_attributes.values
     try:
         predictions = predict_fn(
-            all_perturbations.drop(['alteredAttributes', 'droppedValues', 'copiedValues', 'triangle'], axis=1))
+            all_perturbations.drop(['altered_attributes', 'droppedValues', 'copiedValues', 'triangle'], axis=1))
         predictions = pd.concat(
-            [predictions, all_perturbations[['alteredAttributes', 'droppedValues', 'copiedValues', 'triangle']]],
+            [predictions, all_perturbations[['altered_attributes', 'droppedValues', 'copiedValues', 'triangle']]],
             axis=1)
 
         proba = predictions[['nomatch_score', 'match_score']].values
@@ -400,14 +400,19 @@ def full_token_perturbations_from_triangle(triangle_ids, sources_map, attributes
     if prefix+'id' in support:
         support.drop(prefix+'id')
 
-    #print(f'{free} <-- {support}')
     allowed_attributes = set([a.split("__")[0]for a in attributes if not a.startswith('ltable_id') and not a.startswith('rtable_id') ]) # attributes need to be attributes
     all_paths = generate_multiple_ngram_paths(free, support, allowed_attributes=allowed_attributes, max_n=1, n_paths=num_paths)
-    #print(f"Generated {len(all_paths)} paths")
     all_perturbation_dfs = []
     for path in all_paths:
-        all_perturbation_dfs.append(pd.DataFrame(path))
-
+        path = [a for a in path if all(elem in attributes for elem in a['altered_attributes'])] # we allow changes on allowed attributes only
+        if len(path) > 0:
+            all_perturbation_dfs.append(pd.DataFrame(path))
+    if len(all_perturbation_dfs) == 0:
+        for path in all_paths:
+            path = [a for a in path if
+                    any(elem in attributes for elem in a['altered_attributes'])] # we select paths that also contain changed to allowed attributes
+            if len(path) > 0:
+                all_perturbation_dfs.append(pd.DataFrame(path))
     perturbations_df = pd.concat(all_perturbation_dfs, axis=0)
     if perturbations_df.empty:
         return pd.DataFrame(), pd.DataFrame(), pd.DataFrame(), {}
@@ -493,8 +498,8 @@ def predict_step(all_perturbations, class_to_explain, cur_step, max_len_attribut
         return pd.DataFrame(), pd.DataFrame(), all_good, {}
 
 
-def fast_token_perturbations_from_triangle(triangle_ids, sources_map, attributes, max_len_attribute_set,
-                                           class_to_explain, lprefix, rprefix, predict_fn, subsequences: bool = True):
+def multiple_token_perturbations_depth(triangle_ids, sources_map, attributes, max_len_attribute_set,
+                                       class_to_explain, lprefix, rprefix, predict_fn, subsequences: bool = True):
     all_good = False
     triangle = __get_records(sources_map, triangle_ids, lprefix, rprefix)  # get triangle values
     support = triangle[2].copy()
@@ -751,7 +756,7 @@ def token_triangle_process(all_triangles, attributes, class_to_explain, predict_
 def lattice_stratified_process(depth, all_triangles, attributes, class_to_explain, predict_fn, sourcesMap, lprefix,
                                rprefix, num_threads=-1):
     results = Parallel(n_jobs=num_threads, prefer='threads')(
-        delayed(fast_token_perturbations_from_triangle)(
+        delayed(multiple_token_perturbations_depth)(
             triangle, sourcesMap, attributes, depth, class_to_explain, lprefix, rprefix, predict_fn
         ) for triangle in tqdm(all_triangles)
     )
@@ -863,10 +868,10 @@ def process_triangle(triangle: tuple, attributes: list, class_to_explain: int, p
         currentTokenPerturbations = token_perturbations_from_triangle(triangle, sourcesMap, attributes, max_len,
                                                                       class_to_explain, lprefix, rprefix)
         # currentTokenPerturbations = createPerturbationsFromTriangle(triangle, sourcesMap, attributes, attr_length, class_to_explain, lprefix, rprefix)
-        currPerturbedAttr = currentTokenPerturbations[['alteredAttributes', 'alteredTokens']].apply(
+        currPerturbedAttr = currentTokenPerturbations[['altered_attributes', 'altered_tokens']].apply(
             lambda x: ':'.join(x.dropna().astype(str)), axis=1).values
         predictions = predict_fn(currentTokenPerturbations)
-        predictions = predictions.drop(columns=['alteredAttributes', 'alteredTokens'])
+        predictions = predictions.drop(columns=['altered_attributes', 'altered_tokens'])
         proba = predictions[['nomatch_score', 'match_score']].values
         curr_flippedPredictions = currentTokenPerturbations[proba[:, class_to_explain] < 0.5]
         token_flippedPredictions.append(curr_flippedPredictions)
@@ -991,7 +996,7 @@ def explain_samples(dataset: pd.DataFrame, sources: list, predict_fn: callable, 
 
             if len(explanation) > 0:
                 if len(flipped_predictions) > 0:
-                    flipped_predictions['attr_count'] = flipped_predictions.alteredAttributes.astype(str) \
+                    flipped_predictions['attr_count'] = flipped_predictions.altered_attributes.astype(str) \
                         .str.split(',').str.len()
                     flipped_predictions = flipped_predictions.sort_values(by=['attr_count'])
                 if return_top:
@@ -1119,17 +1124,17 @@ def lattice_stratified_attribute(all_triangles, class_to_explain, sources_map, a
         perturbations_df = pd.concat(perturbations, ignore_index=True)
     except:
         perturbations_df = pd.DataFrame(perturbations)
-    if len(perturbations_df) > 0 and 'alteredAttributes' in perturbations_df.columns:
-        curr_perturbed_attr = perturbations_df.alteredAttributes.values
+    if len(perturbations_df) > 0 and 'altered_attributes' in perturbations_df.columns:
+        curr_perturbed_attr = perturbations_df.altered_attributes.values
         if no_combinations != attr_length:
             for c in ['ltable_id', 'rtable_id']:
                 if c in perturbations_df.columns:
                     perturbations_df = perturbations_df.drop([c], axis=1)
 
             predictions = predict_fn(
-                perturbations_df.drop(['alteredAttributes', 'droppedValues', 'copiedValues', 'triangle'], axis=1))
+                perturbations_df.drop(['altered_attributes', 'droppedValues', 'copiedValues', 'triangle'], axis=1))
             predictions = pd.concat(
-                [predictions, perturbations_df[['alteredAttributes', 'droppedValues', 'copiedValues', 'triangle']]],
+                [predictions, perturbations_df[['altered_attributes', 'droppedValues', 'copiedValues', 'triangle']]],
                 axis=1)
             all_predictions = pd.concat([all_predictions, predictions])
             proba = predictions[['nomatch_score', 'match_score']].values
@@ -1198,14 +1203,14 @@ def perturb_predict(all_triangles, attributes, check, class_to_explain, discard_
                 perturbations_df = pd.concat(perturbations, ignore_index=True)
             except:
                 perturbations_df = pd.DataFrame(perturbations)
-            if len(perturbations_df) == 0 or 'alteredAttributes' not in perturbations_df.columns:
+            if len(perturbations_df) == 0 or 'altered_attributes' not in perturbations_df.columns:
                 continue
-            curr_perturbed_attr = perturbations_df.alteredAttributes.values
+            curr_perturbed_attr = perturbations_df.altered_attributes.values
             if a != attr_length and not all_good:
                 predictions = predict_fn(
-                    perturbations_df.drop(['alteredAttributes', 'droppedValues', 'copiedValues', 'triangle'], axis=1))
+                    perturbations_df.drop(['altered_attributes', 'droppedValues', 'copiedValues', 'triangle'], axis=1))
                 predictions = pd.concat(
-                    [predictions, perturbations_df[['alteredAttributes', 'droppedValues', 'copiedValues', 'triangle']]],
+                    [predictions, perturbations_df[['altered_attributes', 'droppedValues', 'copiedValues', 'triangle']]],
                     axis=1)
                 all_predictions = pd.concat([all_predictions, predictions])
                 proba = predictions[['nomatch_score', 'match_score']].values
@@ -1262,9 +1267,9 @@ def perturb_predict(all_triangles, attributes, check, class_to_explain, discard_
             perturbations_df = pd.concat(perturbations, ignore_index=True)
         except:
             perturbations_df = pd.DataFrame(perturbations)
-        curr_perturbed_attr = perturbations_df.alteredAttributes.values
+        curr_perturbed_attr = perturbations_df.altered_attributes.values
         predictions = predict_fn(perturbations_df)
-        predictions = predictions.drop(columns=['alteredAttributes'])
+        predictions = predictions.drop(columns=['altered_attributes'])
         proba = predictions[['nomatch_score', 'match_score']].values
         curr_flipped_predictions = perturbations_df[proba[:, class_to_explain] < 0.5]
         flipped_predictions.append(curr_flipped_predictions)
