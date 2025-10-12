@@ -19,13 +19,17 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 class SelfExplainer(BaseLLMExplainer):
 
-    def __init__(self, model_type='azure_openai', temperature=0.01, max_length=512, fake=False, model_name="",
+    def __init__(self, model_type='azure_openai', temperature=0.01, fake=False, model_name="",
                  verbose=False, delegate=None, explanation_granularity="attribute", explainer_fn="self", prompts=None,
                  deployment_name="", model_version="2023-05-15"):
         self.fake = fake
         self.model_type = model_type
         if model_type == 'hf':
-            llm = HuggingFaceEndpoint(repo_id=model_name, task="text-generation",
+            if model_name.startswith('https://'):
+                llm = HuggingFaceEndpoint(endpoint_url=model_name, task="text-generation",
+                                          temperature=temperature, max_new_tokens=1024)
+            else:
+                llm = HuggingFaceEndpoint(repo_id=model_name, task="text-generation",
                                  temperature= temperature, max_new_tokens= 1024)
             self.llm = ChatHuggingFace(llm=llm, token=True)
         elif model_type == 'openai':
@@ -355,12 +359,18 @@ class SelfExplainer(BaseLLMExplainer):
                             saliency_content = saliency_answer[
                                                start_index + 3:saliency_answer.index('```', start_index + 3)]
                     saliency_dict = json.loads(saliency_content)
-                    saliency_explanation = saliency_dict
+                    if 'saliency_explanation' in saliency_dict:
+                        saliency_explanation = saliency_dict['saliency_explanation']
+                    else:
+                        saliency_explanation = saliency_dict
                 except:
                     try:
                         saliency = saliency_answer[saliency_answer.index("{"):saliency_answer.rfind("}") + 1]
                         saliency_dict = json.loads(saliency)
-                        saliency_explanation = saliency_dict
+                        if 'saliency_explanation' in saliency_dict:
+                            saliency_explanation = saliency_dict['saliency_explanation']
+                        else:
+                            saliency_explanation = saliency_dict
                     except:
                         pass
                 if self.verbose:
@@ -512,6 +522,8 @@ def parse_pase_answer(answer, llm):
             for a in split:
                 try:
                     json_answer = json.loads(a.replace('json', ''))
+                    if 'prediction' in json_answer and 'saliency_explanation' in json_answer and 'counterfactual_explanation' in json_answer:
+                        return json_answer['prediction'], json_answer['saliency_explanation'], json_answer['counterfactual_explanation']
                     return parse_pase_answer(json_answer, llm)
                 except:
                     if '}}' in a:

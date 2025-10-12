@@ -41,7 +41,7 @@ def get_tuples(xc):
 
 
 def text_to_data(answer, llm_fn):
-    template = ("transform the following content into a json with entries for: the matching prediction (key = 'matching'),"
+    template = ("transform the following content into a json with entries for: the matching prediction (key = 'prediction'),"
                 "the saliency explanation (key = 'saliency_explanation') as a dictionary, the counterfactual explanation "
                 "(key = 'counterfactual_explanation') as a dictionary."
                 "the matching prediction has to be either 1 for matching or 0 for non-matching."
@@ -51,7 +51,7 @@ def text_to_data(answer, llm_fn):
                 "e.g., {'ltable_abc':'foo bar', 'ltable_cde':'lorem ipsum', 'rtable_abc':'foo ban', 'rtable_cde':'lorem ipsum'})"
                 "in case of features with the same name, add 'ltable_' prefix to the former and 'rtable_' prefix to the latter."
                 "return only the json, here's the content: \"content\"")
-    json_str_answer = "{'matching': null, 'saliency_explanation': null, 'counterfactual_explanation': null}"
+    json_str_answer = "{'prediction': null, 'saliency_explanation': null, 'counterfactual_explanation': null}"
     try:
         json_str_answer = llm_fn.invoke(template.replace("content", answer))
         json_str_answer = json_str_answer.content
@@ -63,7 +63,9 @@ def text_to_data(answer, llm_fn):
     if json_str_answer.startswith('```json'):
         json_str_answer = json_str_answer.replace('```json','').replace('```','')
     answer_dict = json.loads(json_str_answer)
-    if 'matching' in answer_dict:
+    if 'prediction' in answer_dict:
+        prediction = answer_dict['prediction']
+    elif 'matching' in answer_dict:
         prediction = answer_dict['matching']
     elif 'is_match' in answer_dict:
         prediction = answer_dict['is_match']

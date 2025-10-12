@@ -40,7 +40,8 @@ class HybridCerta(FullCerta):
         pae_dicts = []
         for e in self.ellmers:
             for _ in range(self.num_draws):
-                pae_dict = e.predict_and_explain(ltuple, rtuple)['saliency']
+                full_answer = e.predict_and_explain(ltuple, rtuple)
+                pae_dict = full_answer['saliency']
                 pae_dicts.append(pae_dict)
 
         pae = self.delegate.predict_tuples(ltuple, rtuple)
@@ -102,10 +103,10 @@ class HybridCerta(FullCerta):
                 if 'token' == self.explanation_granularity:
                     token_attributes_filtered = []
                     for ff in filter_features:
-                        if ff.startswith('ltable_'):
-                            continue
-                        if ff.startswith('rtable_'):
-                            continue
+                        if ff.startswith('ltable_') and '__' in ff:
+                            token_attributes_filtered.append(ff)
+                        elif ff.startswith('rtable_') and '__' in ff:
+                            token_attributes_filtered.append(ff)
                         else:
                             for ic in ltuple.keys():
                                 if ff in ltuple[ic].split(' '):
@@ -114,6 +115,8 @@ class HybridCerta(FullCerta):
                                 if ff in rtuple[ic].split(' '):
                                     token_attributes_filtered.append(ic + '__' + ff)
                     filter_features = token_attributes_filtered
+                    if len(filter_features) == 0:
+                        continue
                 # regenerate support_samples, when empty
                 if support_samples is not None and len(support_samples) == 0:
                     support_samples = None
@@ -129,7 +132,7 @@ class HybridCerta(FullCerta):
                     saliency_explanation = saliency_df.to_dict('list')
                     if len(cfs) > 0:
                         cf_explanation = cfs.drop(
-                            ['alteredAttributes', 'droppedValues', 'copiedValues', 'triangle', 'attr_count'],
+                            ['altered_attributes', 'dropped_values', 'copied_values', 'triangle', 'attr_count'],
                             axis=1).iloc[0].T.to_dict()
                     print(saliency_explanation)
                     aggregated_pn = 0
