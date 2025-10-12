@@ -77,10 +77,43 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
 
         examples = []
 
+        # generate predictions and explanations
+        few_shot_no = 2
+        train_data_matching_df = train_df[train_df['label'] == 1][:few_shot_no]
+        train_data_non_matching_df = train_df[train_df['label'] == 0][:few_shot_no]
+        data_df = pd.concat([train_data_matching_df, train_data_non_matching_df])
+        ranged = range(len(data_df))
+        for idx in tqdm(ranged, disable=False):
+            try:
+                rand_row = data_df.iloc[[idx]]
+                ltuple, rtuple = ellmer.utils.get_tuples(rand_row)
+                answer_dictionary = full_certa.predict_and_explain(ltuple, rtuple)
+                prediction = answer_dictionary['prediction']
+                saliency_explanation = answer_dictionary['saliency']
+                cf_explanation = answer_dictionary['cf']
 
+                examples.append({"input": f"record1:\n{ltuple}\n record2:\n{rtuple}\n",
+                                 "prediction": prediction, "saliency": saliency_explanation,
+                                 "cf": cf_explanation})
+            except Exception:
+                traceback.print_exc()
+                print(f'error while finding few shot samples')
+
+        fs1 = ICLSelfExplainer(examples=examples,
+                               explanation_granularity=explanation_granularity,
+                               deployment_name=llm_config['deployment_name'],
+                               temperature=temperature,
+                               model_name=llm_config['model_name'],
+                               model_type=llm_config['model_type'],
+                               prompts={"fs": "ellmer/prompts/fs1.txt", "input":
+                                   "record1:\n{ltuple}\n record2:\n{rtuple}\n"})
 
         ellmers = {
-
+            "zs_" + llm_config['tag']: zeroshot,
+            "cot_" + llm_config['tag']: cot2,
+            "fs_" + llm_config['tag']: fs1,
+            "certa(cot)_" + llm_config['tag']: FullCerta(explanation_granularity, predict_only, certa,
+                                                                        num_triangles),
             "hybrid_" + llm_config['tag']: HybridCerta(explanation_granularity, cot, certa,
                                                                             [zeroshot, cot, cot2],
                                                                             num_triangles=num_triangles),
