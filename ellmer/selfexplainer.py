@@ -35,7 +35,7 @@ class SelfExplainer(BaseLLMExplainer):
         elif model_type == 'openai':
             self.llm = OpenAI(temperature=temperature, model_name=model_name)
         elif model_type == 'azure_openai':
-            self.llm = AzureChatOpenAI(deployment_name=deployment_name, model_name=model_name, request_timeout=30,
+            self.llm = AzureChatOpenAI(model_name=model_name, request_timeout=120,
                                        openai_api_version=model_version, temperature=temperature)
         elif model_type == 'delegate':
             self.llm = delegate
@@ -135,7 +135,7 @@ class SelfExplainer(BaseLLMExplainer):
                     pre_pred_t = time() - pre_pred_t
                     print(f'pre_prep_time:{pre_pred_t}')
                     pred_t = time()
-                answer = self.llm(messages)
+                answer = self.llm.invoke(messages)
                 if self.verbose:
                     pred_t = time() - pred_t
                     print(f'pred_time:{pred_t}')
@@ -210,7 +210,7 @@ class SelfExplainer(BaseLLMExplainer):
                     pre_pred_t = time() - pre_pred_t
                     print(f'er_pre_pred_time:{pre_pred_t}')
                     pred_t = time()
-                answer = self.llm(messages)
+                answer = self.llm.invoke(messages)
                 er_answer = answer.content
                 if self.verbose:
                     pred_t = time() - pred_t
@@ -228,7 +228,7 @@ class SelfExplainer(BaseLLMExplainer):
             self.pred_count += 1
 
             if len(er_answer) > 5:
-                conversation.append(("assistant", prediction))
+                conversation.append(("assistant", str(prediction)))
             else:
                 conversation.append(("assistant", er_answer))
 
@@ -261,7 +261,7 @@ class SelfExplainer(BaseLLMExplainer):
                         print(f'why_answer:{why_answer}')
                 elif self.model_type in ['hf']:
                     messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple,
-                                                        rtuple=rtuple)
+                                                        rtuple=rtuple, prediction=prediction)
                     why_answer = self.llm.invoke(messages).content
                     if '[/INST]' in why_answer:
                         try:
@@ -282,7 +282,7 @@ class SelfExplainer(BaseLLMExplainer):
                         pre_pred_t = time() - pre_pred_t
                         print(f'why_pre_pred_time:{pre_pred_t}')
                         pred_t = time()
-                    answer = self.llm(messages)
+                    answer = self.llm.invoke(messages)
                     if self.verbose:
                         pred_t = time() - pred_t
                         print(f'why_pred_time:{pred_t}')
@@ -340,7 +340,7 @@ class SelfExplainer(BaseLLMExplainer):
                         pre_pred_t = time() - pre_pred_t
                         print(f'saliency_pre_pred_time:{pre_pred_t}')
                         pred_t = time()
-                    answer = self.llm(messages)
+                    answer = self.llm.invoke(messages)
                     if self.verbose:
                         pred_t = time() - pred_t
                         print(f'saliency_pred_time:{pred_t}')
@@ -427,7 +427,7 @@ class SelfExplainer(BaseLLMExplainer):
                         pre_pred_t = time() - pre_pred_t
                         print(f'cf_pre_pred_time:{pre_pred_t}')
                         pred_t = time()
-                    answer = self.llm(messages)
+                    answer = self.llm.invoke(messages)
                     if self.verbose:
                         pred_t = time() - pred_t
                         print(f'cf_pred_time:{pred_t}')

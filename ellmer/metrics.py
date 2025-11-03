@@ -169,7 +169,7 @@ def get_concordance(pred1_file, pred2_file):
 
             # the similarity between the counterfactuals using different similarity metrics
             if cf1 is not None and cf2 is not None:
-                observation['cos_sim'] = cosine_similarity(list(cf1.values()), list(cf2.values()))[0]
+                observation['cos_sim'] = cosine_similarity(list(cf1.values()), list(cf2.values()))[0] # FIXME AttributeError: 'str' object has no attribute 'values'
 
             # examples that are particularly dissimilar (probably as the least similar 5% perc)
             # the similarity between counterfactuals in different groups (match, non-matching, disagree with label, etc.)
@@ -335,7 +335,7 @@ def get_cf_metrics(explainer_names: list, predict_fn, base_dir, test_set_df: pd.
                 if type(cfs[i]) == str:
                     continue
 
-                if len(cfs[i]) == 0 or len(cfs[i][0].keys()) == 0 or indexes[i] != i:
+                if len(cfs[i]) == 0 or len(cfs[i][0].keys()) == 0 or indexes[i] != i: # FIXME AttributeError: 'str' object has no attribute 'keys'
                     continue
 
                 instance = test_set_df.iloc[i].copy()

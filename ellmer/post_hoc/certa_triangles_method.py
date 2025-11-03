@@ -413,8 +413,9 @@ def full_token_perturbations_from_triangle(triangle_ids, sources_map, attributes
                     any(elem in attributes for elem in a['altered_attributes'])] # we select paths that also contain changed to allowed attributes
             if len(path) > 0:
                 all_perturbation_dfs.append(pd.DataFrame(path))
-    perturbations_df = pd.concat(all_perturbation_dfs, axis=0)
-    if perturbations_df.empty:
+    if len(all_perturbation_dfs) != 0:
+        perturbations_df = pd.concat(all_perturbation_dfs, axis=0)
+    else:
         return pd.DataFrame(), pd.DataFrame(), pd.DataFrame(), {}
 
     r2 = triangle[1].copy() # pivot record is untouched
