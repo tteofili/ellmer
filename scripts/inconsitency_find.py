@@ -15,9 +15,9 @@ import json
 import traceback
 from tqdm import tqdm
 import argparse
+import operator
 
-
-def eval(cache, samples, num_triangles, explanation_granularity, quantitative, base_dir, dataset_names, model_type,
+def find(cache, samples, num_triangles, explanation_granularity, quantitative, base_dir, dataset_names, model_type,
          model_name, deployment_name, tag, temperature):
     if cache == "memory":
         langchain.llm_cache = InMemoryCache()
@@ -56,62 +56,22 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
 
     for d in dataset_names:
         expdir = f'./experiments/{model_type}/{model_name}/{explanation_granularity}/{d}/{datetime.now():%Y%m%d}/{datetime.now():%H_%M}/'
-        obs_dir = f'experiments/{model_type}/{model_name}/{explanation_granularity}/concordance/{d}//{datetime.now():%Y%m%d}/{datetime.now():%H_%M}'
 
         print(f'using dataset {d}')
         dataset_dir = '/'.join([base_dir, d])
         lsource = pd.read_csv(dataset_dir + '/tableA.csv')
         rsource = pd.read_csv(dataset_dir + '/tableB.csv')
         test = pd.read_csv(dataset_dir + '/test.csv')
-        train = pd.read_csv(dataset_dir + '/train.csv')
 
         test_df = merge_sources(test, 'ltable_', 'rtable_', lsource, rsource, ['label'],
                                 [], samples=samples)
-        train_df = merge_sources(train, 'ltable_', 'rtable_', lsource, rsource, ['label'],
-                                 [], samples=samples)
 
         certa = LLMCertaExplainer(lsource, rsource)
 
-        full_certa = FullCerta(explanation_granularity, predict_only, certa, num_triangles,
-                               max_predict=100)
-
-        examples = []
-
-        # generate predictions and explanations
-        few_shot_no = 1
-        train_data_matching_df = train_df[train_df['label'] == 1][:few_shot_no]
-        train_data_non_matching_df = train_df[train_df['label'] == 0][:few_shot_no]
-        data_df = pd.concat([train_data_matching_df, train_data_non_matching_df])
-        ranged = range(len(data_df))
-        for idx in tqdm(ranged, disable=False):
-            try:
-                rand_row = data_df.iloc[[idx]]
-                ltuple, rtuple = ellmer.utils.get_tuples(rand_row)
-                answer_dictionary = full_certa.predict_and_explain(ltuple, rtuple)
-                prediction = answer_dictionary['prediction']
-                saliency_explanation = answer_dictionary['saliency']
-                cf_explanation = answer_dictionary['cf']
-
-                examples.append({"input": f"record1:\n{ltuple}\n record2:\n{rtuple}\n",
-                                 "prediction": prediction, "saliency": saliency_explanation,
-                                 "cf": cf_explanation})
-            except Exception:
-                traceback.print_exc()
-                print(f'error while finding few shot samples')
-
-        fs1 = ICLSelfExplainer(examples=examples,
-                               explanation_granularity=explanation_granularity,
-                               deployment_name=llm_config['deployment_name'],
-                               temperature=temperature,
-                               model_name=llm_config['model_name'],
-                               model_type=llm_config['model_type'],
-                               prompts={"fs": "ellmer/prompts/fs1.txt", "input":
-                                   "record1:\n{ltuple}\n record2:\n{rtuple}\n"})
 
         ellmers = {
             "zs_" + llm_config['tag']: zeroshot,
             "cot_" + llm_config['tag']: cot2,
-            "fs_" + llm_config['tag']: fs1,
             "certa_" + llm_config['tag']: FullCerta(explanation_granularity, predict_only, certa,
                                                          num_triangles),
             "hybrid_" + llm_config['tag']: HybridCerta(explanation_granularity, cot, certa,
@@ -119,19 +79,18 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
                                                        num_triangles=num_triangles),
         }
 
-        result_files = []
-        for key, llm in ellmers.items():
-            print(f'{key} on {d}')
-            curr_llm_results = []
-            start_time = time()
+        comparison_results = []
+        start_time = time()
 
-            # generate predictions and explanations
-            test_data_df = test_df[:samples]
-            ranged = range(len(test_data_df))
-            for idx in tqdm(ranged, disable=False):
-                try:
-                    rand_row = test_df.iloc[[idx]]
-                    ltuple, rtuple = ellmer.utils.get_tuples(rand_row)
+        # generate predictions and explanations
+        test_data_df = test_df[:samples]
+        ranged = range(len(test_data_df))
+        for idx in tqdm(ranged, disable=False):
+            comparison = {}
+            try:
+                rand_row = test_df.iloc[[idx]]
+                ltuple, rtuple = ellmer.utils.get_tuples(rand_row)
+                for key, llm in ellmers.items():
                     ptime = time()
                     answer_dictionary = llm.predict_and_explain(ltuple, rtuple)
                     ptime = time() - ptime
@@ -147,77 +106,62 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
                                 "latency": ptime, "conversation": conversation}
                     if "filter_features" in answer_dictionary:
                         row_dict["filter_features"] = answer_dictionary["filter_features"]
-                    curr_llm_results.append(row_dict)
-                except Exception:
-                    traceback.print_exc()
-                    print(f'error, waiting...')
-                    sleep(10)
-                    start_time += 10
+
+
+                    # attributes_dict = {}
+                    # for k,v in saliency.items():
+                    #     try:
+                    #         attributes_dict[k] = float(v)
+                    #     except:
+                    #         try:
+                    #             attributes_dict[k] = float(v[0])
+                    #         except:
+                    #             attributes_dict[k] = 0
+                    #             print(f'{v} is not a float in {saliency}')
+                    # if key.startswith('certa'):
+                    #     sorted_attributes_dict = sorted(attributes_dict.items(), key=operator.itemgetter(1),
+                    #                                     reverse=True)
+                    # else:
+                    #     sorted_attributes_dict = sorted(attributes_dict.items(), key=operator.itemgetter(1),
+                    #                                     reverse=prediction)
+                    # for top_k in range(10):
+                    #     top_k_attributes = sorted_attributes_dict[:top_k]
+                    #     row_copy = rand_row.copy()
+                    #     for t in top_k_attributes:
+                    #         split = t[0].split('__')
+                    #         if len(split) == 2:
+                    #             row_copy.at[split[0]] = rand_row[split[0]].replace(split[1], '')
+                    #         else:
+                    #             row_copy.at[t[0]] = ''
+
+
+                    comparison[key] = row_dict
+                comparison_results.append(comparison)
+            except Exception:
+                traceback.print_exc()
+                print(f'error, waiting...')
+                sleep(10)
+                start_time += 10
 
             total_time = time() - start_time
 
             os.makedirs(expdir, exist_ok=True)
-            llm_results = {"data": curr_llm_results, "total_time": total_time}
+            llm_results = {"data": comparison_results, "total_time": total_time}
 
-            output_file_path = expdir + key + '_results.json'
+            output_file_path = expdir + str(idx) + '_results.json'
             with open(output_file_path, 'w') as fout:
                 json.dump(llm_results, fout)
 
-            faithfulness = 'nan'
-            cf_metrics = {}
-            count_tokens_samples = 'nan'
-            predictions_samples = 'nan'
 
-            if quantitative:
-                # generate quantitative explainability metrics for each set of generated explanations
-
-                # generate saliency metrics
-                faithfulness = ellmer.metrics.get_faithfulness([key], llm.evaluation, expdir, test_data_df)
-                print(f'{key} faithfulness({key}):{faithfulness}')
-
-                # generate counterfactual metrics
-                cf_metrics = ellmer.metrics.get_cf_metrics([key], llm.predict, expdir, test_data_df)
-                print(f'{key} cf_metrics({key}):{cf_metrics}')
-
-                metrics_results = {"faithfulness": faithfulness, "counterfactual_metrics": cf_metrics}
-
-                count_tokens_samples = llm.count_tokens() / samples
-                predictions_samples = llm.count_predictions() / samples
-                llm_results = {"data": curr_llm_results, "total_time": total_time, "metrics": metrics_results,
-                               "tokens": count_tokens_samples, "predictions": predictions_samples}
-
-                output_file_path = expdir + key + '_results.json'
-                with open(output_file_path, 'w') as fout:
-                    json.dump(llm_results, fout)
-
-            result_files.append((key, output_file_path))
-            print(f'{key} data generated in {total_time}s')
-
-            row_dict = {"total_time": total_time, "tokens": count_tokens_samples, "predictions": predictions_samples,
-                        "faithfulness": faithfulness, "model": key, "dataset": d}
-            for cfk, cfv in cf_metrics.items():
-                row_dict[cfk] = cfv
+            row_dict = {"total_time": total_time, "dataset": d}
             eval_row = pd.Series(row_dict)
             evals.append(eval_row)
 
-        # generate concordance statistics for each pair of results
-        for pair in itertools.combinations(result_files, 2):
-            p1 = pair[0]
-            p1_name = p1[0]
-            p1_file = p1[1]
-            p2 = pair[1]
-            p2_name = p2[0]
-            p2_file = p2[1]
-            print(f'concordance statistics for {p1_name} - {p2_name}')
-            observations = ellmer.metrics.get_concordance(p1_file, p2_file)
-            print(f'{observations}')
-            os.makedirs(obs_dir, exist_ok=True)
-            observations.to_csv(f'{obs_dir}/{p1_name}_{p2_name}.csv')
 
     eval_df = pd.DataFrame(evals)
     eval_expdir = f'./experiments/{model_type}/{model_name}/{explanation_granularity}/{datetime.now():%Y%m%d}/{datetime.now():%H_%M}/'
     os.makedirs(eval_expdir, exist_ok=True)
-    eval_df.to_csv(eval_expdir + "eval.csv")
+    eval_df.to_csv(eval_expdir + "inconsistency.csv")
 
 
 if __name__ == "__main__":
@@ -262,5 +206,5 @@ if __name__ == "__main__":
     deployment_name = args.deployment_name
     tag = args.tag
 
-    eval(cache, samples, num_triangles, explanation_granularity, quantitative, base_dir, dataset_names, model_type,
+    find(cache, samples, num_triangles, explanation_granularity, quantitative, base_dir, dataset_names, model_type,
          model_name, deployment_name, tag, temperature)
