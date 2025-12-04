@@ -265,41 +265,43 @@ def get_faithfulness(saliency_names: list, eval_fn, base_dir: str, test_set_df: 
             top_k = max(1, int(threshold * attr_len))
             test_set_df_c = test_set_df.copy().astype(str)
             for i in range(len(predictions)):
-                if int(predictions[i]) == 0:
-                    reverse = False
-                attributes_dict = dict()
-                sal_dict = saliencies[i]
-                if type(sal_dict) == str:
-                    continue
-                for k,v in sal_dict.items():
-                    try:
-                        attributes_dict[k] = float(v)
-                    except:
+                try:
+                    if int(predictions[i]) == 0:
+                        reverse = False
+                    attributes_dict = dict()
+                    sal_dict = saliencies[i]
+                    if type(sal_dict) == str:
+                        continue
+                    for k,v in sal_dict.items():
                         try:
-                            attributes_dict[k] = float(v[0])
+                            attributes_dict[k] = float(v)
                         except:
-                            attributes_dict[k] = 0
-                            print(f'{v} is not a float in {sal_dict}')
-                if saliency.startswith('certa'):
-                    sorted_attributes_dict = sorted(attributes_dict.items(), key=operator.itemgetter(1),
-                                                    reverse=True)
-                else:
-                    sorted_attributes_dict = sorted(attributes_dict.items(), key=operator.itemgetter(1),
-                                                    reverse=reverse)
-                top_k_attributes = sorted_attributes_dict[:top_k]
-                for t in top_k_attributes:
-                    split = t[0].split('__')
-                    if len(split) == 2:
-                        test_set_df_c.at[i, split[0]] = test_set_df_c.iloc[i][split[0]].replace(split[1], '')
+                            try:
+                                attributes_dict[k] = float(v[0])
+                            except:
+                                attributes_dict[k] = 0
+                                print(f'{v} is not a float in {sal_dict}')
+                    if saliency.startswith('certa'):
+                        sorted_attributes_dict = sorted(attributes_dict.items(), key=operator.itemgetter(1),
+                                                        reverse=True)
                     else:
-                        test_set_df_c.at[i, t[0]] = ''
+                        sorted_attributes_dict = sorted(attributes_dict.items(), key=operator.itemgetter(1),
+                                                        reverse=reverse)
+                    top_k_attributes = sorted_attributes_dict[:top_k]
+                    for t in top_k_attributes:
+                        split = t[0].split('__')
+                        if len(split) == 2:
+                            test_set_df_c.at[i, split[0]] = test_set_df_c.iloc[i][split[0]].replace(split[1], '')
+                        else:
+                            test_set_df_c.at[i, t[0]] = ''
+                except:
+                    pass
             try:
                 evaluation = eval_fn(test_set_df_c)
                 model_scores.append(evaluation)
             except Exception as e:
                 print(f'skipped faithfulness for {saliency}: {e}')
                 traceback.print_exc()
-                model_scores.append(evaluation)
         if len(thresholds) == len(model_scores):
             auc_sal = auc(thresholds, model_scores)
             aucs[saliency] = auc_sal

@@ -7,6 +7,9 @@ import numpy as np
 import pandas as pd
 from joblib import Parallel, delayed
 from ellmer.post_hoc.utils import diff, get_row
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.preprocessing import normalize
 
 
 def get_original_prediction(r1, r2, predict_fn):
@@ -82,6 +85,7 @@ def support_predictions(r1: pd.Series, r2: pd.Series, lsource: pd.DataFrame,
 
 WORD = re.compile(r'\w+')
 
+
 def find_similarities(test_df: pd.DataFrame, strict: bool):
     lprefix = 'ltable_'
     rprefix = 'rtable_'
@@ -94,9 +98,24 @@ def find_similarities(test_df: pd.DataFrame, strict: bool):
     r_string_test_df = test_df[r_columns].astype('str').agg(' '.join, axis=1)
     label_df = test_df['label']
 
-    merged_string = pd.concat([l_string_test_df, r_string_test_df, label_df], ignore_index=True, axis=1)
+    # vectorized similarity calculation
+    vectorizer = CountVectorizer(token_pattern=r'\w+')
+    # fit on all text to ensure vocabulary consistency
+    all_text = pd.concat([l_string_test_df, r_string_test_df])
+    vectorizer.fit(all_text)
 
-    sim_df = merged_string.apply(lambda x: get_cosine(x[0], x[1]), axis=1)
+    l_vectors = vectorizer.transform(l_string_test_df)
+    r_vectors = vectorizer.transform(r_string_test_df)
+
+    # normalize vectors to unit length for cosine similarity
+    l_vectors = normalize(l_vectors)
+    r_vectors = normalize(r_vectors)
+
+    # row-wise dot product
+    sim_scores = np.asarray(l_vectors.multiply(r_vectors).sum(axis=1)).flatten()
+    sim_df = pd.Series(sim_scores)
+
+    merged_string = pd.concat([l_string_test_df, r_string_test_df, label_df], ignore_index=True, axis=1)
 
     tuples_ls_df = pd.concat([merged_string, sim_df], ignore_index=True, axis=1)
 
@@ -133,22 +152,28 @@ def text_to_vector(text):
     words = WORD.findall(text)
     return Counter(words)
 
+
 def find_candidates(record, source, min_similarity, find_positives):
     record2text = " ".join([val for k, val in record.to_dict().items() if k not in ['id']])
     source_without_id = source.copy()
     source_without_id = source_without_id.drop(['id'], axis=1)
     source_ids = source.id.values
-    # for a faster iteration
-    source_without_id = source_without_id.values
+
+    # vectorized candidate finding
+    source_docs = source_without_id.astype(str).agg(' '.join, axis=1)
+    vectorizer = CountVectorizer(token_pattern=r'\w+')
+    all_docs = [record2text] + source_docs.tolist()
+    tfidf_matrix = vectorizer.fit_transform(all_docs)
+
+    cosine_sims = cosine_similarity(tfidf_matrix[0:1], tfidf_matrix[1:]).flatten()
+
     candidates = []
-    for idx, row in enumerate(source_without_id):
-        currentRecord = " ".join(row)
-        currentSimilarity = get_cosine(record2text, currentRecord)
+    for idx, score in enumerate(cosine_sims):
         if find_positives:
-            if currentSimilarity >= min_similarity:
+            if score >= min_similarity:
                 candidates.append((record['id'], source_ids[idx]))
         else:
-            if currentSimilarity < min_similarity:
+            if score < min_similarity:
                 candidates.append((record['id'], source_ids[idx]))
     return pd.DataFrame(candidates, columns=['ltable_id', 'rtable_id'])
 
@@ -156,33 +181,42 @@ def find_candidates(record, source, min_similarity, find_positives):
 def find_candidates_predict(record, source, find_positives, predict_fn, num_candidates, lj=True, scored: bool = True,
                             max_predict=-1, lprefix='ltable_', rprefix='rtable_', batched: bool = True,
                             num_threads: int = -1, llm=None):
+    # optimize by filtering source first before creating full pair dataframe
+    source_copy = source.copy()
+
+    if max_predict > 0:
+        source_copy = source_copy.sample(frac=1)[:max_predict]
+
+    if scored:
+        record_text = record_to_text(record)
+        # use vectorized cosine similarity
+        source_texts = source_copy.astype(str).agg(' '.join, axis=1).tolist()
+        vectorizer = CountVectorizer(token_pattern=r'\w+')
+        all_docs = [record_text] + source_texts
+        matrix = vectorizer.fit_transform(all_docs)
+        scores = cosine_similarity(matrix[0:1], matrix[1:]).flatten()
+
+        source_copy['__score'] = scores
+        source_copy = source_copy.sort_values(by='__score', ascending=not find_positives)
+        source_copy = source_copy.drop(['__score'], axis=1)
+
+    source_copy = source_copy[:num_candidates * 100]
+
     if lj:
-        prefix = rprefix
-        records = pd.DataFrame([record] * len(source))
-        copy = source.copy()
+        records = pd.DataFrame([record] * len(source_copy))
+        copy = source_copy.copy()
         records.columns = list(map(lambda col: lprefix + col, records.columns))
         copy.columns = list(map(lambda col: rprefix + col, copy.columns))
         records.index = copy.index
         samples = pd.concat([records, copy], axis=1)
     else:
-        prefix = lprefix
-        copy = source.copy()
-        records = pd.DataFrame([record] * len(source))
+        copy = source_copy.copy()
+        records = pd.DataFrame([record] * len(source_copy))
         records.index = copy.index
         copy.columns = list(map(lambda col: lprefix + col, copy.columns))
         records.columns = list(map(lambda col: rprefix + col, records.columns))
         samples = pd.concat([copy, records], axis=1)
 
-    if max_predict > 0:
-        samples = samples.sample(frac=1)[:max_predict]
-
-    record_text = record_to_text(record)
-    if scored:
-        samples['score'] = samples.filter(regex='^' + prefix).T.apply(lambda row: cs(record_text, record_to_text(row)))
-        samples = samples.sort_values(by='score', ascending=not find_positives)
-        samples = samples.drop(['score'], axis=1)
-
-    samples = samples[:num_candidates * 100]
     result = pd.DataFrame()
     if batched:
         batch = num_candidates * 4

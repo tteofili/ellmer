@@ -84,7 +84,7 @@ class LLMCertaExplainer(object):
             pns, pss, cf_ex, triangles = certa_triangles_method.explain_samples(support_samples, extended_sources, predict_fn,
                                                                                 lprefix, rprefix, pc, attr_length,
                                                                                 persist_predictions=debug, token=token,
-                                                                                filter_features=filter_features)
+                                                                                filter_features=filter_features, two_step_token=two_step_token,)
             cf_summary = certa_triangles_method.cf_summary(pss)
             saliency_df = pd.DataFrame(data=[pns.values()], columns=pns.keys())
             if len(cf_ex) > 0:

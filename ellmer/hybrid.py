@@ -127,7 +127,8 @@ class HybridCerta(FullCerta):
                                                                                            num_triangles=num_triangles,
                                                                                            max_predict=max_predict,
                                                                                            filter_features=filter_features,
-                                                                                           support_samples=support_samples)
+                                                                                           support_samples=support_samples,
+                                                                                           two_step_token=False)
                 if len(saliency_df) > 0 and len(cf_summary) > 0:
                     saliency_explanation = saliency_df.to_dict('list')
                     if len(cfs) > 0:

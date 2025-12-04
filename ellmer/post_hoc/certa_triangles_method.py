@@ -135,8 +135,8 @@ def create_perturbations_from_triangle(triangleIds, sourcesMap, attributes, max_
         all_perturbations = pd.concat([r2_df, perturbations_df], axis=1)
     all_perturbations = all_perturbations.drop([lprefix + 'id', rprefix + 'id'], axis=1)
     all_perturbations['altered_attributes'] = perturbed_attributes
-    all_perturbations['droppedValues'] = dropped_values
-    all_perturbations['copiedValues'] = copied_values
+    all_perturbations['dropped_values'] = dropped_values
+    all_perturbations['copied_values'] = copied_values
 
     return all_perturbations
 
@@ -256,16 +256,16 @@ def token_perturbations_from_triangle(triangle_ids, sources_map, attributes, max
             all_perturbations = pd.concat([r2_df, perturbations_df], axis=1)
         all_perturbations = all_perturbations.drop([lprefix + 'id', rprefix + 'id'], axis=1)
     all_perturbations['altered_attributes'] = perturbed_attributes
-    all_perturbations['droppedValues'] = droppedValues
-    all_perturbations['copiedValues'] = copiedValues
+    all_perturbations['dropped_values'] = droppedValues
+    all_perturbations['copied_values'] = copiedValues
     all_perturbations['triangle'] = ' '.join(triangle_ids)
 
     currPerturbedAttr = all_perturbations.altered_attributes.values
     try:
         predictions = predict_fn(
-            all_perturbations.drop(['altered_attributes', 'droppedValues', 'copiedValues', 'triangle'], axis=1))
+            all_perturbations.drop(['altered_attributes', 'dropped_values', 'copied_values', 'triangle'], axis=1))
         predictions = pd.concat(
-            [predictions, all_perturbations[['altered_attributes', 'droppedValues', 'copiedValues', 'triangle']]],
+            [predictions, all_perturbations[['altered_attributes', 'dropped_values', 'copied_values', 'triangle']]],
             axis=1)
 
         proba = predictions[['nomatch_score', 'match_score']].values
@@ -882,6 +882,16 @@ def process_triangle(triangle: tuple, attributes: list, class_to_explain: int, p
     return pd.DataFrame(predictions_list), token_flippedPredictions, token_rankings
 
 
+def tok2attr_columns(filter_features):
+    new_attr_features = []
+    for f in filter_features:
+        if '__' in f:
+            new_attr_features.append(f.split('__')[0])
+        else:
+            new_attr_features.append(f)
+    return new_attr_features
+
+
 def explain_samples(dataset: pd.DataFrame, sources: list, predict_fn: callable, lprefix, rprefix,
                     class_to_explain: int, attr_length: int, check: bool = False,
                     discard_bad: bool = False, return_top: bool = False, persist_predictions: bool = False,
@@ -896,8 +906,9 @@ def explain_samples(dataset: pd.DataFrame, sources: list, predict_fn: callable, 
     if two_step_token:
         attributes = [col for col in list(sources[0]) if col not in [lprefix + 'id']]
         attributes += [col for col in list(sources[1]) if col not in [rprefix + 'id']]
-        if filter_features is not None:
-            attributes = list(set(attributes).intersection(set(filter_features)))
+        attr_filter_features = tok2attr_columns(filter_features)
+        if attr_filter_features is not None:
+            attributes = list(set(attributes).intersection(set(attr_filter_features)))
             attr_length = len(attributes)
 
         if len(all_triangles) > 0:
@@ -953,12 +964,7 @@ def explain_samples(dataset: pd.DataFrame, sources: list, predict_fn: callable, 
     if token:
         record = pd.DataFrame(dataset.iloc[0]).T
         # we need to map records from series of attributes into series of tokens, attribute names are mapped to "original" token names
-        attributes = []
-        for column in record.columns:
-            if column not in ['label', 'id', lprefix + 'id', rprefix + 'id']:
-                tokens = str(record[column].values[0]).split(' ')
-                for t in tokens:
-                    attributes.append(column + '__' + t)
+        attributes = attr2token_columns(lprefix, record, rprefix)
         if filter_features is not None:
             attributes_new = []
             for f in filter_features:
@@ -1012,6 +1018,16 @@ def explain_samples(dataset: pd.DataFrame, sources: list, predict_fn: callable, 
         else:
             logging.warning(f'empty triangles !?')
             return dict(), pd.DataFrame(), pd.DataFrame(), []
+
+
+def attr2token_columns(lprefix, record, rprefix):
+    attributes = []
+    for column in record.columns:
+        if column not in ['label', 'id', lprefix + 'id', rprefix + 'id']:
+            tokens = str(record[column].values[0]).split(' ')
+            for t in tokens:
+                attributes.append(column + '__' + t)
+    return attributes
 
 
 def token_level_expl(pair, all_triangles, attr_length, attributes, class_to_explain, lprefix, persist_predictions,
@@ -1133,9 +1149,9 @@ def lattice_stratified_attribute(all_triangles, class_to_explain, sources_map, a
                     perturbations_df = perturbations_df.drop([c], axis=1)
 
             predictions = predict_fn(
-                perturbations_df.drop(['altered_attributes', 'droppedValues', 'copiedValues', 'triangle'], axis=1))
+                perturbations_df.drop(['altered_attributes', 'dropped_values', 'copied_values', 'triangle'], axis=1))
             predictions = pd.concat(
-                [predictions, perturbations_df[['altered_attributes', 'droppedValues', 'copiedValues', 'triangle']]],
+                [predictions, perturbations_df[['altered_attributes', 'dropped_values', 'copied_values', 'triangle']]],
                 axis=1)
             all_predictions = pd.concat([all_predictions, predictions])
             proba = predictions[['nomatch_score', 'match_score']].values
@@ -1209,9 +1225,9 @@ def perturb_predict(all_triangles, attributes, check, class_to_explain, discard_
             curr_perturbed_attr = perturbations_df.altered_attributes.values
             if a != attr_length and not all_good:
                 predictions = predict_fn(
-                    perturbations_df.drop(['altered_attributes', 'droppedValues', 'copiedValues', 'triangle'], axis=1))
+                    perturbations_df.drop(['altered_attributes', 'dropped_values', 'copied_values', 'triangle'], axis=1))
                 predictions = pd.concat(
-                    [predictions, perturbations_df[['altered_attributes', 'droppedValues', 'copiedValues', 'triangle']]],
+                    [predictions, perturbations_df[['altered_attributes', 'dropped_values', 'copied_values', 'triangle']]],
                     axis=1)
                 all_predictions = pd.concat([all_predictions, predictions])
                 proba = predictions[['nomatch_score', 'match_score']].values
