@@ -1031,7 +1031,7 @@ def attr2token_columns(lprefix, record, rprefix):
 
 
 def token_level_expl(pair, all_triangles, attr_length, attributes, class_to_explain, lprefix, persist_predictions,
-                     predict_fn, return_top, rprefix, sourcesMap, num_paths=5):
+                     predict_fn, return_top, rprefix, sourcesMap, num_paths=3):
     flipped_predictions, rankings, all_predictions = triangle_parallel_token_explain(pair, all_triangles, attributes,
                                                                                      class_to_explain, predict_fn, sourcesMap,
                                                                                      lprefix, rprefix, num_paths=num_paths)

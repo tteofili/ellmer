@@ -1,20 +1,22 @@
+import argparse
 import itertools
-from langchain.cache import InMemoryCache, SQLiteCache
+import json
+import os
+import traceback
+from datetime import datetime
+from time import sleep, time
+
 import langchain
 import pandas as pd
-from ellmer.utils import merge_sources
-from ellmer.post_hoc.certa_explain import LLMCertaExplainer
-from datetime import datetime
-import os
-from ellmer.selfexplainer import SelfExplainer, ICLSelfExplainer
+from langchain.cache import InMemoryCache, SQLiteCache
+from tqdm import tqdm
+
+import ellmer.metrics
 from ellmer.full_certa import FullCerta
 from ellmer.hybrid import HybridCerta
-import ellmer.metrics
-from time import sleep, time
-import json
-import traceback
-from tqdm import tqdm
-import argparse
+from ellmer.post_hoc.certa_explain import LLMCertaExplainer
+from ellmer.selfexplainer import SelfExplainer, ICLSelfExplainer
+from ellmer.utils import merge_sources
 
 
 def eval(cache, samples, num_triangles, explanation_granularity, quantitative, base_dir, dataset_names, model_type,
@@ -113,7 +115,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
             "cot_" + llm_config['tag']: cot2,
             "fs_" + llm_config['tag']: fs1,
             "certa_" + llm_config['tag']: FullCerta(explanation_granularity, predict_only, certa,
-                                                         num_triangles),
+                                                    num_triangles),
             "hybrid_" + llm_config['tag']: HybridCerta(explanation_granularity, cot, certa,
                                                        [zeroshot, cot, cot2],
                                                        num_triangles=num_triangles),
@@ -184,7 +186,8 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
                 count_tokens_samples = llm.count_tokens() / samples
                 predictions_samples = llm.count_predictions() / samples
                 llm_results = {"data": curr_llm_results, "total_time": total_time, "metrics": metrics_results,
-                               "tokens": count_tokens_samples, "predictions": predictions_samples}
+                               "tokens": count_tokens_samples, "predictions": predictions_samples,
+                               "avg_latency": total_time / samples}
 
                 output_file_path = expdir + key + '_results.json'
                 with open(output_file_path, 'w') as fout:
