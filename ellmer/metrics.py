@@ -300,7 +300,7 @@ def get_faithfulness(saliency_names: list, eval_fn, base_dir: str, test_set_df: 
                 evaluation = eval_fn(test_set_df_c)
                 model_scores.append(evaluation)
             except Exception as e:
-                print(f'skipped faithfulness for {saliency}: {e}')
+                print(f'skipped faithfulness @{threshold} for {saliency}: {e}')
                 traceback.print_exc()
         if len(thresholds) == len(model_scores):
             auc_sal = auc(thresholds, model_scores)
