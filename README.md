@@ -34,5 +34,7 @@ Other optional parameters can be specified in the [script](scripts/eval.py#l160)
 
 # Notebooks
 
-* [ChatGPT self-explanations prompt sensitivity](notebooks/examples.ipynb).
+* [ChatGPT self-explanations prompt sensitivity](notebooks/self_expl_prompt_variance.ipynb).
+* [ChatGPT self-explanations vs post_hoc attribute consistency](notebooks/example_attribute.ipynb).
+* [ChatGPT self-explanations vs post_hoc token consistency](notebooks/example_token.ipynb).
 

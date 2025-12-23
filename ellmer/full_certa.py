@@ -70,7 +70,14 @@ class FullCerta(BaseLLMExplainer):
                         elif len(new_filtered_df) > 0:
                             filtered_df = new_filtered_df
                 if len(filtered_df) > 0:
-                    return filtered_df.drop_duplicates().iloc[0]
+                    filtered_d_df = filtered_df.drop_duplicates()
+                    if len(filtered_d_df) > 1:
+                        print(f'warning: found more than 1 filtered item!({len(filtered_d_df)})')
+                        print(filtered_d_df)
+                        print(f'getting first one')
+                        return filtered_d_df.iloc[0]
+                    else:
+                        return filtered_d_df.iloc[0]
         else:
             return result.iloc[0]
 

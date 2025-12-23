@@ -1,10 +1,10 @@
 import logging
-
 import numpy as np
 import pandas as pd
 
 from ellmer.post_hoc import certa_local_support, certa_triangles_method
 from ellmer.post_hoc.utils import lattice, get_row
+
 
 class LLMCertaExplainer(object):
 
