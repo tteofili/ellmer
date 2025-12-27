@@ -84,7 +84,7 @@ class SelfExplainer(BaseLLMExplainer):
             _, prediction = ellmer.utils.text_to_match(er_answer, self.llm)
             self.pred_count += 1
             self.tokens += sum([len(m[1].split(' ')) for m in conversation])  # input tokens
-            self.tokens += sum(ltuple.split(' ')) + sum(rtuple.split(' '))
+            self.tokens += len(str(ltuple).split(' ')) + len(str(rtuple).split(' '))
             self.tokens += len(er_answer.split(' '))  # output tokens
         else:
             prediction = self.predict_and_explain(ltuple, rtuple)['prediction']
@@ -153,7 +153,7 @@ class SelfExplainer(BaseLLMExplainer):
                 print(f'empty prediction!\nquestion{question}\nconversation{conversation}')
             self.pred_count += 1
             self.tokens += sum([len(m[1].split(' ')) for m in conversation])  # input tokens
-            self.tokens += sum(ltuple.split(' ')) + sum(rtuple.split(' '))
+            self.tokens += len(str(ltuple).split(' ')) + len(str(rtuple).split(' '))
             self.tokens += len(content.split(' '))  # output tokens
             try:
                 saliency_explanation = dict([(x[0], x[1]['saliency']) for x in list(saliency_explanation.items())])
@@ -484,7 +484,7 @@ class SelfExplainer(BaseLLMExplainer):
                 self.pred_count += 1
 
             self.tokens += sum([len(m[1].split(' ')) for m in conversation])
-            self.tokens += sum(ltuple.split(' ')) + sum(rtuple.split(' '))
+            self.tokens += len(str(ltuple).split(' ')) + len(str(rtuple).split(' '))
             try:
                 saliency_explanation = dict([(x[0], x[1]['saliency']) for x in list(saliency_explanation.items())])
             except:
@@ -645,7 +645,7 @@ class ICLSelfExplainer(SelfExplainer):
         conversation = [str(m) for m in final_prompt.messages]
         conversation.append(formatted_question)
         self.tokens += sum([len(str(m).split(' ')) for m in final_prompt.messages])  # input tokens
-        self.tokens += sum(ltuple.split(' ')) + sum(rtuple.split(' '))
+        self.tokens += len(str(ltuple).split(' ')) + len(str(rtuple).split(' '))
         answer_content = answer.content
         conversation.append(answer_content)
         self.tokens += len(answer.content.split(' '))  # output tokens

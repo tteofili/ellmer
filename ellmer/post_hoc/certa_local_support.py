@@ -200,7 +200,7 @@ def find_candidates_predict(record, source, find_positives, predict_fn, num_cand
         source_copy = source_copy.sort_values(by='__score', ascending=not find_positives)
         source_copy = source_copy.drop(['__score'], axis=1)
 
-    source_copy = source_copy[:num_candidates * 100]
+    source_copy = source_copy[:num_candidates * 2]
 
     if lj:
         records = pd.DataFrame([record] * len(source_copy))
