@@ -1,7 +1,7 @@
 import pandas as pd
 from datasets import load_dataset
 
-def export_wdc_cameras(output_dir: str = "../datasets/wdc", name: str = "watches_small"):
+def export_wdc(output_dir: str = "../datasets/wdc", name: str = "cameras_large"):
     output_dir = output_dir + f"/{name}"
     lsource_data = []
     rsource_data = []
@@ -51,4 +51,4 @@ def export_wdc_cameras(output_dir: str = "../datasets/wdc", name: str = "watches
     pd.concat(rsource_data).to_csv(os.path.join(output_dir, "tableB.csv"), index=False)
 
 if __name__ == "__main__":
-    export_wdc_cameras()
+    export_wdc()
