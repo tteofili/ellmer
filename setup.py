@@ -24,7 +24,9 @@ setuptools.setup(
           'safetensors',
           'torch',
           'openai',
-          'nltk'
+          'nltk',
+          'langchain',
+          'langchain_huggingface'
       ],
     classifiers=[
         "Programming Language :: Python :: 3",

@@ -30,7 +30,7 @@ class SelfExplainer(BaseLLMExplainer):
                                           temperature=temperature, max_new_tokens=1024)
             else:
                 llm = HuggingFaceEndpoint(repo_id=model_name, task="text-generation",
-                                 temperature= temperature, max_new_tokens= 1024)
+                                 temperature= temperature, max_new_tokens= 1024, provider="auto")
             self.llm = ChatHuggingFace(llm=llm, token=True)
         elif model_type == 'openai':
             self.llm = OpenAI(temperature=temperature, model_name=model_name)
