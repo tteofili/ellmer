@@ -16,7 +16,7 @@ def get_attribute_from_token(token_feat):
     return token_feat.split("__")[0]
 
 
-def topk_attr_token_overlap(token_sal, attr_sal, k_tokens=20, k_attrs=3):
+def topk_attr_token_overlap(token_sal, attr_sal, k_tokens=30, k_attrs=3):
     # flatten token saliency
     token_sal = {k: flatten(v) for k, v in token_sal.items()}
     attr_sal = {k: flatten(v) for k, v in attr_sal.items()}
@@ -266,6 +266,20 @@ precomputed_data = {
             "../experiments/azure_openai/gpt-5-nano/attribute/watches_small/20251223/17_40/",
         ],
     ],
+    "llama-3.1": [
+        [
+            "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/token/walmart_amazon/20260103/00_53/",
+            "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/attribute/walmart_amazon/20260102/14_25/",
+        ],
+        [
+            "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/token/fodo_zaga/20260102/15_27/",
+            "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/attribute/fodo_zaga/20260103/01_50/",
+        ],
+        [
+            "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/token/abt_buy/20260103/03_05/",
+            "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/attribute/abt_buy/20260102/16_56/",
+        ],
+    ]
 }
 
 if __name__ == '__main__':
