@@ -2,6 +2,9 @@ import json
 import re
 from collections import defaultdict
 
+import pandas as pd
+
+
 # -----------------------------
 # Utility functions
 # -----------------------------
@@ -12,16 +15,23 @@ def tokenize(text):
         return set()
     return set(re.findall(r"\w+", text.lower()))
 
+
 def extract_tokens_from_record(record, side):
     """
     Extract token sets per attribute from a record.
     Returns: { f"{side}_{attr}": set(tokens) }
     """
     tokens = {}
+    if type(record) == str:
+        try:
+            record = json.loads(record)
+        except json.decoder.JSONDecodeError:
+            return dict()
     for k, v in record.items():
         if k.startswith(f"{side}_") and isinstance(v, str):
             tokens[k] = tokenize(v)
     return tokens
+
 
 def get_counterfactual_changed_tokens(original, cf, side):
     """
@@ -44,6 +54,7 @@ def get_counterfactual_changed_tokens(original, cf, side):
 
     return changed
 
+
 # -----------------------------
 # Metrics
 # -----------------------------
@@ -56,22 +67,30 @@ def top_k_overlap(saliency, changed_tokens, k):
     if not changed_tokens:
         return 0.0
 
-    ranked = sorted(saliency.items(), key=lambda x: x[1], reverse=True)
-    top_k = {feat for feat, _ in ranked[:k]}
+    try:
+        ranked = sorted(saliency.items(), key=lambda x: x[1], reverse=True)
+        top_k = {feat for feat, _ in ranked[:k]}
 
-    return len(top_k & changed_tokens) / len(changed_tokens)
+        return len(top_k & changed_tokens) / len(changed_tokens)
+    except:
+        return 0.0
+
 
 def attribution_mass_on_cf(saliency, changed_tokens):
     """
     Attribution mass on counterfactual tokens:
     sum saliency on CF tokens / total saliency mass
     """
-    total_mass = sum(saliency.values())
-    if total_mass == 0:
+    try:
+        total_mass = sum(saliency.values())
+        if total_mass == 0:
+            return 0.0
+
+        cf_mass = sum(v for f, v in saliency.items() if f in changed_tokens)
+        return cf_mass / total_mass
+    except:
         return 0.0
 
-    cf_mass = sum(v for f, v in saliency.items() if f in changed_tokens)
-    return cf_mass / total_mass
 
 # -----------------------------
 # Main computation
@@ -84,20 +103,29 @@ def flatten(param):
         return param
 
 
-def compute_metrics(json_path, k=10):
+def compute_metrics(json_path, k=10, granularity='token'):
     with open(json_path) as f:
         data = json.load(f)["data"]
 
     results = []
 
     for item in data:
+        if type(item['saliency']) == str:
+            continue
+
         # --- saliency (flatten lists) ---
         saliency = {k: flatten(v) for k, v in item["saliency"].items()}
 
         # --- original records ---
         original = {}
-        original.update(dict(map(lambda item: ("ltable_" + item[0], item[1]), item['ltuple'].items())))
-        original.update(dict(map(lambda item: ("rtable_" + item[0], item[1]), item['rtuple'].items())))
+        if list(item['ltuple'].keys())[0].startswith('ltable_'):
+            original.update({k: v for k, v in item['ltuple'].items()})
+        else:
+            original.update(dict(map(lambda item: ("ltable_" + item[0], item[1]), item['ltuple'].items())))
+        if list(item['rtuple'].keys())[0].startswith('rtable_'):
+            original.update({k: v for k, v in item['rtuple'].items()})
+        else:
+            original.update(dict(map(lambda item: ("rtable_" + item[0], item[1]), item['rtuple'].items())))
 
         # --- assume 1 counterfactual per instance ---
         cf = item["cfs"][0]
@@ -109,6 +137,17 @@ def compute_metrics(json_path, k=10):
         changed_tokens |= get_counterfactual_changed_tokens(original, cf, "ltable")
         changed_tokens |= get_counterfactual_changed_tokens(original, cf, "rtable")
 
+        if granularity == 'attribute':
+            changed_tokens = set([t.split('__')[0] for t in changed_tokens])
+            new_saliency = {}
+            for tk, v in saliency.items():
+                attrib = tk.split('__')[0]
+                if attrib not in new_saliency:
+                    new_saliency[attrib] = v
+                else:
+                    new_saliency[attrib] = new_saliency[attrib] + v
+            saliency = new_saliency
+
         tk = top_k_overlap(saliency, changed_tokens, k)
         mass = attribution_mass_on_cf(saliency, changed_tokens)
 
@@ -119,14 +158,19 @@ def compute_metrics(json_path, k=10):
             "num_cf_tokens": len(changed_tokens)
         })
 
-    # Aggregate
-    avg_topk = sum(r["top_k_overlap"] for r in results) / len(results)
-    avg_mass = sum(r["attribution_mass_cf"] for r in results) / len(results)
+    if len(results) > 0:
+        # Aggregate
+        avg_topk = sum(r["top_k_overlap"] for r in results) / len(results)
+        avg_mass = sum(r["attribution_mass_cf"] for r in results) / len(results)
+    else:
+        avg_topk = 0.0
+        avg_mass = 0.0
 
     return results, {
         "avg_top_k_overlap": avg_topk,
         "avg_attribution_mass_cf": avg_mass
     }
+
 
 def compute_topk_curve(data, ks):
     curve = defaultdict(list)
@@ -152,7 +196,9 @@ def compute_topk_curve(data, ks):
 
     return {k: sum(v) / len(v) for k, v in curve.items()}
 
+
 import matplotlib.pyplot as plt
+
 
 def plot_topk_curves(topk_curves):
     plt.figure()
@@ -167,7 +213,8 @@ def plot_topk_curves(topk_curves):
     plt.grid(True)
     plt.show()
 
-def plot_topk_curve(topk_curve):
+
+def plot_topk_curve(topk_curve, label):
     ks = sorted(topk_curve.keys())
     values = [topk_curve[k] for k in ks]
 
@@ -175,9 +222,10 @@ def plot_topk_curve(topk_curve):
     plt.plot(ks, values, marker="o")
     plt.xlabel("k (Top-k salient tokens)")
     plt.ylabel("Top-k Overlap")
-    plt.title("Saliency–Counterfactual Alignment (Top-k Overlap)")
+    plt.title(f"{label}: Saliency–Counterfactual Alignment (Top-k Overlap)")
     plt.grid(True)
     plt.show()
+
 
 def plot_attribution_mass_distribution(results):
     values = [r["attribution_mass_cf"] for r in results]
@@ -204,34 +252,90 @@ def plot_cf_size_vs_mass(results):
     plt.show()
 
 
-
-
 # -----------------------------
 # Run
 # -----------------------------
 
-if __name__ == "__main__":
-    json_path = "../experiments/azure_openai/gpt-5-nano/token/abt_buy/20251225/06_03/"
-    ks = [1, 3, 5, 10, 20, 50]
+def compare(json_path, explainers=['zs_sample', 'hybrid_sample', 'fs_sample', 'cot_sample', 'certa_sample'],
+            ks=[1, 3, 5, 10, 20, 50], plot: bool = False, verbose: bool = False, granularity: str = 'token'):
+    # json_path = "../experiments/azure_openai/gpt-5-nano/token/abt_buy/20251225/06_03/"
     topk_curves = dict()
-    for explainer in ['zs_sample', 'hybrid_sample', 'fs_sample', 'cot_sample', 'certa_sample']:
-        print(f'{explainer}:')
+    eval_results = []
+    for explainer in explainers:
+        # print(f'{explainer}:')
         json_path_cur = json_path + explainer + "_results.json"
-        with open(json_path_cur) as f:
-            data = json.load(f)["data"]
+        try:
+            with open(json_path_cur) as f:
+                data = json.load(f)["data"]
+        except:
+            continue
 
-        results, summary = compute_metrics(json_path_cur, k=10)
-        topk_curve = compute_topk_curve(data, ks)
-        topk_curves[explainer] = topk_curve
+        results, summary = compute_metrics(json_path_cur, k=3, granularity=granularity)
+        if plot:
+            topk_curve = compute_topk_curve(data, ks)
+            topk_curves[explainer] = topk_curve
+        summary['explainer'] = explainer.replace("_sample", "")
+        eval_results.append(summary)
+        if verbose:
+            print("Summary:")
+            for k, v in summary.items():
+                print(f"{k}: {v:.4f}")
 
-        print("Summary:")
-        for k, v in summary.items():
-            print(f"{k}: {v:.4f}")
-
-        plot_topk_curve(topk_curve)
-        plot_attribution_mass_distribution(results)
-        plot_cf_size_vs_mass(results)
-
-    plot_topk_curves(topk_curves)
+        if plot:
+            plot_topk_curve(topk_curve, explainer)
+            plot_attribution_mass_distribution(results)
+            plot_cf_size_vs_mass(results)
+    if plot:
+        plot_topk_curves(topk_curves)
+    return pd.DataFrame(eval_results)
 
 
+precomputed_data = {
+    "chatgpt4-attribute": [
+        "../experiments/azure_openai/gpt-4-32k/attribute/abt_buy/20241014/22_34/",
+        "../experiments/azure_openai/gpt-4-32k/attribute/beers/20241014/23_41/",
+        "../experiments/azure_openai/gpt-4-32k/attribute/fodo_zaga/20241015/08_53/",
+        "../experiments/azure_openai/gpt-4-32k/attribute/walmart_amazon/20241016/12_10/",
+        "../experiments/azure_openai/gpt-4-32k/attribute/carparts/20241014/09_19/",
+        "../experiments/azure_openai/gpt-4-32k/attribute/books/20241011/09_31/",
+
+    ],
+    "chatgpt4-token": [
+        "../experiments/azure_openai/gpt-4-32k/token/beers/20241012/09_05/",
+        "../experiments/azure_openai/gpt-4-32k/token/watches_large/20260125/13_37/",
+        "../experiments/azure_openai/gpt-4-32k/token/cameras_large/20260125/08_56/",
+        "../experiments/azure_openai/gpt-4-32k/token/books/20260125/20_10/",
+        "../experiments/azure_openai/gpt-4-32k/token/carparts/20260125/20_10/",
+    ],
+    "chatgpt5-attribute": [
+        "../experiments/azure_openai/gpt-5-nano/attribute/abt_buy/20251226/01_45/",
+        "../experiments/azure_openai/gpt-5-nano/attribute/amazon_google/20251225/15_03/",
+        "../experiments/azure_openai/gpt-5-nano/attribute/beers/20251225/11_58/",
+        "../experiments/azure_openai/gpt-5-nano/attribute/fodo_zaga/20251225/21_11/",
+        "../experiments/azure_openai/gpt-5-nano/attribute/walmart_amazon/20251225/17_35/",
+        "../experiments/azure_openai/gpt-5-nano/attribute/watches_small/20251223/17_40/",
+        "../experiments/azure_openai/gpt-5-nano/attribute/cameras_small/20251223/22_36/",
+        "../experiments/azure_openai/gpt-5-nano/attribute/books/20251110/15_04/",
+
+    ],
+    "chatgpt5-token": [
+        "../experiments/azure_openai/gpt-5-nano/token/abt_buy/20251225/06_03/",
+        "../experiments/azure_openai/gpt-5-nano/token/amazon_google/20251224/21_01/",
+        "../experiments/azure_openai/gpt-5-nano/token/beers/20251224/17_34/",
+        "../experiments/azure_openai/gpt-5-nano/token/fodo_zaga/20251225/02_38/",
+        "../experiments/azure_openai/gpt-5-nano/token/walmart_amazon/20251224/23_33/",
+        "../experiments/azure_openai/gpt-5-nano/token/watches_small/20251224/08_56/",
+        "../experiments/azure_openai/gpt-5-nano/token/cameras_small/20251224/13_15/",
+        "../experiments/azure_openai/gpt-5-nano/token/books/20250917/10_53/",
+    ],
+
+}
+
+if __name__ == '__main__':
+    for k, v in precomputed_data.items():
+        saliency_token_metrics = []
+        for path in v:
+            saliency_token_metrics.append(compare(path, granularity=k.split('-')[1]))
+        saliency_cf_agreement = pd.concat(saliency_token_metrics).groupby("explainer").mean()
+        saliency_cf_agreement.to_csv(f"../experiments/saliency_cf_agreement_{k}.csv")
+        print(f'{k}:\n{saliency_cf_agreement}')
