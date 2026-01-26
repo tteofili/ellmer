@@ -108,7 +108,8 @@ def cf_attr_token_alignment(token_cf_tokens, attr_cf_attrs):
 
 
 def compare(pair, model, verbose: bool = False,
-            explainers=['zs_sample', 'hybrid_sample', 'fs_sample', 'cot_sample', 'certa_sample'], ):
+            explainers=['zs_sample', 'hybrid_sample', 'fs_sample', 'cot_sample', 'certa_sample'], k_tokens=30,
+            k_attrs=3):
     agg_results = []
     for explainer in explainers:
         try:
@@ -137,7 +138,7 @@ def compare(pair, model, verbose: bool = False,
             try:
                 results.append({
                     "id": id_,
-                    "topk_attr_token_overlap": topk_attr_token_overlap(tok, attr),
+                    "topk_attr_token_overlap": topk_attr_token_overlap(tok, attr, k_tokens=k_tokens, k_attrs=k_attrs),
                     "attr_token_mass_consistency": attribution_mass_consistency(tok, attr)
                 })
             except:
@@ -177,8 +178,7 @@ def compare(pair, model, verbose: bool = False,
 
                 attr_cf_attrs = extract_cf_attributes(original, attr_cf)
             except:
-                attr_cf_attrs = set()
-
+                continue
             cov, prec, f1 = cf_attr_token_alignment(token_cf_tokens, attr_cf_attrs)
 
             results.append({
@@ -205,11 +205,11 @@ precomputed_data = {
     "chatgpt4": [
         [
             "../experiments/azure_openai/gpt-4-32k/token/abt_buy/20260125/23_49/",
-            "../experiments/azure_openai/gpt-4-32k/attribute/abt_buy/20241014/22_34/",
+            "../experiments/azure_openai/gpt-4-32k/attribute/abt_buy/20260126/11_32/",
         ],
         [
             "../experiments/azure_openai/gpt-4-32k/token/beers/20260126/01_49/",
-            "../experiments/azure_openai/gpt-4-32k/attribute/beers/20241014/23_41/",
+            "../experiments/azure_openai/gpt-4-32k/attribute/beers/20260126/11_51/",
         ],
         [
             "../experiments/azure_openai/gpt-4-32k/token/books/20260125/20_01/",
@@ -224,7 +224,7 @@ precomputed_data = {
             "../experiments/azure_openai/gpt-4-32k/attribute/cameras_large/20260123/18_35/",
         ],
         [
-            "../experiments/azure_openai/gpt-4-32k/token/fodo_zaga/20241014/08_25/",
+            "../experiments/azure_openai/gpt-4-32k/token/fodo_zaga/20260126/12_25/",
             "../experiments/azure_openai/gpt-4-32k/attribute/fodo_zaga/20260126/03_49/",
         ],
         [
@@ -286,8 +286,22 @@ if __name__ == '__main__':
     for k, v in precomputed_data.items():
         attribute_token_metrics = []
         for pair in v:
-            results = compare(pair, k)
-            attribute_token_metrics.append(results)
+            for kt, ka in [
+                [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 1], [7, 1], [8, 1], [9, 1], [10, 1],
+                [10, 2], [4, 2], [5, 2], [6, 2], [7, 2], [8, 2], [9, 2],
+                [10, 3], [20, 3], [15, 3], [9, 3], [8, 3], [7, 3],
+                [20, 4], [15, 4], [25, 4], [10, 4], [9, 4], [8, 4],
+                [20, 5], [10, 5], [15, 5], [25, 5], [30, 5], [15, 5],
+                [20, 6], [30, 6], [25, 6], [30, 6], [35, 6], [40, 6],
+            ]:
+                results = compare(pair, k, k_tokens=kt, k_attrs=ka)
+                attribute_token_metrics.append(results)
         agreement_stats = pd.concat(attribute_token_metrics).groupby(["model", "explainer"]).mean()
         agreement_stats.to_csv(f"../experiments/attribute_token_agreement_{k}.csv")
-        print(f'{k}:\n{agreement_stats}')
+        toprint = agreement_stats[['coverage', 'prec', 'topk_overlap']]
+        print(f'{k}:\n{toprint}')
+
+'''
+
+                
+                '''
