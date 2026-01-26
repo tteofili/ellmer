@@ -292,16 +292,19 @@ def compare(json_path, explainers=['zs_sample', 'hybrid_sample', 'fs_sample', 'c
 
 precomputed_data = {
     "chatgpt4-attribute": [
-        "../experiments/azure_openai/gpt-4-32k/attribute/abt_buy/20241014/22_34/",
-        "../experiments/azure_openai/gpt-4-32k/attribute/beers/20241014/23_41/",
-        "../experiments/azure_openai/gpt-4-32k/attribute/fodo_zaga/20241015/08_53/",
-        "../experiments/azure_openai/gpt-4-32k/attribute/walmart_amazon/20241016/12_10/",
+        "../experiments/azure_openai/gpt-4-32k/attribute/abt_buy/20260126/11_32/",
+        "../experiments/azure_openai/gpt-4-32k/attribute/beers/20260126/11_51/",
+        "../experiments/azure_openai/gpt-4-32k/attribute/fodo_zaga/20260126/12_25/",
+        "../experiments/azure_openai/gpt-4-32k/attribute/walmart_amazon/20260126/13_36/",
         "../experiments/azure_openai/gpt-4-32k/attribute/carparts/20241014/09_19/",
         "../experiments/azure_openai/gpt-4-32k/attribute/books/20241011/09_31/",
 
     ],
     "chatgpt4-token": [
-        "../experiments/azure_openai/gpt-4-32k/token/beers/20241012/09_05/",
+        "../experiments/azure_openai/gpt-4-32k/token/abt_buy/20260125/23_49/",
+        "../experiments/azure_openai/gpt-4-32k/token/beers/20260125/01_49/",
+        "../experiments/azure_openai/gpt-4-32k/token/amazon_google/20260126/05_32/",
+        "../experiments/azure_openai/gpt-4-32k/token/walmart_amazon/20260126/07_09/",
         "../experiments/azure_openai/gpt-4-32k/token/watches_large/20260125/13_37/",
         "../experiments/azure_openai/gpt-4-32k/token/cameras_large/20260125/08_56/",
         "../experiments/azure_openai/gpt-4-32k/token/books/20260125/20_10/",
@@ -325,9 +328,26 @@ precomputed_data = {
         "../experiments/azure_openai/gpt-5-nano/token/fodo_zaga/20251225/02_38/",
         "../experiments/azure_openai/gpt-5-nano/token/walmart_amazon/20251224/23_33/",
         "../experiments/azure_openai/gpt-5-nano/token/watches_small/20251224/08_56/",
+        "../experiments/azure_openai/gpt-5-nano/token/watches_small/20251217/10_12/",
         "../experiments/azure_openai/gpt-5-nano/token/cameras_small/20251224/13_15/",
         "../experiments/azure_openai/gpt-5-nano/token/books/20250917/10_53/",
     ],
+    "llama-3.1-attribute": [
+
+        "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/attribute/walmart_amazon/20260102/14_25/",
+        "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/attribute/fodo_zaga/20260103/01_50/",
+        "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/attribute/abt_buy/20260102/16_56/",
+        "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/attribute/beers/20260102/12_51/",
+        "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/attribute/amazon_google/20260102/13_43/",
+
+    ],
+    "llama-3.1-token": [
+
+        "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/token/walmart_amazon/20260103/00_53/",
+        "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/token/fodo_zaga/20260102/15_27/",
+        "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/token/abt_buy/20260103/03_05/",
+
+    ]
 
 }
 

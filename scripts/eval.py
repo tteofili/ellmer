@@ -159,7 +159,11 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
             total_time = time() - start_time
 
             os.makedirs(expdir, exist_ok=True)
-            llm_results = {"data": curr_llm_results, "total_time": total_time}
+            count_tokens_samples = llm.count_tokens() / samples
+            predictions_samples = llm.count_predictions() / samples
+            llm_results = {"data": curr_llm_results, "total_time": total_time, "tokens": count_tokens_samples,
+                           "predictions": predictions_samples,
+                           "avg_latency": total_time / samples}
 
             output_file_path = expdir + key + '_results.json'
             with open(output_file_path, 'w') as fout:
@@ -183,8 +187,6 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
 
                 metrics_results = {"faithfulness": faithfulness, "counterfactual_metrics": cf_metrics}
 
-                count_tokens_samples = llm.count_tokens() / samples
-                predictions_samples = llm.count_predictions() / samples
                 llm_results = {"data": curr_llm_results, "total_time": total_time, "metrics": metrics_results,
                                "tokens": count_tokens_samples, "predictions": predictions_samples,
                                "avg_latency": total_time / samples}
