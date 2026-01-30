@@ -2,25 +2,17 @@ import json
 import re
 from collections import defaultdict
 
+import numpy as np
 import pandas as pd
 
 
-# -----------------------------
-# Utility functions
-# -----------------------------
-
 def tokenize(text):
-    """Simple whitespace + punctuation tokenizer."""
     if text is None:
         return set()
     return set(re.findall(r"\w+", text.lower()))
 
 
 def extract_tokens_from_record(record, side):
-    """
-    Extract token sets per attribute from a record.
-    Returns: { f"{side}_{attr}": set(tokens) }
-    """
     tokens = {}
     if type(record) == str:
         try:
@@ -34,11 +26,6 @@ def extract_tokens_from_record(record, side):
 
 
 def get_counterfactual_changed_tokens(original, cf, side):
-    """
-    Compute tokens changed by the counterfactual (symmetric difference).
-    Returns a set of feature-level token keys:
-    e.g. ltable_description__pink
-    """
     changed = set()
 
     orig_tokens = extract_tokens_from_record(original, side)
@@ -55,15 +42,7 @@ def get_counterfactual_changed_tokens(original, cf, side):
     return changed
 
 
-# -----------------------------
-# Metrics
-# -----------------------------
-
 def top_k_overlap(saliency, changed_tokens, k):
-    """
-    Recall-style Top-k Overlap:
-    |Top-k saliency ∩ CF tokens| / |CF tokens|
-    """
     if not changed_tokens:
         return 0.0
 
@@ -77,10 +56,6 @@ def top_k_overlap(saliency, changed_tokens, k):
 
 
 def attribution_mass_on_cf(saliency, changed_tokens):
-    """
-    Attribution mass on counterfactual tokens:
-    sum saliency on CF tokens / total saliency mass
-    """
     try:
         total_mass = sum(saliency.values())
         if total_mass == 0:
@@ -92,10 +67,6 @@ def attribution_mass_on_cf(saliency, changed_tokens):
         return 0.0
 
 
-# -----------------------------
-# Main computation
-# -----------------------------
-
 def flatten(param):
     if type(param) == list:
         return param[0]
@@ -103,7 +74,7 @@ def flatten(param):
         return param
 
 
-def compute_metrics(json_path, k=10, granularity='token'):
+def compute_metrics(json_path, ks=[1, 2, 3, 4, 5], granularity='token'):
     with open(json_path) as f:
         data = json.load(f)["data"]
 
@@ -127,7 +98,7 @@ def compute_metrics(json_path, k=10, granularity='token'):
         else:
             original.update(dict(map(lambda item: ("rtable_" + item[0], item[1]), item['rtuple'].items())))
 
-        # --- assume 1 counterfactual per instance ---
+        # --- use 1 counterfactual per instance ---
         cf = item["cfs"][0]
 
         if len(cf) == 0:
@@ -147,27 +118,38 @@ def compute_metrics(json_path, k=10, granularity='token'):
                 else:
                     new_saliency[attrib] = new_saliency[attrib] + v
             saliency = new_saliency
+        tks = []
+        for k in ks:
+            tks.append(top_k_overlap(saliency, changed_tokens, k))
 
-        tk = top_k_overlap(saliency, changed_tokens, k)
         mass = attribution_mass_on_cf(saliency, changed_tokens)
 
-        results.append({
+        row = {
             "id": item["id"],
-            "top_k_overlap": tk,
             "attribution_mass_cf": mass,
             "num_cf_tokens": len(changed_tokens)
-        })
+        }
+        idx_k = 1
+        for tk in tks:
+            row[f'top_k_overlap@{idx_k}'] = tk
+            idx_k += 1
+        row['avg_top_k_overlap'] = np.mean(tks)
+        results.append(row)
+    model_name = json_path.split('/')[3]
+    dataset = json_path.split('/')[5]
+    explainer = json_path.split('/')[-1].split('.')[0].replace('_sample_results','')
+    pd.DataFrame.from_dict(results).to_csv(f'sal_cf_{model_name}_{dataset}_{explainer}', index=False)
 
     if len(results) > 0:
         # Aggregate
-        avg_topk = sum(r["top_k_overlap"] for r in results) / len(results)
+        avg_topk = sum(r["avg_top_k_overlap"] for r in results) / len(results)
         avg_mass = sum(r["attribution_mass_cf"] for r in results) / len(results)
     else:
         avg_topk = 0.0
         avg_mass = 0.0
 
     return results, {
-        "avg_top_k_overlap": avg_topk,
+        "xd_avg_top_k_overlap": avg_topk,
         "avg_attribution_mass_cf": avg_mass
     }
 
@@ -252,17 +234,11 @@ def plot_cf_size_vs_mass(results):
     plt.show()
 
 
-# -----------------------------
-# Run
-# -----------------------------
-
 def compare(json_path, explainers=['zs_sample', 'hybrid_sample', 'fs_sample', 'cot_sample', 'certa_sample'],
             ks=[1, 3, 5, 10, 20, 50], plot: bool = False, verbose: bool = False, granularity: str = 'token'):
-    # json_path = "../experiments/azure_openai/gpt-5-nano/token/abt_buy/20251225/06_03/"
     topk_curves = dict()
     eval_results = []
     for explainer in explainers:
-        # print(f'{explainer}:')
         json_path_cur = json_path + explainer + "_results.json"
         try:
             with open(json_path_cur) as f:
@@ -270,7 +246,7 @@ def compare(json_path, explainers=['zs_sample', 'hybrid_sample', 'fs_sample', 'c
         except:
             continue
 
-        results, summary = compute_metrics(json_path_cur, k=3, granularity=granularity)
+        results, summary = compute_metrics(json_path_cur, granularity=granularity)
         if plot:
             topk_curve = compute_topk_curve(data, ks)
             topk_curves[explainer] = topk_curve
@@ -333,19 +309,22 @@ precomputed_data = {
         "../experiments/azure_openai/gpt-5-nano/token/books/20250917/10_53/",
     ],
     "llama-3.1-attribute": [
-
+        "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/attribute/carparts/20260108/00_44/",
+        "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/attribute/books/20260107/23_42/",
+        "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/attribute/cameras_small/20260125/17_07/",
         "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/attribute/walmart_amazon/20260102/14_25/",
         "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/attribute/fodo_zaga/20260103/01_50/",
         "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/attribute/abt_buy/20260102/16_56/",
         "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/attribute/beers/20260102/12_51/",
         "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/attribute/amazon_google/20260102/13_43/",
-
     ],
     "llama-3.1-token": [
-
         "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/token/walmart_amazon/20260103/00_53/",
-        "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/token/fodo_zaga/20260102/15_27/",
+        "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/token/fodo_zaga/20260103/01_50/",
         "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/token/abt_buy/20260103/03_05/",
+        "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/token/amazon_google/20260102/23_58/",
+        "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/token/beers/20260102/23_04/",
+        "../experiments/hf/meta-llama/Llama-3.1-8B-Instruct/token/books/20250412/23_04/",
 
     ]
 
