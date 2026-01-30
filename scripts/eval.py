@@ -74,9 +74,6 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
 
         certa = LLMCertaExplainer(lsource, rsource)
 
-        full_certa = FullCerta(explanation_granularity, predict_only, certa, num_triangles,
-                               max_predict=100)
-
         examples = []
 
         # generate predictions and explanations
@@ -89,7 +86,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
             try:
                 rand_row = data_df.iloc[[idx]]
                 ltuple, rtuple = ellmer.utils.get_tuples(rand_row)
-                answer_dictionary = full_certa.predict_and_explain(ltuple, rtuple)
+                answer_dictionary = cot.predict_and_explain(ltuple, rtuple)
                 prediction = answer_dictionary['prediction']
                 saliency_explanation = answer_dictionary['saliency']
                 cf_explanation = answer_dictionary['cf']
