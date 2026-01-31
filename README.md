@@ -3,11 +3,9 @@
 ELLMER
 =======
 
-Code for the paper "_Can we trust LLM Self-Explanations for Entity Resolution?_".
-
 # Installation
 
-To install _ELLMER_ locally run :
+simply run :
 ```shell
 pip install .
 ```
