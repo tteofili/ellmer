@@ -107,41 +107,11 @@ def find(cache, samples, num_triangles, explanation_granularity, quantitative, b
                     if "filter_features" in answer_dictionary:
                         row_dict["filter_features"] = answer_dictionary["filter_features"]
 
-
-                    # attributes_dict = {}
-                    # for k,v in saliency.items():
-                    #     try:
-                    #         attributes_dict[k] = float(v)
-                    #     except:
-                    #         try:
-                    #             attributes_dict[k] = float(v[0])
-                    #         except:
-                    #             attributes_dict[k] = 0
-                    #             print(f'{v} is not a float in {saliency}')
-                    # if key.startswith('certa'):
-                    #     sorted_attributes_dict = sorted(attributes_dict.items(), key=operator.itemgetter(1),
-                    #                                     reverse=True)
-                    # else:
-                    #     sorted_attributes_dict = sorted(attributes_dict.items(), key=operator.itemgetter(1),
-                    #                                     reverse=prediction)
-                    # for top_k in range(10):
-                    #     top_k_attributes = sorted_attributes_dict[:top_k]
-                    #     row_copy = rand_row.copy()
-                    #     for t in top_k_attributes:
-                    #         split = t[0].split('__')
-                    #         if len(split) == 2:
-                    #             row_copy.at[split[0]] = rand_row[split[0]].replace(split[1], '')
-                    #         else:
-                    #             row_copy.at[t[0]] = ''
-
-
                     comparison[key] = row_dict
                 comparison_results.append(comparison)
             except Exception:
                 traceback.print_exc()
                 print(f'error, waiting...')
-                sleep(10)
-                start_time += 10
 
             total_time = time() - start_time
 
@@ -161,7 +131,7 @@ def find(cache, samples, num_triangles, explanation_granularity, quantitative, b
     eval_df = pd.DataFrame(evals)
     eval_expdir = f'./experiments/{model_type}/{model_name}/{explanation_granularity}/{datetime.now():%Y%m%d}/{datetime.now():%H_%M}/'
     os.makedirs(eval_expdir, exist_ok=True)
-    eval_df.to_csv(eval_expdir + "inconsistency.csv")
+    eval_df.to_csv(eval_expdir + "examples.csv")
 
 
 if __name__ == "__main__":
