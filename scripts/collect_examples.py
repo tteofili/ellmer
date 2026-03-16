@@ -104,6 +104,8 @@ def find(cache, samples, num_triangles, explanation_granularity, quantitative, b
                     row_dict = {"id": idx, "ltuple": ltuple, "rtuple": rtuple, "prediction": prediction,
                                 "label": rand_row['label'].values[0], "saliency": saliency, "cfs": cfs,
                                 "latency": ptime, "conversation": conversation}
+                    if "llm_time" in answer_dictionary:
+                        row_dict["llm_time"] = answer_dictionary["llm_time"]
                     if "filter_features" in answer_dictionary:
                         row_dict["filter_features"] = answer_dictionary["filter_features"]
 
@@ -114,16 +116,36 @@ def find(cache, samples, num_triangles, explanation_granularity, quantitative, b
                 print(f'error, waiting...')
 
             total_time = time() - start_time
+            # Local time excludes remote LLM execution only; use for stable timing across runs.
+            total_llm_time = sum(c[k].get("llm_time", c[k]["latency"]) for c in comparison_results for k in c)
+            local_time = max(0.0, total_time - total_llm_time)
+            total_calls = sum(len(c) for c in comparison_results)
+            n_samples = len(comparison_results)
+            avg_latency_llm = total_llm_time / total_calls if total_calls else 0.0
+            avg_latency_local = local_time / n_samples if n_samples else 0.0
 
             os.makedirs(expdir, exist_ok=True)
-            llm_results = {"data": comparison_results, "total_time": total_time}
+            llm_results = {
+                "data": comparison_results,
+                "total_time": total_time,
+                "total_llm_time": total_llm_time,
+                "total_local_time": local_time,
+                "avg_latency_llm": avg_latency_llm,
+                "avg_latency_local": avg_latency_local,
+            }
 
             output_file_path = expdir + str(idx) + '_results.json'
             with open(output_file_path, 'w') as fout:
                 json.dump(llm_results, fout)
 
-
-            row_dict = {"total_time": total_time, "dataset": d}
+            row_dict = {
+                "total_time": total_time,
+                "total_llm_time": total_llm_time,
+                "total_local_time": local_time,
+                "avg_latency_llm": avg_latency_llm,
+                "avg_latency_local": avg_latency_local,
+                "dataset": d,
+            }
             eval_row = pd.Series(row_dict)
             evals.append(eval_row)
 

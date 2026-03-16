@@ -1,6 +1,6 @@
 import operator
 import random
-from langchain.chains import LLMChain
+from concurrent.futures import ThreadPoolExecutor
 
 from ellmer.full_certa import FullCerta
 
@@ -37,12 +37,17 @@ class HybridCerta(FullCerta):
             top_k = self.top_k
         its = 0
         support_samples = None
-        pae_dicts = []
-        for e in self.ellmers:
-            for _ in range(self.num_draws):
-                full_answer = e.predict_and_explain(ltuple, rtuple)
-                pae_dict = full_answer['saliency']
-                pae_dicts.append(pae_dict)
+
+        def _one_ellmer(e):
+            return e.predict_and_explain(ltuple, rtuple)['saliency']
+
+        with ThreadPoolExecutor(max_workers=len(self.ellmers)) as executor:
+            futures = [
+                executor.submit(_one_ellmer, e)
+                for e in self.ellmers
+                for _ in range(self.num_draws)
+            ]
+            pae_dicts = [f.result() for f in futures]
 
         pae = self.delegate.predict_tuples(ltuple, rtuple)
         prediction = pae

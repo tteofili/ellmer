@@ -98,30 +98,15 @@ def get_concordance(pred1_file, pred2_file):
     make_predictions_boolean(pred1_json)
     make_predictions_boolean(pred2_json)
 
-    p1_ids = [p['id'] for p in pred1_json]
-    p2_ids = [p['id'] for p in pred2_json]
-
-    pids = set(p1_ids).intersection(set(p2_ids))
+    id_to_pred1 = {p['id']: p for p in pred1_json}
+    id_to_pred2 = {p['id']: p for p in pred2_json}
+    pids = set(id_to_pred1).intersection(id_to_pred2)
 
     observations = []
-    # for each prediction, identify:
-    lidx = 0
-    ridx = 0
-
     for pid in pids:
         try:
-            pred1 = None
-            for cpr1 in pred1_json[lidx:]:
-                if cpr1['id'] == pid:
-                    pred1 = cpr1
-                    break
-                lidx+=1
-            pred2 = None
-            for cpr2 in pred2_json[ridx:]:
-                if cpr2['id'] == pid:
-                    pred2 = cpr2
-                    break
-                ridx += 1
+            pred1 = id_to_pred1.get(pid)
+            pred2 = id_to_pred2.get(pid)
             if pred1 is None or pred2 is None:
                 continue
             observation = dict()
@@ -238,7 +223,8 @@ def get_cosine(vec1, vec2):
         return float(numerator) / denominator
 
 
-def get_faithfulness(saliency_names: list, eval_fn, base_dir: str, test_set_df: pd.DataFrame):
+def get_faithfulness(saliency_names: list, eval_fn, base_dir: str, test_set_df: pd.DataFrame,
+                     results_by_name: dict = None):
     print(test_set_df.shape)
     np.random.seed(0)
 
@@ -249,9 +235,12 @@ def get_faithfulness(saliency_names: list, eval_fn, base_dir: str, test_set_df: 
     for saliency in saliency_names:
         model_scores = []
         reverse = True
-        json_path = os.path.join(base_dir, saliency + '_results.json')
-        with open(json_path) as fd:
-            results_json = json.load(fd)
+        if results_by_name is not None and saliency in results_by_name:
+            results_json = results_by_name[saliency]
+        else:
+            json_path = os.path.join(base_dir, saliency + '_results.json')
+            with open(json_path) as fd:
+                results_json = json.load(fd)
 
         if 'data' in results_json:
             results_json = results_json['data']
@@ -308,13 +297,17 @@ def get_faithfulness(saliency_names: list, eval_fn, base_dir: str, test_set_df: 
     return aucs
 
 
-def get_cf_metrics(explainer_names: list, predict_fn, base_dir, test_set_df: pd.DataFrame):
+def get_cf_metrics(explainer_names: list, predict_fn, base_dir, test_set_df: pd.DataFrame,
+                   results_by_name: dict = None):
     to_drop = ['ltable_id', 'rtable_id', 'match', 'label']
     rows = dict()
     for explainer_name in explainer_names:
-        json_path = os.path.join(base_dir, explainer_name + '_results.json')
-        with open(json_path) as fd:
-            results_json = json.load(fd)
+        if results_by_name is not None and explainer_name in results_by_name:
+            results_json = results_by_name[explainer_name]
+        else:
+            json_path = os.path.join(base_dir, explainer_name + '_results.json')
+            with open(json_path) as fd:
+                results_json = json.load(fd)
         if 'data' in results_json:
             results_json = results_json['data']
         cfs = []

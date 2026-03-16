@@ -53,6 +53,32 @@ class SelfExplainer(BaseLLMExplainer):
         self.pred_count = 0
         self.tokens = 0
 
+    @staticmethod
+    def _strip_response(content: str) -> str:
+        if not content:
+            return content
+        if '[/INST]' in content:
+            content = content.split('[/INST]')[-1]
+        elif '<|end_header_id|>' in content:
+            content = content.split('<|end_header_id|>')[-1]
+        return content.strip() if isinstance(content, str) else content
+
+    def _invoke(self, template, _remote_timings=None, **kwargs) -> str:
+        """Call LLM (chain.predict or llm.invoke). If _remote_timings is a list, append elapsed seconds for remote-only time."""
+        t0 = time()
+        if self.model_type in ['falcon', 'llama2']:
+            chain = LLMChain(llm=self.llm, prompt=template)
+            out = chain.predict(**kwargs)
+        else:
+            messages = template.format_messages(**kwargs)
+            raw = self.llm.invoke(messages)
+            out = getattr(raw, 'content', raw) if raw else ''
+        if _remote_timings is not None:
+            _remote_timings.append(time() - t0)
+        if self.model_type == 'hf':
+            return self._strip_response(out)
+        return self._strip_response(out) if out else out
+
     def predict_tuples(self, ltuple, rtuple, append_conversation=None):
         conversation = []
         if "ptse" in self.prompts:
@@ -65,20 +91,10 @@ class SelfExplainer(BaseLLMExplainer):
             question = "record1: {ltuple}\n  record2: {rtuple}"
             conversation.append(("user", question))
             template = ChatPromptTemplate.from_messages(conversation)
-            if self.model_type in ['falcon', 'llama2']:
-                chain = LLMChain(llm=self.llm, prompt=template)
-                er_answer = chain.predict(ltuple=ltuple, rtuple=rtuple)
-            elif self.model_type in ['hf']:
-                messages = template.format_messages(ltuple=ltuple, rtuple=rtuple, feature=self.explanation_granularity,)
-                raw_content = self.llm.invoke(messages)
-                try:
-                    er_answer = raw_content.content.split('[/INST]')[-1]
-                except:
-                    er_answer = raw_content.content
-            else:
-                messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple, rtuple=rtuple)
-                answer = self.llm(messages)
-                er_answer = answer.content
+            er_kwargs = dict(ltuple=ltuple, rtuple=rtuple)
+            if self.model_type != 'falcon' and self.model_type != 'llama2':
+                er_kwargs['feature'] = self.explanation_granularity
+            er_answer = self._invoke(template, **er_kwargs)
 
             # parse answer into prediction
             _, prediction = ellmer.utils.text_to_match(er_answer, self.llm)
@@ -96,6 +112,7 @@ class SelfExplainer(BaseLLMExplainer):
 
     def predict_and_explain(self, ltuple, rtuple):
         conversation = []
+        remote_timings = []
         if "pase" in self.prompts:
             if self.verbose:
                 prep_t = time()
@@ -108,39 +125,7 @@ class SelfExplainer(BaseLLMExplainer):
             if self.verbose:
                 prep_t = time() - prep_t
                 print(f'prep_time:{prep_t}')
-            if self.model_type in ['falcon', 'llama2']:
-                if self.verbose:
-                    pre_pred_t = time()
-                chain = LLMChain(llm=self.llm, prompt=template)
-                if self.verbose:
-                    pre_pred_t = time() - pre_pred_t
-                    print(f'pre_prep_time:{pre_pred_t}')
-                    pred_t = time()
-                content = chain.predict(ltuple=ltuple, rtuple=rtuple, feature=self.explanation_granularity)
-                if self.verbose:
-                    pred_t = time() - pred_t
-                    print(f'pred_time:{pred_t}')
-                    print(f'content:{content}')
-            elif self.model_type in ['hf']:
-                messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple, rtuple=rtuple)
-                raw_content = self.llm.invoke(messages)
-                try:
-                    content = raw_content.content.split('[/INST]')[-1]
-                except:
-                    content = raw_content.content
-            else:
-                if self.verbose:
-                    pre_pred_t = time()
-                messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple, rtuple=rtuple)
-                if self.verbose:
-                    pre_pred_t = time() - pre_pred_t
-                    print(f'pre_prep_time:{pre_pred_t}')
-                    pred_t = time()
-                answer = self.llm.invoke(messages)
-                if self.verbose:
-                    pred_t = time() - pred_t
-                    print(f'pred_time:{pred_t}')
-                content = answer.content
+            content = self._invoke(template, _remote_timings=remote_timings, ltuple=ltuple, rtuple=rtuple, feature=self.explanation_granularity)
             if self.verbose:
                 print(content)
                 parse_t = time()
@@ -164,7 +149,7 @@ class SelfExplainer(BaseLLMExplainer):
                 except:
                     pass
             return {"prediction": prediction, "saliency": saliency_explanation, "cf": cf_explanation,
-                    "conversation": conversation}
+                    "conversation": conversation, "llm_time": sum(remote_timings)}
         elif "ptse" in self.prompts:
             if self.verbose:
                 prep_t = time()
@@ -178,45 +163,10 @@ class SelfExplainer(BaseLLMExplainer):
             if self.verbose:
                 prep_t = time() - prep_t
                 print(f'er_prep_time:{prep_t}')
-            if self.model_type in ['falcon', 'llama2']:
-                if self.verbose:
-                    pre_pred_t = time()
-                chain = LLMChain(llm=self.llm, prompt=template)
-                if self.verbose:
-                    pre_pred_t = time() - pre_pred_t
-                    print(f'er_pre_pred_time:{pre_pred_t}')
-                    pred_t = time()
-                er_answer = chain.predict(ltuple=ltuple, rtuple=rtuple)
-                if self.verbose:
-                    pred_t = time() - pred_t
-                    print(f'er_pred_time:{pred_t}')
-                    print(f'er_answer:{er_answer}')
-            elif self.model_type in ['hf']:
-                messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple, rtuple=rtuple)
-                er_answer = self.llm.invoke(messages).content
-                if '[/INST]' in er_answer:
-                    try:
-                        er_answer = er_answer.split('[/INST]')[-1]
-                    except:
-                        pass
-                elif "<|end_header_id|>" in er_answer:
-                    try:
-                        er_answer = er_answer.split("<|end_header_id|>")[-1]
-                    except:
-                        pass
-            else:
-                if self.verbose:
-                    pre_pred_t = time()
-                messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple, rtuple=rtuple)
-                if self.verbose:
-                    pre_pred_t = time() - pre_pred_t
-                    print(f'er_pre_pred_time:{pre_pred_t}')
-                    pred_t = time()
-                answer = self.llm.invoke(messages)
-                er_answer = answer.content
-                if self.verbose:
-                    pred_t = time() - pred_t
-                    print(f'er_pred_time:{pred_t}')
+            er_kwargs = dict(ltuple=ltuple, rtuple=rtuple)
+            if self.model_type not in ['falcon', 'llama2']:
+                er_kwargs['feature'] = self.explanation_granularity
+            er_answer = self._invoke(template, _remote_timings=remote_timings, **er_kwargs)
             if self.verbose:
                 print(er_answer)
             if self.verbose:
@@ -248,47 +198,10 @@ class SelfExplainer(BaseLLMExplainer):
                 if self.verbose:
                     prep_t = time() - prep_t
                     print(f'why_prep_time:{prep_t}')
-                if self.model_type in ['falcon', 'llama2']:
-                    if self.verbose:
-                        pre_pred_t = time()
-                    chain = LLMChain(llm=self.llm, prompt=template)
-                    if self.verbose:
-                        pre_pred_t = time() - pre_pred_t
-                        print(f'why_pre_pred_time:{pre_pred_t}')
-                        pred_t = time()
-                    why_answer = chain.predict(ltuple=ltuple, rtuple=rtuple, prediction=prediction)
-                    if self.verbose:
-                        pred_t = time() - pred_t
-                        print(f'why_pred_time:{pred_t}')
-                        print(f'why_answer:{why_answer}')
-                elif self.model_type in ['hf']:
-                    messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple,
-                                                        rtuple=rtuple, prediction=prediction)
-                    why_answer = self.llm.invoke(messages).content
-                    if '[/INST]' in why_answer:
-                        try:
-                            why_answer = why_answer.split('[/INST]')[-1]
-                        except:
-                            pass
-                    elif "<|end_header_id|>" in why_answer:
-                        try:
-                            why_answer = why_answer.split("<|end_header_id|>")[-1]
-                        except:
-                            pass
-                else:
-                    if self.verbose:
-                        pre_pred_t = time()
-                    messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple,
-                                                        rtuple=rtuple, prediction=prediction)
-                    if self.verbose:
-                        pre_pred_t = time() - pre_pred_t
-                        print(f'why_pre_pred_time:{pre_pred_t}')
-                        pred_t = time()
-                    answer = self.llm.invoke(messages)
-                    if self.verbose:
-                        pred_t = time() - pred_t
-                        print(f'why_pred_time:{pred_t}')
-                    why_answer = answer.content
+                why_kwargs = dict(ltuple=ltuple, rtuple=rtuple, prediction=prediction)
+                if self.model_type not in ['falcon', 'llama2']:
+                    why_kwargs['feature'] = self.explanation_granularity
+                why_answer = self._invoke(template, _remote_timings=remote_timings, **why_kwargs)
                 if self.verbose:
                     print(why_answer)
                 why = why_answer
@@ -305,48 +218,11 @@ class SelfExplainer(BaseLLMExplainer):
                 if self.verbose:
                     prep_t = time() - prep_t
                     print(f'saliency_prep_time:{prep_t}')
-                if self.model_type in ['falcon', 'llama2']:
-                    if self.verbose:
-                        pre_pred_t = time()
-                    chain = LLMChain(llm=self.llm, prompt=template)
-                    if self.verbose:
-                        pre_pred_t = time() - pre_pred_t
-                        print(f'saliency_pre_pred_time:{pre_pred_t}')
-                        pred_t = time()
-                    saliency_answer = chain.predict(ltuple=ltuple, rtuple=rtuple, prediction=prediction,
-                                                    feature=self.explanation_granularity)
-                    if self.verbose:
-                        pred_t = time() - pred_t
-                        print(f'saliency_pred_time:{pred_t}')
-                        print(f'saliency_answer:{saliency_answer}')
-                elif self.model_type in ['hf']:
-                    messages = template.format_messages(ltuple=ltuple, rtuple=rtuple, prediction=prediction,
-                                                        feature=self.explanation_granularity)
-                    saliency_answer = self.llm.invoke(messages).content
-                    if '[/INST]' in saliency_answer:
-                        try:
-                            saliency_answer = saliency_answer.split('[/INST]')[-1]
-                        except:
-                            pass
-                    elif "<|end_header_id|>" in saliency_answer:
-                        try:
-                            saliency_answer = saliency_answer.split("<|end_header_id|>")[-1]
-                        except:
-                            pass
-                else:
-                    if self.verbose:
-                        pre_pred_t = time()
-                    messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple,
-                                                        rtuple=rtuple, prediction=prediction)
-                    if self.verbose:
-                        pre_pred_t = time() - pre_pred_t
-                        print(f'saliency_pre_pred_time:{pre_pred_t}')
-                        pred_t = time()
-                    answer = self.llm.invoke(messages)
-                    if self.verbose:
-                        pred_t = time() - pred_t
-                        print(f'saliency_pred_time:{pred_t}')
-                    saliency_answer = answer.content
+                saliency_answer = self._invoke(
+                    template, _remote_timings=remote_timings,
+                    ltuple=ltuple, rtuple=rtuple, prediction=prediction,
+                    feature=self.explanation_granularity,
+                )
                 if self.verbose:
                     print(saliency_answer)
                     parse_t = time()
@@ -391,49 +267,11 @@ class SelfExplainer(BaseLLMExplainer):
                 if self.verbose:
                     prep_t = time() - prep_t
                     print(f'cf_prep_time:{prep_t}')
-                if self.model_type in ['falcon', 'llama2']:
-                    if self.verbose:
-                        pre_pred_t = time()
-                    chain = LLMChain(llm=self.llm, prompt=template)
-                    if self.verbose:
-                        pre_pred_t = time() - pre_pred_t
-                        print(f'cf_pre_pred_time:{pre_pred_t}')
-                        pred_t = time()
-                    cf_answer = chain.predict(ltuple=ltuple, rtuple=rtuple, prediction=prediction,
-                                              feature=self.explanation_granularity)
-                    if self.verbose:
-                        pred_t = time() - pred_t
-                        print(f'cf_pred_time:{pred_t}')
-                        print(f'cf_answer:{cf_answer}')
-                elif self.model_type in ['hf']:
-                    messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple,
-                                                        rtuple=rtuple, prediction=prediction)
-                    cf_answer = self.llm.invoke(messages).content
-                    if '[/INST]' in cf_answer:
-                        try:
-                            cf_answer = cf_answer.split('[/INST]')[-1]
-                        except:
-                            pass
-                    elif "<|end_header_id|>" in cf_answer:
-                        try:
-                            cf_answer = cf_answer.split("<|end_header_id|>")[-1]
-                        except:
-                            pass
-                else:
-                    if self.verbose:
-                        pre_pred_t = time()
-                    messages = template.format_messages(feature=self.explanation_granularity, ltuple=ltuple,
-                                                        rtuple=rtuple,
-                                                        prediction=prediction)
-                    if self.verbose:
-                        pre_pred_t = time() - pre_pred_t
-                        print(f'cf_pre_pred_time:{pre_pred_t}')
-                        pred_t = time()
-                    answer = self.llm.invoke(messages)
-                    if self.verbose:
-                        pred_t = time() - pred_t
-                        print(f'cf_pred_time:{pred_t}')
-                    cf_answer = answer.content
+                cf_answer = self._invoke(
+                    template, _remote_timings=remote_timings,
+                    ltuple=ltuple, rtuple=rtuple, prediction=prediction,
+                    feature=self.explanation_granularity,
+                )
                 if self.verbose:
                     print(cf_answer)
                     parse_t = time()
@@ -494,7 +332,7 @@ class SelfExplainer(BaseLLMExplainer):
                 except:
                     pass
             return {"prediction": prediction, "why": why, "saliency": saliency_explanation, "cf": cf_explanation,
-                    "conversation": conversation}
+                    "conversation": conversation, "llm_time": sum(remote_timings)}
 
 
 def parse_pase_answer(answer, llm):
@@ -640,7 +478,9 @@ class ICLSelfExplainer(SelfExplainer):
         chain = final_prompt | self.llm
         question = self.prompts['input']
         formatted_question = question.format(ltuple=ltuple, rtuple=rtuple)
+        t0 = time()
         answer = chain.invoke({"input": formatted_question.replace('"', '').replace("'",'')})
+        llm_time = time() - t0
 
         conversation = [str(m) for m in final_prompt.messages]
         conversation.append(formatted_question)
@@ -686,4 +526,4 @@ class ICLSelfExplainer(SelfExplainer):
             pass
         self.pred_count += 1
 
-        return {"prediction": prediction, "saliency": saliency, "cf": cf, "conversation": conversation}
+        return {"prediction": prediction, "saliency": saliency, "cf": cf, "conversation": conversation, "llm_time": llm_time}

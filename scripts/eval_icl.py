@@ -141,6 +141,8 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
                     row_dict = {"id": idx, "ltuple": ltuple, "rtuple": rtuple, "prediction": prediction,
                                 "label": rand_row['label'].values[0], "saliency": saliency, "cfs": cfs,
                                 "latency": ptime, "conversation": conversation}
+                    if "llm_time" in answer_dictionary:
+                        row_dict["llm_time"] = answer_dictionary["llm_time"]
                     if "filter_features" in answer_dictionary:
                         row_dict["filter_features"] = answer_dictionary["filter_features"]
                     curr_llm_results.append(row_dict)
@@ -151,9 +153,23 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
                     start_time += 10
 
             total_time = time() - start_time
+            # Local time excludes remote LLM execution only; use for stable timing across runs.
+            n = len(curr_llm_results)
+            samples_count = len(test_data_df)
+            total_llm_time = sum(r.get("llm_time", r["latency"]) for r in curr_llm_results) if n else 0.0
+            local_time = max(0.0, total_time - total_llm_time)
+            avg_latency_llm = total_llm_time / n if n else 0.0
+            avg_latency_local = local_time / samples_count if samples_count else 0.0
 
             os.makedirs(expdir, exist_ok=True)
-            llm_results = {"data": curr_llm_results, "total_time": total_time}
+            llm_results = {
+                "data": curr_llm_results,
+                "total_time": total_time,
+                "total_llm_time": total_llm_time,
+                "total_local_time": local_time,
+                "avg_latency_llm": avg_latency_llm,
+                "avg_latency_local": avg_latency_local,
+            }
 
             output_file_path = expdir + key + '_results.json'
             with open(output_file_path, 'w') as fout:
@@ -179,18 +195,28 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
 
                 count_tokens_samples = llm.count_tokens() / samples
                 predictions_samples = llm.count_predictions() / samples
-                llm_results = {"data": curr_llm_results, "total_time": total_time, "metrics": metrics_results,
-                               "tokens": count_tokens_samples, "predictions": predictions_samples}
+                llm_results["metrics"] = metrics_results
+                llm_results["tokens"] = count_tokens_samples
+                llm_results["predictions"] = predictions_samples
 
-                output_file_path = expdir + key + '_results.json'
                 with open(output_file_path, 'w') as fout:
                     json.dump(llm_results, fout)
 
             result_files.append((key, output_file_path))
-            print(f'{key} data generated in {total_time}s')
+            print(f'{key} data generated in {total_time}s (local: {local_time}s)')
 
-            row_dict = {"total_time": total_time, "tokens": count_tokens_samples, "predictions": predictions_samples,
-                        "faithfulness": faithfulness, "model": key, "dataset": d}
+            row_dict = {
+                "total_time": total_time,
+                "total_llm_time": total_llm_time,
+                "total_local_time": local_time,
+                "avg_latency_llm": avg_latency_llm,
+                "avg_latency_local": avg_latency_local,
+                "tokens": count_tokens_samples,
+                "predictions": predictions_samples,
+                "faithfulness": faithfulness,
+                "model": key,
+                "dataset": d,
+            }
             for cfk, cfv in cf_metrics.items():
                 row_dict[cfk] = cfv
             eval_row = pd.Series(row_dict)

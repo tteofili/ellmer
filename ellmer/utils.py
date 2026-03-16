@@ -1,9 +1,11 @@
-import pandas as pd
-import numpy as np
-import openai
+import functools
+import json
 import random
 import time
-import json
+
+import numpy as np
+import openai
+import pandas as pd
 from tqdm import tqdm
 
 
@@ -108,9 +110,10 @@ def text_to_match(answer, llm_fn, n=0):
     return no_match_score, match_score
 
 
+@functools.lru_cache(maxsize=64)
 def read_prompt(file_path: str):
     with open(file_path) as file:
-        lines = [(line.rstrip().split('::')) for line in file]
+        lines = [tuple(line.rstrip().split('::')) for line in file]
     return lines
 
 
@@ -177,70 +180,83 @@ def completion_with_backoff(deployment_id="gpt-35-turbo", model="gpt-3.5-turbo",
         except Exception as e:
             raise e
 
+def _row_from_index(df_by_id, id_val):
+    row = df_by_id.loc[id_val]
+    return row.iloc[0] if isinstance(row, pd.DataFrame) else row
+
+
 def merge_sources(table, left_prefix, right_prefix, left_source, right_source, copy_from_table, ignore_from_table,
                   robust: bool = False, samples: int = -1):
-    dataset = pd.DataFrame(columns={col: table[col].dtype for col in copy_from_table})
     ignore_column = copy_from_table + ignore_from_table
+    left_idx = left_source.set_index('id')
+    right_idx = right_source.set_index('id')
+    rows_list = []
 
     for i, row in tqdm(table.iterrows()):
         leftid = row[left_prefix + 'id']
         rightid = row[right_prefix + 'id']
-        l_tuple = left_source.loc[left_source['id'] == leftid].iloc[0]
-        r_tuple = right_source.loc[right_source['id'] == rightid].iloc[0]
+        l_tuple = _row_from_index(left_idx, leftid).copy()
+        r_tuple = _row_from_index(right_idx, rightid).copy()
         for ic in ignore_column:
-            if ic in l_tuple:
+            if ic in l_tuple.index:
                 l_tuple = l_tuple.drop([ic])
-            if ic in r_tuple:
+            if ic in r_tuple.index:
                 r_tuple = r_tuple.drop([ic])
         new_row = get_row(l_tuple, r_tuple, lprefix=left_prefix, rprefix=right_prefix)
         new_row['label'] = row['label']
-        dataset = pd.concat([dataset, new_row], ignore_index=True)
+        rows_list.append(new_row)
+
+        if robust:
+            try:
+                sym_new_row = {column: row[column] for column in copy_from_table}
+                for id_val, source_idx, prefix in [
+                    (rightid, right_idx, left_prefix),
+                    (leftid, left_idx, right_prefix),
+                ]:
+                    r = _row_from_index(source_idx, id_val)
+                    for column in source_idx.columns:
+                        if column not in ignore_column:
+                            sym_new_row[prefix + column] = r[column]
+                rows_list.append(pd.DataFrame([sym_new_row]))
+            except Exception:
+                pass
+
+            try:
+                lcopy_row = {column: row[column] for column in copy_from_table}
+                for id_val, source_idx, prefix in [
+                    (leftid, left_idx, left_prefix),
+                    (leftid, left_idx, right_prefix),
+                ]:
+                    r = _row_from_index(source_idx, id_val)
+                    for column in source_idx.columns:
+                        if column not in ignore_column:
+                            lcopy_row[prefix + column] = r[column]
+                lcopy_row['label'] = 1
+                rows_list.append(pd.DataFrame([lcopy_row]))
+            except Exception:
+                pass
+
+            try:
+                rcopy_row = {column: row[column] for column in copy_from_table}
+                for id_val, source_idx, prefix in [
+                    (rightid, right_idx, left_prefix),
+                    (rightid, right_idx, right_prefix),
+                ]:
+                    r = _row_from_index(source_idx, id_val)
+                    for column in source_idx.columns:
+                        if column not in ignore_column:
+                            rcopy_row[prefix + column] = r[column]
+                rcopy_row['label'] = 1
+                rows_list.append(pd.DataFrame([rcopy_row]))
+            except Exception:
+                pass
+
         if i == samples:
             break
 
-
-    if robust:
-            # symmetry
-            sym_new_row = {column: row[column] for column in copy_from_table}
-            try:
-                for id, source, prefix in [(rightid, right_source, left_prefix), (leftid, left_source, right_prefix)]:
-
-                    for column in source.keys():
-                        if column not in ignore_column:
-                            sym_new_row[prefix + column] = source.loc[id][column]
-
-                dataset = pd.concat([dataset, pd.DataFrame([sym_new_row])], ignore_index=True)
-
-            except:
-                pass
-
-            # identity
-            lcopy_row = {column: row[column] for column in copy_from_table}
-            try:
-                for id, source, prefix in [(leftid, left_source, left_prefix), (leftid, left_source, right_prefix)]:
-
-                    for column in source.keys():
-                        if column not in ignore_column:
-                            lcopy_row[prefix + column] = source.loc[id][column]
-
-                lcopy_row['label'] = 1
-                dataset = pd.concat([dataset, pd.DataFrame([lcopy_row])], ignore_index=True)
-            except:
-                pass
-
-            rcopy_row = {column: row[column] for column in copy_from_table}
-            try:
-                for id, source, prefix in [(rightid, right_source, left_prefix), (rightid, right_source, right_prefix)]:
-
-                    for column in source.keys():
-                        if column not in ignore_column:
-                            rcopy_row[prefix + column] = source.loc[id][column]
-
-                rcopy_row['label'] = 1
-                dataset = pd.concat([dataset, pd.DataFrame([rcopy_row])], ignore_index=True)
-            except:
-                pass
-    return dataset
+    if not rows_list:
+        return pd.DataFrame(columns={col: table[col].dtype for col in copy_from_table})
+    return pd.concat(rows_list, ignore_index=True)
 
 
 def get_row(r1, r2, lprefix='ltable_', rprefix='rtable_'):

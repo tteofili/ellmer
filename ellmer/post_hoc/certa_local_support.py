@@ -312,20 +312,25 @@ def record_to_text(record, ignored_columns=['id', 'ltable_id', 'rtable_id', 'lab
 
 
 def generate_subsequences(lsource, rsource, max=-1):
-    new_records_left_df = pd.DataFrame()
+    left_parts = []
+    offset_left = len(lsource)
     for i in np.arange(len(lsource[:max])):
         r = lsource.iloc[i]
-        nr_df = pd.DataFrame(generate_modified(r, start_id=len(new_records_left_df) + len(lsource)))
+        nr_df = pd.DataFrame(generate_modified(r, start_id=len(left_parts) + offset_left))
         if len(nr_df) > 0:
             nr_df.columns = lsource.columns
-            new_records_left_df = pd.concat([new_records_left_df, nr_df])
-    new_records_right_df = pd.DataFrame()
+            left_parts.append(nr_df)
+    new_records_left_df = pd.concat(left_parts, axis=0) if left_parts else pd.DataFrame()
+
+    right_parts = []
+    offset_right = len(rsource)
     for i in np.arange(len(rsource[:max])):
         r = rsource.iloc[i]
-        nr_df = pd.DataFrame(generate_modified(r, start_id=len(new_records_right_df) + len(rsource)))
+        nr_df = pd.DataFrame(generate_modified(r, start_id=len(right_parts) + offset_right))
         if len(nr_df) > 0:
             nr_df.columns = rsource.columns
-            new_records_right_df = pd.concat([new_records_right_df, nr_df])
+            right_parts.append(nr_df)
+    new_records_right_df = pd.concat(right_parts, axis=0) if right_parts else pd.DataFrame()
     return new_records_left_df, new_records_right_df
 
 
@@ -407,11 +412,12 @@ def cs(text1, text2):
 
 
 def expand_copies(lprefix, lsource, r1, r2, rprefix, rsource):
-    generated_df = pd.DataFrame()
+    generated_parts = []
     new_copies_left = []
     new_copies_right = []
     left = True
     for record in [r1, r2]:
+        r1r2c_rows = []
         r1_df = pd.DataFrame(data=[record.values], columns=record.index)
         r2_df = pd.DataFrame(data=[record.values], columns=record.index)
         r1_df.columns = list(map(lambda col: 'ltable_' + col, r1_df.columns))
@@ -458,9 +464,10 @@ def expand_copies(lprefix, lsource, r1, r2, rprefix, rsource):
                     new_copy['attr_name'] = r1r2c.columns[t]
                     new_copy['attr_pos'] = t
 
-                    # r1r2c = r1r2c.append(new_copy, ignore_index=True)
-                    r1r2c = pd.concat([r1r2c, pd.DataFrame([new_copy])], ignore_index=True)
+                    r1r2c_rows.append(new_copy)
 
+        if r1r2c_rows:
+            r1r2c = pd.concat([r1r2c, pd.DataFrame(r1r2c_rows)], ignore_index=True)
         if left:
             r1r2c['id'] = "0@" + r1r2c[lprefix + 'id'].astype(str) + "#" + "1@" + r1r2c[
                 rprefix + 'id'].astype(str)
@@ -469,7 +476,8 @@ def expand_copies(lprefix, lsource, r1, r2, rprefix, rsource):
             r1r2c['id'] = "0@" + r1r2c[lprefix + 'id'].astype(str) + "#" + "1@" + r1r2c[
                 rprefix + 'id'].astype(str)
 
-        generated_df = pd.concat([generated_df, r1r2c], axis=0)
+        generated_parts.append(r1r2c)
+    generated_df = pd.concat(generated_parts, axis=0) if generated_parts else pd.DataFrame()
     generated_records_left_df = pd.DataFrame(new_copies_left).rename(columns=lambda x: x[len(lprefix):])
     generated_records_right_df = pd.DataFrame(new_copies_right).rename(columns=lambda x: x[len(rprefix):])
 

@@ -3,6 +3,7 @@ import itertools
 import json
 import os
 import traceback
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
 from time import sleep, time
 
@@ -19,8 +20,161 @@ from ellmer.selfexplainer import SelfExplainer, ICLSelfExplainer
 from ellmer.utils import merge_sources
 
 
+def build_self_explainers(llm_config, temperature, granularity):
+    """Build zeroshot, cot (no why), cot_with_why, and predict_only explainers."""
+    common = dict(
+        explanation_granularity=granularity,
+        deployment_name=llm_config['deployment_name'],
+        temperature=temperature,
+        model_name=llm_config['model_name'],
+        model_type=llm_config['model_type'],
+    )
+    return {
+        "zeroshot": SelfExplainer(
+            **common,
+            prompts={"pase": "ellmer/prompts/constrained16.txt"},
+        ),
+        "cot": SelfExplainer(
+            **common,
+            prompts={"ptse": {
+                "er": "ellmer/prompts/er.txt",
+                "saliency": "ellmer/prompts/er-saliency-lc.txt",
+                "cf": "ellmer/prompts/er-cf-lc.txt",
+            }},
+        ),
+        "cot_with_why": SelfExplainer(
+            **common,
+            prompts={"ptse": {
+                "er": "ellmer/prompts/er.txt",
+                "why": "ellmer/prompts/er-why.txt",
+                "saliency": "ellmer/prompts/er-saliency-lc.txt",
+                "cf": "ellmer/prompts/er-cf-lc.txt",
+            }},
+        ),
+        "predict_only": SelfExplainer(
+            **common,
+            prompts={"ptse": {"er": "ellmer/prompts/er.txt"}},
+        ),
+    }
+
+
+def _run_one_sample(idx, llm, test_df):
+    """Run predict_and_explain for one test row. Returns (idx, row_dict) or (idx, None) on error."""
+    try:
+        rand_row = test_df.iloc[[idx]]
+        ltuple, rtuple = ellmer.utils.get_tuples(rand_row)
+        ptime = time()
+        answer_dictionary = llm.predict_and_explain(ltuple, rtuple)
+        ptime = time() - ptime
+        prediction = answer_dictionary['prediction']
+        saliency = answer_dictionary['saliency']
+        cfs = [answer_dictionary['cf']]
+        conversation = answer_dictionary.get('conversation', '')
+        row_dict = {
+            "id": idx, "ltuple": ltuple, "rtuple": rtuple, "prediction": prediction,
+            "label": rand_row['label'].values[0], "saliency": saliency, "cfs": cfs,
+            "latency": ptime, "conversation": conversation,
+        }
+        if "llm_time" in answer_dictionary:
+            row_dict["llm_time"] = answer_dictionary["llm_time"]
+        if "filter_features" in answer_dictionary:
+            row_dict["filter_features"] = answer_dictionary["filter_features"]
+        return (idx, row_dict)
+    except Exception:
+        traceback.print_exc()
+        print('error, waiting...')
+        sleep(10)
+        return (idx, None)
+
+
+def run_explainer(key, llm, test_df, samples, expdir, quantitative, dataset_name, workers=1):
+    """Run one explainer on the test set, optionally compute metrics, write results. Returns (key, output_file_path, eval_row)."""
+    print(f'{key} on {dataset_name}')
+    start_time = time()
+    test_data_df = test_df[:samples]
+    indices = list(range(len(test_data_df)))
+
+    if workers <= 1:
+        curr_llm_results = []
+        for idx in tqdm(indices, disable=False):
+            _, row_dict = _run_one_sample(idx, llm, test_df)
+            if row_dict is not None:
+                curr_llm_results.append(row_dict)
+    else:
+        curr_llm_results = []
+        with ThreadPoolExecutor(max_workers=workers) as executor:
+            futures = [executor.submit(_run_one_sample, idx, llm, test_df) for idx in indices]
+            for f in tqdm(as_completed(futures), total=len(futures), disable=False):
+                idx, row_dict = f.result()
+                if row_dict is not None:
+                    curr_llm_results.append(row_dict)
+        curr_llm_results.sort(key=lambda r: r["id"])
+
+    total_time = time() - start_time
+    # Local time excludes remote LLM execution only; use for stable timing across runs.
+    n = len(curr_llm_results)
+    total_llm_time = sum(r.get("llm_time", r["latency"]) for r in curr_llm_results) if n else 0.0
+    local_time = max(0.0, total_time - total_llm_time)
+    avg_latency_llm = total_llm_time / n if n else 0.0
+    avg_latency_local = local_time / samples if samples else 0.0
+
+    os.makedirs(expdir, exist_ok=True)
+    count_tokens_samples = llm.count_tokens() / samples
+    predictions_samples = llm.count_predictions() / samples
+    faithfulness = 'nan'
+    cf_metrics = {}
+
+    if quantitative:
+        faithfulness = ellmer.metrics.get_faithfulness(
+            [key], llm.evaluation, expdir, test_data_df,
+            results_by_name={key: {"data": curr_llm_results}})
+        print(f'{key} faithfulness({key}):{faithfulness}')
+        cf_metrics = ellmer.metrics.get_cf_metrics(
+            [key], llm.predict, expdir, test_data_df,
+            results_by_name={key: {"data": curr_llm_results}})
+        print(f'{key} cf_metrics({key}):{cf_metrics}')
+
+    metrics_results = {"faithfulness": faithfulness, "counterfactual_metrics": cf_metrics} if quantitative else {}
+    llm_results = {
+        "data": curr_llm_results,
+        "total_time": total_time,
+        "total_llm_time": total_llm_time,
+        "total_local_time": local_time,
+        "tokens": count_tokens_samples,
+        "predictions": predictions_samples,
+        "avg_latency": total_time / samples,
+        "avg_latency_llm": avg_latency_llm,
+        "avg_latency_local": avg_latency_local,
+    }
+    if quantitative:
+        llm_results["metrics"] = metrics_results
+
+    output_file_path = expdir + key + '_results.json'
+    with open(output_file_path, 'w') as fout:
+        json.dump(llm_results, fout)
+
+    row_dict = {
+        "total_time": total_time,
+        "total_llm_time": total_llm_time,
+        "total_local_time": local_time,
+        "avg_latency_llm": avg_latency_llm,
+        "avg_latency_local": avg_latency_local,
+        "tokens": count_tokens_samples,
+        "predictions": predictions_samples,
+        "faithfulness": faithfulness,
+        "model": key,
+        "dataset": dataset_name,
+    }
+    for cfk, cfv in cf_metrics.items():
+        row_dict[cfk] = cfv
+    eval_row = pd.Series(row_dict)
+    print(f'{key} data generated in {total_time}s (local: {local_time}s)')
+    return key, output_file_path, eval_row
+
+
 def eval(cache, samples, num_triangles, explanation_granularity, quantitative, base_dir, dataset_names, model_type,
-         model_name, deployment_name, tag, temperature, run_id=None, session_dir=None, multi_run=False):
+         model_name, deployment_name, tag, temperature, run_id=None, session_dir=None, multi_run=False, workers=1,
+         parallel_explainers=False):
     if not multi_run:
         if cache == "memory":
             langchain.llm_cache = InMemoryCache()
@@ -28,32 +182,11 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
             langchain.llm_cache = SQLiteCache(database_path=".langchain.db")
 
     llm_config = {"model_type": model_type, "model_name": model_name, "deployment_name": deployment_name, "tag": tag}
-
-    zeroshot = SelfExplainer(explanation_granularity=explanation_granularity,
-                             deployment_name=llm_config['deployment_name'], temperature=temperature,
-                             model_name=llm_config['model_name'], model_type=llm_config['model_type'],
-                             prompts={"pase": "ellmer/prompts/constrained16.txt"})
-
-    cot = SelfExplainer(explanation_granularity=explanation_granularity,
-                        deployment_name=llm_config['deployment_name'], temperature=temperature,
-                        model_name=llm_config['model_name'], model_type=llm_config['model_type'],
-                        prompts={"ptse": {"er": "ellmer/prompts/er.txt",
-                                          "saliency": "ellmer/prompts/er-saliency-lc.txt",
-                                          "cf": "ellmer/prompts/er-cf-lc.txt"}})
-
-    cot2 = SelfExplainer(explanation_granularity=explanation_granularity,
-                         deployment_name=llm_config['deployment_name'], temperature=temperature,
-                         model_name=llm_config['model_name'], model_type=llm_config['model_type'],
-                         prompts={
-                             "ptse": {"er": "ellmer/prompts/er.txt",
-                                      "why": "ellmer/prompts/er-why.txt",
-                                      "saliency": "ellmer/prompts/er-saliency-lc.txt",
-                                      "cf": "ellmer/prompts/er-cf-lc.txt"}})
-
-    predict_only = SelfExplainer(explanation_granularity=explanation_granularity,
-                                 deployment_name=llm_config['deployment_name'], temperature=temperature,
-                                 model_name=llm_config['model_name'], model_type=llm_config['model_type'],
-                                 prompts={"ptse": {"er": "ellmer/prompts/er.txt"}})
+    explainers = build_self_explainers(llm_config, temperature, explanation_granularity)
+    zeroshot = explainers["zeroshot"]
+    cot = explainers["cot"]
+    cot_with_why = explainers["cot_with_why"]
+    predict_only = explainers["predict_only"]
 
     evals = []
 
@@ -81,7 +214,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
 
         examples = []
 
-        # generate predictions and explanations
+        # generate predictions and explanations for few-shot examples
         few_shot_no = 1
         train_data_matching_df = train_df[train_df['label'] == 1][:few_shot_no]
         train_data_non_matching_df = train_df[train_df['label'] == 0][:few_shot_no]
@@ -91,7 +224,7 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
             try:
                 rand_row = data_df.iloc[[idx]]
                 ltuple, rtuple = ellmer.utils.get_tuples(rand_row)
-                answer_dictionary = cot.predict_and_explain(ltuple, rtuple)
+                answer_dictionary = cot_with_why.predict_and_explain(ltuple, rtuple)
                 prediction = answer_dictionary['prediction']
                 saliency_explanation = answer_dictionary['saliency']
                 cf_explanation = answer_dictionary['cf']
@@ -114,98 +247,39 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
 
         ellmers = {
             "zs_" + llm_config['tag']: zeroshot,
-            "cot_" + llm_config['tag']: cot2,
+            "cot_" + llm_config['tag']: cot_with_why,
             "fs_" + llm_config['tag']: fs1,
-            "certa_" + llm_config['tag']: FullCerta(explanation_granularity, predict_only, certa,
-                                                    num_triangles),
-            "hybrid_" + llm_config['tag']: HybridCerta(explanation_granularity, cot, certa,
-                                                       [zeroshot, cot, cot2],
-                                                       num_triangles=num_triangles),
+            "certa_" + llm_config['tag']: FullCerta(explanation_granularity, predict_only, certa, num_triangles),
+            "hybrid_" + llm_config['tag']: HybridCerta(
+                explanation_granularity, cot, certa,
+                [zeroshot, cot, cot_with_why],
+                num_triangles=num_triangles,
+            ),
         }
 
         result_files = []
-        for key, llm in ellmers.items():
-            print(f'{key} on {d}')
-            curr_llm_results = []
-            start_time = time()
-
-            # generate predictions and explanations
-            test_data_df = test_df[:samples]
-            ranged = range(len(test_data_df))
-            for idx in tqdm(ranged, disable=False):
-                try:
-                    rand_row = test_df.iloc[[idx]]
-                    ltuple, rtuple = ellmer.utils.get_tuples(rand_row)
-                    ptime = time()
-                    answer_dictionary = llm.predict_and_explain(ltuple, rtuple)
-                    ptime = time() - ptime
-                    prediction = answer_dictionary['prediction']
-                    saliency = answer_dictionary['saliency']
-                    cfs = [answer_dictionary['cf']]
-                    if 'conversation' in answer_dictionary:
-                        conversation = answer_dictionary['conversation']
-                    else:
-                        conversation = ''
-                    row_dict = {"id": idx, "ltuple": ltuple, "rtuple": rtuple, "prediction": prediction,
-                                "label": rand_row['label'].values[0], "saliency": saliency, "cfs": cfs,
-                                "latency": ptime, "conversation": conversation}
-                    if "filter_features" in answer_dictionary:
-                        row_dict["filter_features"] = answer_dictionary["filter_features"]
-                    curr_llm_results.append(row_dict)
-                except Exception:
-                    traceback.print_exc()
-                    print(f'error, waiting...')
-                    sleep(10)
-                    start_time += 10
-
-            total_time = time() - start_time
-
-            os.makedirs(expdir, exist_ok=True)
-            count_tokens_samples = llm.count_tokens() / samples
-            predictions_samples = llm.count_predictions() / samples
-            llm_results = {"data": curr_llm_results, "total_time": total_time, "tokens": count_tokens_samples,
-                           "predictions": predictions_samples,
-                           "avg_latency": total_time / samples}
-
-            output_file_path = expdir + key + '_results.json'
-            with open(output_file_path, 'w') as fout:
-                json.dump(llm_results, fout)
-
-            faithfulness = 'nan'
-            cf_metrics = {}
-            count_tokens_samples = 'nan'
-            predictions_samples = 'nan'
-
-            if quantitative:
-                # generate quantitative explainability metrics for each set of generated explanations
-
-                # generate saliency metrics
-                faithfulness = ellmer.metrics.get_faithfulness([key], llm.evaluation, expdir, test_data_df)
-                print(f'{key} faithfulness({key}):{faithfulness}')
-
-                # generate counterfactual metrics
-                cf_metrics = ellmer.metrics.get_cf_metrics([key], llm.predict, expdir, test_data_df)
-                print(f'{key} cf_metrics({key}):{cf_metrics}')
-
-                metrics_results = {"faithfulness": faithfulness, "counterfactual_metrics": cf_metrics}
-
-                llm_results = {"data": curr_llm_results, "total_time": total_time, "metrics": metrics_results,
-                               "tokens": count_tokens_samples, "predictions": predictions_samples,
-                               "avg_latency": total_time / samples}
-
-                output_file_path = expdir + key + '_results.json'
-                with open(output_file_path, 'w') as fout:
-                    json.dump(llm_results, fout)
-
-            result_files.append((key, output_file_path))
-            print(f'{key} data generated in {total_time}s')
-
-            row_dict = {"total_time": total_time, "tokens": count_tokens_samples, "predictions": predictions_samples,
-                        "faithfulness": faithfulness, "model": key, "dataset": d}
-            for cfk, cfv in cf_metrics.items():
-                row_dict[cfk] = cfv
-            eval_row = pd.Series(row_dict)
-            evals.append(eval_row)
+        if parallel_explainers:
+            explainer_results = []
+            with ThreadPoolExecutor(max_workers=len(ellmers)) as executor:
+                futures = {
+                    executor.submit(
+                        run_explainer, key, llm, test_df, samples, expdir, quantitative, d, workers
+                    ): key
+                    for key, llm in ellmers.items()
+                }
+                for future in as_completed(futures):
+                    _, output_file_path, eval_row = future.result()
+                    key = futures[future]
+                    explainer_results.append((key, output_file_path, eval_row))
+            explainer_results.sort(key=lambda x: x[0])
+            result_files = [(k, p) for k, p, _ in explainer_results]
+            evals.extend(r for _, _, r in explainer_results)
+        else:
+            for key, llm in ellmers.items():
+                _, output_file_path, eval_row = run_explainer(
+                    key, llm, test_df, samples, expdir, quantitative, d, workers=workers)
+                result_files.append((key, output_file_path))
+                evals.append(eval_row)
 
         # generate concordance statistics for each pair of results
         for pair in itertools.combinations(result_files, 2):
@@ -246,8 +320,8 @@ if __name__ == "__main__":
                         help='no. of open triangles used to generate CERTA explanations')
     parser.add_argument('--granularity', metavar='tk', type=str, default='attribute',
                         choices=['attribute', 'token'], help='explanation granularity')
-    parser.add_argument('--quantitative', metavar='q', type=bool, default=False,
-                        help='whether to generate quantitative explanation evaluation results')
+    parser.add_argument('--quantitative', action='store_true',
+                        help='generate quantitative explanation evaluation results')
     parser.add_argument('--model_name', metavar='mn', type=str, help='model name/identifier',
                         default="gpt-3.5-turbo")
     parser.add_argument('--deployment_name', metavar='dn', type=str, help='deployment name',
@@ -258,6 +332,10 @@ if __name__ == "__main__":
                         help='number of runs for significance testing (when > 1, uses run-scoped dirs and per-run or no cache)')
     parser.add_argument('--run_output_dir', metavar='o', type=str, default=None,
                         help='output directory for multi-run session (default: experiments/.../YYYYMMDD_HH_MM/)')
+    parser.add_argument('--workers', type=int, default=1,
+                        help='number of parallel workers for test-sample LLM calls (default: 1)')
+    parser.add_argument('--parallel_explainers', action='store_true',
+                        help='run the five explainers (zs, cot, fs, certa, hybrid) in parallel')
 
     args = parser.parse_args()
     base_datadir = args.base_dir
@@ -277,6 +355,8 @@ if __name__ == "__main__":
     tag = args.tag
     runs = args.runs
     run_output_dir = args.run_output_dir
+    workers = args.workers
+    parallel_explainers = args.parallel_explainers
 
     if runs > 1:
         session_dir = run_output_dir or (
@@ -295,7 +375,8 @@ if __name__ == "__main__":
             print(f'--- Run {run_id + 1}/{runs} ---')
             eval(cache, samples, num_triangles, explanation_granularity, quantitative, base_dir, dataset_names,
                  model_type, model_name, deployment_name, tag, temperature,
-                 run_id=run_id, session_dir=session_dir, multi_run=True)
+                 run_id=run_id, session_dir=session_dir, multi_run=True, workers=workers,
+                 parallel_explainers=parallel_explainers)
             run_eval_path = os.path.join(session_dir, f'run_{run_id}', 'eval.csv')
             if os.path.isfile(run_eval_path):
                 run_eval_df = pd.read_csv(run_eval_path, index_col=0)
@@ -308,4 +389,5 @@ if __name__ == "__main__":
             print(f'Wrote {eval_all_runs_path}')
     else:
         eval(cache, samples, num_triangles, explanation_granularity, quantitative, base_dir, dataset_names,
-             model_type, model_name, deployment_name, tag, temperature)
+             model_type, model_name, deployment_name, tag, temperature, workers=workers,
+             parallel_explainers=parallel_explainers)

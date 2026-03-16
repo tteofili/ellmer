@@ -30,6 +30,8 @@ python scripts/eval.py --base_dir path/to/deepmatcher_datasets --model_type azur
 
 Other optional parameters can be specified in the [script](scripts/eval.py#l160).
 
+**Timing:** Results include `total_local_time` and `avg_latency_local`, which measure run time without the remote LLM execution step (LLMChain / HuggingFace / OpenAI API calls), for more stable timing across runs. When an explainer provides `llm_time`, only that remote execution is subtracted; otherwise the full `predict_and_explain` duration is treated as LLM time. With `--workers > 1`, the split between local and LLM time is approximate because wall time can be less than the sum of per-call latencies.
+
 # Notebooks
 
 * [ChatGPT self-explanations prompt sensitivity](notebooks/self_expl_prompt_variance.ipynb).

@@ -15,8 +15,13 @@ import pandas as pd
 from scipy.stats import wilcoxon
 
 # Metric columns to aggregate (numeric); exclude identifiers and run_id
+# total_local_time / avg_latency_local exclude LLM call time for stable timing across runs
 METRIC_COLUMNS = [
     "total_time",
+    "total_llm_time",
+    "total_local_time",
+    "avg_latency_llm",
+    "avg_latency_local",
     "tokens",
     "predictions",
     "faithfulness",

@@ -2,7 +2,6 @@ from collections import Counter
 
 import math
 import re
-from langchain.chains import LLMChain
 
 from ellmer.explainer import BaseLLMExplainer
 
@@ -39,47 +38,55 @@ class FullCerta(BaseLLMExplainer):
         return {"prediction": prediction, "saliency": saliency_explanation, "cf": cf_explanation}
 
     def get_row(self, row, df, prefix=''):
-        rc = dict()
-        for k, v in row.items():
-            new_k = k.replace(prefix, "")
-            rc[new_k] = [v]
+        # Build lookup dict: strip prefix from row keys, values as single-element lists for isin()
+        rc = {k.replace(prefix, ""): [v] for k, v in row.items()}
+
+        # Step 1: exact match on all columns (excluding id)
         if 'id' in df.columns:
-            result = df[df.drop(['id'], axis=1).isin(rc).all(axis=1)]
-        elif prefix+'id' in df.columns:
-            result = df[df.drop([prefix+'id'], axis=1).isin(rc).all(axis=1)]
+            match_cols = df.drop(['id'], axis=1)
+        elif prefix + 'id' in df.columns:
+            match_cols = df.drop([prefix + 'id'], axis=1)
         else:
-            result = df[df.isin(rc).all(axis=1)]
-        if len(result) == 0:
-            result = df.copy()
-            for k, v in rc.items():
-                result_new = result[result[k] == rc[k][0]]
-                if len(result_new) == 1:
-                    break
-                if len(result_new) == 0:
+            match_cols = df
+        exact = df[match_cols.isin(rc).all(axis=1)]
+        if len(exact) == 1:
+            return exact.iloc[0]
+        if len(exact) > 1:
+            return exact.iloc[0]
+
+        # Step 2: column-by-column filter
+        result = df.copy()
+        for k, v in rc.items():
+            if k not in result.columns:
+                continue
+            result_new = result[result[k] == v[0]]
+            if len(result_new) == 1:
+                return result_new.iloc[0]
+            if len(result_new) == 0:
+                continue
+            result = result_new
+
+        # Step 3: final tie-break when multiple rows remain
+        if len(result) > 1:
+            print(f'warning: found more than 1 item!({len(result)})')
+            filtered_df = df.copy()
+            for c in df.columns:
+                if c not in filtered_df.columns or c not in rc:
                     continue
-                else:
-                    result = result_new
-            if len(result) > 1:
-                print(f'warning: found more than 1 item!({len(result)})')
-                filtered_df = df.copy()
-                for c in df.columns:
-                    if c in filtered_df.columns and c in rc:
-                        new_filtered_df = filtered_df.loc[filtered_df[c].isin(rc[c])]
-                        if len(new_filtered_df) == 1:
-                            return new_filtered_df.iloc[0]
-                        elif len(new_filtered_df) > 0:
-                            filtered_df = new_filtered_df
-                if len(filtered_df) > 0:
-                    filtered_d_df = filtered_df.drop_duplicates()
-                    if len(filtered_d_df) > 1:
-                        print(f'warning: found more than 1 filtered item!({len(filtered_d_df)})')
-                        print(filtered_d_df)
-                        print(f'getting first one')
-                        return filtered_d_df.iloc[0]
-                    else:
-                        return filtered_d_df.iloc[0]
-        else:
-            return result.iloc[0]
+                new_filtered_df = filtered_df.loc[filtered_df[c].isin(rc[c])]
+                if len(new_filtered_df) == 1:
+                    return new_filtered_df.iloc[0]
+                if len(new_filtered_df) > 0:
+                    filtered_df = new_filtered_df
+            if len(filtered_df) > 0:
+                filtered_d_df = filtered_df.drop_duplicates()
+                if len(filtered_d_df) > 1:
+                    print(f'warning: found more than 1 filtered item!({len(filtered_d_df)})')
+                    print(filtered_d_df)
+                    print('getting first one')
+                return filtered_d_df.iloc[0]
+
+        return result.iloc[0]
 
     def record_to_text(self, record, ignored_columns=['id', 'ltable_id', 'rtable_id', 'label']):
         return " ".join([str(val) for k, val in record.to_dict().items() if k not in [ignored_columns]])

@@ -23,7 +23,7 @@ class BaseLLMExplainer:
     def predict_and_explain(self, ltuple, rtuple):
         prediction = self.predict_tuples(ltuple, rtuple)
         saliency, cf = self.explain(ltuple, rtuple, prediction)
-        return {"prediction": prediction, "saliency_explanation": saliency, "counterfactual_explanation": cf}
+        return {"prediction": prediction, "saliency": saliency, "cf": cf}
 
     def predict_tuples(self, ltuple, rtuple):
         return False
