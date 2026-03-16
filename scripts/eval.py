@@ -20,11 +20,12 @@ from ellmer.utils import merge_sources
 
 
 def eval(cache, samples, num_triangles, explanation_granularity, quantitative, base_dir, dataset_names, model_type,
-         model_name, deployment_name, tag, temperature):
-    if cache == "memory":
-        langchain.llm_cache = InMemoryCache()
-    elif cache == "sqlite":
-        langchain.llm_cache = SQLiteCache(database_path=".langchain.db")
+         model_name, deployment_name, tag, temperature, run_id=None, session_dir=None, multi_run=False):
+    if not multi_run:
+        if cache == "memory":
+            langchain.llm_cache = InMemoryCache()
+        elif cache == "sqlite":
+            langchain.llm_cache = SQLiteCache(database_path=".langchain.db")
 
     llm_config = {"model_type": model_type, "model_name": model_name, "deployment_name": deployment_name, "tag": tag}
 
@@ -57,8 +58,12 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
     evals = []
 
     for d in dataset_names:
-        expdir = f'./experiments/{model_type}/{model_name}/{explanation_granularity}/{d}/{datetime.now():%Y%m%d}/{datetime.now():%H_%M}/'
-        obs_dir = f'experiments/{model_type}/{model_name}/{explanation_granularity}/concordance/{d}//{datetime.now():%Y%m%d}/{datetime.now():%H_%M}'
+        if session_dir is not None and run_id is not None:
+            expdir = f'{session_dir}/run_{run_id}/{d}/'
+            obs_dir = f'{session_dir}/run_{run_id}/concordance/{d}/'
+        else:
+            expdir = f'./experiments/{model_type}/{model_name}/{explanation_granularity}/{d}/{datetime.now():%Y%m%d}/{datetime.now():%H_%M}/'
+            obs_dir = f'experiments/{model_type}/{model_name}/{explanation_granularity}/concordance/{d}//{datetime.now():%Y%m%d}/{datetime.now():%H_%M}'
 
         print(f'using dataset {d}')
         dataset_dir = '/'.join([base_dir, d])
@@ -217,7 +222,10 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
             observations.to_csv(f'{obs_dir}/{p1_name}_{p2_name}.csv')
 
     eval_df = pd.DataFrame(evals)
-    eval_expdir = f'./experiments/{model_type}/{model_name}/{explanation_granularity}/{datetime.now():%Y%m%d}/{datetime.now():%H_%M}/'
+    if session_dir is not None and run_id is not None:
+        eval_expdir = f'{session_dir}/run_{run_id}/'
+    else:
+        eval_expdir = f'./experiments/{model_type}/{model_name}/{explanation_granularity}/{datetime.now():%Y%m%d}/{datetime.now():%H_%M}/'
     os.makedirs(eval_expdir, exist_ok=True)
     eval_df.to_csv(eval_expdir + "eval.csv")
 
@@ -246,6 +254,10 @@ if __name__ == "__main__":
                         default="gpt-35-turbo")
     parser.add_argument('--tag', metavar='tg', type=str, help='run tag', default="sample")
     parser.add_argument('--temperature', metavar='tp', type=float, help='LLM temperature', default=0.01)
+    parser.add_argument('--runs', metavar='n', type=int, default=1,
+                        help='number of runs for significance testing (when > 1, uses run-scoped dirs and per-run or no cache)')
+    parser.add_argument('--run_output_dir', metavar='o', type=str, default=None,
+                        help='output directory for multi-run session (default: experiments/.../YYYYMMDD_HH_MM/)')
 
     args = parser.parse_args()
     base_datadir = args.base_dir
@@ -263,6 +275,37 @@ if __name__ == "__main__":
     model_name = args.model_name
     deployment_name = args.deployment_name
     tag = args.tag
+    runs = args.runs
+    run_output_dir = args.run_output_dir
 
-    eval(cache, samples, num_triangles, explanation_granularity, quantitative, base_dir, dataset_names, model_type,
-         model_name, deployment_name, tag, temperature)
+    if runs > 1:
+        session_dir = run_output_dir or (
+            f'./experiments/{model_type}/{model_name}/{explanation_granularity}/'
+            f'{datetime.now():%Y%m%d}_{datetime.now():%H_%M}/'
+        )
+        os.makedirs(session_dir, exist_ok=True)
+        all_evals = []
+        for run_id in range(runs):
+            if cache == "memory":
+                langchain.llm_cache = InMemoryCache()
+            elif cache == "sqlite":
+                langchain.llm_cache = SQLiteCache(database_path=f".langchain_run_{run_id}.db")
+            else:
+                langchain.llm_cache = None
+            print(f'--- Run {run_id + 1}/{runs} ---')
+            eval(cache, samples, num_triangles, explanation_granularity, quantitative, base_dir, dataset_names,
+                 model_type, model_name, deployment_name, tag, temperature,
+                 run_id=run_id, session_dir=session_dir, multi_run=True)
+            run_eval_path = os.path.join(session_dir, f'run_{run_id}', 'eval.csv')
+            if os.path.isfile(run_eval_path):
+                run_eval_df = pd.read_csv(run_eval_path, index_col=0)
+                run_eval_df['run_id'] = run_id
+                all_evals.append(run_eval_df)
+        if all_evals:
+            eval_all_runs_df = pd.concat(all_evals, ignore_index=True)
+            eval_all_runs_path = os.path.join(session_dir, 'eval_all_runs.csv')
+            eval_all_runs_df.to_csv(eval_all_runs_path)
+            print(f'Wrote {eval_all_runs_path}')
+    else:
+        eval(cache, samples, num_triangles, explanation_granularity, quantitative, base_dir, dataset_names,
+             model_type, model_name, deployment_name, tag, temperature)
