@@ -230,18 +230,20 @@ class SelfExplainer(BaseLLMExplainer):
                 try:
                     saliency_content = saliency_answer
                     try:
-                        saliency_content = saliency_answer.split('```')[1].replace('`', '').replace('´', '')
-                    except:
+                        saliency_content = saliency_answer.split('```')[1].replace('`', '').replace('´', '').strip()
+                    except Exception:
                         if '```' in saliency_answer:
                             start_index = saliency_answer.index('```')
                             saliency_content = saliency_answer[
                                                start_index + 3:saliency_answer.index('```', start_index + 3)]
-                    saliency_dict = json.loads(saliency_content)
+                    if not saliency_content and "{" in (saliency_answer or ""):
+                        saliency_content = saliency_answer[saliency_answer.index("{"):saliency_answer.rfind("}") + 1]
+                    saliency_dict = json.loads(saliency_content) if saliency_content else {}
                     if 'saliency_explanation' in saliency_dict:
                         saliency_explanation = saliency_dict['saliency_explanation']
                     else:
                         saliency_explanation = saliency_dict
-                except:
+                except Exception:
                     try:
                         saliency = saliency_answer[saliency_answer.index("{"):saliency_answer.rfind("}") + 1]
                         saliency_dict = json.loads(saliency)
@@ -249,7 +251,7 @@ class SelfExplainer(BaseLLMExplainer):
                             saliency_explanation = saliency_dict['saliency_explanation']
                         else:
                             saliency_explanation = saliency_dict
-                    except:
+                    except Exception:
                         pass
                 if self.verbose:
                     parse_t = time() - parse_t
@@ -288,8 +290,11 @@ class SelfExplainer(BaseLLMExplainer):
                         # cf_answer_json = ''.join(cf_answer_content.split("{")[1].split("}")[0])
                     else:
                         cf_answer_json = cf_answer_content
-                    cf_dict = ast.literal_eval(cf_answer_json)
-                    keys = cf_dict.keys()
+                    try:
+                        cf_dict = json.loads(cf_answer_json)
+                    except Exception:
+                        cf_dict = ast.literal_eval(cf_answer_json)
+                    keys = list(cf_dict.keys()) if hasattr(cf_dict, 'keys') else []
                     if "record_after" in keys:
                         cf_explanation = cf_dict["record_after"]
                         if list(cf_explanation.keys())[0].startswith('rtable_'):
@@ -298,22 +303,24 @@ class SelfExplainer(BaseLLMExplainer):
                             cf_explanation = cf_explanation | ast.literal_eval(rtuple)
                     elif "counterfactual_record" in keys:
                         cf_explanation = cf_dict["counterfactual_record"]
+                    elif "counterfactual_explanation" in keys:
+                        cf_explanation = cf_dict["counterfactual_explanation"]
                     elif "counterfactual" in keys:
                         cf_explanation = cf_dict['counterfactual']
                     elif "record1" in keys and "record2" in keys:
-                        for k in cf_dict['record1'].keys():
+                        for k in list(cf_dict['record1'].keys()):
                             if not k.startswith('ltable_'):
                                 cf_dict['record1']['ltable_' + k] = cf_dict['record1'][k]
                                 cf_dict['record1'].pop(k)
 
-                        for k in cf_dict['record2'].keys():
+                        for k in list(cf_dict['record2'].keys()):
                             if not k.startswith('rtable_'):
                                 cf_dict['record2']['rtable_' + k] = cf_dict['record2'][k]
                                 cf_dict['record2'].pop(k)
                         cf_explanation = cf_dict['record1'] | cf_dict['record2']
                     else:
                         cf_explanation = cf_dict
-                except:
+                except Exception:
                     pass
                 if self.verbose:
                     parse_t = time() - parse_t

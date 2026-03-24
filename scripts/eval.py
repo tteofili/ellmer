@@ -20,6 +20,13 @@ from ellmer.selfexplainer import SelfExplainer, ICLSelfExplainer
 from ellmer.utils import merge_sources
 
 
+def _json_serializable_default(obj):
+    """Convert numpy/pandas scalars to native Python for JSON serialization."""
+    if hasattr(obj, 'item'):
+        return obj.item()
+    raise TypeError(f'Object of type {obj.__class__.__name__} is not JSON serializable')
+
+
 def build_self_explainers(llm_config, temperature, granularity):
     """Build zeroshot, cot (no why), cot_with_why, and predict_only explainers."""
     common = dict(
@@ -70,6 +77,9 @@ def _run_one_sample(idx, llm, test_df):
         saliency = answer_dictionary['saliency']
         cfs = [answer_dictionary['cf']]
         conversation = answer_dictionary.get('conversation', '')
+        # JSON has no tuple type; convert list of (role, content) tuples to list of lists
+        if conversation:
+            conversation = [list(t) for t in conversation]
         row_dict = {
             "id": idx, "ltuple": ltuple, "rtuple": rtuple, "prediction": prediction,
             "label": rand_row['label'].values[0], "saliency": saliency, "cfs": cfs,
@@ -148,10 +158,11 @@ def run_explainer(key, llm, test_df, samples, expdir, quantitative, dataset_name
     }
     if quantitative:
         llm_results["metrics"] = metrics_results
+    print(llm_results)
 
     output_file_path = expdir + key + '_results.json'
     with open(output_file_path, 'w') as fout:
-        json.dump(llm_results, fout)
+        json.dump(llm_results, fout, default=_json_serializable_default)
 
     row_dict = {
         "total_time": total_time,
@@ -321,7 +332,7 @@ if __name__ == "__main__":
     parser.add_argument('--granularity', metavar='tk', type=str, default='attribute',
                         choices=['attribute', 'token'], help='explanation granularity')
     parser.add_argument('--quantitative', action='store_true',
-                        help='generate quantitative explanation evaluation results')
+                        help='generate quantitative explanation evaluation results', default=True)
     parser.add_argument('--model_name', metavar='mn', type=str, help='model name/identifier',
                         default="gpt-3.5-turbo")
     parser.add_argument('--deployment_name', metavar='dn', type=str, help='deployment name',
@@ -332,9 +343,9 @@ if __name__ == "__main__":
                         help='number of runs for significance testing (when > 1, uses run-scoped dirs and per-run or no cache)')
     parser.add_argument('--run_output_dir', metavar='o', type=str, default=None,
                         help='output directory for multi-run session (default: experiments/.../YYYYMMDD_HH_MM/)')
-    parser.add_argument('--workers', type=int, default=1,
+    parser.add_argument('--workers', type=int, default=4,
                         help='number of parallel workers for test-sample LLM calls (default: 1)')
-    parser.add_argument('--parallel_explainers', action='store_true',
+    parser.add_argument('--parallel_explainers', action='store_true', default=True,
                         help='run the five explainers (zs, cot, fs, certa, hybrid) in parallel')
 
     args = parser.parse_args()
