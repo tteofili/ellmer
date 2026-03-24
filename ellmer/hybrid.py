@@ -56,52 +56,78 @@ class HybridCerta(FullCerta):
         num_triangles = self.num_triangles
 
         while not satisfied:
+            def _score(x):
+                if isinstance(x, list):
+                    return float(x[0]) if x else 0.0
+                return float(x)
+
             if self.combine == 'freq':
-                # get most frequent features from the self-explanations
-                filter_features = []
+                # get most frequent features from the self-explanations (only count > 1 across explainers/draws)
+                fc = {}
                 for se in pae_dicts:
                     if type(se) is dict:
                         try:
-                            fse = {k: v for k, v in se.items() if v > 0}
+                            fse = {k: v for k, v in se.items() if _score(v) > 0}
                             if len(fse) > 0:
                                 sorted_attributes_dict = sorted(fse.items(), key=operator.itemgetter(1), reverse=True)[:top_k]
-                                top_features = [f[0] for f in sorted_attributes_dict]
-                                filter_features = filter_features + top_features
-                        except:
+                                for f, _ in sorted_attributes_dict:
+                                    fc[f] = fc.get(f, 0) + 1
+                        except Exception:
                             pass
-                fc = {}
-                for f in filter_features:
-                    if f in fc:
-                        fc[f] = fc[f] + 1
-                    else:
-                        fc[f] = 1
-                sorted_fc = sorted(fc.items(), key=operator.itemgetter(1), reverse=True)[:top_k]
+                sorted_fc = sorted(fc.items(), key=operator.itemgetter(1), reverse=True)
+                sorted_fc = [(f, c) for f, c in sorted_fc if c > 1][:top_k]
                 filter_features = [sfc[0] for sfc in sorted_fc]
             elif self.combine == 'union':
-                # get all features from the self-explanations
-                filter_features = []
+                fc = {}
                 for se in pae_dicts:
-                    sorted_attributes_dict = sorted(se.items(), key=operator.itemgetter(1), reverse=True)[:top_k]
-                    top_features = [f[0] for f in sorted_attributes_dict]
-                    for tf in top_features:
-                        if tf not in filter_features:
-                            filter_features.append(tf)
+                    if type(se) is not dict:
+                        continue
+                    try:
+                        sorted_attributes_dict = sorted(se.items(), key=operator.itemgetter(1), reverse=True)[:top_k]
+                        for f, _ in sorted_attributes_dict:
+                            fc[f] = fc.get(f, 0) + 1
+                    except Exception:
+                        pass
+                sorted_fc = sorted(fc.items(), key=operator.itemgetter(1), reverse=True)
+                sorted_fc = [(f, c) for f, c in sorted_fc if c > 1][:top_k]
+                filter_features = [sfc[0] for sfc in sorted_fc]
             elif self.combine == 'intersection':
-                # get recurring features only from the self-explanations
-                filter_features = set()
+                # recurring features in every self-explanation top-k, and seen in more than one draw/explainer
+                top_sets = []
+                fc = {}
                 for se in pae_dicts:
-                    sorted_attributes_dict = sorted(se.items(), key=operator.itemgetter(1), reverse=True)[:top_k]
-                    top_features = set([f[0] for f in sorted_attributes_dict])
-                    if len(filter_features) == 0:
-                        filter_features = top_features
-                    filter_features = filter_features.intersection(top_features)
-                filter_features = list(filter_features)
+                    if type(se) is not dict:
+                        continue
+                    try:
+                        sorted_attributes_dict = sorted(se.items(), key=operator.itemgetter(1), reverse=True)[:top_k]
+                        top_features = {f[0] for f in sorted_attributes_dict}
+                        top_sets.append(top_features)
+                        for f in top_features:
+                            fc[f] = fc.get(f, 0) + 1
+                    except Exception:
+                        pass
+                if not top_sets:
+                    filter_features = []
+                else:
+                    inter = set.intersection(*top_sets)
+                    filter_features = [f for f in inter if fc.get(f, 0) > 1]
             elif self.combine == 'random':
-                filter_features = set()
+                fc = {}
                 for se in pae_dicts:
+                    if type(se) is not dict:
+                        continue
+                    try:
+                        sorted_attributes_dict = sorted(se.items(), key=operator.itemgetter(1), reverse=True)[:top_k]
+                        for f, _ in sorted_attributes_dict:
+                            fc[f] = fc.get(f, 0) + 1
+                    except Exception:
+                        pass
+                pool = [f for f, c in fc.items() if c > 1]
+                filter_features = []
+                if pool:
                     for _ in range(top_k):
-                        filter_features.add(random.choice(se)[0])
-                filter_features = list(filter_features)
+                        filter_features.append(random.choice(pool))
+                    filter_features = list(dict.fromkeys(filter_features))
             else:
                 raise ValueError("Unknown combination method")
             if len(filter_features) > 0:
