@@ -37,5 +37,6 @@ setuptools.setup(
     python_requires='>=3.6',
     extras_require={
         "lemon": ["lemon-explain"],
+        "test": ["pytest>=7.0"],
     },
 )
