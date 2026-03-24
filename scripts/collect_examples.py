@@ -9,6 +9,7 @@ import os
 from ellmer.selfexplainer import SelfExplainer, ICLSelfExplainer
 from ellmer.full_certa import FullCerta
 from ellmer.hybrid import HybridCerta
+from ellmer.hybrid_lemon_minun import HybridLemonMinun
 import ellmer.metrics
 from time import sleep, time
 import json
@@ -77,6 +78,9 @@ def find(cache, samples, num_triangles, explanation_granularity, quantitative, b
             "hybrid_" + llm_config['tag']: HybridCerta(explanation_granularity, cot, certa,
                                                        [zeroshot, cot, cot2],
                                                        num_triangles=num_triangles),
+            "hybrid_lemon_minun_" + llm_config['tag']: HybridLemonMinun(
+                explanation_granularity, cot, certa, num_triangles=num_triangles
+            ),
         }
 
         comparison_results = []

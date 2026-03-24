@@ -35,4 +35,7 @@ setuptools.setup(
         'Topic :: Scientific/Engineering :: Artificial Intelligence',
     ],
     python_requires='>=3.6',
+    extras_require={
+        "lemon": ["lemon-explain"],
+    },
 )

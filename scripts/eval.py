@@ -15,6 +15,7 @@ from tqdm import tqdm
 import ellmer.metrics
 from ellmer.full_certa import FullCerta
 from ellmer.hybrid import HybridCerta
+from ellmer.hybrid_lemon_minun import HybridLemonMinun
 from ellmer.post_hoc.certa_explain import LLMCertaExplainer
 from ellmer.selfexplainer import SelfExplainer, ICLSelfExplainer
 from ellmer.utils import merge_sources
@@ -264,6 +265,12 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
             "hybrid_" + llm_config['tag']: HybridCerta(
                 explanation_granularity, cot, certa,
                 [zeroshot, cot, cot_with_why],
+                num_triangles=num_triangles,
+            ),
+            "hybrid_lemon_minun_" + llm_config['tag']: HybridLemonMinun(
+                explanation_granularity,
+                cot,
+                certa,
                 num_triangles=num_triangles,
             ),
         }
