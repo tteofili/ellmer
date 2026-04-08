@@ -9,6 +9,7 @@ import operator
 from sklearn.metrics import auc
 from collections import Counter
 import json
+from ellmer.llm_output_parse import to_numeric_saliency_map
 
 WORD = re.compile(r'\w+')
 
@@ -137,6 +138,8 @@ def get_concordance(pred1_file, pred2_file):
             sal2 = get_saliency(pred2)
 
             if sal1 is not None and sal2 is not None:
+                sal1 = to_numeric_saliency_map(sal1)
+                sal2 = to_numeric_saliency_map(sal2)
                 sal1_ranked_keys = list(
                     {k: v for k, v in sorted(sal1.items(), key=lambda item: item[1], reverse=True)}.keys())
                 sal2_ranked_keys = list(
@@ -224,7 +227,7 @@ def get_cosine(vec1, vec2):
 
 
 def get_faithfulness(saliency_names: list, eval_fn, base_dir: str, test_set_df: pd.DataFrame,
-                     results_by_name: dict = None):
+                     results_by_name: dict = None, include_stats: bool = False):
     print(test_set_df.shape)
     np.random.seed(0)
 
@@ -232,9 +235,10 @@ def get_faithfulness(saliency_names: list, eval_fn, base_dir: str, test_set_df: 
 
     attr_len = len(test_set_df.columns) - 2
     aucs = dict()
+    stats = dict()
     for saliency in saliency_names:
         model_scores = []
-        reverse = True
+        masked_instances = 0
         if results_by_name is not None and saliency in results_by_name:
             results_json = results_by_name[saliency]
         else:
@@ -250,33 +254,31 @@ def get_faithfulness(saliency_names: list, eval_fn, base_dir: str, test_set_df: 
         for v in results_json:
             saliencies.append(v['saliency'])
             predictions.append(v['prediction'])
+        missing_rows = 0
+        for sal_dict in saliencies:
+            if type(sal_dict) == str:
+                missing_rows += 1
+                continue
+            if not to_numeric_saliency_map(sal_dict):
+                missing_rows += 1
         for threshold in thresholds:
             top_k = max(1, int(threshold * attr_len))
             test_set_df_c = test_set_df.copy().astype(str)
             for i in range(len(predictions)):
                 try:
-                    if int(predictions[i]) == 0:
-                        reverse = False
-                    attributes_dict = dict()
                     sal_dict = saliencies[i]
                     if type(sal_dict) == str:
                         continue
-                    for k,v in sal_dict.items():
-                        try:
-                            attributes_dict[k] = float(v)
-                        except:
-                            try:
-                                attributes_dict[k] = float(v[0])
-                            except:
-                                attributes_dict[k] = 0
-                                print(f'{v} is not a float in {sal_dict}')
-                    if saliency.startswith('certa'):
-                        sorted_attributes_dict = sorted(attributes_dict.items(), key=operator.itemgetter(1),
-                                                        reverse=True)
-                    else:
-                        sorted_attributes_dict = sorted(attributes_dict.items(), key=operator.itemgetter(1),
-                                                        reverse=reverse)
+                    attributes_dict = to_numeric_saliency_map(sal_dict)
+                    if not attributes_dict:
+                        continue
+                    # Signed-default policy: rank by descending raw saliency.
+                    sorted_attributes_dict = sorted(
+                        attributes_dict.items(), key=operator.itemgetter(1), reverse=True
+                    )
                     top_k_attributes = sorted_attributes_dict[:top_k]
+                    if top_k_attributes:
+                        masked_instances += 1
                     for t in top_k_attributes:
                         split = t[0].split('__')
                         if len(split) == 2:
@@ -294,13 +296,23 @@ def get_faithfulness(saliency_names: list, eval_fn, base_dir: str, test_set_df: 
         if len(thresholds) == len(model_scores):
             auc_sal = auc(thresholds, model_scores)
             aucs[saliency] = auc_sal
+        stats[saliency] = {
+            "n_total": len(predictions),
+            "n_thresholds": len(thresholds),
+            "n_masked_ops": masked_instances,
+            "n_missing_or_invalid_saliency": missing_rows,
+            "valid_ratio": (len(predictions) - missing_rows) / max(1, len(predictions)),
+        }
+    if include_stats:
+        return aucs, stats
     return aucs
 
 
 def get_cf_metrics(explainer_names: list, predict_fn, base_dir, test_set_df: pd.DataFrame,
-                   results_by_name: dict = None):
+                   results_by_name: dict = None, include_stats: bool = False):
     to_drop = ['ltable_id', 'rtable_id', 'match', 'label']
     rows = dict()
+    stats = dict()
     for explainer_name in explainer_names:
         if results_by_name is not None and explainer_name in results_by_name:
             results_json = results_by_name[explainer_name]
@@ -322,15 +334,18 @@ def get_cf_metrics(explainer_names: list, predict_fn, base_dir, test_set_df: pd.
         sparsity = 0
         diversity = 0
         count = 1e-10
+        skipped = 0
         for i in range(len(test_set_df)):
             try:
                 if i >= len(cfs):
                     break
 
                 if type(cfs[i]) == str:
+                    skipped += 1
                     continue
 
                 if len(cfs[i]) == 0 or len(cfs[i][0].keys()) == 0 or indexes[i] != i: # FIXME AttributeError: 'str' object has no attribute 'keys'
+                    skipped += 1
                     continue
 
                 instance = test_set_df.iloc[i].copy()
@@ -354,6 +369,7 @@ def get_cf_metrics(explainer_names: list, predict_fn, base_dir, test_set_df: pd.
                 count += 1
             except:
                 traceback.print_exc()
+                skipped += 1
                 pass
 
         mean_validity = validity / count
@@ -363,6 +379,14 @@ def get_cf_metrics(explainer_names: list, predict_fn, base_dir, test_set_df: pd.
         row = {'validity': mean_validity, 'proximity': mean_proximity,
                'sparsity': mean_sparsity, 'diversity': mean_diversity}
         rows[explainer_name] = row
+        stats[explainer_name] = {
+            "n_total": len(test_set_df),
+            "n_valid": max(0, int(round(count - 1e-10))),
+            "n_skipped": skipped,
+            "valid_ratio": max(0, int(round(count - 1e-10))) / max(1, len(test_set_df)),
+        }
+    if include_stats:
+        return rows, stats
     return rows
 
 

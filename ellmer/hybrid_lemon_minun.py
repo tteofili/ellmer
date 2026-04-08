@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import operator
+from concurrent.futures import ThreadPoolExecutor
 from typing import List, Optional
 
 from ellmer.full_certa import FullCerta
@@ -114,29 +115,40 @@ class HybridLemonMinun(FullCerta):
 
             final_mask = mask
 
-            saliency_explanation, _exp = run_lemon_lime_masked(
-                ltuple,
-                rtuple,
-                self.predict_fn,
-                mask,
-                explanation_granularity=self.explanation_granularity,
-                num_features=self.lem_num_features,
-                num_samples=self.lem_num_samples,
-                random_state=self.random_state + its + 17,
-                show_progress=False,
-            )
-
             pos_c = self._positive_class(prediction)
-            cf_explanation, _neval = minun_counterfactual(
-                ltuple,
-                rtuple,
-                self.predict_fn,
-                mask,
-                pos_c,
-                method=self.cf_method,
-                k=self.cf_k,
-                max_evals=self.cf_max_evals,
-            )
+            # LEMON and Minun only share inputs (mask, tuples); run concurrently to overlap CPU + predict_fn work.
+            rs = self.random_state + its + 17
+
+            def _run_lemon():
+                return run_lemon_lime_masked(
+                    ltuple,
+                    rtuple,
+                    self.predict_fn,
+                    mask,
+                    explanation_granularity=self.explanation_granularity,
+                    num_features=self.lem_num_features,
+                    num_samples=self.lem_num_samples,
+                    random_state=rs,
+                    show_progress=False,
+                )
+
+            def _run_minun():
+                return minun_counterfactual(
+                    ltuple,
+                    rtuple,
+                    self.predict_fn,
+                    mask,
+                    pos_c,
+                    method=self.cf_method,
+                    k=self.cf_k,
+                    max_evals=self.cf_max_evals,
+                )
+
+            with ThreadPoolExecutor(max_workers=2) as pool:
+                fut_lemon = pool.submit(_run_lemon)
+                fut_minun = pool.submit(_run_minun)
+                saliency_explanation, _exp = fut_lemon.result()
+                cf_explanation, _neval = fut_minun.result()
 
             has_cf = len(cf_explanation) > 0
             # Saliency is max-abs normalized to [-1, 1]; require both a CF flip and some attribution mass.

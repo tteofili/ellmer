@@ -312,5 +312,98 @@ class TestICLSelfExplainer(unittest.TestCase):
         self.assertIn("ltable_title", out.get("cf", {}))
 
 
+class TestLlmOutputParse(unittest.TestCase):
+    """Staged CoT output parsers (no LLM)."""
+
+    def test_extract_tagged_block(self):
+        from ellmer.llm_output_parse import extract_tagged_block
+
+        text = "noise\nBEGIN_SALIENCY\na\t1.0\nEND_SALIENCY\ntrailer"
+        self.assertEqual(extract_tagged_block(text, "BEGIN_SALIENCY", "END_SALIENCY"), "a\t1.0")
+
+    def test_parse_tsv_scores_skips_comments(self):
+        from ellmer.llm_output_parse import parse_tsv_scores
+
+        block = "# hdr\nltable_x\t0.5\n\nrtable_y\t-0.25\nbadline\n"
+        d = parse_tsv_scores(block)
+        self.assertAlmostEqual(d["ltable_x"], 0.5)
+        self.assertAlmostEqual(d["rtable_y"], -0.25)
+        self.assertEqual(len(d), 2)
+
+    def test_parse_prediction_line(self):
+        from ellmer.llm_output_parse import parse_prediction_line
+
+        self.assertEqual(
+            parse_prediction_line("<thinking>x</thinking>\nPREDICTION: 1\n"),
+            1,
+        )
+        self.assertEqual(parse_prediction_line("PREDICTION: 0"), 0)
+        self.assertEqual(parse_prediction_line("prefix\nPREDICTION: 1\ntrailer"), 1)
+
+    def test_parse_saliency_tsv_and_json(self):
+        from ellmer.llm_output_parse import parse_saliency_response
+
+        tsv = "blah\nBEGIN_SALIENCY\nltable_title\t0.9\nEND_SALIENCY\n"
+        self.assertAlmostEqual(parse_saliency_response(tsv)["ltable_title"], 0.9)
+
+        js = 'talk\nSALIENCY_JSON: {"ltable_a": 0.2, "rtable_b": 0.8}\n'
+        sal = parse_saliency_response(js)
+        self.assertAlmostEqual(sal["ltable_a"], 0.2)
+        self.assertAlmostEqual(sal["rtable_b"], 0.8)
+
+    def test_normalize_saliency_nested(self):
+        from ellmer.llm_output_parse import normalize_saliency_dict
+
+        d = normalize_saliency_dict({"k": {"saliency": 0.5}, "j": {"saliency_score": [0.1]}})
+        self.assertAlmostEqual(d["k"], 0.5)
+        self.assertAlmostEqual(d["j"], 0.1)
+
+    def test_parse_cf_tsv(self):
+        from ellmer.llm_output_parse import parse_cf_tsv_or_json
+
+        lt = {"id": "1", "title": "a"}
+        rt = {"id": "2", "title": "b"}
+        text = "BEGIN_CF\nltable_title\tpear\nEND_CF"
+        cf = parse_cf_tsv_or_json(text, lt, rt)
+        self.assertEqual(cf["ltable_title"], "pear")
+
+
+@skip_self_stack
+class TestStagedSelfExplainer(unittest.TestCase):
+    @patch.object(SelfExplainer, "_invoke")
+    @patch("ellmer.selfexplainer.ellmer.utils.read_prompt")
+    def test_ptse_staged_three_calls(self, mock_read_prompt, mock_invoke):
+        mock_read_prompt.return_value = [
+            ("system", "s"),
+            ("human", "{ltuple}\n{rtuple}\n{prediction_int}\n{prediction_label}\n{feature}"),
+        ]
+        mock_invoke.side_effect = [
+            "<thinking>t</thinking>\nPREDICTION: 1\n",
+            "BEGIN_SALIENCY\nltable_title\t0.9\nEND_SALIENCY\n",
+            "BEGIN_CF\nltable_title\tz\nEND_CF\n",
+        ]
+        llm = MagicMock()
+        se = SelfExplainer(
+            model_type="delegate",
+            delegate=llm,
+            explanation_granularity="attribute",
+            prompts={
+                "ptse_staged": {
+                    "er": "dummy_er.txt",
+                    "saliency": "dummy_sal.txt",
+                    "cf": "dummy_cf.txt",
+                }
+            },
+        )
+        lt, rt = {"title": "a"}, {"title": "b"}
+        out = se.predict_and_explain(lt, rt)
+        self.assertEqual(out["prediction"], 1)
+        self.assertAlmostEqual(out["saliency"]["ltable_title"], 0.9)
+        self.assertEqual(out["cf"]["ltable_title"], "z")
+        self.assertEqual(mock_invoke.call_count, 3)
+        self.assertIn("llm_time", out)
+        self.assertIsInstance(out["conversation"], list)
+
+
 if __name__ == "__main__":
     unittest.main()

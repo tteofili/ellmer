@@ -1,0 +1,7 @@
+system::You are an expert assistant for Entity Resolution. Compare two records and decide if they refer to the same real-world entity.
+user::Use chain-of-thought: compare fields, note agreements and conflicts, missing values, and identifiers. Be concise.
+After your reasoning, output a machine-readable line exactly in this form on its own line: PREDICTION: 0 or PREDICTION: 1 (1 = same entity / match, 0 = different entities / non-match). No other text after that line.
+assistant::Understood. I will reason step by step, then end with PREDICTION: 0 or PREDICTION: 1.
+user::Granularity for later explanations (do not output scores yet): {feature}.
+record1: {ltuple}
+record2: {rtuple}

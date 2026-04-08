@@ -2,6 +2,10 @@ import functools
 import json
 import random
 import time
+from typing import List, Optional, Tuple
+
+# Roles that start a new message line in prompt .txt files (role::body).
+_PROMPT_MESSAGE_ROLES = frozenset({"system", "user", "assistant", "human"})
 
 import numpy as np
 import openai
@@ -110,11 +114,37 @@ def text_to_match(answer, llm_fn, n=0):
     return no_match_score, match_score
 
 
+def _parse_prompt_file_lines(raw_lines: List[str]) -> List[Tuple[str, str]]:
+    """Parse role::body lines; merge continuation lines (no leading role::) into the previous body."""
+    messages: List[Tuple[str, str]] = []
+    current_role: Optional[str] = None
+    current_chunks: List[str] = []
+
+    def flush():
+        nonlocal current_role, current_chunks
+        if current_role is not None:
+            messages.append((current_role, "\n".join(current_chunks)))
+
+    for line in raw_lines:
+        line = line.rstrip("\n\r")
+        if "::" in line:
+            role, body = line.split("::", 1)
+            if role in _PROMPT_MESSAGE_ROLES:
+                flush()
+                current_role = role
+                current_chunks = [body]
+                continue
+        if current_role is None:
+            continue
+        current_chunks.append(line)
+    flush()
+    return messages
+
+
 @functools.lru_cache(maxsize=64)
 def read_prompt(file_path: str):
     with open(file_path) as file:
-        lines = [tuple(line.rstrip().split('::')) for line in file]
-    return lines
+        return _parse_prompt_file_lines(file.readlines())
 
 
 def concordance_correlation(y_pred, y_true):

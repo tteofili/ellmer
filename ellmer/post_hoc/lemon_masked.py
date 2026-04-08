@@ -11,6 +11,7 @@ import numpy as np
 import pandas as pd
 
 from ellmer.post_hoc.explanation_mask import ExplanationMask
+from ellmer.post_hoc.sklearn_compat import apply_lemon_onehot_encoder_compat
 
 
 class FilteredInterpretablePair:
@@ -105,6 +106,7 @@ def explain_lime_record_pair_masked(
     prefix_b: str = "rtable_",
 ):
     _require_lemon()
+    apply_lemon_onehot_encoder_compat()
     from lemon._lemon import (
         _InterpretableRecordPair,
         _InterpretableSamples,
@@ -210,6 +212,7 @@ def lemon_explanation_to_saliency_dict(
     """Map LEMON ``MatchingAttributionExplanation`` to ellmer/CERTA-style ``{feature: [weight]}``.
 
     Weights are **signed** and scaled by max-|weight| so every value lies in ``[-1, 1]`` (or is zero).
+    Sign follows LIME semantics: positive supports the explained/predicted class, negative opposes it.
     """
     acc = {}
 

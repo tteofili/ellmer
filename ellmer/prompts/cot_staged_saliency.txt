@@ -1,0 +1,13 @@
+user::The prediction for this pair is already fixed: {prediction_label} (numeric {prediction_int}). Use prediction-relative signed saliency (LIME-style): positive scores support the predicted class, negative scores are evidence against the predicted class.
+Explain briefly which {feature}s mattered (chain-of-thought), then output ONLY a block between the exact lines BEGIN_SALIENCY and END_SALIENCY.
+Inside the block: one line per {feature}, tab-separated: key<TAB>score. Scores are real numbers; larger absolute value means stronger influence.
+For attribute-level keys use ltable_<attr> and rtable_<attr>. For token-level keys use ltable_<attr>__<token> and rtable_<attr>__<token>.
+Example format:
+BEGIN_SALIENCY
+ltable_title	0.7
+rtable_price	-0.4
+END_SALIENCY
+Do not use JSON inside the thinking section; only the TSV block between the markers.
+assistant::I will reason briefly, then output BEGIN_SALIENCY ... END_SALIENCY with one key per line.
+user::record1: {ltuple}
+record2: {rtuple}

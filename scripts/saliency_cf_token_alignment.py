@@ -4,6 +4,7 @@ from collections import defaultdict
 
 import numpy as np
 import pandas as pd
+from ellmer.llm_output_parse import to_numeric_saliency_map
 
 
 def tokenize(text):
@@ -56,15 +57,19 @@ def top_k_overlap(saliency, changed_tokens, k):
 
 
 def attribution_mass_on_cf(saliency, changed_tokens):
+    """Return support/opposition/net attribution mass on changed tokens using abs-mass normalization."""
     try:
-        total_mass = sum(saliency.values())
-        if total_mass == 0:
-            return 0.0
-
-        cf_mass = sum(v for f, v in saliency.items() if f in changed_tokens)
-        return cf_mass / total_mass
+        if not saliency:
+            return 0.0, 0.0, 0.0
+        total_abs = sum(abs(v) for v in saliency.values())
+        if total_abs <= 1e-12:
+            return 0.0, 0.0, 0.0
+        support = sum(max(v, 0.0) for f, v in saliency.items() if f in changed_tokens) / total_abs
+        opposition = sum(max(-v, 0.0) for f, v in saliency.items() if f in changed_tokens) / total_abs
+        net = sum(v for f, v in saliency.items() if f in changed_tokens) / total_abs
+        return support, opposition, net
     except:
-        return 0.0
+        return 0.0, 0.0, 0.0
 
 
 def flatten(param):
@@ -79,13 +84,16 @@ def compute_metrics(json_path, ks=[1, 2, 3, 4, 5], granularity='token'):
         data = json.load(f)["data"]
 
     results = []
+    n_total = len(data)
+    n_skipped = 0
 
     for item in data:
         if type(item['saliency']) == str:
+            n_skipped += 1
             continue
 
         # --- saliency (flatten lists) ---
-        saliency = {k: flatten(v) for k, v in item["saliency"].items()}
+        saliency = to_numeric_saliency_map(item["saliency"])
 
         # --- original records ---
         original = {}
@@ -102,6 +110,7 @@ def compute_metrics(json_path, ks=[1, 2, 3, 4, 5], granularity='token'):
         cf = item["cfs"][0]
 
         if len(cf) == 0:
+            n_skipped += 1
             continue
 
         changed_tokens = set()
@@ -122,11 +131,13 @@ def compute_metrics(json_path, ks=[1, 2, 3, 4, 5], granularity='token'):
         for k in ks:
             tks.append(top_k_overlap(saliency, changed_tokens, k))
 
-        mass = attribution_mass_on_cf(saliency, changed_tokens)
+        support_mass, opposition_mass, net_mass = attribution_mass_on_cf(saliency, changed_tokens)
 
         row = {
             "id": item["id"],
-            "attribution_mass_cf": mass,
+            "attribution_support_mass_cf": support_mass,
+            "attribution_opposition_mass_cf": opposition_mass,
+            "attribution_mass_cf": net_mass,
             "num_cf_tokens": len(changed_tokens)
         }
         idx_k = 1
@@ -150,7 +161,11 @@ def compute_metrics(json_path, ks=[1, 2, 3, 4, 5], granularity='token'):
 
     return results, {
         "xd_avg_top_k_overlap": avg_topk,
-        "avg_attribution_mass_cf": avg_mass
+        "avg_attribution_mass_cf": avg_mass,
+        "n_total": n_total,
+        "n_valid": len(results),
+        "n_skipped": n_skipped,
+        "valid_ratio": len(results) / max(1, n_total),
     }
 
 
@@ -158,7 +173,7 @@ def compute_topk_curve(data, ks):
     curve = defaultdict(list)
 
     for item in data:
-        saliency = {k: flatten(v) for k, v in item["saliency"].items()}
+        saliency = to_numeric_saliency_map(item["saliency"])
 
         original = {}
         original.update(dict(map(lambda item: ("ltable_" + item[0], item[1]), item['ltuple'].items())))

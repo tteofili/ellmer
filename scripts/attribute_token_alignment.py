@@ -8,6 +8,7 @@ import pandas as pd
 from scipy.stats import kendalltau, spearmanr, pearsonr
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from ellmer.llm_output_parse import to_numeric_saliency_map
 
 
 def flatten(param):
@@ -49,27 +50,25 @@ def saliency_consistency(token_sal, attr_sal):
     avg_overlap = 0.0
     cos_sim = 0.0
 
-    token_sal = {k: flatten(v) for k, v in token_sal.items()}
-    attr_sal = {k: flatten(v) for k, v in attr_sal.items()}
+    token_sal = to_numeric_saliency_map(token_sal)
+    attr_sal = to_numeric_saliency_map(attr_sal)
 
     token_mass = defaultdict(float)
     try:
         for tok, val in token_sal.items():
             token_mass[get_attribute_from_token(tok)] += val
 
-        total_tok = sum(token_mass.values())
-        total_attr = sum(attr_sal.values())
+        total_tok = sum(abs(v) for v in token_mass.values())
+        total_attr = sum(abs(v) for v in attr_sal.values())
     except:
         return score, kt, pr_val, rho, avg_overlap, cos_sim
 
     if total_tok == 0 or total_attr == 0:
         return score, kt, pr_val, rho, avg_overlap, cos_sim
 
-    att_vec = []
-    tok_vec = []
-    for tok, val in attr_sal.items():
-        tok_vec.append(val / total_tok)
-        att_vec.append(val)
+    keys = sorted(set(token_mass.keys()) | set(attr_sal.keys()))
+    att_vec = [attr_sal.get(k, 0.0) / total_attr for k in keys]
+    tok_vec = [token_mass.get(k, 0.0) / total_tok for k in keys]
 
     tok_ranked_keys = list(
         {k: v for k, v in sorted(token_mass.items(), key=lambda item: item[1], reverse=True)}.keys())
@@ -97,7 +96,8 @@ def saliency_consistency(token_sal, attr_sal):
     for a in set(token_mass) | set(attr_sal):
         p_tok = token_mass.get(a, 0.0) / total_tok
         p_attr = attr_sal.get(a, 0.0) / total_attr
-        score += min(p_tok, p_attr)
+        score += min(max(p_tok, 0.0), max(p_attr, 0.0))
+        score += min(max(-p_tok, 0.0), max(-p_attr, 0.0))
 
     cos_sim = local_cosine_similarity(att_vec, tok_vec)
 
@@ -210,15 +210,19 @@ def compare(pair, model, verbose: bool = False,
             attr_data = {}
 
         results = []
+        n_total = len(token_data)
+        n_skipped_sal = 0
 
         for id_ in token_data:
             try:
                 tok = token_data[id_]["saliency"]
                 attr = attr_data[id_]["saliency"]
             except:
+                n_skipped_sal += 1
                 continue
 
             if not tok or not attr or type(tok) == str or type(attr) == str:
+                n_skipped_sal += 1
                 continue
 
             new_attr = attr.copy()
@@ -244,6 +248,7 @@ def compare(pair, model, verbose: bool = False,
                     "avg_overlap": avg_overlap,
                 })
             except:
+                n_skipped_sal += 1
                 continue
         if len(results) == 0:
             continue
@@ -259,12 +264,14 @@ def compare(pair, model, verbose: bool = False,
             print("Average Attribute–Token Mass Consistency:", avg_mass)
 
         results = []
+        n_skipped_cf = 0
 
         for id_ in token_data:
             try:
                 tok_item = token_data[id_]
                 attr_item = attr_data[id_]
             except:
+                n_skipped_cf += 1
                 continue
 
             if tok_item['ltuple'] != attr_item['ltuple'] or tok_item['rtuple'] != attr_item['rtuple']:
@@ -278,6 +285,7 @@ def compare(pair, model, verbose: bool = False,
             attr_cf = attr_item["cfs"][0]
 
             if not tok_cf or not attr_cf:
+                n_skipped_cf += 1
                 continue
 
             token_cf_tokens = set()
@@ -287,6 +295,7 @@ def compare(pair, model, verbose: bool = False,
 
                 attr_cf_attrs = extract_cf_attributes(original, attr_cf)
             except:
+                n_skipped_cf += 1
                 continue
 
             token_attrs = {get_attribute_from_token(t) for t in token_cf_tokens}
@@ -340,7 +349,8 @@ def compare(pair, model, verbose: bool = False,
                "ndcg": avg_ndcg, "avg_att_sparsity": avg_att_sparsity,
                "avg_tok_sparsity": avg_tok_sparsity,
                "avg_ger": avg_ger, "avg_kt": avg_kt, "avg_pc": avg_pc, "spearman": avg_spearman,
-               "avg_overlap": avg_overlap, "avg_cf_sim": avg_cf_sim}
+               "avg_overlap": avg_overlap, "avg_cf_sim": avg_cf_sim,
+               "n_total": n_total, "n_skipped_saliency": n_skipped_sal, "n_skipped_cf": n_skipped_cf}
         agg_results.append(row)
         dname = pair[0].split('/')[5]
         pd.DataFrame.from_records(agg_results)[['explainer', 'avg_kt', 'avg_cf_sim']].to_csv(

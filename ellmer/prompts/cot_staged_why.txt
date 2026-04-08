@@ -1,0 +1,4 @@
+user::In plain language, summarize why the records were classified as {prediction_label} ({prediction_int}). No JSON or special markers required.
+assistant::I will summarize the reasoning clearly.
+user::record1: {ltuple}
+record2: {rtuple}

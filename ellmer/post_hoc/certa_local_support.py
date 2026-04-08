@@ -261,8 +261,13 @@ def augment_with_llm(find_positives, lj, llm, num_candidates, predict_fn, record
             format them as a CSV file
             return only the CSV output
             '''
-            raw_answer = llm.invoke(template)
-            content = raw_answer.content
+            from langchain_core.messages import HumanMessage
+
+            try:
+                raw_answer = llm.invoke([HumanMessage(content=template)])
+            except Exception:
+                raw_answer = llm.invoke(template)
+            content = getattr(raw_answer, "content", raw_answer)
             with open('synth_df.csv', mode='w') as writer:
                 writer.write(content)
             synthetic_records_df = pd.read_csv('synth_df.csv', header=None, on_bad_lines='skip')

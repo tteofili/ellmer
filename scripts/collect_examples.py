@@ -27,10 +27,15 @@ def find(cache, samples, num_triangles, explanation_granularity, quantitative, b
 
     llm_config = {"model_type": model_type, "model_name": model_name, "deployment_name": deployment_name, "tag": tag}
 
+    pase_prompt = (
+        "ellmer/prompts/constrained16_attribute.txt"
+        if explanation_granularity == "attribute"
+        else "ellmer/prompts/constrained16.txt"
+    )
     zeroshot = SelfExplainer(explanation_granularity=explanation_granularity,
                              deployment_name=llm_config['deployment_name'], temperature=temperature,
                              model_name=llm_config['model_name'], model_type=llm_config['model_type'],
-                             prompts={"pase": "ellmer/prompts/constrained16.txt"})
+                             prompts={"pase": pase_prompt})
 
     cot = SelfExplainer(explanation_granularity=explanation_granularity,
                         deployment_name=llm_config['deployment_name'], temperature=temperature,
@@ -165,7 +170,7 @@ if __name__ == "__main__":
     parser.add_argument('--base_dir', metavar='b', type=str, help='the datasets base directory',
                         required=True)
     parser.add_argument('--model_type', metavar='m', type=str, help='the LLM type to evaluate',
-                        choices=['azure_openai', 'falcon', 'llama2', 'hf'], required=True)
+                        choices=['azure_openai', 'falcon', 'llama2', 'hf', 'bedrock'], required=True)
     parser.add_argument('--datasets', metavar='d', type=str, nargs='+', required=True,
                         help='the dataset(s) to be used for the evaluation')
     parser.add_argument('--samples', metavar='s', type=int, default=-1,

@@ -1,0 +1,10 @@
+user::The matching decision is fixed: {prediction_label} ({prediction_int}). Propose a minimal counterfactual: change attribute values so the decision would flip (if match, make a non-match; if non-match, make a match). Explain briefly, then output ONLY a block between BEGIN_CF and END_CF.
+Inside: one line per changed field, tab-separated: field_key<TAB>new_value. Use ltable_<attr> and rtable_<attr> keys only. Include only fields you change; you may change one or several.
+Example format:
+BEGIN_CF
+ltable_title	other product
+END_CF
+Do not use JSON in the reasoning; only the TSV block between the markers.
+assistant::I will give a short rationale, then BEGIN_CF ... END_CF.
+user::record1: {ltuple}
+record2: {rtuple}

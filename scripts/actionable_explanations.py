@@ -154,7 +154,7 @@ if __name__ == "__main__":
     parser.add_argument('--base_dir', metavar='b', type=str, help='the datasets base directory',
                         required=True)
     parser.add_argument('--model_type', metavar='m', type=str, help='the LLM type to evaluate',
-                        choices=['azure_openai', 'falcon', 'llama2', 'hf'], required=True)
+                        choices=['azure_openai', 'falcon', 'llama2', 'hf', 'bedrock'], required=True)
     parser.add_argument('--datasets', metavar='d', type=str, nargs='+', required=True,
                         help='the dataset(s) to be used for the evaluation')
     parser.add_argument('--samples', metavar='s', type=int, default=-1,

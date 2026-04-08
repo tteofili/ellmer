@@ -2,16 +2,39 @@ import ast
 import json
 import openai
 import os
-from langchain import OpenAI
-from langchain.chains import LLMChain
-from langchain.chat_models import AzureChatOpenAI
-from langchain.prompts import ChatPromptTemplate
+try:
+    from langchain.chains import LLMChain
+except ImportError:
+    from langchain_classic.chains import LLMChain
+
+try:
+    from langchain import OpenAI
+except ImportError:
+    from langchain_community.llms import OpenAI
+
+try:
+    from langchain.chat_models import AzureChatOpenAI
+except ImportError:
+    from langchain_openai import AzureChatOpenAI
+
+try:
+    from langchain.prompts import ChatPromptTemplate
+except ImportError:
+    from langchain_core.prompts import ChatPromptTemplate
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 from langchain_core.prompts import FewShotChatMessagePromptTemplate
 from time import time
 
 import ellmer.utils
-from ellmer.explainer import BaseLLMExplainer, falcon_pipeline, llama2_llm
+from ellmer.base_explainer import BaseLLMExplainer
+from ellmer.llm_output_parse import (
+    collapse_saliency_token_keys_to_attributes,
+    normalize_saliency_dict,
+    parse_cf_tsv_or_json,
+    parse_prediction_line,
+    parse_saliency_response,
+    to_numeric_saliency_map,
+)
 
 openai.api_base = os.getenv("OPENAI_API_BASE")
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -40,9 +63,25 @@ class SelfExplainer(BaseLLMExplainer):
         elif model_type == 'delegate':
             self.llm = delegate
         elif model_type == 'falcon':
+            from ellmer.explainer import falcon_pipeline
+
             self.llm = falcon_pipeline(model_id=model_name)
         elif model_type == 'llama2':
+            from ellmer.explainer import llama2_llm
+
             self.llm = llama2_llm(verbose=verbose, temperature=temperature, quantized_model_path=model_name)
+        elif model_type == 'bedrock':
+            from ellmer.bedrock_llm import build_chat_bedrock
+
+            # Scripts often pass Azure default deployment_name; only treat as Bedrock profile if set to a non-Azure value.
+            dep = (deployment_name or "").strip()
+            if dep in {"gpt-35-turbo", "gpt-3.5-turbo", "gpt-4", "gpt-4-32k"}:
+                dep = ""
+            self.llm = build_chat_bedrock(
+                model_name=model_name,
+                temperature=temperature,
+                inference_profile_id=dep or None,
+            )
         self.verbose = verbose
         self.explanation_granularity = explanation_granularity
         if "self" == explainer_fn:
@@ -81,7 +120,22 @@ class SelfExplainer(BaseLLMExplainer):
 
     def predict_tuples(self, ltuple, rtuple, append_conversation=None):
         conversation = []
-        if "ptse" in self.prompts:
+        if self.prompts and "ptse_staged" in self.prompts:
+            ps = self.prompts["ptse_staged"]
+            er_prompt = ps["er"]
+            for prompt_message in ellmer.utils.read_prompt(er_prompt):
+                conversation.append((prompt_message[0], prompt_message[1]))
+            if append_conversation is not None:
+                conversation.extend(append_conversation)
+            template = ChatPromptTemplate.from_messages(conversation)
+            er_kwargs = dict(ltuple=ltuple, rtuple=rtuple, feature=self.explanation_granularity)
+            er_answer = self._invoke(template, **er_kwargs)
+            prediction = parse_prediction_line(er_answer, self.llm)
+            self.pred_count += 1
+            self.tokens += sum([len(m[1].split(" ")) for m in conversation])
+            self.tokens += len(str(ltuple).split(" ")) + len(str(rtuple).split(" "))
+            self.tokens += len(er_answer.split(" "))
+        elif "ptse" in self.prompts:
             ptse_prompts = self.prompts["ptse"]
             er_prompt = ptse_prompts['er']
             for prompt_message in ellmer.utils.read_prompt(er_prompt):
@@ -92,7 +146,7 @@ class SelfExplainer(BaseLLMExplainer):
             conversation.append(("user", question))
             template = ChatPromptTemplate.from_messages(conversation)
             er_kwargs = dict(ltuple=ltuple, rtuple=rtuple)
-            if self.model_type != 'falcon' and self.model_type != 'llama2':
+            if self.model_type not in ('falcon', 'llama2'):
                 er_kwargs['feature'] = self.explanation_granularity
             er_answer = self._invoke(template, **er_kwargs)
 
@@ -113,6 +167,9 @@ class SelfExplainer(BaseLLMExplainer):
     def predict_and_explain(self, ltuple, rtuple):
         conversation = []
         remote_timings = []
+        if self.prompts and "ptse_staged" in self.prompts:
+            out = self._predict_and_explain_ptse_staged(ltuple, rtuple)
+            return out
         if "pase" in self.prompts:
             if self.verbose:
                 prep_t = time()
@@ -140,15 +197,16 @@ class SelfExplainer(BaseLLMExplainer):
             self.tokens += sum([len(m[1].split(' ')) for m in conversation])  # input tokens
             self.tokens += len(str(ltuple).split(' ')) + len(str(rtuple).split(' '))
             self.tokens += len(content.split(' '))  # output tokens
-            try:
-                saliency_explanation = dict([(x[0], x[1]['saliency']) for x in list(saliency_explanation.items())])
-            except:
-                try:
-                    saliency_explanation = dict(
-                        [(x[0], x[1]['saliency_score']) for x in list(saliency_explanation.items())])
-                except:
-                    pass
+            saliency_explanation = normalize_saliency_dict(saliency_explanation)
+            if self.explanation_granularity == "attribute":
+                saliency_explanation = collapse_saliency_token_keys_to_attributes(saliency_explanation)
+            saliency_explanation = to_numeric_saliency_map(saliency_explanation)
+            if not isinstance(cf_explanation, dict):
+                cf_explanation = parse_cf_tsv_or_json(content, ltuple, rtuple)
+            if not isinstance(cf_explanation, dict):
+                cf_explanation = {}
             return {"prediction": prediction, "saliency": saliency_explanation, "cf": cf_explanation,
+                    "saliency_present": bool(saliency_explanation), "cf_present": bool(cf_explanation),
                     "conversation": conversation, "llm_time": sum(remote_timings)}
         elif "ptse" in self.prompts:
             if self.verbose:
@@ -185,8 +243,8 @@ class SelfExplainer(BaseLLMExplainer):
                 conversation.append(("assistant", er_answer))
 
             why = None
-            saliency_explanation = None
-            cf_explanation = None
+            saliency_explanation = {}
+            cf_explanation = {}
 
             # get explanations
             if "why" in ptse_prompts:
@@ -226,33 +284,7 @@ class SelfExplainer(BaseLLMExplainer):
                 if self.verbose:
                     print(saliency_answer)
                     parse_t = time()
-                saliency_explanation = dict()
-                try:
-                    saliency_content = saliency_answer
-                    try:
-                        saliency_content = saliency_answer.split('```')[1].replace('`', '').replace('´', '').strip()
-                    except Exception:
-                        if '```' in saliency_answer:
-                            start_index = saliency_answer.index('```')
-                            saliency_content = saliency_answer[
-                                               start_index + 3:saliency_answer.index('```', start_index + 3)]
-                    if not saliency_content and "{" in (saliency_answer or ""):
-                        saliency_content = saliency_answer[saliency_answer.index("{"):saliency_answer.rfind("}") + 1]
-                    saliency_dict = json.loads(saliency_content) if saliency_content else {}
-                    if 'saliency_explanation' in saliency_dict:
-                        saliency_explanation = saliency_dict['saliency_explanation']
-                    else:
-                        saliency_explanation = saliency_dict
-                except Exception:
-                    try:
-                        saliency = saliency_answer[saliency_answer.index("{"):saliency_answer.rfind("}") + 1]
-                        saliency_dict = json.loads(saliency)
-                        if 'saliency_explanation' in saliency_dict:
-                            saliency_explanation = saliency_dict['saliency_explanation']
-                        else:
-                            saliency_explanation = saliency_dict
-                    except Exception:
-                        pass
+                saliency_explanation = parse_saliency_response(saliency_answer)
                 if self.verbose:
                     parse_t = time() - parse_t
                     print(f'saliency_parse_time:{parse_t}')
@@ -277,51 +309,7 @@ class SelfExplainer(BaseLLMExplainer):
                 if self.verbose:
                     print(cf_answer)
                     parse_t = time()
-                cf_explanation = dict()
-                try:
-                    cf_answer_content = cf_answer.replace('`', '').replace('´', '')
-                    if '```' in cf_answer_content:
-                        cf_answer_json = cf_answer_content.split('```')[1]
-                    elif cf_answer_content.startswith("{"):
-                        cf_answer_json = cf_answer_content
-                    elif "{" in cf_answer_content and "}" in cf_answer_content:
-                        cf_answer_json = cf_answer_content[
-                                         cf_answer_content.index("{"):cf_answer_content.rfind("}") + 1]
-                        # cf_answer_json = ''.join(cf_answer_content.split("{")[1].split("}")[0])
-                    else:
-                        cf_answer_json = cf_answer_content
-                    try:
-                        cf_dict = json.loads(cf_answer_json)
-                    except Exception:
-                        cf_dict = ast.literal_eval(cf_answer_json)
-                    keys = list(cf_dict.keys()) if hasattr(cf_dict, 'keys') else []
-                    if "record_after" in keys:
-                        cf_explanation = cf_dict["record_after"]
-                        if list(cf_explanation.keys())[0].startswith('rtable_'):
-                            cf_explanation = cf_explanation | ast.literal_eval(ltuple)
-                        else:
-                            cf_explanation = cf_explanation | ast.literal_eval(rtuple)
-                    elif "counterfactual_record" in keys:
-                        cf_explanation = cf_dict["counterfactual_record"]
-                    elif "counterfactual_explanation" in keys:
-                        cf_explanation = cf_dict["counterfactual_explanation"]
-                    elif "counterfactual" in keys:
-                        cf_explanation = cf_dict['counterfactual']
-                    elif "record1" in keys and "record2" in keys:
-                        for k in list(cf_dict['record1'].keys()):
-                            if not k.startswith('ltable_'):
-                                cf_dict['record1']['ltable_' + k] = cf_dict['record1'][k]
-                                cf_dict['record1'].pop(k)
-
-                        for k in list(cf_dict['record2'].keys()):
-                            if not k.startswith('rtable_'):
-                                cf_dict['record2']['rtable_' + k] = cf_dict['record2'][k]
-                                cf_dict['record2'].pop(k)
-                        cf_explanation = cf_dict['record1'] | cf_dict['record2']
-                    else:
-                        cf_explanation = cf_dict
-                except Exception:
-                    pass
+                cf_explanation = parse_cf_tsv_or_json(cf_answer, ltuple, rtuple)
                 if self.verbose:
                     parse_t = time() - parse_t
                     print(f'cf_parse_time:{parse_t}')
@@ -330,19 +318,88 @@ class SelfExplainer(BaseLLMExplainer):
 
             self.tokens += sum([len(m[1].split(' ')) for m in conversation])
             self.tokens += len(str(ltuple).split(' ')) + len(str(rtuple).split(' '))
-            try:
-                saliency_explanation = dict([(x[0], x[1]['saliency']) for x in list(saliency_explanation.items())])
-            except:
-                try:
-                    saliency_explanation = dict(
-                        [(x[0], x[1]['saliency_score']) for x in list(saliency_explanation.items())])
-                except:
-                    pass
+            saliency_explanation = to_numeric_saliency_map(normalize_saliency_dict(saliency_explanation))
+            if not isinstance(cf_explanation, dict):
+                cf_explanation = {}
             return {"prediction": prediction, "why": why, "saliency": saliency_explanation, "cf": cf_explanation,
+                    "saliency_present": bool(saliency_explanation), "cf_present": bool(cf_explanation),
                     "conversation": conversation, "llm_time": sum(remote_timings)}
+        return {"prediction": 0, "why": None, "saliency": {}, "cf": {}, "saliency_present": False, "cf_present": False,
+                "conversation": conversation, "llm_time": sum(remote_timings)}
+
+    def _predict_and_explain_ptse_staged(self, ltuple, rtuple):
+        """Three-call CoT pipeline with TSV-tagged saliency and counterfactual blocks."""
+        conversation = []
+        remote_timings = []
+        ps = self.prompts["ptse_staged"]
+        why = None
+        saliency_explanation = {}
+        cf_explanation = {}
+
+        def _append_prompt_messages(path_key):
+            for role, body in ellmer.utils.read_prompt(ps[path_key]):
+                conversation.append((role, body))
+
+        # --- Call 1: match ---
+        _append_prompt_messages("er")
+        template = ChatPromptTemplate.from_messages(conversation)
+        er_kwargs = dict(ltuple=ltuple, rtuple=rtuple, feature=self.explanation_granularity)
+        er_answer = self._invoke(template, _remote_timings=remote_timings, **er_kwargs)
+        conversation.append(("assistant", er_answer))
+        prediction = parse_prediction_line(er_answer, self.llm)
+        self.pred_count += 1
+
+        pred_int = int(prediction) if prediction in (0, 1) else int(bool(prediction))
+        pred_label = "MATCH" if pred_int == 1 else "NON-MATCH"
+        staged_kw = dict(
+            ltuple=ltuple,
+            rtuple=rtuple,
+            feature=self.explanation_granularity,
+            prediction_int=pred_int,
+            prediction_label=pred_label,
+        )
+
+        if "why" in ps:
+            _append_prompt_messages("why")
+            template = ChatPromptTemplate.from_messages(conversation)
+            why_answer = self._invoke(template, _remote_timings=remote_timings, **staged_kw)
+            why = why_answer
+            conversation.append(("assistant", why_answer))
+            self.pred_count += 1
+
+        # --- Call 2: saliency ---
+        _append_prompt_messages("saliency")
+        template = ChatPromptTemplate.from_messages(conversation)
+        saliency_answer = self._invoke(template, _remote_timings=remote_timings, **staged_kw)
+        conversation.append(("assistant", saliency_answer))
+        saliency_explanation = to_numeric_saliency_map(parse_saliency_response(saliency_answer))
+        self.pred_count += 1
+
+        # --- Call 3: counterfactual ---
+        _append_prompt_messages("cf")
+        template = ChatPromptTemplate.from_messages(conversation)
+        cf_answer = self._invoke(template, _remote_timings=remote_timings, **staged_kw)
+        conversation.append(("assistant", cf_answer))
+        cf_explanation = parse_cf_tsv_or_json(cf_answer, ltuple, rtuple)
+        self.pred_count += 1
+
+        self.tokens += sum([len(m[1].split(" ")) for m in conversation])
+        self.tokens += len(str(ltuple).split(" ")) + len(str(rtuple).split(" "))
+
+        return {
+            "prediction": pred_int,
+            "why": why,
+            "saliency": saliency_explanation,
+            "cf": cf_explanation,
+            "saliency_present": bool(saliency_explanation),
+            "cf_present": bool(cf_explanation),
+            "conversation": conversation,
+            "llm_time": sum(remote_timings),
+        }
 
 
 def parse_pase_answer(answer, llm):
+    """Parse single-shot PASE JSON. Optional repair: set env ``ELLMER_PASE_USE_TEXT_TO_DATA=1`` to run a second LLM call via ``text_to_data`` (legacy, off by default)."""
     if type(answer) != str:
         answer = str(answer)
 
@@ -350,12 +407,18 @@ def parse_pase_answer(answer, llm):
     saliency = dict()
     cf = dict()
 
-    try:
-        prediction, saliency, cf = ellmer.utils.text_to_data(answer, llm)
-        if prediction is not None and saliency is not None and cf is not None:
-            return prediction, saliency, cf
-    except:
-        pass
+    _pase_llm_json_repair = os.environ.get("ELLMER_PASE_USE_TEXT_TO_DATA", "").lower() in (
+        "1",
+        "true",
+        "yes",
+    )
+    if _pase_llm_json_repair:
+        try:
+            prediction, saliency, cf = ellmer.utils.text_to_data(answer, llm)
+            if prediction is not None and saliency is not None and cf is not None:
+                return prediction, saliency, cf
+        except Exception:
+            pass
 
     original_answer = answer
     try:
@@ -380,11 +443,11 @@ def parse_pase_answer(answer, llm):
                 for a in split:
                     nm, ns, ncf = parse_pase_answer(a, llm)
                     try:
-                        if nm is not None and len(ns) is not 0 and len(cf) is not 0:
+                        if nm is not None and len(ns) != 0 and len(cf) != 0:
                             return nm, ns, ncf
                     except:
                         pass
-            return "0", "{}", "{}"
+            return 0, {}, {}
         elif "\n\n{" in answer and "}\n\n" in answer:
             answer = '{' + ''.join(answer.split("\n\n{")[1].split("}\n\n")[0]) + '}'
 
@@ -456,6 +519,10 @@ def parse_pase_answer(answer, llm):
         pass
     if matching is None:
         _, matching = ellmer.utils.text_to_match(answer, llm.__call__)
+    if not isinstance(saliency, dict):
+        saliency = {}
+    if not isinstance(cf, dict):
+        cf = {}
     return matching, saliency, cf
 
 
@@ -510,27 +577,15 @@ class ICLSelfExplainer(SelfExplainer):
             pass
         if prediction not in ["0", "1", 0, 1]:
             _, prediction = ellmer.utils.text_to_match(answer_content, self.llm)
-        try:
-            s_start = answer_content.find("saliency:") + len("saliency:")
-            s_end = answer_content.find("}", s_start) + 1
-            saliency = answer_content[s_start:s_end].replace("'", "\"")
-            saliency = json.loads(saliency)
-            ns = dict()
-            for k, v in saliency.items():
-                if type(v) == list:
-                    ns[k] = v[0]
-                else:
-                    ns[k] = v
-            saliency = ns
-        except:
-            pass
-        try:
-            cf_start = answer_content.find("counterfactual:") + len("counterfactual:")
-            cf_end = answer_content.find("}", cf_start) + 1
-            cf = answer_content[cf_start:cf_end].replace("'", "\"")
-            cf = json.loads(cf)
-        except:
-            pass
+        saliency = to_numeric_saliency_map(parse_saliency_response(answer_content))
+        if not saliency and "saliency:" in answer_content.lower():
+            saliency = to_numeric_saliency_map(
+                parse_saliency_response(answer_content.replace("saliency:", "SALIENCY_JSON:", 1))
+            )
+        cf = parse_cf_tsv_or_json(answer_content, ltuple, rtuple)
+        if not cf and "counterfactual:" in answer_content.lower():
+            cf = parse_cf_tsv_or_json(answer_content.replace("counterfactual:", "CF_JSON:", 1), ltuple, rtuple)
         self.pred_count += 1
 
-        return {"prediction": prediction, "saliency": saliency, "cf": cf, "conversation": conversation, "llm_time": llm_time}
+        return {"prediction": prediction, "saliency": saliency, "cf": cf, "saliency_present": bool(saliency),
+                "cf_present": bool(cf), "conversation": conversation, "llm_time": llm_time}
