@@ -74,17 +74,21 @@ def find(cache, samples, num_triangles, explanation_granularity, quantitative, b
 
         certa = LLMCertaExplainer(lsource, rsource)
 
+        zs_h = zeroshot.fork_for_stats()
+        cot_h = cot.fork_for_stats()
+        cot2_h = cot2.fork_for_stats()
+        cot_lemon = cot.fork_for_stats()
 
         ellmers = {
             "zs_" + llm_config['tag']: zeroshot,
             "cot_" + llm_config['tag']: cot2,
             "certa_" + llm_config['tag']: FullCerta(explanation_granularity, predict_only, certa,
                                                          num_triangles),
-            "hybrid_" + llm_config['tag']: HybridCerta(explanation_granularity, cot, certa,
-                                                       [zeroshot, cot, cot2],
+            "hybrid_" + llm_config['tag']: HybridCerta(explanation_granularity, cot_h, certa,
+                                                       [zs_h, cot_h, cot2_h],
                                                        num_triangles=num_triangles),
             "hybrid_lemon_minun_" + llm_config['tag']: HybridLemonMinun(
-                explanation_granularity, cot, certa, num_triangles=num_triangles
+                explanation_granularity, cot_lemon, certa, num_triangles=num_triangles
             ),
         }
 

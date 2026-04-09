@@ -17,6 +17,19 @@ class HybridLemonMinun(FullCerta):
     Both stages share an ``ExplanationMask`` (modifiable attributes/tokens).
 
     Depends on the optional ``lemon-explain`` package.
+
+    **Prediction budget (order-of-magnitude):** Each outer iteration runs masked LEMON (LIME with
+    ``num_samples`` perturbations, each calling ``predict_fn``) and Minun (up to ``cf_max_evals``
+    calls to ``predict_fn``). The outer loop runs at most ``max_iterations`` times. Discovery
+    adds one extra unmasked LEMON pass on the first iteration.
+
+    - **LIME samples:** If ``lem_num_samples`` is ``None``, the count is
+      ``lime_sample_budget_for_n(n)`` = ``max(min(30 * n, 3000), 500)`` for ``n`` interpretable
+      features after masking. If you set ``lem_num_samples`` explicitly, it is still **capped** to
+      that same budget when ``lime_cap_samples`` is true (so a large fixed value does not ignore a
+      small masked feature set).
+    - **Counterfactuals:** ``cf_max_evals`` caps Minun; ``cf_method`` is ``"greedy"`` or
+      ``"binary"`` (see ``minun_counterfactual``).
     """
 
     def __init__(
@@ -26,26 +39,32 @@ class HybridLemonMinun(FullCerta):
         certa,
         lem_num_features: int = 5,
         lem_num_samples: Optional[int] = None,
+        lime_cap_samples: bool = True,
         cf_method: str = "greedy",
         cf_k: int = 10,
-        cf_max_evals: int = 800,
+        cf_max_evals: int = 80,
+        max_iterations: int = 10,
         combine: str = "freq",
         top_k: int = -1,
         max_predict: int = -1,
         user_mask: Optional[ExplanationMask] = None,
         random_state: int = 0,
         num_triangles: int = 1,
+        phi: float = 0.5,
     ):
         super().__init__(explanation_granularity, pred_delegate, certa, num_triangles=num_triangles, max_predict=max_predict)
         self.lem_num_features = lem_num_features
         self.lem_num_samples = lem_num_samples
+        self.lime_cap_samples = lime_cap_samples
         self.cf_method = cf_method
         self.cf_k = cf_k
         self.cf_max_evals = cf_max_evals
+        self.max_iterations = max_iterations
         self.combine = combine
         self.top_k = top_k
         self.user_mask = user_mask
         self.random_state = random_state
+        self.phi = phi
         if combine not in ("freq", "union", "intersection"):
             raise ValueError("combine must be 'freq', 'union', or 'intersection' for mask discovery")
 
@@ -77,7 +96,8 @@ class HybridLemonMinun(FullCerta):
         except (TypeError, ValueError):
             return 1 if prediction else 0
 
-    def predict_and_explain(self, ltuple, rtuple, max_predict: int = -1, verbose: bool = False):
+    def predict_and_explain(self, ltuple, rtuple, max_predict: int = -1, verbose: bool = False, phi=None):
+        thr = self.phi if phi is None else phi
         _ = max_predict
         _ = verbose
         prediction = self.delegate.predict_tuples(ltuple, rtuple)
@@ -92,7 +112,7 @@ class HybridLemonMinun(FullCerta):
         mask: Optional[ExplanationMask] = self.user_mask
         final_mask: Optional[ExplanationMask] = mask
 
-        while not satisfied and its < 10:
+        while not satisfied and its < self.max_iterations:
             if mask is None:
                 if not discovery_done:
                     sal_uncovered, _exp0 = run_lemon_lime_masked(
@@ -105,6 +125,7 @@ class HybridLemonMinun(FullCerta):
                         num_samples=self.lem_num_samples,
                         random_state=self.random_state,
                         show_progress=False,
+                        cap_lime_samples=self.lime_cap_samples,
                     )
                     pae_dicts.append(sal_uncovered)
                     discovery_done = True
@@ -130,6 +151,7 @@ class HybridLemonMinun(FullCerta):
                     num_samples=self.lem_num_samples,
                     random_state=rs,
                     show_progress=False,
+                    cap_lime_samples=self.lime_cap_samples,
                 )
 
             def _run_minun():
@@ -154,8 +176,8 @@ class HybridLemonMinun(FullCerta):
             # Saliency is max-abs normalized to [-1, 1]; require both a CF flip and some attribution mass.
             total_abs = 0.0
             for sev in saliency_explanation.values():
-                total_abs += abs(float(sev[0]) if isinstance(sev, list) else float(sev))
-            if has_cf and total_abs >= 0.1:
+                total_abs += float(sev[0]) if isinstance(sev, list) else float(sev)
+            if has_cf and total_abs >= thr:
                 satisfied = True
 
             if self.user_mask is not None:

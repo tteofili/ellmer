@@ -57,8 +57,12 @@ def compare(cache, samples, base_dir, dataset_names, model_type, model_name, dep
 
         certa = LLMCertaExplainer(lsource, rsource)
 
-        ellmer_explainer = HybridCerta(explanation_granularity, cot, certa,[zeroshot, cot, cot2],
-                                                                                num_triangles=10)
+        zs_h = zeroshot.fork_for_stats()
+        cot_h = cot.fork_for_stats()
+        cot2_h = cot2.fork_for_stats()
+        ellmer_explainer = HybridCerta(
+            explanation_granularity, cot_h, certa, [zs_h, cot_h, cot2_h], num_triangles=10
+        )
         labels = []
         predictions = []
         # generate predictions

@@ -181,6 +181,28 @@ class TestFullCerta(unittest.TestCase):
 
 @skip_certa_stack
 class TestHybridCerta(unittest.TestCase):
+    def test_phi_constructor_default_and_custom(self):
+        lsource, rsource, ltuple, rtuple = _tables()
+        delegate = MockDelegate()
+        certa = MockCertaExplainer(lsource, rsource)
+        e1 = MockEllmer({"ltable_title": 0.9})
+        hy_default = HybridCerta(
+            "attribute", delegate, certa, ellmers=[e1], num_draws=1, num_triangles=2, combine="freq", top_k=3
+        )
+        self.assertEqual(hy_default.phi, 0.5)
+        hy_hi = HybridCerta(
+            "attribute",
+            delegate,
+            certa,
+            ellmers=[e1],
+            num_draws=1,
+            num_triangles=2,
+            combine="freq",
+            top_k=3,
+            phi=0.99,
+        )
+        self.assertEqual(hy_hi.phi, 0.99)
+
     def test_freq_requires_repeated_feature_in_topk(self):
         lsource, rsource, ltuple, rtuple = _tables()
         delegate = MockDelegate()
@@ -223,6 +245,22 @@ class TestHybridCerta(unittest.TestCase):
 
 @skip_certa_stack
 class TestHybridLemonMinun(unittest.TestCase):
+    def test_phi_constructor(self):
+        lsource, rsource, ltuple, rtuple = _tables()
+        delegate = MockDelegate()
+        certa = MockCertaExplainer(lsource, rsource)
+        hy = HybridLemonMinun(
+            "attribute",
+            delegate,
+            certa,
+            lem_num_features=2,
+            lem_num_samples=5,
+            top_k=2,
+            combine="freq",
+            phi=0.3,
+        )
+        self.assertEqual(hy.phi, 0.3)
+
     @patch("ellmer.hybrid_lemon_minun.minun_counterfactual")
     @patch("ellmer.hybrid_lemon_minun.run_lemon_lime_masked")
     def test_returns_expected_keys(self, mock_lemon, mock_minun):

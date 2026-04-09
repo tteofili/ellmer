@@ -23,7 +23,11 @@ except ImportError:
     from langchain_core.prompts import ChatPromptTemplate
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
 from langchain_core.prompts import FewShotChatMessagePromptTemplate
+import copy
+from contextlib import contextmanager
 from time import time
+import threading
+from typing import Optional
 
 import ellmer.utils
 from ellmer.base_explainer import BaseLLMExplainer
@@ -39,14 +43,39 @@ from ellmer.llm_output_parse import (
 openai.api_base = os.getenv("OPENAI_API_BASE")
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
+# Optional: one lock per ``llm`` when ``ELLMER_SERIALIZE_LLM_INVOKE=1`` (or ``serialize_llm_invokes=True``).
+# Default is **off** so httpx-backed clients can run concurrent ``invoke`` calls from multiple threads.
+_llm_invoke_locks: dict[int, threading.Lock] = {}
+_llm_invoke_locks_guard = threading.Lock()
+
+
+def _env_serialize_llm_invokes() -> bool:
+    return os.environ.get("ELLMER_SERIALIZE_LLM_INVOKE", "").lower() in ("1", "true", "yes")
+
+
+def _invoke_lock_for_llm(llm) -> threading.Lock:
+    k = id(llm)
+    with _llm_invoke_locks_guard:
+        if k not in _llm_invoke_locks:
+            _llm_invoke_locks[k] = threading.Lock()
+        return _llm_invoke_locks[k]
+
 
 class SelfExplainer(BaseLLMExplainer):
+    """LLM-backed explainer.
+
+    Remote calls use the LangChain chat model as-is. By default, ``invoke``/``predict`` are **not**
+    wrapped in a process-wide mutex (thread-safe HTTP stacks such as httpx allow overlap). For
+    clients that are not thread-safe, set environment ``ELLMER_SERIALIZE_LLM_INVOKE=1`` or pass
+    ``serialize_llm_invokes=True``.
+    """
 
     def __init__(self, model_type='azure_openai', temperature=0.01, fake=False, model_name="",
                  verbose=False, delegate=None, explanation_granularity="attribute", explainer_fn="self", prompts=None,
-                 deployment_name="", model_version="2023-05-15"):
+                 deployment_name="", model_version="2023-05-15", serialize_llm_invokes: Optional[bool] = None):
         self.fake = fake
         self.model_type = model_type
+        self._azure_llm_clone_params: Optional[dict] = None
         if model_type == 'hf':
             if model_name.startswith('https://'):
                 llm = HuggingFaceEndpoint(endpoint_url=model_name, task="text-generation",
@@ -60,6 +89,12 @@ class SelfExplainer(BaseLLMExplainer):
         elif model_type == 'azure_openai':
             self.llm = AzureChatOpenAI(model_name=model_name, request_timeout=120,
                                        openai_api_version=model_version, temperature=temperature)
+            self._azure_llm_clone_params = dict(
+                model_name=model_name,
+                request_timeout=120,
+                openai_api_version=model_version,
+                temperature=temperature,
+            )
         elif model_type == 'delegate':
             self.llm = delegate
         elif model_type == 'falcon':
@@ -91,6 +126,54 @@ class SelfExplainer(BaseLLMExplainer):
         self.prompts = prompts
         self.pred_count = 0
         self.tokens = 0
+        self._usage_lock = threading.Lock()
+        self.serialize_llm_invokes = (
+            serialize_llm_invokes if serialize_llm_invokes is not None else _env_serialize_llm_invokes()
+        )
+
+    @contextmanager
+    def _llm_invoke_cm(self):
+        """Serialize ``invoke``/``predict`` only when ``serialize_llm_invokes`` is true."""
+        if self.serialize_llm_invokes:
+            with _invoke_lock_for_llm(self.llm):
+                yield
+        else:
+            yield
+
+    def fork_for_stats(self, deep_llm: bool = False) -> "SelfExplainer":
+        """
+        Shallow copy with isolated token/pred counters; shares ``self.llm`` and prompts by default.
+
+        Use when multiple hybrid explainers or parallel ``run_explainer`` jobs would otherwise
+        share one ``SelfExplainer`` and corrupt cumulative usage.
+
+        **Concurrency:** By default, ``invoke`` is **not** globally serialized (see ``serialize_llm_invokes``
+        and ``ELLMER_SERIALIZE_LLM_INVOKE``). Assumes the HTTP client (e.g. httpx) is safe for concurrent calls.
+
+        **deep_llm:** If ``True`` and ``model_type == 'azure_openai'``, builds a **new** ``AzureChatOpenAI``
+        instance so each fork has its own client (extra connections; use for maximum parallel HTTP
+        without sharing a single client). Other model types raise ``ValueError``.
+        """
+        other = copy.copy(self)
+        other.tokens = 0
+        other.pred_count = 0
+        other._usage_lock = threading.Lock()
+        if deep_llm:
+            if self._azure_llm_clone_params is not None:
+                other.llm = AzureChatOpenAI(**self._azure_llm_clone_params)
+            else:
+                raise ValueError(
+                    "fork_for_stats(deep_llm=True) is only supported for model_type='azure_openai'"
+                )
+        return other
+
+    def _accumulate_usage(self, token_delta: int = 0, pred_delta: int = 0) -> None:
+        """Thread-safe updates to token and prediction counters (used under parallel sample workers)."""
+        if token_delta == 0 and pred_delta == 0:
+            return
+        with self._usage_lock:
+            self.tokens += token_delta
+            self.pred_count += pred_delta
 
     @staticmethod
     def _strip_response(content: str) -> str:
@@ -104,16 +187,17 @@ class SelfExplainer(BaseLLMExplainer):
 
     def _invoke(self, template, _remote_timings=None, **kwargs) -> str:
         """Call LLM (chain.predict or llm.invoke). If _remote_timings is a list, append elapsed seconds for remote-only time."""
-        t0 = time()
-        if self.model_type in ['falcon', 'llama2']:
-            chain = LLMChain(llm=self.llm, prompt=template)
-            out = chain.predict(**kwargs)
-        else:
-            messages = template.format_messages(**kwargs)
-            raw = self.llm.invoke(messages)
-            out = getattr(raw, 'content', raw) if raw else ''
-        if _remote_timings is not None:
-            _remote_timings.append(time() - t0)
+        with self._llm_invoke_cm():
+            t0 = time()
+            if self.model_type in ['falcon', 'llama2']:
+                chain = LLMChain(llm=self.llm, prompt=template)
+                out = chain.predict(**kwargs)
+            else:
+                messages = template.format_messages(**kwargs)
+                raw = self.llm.invoke(messages)
+                out = getattr(raw, 'content', raw) if raw else ''
+            if _remote_timings is not None:
+                _remote_timings.append(time() - t0)
         if self.model_type == 'hf':
             return self._strip_response(out)
         return self._strip_response(out) if out else out
@@ -131,10 +215,13 @@ class SelfExplainer(BaseLLMExplainer):
             er_kwargs = dict(ltuple=ltuple, rtuple=rtuple, feature=self.explanation_granularity)
             er_answer = self._invoke(template, **er_kwargs)
             prediction = parse_prediction_line(er_answer, self.llm)
-            self.pred_count += 1
-            self.tokens += sum([len(m[1].split(" ")) for m in conversation])
-            self.tokens += len(str(ltuple).split(" ")) + len(str(rtuple).split(" "))
-            self.tokens += len(er_answer.split(" "))
+            self._accumulate_usage(
+                sum([len(m[1].split(" ")) for m in conversation])
+                + len(str(ltuple).split(" "))
+                + len(str(rtuple).split(" "))
+                + len(er_answer.split(" ")),
+                pred_delta=1,
+            )
         elif "ptse" in self.prompts:
             ptse_prompts = self.prompts["ptse"]
             er_prompt = ptse_prompts['er']
@@ -152,10 +239,13 @@ class SelfExplainer(BaseLLMExplainer):
 
             # parse answer into prediction
             _, prediction = ellmer.utils.text_to_match(er_answer, self.llm)
-            self.pred_count += 1
-            self.tokens += sum([len(m[1].split(' ')) for m in conversation])  # input tokens
-            self.tokens += len(str(ltuple).split(' ')) + len(str(rtuple).split(' '))
-            self.tokens += len(er_answer.split(' '))  # output tokens
+            self._accumulate_usage(
+                sum([len(m[1].split(' ')) for m in conversation])
+                + len(str(ltuple).split(' '))
+                + len(str(rtuple).split(' '))
+                + len(er_answer.split(' ')),
+                pred_delta=1,
+            )
         else:
             prediction = self.predict_and_explain(ltuple, rtuple)['prediction']
         if self.verbose:
@@ -193,10 +283,13 @@ class SelfExplainer(BaseLLMExplainer):
                 print(f'parse_time:{parse_t}')
             if prediction is None:
                 print(f'empty prediction!\nquestion{question}\nconversation{conversation}')
-            self.pred_count += 1
-            self.tokens += sum([len(m[1].split(' ')) for m in conversation])  # input tokens
-            self.tokens += len(str(ltuple).split(' ')) + len(str(rtuple).split(' '))
-            self.tokens += len(content.split(' '))  # output tokens
+            self._accumulate_usage(
+                sum([len(m[1].split(' ')) for m in conversation])
+                + len(str(ltuple).split(' '))
+                + len(str(rtuple).split(' '))
+                + len(content.split(' ')),
+                pred_delta=1,
+            )
             saliency_explanation = normalize_saliency_dict(saliency_explanation)
             if self.explanation_granularity == "attribute":
                 saliency_explanation = collapse_saliency_token_keys_to_attributes(saliency_explanation)
@@ -235,7 +328,7 @@ class SelfExplainer(BaseLLMExplainer):
                 parse_t = time() - parse_t
                 print(f'er_parse_time:{parse_t}')
 
-            self.pred_count += 1
+            self._accumulate_usage(pred_delta=1)
 
             if len(er_answer) > 5:
                 conversation.append(("assistant", str(prediction)))
@@ -264,7 +357,7 @@ class SelfExplainer(BaseLLMExplainer):
                     print(why_answer)
                 why = why_answer
                 conversation.append(("assistant", why_answer))
-                self.pred_count += 1
+                self._accumulate_usage(pred_delta=1)
 
             # saliency explanation
             if "saliency" in ptse_prompts:
@@ -289,7 +382,7 @@ class SelfExplainer(BaseLLMExplainer):
                     parse_t = time() - parse_t
                     print(f'saliency_parse_time:{parse_t}')
                 conversation.append(("assistant", json.dumps(saliency_explanation).replace('{', '').replace('}', '')))
-                self.pred_count += 1
+                self._accumulate_usage(pred_delta=1)
 
             # counterfactual explanation
             if "cf" in ptse_prompts:
@@ -314,10 +407,13 @@ class SelfExplainer(BaseLLMExplainer):
                     parse_t = time() - parse_t
                     print(f'cf_parse_time:{parse_t}')
                 conversation.append(("assistant", str(cf_explanation)))
-                self.pred_count += 1
+                self._accumulate_usage(pred_delta=1)
 
-            self.tokens += sum([len(m[1].split(' ')) for m in conversation])
-            self.tokens += len(str(ltuple).split(' ')) + len(str(rtuple).split(' '))
+            self._accumulate_usage(
+                sum([len(m[1].split(' ')) for m in conversation])
+                + len(str(ltuple).split(' '))
+                + len(str(rtuple).split(' ')),
+            )
             saliency_explanation = to_numeric_saliency_map(normalize_saliency_dict(saliency_explanation))
             if not isinstance(cf_explanation, dict):
                 cf_explanation = {}
@@ -347,7 +443,7 @@ class SelfExplainer(BaseLLMExplainer):
         er_answer = self._invoke(template, _remote_timings=remote_timings, **er_kwargs)
         conversation.append(("assistant", er_answer))
         prediction = parse_prediction_line(er_answer, self.llm)
-        self.pred_count += 1
+        self._accumulate_usage(pred_delta=1)
 
         pred_int = int(prediction) if prediction in (0, 1) else int(bool(prediction))
         pred_label = "MATCH" if pred_int == 1 else "NON-MATCH"
@@ -365,7 +461,7 @@ class SelfExplainer(BaseLLMExplainer):
             why_answer = self._invoke(template, _remote_timings=remote_timings, **staged_kw)
             why = why_answer
             conversation.append(("assistant", why_answer))
-            self.pred_count += 1
+            self._accumulate_usage(pred_delta=1)
 
         # --- Call 2: saliency ---
         _append_prompt_messages("saliency")
@@ -373,7 +469,7 @@ class SelfExplainer(BaseLLMExplainer):
         saliency_answer = self._invoke(template, _remote_timings=remote_timings, **staged_kw)
         conversation.append(("assistant", saliency_answer))
         saliency_explanation = to_numeric_saliency_map(parse_saliency_response(saliency_answer))
-        self.pred_count += 1
+        self._accumulate_usage(pred_delta=1)
 
         # --- Call 3: counterfactual ---
         _append_prompt_messages("cf")
@@ -381,10 +477,13 @@ class SelfExplainer(BaseLLMExplainer):
         cf_answer = self._invoke(template, _remote_timings=remote_timings, **staged_kw)
         conversation.append(("assistant", cf_answer))
         cf_explanation = parse_cf_tsv_or_json(cf_answer, ltuple, rtuple)
-        self.pred_count += 1
+        self._accumulate_usage(pred_delta=1)
 
-        self.tokens += sum([len(m[1].split(" ")) for m in conversation])
-        self.tokens += len(str(ltuple).split(" ")) + len(str(rtuple).split(" "))
+        self._accumulate_usage(
+            sum([len(m[1].split(" ")) for m in conversation])
+            + len(str(ltuple).split(" "))
+            + len(str(rtuple).split(" ")),
+        )
 
         return {
             "prediction": pred_int,
@@ -553,16 +652,20 @@ class ICLSelfExplainer(SelfExplainer):
         question = self.prompts['input']
         formatted_question = question.format(ltuple=ltuple, rtuple=rtuple)
         t0 = time()
-        answer = chain.invoke({"input": formatted_question.replace('"', '').replace("'",'')})
+        with self._llm_invoke_cm():
+            answer = chain.invoke({"input": formatted_question.replace('"', '').replace("'",'')})
         llm_time = time() - t0
 
         conversation = [str(m) for m in final_prompt.messages]
         conversation.append(formatted_question)
-        self.tokens += sum([len(str(m).split(' ')) for m in final_prompt.messages])  # input tokens
-        self.tokens += len(str(ltuple).split(' ')) + len(str(rtuple).split(' '))
         answer_content = answer.content
         conversation.append(answer_content)
-        self.tokens += len(answer.content.split(' '))  # output tokens
+        self._accumulate_usage(
+            sum([len(str(m).split(' ')) for m in final_prompt.messages])
+            + len(str(ltuple).split(' '))
+            + len(str(rtuple).split(' '))
+            + len(answer.content.split(' ')),
+        )
         prediction = "0"
         saliency = {}
         cf = {}
@@ -585,7 +688,7 @@ class ICLSelfExplainer(SelfExplainer):
         cf = parse_cf_tsv_or_json(answer_content, ltuple, rtuple)
         if not cf and "counterfactual:" in answer_content.lower():
             cf = parse_cf_tsv_or_json(answer_content.replace("counterfactual:", "CF_JSON:", 1), ltuple, rtuple)
-        self.pred_count += 1
+        self._accumulate_usage(pred_delta=1)
 
         return {"prediction": prediction, "saliency": saliency, "cf": cf, "saliency_present": bool(saliency),
                 "cf_present": bool(cf), "conversation": conversation, "llm_time": llm_time}

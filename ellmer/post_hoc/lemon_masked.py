@@ -65,6 +65,17 @@ def _lemon_feature_allowed(
     return False
 
 
+def lime_sample_budget_for_n(n: int) -> int:
+    """
+    Default LIME perturbation count for ``n`` interpretable features (after masking).
+
+    Same formula as used when ``num_samples`` is ``None``: ``max(min(30 * n, 3000), 500)``.
+    """
+    if n <= 0:
+        return 1
+    return max(min(30 * n, 3000), 500)
+
+
 def apply_explanation_mask(
     irp,
     mask: Optional[ExplanationMask],
@@ -104,6 +115,7 @@ def explain_lime_record_pair_masked(
     show_progress: bool = False,
     prefix_a: str = "ltable_",
     prefix_b: str = "rtable_",
+    cap_lime_samples: bool = True,
 ):
     _require_lemon()
     apply_lemon_onehot_encoder_compat()
@@ -157,9 +169,12 @@ def explain_lime_record_pair_masked(
             },
         )
 
+    n_irp = len(interpretable_record_pair)
+    budget = lime_sample_budget_for_n(n_irp)
     if num_samples is None:
-        n = len(interpretable_record_pair)
-        num_samples = max(min(30 * n, 3000), 500)
+        num_samples = budget
+    elif cap_lime_samples:
+        num_samples = min(int(num_samples), budget)
 
     samples = _InterpretableSamples(
         num_samples=num_samples,
@@ -261,6 +276,7 @@ def run_lemon_lime_masked(
     num_samples: Optional[int] = None,
     random_state: Optional[int] = None,
     show_progress: bool = False,
+    cap_lime_samples: bool = True,
 ) -> Tuple[dict, object]:
     from ellmer.post_hoc.lemon_adapter import ltuple_rtuple_to_lemon_frames, make_lemon_predict_proba
 
@@ -279,6 +295,7 @@ def run_lemon_lime_masked(
         granularity=lemon_gran,
         random_state=random_state,
         show_progress=show_progress,
+        cap_lime_samples=cap_lime_samples,
     )
     saliency = lemon_explanation_to_saliency_dict(exp, saliency_granularity=explanation_granularity)
     return saliency, exp

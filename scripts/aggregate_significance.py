@@ -2,8 +2,10 @@
 Aggregate multi-run evaluation results and compute significance tests.
 
 Reads run_*/eval.csv or eval_all_runs.csv from a session directory, computes
-mean, std, and 95% CI per (dataset, model, metric), and pairwise Wilcoxon
-signed-rank p-values for method comparisons per (dataset, metric).
+mean, std, and confidence intervals for the mean (Student's t) per
+(dataset, model, metric), and pairwise Wilcoxon p-values plus CIs for the
+paired mean difference (method_a minus method_b) per (dataset, metric).
+Default confidence level is 95% (override with --confidence).
 """
 
 import argparse
@@ -12,6 +14,7 @@ import glob
 
 import numpy as np
 import pandas as pd
+from scipy import stats
 from scipy.stats import wilcoxon
 
 # Metric columns to aggregate (numeric); exclude identifiers and run_id
@@ -75,42 +78,56 @@ def to_numeric_series(s):
     return pd.to_numeric(s, errors="coerce")
 
 
-def compute_summary(df, metric_columns):
-    """Per (dataset, model) and per metric: mean, std, 95% CI (normal approximation)."""
+def _mean_ci_t(vals, confidence=0.95):
+    """
+    Mean and two-sided CI for the mean using Student's t (appropriate for small n).
+    Returns (mean, std, ci_lower, ci_upper, n).
+    """
+    vals = np.asarray(vals, dtype=float)
+    vals = vals[~np.isnan(vals)]
+    n = len(vals)
+    if n == 0:
+        return (np.nan, np.nan, np.nan, np.nan, 0)
+    mean = float(np.mean(vals))
+    if n == 1:
+        return (mean, np.nan, mean, mean, 1)
+    std = float(np.std(vals, ddof=1))
+    sem = stats.sem(vals, ddof=1)
+    alpha = 1.0 - confidence
+    t_crit = stats.t.ppf(1.0 - alpha / 2.0, n - 1)
+    half = t_crit * sem
+    return (mean, std, mean - half, mean + half, n)
+
+
+def compute_summary(df, metric_columns, confidence=0.95):
+    """Per (dataset, model) and per metric: mean, std, CI for the mean (Student's t)."""
     rows = []
     for (dataset, model), grp in df.groupby(["dataset", "model"]):
-        n = len(grp["run_id"].unique())
         for col in metric_columns:
             if col not in grp.columns:
                 continue
             vals = to_numeric_series(grp[col]).dropna()
             if len(vals) == 0:
                 continue
-            mean = vals.mean()
-            std = vals.std()
-            if std != std or std == 0:
-                se = 0.0
-            else:
-                se = std / np.sqrt(len(vals))
-            ci_half = 1.96 * se
+            mean, std, ci_lo, ci_hi, n = _mean_ci_t(vals.values, confidence=confidence)
             rows.append({
                 "dataset": dataset,
                 "model": model,
                 "metric": col,
                 "mean": mean,
                 "std": std,
-                "ci_lower": mean - ci_half,
-                "ci_upper": mean + ci_half,
-                "n_runs": len(vals),
+                "ci_lower": ci_lo,
+                "ci_upper": ci_hi,
+                "n_runs": n,
             })
     return pd.DataFrame(rows)
 
 
-def compute_significance(df, metric_columns):
+def compute_significance(df, metric_columns, confidence=0.95):
     """
     For each (dataset, metric), compare every pair of models with Wilcoxon
-    signed-rank test (paired across runs). Returns dataset, metric, method_a,
-    method_b, p_value.
+    signed-rank test (paired across runs). Also report paired mean difference
+    (method_a - method_b) and its CI from a paired t on the run-level differences.
     """
     rows = []
     for dataset in df["dataset"].unique():
@@ -135,8 +152,10 @@ def compute_significance(df, metric_columns):
                     common_idx = a_vals.index.intersection(b_vals.index)
                     if len(common_idx) < 3:
                         continue
-                    a = a_vals.loc[common_idx].values
-                    b = b_vals.loc[common_idx].values
+                    a = a_vals.loc[common_idx].values.astype(float)
+                    b = b_vals.loc[common_idx].values.astype(float)
+                    diff = a - b
+                    mean_diff, _, diff_lo, diff_hi, n_paired = _mean_ci_t(diff, confidence=confidence)
                     try:
                         _, p_value = wilcoxon(a, b, alternative="two-sided")
                     except Exception:
@@ -146,6 +165,10 @@ def compute_significance(df, metric_columns):
                         "metric": metric,
                         "method_a": method_a,
                         "method_b": method_b,
+                        "n_paired_runs": n_paired,
+                        "mean_diff_a_minus_b": mean_diff,
+                        "diff_ci_lower": diff_lo,
+                        "diff_ci_upper": diff_hi,
                         "p_value": p_value,
                     })
     return pd.DataFrame(rows)
@@ -178,7 +201,17 @@ def main():
         action="store_true",
         help="Apply Bonferroni correction to p-values in significance.csv",
     )
+    parser.add_argument(
+        "--confidence",
+        type=float,
+        default=0.95,
+        help="Confidence level for all CIs (summary mean CIs and paired diff CIs). Default: 0.95",
+    )
     args = parser.parse_args()
+
+    confidence = float(args.confidence)
+    if not (0.0 < confidence < 1.0):
+        raise ValueError("--confidence must be in (0, 1)")
 
     df = load_runs(session_dir=args.session_dir, eval_all_runs_path=args.eval_all_runs)
     metric_cols = [c for c in METRIC_COLUMNS if c in df.columns]
@@ -186,8 +219,8 @@ def main():
         metric_cols = [c for c in df.columns if c not in ("dataset", "model", "run_id")]
         metric_cols = [c for c in metric_cols if df[c].dtype in (np.float64, np.int64) or pd.api.types.is_numeric_dtype(df[c])]
 
-    summary_df = compute_summary(df, metric_cols)
-    sig_df = compute_significance(df, metric_cols)
+    summary_df = compute_summary(df, metric_cols, confidence=confidence)
+    sig_df = compute_significance(df, metric_cols, confidence=confidence)
 
     if args.bonferroni and len(sig_df) > 0:
         n_tests = len(sig_df)

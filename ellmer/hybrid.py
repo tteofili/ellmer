@@ -7,7 +7,7 @@ from ellmer.full_certa import FullCerta
 
 class HybridCerta(FullCerta):
     def __init__(self, explanation_granularity, pred_delegate, certa, ellmers, num_draws=1, num_triangles=10,
-                 combine: str = 'freq', top_k: int = -1):
+                 combine: str = 'freq', top_k: int = -1, phi: float = 0.5):
         self.explanation_granularity = explanation_granularity
         self.certa = certa
         self.num_triangles = num_triangles
@@ -17,8 +17,10 @@ class HybridCerta(FullCerta):
         self.num_draws = num_draws
         self.combine = combine
         self.top_k = top_k
+        self.phi = phi
 
-    def predict_and_explain(self, ltuple, rtuple, max_predict: int = -1, verbose: bool = False):
+    def predict_and_explain(self, ltuple, rtuple, max_predict: int = -1, verbose: bool = False, phi=None):
+        thr = self.phi if phi is None else phi
         satisfied = False
         saliency_explanation = {}
         cf_explanation = {}
@@ -174,7 +176,7 @@ class HybridCerta(FullCerta):
                             aggregated_pn += sev[0]
                         else:
                             aggregated_pn += sev
-                    if aggregated_pn >= 0.1 and max(cf_summary.to_dict().values()) > 0:
+                    if aggregated_pn >= thr and max(cf_summary.to_dict().values()) > 0:
                         satisfied = True
             if 'attribute' == self.explanation_granularity:
                 top_k += 1

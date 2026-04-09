@@ -180,9 +180,12 @@ def _run_one_sample(idx, llm, test_df):
 def run_explainer(key, llm, test_df, samples, expdir, quantitative, dataset_name, workers=1):
     """Run one explainer on the test set, optionally compute metrics, write results. Returns (key, output_file_path, eval_row)."""
     print(f'{key} on {dataset_name}')
-    start_time = time()
     test_data_df = test_df[:samples]
     indices = list(range(len(test_data_df)))
+
+    tokens_before = llm.count_tokens()
+    preds_before = llm.count_predictions()
+    start_time = time()
 
     if workers <= 1:
         curr_llm_results = []
@@ -215,8 +218,6 @@ def run_explainer(key, llm, test_df, samples, expdir, quantitative, dataset_name
     avg_latency_local = local_time / samples if samples else 0.0
 
     os.makedirs(expdir, exist_ok=True)
-    count_tokens_samples = llm.count_tokens() / samples
-    predictions_samples = llm.count_predictions() / samples
     faithfulness = 'nan'
     cf_metrics = {}
 
@@ -230,6 +231,12 @@ def run_explainer(key, llm, test_df, samples, expdir, quantitative, dataset_name
             results_by_name={key: {"data": curr_llm_results}})
         print(f'{key} cf_metrics({key}):{cf_metrics}')
 
+    tokens_delta = llm.count_tokens() - tokens_before
+    preds_delta = llm.count_predictions() - preds_before
+    denom = float(samples) if samples else 0.0
+    count_tokens_samples = (tokens_delta / denom) if denom else 0.0
+    predictions_samples = (preds_delta / denom) if denom else 0.0
+
     metrics_results = {"faithfulness": faithfulness, "counterfactual_metrics": cf_metrics} if quantitative else {}
     llm_results = {
         "data": curr_llm_results,
@@ -237,8 +244,10 @@ def run_explainer(key, llm, test_df, samples, expdir, quantitative, dataset_name
         "total_llm_time": total_llm_time,
         "total_local_time": local_time,
         "tokens": count_tokens_samples,
+        "tokens_total_run": tokens_delta,
         "predictions": predictions_samples,
-        "avg_latency": total_time / samples,
+        "predictions_total_run": preds_delta,
+        "avg_latency": total_time / samples if samples else 0.0,
         "avg_latency_llm": avg_latency_llm,
         "avg_latency_local": avg_latency_local,
         "explanation_presence": presence,
@@ -270,9 +279,30 @@ def run_explainer(key, llm, test_df, samples, expdir, quantitative, dataset_name
     return key, output_file_path, eval_row
 
 
-def eval(cache, samples, num_triangles, explanation_granularity, quantitative, base_dir, dataset_names, model_type,
-         model_name, deployment_name, tag, temperature, run_id=None, session_dir=None, multi_run=False, workers=1,
-         parallel_explainers=False):
+def eval(
+    cache,
+    samples,
+    num_triangles,
+    explanation_granularity,
+    quantitative,
+    base_dir,
+    dataset_names,
+    model_type,
+    model_name,
+    deployment_name,
+    tag,
+    temperature,
+    run_id=None,
+    session_dir=None,
+    multi_run=False,
+    workers=1,
+    parallel_explainers=False,
+    lemon_minun_lem_num_samples=None,
+    lemon_minun_cf_max_evals=800,
+    lemon_minun_max_iterations=10,
+    lemon_minun_cf_method="greedy",
+    lemon_minun_lime_cap_samples=True,
+):
     if not multi_run:
         if cache == "memory":
             langchain.llm_cache = InMemoryCache()
@@ -343,21 +373,32 @@ def eval(cache, samples, num_triangles, explanation_granularity, quantitative, b
                                prompts={"fs": "ellmer/prompts/fs1.txt", "input":
                                    "record1:\n{ltuple}\n record2:\n{rtuple}\n"})
 
+        # Isolated usage counters per hybrid (shared ``cot`` would mix token/pred stats across explainers).
+        zs_h = zeroshot.fork_for_stats()
+        cot_h = cot.fork_for_stats()
+        cwhy_h = cot_with_why.fork_for_stats()
+        cot_lemon = cot.fork_for_stats()
+
         ellmers = {
             "zs_" + llm_config['tag']: zeroshot,
             "cot_" + llm_config['tag']: cot_with_why,
             "fs_" + llm_config['tag']: fs1,
             "certa_" + llm_config['tag']: FullCerta(explanation_granularity, predict_only, certa, num_triangles),
             "hybrid_" + llm_config['tag']: HybridCerta(
-                explanation_granularity, cot, certa,
-                [zeroshot, cot, cot_with_why],
+                explanation_granularity, cot_h, certa,
+                [zs_h, cot_h, cwhy_h],
                 num_triangles=num_triangles,
             ),
             "hybrid_lemon_minun_" + llm_config['tag']: HybridLemonMinun(
                 explanation_granularity,
-                cot,
+                cot_lemon,
                 certa,
                 num_triangles=num_triangles,
+                lem_num_samples=lemon_minun_lem_num_samples,
+                cf_max_evals=lemon_minun_cf_max_evals,
+                max_iterations=lemon_minun_max_iterations,
+                cf_method=lemon_minun_cf_method,
+                lime_cap_samples=lemon_minun_lime_cap_samples,
             ),
         }
 
@@ -462,6 +503,41 @@ if __name__ == "__main__":
         help='run explainers one after another (lower peak memory / API load)',
     )
     parser.set_defaults(parallel_explainers=True)
+    parser.add_argument(
+        '--lemon-minun-lem-num-samples',
+        type=int,
+        default=None,
+        metavar='N',
+        help='Hybrid Lemon/Minun: LIME perturbation count (default: adaptive max(min(30*n,3000),500) per masked n)',
+    )
+    parser.add_argument(
+        '--lemon-minun-cf-max-evals',
+        type=int,
+        default=800,
+        metavar='N',
+        help='Hybrid Lemon/Minun: max counterfactual predictor evaluations per iteration (default: 800)',
+    )
+    parser.add_argument(
+        '--lemon-minun-max-iterations',
+        type=int,
+        default=10,
+        metavar='N',
+        help='Hybrid Lemon/Minun: max outer mask-refinement iterations (default: 10)',
+    )
+    parser.add_argument(
+        '--lemon-minun-cf-method',
+        type=str,
+        choices=['greedy', 'binary'],
+        default='greedy',
+        help='Hybrid Lemon/Minun: Minun search strategy (default: greedy)',
+    )
+    parser.add_argument(
+        '--lemon-minun-no-lime-cap',
+        dest='lemon_minun_lime_cap_samples',
+        action='store_false',
+        help='Hybrid Lemon/Minun: do not cap lem_num_samples to adaptive budget for current mask size',
+    )
+    parser.set_defaults(lemon_minun_lime_cap_samples=True)
 
     args = parser.parse_args()
     base_datadir = args.base_dir
@@ -499,10 +575,30 @@ if __name__ == "__main__":
             else:
                 langchain.llm_cache = None
             print(f'--- Run {run_id + 1}/{runs} ---')
-            eval(cache, samples, num_triangles, explanation_granularity, quantitative, base_dir, dataset_names,
-                 model_type, model_name, deployment_name, tag, temperature,
-                 run_id=run_id, session_dir=session_dir, multi_run=True, workers=workers,
-                 parallel_explainers=parallel_explainers)
+            eval(
+                cache,
+                samples,
+                num_triangles,
+                explanation_granularity,
+                quantitative,
+                base_dir,
+                dataset_names,
+                model_type,
+                model_name,
+                deployment_name,
+                tag,
+                temperature,
+                run_id=run_id,
+                session_dir=session_dir,
+                multi_run=True,
+                workers=workers,
+                parallel_explainers=parallel_explainers,
+                lemon_minun_lem_num_samples=args.lemon_minun_lem_num_samples,
+                lemon_minun_cf_max_evals=args.lemon_minun_cf_max_evals,
+                lemon_minun_max_iterations=args.lemon_minun_max_iterations,
+                lemon_minun_cf_method=args.lemon_minun_cf_method,
+                lemon_minun_lime_cap_samples=args.lemon_minun_lime_cap_samples,
+            )
             run_eval_path = os.path.join(session_dir, f'run_{run_id}', 'eval.csv')
             if os.path.isfile(run_eval_path):
                 run_eval_df = pd.read_csv(run_eval_path, index_col=0)
@@ -514,6 +610,24 @@ if __name__ == "__main__":
             eval_all_runs_df.to_csv(eval_all_runs_path)
             print(f'Wrote {eval_all_runs_path}')
     else:
-        eval(cache, samples, num_triangles, explanation_granularity, quantitative, base_dir, dataset_names,
-             model_type, model_name, deployment_name, tag, temperature, workers=workers,
-             parallel_explainers=parallel_explainers)
+        eval(
+            cache,
+            samples,
+            num_triangles,
+            explanation_granularity,
+            quantitative,
+            base_dir,
+            dataset_names,
+            model_type,
+            model_name,
+            deployment_name,
+            tag,
+            temperature,
+            workers=workers,
+            parallel_explainers=parallel_explainers,
+            lemon_minun_lem_num_samples=args.lemon_minun_lem_num_samples,
+            lemon_minun_cf_max_evals=args.lemon_minun_cf_max_evals,
+            lemon_minun_max_iterations=args.lemon_minun_max_iterations,
+            lemon_minun_cf_method=args.lemon_minun_cf_method,
+            lemon_minun_lime_cap_samples=args.lemon_minun_lime_cap_samples,
+        )
