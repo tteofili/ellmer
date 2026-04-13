@@ -1,5 +1,7 @@
 import math
 import traceback
+from typing import Optional, Sequence
+
 import numpy as np
 from scipy.stats import kendalltau
 import pandas as pd
@@ -227,13 +229,14 @@ def get_cosine(vec1, vec2):
 
 
 def get_faithfulness(saliency_names: list, eval_fn, base_dir: str, test_set_df: pd.DataFrame,
-                     results_by_name: dict = None, include_stats: bool = False):
-    print(test_set_df.shape)
+                     results_by_name: dict = None, include_stats: bool = False,
+                     row_indices: Optional[Sequence[int]] = None):
+    base_df = test_set_df
+    print(base_df.shape)
     np.random.seed(0)
 
     thresholds = [0.1, 0.33, 0.5, 0.7, 0.9]
 
-    attr_len = len(test_set_df.columns) - 2
     aucs = dict()
     stats = dict()
     for saliency in saliency_names:
@@ -249,6 +252,24 @@ def get_faithfulness(saliency_names: list, eval_fn, base_dir: str, test_set_df: 
         if 'data' in results_json:
             results_json = results_json['data']
 
+        ts_df = base_df
+        if row_indices is not None:
+            ix = list(row_indices)
+            ts_df = base_df.iloc[ix].reset_index(drop=True)
+            results_json = [results_json[i] for i in ix]
+
+        attr_len = len(ts_df.columns) - 2
+        if attr_len <= 0 or len(results_json) == 0:
+            aucs[saliency] = float("nan")
+            stats[saliency] = {
+                "n_total": 0,
+                "n_thresholds": 0,
+                "n_masked_ops": 0,
+                "n_missing_or_invalid_saliency": 0,
+                "valid_ratio": 0.0,
+            }
+            continue
+
         saliencies = []
         predictions = []
         for v in results_json:
@@ -263,7 +284,7 @@ def get_faithfulness(saliency_names: list, eval_fn, base_dir: str, test_set_df: 
                 missing_rows += 1
         for threshold in thresholds:
             top_k = max(1, int(threshold * attr_len))
-            test_set_df_c = test_set_df.copy().astype(str)
+            test_set_df_c = ts_df.copy().astype(str)
             for i in range(len(predictions)):
                 try:
                     sal_dict = saliencies[i]
@@ -296,6 +317,8 @@ def get_faithfulness(saliency_names: list, eval_fn, base_dir: str, test_set_df: 
         if len(thresholds) == len(model_scores):
             auc_sal = auc(thresholds, model_scores)
             aucs[saliency] = auc_sal
+        elif saliency not in aucs:
+            aucs[saliency] = float("nan")
         stats[saliency] = {
             "n_total": len(predictions),
             "n_thresholds": len(thresholds),
@@ -309,8 +332,10 @@ def get_faithfulness(saliency_names: list, eval_fn, base_dir: str, test_set_df: 
 
 
 def get_cf_metrics(explainer_names: list, predict_fn, base_dir, test_set_df: pd.DataFrame,
-                   results_by_name: dict = None, include_stats: bool = False):
+                   results_by_name: dict = None, include_stats: bool = False,
+                   row_indices: Optional[Sequence[int]] = None):
     to_drop = ['ltable_id', 'rtable_id', 'match', 'label']
+    base_df = test_set_df
     rows = dict()
     stats = dict()
     for explainer_name in explainer_names:
@@ -322,6 +347,11 @@ def get_cf_metrics(explainer_names: list, predict_fn, base_dir, test_set_df: pd.
                 results_json = json.load(fd)
         if 'data' in results_json:
             results_json = results_json['data']
+        ts_df = base_df
+        if row_indices is not None:
+            ix = list(row_indices)
+            ts_df = base_df.iloc[ix].reset_index(drop=True)
+            results_json = [results_json[i] for i in ix]
         cfs = []
         predictions = []
         indexes = []
@@ -335,7 +365,7 @@ def get_cf_metrics(explainer_names: list, predict_fn, base_dir, test_set_df: pd.
         diversity = 0
         count = 1e-10
         skipped = 0
-        for i in range(len(test_set_df)):
+        for i in range(len(ts_df)):
             try:
                 if i >= len(cfs):
                     break
@@ -344,13 +374,21 @@ def get_cf_metrics(explainer_names: list, predict_fn, base_dir, test_set_df: pd.
                     skipped += 1
                     continue
 
-                if len(cfs[i]) == 0 or len(cfs[i][0].keys()) == 0 or indexes[i] != i: # FIXME AttributeError: 'str' object has no attribute 'keys'
+                if len(cfs[i]) == 0 or len(cfs[i][0].keys()) == 0:
                     skipped += 1
                     continue
+                if row_indices is None:
+                    if indexes[i] != i:
+                        skipped += 1
+                        continue
+                else:
+                    if i >= len(row_indices) or indexes[i] != row_indices[i]:
+                        skipped += 1
+                        continue
 
-                instance = test_set_df.iloc[i].copy()
+                instance = ts_df.iloc[i].copy()
                 for c in to_drop:
-                    if c in test_set_df.columns:
+                    if c in ts_df.columns:
                         instance = instance.drop(c)
                 matching = int(predictions[i])
 
@@ -380,10 +418,10 @@ def get_cf_metrics(explainer_names: list, predict_fn, base_dir, test_set_df: pd.
                'sparsity': mean_sparsity, 'diversity': mean_diversity}
         rows[explainer_name] = row
         stats[explainer_name] = {
-            "n_total": len(test_set_df),
+            "n_total": len(ts_df),
             "n_valid": max(0, int(round(count - 1e-10))),
             "n_skipped": skipped,
-            "valid_ratio": max(0, int(round(count - 1e-10))) / max(1, len(test_set_df)),
+            "valid_ratio": max(0, int(round(count - 1e-10))) / max(1, len(ts_df)),
         }
     if include_stats:
         return rows, stats
@@ -393,7 +431,7 @@ def get_cf_metrics(explainer_names: list, predict_fn, base_dir, test_set_df: pd.
 def get_validity(predict_fn, counterfactuals, original):
     rowsc_df = pd.DataFrame(counterfactuals.copy())
     predicted = predict_fn(rowsc_df)['match_score'].values[0]
-    return 1 - abs(predicted - original)
+    return abs(predicted - original)
 
 
 def get_proximity(counterfactuals, original_row):

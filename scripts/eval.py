@@ -14,6 +14,7 @@ from langchain_community.cache import SQLiteCache
 from tqdm import tqdm
 
 import ellmer.metrics
+from ellmer.metrics_json_rows import prediction_indices
 from ellmer.full_certa import FullCerta
 from ellmer.hybrid import HybridCerta
 from ellmer.hybrid_lemon_minun import HybridLemonMinun
@@ -138,6 +139,10 @@ def build_self_explainers(llm_config, temperature, granularity):
     }
 
 
+def _nan_cf_row():
+    return {"validity": float("nan"), "proximity": float("nan"), "sparsity": float("nan"), "diversity": float("nan")}
+
+
 def _run_one_sample(idx, llm, test_df):
     """Run predict_and_explain for one test row. Returns (idx, row_dict) or (idx, None) on error."""
     try:
@@ -177,8 +182,22 @@ def _run_one_sample(idx, llm, test_df):
         return (idx, None)
 
 
-def run_explainer(key, llm, test_df, samples, expdir, quantitative, dataset_name, workers=1):
-    """Run one explainer on the test set, optionally compute metrics, write results. Returns (key, output_file_path, eval_row)."""
+def run_explainer(
+    key,
+    llm,
+    test_df,
+    samples,
+    expdir,
+    quantitative,
+    dataset_name,
+    workers=1,
+    split_metrics_by_correctness=False,
+):
+    """Run one explainer on the test set, optionally compute metrics, write results.
+
+    Returns (key, output_file_path, eval_rows) where ``eval_rows`` is a list of one or more
+    :class:`pandas.Series` (one row per ``prediction_split`` when ``split_metrics_by_correctness``).
+    """
     print(f'{key} on {dataset_name}')
     test_data_df = test_df[:samples]
     indices = list(range(len(test_data_df)))
@@ -221,6 +240,7 @@ def run_explainer(key, llm, test_df, samples, expdir, quantitative, dataset_name
     faithfulness = 'nan'
     cf_metrics = {}
 
+    metrics_by_prediction_split = None
     if quantitative:
         faithfulness = ellmer.metrics.get_faithfulness(
             [key], llm.evaluation, expdir, test_data_df,
@@ -230,6 +250,33 @@ def run_explainer(key, llm, test_df, samples, expdir, quantitative, dataset_name
             [key], llm.predict, expdir, test_data_df,
             results_by_name={key: {"data": curr_llm_results}})
         print(f'{key} cf_metrics({key}):{cf_metrics}')
+
+        if split_metrics_by_correctness:
+            _, correct_idx, incorrect_idx = prediction_indices(curr_llm_results)
+            metrics_by_prediction_split = {
+                "all": {"faithfulness": faithfulness, "counterfactual_metrics": cf_metrics},
+            }
+            for split_name, idx in (("correct", correct_idx), ("incorrect", incorrect_idx)):
+                if idx:
+                    f_s = ellmer.metrics.get_faithfulness(
+                        [key], llm.evaluation, expdir, test_data_df,
+                        results_by_name={key: {"data": curr_llm_results}},
+                        row_indices=idx,
+                    )
+                    cf_s = ellmer.metrics.get_cf_metrics(
+                        [key], llm.predict, expdir, test_data_df,
+                        results_by_name={key: {"data": curr_llm_results}},
+                        row_indices=idx,
+                    )
+                else:
+                    f_s = {key: float("nan")}
+                    cf_s = {key: _nan_cf_row()}
+                metrics_by_prediction_split[split_name] = {
+                    "faithfulness": f_s,
+                    "counterfactual_metrics": cf_s,
+                }
+                print(f'{key} faithfulness[{split_name}]({key}):{f_s}')
+                print(f'{key} cf_metrics[{split_name}]({key}):{cf_s}')
 
     tokens_delta = llm.count_tokens() - tokens_before
     preds_delta = llm.count_predictions() - preds_before
@@ -254,13 +301,15 @@ def run_explainer(key, llm, test_df, samples, expdir, quantitative, dataset_name
     }
     if quantitative:
         llm_results["metrics"] = metrics_results
+        if metrics_by_prediction_split is not None:
+            llm_results["metrics_by_prediction_split"] = metrics_by_prediction_split
     print(llm_results)
 
     output_file_path = expdir + key + '_results.json'
     with open(output_file_path, 'w') as fout:
         json.dump(llm_results, fout, default=_json_serializable_default)
 
-    row_dict = {
+    timing_fields = {
         "total_time": total_time,
         "total_llm_time": total_llm_time,
         "total_local_time": local_time,
@@ -268,15 +317,35 @@ def run_explainer(key, llm, test_df, samples, expdir, quantitative, dataset_name
         "avg_latency_local": avg_latency_local,
         "tokens": count_tokens_samples,
         "predictions": predictions_samples,
-        "faithfulness": faithfulness,
-        "model": key,
-        "dataset": dataset_name,
     }
-    for cfk, cfv in cf_metrics.items():
-        row_dict[cfk] = cfv
-    eval_row = pd.Series(row_dict)
+    eval_rows = []
+    if quantitative and split_metrics_by_correctness and metrics_by_prediction_split is not None:
+        for split_name in ("all", "correct", "incorrect"):
+            block = metrics_by_prediction_split[split_name]
+            faith_s = block["faithfulness"]
+            cf_s = block["counterfactual_metrics"]
+            row_dict = {
+                **timing_fields,
+                "faithfulness": faith_s,
+                "model": key,
+                "dataset": dataset_name,
+                "prediction_split": split_name,
+            }
+            for cfk, cfv in cf_s.items():
+                row_dict[cfk] = cfv
+            eval_rows.append(pd.Series(row_dict))
+    else:
+        row_dict = {
+            **timing_fields,
+            "faithfulness": faithfulness,
+            "model": key,
+            "dataset": dataset_name,
+        }
+        for cfk, cfv in cf_metrics.items():
+            row_dict[cfk] = cfv
+        eval_rows.append(pd.Series(row_dict))
     print(f'{key} data generated in {total_time}s (local: {local_time}s)')
-    return key, output_file_path, eval_row
+    return key, output_file_path, eval_rows
 
 
 def eval(
@@ -302,6 +371,7 @@ def eval(
     lemon_minun_max_iterations=10,
     lemon_minun_cf_method="greedy",
     lemon_minun_lime_cap_samples=True,
+    split_metrics_by_correctness=False,
 ):
     if not multi_run:
         if cache == "memory":
@@ -410,23 +480,42 @@ def eval(
             with ThreadPoolExecutor(max_workers=exp_pool_workers) as executor:
                 futures = {
                     executor.submit(
-                        run_explainer, key, llm, test_df, samples, expdir, quantitative, d, workers
+                        run_explainer,
+                        key,
+                        llm,
+                        test_df,
+                        samples,
+                        expdir,
+                        quantitative,
+                        d,
+                        workers,
+                        split_metrics_by_correctness,
                     ): key
                     for key, llm in ellmers.items()
                 }
                 for future in tqdm(as_completed(futures), total=len(futures), disable=False, desc='explainers'):
-                    _, output_file_path, eval_row = future.result()
+                    _, output_file_path, eval_rows = future.result()
                     key = futures[future]
-                    explainer_results.append((key, output_file_path, eval_row))
+                    explainer_results.append((key, output_file_path, eval_rows))
             explainer_results.sort(key=lambda x: x[0])
             result_files = [(k, p) for k, p, _ in explainer_results]
-            evals.extend(r for _, _, r in explainer_results)
+            for _, _, eval_rows in explainer_results:
+                evals.extend(eval_rows)
         else:
             for key, llm in ellmers.items():
-                _, output_file_path, eval_row = run_explainer(
-                    key, llm, test_df, samples, expdir, quantitative, d, workers=workers)
+                _, output_file_path, eval_rows = run_explainer(
+                    key,
+                    llm,
+                    test_df,
+                    samples,
+                    expdir,
+                    quantitative,
+                    d,
+                    workers=workers,
+                    split_metrics_by_correctness=split_metrics_by_correctness,
+                )
                 result_files.append((key, output_file_path))
-                evals.append(eval_row)
+                evals.extend(eval_rows)
 
         # generate concordance statistics for each pair of results (parallel when many pairs)
         pairs = list(itertools.combinations(result_files, 2))
@@ -538,8 +627,17 @@ if __name__ == "__main__":
         help='Hybrid Lemon/Minun: do not cap lem_num_samples to adaptive budget for current mask size',
     )
     parser.set_defaults(lemon_minun_lime_cap_samples=True)
+    parser.add_argument(
+        "--split-metrics-by-correctness",
+        action="store_true",
+        help="With --quantitative, also compute faithfulness and CF metrics on correct vs incorrect "
+        "predictions (extra LLM evaluation calls). Adds prediction_split to eval.csv and "
+        "metrics_by_prediction_split to each result JSON.",
+    )
 
     args = parser.parse_args()
+    if getattr(args, "split_metrics_by_correctness", False) and not args.quantitative:
+        parser.error("--split-metrics-by-correctness requires quantitative metrics (use --quantitative, default True)")
     base_datadir = args.base_dir
     samples = args.samples
     num_triangles = args.num_triangles
@@ -598,6 +696,7 @@ if __name__ == "__main__":
                 lemon_minun_max_iterations=args.lemon_minun_max_iterations,
                 lemon_minun_cf_method=args.lemon_minun_cf_method,
                 lemon_minun_lime_cap_samples=args.lemon_minun_lime_cap_samples,
+                split_metrics_by_correctness=args.split_metrics_by_correctness,
             )
             run_eval_path = os.path.join(session_dir, f'run_{run_id}', 'eval.csv')
             if os.path.isfile(run_eval_path):
@@ -630,4 +729,5 @@ if __name__ == "__main__":
             lemon_minun_max_iterations=args.lemon_minun_max_iterations,
             lemon_minun_cf_method=args.lemon_minun_cf_method,
             lemon_minun_lime_cap_samples=args.lemon_minun_lime_cap_samples,
+            split_metrics_by_correctness=args.split_metrics_by_correctness,
         )
