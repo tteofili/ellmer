@@ -79,7 +79,9 @@ def flatten(param):
         return param
 
 
-def compute_metrics(json_path, ks=[1, 2, 3, 4, 5], granularity='token'):
+def compute_metrics(
+    json_path, ks=[1, 2, 3, 4, 5], granularity="token", write_per_instance_csv=True
+):
     with open(json_path) as f:
         data = json.load(f)["data"]
 
@@ -146,10 +148,13 @@ def compute_metrics(json_path, ks=[1, 2, 3, 4, 5], granularity='token'):
             idx_k += 1
         row['avg_top_k_overlap'] = np.mean(tks)
         results.append(row)
-    model_name = json_path.split('/')[3]
-    dataset = json_path.split('/')[5]
-    explainer = json_path.split('/')[-1].split('.')[0].replace('_sample_results','')
-    pd.DataFrame.from_dict(results).to_csv(f'sal_cf_{model_name}_{dataset}_{explainer}', index=False)
+    if write_per_instance_csv and results:
+        model_name = json_path.split("/")[3]
+        dataset = json_path.split("/")[5]
+        explainer = json_path.split("/")[-1].split(".")[0].replace("_sample_results", "")
+        pd.DataFrame.from_dict(results).to_csv(
+            f"sal_cf_{model_name}_{dataset}_{explainer}", index=False
+        )
 
     if len(results) > 0:
         # Aggregate
@@ -194,10 +199,14 @@ def compute_topk_curve(data, ks):
     return {k: sum(v) / len(v) for k, v in curve.items()}
 
 
-import matplotlib.pyplot as plt
+def _plt():
+    import matplotlib.pyplot as plt
+
+    return plt
 
 
 def plot_topk_curves(topk_curves):
+    plt = _plt()
     plt.figure()
     for k, v in topk_curves.items():
         ks = sorted(v.keys())
@@ -212,6 +221,7 @@ def plot_topk_curves(topk_curves):
 
 
 def plot_topk_curve(topk_curve, label):
+    plt = _plt()
     ks = sorted(topk_curve.keys())
     values = [topk_curve[k] for k in ks]
 
@@ -225,6 +235,7 @@ def plot_topk_curve(topk_curve, label):
 
 
 def plot_attribution_mass_distribution(results):
+    plt = _plt()
     values = [r["attribution_mass_cf"] for r in results]
 
     plt.figure()
@@ -237,6 +248,7 @@ def plot_attribution_mass_distribution(results):
 
 
 def plot_cf_size_vs_mass(results):
+    plt = _plt()
     x = [r["num_cf_tokens"] for r in results]
     y = [r["attribution_mass_cf"] for r in results]
 

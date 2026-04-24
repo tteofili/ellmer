@@ -25,9 +25,7 @@ Recomputation calls the same explainer stack as ``scripts/eval.py`` (LLM / API a
 from __future__ import annotations
 
 import argparse
-import importlib.util
 import json
-import os
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
@@ -41,112 +39,16 @@ _ROOT = Path(__file__).resolve().parents[1]
 if str(_ROOT) not in sys.path:
     sys.path.insert(0, str(_ROOT))
 
-import ellmer.metrics
+from ellmer.experiment_concordance_path import parse_concordance_path
+from ellmer.experiment_metrics_recompute import (
+    recompute_metrics_for_file,
+    safe_load_results_json,
+)
 from ellmer.experiment_paths import parse_results_json_path
 from ellmer.metrics_json_rows import (
     pred_int as _pred_int,
-    prediction_indices,
-    faithfulness_scalar as _faithfulness_scalar,
     fast_rows_from_payload as _fast_rows_from_payload,
 )
-from ellmer.utils import merge_sources
-
-
-def _safe_load_results_json(path: Path) -> Optional[Dict[str, Any]]:
-    """
-    Load a *_results.json file. Returns None if the file is missing, unreadable,
-    or not valid JSON (common with interrupted writes or non-JSON artifacts).
-    """
-    try:
-        text = path.read_text(encoding="utf-8", errors="replace")
-    except OSError as e:
-        print(f"Warning: could not read {path}: {e}", file=sys.stderr)
-        return None
-    try:
-        return json.loads(text)
-    except json.JSONDecodeError as e:
-        print(
-            f"Warning: invalid JSON in {path} ({e.msg} at char {e.pos}); skipping",
-            file=sys.stderr,
-        )
-        return None
-
-
-def _load_eval_script():
-    """Load scripts/eval.py as a module (build_self_explainers, _build_few_shot_example, etc.)."""
-    path = Path(__file__).resolve().parent / "eval.py"
-    spec = importlib.util.spec_from_file_location("ellmer_eval_script", path)
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
-    return mod
-
-
-def _split_concordance_stem(stem: str) -> Tuple[str, str]:
-    """
-    Split filename stem ``p1_p2`` into two explainer keys. Names always end with ``_sample``
-    in this codebase; match longest known suffix first.
-    """
-    known = sorted(
-        [
-            "hybrid_lemon_minun_sample",
-            "hybrid_sample",
-            "certa_sample",
-            "cot_sample",
-            "fs_sample",
-            "zs_sample",
-        ],
-        key=len,
-        reverse=True,
-    )
-    for p2 in known:
-        if stem.endswith(p2) and len(stem) > len(p2):
-            prefix = stem[: -len(p2)].rstrip("_")
-            p1 = prefix
-            if p1:
-                return p1, p2
-    mid = stem.rfind("_")
-    if mid <= 0:
-        return stem, ""
-    return stem[:mid], stem[mid + 1 :]
-
-
-def _parse_concordance_path(csv_path: str) -> Optional[Dict[str, Any]]:
-    """Infer model_type, model_name, granularity, session, run_id, dataset from concordance CSV path."""
-    parts = Path(csv_path).parts
-    if "concordance" not in parts:
-        return None
-    ci = parts.index("concordance")
-    dataset = parts[ci + 1] if ci + 1 < len(parts) else ""
-    prefix_parts = list(parts[:ci])
-    if "experiments" not in prefix_parts:
-        return None
-    ei = prefix_parts.index("experiments")
-    segs = prefix_parts[ei + 1 :]
-    run_id = None
-    for s in segs:
-        if s.startswith("run_") and s[4:].isdigit():
-            run_id = int(s[4:])
-            break
-    if len(segs) >= 5 and run_id is not None:
-        model_type, model_name, granularity, session = segs[0], segs[1], segs[2], segs[3]
-    elif len(segs) >= 4:
-        model_type, model_name, granularity = segs[0], segs[1], segs[2]
-        session = segs[3] if len(segs) > 3 else None
-    else:
-        return None
-    stem = Path(csv_path).stem
-    p1, p2 = _split_concordance_stem(stem)
-    return {
-        "model_type": model_type,
-        "model_name": model_name,
-        "granularity": granularity,
-        "session": session,
-        "run_id": run_id,
-        "dataset": dataset,
-        "explainer_a": p1,
-        "explainer_b": p2,
-        "csv_path": csv_path,
-    }
 
 
 def _filter_concordance_df(df: pd.DataFrame, mode: str) -> pd.DataFrame:
@@ -174,7 +76,7 @@ def aggregate_concordance_csvs(
     import glob
 
     for csv_path in glob.glob(pattern, recursive=True):
-        meta = _parse_concordance_path(csv_path)
+        meta = parse_concordance_path(csv_path)
         if meta is None:
             continue
         try:
@@ -196,173 +98,6 @@ def aggregate_concordance_csvs(
             row["pred_pair_agreement_rate"] = float(df_f["agree"].mean()) if n else np.nan
         rows.append(row)
     return pd.DataFrame(rows)
-
-
-def _build_ellmers(
-    eval_mod,
-    base_dir: str,
-    dataset_name: str,
-    samples: int,
-    llm_config: dict,
-    temperature: float,
-    granularity: str,
-    num_triangles: int,
-    tag: str,
-    lemon_kwargs: dict,
-):
-    """Return (ellmers dict, test_df) mirroring scripts/eval.py."""
-    dataset_dir = "/".join([base_dir, dataset_name])
-    lsource = pd.read_csv(dataset_dir + "/tableA.csv")
-    rsource = pd.read_csv(dataset_dir + "/tableB.csv")
-    test = pd.read_csv(dataset_dir + "/test.csv")
-    train = pd.read_csv(dataset_dir + "/train.csv")
-
-    test_df = merge_sources(test, "ltable_", "rtable_", lsource, rsource, ["label"], [], samples=samples)
-    train_df = merge_sources(train, "ltable_", "rtable_", lsource, rsource, ["label"], [], samples=samples)
-
-    certa = eval_mod.LLMCertaExplainer(lsource, rsource)
-    explainers = eval_mod.build_self_explainers(llm_config, temperature, granularity)
-    zeroshot = explainers["zeroshot"]
-    cot = explainers["cot"]
-    cot_with_why = explainers["cot_with_why"]
-    predict_only = explainers["predict_only"]
-
-    few_shot_no = 1
-    train_data_matching_df = train_df[train_df["label"] == 1][:few_shot_no]
-    train_data_non_matching_df = train_df[train_df["label"] == 0][:few_shot_no]
-    data_df = pd.concat([train_data_matching_df, train_data_non_matching_df])
-    n_fs = len(data_df)
-    examples = []
-    for idx in range(n_fs):
-        _, ex = eval_mod._build_few_shot_example(cot_with_why, idx, data_df)
-        if ex is not None:
-            examples.append(ex)
-
-    fs1 = eval_mod.ICLSelfExplainer(
-        examples=examples,
-        explanation_granularity=granularity,
-        deployment_name=llm_config["deployment_name"],
-        temperature=temperature,
-        model_name=llm_config["model_name"],
-        model_type=llm_config["model_type"],
-        prompts={"fs": "ellmer/prompts/fs1.txt", "input": "record1:\n{ltuple}\n record2:\n{rtuple}\n"},
-    )
-
-    zs_h = zeroshot.fork_for_stats()
-    cot_h = cot.fork_for_stats()
-    cwhy_h = cot_with_why.fork_for_stats()
-    cot_lemon = cot.fork_for_stats()
-
-    ellmers = {
-        "zs_" + tag: zeroshot,
-        "cot_" + tag: cot_with_why,
-        "fs_" + tag: fs1,
-        "certa_" + tag: eval_mod.FullCerta(granularity, predict_only, certa, num_triangles),
-        "hybrid_" + tag: eval_mod.HybridCerta(
-            granularity,
-            cot_h,
-            certa,
-            [zs_h, cot_h, cwhy_h],
-            num_triangles=num_triangles,
-        ),
-        "hybrid_lemon_minun_" + tag: eval_mod.HybridLemonMinun(
-            granularity,
-            cot_lemon,
-            certa,
-            num_triangles=num_triangles,
-            **lemon_kwargs,
-        ),
-    }
-    return ellmers, test_df
-
-
-def _recompute_metrics_for_file(
-    path: str,
-    info,
-    base_dir: str,
-    samples: int,
-    model_type: str,
-    deployment_name: str,
-    temperature: float,
-    num_triangles: int,
-    tag: str,
-    lemon_kwargs: dict,
-) -> List[Dict[str, Any]]:
-    eval_mod = _load_eval_script()
-    llm_config = {
-        "model_type": model_type,
-        "model_name": info.model_name,
-        "deployment_name": deployment_name,
-        "tag": tag,
-    }
-    ellmers, test_df = _build_ellmers(
-        eval_mod,
-        base_dir,
-        info.dataset,
-        samples,
-        llm_config,
-        temperature,
-        info.granularity,
-        num_triangles,
-        tag,
-        lemon_kwargs,
-    )
-    payload = _safe_load_results_json(Path(path))
-    if payload is None:
-        return []
-    data = payload.get("data") or []
-    expdir = os.path.dirname(path) + "/"
-    test_data_df = test_df if samples < 0 else test_df[:samples]
-    key = info.explainer_key
-    if key not in ellmers:
-        return []
-    llm = ellmers[key]
-    _, correct_idx, incorrect_idx = prediction_indices(data)
-    out_rows = []
-    for split_name, idx in (
-        ("all", None),
-        ("correct", correct_idx),
-        ("incorrect", incorrect_idx),
-    ):
-        if idx is not None and len(idx) == 0:
-            continue
-        faith = ellmer.metrics.get_faithfulness(
-            [key],
-            llm.evaluation,
-            expdir,
-            test_data_df,
-            results_by_name={key: {"data": data}},
-            row_indices=idx,
-        )
-        cf = ellmer.metrics.get_cf_metrics(
-            [key],
-            llm.predict,
-            expdir,
-            test_data_df,
-            results_by_name={key: {"data": data}},
-            row_indices=idx,
-        )
-        f_sc = _faithfulness_scalar(faith, key)
-        cf_row = cf.get(key, {})
-        out_rows.append(
-            {
-                "dataset": info.dataset,
-                "model_name": info.model_name,
-                "model_type": model_type,
-                "granularity": info.granularity,
-                "session": info.session,
-                "run_id": info.run_id,
-                "explainer": key,
-                "prediction_split": split_name,
-                "faithfulness_auc": f_sc,
-                "validity": cf_row.get("validity"),
-                "proximity": cf_row.get("proximity"),
-                "sparsity": cf_row.get("sparsity"),
-                "diversity": cf_row.get("diversity"),
-                "source": "recompute",
-            }
-        )
-    return out_rows
 
 
 def main():
@@ -449,7 +184,7 @@ def main():
                 "cf_method": "greedy",
                 "lime_cap_samples": True,
             }
-            rows = _recompute_metrics_for_file(
+            rows = recompute_metrics_for_file(
                 path_str,
                 info,
                 args.base_dir,
@@ -460,9 +195,10 @@ def main():
                 args.num_triangles,
                 args.tag,
                 lemon_kwargs,
+                source="recompute",
             )
             return rows, None
-        payload = _safe_load_results_json(p)
+        payload = safe_load_results_json(p)
         if payload is None:
             return [], path_str
         if payload.get("metrics"):

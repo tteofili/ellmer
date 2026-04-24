@@ -39,5 +39,6 @@ setuptools.setup(
         "lemon": ["lemon-explain"],
         "test": ["pytest>=7.0"],
         "bedrock": ["langchain-aws>=0.2.0", "boto3>=1.34.0"],
+        "stats": ["scipy>=1.5.0"],
     },
 )

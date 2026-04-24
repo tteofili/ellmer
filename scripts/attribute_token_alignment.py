@@ -192,9 +192,21 @@ def cf_attr_token_alignment(token_attrs, attr_cf_attrs):
     return coverage, precision, f1, jacc
 
 
-def compare(pair, model, verbose: bool = False,
-            explainers=['zs_sample', 'cot_sample', 'fs_sample', 'certa_sample', 'hybrid_sample', ], k_tokens=30,
-            k_attrs=3):
+def compare(
+    pair,
+    model,
+    verbose: bool = False,
+    explainers=[
+        "zs_sample",
+        "cot_sample",
+        "fs_sample",
+        "certa_sample",
+        "hybrid_sample",
+    ],
+    k_tokens=30,
+    k_attrs=3,
+    write_debug_csv: bool = True,
+):
     agg_results = []
     for explainer in explainers:
         try:
@@ -352,9 +364,171 @@ def compare(pair, model, verbose: bool = False,
                "avg_overlap": avg_overlap, "avg_cf_sim": avg_cf_sim,
                "n_total": n_total, "n_skipped_saliency": n_skipped_sal, "n_skipped_cf": n_skipped_cf}
         agg_results.append(row)
-        dname = pair[0].split('/')[5]
-        pd.DataFrame.from_records(agg_results)[['explainer', 'avg_kt', 'avg_cf_sim']].to_csv(
-            f'../experiments/{model}_{dname}.csv', index=False)
+        if write_debug_csv:
+            dname = pair[0].split("/")[5]
+            pd.DataFrame.from_records(agg_results)[["explainer", "avg_kt", "avg_cf_sim"]].to_csv(
+                f"../experiments/{model}_{dname}.csv", index=False
+            )
+    return pd.DataFrame(agg_results)
+
+
+def compare_paper_table_metrics(
+    pair,
+    model: str = "model",
+    explainers=None,
+    k_grid: int = 5,
+    write_debug_csv: bool = False,
+):
+    """
+    Metrics aligned with the paper-style table: CF **coverage** & **precision** (same
+    construction as :func:`compare`), plus **top-1..top-k** saliency agreement using
+    :func:`topk_attr_token_overlap` with ``k_tokens=k`` and ``k_attrs=k`` for each *k*.
+
+    Returns a DataFrame with one row per explainer (per-dataset means over instances).
+    **avg_top_k** is the mean of the *k* mean-overlap values (``top_1`` … ``top_k``).
+    """
+    if explainers is None:
+        explainers = [
+            "zs_sample",
+            "cot_sample",
+            "fs_sample",
+            "certa_sample",
+            "hybrid_sample",
+        ]
+    agg_results = []
+    for explainer in explainers:
+        try:
+            with open(pair[0] + explainer + "_results.json") as f:
+                token_data = {d["id"]: d for d in json.load(f)["data"]}
+        except OSError:
+            token_data = {}
+
+        try:
+            with open(pair[1] + explainer + "_results.json") as f:
+                attr_data = {d["id"]: d for d in json.load(f)["data"]}
+        except OSError:
+            attr_data = {}
+
+        over_rows = []
+        n_skipped_sal = 0
+        n_total = len(token_data)
+
+        for id_ in token_data:
+            try:
+                tok = token_data[id_]["saliency"]
+                attr = attr_data[id_]["saliency"]
+            except (KeyError, TypeError):
+                n_skipped_sal += 1
+                continue
+
+            if not tok or not attr or isinstance(tok, str) or isinstance(attr, str):
+                n_skipped_sal += 1
+                continue
+
+            new_attr = attr.copy()
+            for k, v in attr.items():
+                if "__" in k:
+                    target_att = get_attribute_from_token(k)
+                    if target_att in new_attr:
+                        new_attr[target_att] += v
+                    else:
+                        new_attr[target_att] = v
+                    new_attr.pop(k)
+            attr = new_attr
+
+            try:
+                tvals = {
+                    f"top_{kk}": topk_attr_token_overlap(tok, attr, k_tokens=kk, k_attrs=kk)
+                    for kk in range(1, k_grid + 1)
+                }
+                tvals["id"] = id_
+                over_rows.append(tvals)
+            except Exception:  # noqa: BLE001
+                n_skipped_sal += 1
+                continue
+
+        if not over_rows:
+            continue
+        mtop = {f"top_{kk}": float(np.mean([r[f"top_{kk}"] for r in over_rows])) for kk in range(1, k_grid + 1)}
+        mtop["avg_top_k"] = float(np.mean([mtop[f"top_{kk}"] for kk in range(1, k_grid + 1)]))
+
+        # CF: same as compare()
+        results_cf = []
+        n_skipped_cf = 0
+        for id_ in token_data:
+            try:
+                tok_item = token_data[id_]
+                attr_item = attr_data[id_]
+            except (KeyError, TypeError):
+                n_skipped_cf += 1
+                continue
+
+            if tok_item["ltuple"] != attr_item["ltuple"] or tok_item["rtuple"] != attr_item["rtuple"]:
+                continue
+
+            original = {}
+            original.update(
+                dict(
+                    map(
+                        lambda it: ("ltable_" + it[0], it[1]),
+                        tok_item["ltuple"].items(),
+                    )
+                )
+            )
+            original.update(
+                dict(
+                    map(
+                        lambda it: ("rtable_" + it[0], it[1]),
+                        tok_item["rtuple"].items(),
+                    )
+                )
+            )
+
+            tok_cf = tok_item["cfs"][0]
+            attr_cf = attr_item["cfs"][0]
+
+            if not tok_cf or not attr_cf:
+                n_skipped_cf += 1
+                continue
+
+            try:
+                token_cf_tokens = set()
+                token_cf_tokens |= extract_cf_tokens(original, tok_cf, "ltable")
+                token_cf_tokens |= extract_cf_tokens(original, tok_cf, "rtable")
+                attr_cf_attrs = extract_cf_attributes(original, attr_cf)
+            except Exception:  # noqa: BLE001
+                n_skipped_cf += 1
+                continue
+
+            token_attrs = {get_attribute_from_token(t) for t in token_cf_tokens}
+            cov, prec, f1, jacc = cf_attr_token_alignment(token_attrs, attr_cf_attrs)
+            results_cf.append(
+                {
+                    "cf_attr_coverage": cov,
+                    "cf_attr_precision": prec,
+                }
+            )
+        if not results_cf:
+            continue
+        avg_coverage = float(np.mean([r["cf_attr_coverage"] for r in results_cf]))
+        avg_prec = float(np.mean([r["cf_attr_precision"] for r in results_cf]))
+        row = {
+            "model": model,
+            "explainer": explainer,
+            "coverage": avg_coverage,
+            "precision": avg_prec,
+            **{f"top_{k}_overlap": mtop[f"top_{k}"] for k in range(1, k_grid + 1)},
+            "avg_top_k_overlap": mtop["avg_top_k"],
+            "n_total": n_total,
+            "n_skipped_saliency": n_skipped_sal,
+            "n_skipped_cf": n_skipped_cf,
+        }
+        agg_results.append(row)
+        if write_debug_csv:
+            dname = pair[0].split("/")[5]
+            pd.DataFrame.from_records(agg_results).to_csv(
+                f"../experiments/{model}_paper_{dname}.csv", index=False
+            )
     return pd.DataFrame(agg_results)
 
 

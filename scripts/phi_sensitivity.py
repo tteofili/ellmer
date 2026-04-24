@@ -284,8 +284,8 @@ if __name__ == "__main__":
         "--phi-values",
         type=float,
         nargs="+",
-        default=[0.25, 0.5, 0.75],
-        help="phi thresholds (default: 0.25 0.5 0.75)",
+        default=[0.25, 0.5, 0.75, 1],
+        help="phi thresholds (default: 0.25 0.5 0.75 1)",
     )
     parser.add_argument(
         "--output_dir",
