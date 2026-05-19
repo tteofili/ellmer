@@ -572,7 +572,7 @@ if __name__ == "__main__":
                         help='Azure deployment name; for Bedrock, optional inference profile ID (Azure defaults like gpt-35-turbo are ignored)',
                         default="gpt-35-turbo")
     parser.add_argument('--tag', metavar='tg', type=str, help='run tag', default="sample")
-    parser.add_argument('--temperature', metavar='tp', type=float, help='LLM temperature', default=0.01)
+    parser.add_argument('--temperature', metavar='tp', type=float, help='LLM temperature', default=0.0)
     parser.add_argument('--runs', metavar='n', type=int, default=1,
                         help='number of runs for significance testing (when > 1, uses run-scoped dirs and per-run or no cache)')
     parser.add_argument('--run_output_dir', metavar='o', type=str, default=None,

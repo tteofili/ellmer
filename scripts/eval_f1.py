@@ -90,7 +90,7 @@ if __name__ == "__main__":
     parser.add_argument('--deployment_name', metavar='dn', type=str, help='deployment name',
                         default="gpt-35-turbo")
     parser.add_argument('--tag', metavar='tg', type=str, help='run tag', default="sample")
-    parser.add_argument('--temperature', metavar='tp', type=float, help='LLM temperature', default=0.01)
+    parser.add_argument('--temperature', metavar='tp', type=float, help='LLM temperature', default=0.0)
 
     args = parser.parse_args()
     base_datadir = args.base_dir

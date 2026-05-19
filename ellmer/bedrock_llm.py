@@ -56,7 +56,7 @@ def resolve_bedrock_region(region_name: Optional[str] = None) -> str:
 
 def build_chat_bedrock(
     model_name: str,
-    temperature: float = 0.01,
+    temperature: float = 0.0,
     inference_profile_id: Optional[str] = None,
     region_name: Optional[str] = None,
 ) -> Any:

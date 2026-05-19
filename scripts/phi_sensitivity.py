@@ -279,7 +279,7 @@ if __name__ == "__main__":
     parser.add_argument("--model_name", type=str, default="gpt-3.5-turbo")
     parser.add_argument("--deployment_name", type=str, default="gpt-35-turbo")
     parser.add_argument("--tag", type=str, default="sample")
-    parser.add_argument("--temperature", type=float, default=0.01)
+    parser.add_argument("--temperature", type=float, default=0.0)
     parser.add_argument(
         "--phi-values",
         type=float,

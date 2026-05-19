@@ -123,7 +123,7 @@ def main():
     )
     parser.add_argument("--model-type", type=str, default=None, help="Override model type for recompute")
     parser.add_argument("--deployment-name", type=str, default="gpt-35-turbo")
-    parser.add_argument("--temperature", type=float, default=0.01)
+    parser.add_argument("--temperature", type=float, default=0.0)
     parser.add_argument("--num-triangles", type=int, default=10)
     parser.add_argument("--samples", type=int, default=-1)
     parser.add_argument("--tag", type=str, default="sample", help="Explainer tag suffix (zs_<tag>)")

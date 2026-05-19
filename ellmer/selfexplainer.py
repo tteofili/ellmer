@@ -70,7 +70,7 @@ class SelfExplainer(BaseLLMExplainer):
     ``serialize_llm_invokes=True``.
     """
 
-    def __init__(self, model_type='azure_openai', temperature=0.01, fake=False, model_name="",
+    def __init__(self, model_type='azure_openai', temperature=0.0, fake=False, model_name="",
                  verbose=False, delegate=None, explanation_granularity="attribute", explainer_fn="self", prompts=None,
                  deployment_name="", model_version="2023-05-15", serialize_llm_invokes: Optional[bool] = None):
         self.fake = fake
