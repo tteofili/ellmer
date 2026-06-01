@@ -19,6 +19,7 @@ class TestPhiSensitivityHelpers(unittest.TestCase):
         self.assertAlmostEqual(parse_phi_from_model_key("hybrid_certa_phi0p25_sample"), 0.25)
         self.assertAlmostEqual(parse_phi_from_model_key("hybrid_lemon_minun_phi0p5_x"), 0.5)
         self.assertAlmostEqual(parse_phi_from_model_key("hybrid_lemon_minun_phi0p75_run"), 0.75)
+        self.assertAlmostEqual(parse_phi_from_model_key("hybrid_certa_phi1_sample"), 1.0)
         self.assertIsNone(parse_phi_from_model_key("hybrid_sample"))
 
 

@@ -38,11 +38,14 @@ def _cf_row(counterfactual_metrics: Any, model_key: str) -> Dict[str, Optional[f
 
 
 def parse_phi_from_model_key(model_key: str) -> Optional[float]:
-    """Parse phi from keys like ``hybrid_certa_phi0p25_mytag`` (see :func:`phi_tag`)."""
-    m = re.search(r"_phi(0p[0-9]+)_", model_key)
+    """Parse phi from keys like ``hybrid_certa_phi0p25_mytag`` or ``hybrid_certa_phi1_mytag``."""
+    m = re.search(r"_phi(0p[0-9]+|1)(?:_|$)", model_key)
     if not m:
         return None
-    return float(m.group(1).replace("p", ".", 1))
+    frag = m.group(1)
+    if frag == "1":
+        return 1.0
+    return float(frag.replace("p", ".", 1))
 
 
 def row_from_results_json(path: str) -> Optional[Dict[str, Any]]:
